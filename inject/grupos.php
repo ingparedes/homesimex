@@ -9,7 +9,7 @@ $server = "localhost";
 $user = "root";
 $pass = "";
 $bd = "simexamerica";
-$idescenario = 53// $_GET['idescenario'];
+$idescenario = $_GET['idescenario'];
 
 //Creamos la conexión
 $conexion = mysqli_connect($server, $user, $pass,$bd) 

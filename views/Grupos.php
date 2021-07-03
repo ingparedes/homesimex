@@ -5,6 +5,10 @@ namespace PHPMaker2021\simexamerica;
 // Page object
 $Grupos = &$Page;
 ?>
+<?php
+$id_esc = $_GET['ides'];
+?>
+
 <style>
 .gu-mirror {
   position: fixed !important;
@@ -758,7 +762,7 @@ obtenerUsuarios(0);
   obtenerGrupos();
 function obtenerUsuarios(grupo){
         $.ajax({
-            url: "inject/usuarios.php?idGrupo="+grupo+"&idescenario="+<?php echo $_GET['ides'] ?>,
+            url: "inject/usuarios.php?idGrupo="+grupo+"&idescenario="+<?php echo $id_esc;  ?>,
             success: function (es) {
                 let respuesta = JSON.parse(es);
                 //console.log(respuesta);
@@ -785,8 +789,8 @@ function obtenerGrupos(){
  
   app.elementos.push(grups);
         $.ajax({
-         //   url: "inject/grupos.php?idescenario="+<?php echo $_GET['ides'] ?>,
-            url: "inject/grupos.php,            
+          url: "inject/grupos.php?idescenario="+<?php echo $id_esc;  ?>,
+           // url: "inject/grupos.php,            
             success: function (es) {
                 let respuesta = JSON.parse(es);
 //                console.log(respuesta);
