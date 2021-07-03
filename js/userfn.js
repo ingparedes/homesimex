@@ -1,0 +1,1 @@
+$("#458").attr("style","margin: -12px auto"),$("#458").click(!1),$("#459").attr("style","margin: -12px auto"),$("#459").click(!1),$("#460").attr("style","margin: -12px auto"),$("#460").click(!1);

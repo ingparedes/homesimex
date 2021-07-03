@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+
+  <link rel="stylesheet" href="./styles/bootstrap4/bootstrap.css">
+	<link rel="stylesheet" href="./styles/main.css">
+  <script src="./js/jquery-3.5.1/jquery-3.5.1.slim.min.js"></script>
+
+  <script type="text/javascript" src="./js/bootstrap4/bootstrap.min.js"></script>
+  <script type="text/javascript" src="./js/iconify/iconify.min.js"></script>
+	<title>Twitter</title>
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-md navbar-dark fixed-top">     
+          <a class="navbar-brand display-mobile" href="#"><svg viewBox="0 0 24 24" class="r-13gxpu9 r-4qtqp9 r-yyyyoo r-16y2uox r-1q142lx r-8kz0gk r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-1srniue"><g><path d="M23.643 4.937c-.835.37-1.732.62-2.675.733.962-.576 1.7-1.49 2.048-2.578-.9.534-1.897.922-2.958 1.13-.85-.904-2.06-1.47-3.4-1.47-2.572 0-4.658 2.086-4.658 4.66 0 .364.042.718.12 1.06-3.873-.195-7.304-2.05-9.602-4.868-.4.69-.63 1.49-.63 2.342 0 1.616.823 3.043 2.072 3.878-.764-.025-1.482-.234-2.11-.583v.06c0 2.257 1.605 4.14 3.737 4.568-.392.106-.803.162-1.227.162-.3 0-.593-.028-.877-.082.593 1.85 2.313 3.198 4.352 3.234-1.595 1.25-3.604 1.995-5.786 1.995-.376 0-.747-.022-1.112-.065 2.062 1.323 4.51 2.093 7.14 2.093 8.57 0 13.255-7.098 13.255-13.254 0-.2-.005-.402-.014-.602.91-.658 1.7-1.477 2.323-2.41z"></path></g></svg></a>  
+
+        <form class="navbar-form display-mobile" role="search">
+          <div class="input-group">
+            <input type="text" class="form-control input-search" placeholder="Search Twitter" name="srch-term" id="srch-term">
+            <div class="input-group-btn">
+              <button class="btn btn-default btn-search" type="submit"><span ></span><i class="iconify octicon octicon-search navbar-search-icon" data-icon="bi:search" data-inline="false"></i></button>
+            </div>
+          </div>
+        </form>
+        <div class="dropdown navbar-user-dropdown display-mobile">
+          <button class="btn btn-secondary dropdown-toggle btn-circle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </div>
+        <button class="btn btn-search-bar display-mobile">Tweet</button>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>        
+        <div class="navbar-collapse collapse" id="navbarCollapse" style="">
+
+          <ul class="navbar-nav mr-auto" id="navbarsExampleDefault">
+            <li class="nav-item active">
+              <a class="nav-link" href="#"><i class="octicon octicon-home iconify" data-icon="ant-design:home-filled" data-inline="false" class="" aria-hidden="true"></i> Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><i class="octicon octicon-zap iconify" data-icon="bi:lightning-fill" data-inline="false"></i> Moments</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><i class="iconify octicon octicon-bell" data-icon="ic:baseline-notifications" data-inline="false"></i> Notifications</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><i class="octicon octicon-inbox iconify" data-icon="wpf:message" data-inline="false"></i> Messages</a>
+            </li>
+          </ul>
+          <a class="navbar-brand display-desktop" href="#"><svg viewBox="0 0 24 24" class="r-13gxpu9 r-4qtqp9 r-yyyyoo r-16y2uox r-1q142lx r-8kz0gk r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-1srniue"><g><path d="M23.643 4.937c-.835.37-1.732.62-2.675.733.962-.576 1.7-1.49 2.048-2.578-.9.534-1.897.922-2.958 1.13-.85-.904-2.06-1.47-3.4-1.47-2.572 0-4.658 2.086-4.658 4.66 0 .364.042.718.12 1.06-3.873-.195-7.304-2.05-9.602-4.868-.4.69-.63 1.49-.63 2.342 0 1.616.823 3.043 2.072 3.878-.764-.025-1.482-.234-2.11-.583v.06c0 2.257 1.605 4.14 3.737 4.568-.392.106-.803.162-1.227.162-.3 0-.593-.028-.877-.082.593 1.85 2.313 3.198 4.352 3.234-1.595 1.25-3.604 1.995-5.786 1.995-.376 0-.747-.022-1.112-.065 2.062 1.323 4.51 2.093 7.14 2.093 8.57 0 13.255-7.098 13.255-13.254 0-.2-.005-.402-.014-.602.91-.658 1.7-1.477 2.323-2.41z"></path></g></svg></a>
+          <div class="left-drop">
+            <form class="navbar-form display-desktop" role="search">
+              <div class="input-group">
+                <input type="text" class="form-control input-search" placeholder="Search Twitter" name="srch-term" id="srch-term">
+                <div class="input-group-btn">
+                  <button class="btn btn-default btn-search" type="submit"><span ></span><i class="iconify octicon octicon-search navbar-search-icon" data-icon="bi:search" data-inline="false"></i></button>
+                </div>
+              </div>
+            </form>
+            <!-- END: Navbar Search form -->
+            <!-- Navbar User menu -->
+            <div class="dropdown navbar-user-dropdown display-desktop">
+              <button class="btn btn-secondary dropdown-toggle btn-circle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </div>
+          <div>
+          <!-- END: Navbar User menu -->
+          <!-- Navbar Tweet button -->                  
+        </div>
+         <button class="btn btn-search-bar display-desktop">Tweet</button> 
+
+      </nav>
+<div class="main-container">
+  <div class="row profile-background">
+    <div class="container">
+
+    </div>
+  </div>
+
+  <nav class="navbar profile-stats">
+    <div class="container">
+      <div class="row" style="width: 100%;">
+        <div class="col">
+          <div class="avatar-container">
+            <div class="avatar">
+
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <ul>
+            <li class="profile-stats-item-active">
+              <a>
+                <span class="profile-stats-item profile-stats-item-label">Tweets</span>
+                <span class="profile-stats-item profile-stats-item-number">51</span>
+              </a>
+            </li>
+            <li>
+              <a>
+                <span class="profile-stats-item profile-stats-item-label">Following</span>
+                <span class="profile-stats-item profile-stats-item-number">420</span>
+              </a>
+            </li>
+            <li>
+              <a>
+                <span class="profile-stats-item profile-stats-item-label">Followers</span>
+                <span class="profile-stats-item profile-stats-item-number">583</span>
+              </a>
+            </li>
+            <li>
+              <a>
+                <span class="profile-stats-item profile-stats-item-label">Likes</span>
+                <span class="profile-stats-item profile-stats-item-number">241</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col">
+
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container main-content">
+    <div class="row">
+      <div class="col profile-col">
+        <!-- Left column -->
+        <div class="profile-header">
+          <!-- Header information -->
+          <h3 class="profile-fullname"><a>Jon Vadillo<a></h3>
+          <h2 class="profile-element"><a>@jonvadillo</a></h2>
+          <a class="profile-element profile-website" hrerf=""><i class="octicon octicon-link"></i>&nbsp;jonvadillo.com</a>
+          <a class="profile-element profile-website" hrerf=""><i class="octicon octicon-location"></i>&nbsp;Vitoria-Gasteiz, Spain</a>
+          <h2 class="profile-element"><i class="octicon octicon-calendar"></i>Joined November 2012</h2>
+          <button class="btn btn-search-bar tweet-to-btn">Tweet to Jon Vadillo</button>
+          <a class="profile-element profile-website" hrerf=""><i class="octicon octicon-file-media"></i>1,142 Photos and videos</a>
+          <div class="pic-grid">
+            <!-- Image grid -->
+            <div class="row">
+              <div class="col pic-col"><img src="https://pbs.twimg.com/media/DFCq7iTXkAADXE-.jpg:thumb" height="73px" class=""></div>
+              <div class="col pic-col"><img src="https://pbs.twimg.com/media/DEoQ0vyXoBA1cwQ.png:thumb" height="73px" class=""></div>
+              <div class="col pic-col"><img src="https://pbs.twimg.com/media/DDVbW4RXsAAasuw.jpg:thumb" height="73px" class=""></div>
+            </div>
+            <!-- End: row -->
+            <div class="row">
+              <div class="col pic-col"><img src="https://pbs.twimg.com/media/DFCq7iTXkAADXE-.jpg:thumb" height="73px" class=""></div>
+              <div class="col pic-col"><img src="https://pbs.twimg.com/media/DEoQ0vyXoBA1cwQ.png:thumb" height="73px" class=""></div>
+              <div class="col pic-col"><img src="https://pbs.twimg.com/media/DDVbW4RXsAAasuw.jpg:thumb" height="73px" class=""></div>
+            </div>
+            <!-- End: row -->
+          </div>
+          <!-- End: image grid -->
+        </div>
+      </div>
+      <!-- End; Left column -->
+      <!-- Center content column -->
+      <div class="col-md-6 col-sm-12">
+        <ol class="tweet-list">
+          <li class="tweet-card">
+            <div class="tweet-content">
+              <div class="tweet-header">
+                <span class="fullname">
+                  <strong>Jon Vadillo</strong>
+                </span>
+                <span class="username">@JonVadillo</span>
+                <span class="tweet-time">- Jul 18</span>
+              </div>
+              <a>
+                <img class="tweet-card-avatar" src="./img/byeUQc0Q_400x400.jpg" alt="">
+              </a>
+              <div class="tweet-text">
+                <p class="" lang="es" data-aria-label-part="0">¡Nuevo artículo en Mozilla!<br>Resuelto: Corregido – Una breve historia sobre un error reportado por la comunidad <a href="https://t.co/dqg5hVQXA0" class="twitter-timeline-link" target="_blank"><span class="">https://www.mozilla-hispano.org/</span></a>                  <a href="" class="twitter-hashtag"><s>#</s><b>firefox</b></a> <a href="" class="twitter-hashtag"><s>#</s><b>comunidad</b></a>
+                  <a href="" class="twitter-hashtag" dir="ltr"></a>
+                </p>
+              </div>
+              <div class="tweet-footer">
+                <a class="tweet-footer-btn">
+                  <i class="octicon octicon-comment iconify" data-icon="bx:bx-comment" data-inline="true" ></i><span> 18</span>
+                </a>
+                <a class="tweet-footer-btn">
+                  <i class="octicon octicon-sync iconify" data-icon="ant-design:sync-outlined" data-inline="true"></i><span> 64</span>
+                </a>
+                <a class="tweet-footer-btn">
+                  <i class="octicon octicon-heart iconify" data-icon="wpf:like" data-inline="true" ></i><span> 202</span>
+                </a>
+                <a class="tweet-footer-btn">                  
+                  <i class="octicon octicon-mail iconify" data-icon="ant-design:mail-outlined" data-inline="true"></i><span> 155</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="tweet-card">
+            <div class="tweet-content">
+              <div class="tweet-header">
+                <span class="fullname">
+                  <strong>Jon Vadillo</strong>
+                </span>
+                <span class="username">@JonVadillo</span>
+                <span class="tweet-time">- Jul 18</span>
+              </div>
+              <a>
+                <img class="tweet-card-avatar" src="./img/byeUQc0Q_400x400.jpg" alt="">
+              </a>
+              <div class="tweet-text">
+                <p class="" lang="es" data-aria-label-part="0">¡Nuevo artículo en Mozilla!<br>Resuelto: Corregido – Una breve historia sobre un error reportado por la comunidad <a href="https://t.co/dqg5hVQXA0" class="twitter-timeline-link" target="_blank"><span class="">https://www.mozilla-hispano.org/</span></a>                  <a href="" class="twitter-hashtag"><s>#</s><b>firefox</b></a> <a href="" class="twitter-hashtag"><s>#</s><b>comunidad</b></a>
+                  <a href="" class="twitter-hashtag" dir="ltr"></a>
+                </p>
+              </div>
+              <div class="tweet-footer">
+                <a class="tweet-footer-btn">
+                  <i class="octicon octicon-comment iconify" data-icon="bx:bx-comment" data-inline="true" ></i><span> 18</span>
+                </a>
+                <a class="tweet-footer-btn">
+                  <i class="octicon octicon-sync iconify" data-icon="ant-design:sync-outlined" data-inline="true"></i><span> 64</span>
+                </a>
+                <a class="tweet-footer-btn">
+                  <i class="octicon octicon-heart iconify" data-icon="wpf:like" data-inline="true" ></i><span> 202</span>
+                </a>
+                <a class="tweet-footer-btn">                  
+                  <i class="octicon octicon-mail iconify" data-icon="ant-design:mail-outlined" data-inline="true"></i><span> 155</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="tweet-card">
+            <div class="tweet-content">
+              <div class="tweet-header">
+                <span class="fullname">
+                  <strong>Jon Vadillo</strong>
+                </span>
+                <span class="username">@JonVadillo</span>
+                <span class="tweet-time">- Jul 18</span>
+              </div>
+              <a>
+                <img class="tweet-card-avatar" src="./img/byeUQc0Q_400x400.jpg" alt="">
+              </a>
+              <div class="tweet-text">
+                <p class="" lang="es" data-aria-label-part="0">¡Nuevo artículo en Mozilla!<br>Resuelto: Corregido – Una breve historia sobre un error reportado por la comunidad <a href="https://t.co/dqg5hVQXA0" class="twitter-timeline-link" target="_blank"><span class="">https://www.mozilla-hispano.org/</span></a>                  <a href="" class="twitter-hashtag"><s>#</s><b>firefox</b></a> <a href="" class="twitter-hashtag"><s>#</s><b>comunidad</b></a>
+                  <a href="" class="twitter-hashtag" dir="ltr"></a>
+                </p>
+              </div>
+              <div class="tweet-footer">
+                <a class="tweet-footer-btn">
+                  <i class="octicon octicon-comment iconify" data-icon="bx:bx-comment" data-inline="true" ></i><span> 18</span>
+                </a>
+                <a class="tweet-footer-btn">
+                  <i class="octicon octicon-sync iconify" data-icon="ant-design:sync-outlined" data-inline="true"></i><span> 64</span>
+                </a>
+                <a class="tweet-footer-btn">
+                  <i class="octicon octicon-heart iconify" data-icon="wpf:like" data-inline="true" ></i><span> 202</span>
+                </a>
+                <a class="tweet-footer-btn">                  
+                  <i class="octicon octicon-mail iconify" data-icon="ant-design:mail-outlined" data-inline="true"></i><span> 155</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="tweet-card">
+            <div class="tweet-content">
+              <div class="tweet-header">
+                <span class="fullname">
+                  <strong>Jon Vadillo</strong>
+                </span>
+                <span class="username">@JonVadillo</span>
+                <span class="tweet-time">- Jul 18</span>
+              </div>
+              <a>
+                <img class="tweet-card-avatar" src="./img/byeUQc0Q_400x400.jpg" alt="">
+              </a>
+              <div class="tweet-text">
+                <p class="" lang="es" data-aria-label-part="0">¡Nuevo artículo en Mozilla!<br>Resuelto: Corregido – Una breve historia sobre un error reportado por la comunidad <a href="https://t.co/dqg5hVQXA0" class="twitter-timeline-link" target="_blank"><span class="">https://www.mozilla-hispano.org/</span></a>                  <a href="" class="twitter-hashtag"><s>#</s><b>firefox</b></a> <a href="" class="twitter-hashtag"><s>#</s><b>comunidad</b></a>
+                  <a href="" class="twitter-hashtag" dir="ltr"></a>
+                </p>
+              </div>
+              <div class="tweet-footer">
+                <a class="tweet-footer-btn">
+                  <i class="octicon octicon-comment iconify" data-icon="bx:bx-comment" data-inline="true" ></i><span> 18</span>
+                </a>
+                <a class="tweet-footer-btn">
+                  <i class="octicon octicon-sync iconify" data-icon="ant-design:sync-outlined" data-inline="true"></i><span> 64</span>
+                </a>
+                <a class="tweet-footer-btn">
+                  <i class="octicon octicon-heart iconify" data-icon="wpf:like" data-inline="true" ></i><span> 202</span>
+                </a>
+                <a class="tweet-footer-btn">                  
+                  <i class="octicon octicon-mail iconify" data-icon="ant-design:mail-outlined" data-inline="true"></i><span> 155</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="tweet-card">
+            <div class="tweet-content">
+              <div class="tweet-header">
+                <span class="fullname">
+                  <strong>Jon Vadillo</strong>
+                </span>
+                <span class="username">@JonVadillo</span>
+                <span class="tweet-time">- Jul 18</span>
+              </div>
+              <a>
+                <img class="tweet-card-avatar" src="./img/byeUQc0Q_400x400.jpg" alt="">
+              </a>
+              <div class="tweet-text">
+                <p class="" lang="es" data-aria-label-part="0">¡Nuevo artículo en Mozilla!<br>Resuelto: Corregido – Una breve historia sobre un error reportado por la comunidad <a href="https://t.co/dqg5hVQXA0" class="twitter-timeline-link" target="_blank"><span class="">https://www.mozilla-hispano.org/</span></a>                  <a href="" class="twitter-hashtag"><s>#</s><b>firefox</b></a> <a href="" class="twitter-hashtag"><s>#</s><b>comunidad</b></a>
+                  <a href="" class="twitter-hashtag" dir="ltr"></a>
+                </p>
+              </div>
+              <div class="tweet-footer">
+                <a class="tweet-footer-btn">
+                  <i class="octicon octicon-comment iconify" data-icon="bx:bx-comment" data-inline="true" ></i><span> 18</span>
+                </a>
+                <a class="tweet-footer-btn">
+
+                  <i class="octicon octicon-sync iconify" data-icon="ant-design:sync-outlined" data-inline="true"></i><span> 64</span>
+                </a>
+                <a class="tweet-footer-btn">
+                  <i class="octicon octicon-heart iconify" data-icon="wpf:like" data-inline="true" ></i><span> 202</span>
+                </a>
+                <a class="tweet-footer-btn">                  
+                  <i class="octicon octicon-mail iconify" data-icon="ant-design:mail-outlined" data-inline="true"></i><span> 155</span>
+                </a>
+              </div>
+            </div>
+          </li>
+        </ol>
+        <!-- End: tweet list -->
+      </div>
+      <!-- End: Center content column -->
+      <div class="col">
+        <div class="content-panel">
+          <div class="panel-header">
+            <h5>Who to follow</h5><small><a href="">Refresh</a></small><small><a href="">View all</a></small>
+          </div>
+          <!-- Who to Follow panel -->
+          <div class="panel-content">
+            <!--Follow list -->
+            <ol class="tweet-list">
+              <li class="tweet-card">
+                <div class="tweet-content">
+                  <img class="tweet-card-avatar" src="./img/byeUQc0Q_400x400.jpg" alt="">
+                  <div class="tweet-header">
+                    <span class="fullname">
+                  <strong>Jon Vadillo</strong>
+                </span>
+                    <span class="username">@JonVadillo</span>
+                  </div>
+
+                  <button class="btn btn-follow">Follow</button>
+                </div>
+              </li>
+              <li class="tweet-card">
+                <div class="tweet-content">
+                  <img class="tweet-card-avatar" src="./img/byeUQc0Q_400x400.jpg" alt="">
+                  <div class="tweet-header">
+                    <span class="fullname">
+                  <strong>Jon Vadillo</strong>
+                </span>
+                    <span class="username">@JonVadillo</span>
+                  </div>
+
+                  <button class="btn btn-follow">Follow</button>
+                </div>
+              </li>
+              <li class="tweet-card">
+                <div class="tweet-content">
+                  <img class="tweet-card-avatar" src="./img/byeUQc0Q_400x400.jpg" alt="">
+                  <div class="tweet-header">
+                    <span class="fullname">
+                  <strong>Jon Vadillo</strong>
+                </span>
+                    <span class="username">@JonVadillo</span>
+                  </div>
+
+                  <button class="btn btn-follow">Follow</button>
+                </div>
+              </li>
+            </ol>
+            <!--END: Follow list -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
