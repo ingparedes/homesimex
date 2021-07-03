@@ -53,8 +53,8 @@ function openURL($url) {
 
 while($row = mysqli_fetch_array($result)) 
 { 
-    $publishKey = 'pub-c-5260e585-8e9b-4d60-9ff8-1d10154850f4';
-    $subscribeKey = 'sub-c-69a803ce-dbfd-11eb-85de-ba1258ebcf9d';
+    $publishKey = 'pub-c-74306dc6-f082-4bc8-9e59-18804033f25d';
+    $subscribeKey = 'sub-c-834f0024-caec-11eb-bdc5-4e51a9db8267';
     $canal = 'canal-02';
     $data = '%7B%0A%22code%22%3A'.$row['id_inyect'].'%0A%7D';
     $url = 'https://ps.pndsn.com/publish';

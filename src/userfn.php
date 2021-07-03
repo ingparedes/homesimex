@@ -110,7 +110,7 @@ function Page_Loading()
 {
     //Log("Page Loading");
         global $EW_XSS_ARRAY;
-    $EW_XSS_ARRAY = array_diff($EW_XSS_ARRAY, array("<embed", "<object", "<iframe", "<frame", "<frameset"));
+    //$EW_XSS_ARRAY = array_diff($EW_XSS_ARRAY, array("<embed", "<object", "<iframe", "<frame", "<frameset"));
 $uID = CurrentUserID();
 $sqlutescenario = ExecuteScalar("SELECT p.gmt, e.fechaini_simulado, e.fechafin_simulado, e.fechaini_real, e.fechafinal_real FROM escenario  e INNER JOIN paisgmt p ON p.id_zone = e.pais_escenario WHERE e.estado IN ('1')");
 $sqlutcuser = ExecuteScalar("SELECT paisgmt.gmt FROM users LEFT JOIN paisgmt ON users.pais = paisgmt.id_zone WHERE id_users ='".$uID."'");

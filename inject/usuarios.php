@@ -10,7 +10,6 @@ $user = "root";
 $pass = "";
 $bd = "simexamerica";
 $idGrupo = $_GET['idGrupo'];//0;
-$idescenario =  $_GET['idescenario'];
 //Creamos la conexión
 $conexion = mysqli_connect($server, $user, $pass,$bd) 
 or die("Ha sucedido un error inexperado en la conexion de la base de datos");
@@ -33,7 +32,8 @@ SELECT
 FROM 
 `users` 
 WHERE 
-`grupo`= $idGrupo and `subgrupo`= 0 and escenario = $idescenario 
+`grupo`=$idGrupo
+and `subgrupo`=0
 ";
 
 mysqli_set_charset($conexion, "utf8");

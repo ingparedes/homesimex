@@ -183,7 +183,7 @@ ew.ready("head", [ew.PATH_BASE + "ckeditor/ckeditor.js", ew.PATH_BASE + "js/ewed
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <?php
 //edit menu class
-$NAVBAR_CLASS .= " fixed-top";
+//$NAVBAR_CLASS .= " fixed-top";
 ?>
 <!-- Navbar -->
 <script type="text/html" id="navbar-menu-items" class="ew-js-template" data-name="navbar" data-seq="10" data-data="navbar" data-method="appendTo" data-target="#ew-navbar">

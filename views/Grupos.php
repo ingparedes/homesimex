@@ -5,10 +5,6 @@ namespace PHPMaker2021\simexamerica;
 // Page object
 $Grupos = &$Page;
 ?>
-<?php
-$id_esc = $_GET['ides'];
-?>
-
 <style>
 .gu-mirror {
   position: fixed !important;
@@ -214,11 +210,11 @@ p,
 ul {
   margin: 0;
   color: #707070;
-  
+  font-size: 14px;
 }
 
 ul {
- 
+  font-size: 16px;
   list-style-type: none;
 }
 
@@ -484,8 +480,8 @@ ul {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
  <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.js'></script>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine"> -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
 
 </body>
 </html>
@@ -757,12 +753,19 @@ var app = new Vue({
         }
     });
 
+   // var publishKey = 'pub-c-74306dc6-f082-4bc8-9e59-18804033f25d';
+   // var subscribeKey = 'sub-c-834f0024-caec-11eb-bdc5-4e51a9db8267';
+//
+   // var pubnub = new CanalPub("canal-01",publishKey,subscribeKey);
+   // var pubnubAdmin = new CanalPub("canal-02",publishKey,subscribeKey);
 
+   // pubnub.mensajeLlegado = llegadaComentario;
+   // pubnubAdmin.mensajeLlegado = llegandoMensaje;
 obtenerUsuarios(0);
   obtenerGrupos();
 function obtenerUsuarios(grupo){
         $.ajax({
-            url: "inject/usuarios.php?idGrupo="+grupo+"&idescenario="+<?php echo $id_esc;  ?>,
+            url: "inject/usuarios.php?idGrupo="+grupo,
             success: function (es) {
                 let respuesta = JSON.parse(es);
                 //console.log(respuesta);
@@ -789,8 +792,7 @@ function obtenerGrupos(){
  
   app.elementos.push(grups);
         $.ajax({
-          url: "inject/grupos.php?idescenario="+<?php echo $id_esc;  ?>,
-           // url: "inject/grupos.php,            
+            url: "inject/grupos.php?idescenario="+<?php echo $_GET['ides'] ?>,
             success: function (es) {
                 let respuesta = JSON.parse(es);
 //                console.log(respuesta);
