@@ -59,7 +59,9 @@ $_SESSION['id_user'] = CurrentUserID();
 
         <div class="card-header bg-success">
             <h3 class="card-title">Mensajes</h3>
+            <form id="formulario_buscador">
             <input type="text" class="form-control float-right" id="buscador" placeholder="Buscar">
+</form>
         </div>
 
         <!-- /.card-header -->
@@ -177,7 +179,7 @@ $_SESSION['id_user'] = CurrentUserID();
 
 <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.29.9.js"></script>
 <script src="inject/pubnub.js"></script>
-  
+<script src="https://cdn.jsdelivr.net/npm/disableautofill@2.0.0/dist/disableautofill.min.js"></script>
 <script type="text/javascript">
     var app = new Vue({
         el: '#vue-chat',
@@ -358,6 +360,10 @@ $_SESSION['id_user'] = CurrentUserID();
         });
         obtenerMensajesEnviados();
     });
+    var daf =new disableautofill({
+        'form': '#formulario_buscador'
+    });
+    daf.init();
 </script>
 
 <?= GetDebugMessage() ?>

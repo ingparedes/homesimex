@@ -260,7 +260,9 @@ $Inicio = &$Page;
                 <div class="card direct-chat direct-chat-primary">
                     <div class="card-header bg-primary">
                         <h3 class="card-title">Mensajes Programados</h3>
+                        <form id="formulario_buscador">
                         <input type="text" class="form-control float-right" id="buscador_admin" placeholder="Buscar">
+</form>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body" id="vue-admin">
@@ -317,7 +319,9 @@ $Inicio = &$Page;
                 <div class="card direct-chat direct-chat-primary">
                     <div class="card-header bg-success">
                         <h3 class="card-title">Mensajes enviados</h3>
+                        <form id="formulario_buscador">
                         <input type="text" class="form-control float-right" id="buscador_client" placeholder="Buscar">
+</form>
                     </div>
                     <div class="container" id="vue-chat">
                         <ul class="timeline" v-for="mens in mensajes" v-if="mens.visible">

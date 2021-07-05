@@ -307,7 +307,9 @@ $(document).ready(function() {
           <div class="card direct-chat direct-chat-primary">
               <div class="card-header bg-primary">
                 <h3 class="card-title">Mensajes Programados</h3>
+                <form id="formulario_buscador">
                 <input type="text" class="form-control float-right" placeholder="Buscar">
+                </form>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
