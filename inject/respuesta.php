@@ -48,7 +48,7 @@ FROM
 		mensajes.adjunto = archivos_doc.id_file
 WHERE
 	mensajes.enviado = 0 AND
-	tareas.id_grupo = $idGrupo";
+	tareas.id_grupo = $idGrupo ORDER BY fstar DESC";
 mysqli_set_charset($conexion, "utf8");
 
 //mysqli_set_charset($conexion, "utf8"); //formato de datos utf8

@@ -49,7 +49,7 @@ FROM
 		mensajes.adjunto = archivos_doc.id_file
 WHERE
     mensajes.enviado = 1 AND
-    mensajes.id_inyect = $idMensaje
+    mensajes.id_inyect = $idMensaje  ORDER BY fstar ASC
 ";
 
 mysqli_set_charset($conexion, "utf8");

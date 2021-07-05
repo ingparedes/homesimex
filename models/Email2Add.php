@@ -1442,8 +1442,12 @@ class Email2Add extends Email2
     //$vars $_GET['IdEmail'];
     $IdEmail = Get("Idmail");
     $reenviar = Get("Idrenviar");
+    $Idmsg = Get("IdResMsg");
+    $reenviarmsg = Get("IdreenMsg");
     SetClientVar("idm",$IdEmail );
     SetClientVar("re",$reenviar );
+    SetClientVar("msg",$Idmsg );
+    SetClientVar("reemsg",$reenviarmsg );
     if (!empty($IdEmail))
     {
     $title = ExecuteScalar("SELECT  sujeto FROM email WHERE id_email =".$IdEmail);
@@ -1477,6 +1481,20 @@ class Email2Add extends Email2
     SetClientVar("arch",$adj );
     SetClientVar("fecha",$fecha);
     SetClientVar("ape",$apellidos );
+    }
+    if (!empty($Idmsg))
+    {
+    $title = ExecuteScalar("SELECT  titulo FROM mensajes WHERE id_inyect =".$Idmsg);
+    $body = ExecuteScalar("SELECT  mensaje FROM mensajes WHERE id_inyect =".$Idmsg);
+    SetClientVar("titles",$title );
+    SetClientVar("bodys",$body );
+    }
+    if (!empty($reenviarmsg))
+    {
+    $title = ExecuteScalar("SELECT  titulo FROM mensajes WHERE id_inyect =".$reenviarmsg);
+    $body = ExecuteScalar("SELECT  mensaje FROM mensajes WHERE id_inyect =".$reenviarmsg);
+    SetClientVar("titles",$title );
+    SetClientVar("bodys",$body );
     }
     }
 

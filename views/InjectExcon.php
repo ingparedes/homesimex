@@ -323,9 +323,7 @@ $InjectExcon = &$Page;
                                     <div class="card-tools">
                                     <a class="btn btn-tool" v-bind:href="'inject/actualizarProgramacion.php?opcion=1&idMensaje='+mens.id"><i class="fas fa-play"></i></a>
                                     <a class="btn btn-tool" v-bind:href="'inject/actualizarProgramacion.php?opcion=2&idMensaje='+mens.id"><i class="fas fa-stop"></i></a>
-                                   <button type="button" class="btn btn-tool" title="Contacts" data-widget="chat-pane-toggle" onclick="window.location.href='MensajesEdit/176?showmaster=tareas&fk_id_tarea=104'" >
-                                            <i class="fas fa-pen"></i>
-                                    </button>
+                                    <a class="btn btn-tool" v-bind:href="'MensajesEdit/'+mens.id"><i class="fas fa-pen"></i></a>
                                     </div>
                                 </div>
                                 <!-- /.direct-chat-text -->

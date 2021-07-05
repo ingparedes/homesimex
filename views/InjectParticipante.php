@@ -38,7 +38,7 @@ $_SESSION['id_user'] = CurrentUserID();
     }
 
     .comment-text {
-        font-size: 12px
+       
     }
     .textarealine {
         overflow: auto;
@@ -110,11 +110,11 @@ $_SESSION['id_user'] = CurrentUserID();
                             <i class="cil-paperclip"></i> <br>
                             <a v-bind:href="'files/'+mens.filename"> {{mens.filename}}</a> 
                             <hr>
-                            <a  data-toggle="collapse" href="#para" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
+                            <a  data-toggle="collapse" v-bind:href="'#para'+mens.id" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
                                             <i class="fa fa-users"></i> 
 
                                             Para:</a>
-                            <div class="collapse multi-collapse" id="para">
+                            <div class="collapse multi-collapse" v-bind:id="'para'+mens.id">
                                         <ul  v-for="destinatario in mens.destinatarios" v-if="mens.visible">
                                           <li> {{destinatario.destinatario}}.</li>
                                         </ul>
@@ -123,12 +123,17 @@ $_SESSION['id_user'] = CurrentUserID();
                             <hr>
                             <div class="timeline-footer">
 
-                                <a class="m-r-15 text-inverse-lighter" title="" data-caption="Enviar" href="/homesimex/Email2Add?Idrenviar=71" data-original-title="Enviar">
-                                    Reenviar&nbsp;<i class="fas fa-sign-out-alt"></i> 
-                                </a>
-                                <a href="javascript:;" class="m-r-15 text-inverse-lighter">
-                                    <i class="fa fa-comments fa-fw fa-lg m-r-3"></i> Coperación
-                                </a> 
+                                <a class="m-r-15 text-inverse-lighter" title="" data-caption="Enviar" v-bind:href="'/homesimex/Email2Add?IdResMsg='+mens.id" data-original-title="Enviar">
+                                    Responder&nbsp;<i class="fa fa-reply" aria-hidden="true"></i>
+
+                                </a>│
+
+                                <a class="m-r-15 text-inverse-lighter" title="" data-caption="Enviar" v-bind:href="'/homesimex/Email2Add?IdreenMsg='+mens.id" data-original-title="Enviar">
+                                Cooperación &nbsp;<i class="fa fa-random" aria-hidden="true"></i>
+
+                                </a> │                               
+  
+
                                 <a type="button" class="m-r-15 text-inverse-lighter" data-toggle="collapse" v-bind:href="'#collapse'+mens.id" >
                                     <i class="fa fa-comments fa-fw fa-lg m-r-3"></i> Comentario
                                 </a> 
