@@ -1,24 +1,13 @@
 <?php 
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-$server = "localhost";
-$user = "root";
-$pass = "";
-$bd = "simexamerica";
-
 if(!($idSubGrupo = $_GET['idSubGrupo']))
 {
 	$idSubGrupo=0;//POR si es solo al grupo
-	echo "XD";
 }
 $idGrupo = $_GET['idGrupo'];
 $idUsuario=$_GET['idUsuario'];
 //Creamos la conexión
-$conexion = mysqli_connect($server, $user, $pass,$bd) 
-or die("Ha sucedido un error inexperado en la conexion de la base de datos");
+include "conexion.php";
 
 //generamos la consulta
 $sql = "

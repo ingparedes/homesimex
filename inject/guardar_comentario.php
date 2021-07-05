@@ -1,22 +1,13 @@
 <?php 
 session_start();
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
-$server = "localhost";
-$user = "root";
-$pass = "";
-$bd = "simexamerica";
 
 $idMensaje = $_POST['idMensaje'];
 $idUser = $_SESSION['id_user'];
 $comentario = $_POST['comentario'];
 
 //Creamos la conexión
-$conexion = new mysqli($server, $user, $pass,$bd) 
-or die("Ha sucedido un error inexperado en la conexion de la base de datos");
-
+include "conexion.php";
 $sql = "
     INSERT INTO resmensaje (id_users,id_inyect,resmensaje,resadjunto)
     VALUES ($idUser,$idMensaje,'$comentario',NULL);

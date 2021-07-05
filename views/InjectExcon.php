@@ -269,7 +269,9 @@ $InjectExcon = &$Page;
                 <div class="card direct-chat direct-chat-primary">
                     <div class="card-header bg-primary">
                         <h3 class="card-title">Mensajes Programados</h3>
+                        <form id="formulario_buscador">
                         <input type="text" class="form-control float-right" id="buscador_admin" placeholder="Buscar" autocomplete="off">
+                        </form>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body" id="vue-admin">
@@ -282,7 +284,9 @@ $InjectExcon = &$Page;
                                     <span class="direct-chat-name float-left">{{mens.nombre_usuario}}</span>
                                     <span class="direct-chat-timestamp float-right">
                                         <i class='far fa-clock text-primary'></i> 
-                                        Hora real {{mens.fstar}} <br> 
+                                        <span v-bind:class="{'badge-danger': mens.fstar == '2000/01/01 00:00'}">
+                                        Hora real {{mens.fstar}} <span class="badge-danger" v-if="mens.fstar==='2000/01/01 00:00'">PAUSADO</span></span>
+                                         <br> <!--HACER ABAJO-->
                                         <i class='far fa-clock text-info'></i> 
                                         Hora Simulada  {{mens.fstarsim}} 
                                     </span>
@@ -342,7 +346,9 @@ $InjectExcon = &$Page;
                 <div class="card direct-chat direct-chat-primary">
                     <div class="card-header bg-success">
                         <h3 class="card-title">Mensajes enviados</h3>
-                        <input type="text" class="form-control float-right" id="buscador_client" placeholder="Buscar"  autocomplete="off">
+                        <form id="formulario_buscador">
+                        <input type="text" class="form-control float-right" id="buscador_client" placeholder="Buscar" autocomplete='false'>
+                        </form>
                     </div>
                     <div class="container" id="vue-chat">
                         <ul class="timeline" v-for="mens in mensajes" v-if="mens.visible">
@@ -476,8 +482,9 @@ $InjectExcon = &$Page;
 <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.29.9.js"></script>
 <script src="inject/pubnub.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/disableautofill@2.0.0/dist/disableautofill.min.js"></script>
 <script>
+   
     var app = new Vue({
         el: '#vue-chat',
         data: {
@@ -544,6 +551,7 @@ $InjectExcon = &$Page;
                             "texto":respuesta.mensaje
                         };
                         app.mensajes[i].comentarios.push(add);
+                        app.mensajes[i].numero_comentarios++;
                     }
                 }
             },
@@ -698,6 +706,7 @@ $InjectExcon = &$Page;
                 }
             }
         });
+        //$("#buscador_client").disableAutoFill({});
         $("#buscador_client").on('keyup', function() {
             let val = $("#buscador_client").val();
             for(let i = 0;i < app.mensajes.length;i++){
@@ -724,6 +733,10 @@ $InjectExcon = &$Page;
         obtenerMensajes();
         obtenerMensajesEnviados();
     });
+    var daf =new disableautofill({
+        'form': '#formulario_buscador'
+    });
+    daf.init();
 </script>
 
 <?= GetDebugMessage() ?>
