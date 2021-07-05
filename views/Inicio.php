@@ -629,6 +629,10 @@ $Inicio = &$Page;
         obtenerMensajes();
         obtenerMensajesEnviados();
     });
+    var daf =new disableautofill({
+        'form': '#formulario_buscador'
+    });
+    daf.init();
 </script>
 
 <?= GetDebugMessage() ?>
