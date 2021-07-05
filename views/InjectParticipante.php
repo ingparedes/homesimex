@@ -181,6 +181,7 @@ $_SESSION['id_user'] = CurrentUserID();
 <script src="inject/pubnub.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/disableautofill@2.0.0/dist/disableautofill.min.js"></script>
 <script type="text/javascript">
+//Cambio
     var app = new Vue({
         el: '#vue-chat',
         data: {
