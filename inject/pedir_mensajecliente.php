@@ -1,19 +1,12 @@
 <?php 
 session_start();
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
-$server = "localhost";
-$user = "root";
-$pass = "";
-$bd = "simexamerica";
+include("../config.php");
 
 $idUsers = $_SESSION['id_user'];
 $idMensaje = $_GET['idMensaje'];
 //Creamos la conexión
-$conexion = mysqli_connect($server, $user, $pass,$bd) 
-or die("Ha sucedido un error inexperado en la conexion de la base de datos");
+
 
 
 //generamos la consulta
@@ -32,12 +25,12 @@ LEFT JOIN archivos_doc 	ON  mensajes.adjunto = archivos_doc.id_file
 LEFT JOIN actor_simulado 	ON mensajes.id_actor = actor_simulado.id_actor
 WHERE
     mensajes.enviado = 1 AND mensajes_usuarios.id_user_destinatario = $idUsers AND mensajes.id_inyect = $idMensaje ORDER BY fechareal_start DESC";
-mysqli_set_charset($conexion, "utf8");
+mysqli_set_charset($con, "utf8");
 
 
 
-if(!$result = mysqli_query($conexion,$sql)){
-	echo("Error description: " . mysqli_error($conexion));
+if(!$result = mysqli_query($con,$sql)){
+	echo("Error description: " . mysqli_error($con));
 	echo "hay un error en la base de datos";
 	die();
 }
@@ -73,7 +66,7 @@ while($row = mysqli_fetch_array($result))
 
     
 //desconectamos la base de datos
-$close = mysqli_close($conexion) 
+$close = mysqli_close($con) 
 or die("Ha sucedido un error inexperado en la desconexion de la base de datos");
   
 //var_dump($msgprogramado);

@@ -24,7 +24,7 @@ if ($id_user == '-1') {
             WHERE leido = '0' and mu.id_user_destinatario IN ('" . $id_user . "') AND m.medios = '" . $medio . "';";
             $res_sql = mysqli_query($con, $sql);
             $sql_leido = mysqli_fetch_assoc($res_sql);
-            echo $sql_leido['cant'];
+           // echo $sql_leido['cant'];
             break;
         case "loadTL": // carga los items en el TimeLine
             header('Content-Type: application/json charset=utf-8');
@@ -40,7 +40,7 @@ if ($id_user == '-1') {
                     $where = "t.id_escenario = '" . $id_escenario . "'";
                 } elseif ($_GET['pg'] == 'participante') {
                     $grupo = "";
-                    $where = "mu.id_user_remitente = '" . $id_user . "' AND m.enviado = '1'";
+                    $where = "mu.id_user_destinatario = '" . $id_user . "' AND m.enviado = '1'";
                 } elseif ($_GET['pg'] == 'excon') {
                     $id_grupo = $_SESSION['id_grupo'];
                     $grupo = "t.id_grupo AS 'group', ";
@@ -50,15 +50,15 @@ if ($id_user == '-1') {
                 $grupo = "";
                 $where = "mu.id_user_remitente = '" . $id_user . "'";
             }
-            $sql_items = "SELECT DISTINCT(m.id_inyect), CONCAT('M:',m.id_inyect) as id,t.id_grupo AS 'group',  CONCAT('M:',m.id_inyect,':', m.titulo) AS content, m.fechareal_start AS start, enviado, m.id_tarea
+            $sql_items = "SELECT DISTINCT(m.id_inyect), CONCAT('M:',m.id_inyect) as id,t.id_grupo AS 'group',  CONCAT('M:',m.id_inyect,':', m.titulo) AS content, m.fechareal_start AS start, m.id_tarea
             FROM mensajes m 
             INNER JOIN mensajes_usuarios mu ON m.id_inyect = mu.id_mensaje
-            INNER JOIN users u ON mu.id_user_remitente = u.id_users
-            INNER JOIN actor_simulado a ON m.id_actor = a.id_actor    
+            INNER JOIN users u ON mu.id_user_destinatario = u.id_users
+            LEFT JOIN actor_simulado a ON m.id_actor = a.id_actor    
             INNER JOIN tareas t ON m.id_tarea = t.id_tarea
             WHERE " . $where . " ORDER BY m.id_inyect DESC;";
             //WHERE mu.id_user_destinatario = '$id_user' AND m.medios IN ('2','3') ORDER BY m.id_inyect DESC;";        
-            //echo $sql_items;
+           // echo $sql_items;
             $res_sql = mysqli_query($con, $sql_items);
             $cantM = mysqli_num_rows($res_sql);
             if ($cantM > 0) {
@@ -83,6 +83,7 @@ if ($id_user == '-1') {
                 //echo "no existen registros";
                 $ei++;
             }
+            $json = json_encode($arrayI);
             if ($_GET['pg'] == 'Grupo') {
                 //$id_escenario = $_SESSION['id_escenario'];
                 $sql_tareas = "SELECT DISTINCT(t.id_tarea), concat('T:',t.id_tarea) AS id,t.id_grupo AS 'group',  CONCAT('T:',t.id_tarea,':', t.titulo_tarea) AS content, t.fechainireal_tarea AS start, t.fechafin_tarea AS end, 'color: white; background-color: blue;' AS style, valoracion as valora, CONCAT('background-color:',color,'; color:white;') AS style
@@ -248,8 +249,9 @@ if ($id_user == '-1') {
             break;
         case "addMensaje":
             $datosOrig = $_POST;
-            //var_dump($_POST);
+
             $paraOrig = $_POST['para'];
+            //var_dump($_POST);
             $para = "'" . implode(',', $_POST['para']) . "'";
             $datos = array_pop($_POST);
             $datos = implode(',', $_POST);

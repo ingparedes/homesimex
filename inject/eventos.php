@@ -1,17 +1,9 @@
 <?php 
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-$server = "localhost";
-$user = "root";
-$pass = "";
-$bd = "simexamerica";
+include("../config.php");
 
 //Creamos la conexión
-$conexion = mysqli_connect($server, $user, $pass,$bd) 
-or die("Ha sucedido un error inexperado en la conexion de la base de datos");
+
 
 $fecha_inicial = date("Y/m/d H:i", time() - 216000);
 $fecha_final = date("Y/m/d H:i");
@@ -28,10 +20,10 @@ WHERE
 	mensajes.fechareal_start BETWEEN '$fecha_inicial' AND '$fecha_final';
 ";
 
-mysqli_set_charset($conexion, "utf8");
+mysqli_set_charset($con, "utf8");
 
-if(!$result = mysqli_query($conexion,$sql)){
-	echo("Error description: " . mysqli_error($conexion));
+if(!$result = mysqli_query($con,$sql)){
+	echo("Error description: " . mysqli_error($con));
 	die();
 }
 
@@ -62,7 +54,7 @@ while($row = mysqli_fetch_array($result))
 }
     
 //desconectamos la base de datos
-$close = mysqli_close($conexion) 
+$close = mysqli_close($con) 
 or die("Ha sucedido un error inexperado en la desconexion de la base de datos");
 
 ?>

@@ -3,7 +3,6 @@
 
 session_start();
 include("config.php");
-$id_user = $_SESSION['id_user'];
 
 header('Content-Type: application/json');
 $id_user = $_SESSION['id_user'];

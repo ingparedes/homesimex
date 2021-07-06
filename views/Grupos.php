@@ -5,6 +5,11 @@ namespace PHPMaker2021\simexamerica;
 // Page object
 $Grupos = &$Page;
 ?>
+<?php
+
+
+?>
+
 <style>
 .gu-mirror {
   position: fixed !important;

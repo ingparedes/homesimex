@@ -367,4 +367,5 @@ $_SESSION['id_user'] = CurrentUserID();
 
 <?= GetDebugMessage() ?>
 
+
 <?= GetDebugMessage() ?>
