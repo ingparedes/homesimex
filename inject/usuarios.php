@@ -25,8 +25,8 @@ SELECT
 FROM 
 `users` 
 WHERE 
-`grupo`=$idGrupo
-and `subgrupo`=0
+`grupo`=$idGrupo and perfil <> -1
+and `subgrupo`=0 
 ";
 
 mysqli_set_charset($con, "utf8");

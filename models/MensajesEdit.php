@@ -118,9 +118,6 @@ class MensajesEdit extends Mensajes
         global $Language, $DashboardReport, $DebugTimer;
         global $UserTable;
 
-        // Custom template
-        $this->UseCustomTemplate = true;
-
         // Initialize
         $GLOBALS["Page"] = &$this;
 
@@ -208,25 +205,18 @@ class MensajesEdit extends Mensajes
 
         // Page is terminated
         $this->terminated = true;
-        if (Post("customexport") === null) {
-             // Page Unload event
-            if (method_exists($this, "pageUnload")) {
-                $this->pageUnload();
-            }
 
-            // Global Page Unloaded event (in userfn*.php)
-            Page_Unloaded();
+         // Page Unload event
+        if (method_exists($this, "pageUnload")) {
+            $this->pageUnload();
         }
+
+        // Global Page Unloaded event (in userfn*.php)
+        Page_Unloaded();
 
         // Export
         if ($this->CustomExport && $this->CustomExport == $this->Export && array_key_exists($this->CustomExport, Config("EXPORT_CLASSES"))) {
-            if (is_array(Session(SESSION_TEMP_IMAGES))) { // Restore temp images
-                $TempImages = Session(SESSION_TEMP_IMAGES);
-            }
-            if (Post("data") !== null) {
-                $content = Post("data");
-            }
-            $ExportFileName = Post("filename", "");
+            $content = $this->getContents();
             if ($ExportFileName == "") {
                 $ExportFileName = $this->TableVar;
             }
@@ -241,11 +231,6 @@ class MensajesEdit extends Mensajes
                 }
                 DeleteTempImages(); // Delete temp images
                 return;
-            }
-        }
-        if ($this->CustomExport) { // Save temp images array for custom export
-            if (is_array($TempImages)) {
-                $_SESSION[SESSION_TEMP_IMAGES] = $TempImages;
             }
         }
         if (!IsApi() && method_exists($this, "pageRedirecting")) {
@@ -384,6 +369,9 @@ class MensajesEdit extends Mensajes
      */
     protected function hideFieldsForAddEdit()
     {
+        if ($this->isAdd() || $this->isCopy() || $this->isGridAdd()) {
+            $this->id_inyect->Visible = false;
+        }
     }
 
     // Lookup data
@@ -1046,7 +1034,11 @@ class MensajesEdit extends Mensajes
                         }
                         $filterWrk .= "`id`" . SearchString("=", trim($wrk), DATATYPE_STRING, "");
                     }
-                    $sqlWrk = $this->para->Lookup->getSql(false, $filterWrk, '', $this, true, true);
+                    $lookupFilter = function() {
+                        return (CurrentUserInfo("perfil") == 2) ? "`idgrupo` = '".CurrentUserInfo("grupo")."'" : "`escenario` = '".CurrentUserInfo("escenario")."'";
+                    };
+                    $lookupFilter = $lookupFilter->bindTo($this);
+                    $sqlWrk = $this->para->Lookup->getSql(false, $filterWrk, $lookupFilter, $this, true, true);
                     $rswrk = Conn()->executeQuery($sqlWrk)->fetchAll(\PDO::FETCH_BOTH);
                     $ari = count($rswrk);
                     if ($ari > 0) { // Lookup values found
@@ -1299,7 +1291,11 @@ class MensajesEdit extends Mensajes
                         $filterWrk .= "`id`" . SearchString("=", trim($wrk), DATATYPE_STRING, "");
                     }
                 }
-                $sqlWrk = $this->para->Lookup->getSql(true, $filterWrk, '', $this, false, true);
+                $lookupFilter = function() {
+                    return (CurrentUserInfo("perfil") == 2) ? "`idgrupo` = '".CurrentUserInfo("grupo")."'" : "`escenario` = '".CurrentUserInfo("escenario")."'";
+                };
+                $lookupFilter = $lookupFilter->bindTo($this);
+                $sqlWrk = $this->para->Lookup->getSql(true, $filterWrk, $lookupFilter, $this, false, true);
                 $rswrk = Conn()->executeQuery($sqlWrk)->fetchAll(\PDO::FETCH_BOTH);
                 $ari = count($rswrk);
                 $arwrk = $rswrk;
@@ -1393,11 +1389,6 @@ class MensajesEdit extends Mensajes
         // Call Row Rendered event
         if ($this->RowType != ROWTYPE_AGGREGATEINIT) {
             $this->rowRendered();
-        }
-
-        // Save data for Custom Template
-        if ($this->RowType == ROWTYPE_VIEW || $this->RowType == ROWTYPE_EDIT || $this->RowType == ROWTYPE_ADD) {
-            $this->Rows[] = $this->customTemplateFieldValues();
         }
     }
 
@@ -1761,6 +1752,10 @@ class MensajesEdit extends Mensajes
                 case "x_id_actor":
                     break;
                 case "x_para":
+                    $lookupFilter = function () {
+                        return (CurrentUserInfo("perfil") == 2) ? "`idgrupo` = '".CurrentUserInfo("grupo")."'" : "`escenario` = '".CurrentUserInfo("escenario")."'";
+                    };
+                    $lookupFilter = $lookupFilter->bindTo($this);
                     break;
                 case "x_adjunto":
                     break;

@@ -79,10 +79,12 @@ else
        // $menu->addMenuItem(444, "usuario", "<div> <div class='image'> <img class='img-circle elevation-1' width='45px'  height='45px' src='http://localhost/homesimex/files/$imgs'> <strong> ".$UserName.' '.$ape."</strong> <p> <small class='text-muted'> ".$UserPermissionValue."  ".$UserG."  </small></P></div></div>  " , "UsersView/$idu?showdetail", -1, "", IsLoggedIn());
         $menu->addMenuItem(444, "usuario","<div class='card-body pt-0'><div class='row'><div class='col-2'><img src='http://localhost/homesimex/files/$fotos'   width='45px'  height='45px' alt='user-avatar' class='img-circle'></div><div class='col-10'><b class = 'float-right'>".$UserName.' '.$ape."</b><ul class='ml-10 mb-0 fa-ul'><li class='small'> ".$UserPermissionValue."</li> <li class='small'> ".$UserG."</li></ul></div></div></div>", "/homesimex/UsersList", -1, "", IsLoggedIn());
         $menu->moveItem("Simulaciones", $menu->Count() - 1); // Move to last
+        $menu->moveItem("Control Excon", $menu->Count() - 1); // Move to last
+        $menu->moveItem("Pizarra", $menu->Count() - 1); // Move to last
          $menu->moveItem("Linea de tiempo total", $menu->Count() - 1); // Move to last
         $menu->moveItem("Linea de tiempo grupo", $menu->Count() - 1); // Move to last
-        $menu->moveItem("Tablero usuario", $menu->Count() - 1); // Move to last
-        $menu->moveItem("Tablero total", $menu->Count() - 1); // Move to last
+        $menu->moveItem("Control", $menu->Count() - 1); // Move to last
+        $menu->moveItem("Control Excon", $menu->Count() - 1); // Move to last
         $menu->moveItem("Mymail", $menu->Count() - 1); // Move to last
         $menu->moveItem("Chat", $menu->Count() - 1); // Move to last
         $menu->moveItem("Multimedia", $menu->Count() - 1); // Move to last
@@ -110,7 +112,7 @@ function Page_Loading()
 {
     //Log("Page Loading");
         global $EW_XSS_ARRAY;
-    //$EW_XSS_ARRAY = array_diff($EW_XSS_ARRAY, array("<embed", "<object", "<iframe", "<frame", "<frameset"));
+    $EW_XSS_ARRAY = array_diff($EW_XSS_ARRAY, array("<embed", "<object", "<iframe", "<frame", "<frameset"));
 $uID = CurrentUserID();
 $sqlutescenario = ExecuteScalar("SELECT p.gmt, e.fechaini_simulado, e.fechafin_simulado, e.fechaini_real, e.fechafinal_real FROM escenario  e INNER JOIN paisgmt p ON p.id_zone = e.pais_escenario WHERE e.estado IN ('1')");
 $sqlutcuser = ExecuteScalar("SELECT paisgmt.gmt FROM users LEFT JOIN paisgmt ON users.pais = paisgmt.id_zone WHERE id_users ='".$uID."'");

@@ -99,7 +99,7 @@ $TimelineGeneral = &$Page;
 </head>
 
 <body>
-    <?php $sql_utc = ExecuteRow("SELECT p.gmt, e.fechaini_simulado, e.fechafin_simulado, e.id_escenario FROM escenario  e INNER JOIN paisgmt p ON p.id_zone = e.pais_escenario WHERE e.estado IN ('1')");
+    <?php $sql_utc = ExecuteRow("SELECT p.gmt, e.fechaini_simulado, e.fechafin_simulado, e.fechaini_real, e.fechafinal_real, e.id_escenario FROM escenario  e INNER JOIN paisgmt p ON p.id_zone = e.pais_escenario WHERE e.estado IN ('1')");
 
     $sqlGrupos = ExecuteRows("SELECT id_grupo AS id, nombre_grupo AS grupo FROM grupo g INNER JOIN escenario e ON g.id_escenario = e.id_escenario     WHERE e.estado = '1';");
 
@@ -520,8 +520,8 @@ $TimelineGeneral = &$Page;
 
         let utc = '<?php echo $sql_utc[0] ?>';
         let hora = utc.slice(4, 10);
-        let fechaIniSimulado = '<?php echo $sql_utc['fechaini_simulado'] ?>';
-        let fechaFinSimulado = '<?php echo $sql_utc['fechafin_simulado'] ?>';
+        let fechaIniSimulado = '<?php echo $sql_utc['fechaini_real'] ?>';
+        let fechaFinSimulado = '<?php echo $sql_utc['fechafinal_real'] ?>';
         let data_json;
         let idEscnrio = <?php echo $sql_utc['id_escenario'] ?>;
         $('#escenario').change(function() {

@@ -123,6 +123,7 @@ return [
     "view_evento_asociado" => \DI\create(ViewEventoAsociado::class),
     "inject_excon" => \DI\create(InjectExcon::class),
     "inject_participante" => \DI\create(InjectParticipante::class),
+    "pizarra" => \DI\create(Pizarra::class),
 
     // User table
     "usertable" => \DI\get("users"),

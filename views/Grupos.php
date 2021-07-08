@@ -6,7 +6,11 @@ namespace PHPMaker2021\simexamerica;
 $Grupos = &$Page;
 ?>
 <?php
-
+$id_escenario = $_GET['ides'];
+   
+// echo Container("escenario")->id_escenario->CurrentValue;
+//	$nombreescnario = ExecuteRow("SELECT nombre_escenario,DATE_FORMAT(fechaini_real, '%Y/%m/%d'), DATE_FORMAT(fechafinal_real, '%Y/%m/%d')  FROM escenario WHERE id_escenario =  = '".$id_escenario."';");
+ $escenID = ExecuteRow("SELECT DATE_FORMAT(fechaini_real, '%Y/%m/%d'), DATE_FORMAT(fechafinal_real, '%Y/%m/%d'),nombre_escenario FROM escenario WHERE id_escenario = '".$id_escenario."';");
 
 ?>
 
@@ -377,6 +381,11 @@ ul {
 
 <body>
   
+<div class="callout callout-primary">
+  <h4>Simulación: <?php echo $escenID[2];  ?>  </h4>
+ <p> <em> Fecha inicio real: <?php echo $escenID[0]  ?> Fecha fin real: <?php echo $escenID[1];  ?> </em></p>
+</div>
+
     <div class="main-page" id="vue-chat">
       <div class="col-md-3">
           <div class="available-items card">
@@ -797,7 +806,7 @@ function obtenerGrupos(){
  
   app.elementos.push(grups);
         $.ajax({
-            url: "inject/grupos.php?idescenario="+<?php echo $_GET['ides'] ?>,
+            url: "inject/grupos.php?idescenario="+ <?php echo $id_escenario; ?>,
             success: function (es) {
                 let respuesta = JSON.parse(es);
 //                console.log(respuesta);
@@ -978,5 +987,6 @@ function obtenerGrupos(){
   }
 
 </script>
+
 
 <?= GetDebugMessage() ?>

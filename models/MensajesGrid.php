@@ -1784,7 +1784,11 @@ class MensajesGrid extends Mensajes
                         }
                         $filterWrk .= "`id`" . SearchString("=", trim($wrk), DATATYPE_STRING, "");
                     }
-                    $sqlWrk = $this->para->Lookup->getSql(false, $filterWrk, '', $this, true, true);
+                    $lookupFilter = function() {
+                        return (CurrentUserInfo("perfil") == 2) ? "`idgrupo` = '".CurrentUserInfo("grupo")."'" : "`escenario` = '".CurrentUserInfo("escenario")."'";
+                    };
+                    $lookupFilter = $lookupFilter->bindTo($this);
+                    $sqlWrk = $this->para->Lookup->getSql(false, $filterWrk, $lookupFilter, $this, true, true);
                     $rswrk = Conn()->executeQuery($sqlWrk)->fetchAll(\PDO::FETCH_BOTH);
                     $ari = count($rswrk);
                     if ($ari > 0) { // Lookup values found
@@ -1958,7 +1962,11 @@ class MensajesGrid extends Mensajes
                         $filterWrk .= "`id`" . SearchString("=", trim($wrk), DATATYPE_STRING, "");
                     }
                 }
-                $sqlWrk = $this->para->Lookup->getSql(true, $filterWrk, '', $this, false, true);
+                $lookupFilter = function() {
+                    return (CurrentUserInfo("perfil") == 2) ? "`idgrupo` = '".CurrentUserInfo("grupo")."'" : "`escenario` = '".CurrentUserInfo("escenario")."'";
+                };
+                $lookupFilter = $lookupFilter->bindTo($this);
+                $sqlWrk = $this->para->Lookup->getSql(true, $filterWrk, $lookupFilter, $this, false, true);
                 $rswrk = Conn()->executeQuery($sqlWrk)->fetchAll(\PDO::FETCH_BOTH);
                 $ari = count($rswrk);
                 $arwrk = $rswrk;
@@ -2115,7 +2123,11 @@ class MensajesGrid extends Mensajes
                         $filterWrk .= "`id`" . SearchString("=", trim($wrk), DATATYPE_STRING, "");
                     }
                 }
-                $sqlWrk = $this->para->Lookup->getSql(true, $filterWrk, '', $this, false, true);
+                $lookupFilter = function() {
+                    return (CurrentUserInfo("perfil") == 2) ? "`idgrupo` = '".CurrentUserInfo("grupo")."'" : "`escenario` = '".CurrentUserInfo("escenario")."'";
+                };
+                $lookupFilter = $lookupFilter->bindTo($this);
+                $sqlWrk = $this->para->Lookup->getSql(true, $filterWrk, $lookupFilter, $this, false, true);
                 $rswrk = Conn()->executeQuery($sqlWrk)->fetchAll(\PDO::FETCH_BOTH);
                 $ari = count($rswrk);
                 $arwrk = $rswrk;
@@ -2584,6 +2596,10 @@ class MensajesGrid extends Mensajes
                 case "x_id_actor":
                     break;
                 case "x_para":
+                    $lookupFilter = function () {
+                        return (CurrentUserInfo("perfil") == 2) ? "`idgrupo` = '".CurrentUserInfo("grupo")."'" : "`escenario` = '".CurrentUserInfo("escenario")."'";
+                    };
+                    $lookupFilter = $lookupFilter->bindTo($this);
                     break;
                 case "x_adjunto":
                     break;

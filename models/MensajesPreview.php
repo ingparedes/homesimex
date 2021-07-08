@@ -727,6 +727,10 @@ class MensajesPreview extends Mensajes
                 case "x_id_actor":
                     break;
                 case "x_para":
+                    $lookupFilter = function () {
+                        return (CurrentUserInfo("perfil") == 2) ? "`idgrupo` = '".CurrentUserInfo("grupo")."'" : "`escenario` = '".CurrentUserInfo("escenario")."'";
+                    };
+                    $lookupFilter = $lookupFilter->bindTo($this);
                     break;
                 case "x_adjunto":
                     break;

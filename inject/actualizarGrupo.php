@@ -10,8 +10,6 @@ if(!($idSubGrupo = $_GET['idSubGrupo']))
 $idGrupo = $_GET['idGrupo'];
 $idUsuario=$_GET['idUsuario'];
 //Creamos la conexión
-$con = mysqli_connect($server, $user, $pass,$bd) 
-or die("Ha sucedido un error inexperado en la conexion de la base de datos");
 
 //generamos la consulta
 $sql = "
@@ -21,7 +19,7 @@ SET `grupo`=$idGrupo,
 WHERE 
 `id_users`=$idUsuario
 ";
-echo $sql;
+//echo $sql;
 mysqli_set_charset($con, "utf8");
 
 //mysqli_set_charset($conexion, "utf8"); //formato de datos utf8

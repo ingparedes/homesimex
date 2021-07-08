@@ -1,30 +1,27 @@
-<!doctype html>
-<html lang="en">
+<?php
 
-<head>
-    <meta charset="UTF-8">
+namespace PHPMaker2021\simexamerica;
 
-    <link rel="stylesheet" href="./styles/bootstrap4/bootstrap.css">
-    <link rel="stylesheet" href="./styles/main.css">
-    <script src="./js/jquery-3.5.1/jquery-3.5.1.slim.min.js"></script>
-
-    <script type="text/javascript" src="./js/bootstrap4/bootstrap.min.js"></script>
-    <script type="text/javascript" src="./js/iconify/iconify.min.js"></script>
-    <title>Twitter</title>
-</head>
+// Page object
+$Chirping = &$Page;
+?>
 <?php session_start();
 $id_user = $_GET['id_user'];
 ?>
 
+    
+  
+  
 <body>
     <?php
-    include('../../config.php');
+    include('../config.php');
     $medio = 3;
     $sql = "SELECT CONCAT(u.nombres,' ',u.apellidos) AS nombre, u.email, u.img_user, m.fechareal_start, m.fechasim_start, m.titulo, m.mensaje, m.adjunto, m.id_actor as actor, m.medios
     FROM mensajes m 
     INNER JOIN mensajes_usuarios mu ON m.id_inyect = mu.id_mensaje
     INNER JOIN users u ON mu.id_user_remitente = u.id_users    
     WHERE mu.id_user_destinatario = '" . $id_user . "' AND m.enviado = '1' AND m.medios = '" . $medio . "' ORDER BY m.id_inyect DESC;";
+
     $res_sql = mysqli_query($con, $sql);
     $cant = mysqli_num_rows($res_sql);
 
@@ -348,4 +345,6 @@ $id_user = $_GET['id_user'];
     });
   });
 </script>
-</html>
+
+
+<?= GetDebugMessage() ?>

@@ -7,7 +7,7 @@ use Doctrine\DBAL\ParameterType;
 /**
  * Page class
  */
-class InjectParticipante
+class Chirping
 {
     use MessagesTrait;
 
@@ -18,10 +18,10 @@ class InjectParticipante
     public $ProjectID = PROJECT_ID;
 
     // Table name
-    public $TableName = 'inject_participante.php';
+    public $TableName = 'chirping.php';
 
     // Page object name
-    public $PageObjName = "InjectParticipante";
+    public $PageObjName = "Chirping";
 
     // Rendering View
     public $RenderingView = false;
@@ -87,7 +87,7 @@ class InjectParticipante
 
         // Table name (for backward compatibility only)
         if (!defined(PROJECT_NAMESPACE . "TABLE_NAME")) {
-            define(PROJECT_NAMESPACE . "TABLE_NAME", 'inject_participante.php');
+            define(PROJECT_NAMESPACE . "TABLE_NAME", 'chirping.php');
         }
 
         // Start timer
@@ -240,8 +240,8 @@ class InjectParticipante
     {
         global $Breadcrumb, $Language;
         $Breadcrumb = new Breadcrumb("index");
-        $Breadcrumb->add("custom", "inject_participante", CurrentUrl(), "", "inject_participante", true);
-        $this->Heading = $Language->TablePhrase("inject_participante", "TblCaption");
+        $Breadcrumb->add("custom", "chirping", CurrentUrl(), "", "chirping", true);
+        $this->Heading = $Language->TablePhrase("chirping", "TblCaption");
     }
 
     // Page Load event

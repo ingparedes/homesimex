@@ -36,6 +36,12 @@ $TableroParticipante = &$Page;
     background-color: #fff;
     font-size: 12px;
   }
+  .vis-custom-time {
+    pointer-events: none;
+}
+.vis-item .vis-item-overflow {
+  overflow: visible;
+}
 </style>
 <script type="text/javascript" src="//unpkg.com/vis-timeline@latest/standalone/umd/vis-timeline-graph2d.min.js"></script>
 <link href="//unpkg.com/vis-timeline@latest/styles/vis-timeline-graph2d.min.css" rel="stylesheet" type="text/css" />
@@ -82,16 +88,16 @@ $TableroParticipante = &$Page;
   // echo "UTC: " . $sql_utc[0];
   $id_user = CurrentUserID();
   $_SESSION['id_user'] = CurrentUserID();
-  echo $id_user;
+ 
 
 
-  /*  $sql_leido1 = ExecuteRow("select count(*) from mensajes_usuarios mu 
+   $sql_leido1 = ExecuteRow("select count(*) from mensajes_usuarios mu 
   INNER JOIN mensajes m ON m.id_inyect = mu.id_mensaje
   WHERE leido = '0' and mu.id_user_destinatario IN ('" . $id_user . "') AND m.medios = '1';"); //tener rn cuenta el medio
 
   $sql_leido2 = ExecuteRow("select count(*) from mensajes_usuarios mu 
   INNER JOIN mensajes m ON m.id_inyect = mu.id_mensaje
-  WHERE leido = '0' and mu.id_user_destinatario IN ('" . $id_user . "') AND m.medios = '2';"); //tener rn cuenta el medio */
+  WHERE leido = '0' and mu.id_user_destinatario IN ('" . $id_user . "') AND m.medios = '2';"); //tener rn cuenta el medio 
 
 
   ?>
@@ -106,10 +112,10 @@ $TableroParticipante = &$Page;
       <div class="col-sm-12">
 
 
-        <div class="item">
+        <div class="item" id="vue-admin">
 
-          <a class="btn btn-app2" href="#" onclick="url( '' );">
-            <span id="mensajes" class="notify-badge">0</span>
+          <a class="btn btn-app2" href="#" onclick="url( 'views/InjectParticipante.php' );">
+          <span id="mensajes" class="notify-badge"><span v-if="mensajesNuevos.length > 0" class="badge-danger">NEW</span></span>
             <img src="images/mensajes.png" alt="Image" height="62" width="62" />
           </a>
         </div>
@@ -117,7 +123,7 @@ $TableroParticipante = &$Page;
 
         <div class="item">
 
-          <a class="btn btn-app2" href="#" onclick="url( 'https://simexamericas.org/homesimex/media/twitter/index.php?id_user=<?php echo $id_user ?>' );">
+          <a class="btn btn-app2" href="#" onclick="url( 'media/twitter/index.php?id_user=<?php echo $id_user ?>' );">
             <span id="tweeter" class="notify-badge">0</span>
             <img src="images/chirping.png" alt="Image" height="62" width="62" />
           </a>
@@ -175,32 +181,68 @@ $TableroParticipante = &$Page;
     </div>
   </div>
   </div>
+  <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.29.9.js"></script>
+<script src="inject/pubnub.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
   <script type="text/javascript">
     function url(cUrl) {
       var frame = $('#frmUrl');
       frame.attr('src', cUrl).show();
     }
   </script>
-
-
   <div class="embed-responsive embed-responsive-16by9">
-    <iframe src="" id="a" class="embed-responsive-item" allowfullscreen></iframe>
-  </div>
-  -->
-
-  <div class="embed-responsive embed-responsive-16by9">
-    <iframe id="frmUrl" class="embed-responsive-item" src="" allowfullscreen></iframe>
+    <iframe id="frmUrl" class="embed-responsive-item" src="InjectParticipante" allowfullscreen></iframe>
   </div>
   <script>
-    //Time Line
+   //Time Line
     var btnLoad = document.getElementById('load');
     var btnSave = document.getElementById('save');
     let utc = '<?php echo $sql_utc[0] ?>';
     let hora = utc.slice(4, 10);
-    let fechaIniSimulado = '<?php echo $sql_utc['fechaini_simulado'] ?>';
-    let fechaFinSimulado = '<?php echo $sql_utc['fechafin_simulado'] ?>';
+    let fechaIniSimulado = '<?php echo $sql_utc['fechaini_real'] ?>';
+    let fechaFinSimulado = '<?php echo $sql_utc['fechafinal_real'] ?>';
     let data_json;
+//notificacion mensaje nuevo
+var app = new Vue({
+        el: '#vue-admin',
+        data: {
+            mensajesNuevos: []
+        }
+    });
 
+    function leerMensajes(){
+        $.ajax({
+            url: "inject/leerMensajes.php",
+            success: function (es) {
+                console.log("mensajesLeidos");
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
+    }
+   // var publishKey = 'pub-c-451eac62-0cee-4afa-9f20-93eb596aedfb';
+    //var subscribeKey = 'sub-c-5c30cc92-dbff-11eb-8c90-a639cde32e15';
+   // var pubnubAdmin = new CanalPub("canal-01",publishKey,subscribeKey);
+   // pubnubAdmin.mensajesNuevos = mensajesNuevos;
+   mensajesNuevos();
+    function mensajesNuevos(){
+        $.ajax({
+            url: "inject/mensajesNuevos.php?id_user="+<?php echo $id_user; ?>,
+            success: function (es) {
+                let respuesta = JSON.parse(es);
+                console.log(respuesta);
+                for(let i = 0;i < respuesta.length;i++){   
+                        app.mensajesNuevos.push(respuesta[i]);
+                        console.log(respuesta[i]);
+                }
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
+    }
     function loadData() {
       // ###### DESDE ACA ########
       $.ajax({
@@ -234,6 +276,9 @@ $TableroParticipante = &$Page;
               },
               start: fechaIniSimulado,
               end: fechaFinSimulado, //new Date(new Date().getTime() + 100000),
+              autoResize: true,
+              horizontalScroll: true,
+              zoomKey: "ctrlKey",
               rollingMode: {
                 follow: false,
                 offset: 0.5,
@@ -242,7 +287,8 @@ $TableroParticipante = &$Page;
               height: '200px',
               margin: {
                 item: 20
-              }
+              },
+              align: "left",
             };
             // Create a Timeline
             var timeline = new vis.Timeline(container, items, options);

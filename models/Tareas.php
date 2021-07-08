@@ -358,7 +358,7 @@ class Tareas extends DbTable
     public function getSqlWhere() // Where
     {
         $where = ($this->SqlWhere != "") ? $this->SqlWhere : "";
-        $this->DefaultFilter = "";
+        $this->DefaultFilter = (CurrentUserInfo("perfil") == 2) ? "`id_grupo` = '".CurrentUserInfo("grupo")."'" : "`id_escenario` = '".CurrentUserInfo("escenario")."'";
         AddFilter($where, $this->DefaultFilter);
         return $where;
     }

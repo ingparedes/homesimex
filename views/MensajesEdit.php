@@ -128,31 +128,31 @@ $Page->showMessage();
 <input type="hidden" name="<?= Config("TABLE_SHOW_MASTER") ?>" value="tareas">
 <input type="hidden" name="fk_id_tarea" value="<?= HtmlEncode($Page->id_tarea->getSessionValue()) ?>">
 <?php } ?>
-<div class="ew-edit-div d-none"><!-- page* -->
+<div class="ew-edit-div"><!-- page* -->
 <?php if ($Page->id_inyect->Visible) { // id_inyect ?>
     <div id="r_id_inyect" class="form-group row">
-        <label id="elh_mensajes_id_inyect" class="<?= $Page->LeftColumnClass ?>"><template id="tpc_mensajes_id_inyect"><?= $Page->id_inyect->caption() ?><?= $Page->id_inyect->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></template></label>
+        <label id="elh_mensajes_id_inyect" class="<?= $Page->LeftColumnClass ?>"><?= $Page->id_inyect->caption() ?><?= $Page->id_inyect->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->id_inyect->cellAttributes() ?>>
-<template id="tpx_mensajes_id_inyect"><span id="el_mensajes_id_inyect">
+<span id="el_mensajes_id_inyect">
 <span<?= $Page->id_inyect->viewAttributes() ?>>
 <input type="text" readonly class="form-control-plaintext" value="<?= HtmlEncode(RemoveHtml($Page->id_inyect->getDisplayValue($Page->id_inyect->EditValue))) ?>"></span>
-</span></template>
+</span>
 <input type="hidden" data-table="mensajes" data-field="x_id_inyect" data-hidden="1" name="x_id_inyect" id="x_id_inyect" value="<?= HtmlEncode($Page->id_inyect->CurrentValue) ?>">
 </div></div>
     </div>
 <?php } ?>
 <?php if ($Page->id_tarea->Visible) { // id_tarea ?>
     <div id="r_id_tarea" class="form-group row">
-        <label id="elh_mensajes_id_tarea" for="x_id_tarea" class="<?= $Page->LeftColumnClass ?>"><template id="tpc_mensajes_id_tarea"><?= $Page->id_tarea->caption() ?><?= $Page->id_tarea->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></template></label>
+        <label id="elh_mensajes_id_tarea" for="x_id_tarea" class="<?= $Page->LeftColumnClass ?>"><?= $Page->id_tarea->caption() ?><?= $Page->id_tarea->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->id_tarea->cellAttributes() ?>>
 <?php if ($Page->id_tarea->getSessionValue() != "") { ?>
-<template id="tpx_mensajes_id_tarea"><span id="el_mensajes_id_tarea">
+<span id="el_mensajes_id_tarea">
 <span<?= $Page->id_tarea->viewAttributes() ?>>
 <input type="text" readonly class="form-control-plaintext" value="<?= HtmlEncode(RemoveHtml($Page->id_tarea->getDisplayValue($Page->id_tarea->ViewValue))) ?>"></span>
-</span></template>
+</span>
 <input type="hidden" id="x_id_tarea" name="x_id_tarea" value="<?= HtmlEncode($Page->id_tarea->CurrentValue) ?>" data-hidden="1">
 <?php } else { ?>
-<template id="tpx_mensajes_id_tarea"><span id="el_mensajes_id_tarea">
+<span id="el_mensajes_id_tarea">
     <select
         id="x_id_tarea"
         name="x_id_tarea"
@@ -177,28 +177,28 @@ loadjs.ready("head", function() {
     ew.createSelect(options);
 });
 </script>
-</span></template>
+</span>
 <?php } ?>
 </div></div>
     </div>
 <?php } ?>
 <?php if ($Page->titulo->Visible) { // titulo ?>
     <div id="r_titulo" class="form-group row">
-        <label id="elh_mensajes_titulo" for="x_titulo" class="<?= $Page->LeftColumnClass ?>"><template id="tpc_mensajes_titulo"><?= $Page->titulo->caption() ?><?= $Page->titulo->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></template></label>
+        <label id="elh_mensajes_titulo" for="x_titulo" class="<?= $Page->LeftColumnClass ?>"><?= $Page->titulo->caption() ?><?= $Page->titulo->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->titulo->cellAttributes() ?>>
-<template id="tpx_mensajes_titulo"><span id="el_mensajes_titulo">
+<span id="el_mensajes_titulo">
 <input type="<?= $Page->titulo->getInputTextType() ?>" data-table="mensajes" data-field="x_titulo" name="x_titulo" id="x_titulo" size="100" maxlength="100" placeholder="<?= HtmlEncode($Page->titulo->getPlaceHolder()) ?>" value="<?= $Page->titulo->EditValue ?>"<?= $Page->titulo->editAttributes() ?> aria-describedby="x_titulo_help">
 <?= $Page->titulo->getCustomMessage() ?>
 <div class="invalid-feedback"><?= $Page->titulo->getErrorMessage() ?></div>
-</span></template>
+</span>
 </div></div>
     </div>
 <?php } ?>
 <?php if ($Page->mensaje->Visible) { // mensaje ?>
     <div id="r_mensaje" class="form-group row">
-        <label id="elh_mensajes_mensaje" class="<?= $Page->LeftColumnClass ?>"><template id="tpc_mensajes_mensaje"><?= $Page->mensaje->caption() ?><?= $Page->mensaje->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></template></label>
+        <label id="elh_mensajes_mensaje" class="<?= $Page->LeftColumnClass ?>"><?= $Page->mensaje->caption() ?><?= $Page->mensaje->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->mensaje->cellAttributes() ?>>
-<template id="tpx_mensajes_mensaje"><span id="el_mensajes_mensaje">
+<span id="el_mensajes_mensaje">
 <?php $Page->mensaje->EditAttrs->appendClass("editor"); ?>
 <textarea data-table="mensajes" data-field="x_mensaje" name="x_mensaje" id="x_mensaje" cols="35" rows="4" placeholder="<?= HtmlEncode($Page->mensaje->getPlaceHolder()) ?>"<?= $Page->mensaje->editAttributes() ?> aria-describedby="x_mensaje_help"><?= $Page->mensaje->EditValue ?></textarea>
 <?= $Page->mensaje->getCustomMessage() ?>
@@ -208,39 +208,39 @@ loadjs.ready(["fmensajesedit", "editor"], function() {
 	ew.createEditor("fmensajesedit", "x_mensaje", 35, 4, <?= $Page->mensaje->ReadOnly || false ? "true" : "false" ?>);
 });
 </script>
-</span></template>
+</span>
 </div></div>
     </div>
 <?php } ?>
 <?php if ($Page->fechareal_start->Visible) { // fechareal_start ?>
     <div id="r_fechareal_start" class="form-group row">
-        <label id="elh_mensajes_fechareal_start" for="x_fechareal_start" class="<?= $Page->LeftColumnClass ?>"><template id="tpc_mensajes_fechareal_start"><?= $Page->fechareal_start->caption() ?><?= $Page->fechareal_start->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></template></label>
+        <label id="elh_mensajes_fechareal_start" for="x_fechareal_start" class="<?= $Page->LeftColumnClass ?>"><?= $Page->fechareal_start->caption() ?><?= $Page->fechareal_start->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->fechareal_start->cellAttributes() ?>>
-<template id="tpx_mensajes_fechareal_start"><span id="el_mensajes_fechareal_start">
+<span id="el_mensajes_fechareal_start">
 <input type="<?= $Page->fechareal_start->getInputTextType() ?>" data-table="mensajes" data-field="x_fechareal_start" data-format="109" name="x_fechareal_start" id="x_fechareal_start" placeholder="<?= HtmlEncode($Page->fechareal_start->getPlaceHolder()) ?>" value="<?= $Page->fechareal_start->EditValue ?>"<?= $Page->fechareal_start->editAttributes() ?> aria-describedby="x_fechareal_start_help">
 <?= $Page->fechareal_start->getCustomMessage() ?>
 <div class="invalid-feedback"><?= $Page->fechareal_start->getErrorMessage() ?></div>
-</span></template>
+</span>
 </div></div>
     </div>
 <?php } ?>
 <?php if ($Page->fechasim_start->Visible) { // fechasim_start ?>
     <div id="r_fechasim_start" class="form-group row">
-        <label id="elh_mensajes_fechasim_start" for="x_fechasim_start" class="<?= $Page->LeftColumnClass ?>"><template id="tpc_mensajes_fechasim_start"><?= $Page->fechasim_start->caption() ?><?= $Page->fechasim_start->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></template></label>
+        <label id="elh_mensajes_fechasim_start" for="x_fechasim_start" class="<?= $Page->LeftColumnClass ?>"><?= $Page->fechasim_start->caption() ?><?= $Page->fechasim_start->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->fechasim_start->cellAttributes() ?>>
-<template id="tpx_mensajes_fechasim_start"><span id="el_mensajes_fechasim_start">
+<span id="el_mensajes_fechasim_start">
 <input type="<?= $Page->fechasim_start->getInputTextType() ?>" data-table="mensajes" data-field="x_fechasim_start" data-format="109" name="x_fechasim_start" id="x_fechasim_start" placeholder="<?= HtmlEncode($Page->fechasim_start->getPlaceHolder()) ?>" value="<?= $Page->fechasim_start->EditValue ?>"<?= $Page->fechasim_start->editAttributes() ?> aria-describedby="x_fechasim_start_help">
 <?= $Page->fechasim_start->getCustomMessage() ?>
 <div class="invalid-feedback"><?= $Page->fechasim_start->getErrorMessage() ?></div>
-</span></template>
+</span>
 </div></div>
     </div>
 <?php } ?>
 <?php if ($Page->medios->Visible) { // medios ?>
     <div id="r_medios" class="form-group row">
-        <label id="elh_mensajes_medios" for="x_medios" class="<?= $Page->LeftColumnClass ?>"><template id="tpc_mensajes_medios"><?= $Page->medios->caption() ?><?= $Page->medios->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></template></label>
+        <label id="elh_mensajes_medios" for="x_medios" class="<?= $Page->LeftColumnClass ?>"><?= $Page->medios->caption() ?><?= $Page->medios->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->medios->cellAttributes() ?>>
-<template id="tpx_mensajes_medios"><span id="el_mensajes_medios">
+<span id="el_mensajes_medios">
     <select
         id="x_medios"
         name="x_medios"
@@ -265,27 +265,27 @@ loadjs.ready("head", function() {
     ew.createSelect(options);
 });
 </script>
-</span></template>
+</span>
 </div></div>
     </div>
 <?php } ?>
 <?php if ($Page->actividad_esperada->Visible) { // actividad_esperada ?>
     <div id="r_actividad_esperada" class="form-group row">
-        <label id="elh_mensajes_actividad_esperada" for="x_actividad_esperada" class="<?= $Page->LeftColumnClass ?>"><template id="tpc_mensajes_actividad_esperada"><?= $Page->actividad_esperada->caption() ?><?= $Page->actividad_esperada->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></template></label>
+        <label id="elh_mensajes_actividad_esperada" for="x_actividad_esperada" class="<?= $Page->LeftColumnClass ?>"><?= $Page->actividad_esperada->caption() ?><?= $Page->actividad_esperada->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->actividad_esperada->cellAttributes() ?>>
-<template id="tpx_mensajes_actividad_esperada"><span id="el_mensajes_actividad_esperada">
+<span id="el_mensajes_actividad_esperada">
 <textarea data-table="mensajes" data-field="x_actividad_esperada" name="x_actividad_esperada" id="x_actividad_esperada" cols="35" rows="4" placeholder="<?= HtmlEncode($Page->actividad_esperada->getPlaceHolder()) ?>"<?= $Page->actividad_esperada->editAttributes() ?> aria-describedby="x_actividad_esperada_help"><?= $Page->actividad_esperada->EditValue ?></textarea>
 <?= $Page->actividad_esperada->getCustomMessage() ?>
 <div class="invalid-feedback"><?= $Page->actividad_esperada->getErrorMessage() ?></div>
-</span></template>
+</span>
 </div></div>
     </div>
 <?php } ?>
 <?php if ($Page->id_actor->Visible) { // id_actor ?>
     <div id="r_id_actor" class="form-group row">
-        <label id="elh_mensajes_id_actor" for="x_id_actor" class="<?= $Page->LeftColumnClass ?>"><template id="tpc_mensajes_id_actor"><?= $Page->id_actor->caption() ?><?= $Page->id_actor->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></template></label>
+        <label id="elh_mensajes_id_actor" for="x_id_actor" class="<?= $Page->LeftColumnClass ?>"><?= $Page->id_actor->caption() ?><?= $Page->id_actor->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->id_actor->cellAttributes() ?>>
-<template id="tpx_mensajes_id_actor"><span id="el_mensajes_id_actor">
+<span id="el_mensajes_id_actor">
 <div class="input-group flex-nowrap">
     <select
         id="x_id_actor"
@@ -315,15 +315,15 @@ loadjs.ready("head", function() {
     ew.createSelect(options);
 });
 </script>
-</span></template>
+</span>
 </div></div>
     </div>
 <?php } ?>
 <?php if ($Page->para->Visible) { // para ?>
     <div id="r_para" class="form-group row">
-        <label id="elh_mensajes_para" for="x_para" class="<?= $Page->LeftColumnClass ?>"><template id="tpc_mensajes_para"><?= $Page->para->caption() ?><?= $Page->para->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></template></label>
+        <label id="elh_mensajes_para" for="x_para" class="<?= $Page->LeftColumnClass ?>"><?= $Page->para->caption() ?><?= $Page->para->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->para->cellAttributes() ?>>
-<template id="tpx_mensajes_para"><span id="el_mensajes_para">
+<span id="el_mensajes_para">
     <select
         id="x_para[]"
         name="x_para[]"
@@ -352,15 +352,15 @@ loadjs.ready("head", function() {
     ew.createSelect(options);
 });
 </script>
-</span></template>
+</span>
 </div></div>
     </div>
 <?php } ?>
 <?php if ($Page->adjunto->Visible) { // adjunto ?>
     <div id="r_adjunto" class="form-group row">
-        <label id="elh_mensajes_adjunto" for="x_adjunto" class="<?= $Page->LeftColumnClass ?>"><template id="tpc_mensajes_adjunto"><?= $Page->adjunto->caption() ?><?= $Page->adjunto->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></template></label>
+        <label id="elh_mensajes_adjunto" for="x_adjunto" class="<?= $Page->LeftColumnClass ?>"><?= $Page->adjunto->caption() ?><?= $Page->adjunto->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->adjunto->cellAttributes() ?>>
-<template id="tpx_mensajes_adjunto"><span id="el_mensajes_adjunto">
+<span id="el_mensajes_adjunto">
 <div class="input-group flex-nowrap">
     <select
         id="x_adjunto"
@@ -390,118 +390,11 @@ loadjs.ready("head", function() {
     ew.createSelect(options);
 });
 </script>
-</span></template>
+</span>
 </div></div>
     </div>
 <?php } ?>
 </div><!-- /page* -->
-<div id="tpd_mensajesedit" class="ew-custom-template"></div>
-<template id="tpm_mensajesedit">
-<div id="ct_MensajesEdit"><?php
-	$idTarea = Container("tareas")->id_tarea->CurrentValue;
-//var_dump(Db());
-
-//$dbconn = Db();
-    //Log("Row Inserted");
-    //Recibe Grupo-id
-	$nombretarea = ExecuteRow("SELECT titulo_tarea,DATE_FORMAT(fechainireal_tarea, '%Y/%m/%d'), DATE_FORMAT(fechafin_tarea, '%Y/%m/%d') as fecha  FROM tareas  WHERE id_tarea = '".$idTarea."';");
-?>
-<div class="callout callout-primary">
-  <h4>Tarea: <?php echo $nombretarea[0];  ?>  </h4>
- <p>Fecha inicio real: <?php echo $nombretarea[1]  ?> Fecha fin real: <?php echo $nombretarea[2];  ?> </p>
-</div>
-	<div id="r_titulo" class="form-group">
-        <label for="x_titulo" class="col-sm-2 col-form-label"><?= $Page->titulo->caption() ?></label>
-        <div class="col-sm-10"><slot class="ew-slot" name="tpx_mensajes_titulo"></slot></div>
-    </div>
- <div id="r_mensaje" class="form-group">
-        <label for="x_mensaje" class="col-sm-2 col-form-label"><?= $Page->mensaje->caption() ?></label>
-        <div class="col-sm-10"><slot class="ew-slot" name="tpx_mensajes_mensaje"></slot></div> 
-    </div>a
- <div class = "row">
-    <div id="r_fechareal_start" class="form-group">
-        <label for="x_fechareal_start" class="col-sm-2 col-form-label"><?= $Page->fechareal_start->caption() ?></label>
-        <div class="col-sm-10"><slot class="ew-slot" name="tpx_mensajes_fechareal_start"></slot></div>
-    </div>
-    <div id="r_fechasim_start" class="form-group">
-        <label for="x_fechasim_start" class="col-sm-2 col-form-label"><?= $Page->fechasim_start->caption() ?></label>
-        <div class="col-sm-10"><slot class="ew-slot" name="tpx_mensajes_fechasim_start"></slot></div>
-    </div>
- </div>
- <div class = "row">
- 	    <div id="r_para" class="form-group">
-        <label for="x_para" class="col-sm-2 col-form-label"><?= $Page->para->caption() ?></label>
-        <div class="col-sm-10"><slot class="ew-slot" name="tpx_mensajes_para"></slot></div>
-    </div>
-        <div id="r_id_actor" class="form-group">
-        <label for="x_id_actor" class="col-sm-2 col-form-label"><?= $Page->id_actor->caption() ?></label>
-        <div class="col-sm-10"><slot class="ew-slot" name="tpx_mensajes_id_actor"></slot></div>
-    </div>
-   </div>
-    <div id="r_actividad_esperada" class="form-group">
-        <label for="x_actividad_esperada" class="col-sm-2 col-form-label"><?= $Page->actividad_esperada->caption() ?></label>
-        <div class="col-sm-10"><slot class="ew-slot" name="tpx_mensajes_actividad_esperada"></slot></div>
-    </div>
-   <div class = "row">
-    <div id="r_medios" class="form-group">
-        <label for="x_medios" class="col-sm-2 col-form-label"><?= $Page->medios->caption() ?></label>
-        <div class="col-sm-10"><slot class="ew-slot" name="tpx_mensajes_medios"></slot></div>
-    </div>
-    <div id="r_adjunto" class="form-group">
-        <label for="x_adjunto" class="col-sm-2 col-form-label"><?= $Page->adjunto->caption() ?></label>
-        <div class="col-sm-10"><slot class="ew-slot" name="tpx_mensajes_adjunto"></slot></div>
-    </div>
-</div>
-   <?php
-	$fecha = ExecuteRow("SELECT t.fechainireal_tarea, t.fechafin_tarea FROM tareas t WHERE t.id_tarea = '".$idTarea."';");
-	$fechaSim = ExecuteRow("SELECT fechaini_simulado, fechafin_simulado FROM escenario e INNER JOIN tareas t ON e.id_escenario = t.id_escenario WHERE t.id_tarea = '".$idTarea."';" );
-	$fechaInicial = date("Y-m-d", strtotime($fecha[0]));
-	$horaInicial = date("H", strtotime($fecha[0]));
-	$minInicial = date("i", strtotime($fecha[0]));
-	$fechaFin = date("Y-m-d", strtotime($fecha[1]));
-	$horaFin = date("H", strtotime($fecha[1]));
-	$minFin = date("i", strtotime($fecha[1]));
-	$fechaIniSimulado = date("Y-m-d", strtotime($fechaSim[0]));
-	$horaIniSimulado = date("H", strtotime($fechaSim[0]));
-	$minIniSimulado = date("i", strtotime($fechaSim[0]));
-	$fechaFinSimulado = date("Y-m-d", strtotime($fechaSim[0]));
-	$horaFinSimulado = date("H", strtotime($fechaSim[0]));
-	$minFinSimulado = date("i", strtotime($fechaSim[0]));	
-	?>
-	<script>
-			let fechaInicial = "<?php echo $fechaInicial ?>";
-			let horaInicial = "<?php echo $horaInicial ?>";
-			let minInicial = "<?php echo $minInicial ?>";
-			let fechaFin = "<?php echo $fechaFin ?>";
-			let horaFin = "<?php echo $horaFin ?>";
-			let minFin = "<?php echo $minFin ?>";
-			flatpickr("#x_fechareal_start",{
-				locale: "es",
-				enableTime: true,
-				dateFormat: "Y-m-d H:i",
-				time_24hr: true,
-				minDate: fechaInicial + " " + horaInicial + ":" + minInicial,
-				maxDate: fechaFin + " " + horaFin + ":" + minFin,
-				defaultDate: fechaInicial + " " + horaInicial + ":" + minInicial,
-			});
-			let fechaIniSimulado = "<?php echo $fechaIniSimulado ?>";
-			let horaIniSimulado = "<?php echo $horaIniSimulado ?>";
-			let minIniSimulado = "<?php echo $minIniSimulado ?>";
-			let fechaFinSimulado = "<?php echo $fechaFinSimulado ?>";
-			let horaFinSimulado = "<?php echo $horaFinSimulado ?>";
-			let minFinSimulado = "<?php echo $minFinSimulado ?>";
-			flatpickr("#x_fechasim_start",{
-				locale: "es",
-				enableTime: true,
-				dateFormat: "Y-m-d H:i",
-				time_24hr: true,
-				minDate: fechaIniSimulado + " " + horaIniSimulado + ":" + minIniSimulado,
-				maxDate: fechaFinSimulado + " " + horaFinSimulado + ":" + minFinSimulado,
-				defaultDate: fechaIniSimulado + " " + horaIniSimulado + ":" + minIniSimulado,
-			});
-	</script>
-</div>
-</template>
 <?php
     if (in_array("resmensaje", explode(",", $Page->getCurrentDetailTable())) && $resmensaje->DetailEdit) {
 ?>
@@ -519,13 +412,6 @@ loadjs.ready("head", function() {
 </div><!-- /buttons .form-group -->
 <?php } ?>
 </form>
-<script class="ew-apply-template">
-loadjs.ready(["jsrender", "makerjs"], function() {
-    ew.templateData = { rows: <?= JsonEncode($Page->Rows) ?> };
-    ew.applyTemplate("tpd_mensajesedit", "tpm_mensajesedit", "mensajesedit", "<?= $Page->CustomExport ?>", ew.templateData.rows[0]);
-    loadjs.done("customtemplate");
-});
-</script>
 <?php
 $Page->showPageFooter();
 echo GetDebugMessage();

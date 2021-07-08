@@ -159,7 +159,9 @@ $USER_LEVEL_PRIVS = [["{E72B71B0-0142-48A2-8D2C-143364E37B13}escenario","-2","0"
     ["{E72B71B0-0142-48A2-8D2C-143364E37B13}inject_excon.php","-2","0"],
     ["{E72B71B0-0142-48A2-8D2C-143364E37B13}inject_excon.php","0","0"],
     ["{E72B71B0-0142-48A2-8D2C-143364E37B13}inject_participante.php","-2","0"],
-    ["{E72B71B0-0142-48A2-8D2C-143364E37B13}inject_participante.php","0","0"]];
+    ["{E72B71B0-0142-48A2-8D2C-143364E37B13}inject_participante.php","0","0"],
+    ["{E72B71B0-0142-48A2-8D2C-143364E37B13}pizarra.php","-2","0"],
+    ["{E72B71B0-0142-48A2-8D2C-143364E37B13}pizarra.php","0","0"]];
 // User level table info
 $USER_LEVEL_TABLES = [["escenario","escenario","escenario",true,"{E72B71B0-0142-48A2-8D2C-143364E37B13}","EscenarioList"],
     ["grupo","grupo","grupo",true,"{E72B71B0-0142-48A2-8D2C-143364E37B13}","GrupoList"],
@@ -236,4 +238,5 @@ $USER_LEVEL_TABLES = [["escenario","escenario","escenario",true,"{E72B71B0-0142-
     ["evento_asociado","evento_asociado","evento asociado",true,"{E72B71B0-0142-48A2-8D2C-143364E37B13}","EventoAsociadoList"],
     ["view_evento_asociado","view_evento_asociado","view evento asociado",true,"{E72B71B0-0142-48A2-8D2C-143364E37B13}","ViewEventoAsociadoList"],
     ["inject_excon.php","inject_excon","InjectExcon",true,"{E72B71B0-0142-48A2-8D2C-143364E37B13}","InjectExcon"],
-    ["inject_participante.php","inject_participante","injectParticipante",true,"{E72B71B0-0142-48A2-8D2C-143364E37B13}","InjectParticipante"]];
+    ["inject_participante.php","inject_participante","injectParticipante",true,"{E72B71B0-0142-48A2-8D2C-143364E37B13}","InjectParticipante"],
+    ["pizarra.php","pizarra","pizarra",true,"{E72B71B0-0142-48A2-8D2C-143364E37B13}","Pizarra"]];

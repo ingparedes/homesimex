@@ -2,9 +2,20 @@
 
 namespace PHPMaker2021\simexamerica;
 
+
+/**
+ * Servidor de almacenamiento/OnlyOffice
+ */
+
+define('_URL_STORE','https://simexamericas.org/OnlyOffice/');
+
 // Page object
 $ArchivosDocAdd = &$Page;
 ?>
+<script type="text/javascript" src="js/jquery.blockUI.js"></script>
+
+<script type="text/javascript" src="js/jquery.fileupload.js"></script>
+
 <script>
 var currentForm, currentPageID;
 var farchivos_docadd;
@@ -102,7 +113,7 @@ loadjs.ready("head", function () {
 <?php
 $Page->showMessage();
 ?>
-<form name="farchivos_docadd" id="farchivos_docadd" class="<?= $Page->FormClassName ?>" action="<?= CurrentPageUrl(false) ?>" method="post">
+<form name="farchivos_docadd" id="farchivos_docadd" class="<?= $Page->FormClassName ?>" action="<?= CurrentPageUrl() ?>" method="post">
 <?php if (Config("CHECK_TOKEN")) { ?>
 <input type="hidden" name="<?= $TokenNameKey ?>" value="<?= $TokenName ?>"><!-- CSRF token name -->
 <input type="hidden" name="<?= $TokenValueKey ?>" value="<?= $TokenValue ?>"><!-- CSRF token value -->
@@ -119,9 +130,15 @@ $Page->showMessage();
 <span id="el_archivos_doc_file_name">
 <div id="fd_x_file_name">
 <div class="input-group">
+    
     <div class="custom-file">
-        <input type="file" class="custom-file-input" title="<?= $Page->file_name->title() ?>" data-table="archivos_doc" data-field="x_file_name" name="x_file_name" id="x_file_name" lang="<?= CurrentLanguageID() ?>"<?= $Page->file_name->editAttributes() ?><?= ($Page->file_name->ReadOnly || $Page->file_name->Disabled) ? " disabled" : "" ?> aria-describedby="x_file_name_help">
+         <a class="file-upload">
+        <input type="file" id="x_file_name"
+               class="custom-file-input"
+               name="x_file_name"
+               data-url="<?=_URL_STORE?>webeditor-ajax.php?type=upload&user=<?=CurrentUserID()?>">
         <label class="custom-file-label ew-file-label" for="x_file_name"><?= $Language->phrase("ChooseFile") ?></label>
+         </a>
     </div>
 </div>
 <?= $Page->file_name->getCustomMessage() ?>
@@ -155,12 +172,63 @@ $Page->showMessage();
 </div><!-- /buttons .form-group -->
 <?php } ?>
 </form>
+
 <?php
 $Page->showPageFooter();
 echo GetDebugMessage();
 ?>
 <script>
-// Field event handlers
+    $(document).ready(function(){
+        $('#fn_x_file_name').change(callFile);
+
+    });
+
+    function callFile(e){
+        var file = this.files[0];
+        var form = new FormData();
+        form.append('media', file);
+        form.append('text', $('#text').val());
+        $.ajax({
+            url : "http://localhost:81/interpreteFile.php",
+            type: "POST",
+            cache: false,
+            contentType: false,
+            processData: false,
+            data : form,
+            success: function(response){
+                console.log(response);
+            }
+        });
+    }
+  
+    function validador(){
+        $('fn_x_file_name').val();
+        var urlFile = $('tr.template-download p.name a').attr('href');
+        var parametros = {
+            "type" : 'upload',
+            "accessFile" : urlFile,//url de descarga
+            "usuario": 1,
+            "nombreArchivo": $('#fn_x_file_name').val()
+        };
+
+
+        $.ajax({
+            type : "POST",
+            data : parametros,
+            url :"<?=_URL_STORE?>interpreteFile.php",
+            success: function(respuesta) {
+
+            },
+            error: function() {
+                console.log("No se ha podido obtener la información");
+            }
+        });
+        //
+    }
+
+
+
+    // Field event handlers
 loadjs.ready("head", function() {
     ew.addEventHandlers("archivos_doc");
 });

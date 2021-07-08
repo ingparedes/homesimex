@@ -4,7 +4,7 @@ session_start();
 include("../config.php");
 
 //Creamos la conexión
-
+$idescenario = $_GET["idescenario"];
 //generamos la consulta
 $sql = "
 SELECT 

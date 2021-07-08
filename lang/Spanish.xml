@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<ew-language date="2021/6/28" version="17.0.4" id="es" name="Spanish" desc="Spanish" author="ELA83">
+<ew-language date="2021/7/8" version="17.0.4" id="es" name="Spanish" desc="Spanish" author="ELA83">
   <!--
     *** Important Notes:
     1. Language ID should follow: https://developers.google.com/recaptcha/docs/language,
@@ -923,11 +923,14 @@
   <project>
     <phrase id="bodytitle" value="SIMEXAMERICA" />
     <phrase id="footertext" value="© Pan American Health Organization. All rights reserved." />
+    <menu id="252">
+      <phrase id="menutext" value="Pizarra" />
+    </menu>
     <menu id="250">
-      <phrase id="menutext" value="InjectExcon" />
+      <phrase id="menutext" value="Control Excon" />
     </menu>
     <menu id="251">
-      <phrase id="menutext" value="injectParticipante" />
+      <phrase id="menutext" value="Control" />
     </menu>
     <menu id="247">
       <phrase id="menutext" value="Edit Grupo" />
@@ -1218,7 +1221,7 @@
       </field>
     </table>
     <table id="grupo">
-      <phrase id="tblcaption" value="Grupos" />
+      <phrase id="tblcaption" value="Control de usuarios" />
       <field id="id_escenario">
         <phrase id="fldcaption" value="ID" />
       </field>
@@ -2672,10 +2675,13 @@
       </field>
     </table>
     <table id="inject_excon">
-      <phrase id="tblcaption" value="InjectExcon" />
+      <phrase id="tblcaption" value="Control Excon" />
     </table>
     <table id="inject_participante">
-      <phrase id="tblcaption" value="injectParticipante" />
+      <phrase id="tblcaption" value="Control" />
+    </table>
+    <table id="pizarra">
+      <phrase id="tblcaption" value="pizarra" />
     </table>
   </project>
 </ew-language>

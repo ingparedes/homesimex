@@ -4,8 +4,20 @@ namespace PHPMaker2021\simexamerica;
 
 // Page object
 $PermisosDocusersView = &$Page;
+
+/**
+ * Servidor de almacenamiento/OnlyOffice
+ */
+
+define('_URL_STORE','https://simexamericas.org/OnlyOffice/');
+
+
+$sql = ExecuteRow("Select concat(nombres,' ',apellidos)  'name'  from users where id_users =".CurrentUserID().";");
+
 ?>
 <?php if (!$Page->isExport()) { ?>
+
+
 <script>
 var currentForm, currentPageID;
 var fpermisos_docusersview;
@@ -37,67 +49,86 @@ if (!ew.vars.tables.permisos_docusers) ew.vars.tables.permisos_docusers = <?= Js
 <?php
 $Page->showMessage();
 ?>
-<form name="fpermisos_docusersview" id="fpermisos_docusersview" class="form-inline ew-form ew-view-form" action="<?= CurrentPageUrl(false) ?>" method="post">
+<form name="fpermisos_docusersview" id="fpermisos_docusersview" class="form-inline ew-form ew-view-form" action="<?= CurrentPageUrl() ?>" method="post">
 <?php if (Config("CHECK_TOKEN")) { ?>
 <input type="hidden" name="<?= $TokenNameKey ?>" value="<?= $TokenName ?>"><!-- CSRF token name -->
 <input type="hidden" name="<?= $TokenValueKey ?>" value="<?= $TokenValue ?>"><!-- CSRF token value -->
 <?php } ?>
 <input type="hidden" name="t" value="permisos_docusers">
 <input type="hidden" name="modal" value="<?= (int)$Page->IsModal ?>">
-<table class="table table-striped table-sm ew-view-table d-none">
+<table class="table table-striped table-sm ew-view-table">
+<?php if ($Page->id_permisiosuser->Visible) { // id_permisiosuser ?>
+    <tr id="r_id_permisiosuser">
+        <td class="<?= $Page->TableLeftColumnClass ?>"><span id="elh_permisos_docusers_id_permisiosuser"><?= $Page->id_permisiosuser->caption() ?></span></td>
+        <td data-name="id_permisiosuser" <?= $Page->id_permisiosuser->cellAttributes() ?>>
+<span id="el_permisos_docusers_id_permisiosuser">
+<span<?= $Page->id_permisiosuser->viewAttributes() ?>>
+<?= $Page->id_permisiosuser->getViewValue() ?></span>
+</span>
+</td>
+    </tr>
+<?php } ?>
 <?php if ($Page->id_file->Visible) { // id_file ?>
     <tr id="r_id_file">
-        <td class="<?= $Page->TableLeftColumnClass ?>"><span id="elh_permisos_docusers_id_file"><template id="tpc_permisos_docusers_id_file"><?= $Page->id_file->caption() ?></template></span></td>
+        <td class="<?= $Page->TableLeftColumnClass ?>"><span id="elh_permisos_docusers_id_file"><?= $Page->id_file->caption() ?></span></td>
         <td data-name="id_file" <?= $Page->id_file->cellAttributes() ?>>
-<template id="tpx_permisos_docusers_id_file" class="permisos_docusersview">
-<?php
+<span id="el_permisos_docusers_id_file">
+<span<?= $Page->id_file->viewAttributes() ?>><?php
 $id = CurrentPage()->id_file->CurrentValue;
-$filex = Executerow("SELECT file_name FROM archivos_doc WHERE id_file = '".$id."';");
-echo $filex['0'];
+$filex = ExecuteRow("SELECT id_users,file_name FROM archivos_doc WHERE id_file = '".$id."';");
+
+echo $filex['file_name'];
 ?>
-</template>
-<template id="tpx_permisos_docusers_id_file"><span id="el_permisos_docusers_id_file">
-<span<?= $Page->id_file->viewAttributes() ?>><slot name="tpx_permisos_docusers_id_file"></slot></span>
-</span></template>
+</span>
+</span>
 </td>
     </tr>
 <?php } ?>
 <?php if ($Page->tipo_permiso->Visible) { // tipo_permiso ?>
     <tr id="r_tipo_permiso">
-        <td class="<?= $Page->TableLeftColumnClass ?>"><span id="elh_permisos_docusers_tipo_permiso"><template id="tpc_permisos_docusers_tipo_permiso"><?= $Page->tipo_permiso->caption() ?></template></span></td>
+        <td class="<?= $Page->TableLeftColumnClass ?>"><span id="elh_permisos_docusers_tipo_permiso"><?= $Page->tipo_permiso->caption() ?></span></td>
         <td data-name="tipo_permiso" <?= $Page->tipo_permiso->cellAttributes() ?>>
-<template id="tpx_permisos_docusers_tipo_permiso"><span id="el_permisos_docusers_tipo_permiso">
+<span id="el_permisos_docusers_tipo_permiso">
 <span<?= $Page->tipo_permiso->viewAttributes() ?>>
+
 <?= $Page->tipo_permiso->getViewValue() ?></span>
-</span></template>
+</span>
+</td>
+    </tr>
+<?php } ?>
+<?php if ($Page->id_users->Visible) { // id_users ?>
+    <tr id="r_id_users">
+        <td class="<?= $Page->TableLeftColumnClass ?>"><span id="elh_permisos_docusers_id_users"><?= $Page->id_users->caption() ?></span></td>
+        <td data-name="id_users" <?= $Page->id_users->cellAttributes() ?>>
+<span id="el_permisos_docusers_id_users">
+<span<?= $Page->id_users->viewAttributes() ?>>
+<?= $Page->id_users->getViewValue() ?></span>
+</span>
+</td>
+    </tr>
+<?php } ?>
+
+<?php if ($Page->date_created->Visible) { // date_created ?>
+    <tr id="r_date_created">
+        <td class="<?= $Page->TableLeftColumnClass ?>"><span id="elh_permisos_docusers_date_created"><?= $Page->date_created->caption() ?></span></td>
+        <td data-name="date_created" <?= $Page->date_created->cellAttributes() ?>>
+<span id="el_permisos_docusers_date_created">
+<span<?= $Page->date_created->viewAttributes() ?>>
+<?= $Page->date_created->getViewValue() ?></span>
+</span>
 </td>
     </tr>
 <?php } ?>
 </table>
-<div id="tpd_permisos_docusersview" class="ew-custom-template"></div>
-<template id="tpm_permisos_docusersview">
-<div id="ct_PermisosDocusersView"><?php
-$sql = ExecuteRow("Select concat(nombres,' ',apellidos)  'name'  from users where id_users =".CurrentUserID().";");
-?>
-<div> <strong> <?= $Page->id_file->caption() ?></strong>:<slot class="ew-slot" name="tpx_permisos_docusers_id_file"></slot></div>
-<div> <strong><?= $Page->tipo_permiso->caption() ?></strong>  : <slot class="ew-slot" name="tpx_permisos_docusers_tipo_permiso"></slot></div>
-<a class="btn btn-primary ew-btn" target="_blank" href="http://190.85.49.114:8181/doceditor.php?nameUser=<?=$sql['name']?>&fileID=<?=$filex['file_name']?>&user=<?=$filex['id_users']?><?=($Page->tipo_permiso->CurrentValue<>'1' )?'&action=view&type=desktop':''?>">Abrir en otro tab</a>
-<div class="embed-responsive embed-responsive-16by9">
-     <iframe id="DocumentFrame"
-     		class="embed-responsive-item"
-            src="http://190.85.49.114:8181/doceditor.php?nameUser=<?=$sql['name']?>&fileID=<?=$filex['file_name']?>&user=<?=$filex['id_users']?><?=($Page->tipo_permiso->CurrentValue<>'1' )?'&action=view&type=desktop':''?>" allowfullscreen >
+    <a class="btn btn-primary ew-btn" target="_blank" href="<?=_URL_STORE?>doceditor.php?ulang=<?=CurrentLanguageID()?>&nameUser=<?=$sql['name']?>&fileID=<?=$filex['file_name']?>&user=<?=$filex['id_users']?><?=($Page->tipo_permiso->CurrentValue<>'1' )?'&action=view&type=desktop':''?>">Abrir en otro tab</a>
+
+    <iframe id="DocumentFrame"
+            title="Onlyoffice"
+            width="100%"
+            height="1000"
+            src="<?=_URL_STORE?>doceditor.php?ulang=<?=CurrentLanguageID()?>&nameUser=<?=$sql['name']?>&fileID=<?=$filex['file_name']?>&user=<?=$filex['id_users']?><?=($Page->tipo_permiso->CurrentValue<>'1' )?'&action=view&type=desktop':''?>">
     </iframe>
-<div> 
-</div>
-</template>
 </form>
-<script class="ew-apply-template">
-loadjs.ready(["jsrender", "makerjs"], function() {
-    ew.templateData = { rows: <?= JsonEncode($Page->Rows) ?> };
-    ew.applyTemplate("tpd_permisos_docusersview", "tpm_permisos_docusersview", "permisos_docusersview", "<?= $Page->CustomExport ?>", ew.templateData.rows[0]);
-    loadjs.done("customtemplate");
-});
-</script>
 <?php
 $Page->showPageFooter();
 echo GetDebugMessage();

@@ -140,6 +140,7 @@ class Mensajes extends DbTable
 
         // medios
         $this->medios = new DbField('mensajes', 'mensajes', 'x_medios', 'medios', '`medios`', '`medios`', 3, 2, -1, false, '`medios`', false, false, false, 'FORMATTED TEXT', 'SELECT');
+        $this->medios->Required = true; // Required field
         $this->medios->Sortable = true; // Allow sort
         $this->medios->UsePleaseSelect = true; // Use PleaseSelect by default
         $this->medios->PleaseSelectText = $Language->phrase("PleaseSelect"); // "PleaseSelect" text
@@ -1271,7 +1272,11 @@ SORTHTML;
                     }
                     $filterWrk .= "`id`" . SearchString("=", trim($wrk), DATATYPE_STRING, "");
                 }
-                $sqlWrk = $this->para->Lookup->getSql(false, $filterWrk, '', $this, true, true);
+                $lookupFilter = function() {
+                    return (CurrentUserInfo("perfil") == 2) ? "`idgrupo` = '".CurrentUserInfo("grupo")."'" : "`escenario` = '".CurrentUserInfo("escenario")."'";
+                };
+                $lookupFilter = $lookupFilter->bindTo($this);
+                $sqlWrk = $this->para->Lookup->getSql(false, $filterWrk, $lookupFilter, $this, true, true);
                 $rswrk = Conn()->executeQuery($sqlWrk)->fetchAll(\PDO::FETCH_BOTH);
                 $ari = count($rswrk);
                 if ($ari > 0) { // Lookup values found

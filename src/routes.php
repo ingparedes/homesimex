@@ -896,6 +896,9 @@ return function (App $app) {
     // inject_participante
     $app->any('/InjectParticipante[/{params:.*}]', InjectParticipanteController::class)->add(PermissionMiddleware::class)->setName('InjectParticipante-inject_participante-custom'); // custom
 
+    // pizarra
+    $app->any('/Pizarra[/{params:.*}]', PizarraController::class)->add(PermissionMiddleware::class)->setName('Pizarra-pizarra-custom'); // custom
+
     // error
     $app->any('/error', OthersController::class . ':error')->add(PermissionMiddleware::class)->setName('error');
 
