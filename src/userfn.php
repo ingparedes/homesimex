@@ -81,7 +81,7 @@ else
         $menu->moveItem("Simulaciones", $menu->Count() - 1); // Move to last
          $menu->moveItem("Linea de tiempo total", $menu->Count() - 1); // Move to last
         $menu->moveItem("Linea de tiempo grupo", $menu->Count() - 1); // Move to last
-        $menu->moveItem("Tablero usuario", $menu->Count() - 1); // Move to last
+        $menu->moveItem("Redes Sociales", $menu->Count() - 1); // Move to last
         $menu->moveItem("Tablero total", $menu->Count() - 1); // Move to last
         $menu->moveItem("Mymail", $menu->Count() - 1); // Move to last
         $menu->moveItem("Chat", $menu->Count() - 1); // Move to last
