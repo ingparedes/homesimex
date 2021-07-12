@@ -350,7 +350,32 @@ $fecha = ExecuteRow("SELECT fechaini_real, fechafinal_real, fechaini_simulado, f
       //datefin =  moment(fecl, "YYYY-MM-DD HH:mm").toDate();
       datefin = moment(fecl).format("YYYY-MM-DD HH:mm");      
       $('#x_fechafin_tarea').val(datefin);
+      flatpickr("#x_fechafin_tarea",{//MIGUEL--PONE QUE VALOR MINIMO EN FECHA FIN SEA EL VALOR INICIAL
+				locale: "es",
+				enableTime: true,
+				time_24hr: true,
+				dateFormat: "Y-m-d H:i",
+				minDate: datefin,
+				maxDate: fechaFin + " " + horaFin + ":" + minFin,
+				defaultDate: fechaInicial + " " + horaInicial + ":" + minInicial,
+			});
 });
+    $("input[name='x_fechainisimulado_tarea']").change(function() { // EVENTO CHANGE
+        fecl = new Date($('input[name=x_fechainisimulado_tarea]').val());
+        //datefin =  moment(fecl, "YYYY-MM-DD HH:mm").toDate();
+        datefin = moment(fecl).format("YYYY-MM-DD HH:mm");      
+        $('#x_fechafinsimulado_tarea').val(datefin);//MIGUEL-- ASIGNA VALOR MINIMO AL MAXIMO
+        flatpickr("#x_fechafinsimulado_tarea",{//MIGUEL---PONE QUE VALOR MINIMO EN FECHA FIN SEA EL VALOR INICIAL
+				locale: "es",
+				enableTime: true,
+				time_24hr: true,
+				dateFormat: "Y-m-d H:i",
+				minDate: datefin,
+				maxDate: fechaFinSimulado + " " + horaFinSimulado + ":" + minFinSimulado,
+				defaultDate: fechaIniSimulado + " " + horaIniSimulado + ":" + minIniSimulado,
+			});
+    });
+//centinela
 //var Xmas95 = fecl;
 //var weekday = Xmas95.getDay();
 //console.log('weekday',weekday);
