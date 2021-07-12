@@ -282,12 +282,13 @@ if ($id_user == '-1') {
                 $cod_tipo = $tmp2[1];
                 if ($cod_tipo <> '') {
                     if ($tipo == 'G') { //grupos 
-                        $sql_users = "SELECT id_users FROM users WHERE grupo = '" . $cod_tipo . "';";
+                        $sql_users = "SELECT id_users FROM users WHERE grupo = '" . $cod_tipo . ";";
                         //echo $sql_users . "<br>";
+                        //echo $sql_users;
 
                     } 
                     else if ($tipo == 'S') { //subgrupo
-                        $sql_users = "SELECT id_users FROM users WHERE subgrupo = '" . $cod_tipo . "';";
+                        $sql_users = "SELECT id_users FROM users WHERE subgrupo = '" . $cod_tipo . ";";
                     } 
                     else if ($tipo == 'P') {
                         $usuarios = $cod_tipo;
@@ -300,7 +301,7 @@ if ($id_user == '-1') {
 
                         $sql_doc_usrs = "INSERT INTO permisos_docusers (id_file, tipo_permiso, id_users) VALUES ('" . $_POST['adjunto'] . "','1','" . $usuarios . "');";
                         $res_sql = mysqli_query($con, $sql_doc_usrs);
-                        
+                    //    echo 'f1';
                         //aqui voy.. hacer pruebas.. 
                     }
                     if ($tipo != 'P') {
@@ -309,7 +310,7 @@ if ($id_user == '-1') {
                         if (mysqli_num_rows($res_sql) > 0) {
                             while ($valor = mysqli_fetch_assoc($res_sql)) {
                                 array_push($usuariosA,$valor);
-                                
+                          //      echo 'f2';
                             }
                         }
 
@@ -323,6 +324,7 @@ if ($id_user == '-1') {
                             $res_sql = mysqli_query($con, $sql_doc);
                             $sql_doc_usrs = "INSERT INTO permisos_docusers (id_file, tipo_permiso, id_users) VALUES ('" . $_POST['adjunto'] . "','1','" . $row['id_users'] . "');";
                             $res_sql = mysqli_query($con, $sql_doc_usrs);
+                      //      echo 'f3';
                         }
                     }
                 }
@@ -330,7 +332,7 @@ if ($id_user == '-1') {
             if ($res_sql) {
                 echo  'ok';
             } else {
-                echo 'Algo fallo al crear el mensaje';
+                echo 'Error al guardar';
             }
 
             break;
@@ -363,12 +365,12 @@ if ($id_user == '-1') {
                 $cod_tipo = $tmp2[1];
                 if ($cod_tipo <> '') {
                     if ($tipo == 'G') { //grupos 
-                        $sql_users = "SELECT id_users FROM users WHERE grupo = '" . $cod_tipo . "';";
+                        $sql_users = "SELECT id_users FROM users WHERE grupo = '" . $cod_tipo . ";";
                         //echo $sql_users . "<br>";
 
                     } else if ($tipo == 'S') { //subgrupo
 
-                        $sql_users = "SELECT id_users FROM users WHERE subgrupo = '" . $cod_tipo . "';";
+                        $sql_users = "SELECT id_users FROM users WHERE subgrupo = '" . $cod_tipo . ";";
                     } else if ($tipo == 'P') {
                         $usuarios = $cod_tipo;
                         $sql = "INSERT INTO mensajes_usuarios (id_user_remitente, id_user_destinatario, id_mensaje) VALUES ('" . $id_user . "','" . $usuarios . "', '" . $id_inyect . "');";
