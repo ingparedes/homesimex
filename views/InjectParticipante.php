@@ -245,7 +245,7 @@ $_SESSION['id_user'] = CurrentUserID();
                     <div class="direct-chat-text speedup" style="background-color:#f2f3f4">
 
                     <div class = "header">
-                        <h4> {{mens.titulo_mensaje}} <!--<span class="badge badge-pill badge-primary float-right">{{mens.calificacion}}</span>--></h4> 
+                                            
                         <span
                                                 class="float-right badge "
                                                 v-bind:class="{'badge-primary': mens.calificacion == 'Pendiente', 'badge-success': mens.calificacion == 'Finalizado', 
@@ -253,19 +253,26 @@ $_SESSION['id_user'] = CurrentUserID();
                                                 >
                                                 {{mens.calificacion}}
                                         </span>
-                        <!--<span class="float-right badge badge-warning "> Inconpleto</span> -->
-                        <!--  
-                        <span
-                                                class="float-right badge "
-                                                v-bind:class="{'badge-primary': mens.calificacion == 'Pendiente', 'badge-success': mens.calificacion == 'Finalizado', 
-                                                    'badge-warning': mens.calificacion == 'Inconcluso' }"
-                                                >
-                                                {{mens.calificacion}}
-                                        </span> 
-                        <span>{{mens.titulo_tarea}}</span> -->
+                                        
+                       
                         <div> 
                             <hr>
-                            <span v-html="mens.mensaje"></span>
+                            <!--MIGUEL Acordeon punto 148-->
+                            <div id="accordion">
+                                            <div class="card">
+                                                <div class="card-header" id="headingThree">
+                                                    <button class="btn  collapsed" data-toggle="collapse" v-bind:data-target="'#collapseThree'+mens.id" aria-expanded="false" v-bind:aria-controls="'collapseThree'+mens.id">
+                                                    <h5>Titulo mensaje: {{mens.titulo_mensaje}} </h5> 
+                                                    </button>
+                                                </div>
+                                                <div v-bind:id="'collapseThree'+mens.id" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                                                <div class="card-body">
+                                                <span v-html="mens.mensaje"></span>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--MIGUEL fin acordeon 148-->
                             <div class="stats">
                             <i class="cil-paperclip"></i> <br>
                             <a v-bind:href="'files/'+mens.filename"> {{mens.filename}}</a> 

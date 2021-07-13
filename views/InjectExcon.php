@@ -268,6 +268,7 @@ $InjectExcon = &$Page;
     text-decoration: none;
     background-color: #28a745;
 }
+
 </style>
     
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
@@ -410,9 +411,23 @@ $InjectExcon = &$Page;
                                     <div class="timeline-content">
                                         <p>
                                         <span><em>Tarea: {{mens.titulo_tarea}} </em></span>
-                                        <h5>Titulo mensaje: {{mens.titulo_mensaje}} </h5> 
-
-                                        <span v-html="mens.mensaje"></span>
+                                        <!--MIGUEL Acordeon punto 148-->
+                                        <div id="accordion">
+                                            <div class="card">
+                                                <div class="card-header" id="headingThree">
+                                                    <button class="btn  collapsed" data-toggle="collapse" v-bind:data-target="'#collapseThree'+mens.id" aria-expanded="false" v-bind:aria-controls="'collapseThree'+mens.id">
+                                                    <h5>Titulo mensaje: {{mens.titulo_mensaje}} </h5> 
+                                                    </button>
+                                                </div>
+                                                <div v-bind:id="'collapseThree'+mens.id" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                                                <div class="card-body">
+                                                <span v-html="mens.mensaje"></span>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--MIGUEL fin acordeon 148-->
+                                        
                                         </p>
                                     </div>
                                     <div class="timeline-likes">
