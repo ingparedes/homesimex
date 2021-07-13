@@ -77,7 +77,15 @@ else
 };
     if ($menu->Id == "menu") { // Sidebar menu or change from "menu" to "navbar" for top menu
        // $menu->addMenuItem(444, "usuario", "<div> <div class='image'> <img class='img-circle elevation-1' width='45px'  height='45px' src='http://localhost/homesimex/files/$imgs'> <strong> ".$UserName.' '.$ape."</strong> <p> <small class='text-muted'> ".$UserPermissionValue."  ".$UserG."  </small></P></div></div>  " , "UsersView/$idu?showdetail", -1, "", IsLoggedIn());
-        $menu->addMenuItem(444, "usuario","<div class='card-body pt-0'><div class='row'><div class='col-2'><img src='http://localhost/homesimex/files/$fotos'   width='45px'  height='45px' alt='user-avatar' class='img-circle'></div><div class='col-10'><b class = 'float-right'>".$UserName.' '.$ape."</b><ul class='ml-10 mb-0 fa-ul'><li class='small'> ".$UserPermissionValue."</li> <li class='small'> ".$UserG."</li></ul></div></div></div>", "/homesimex/UsersList", -1, "", IsLoggedIn());
+        //MIGUEL punto 184 quitar el super poner
+       $menu->addMenuItem(444, "usuario","<div class='card-body pt-0'>
+        <div class='row'><div class='col-4'>
+        <img src='http://localhost/homesimex/files/$fotos'   width='45px'  height='45px' alt='user-avatar' class='img-circle'>
+        </div>
+        <div class='col-8'><b class = 'float-right'>" .$UserName.' alfonso prueba '.$ape."</b>
+        </div>
+        <ul class='ml-8 mb-0 fa-ul'><li class='small'> ".$UserPermissionValue."</li>
+        <li class='small'> ".$UserG."</li></ul></div></div>", "/homesimex/UsersList", -1, "", IsLoggedIn());
         $menu->moveItem("Simulaciones", $menu->Count() - 1); // Move to last
          $menu->moveItem("Linea de tiempo total", $menu->Count() - 1); // Move to last
         $menu->moveItem("Linea de tiempo grupo", $menu->Count() - 1); // Move to last
