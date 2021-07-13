@@ -83,8 +83,9 @@ $TimelineExcon = &$Page;
 </head>
 
 <body>
-    <?php $sql_utc = ExecuteRow("SELECT p.gmt, e.fechaini_simulado, e.fechafin_simulado, e.id_escenario FROM escenario  e INNER JOIN paisgmt p ON p.id_zone = e.pais_escenario WHERE e.estado IN ('1')");
+    <?php $sql_utc = ExecuteRow("SELECT p.gmt, e.fechaini_simulado, e.fechafin_simulado, e.id_escenario, e.nombre_escenario FROM escenario  e INNER JOIN paisgmt p ON p.id_zone = e.pais_escenario WHERE e.estado IN ('1')");//MIGUEL, añadi a la consulta el nombre de la suimulació
     $_SESSION['id_user'] = CurrentUserID();
+    $nombre=$sql_utc['nombre_escenario']; //MIGUEL variable para guardar el nombre de la simulacion
     $_SESSION['id_escenario'] = $sql_utc['id_escenario'];
    // echo "usuario: " . $_SESSION['id_user'];
     $sql_grupo = ExecuteRow("SELECT u.grupo FROM users u WHERE u.id_users = '" . CurrentUserID() . "';");
@@ -102,6 +103,15 @@ $TimelineExcon = &$Page;
     ?>
     <div class="buttons">
         <input type="button" id="load" value="&darr; Load" style="display:none">
+        <h2> <strong>Titulo de la simulación:</strong><!--Titulo para la simulación-->
+        <br>
+        </h2>
+        <h3>
+        <?php 
+            
+            echo $nombre;//Miguel IMpresion del nombre de la simulacion
+            ?>
+            </h3>
         <!-- <input type="button" id="save" value="&uarr; Save" title="Save data from the Timeline into the textarea"> -->
         <button type="button" id="save" class="btn btn-secondary" disabled>Grabar</button>
 
