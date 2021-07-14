@@ -25,12 +25,84 @@ loadjs.ready("head", function () {
 .ew-table-preview-row .ew-grid {
     display: table;
 }
+#colImagen{
+    -webkit-box-flex: 0;
+  -webkit-flex: 0 0 12.28%;
+      -ms-flex: 0 0 12.28%;
+          flex: 0 0 12.28%;
+  max-width: 12.28%;
+}
+#colGrupo{
+    -webkit-box-flex: 0;
+  -webkit-flex: 0 0 17.2%;
+      -ms-flex: 0 0 17.2%;
+          flex: 0 0 17.2%;
+  max-width: 17.2%;
+}
+#colDescripcion{
+    -webkit-box-flex: 0;
+  -webkit-flex: 0 0 40%;
+      -ms-flex: 0 0 40%;
+          flex: 0 0 40%;
+  max-width: 40%;
+}
+#colColor{
+    -webkit-box-flex: 0;
+  -webkit-flex: 0 0 9.4977%;
+      -ms-flex: 0 0 9.4977%;
+          flex: 0 0 9.4977%;
+  max-width: 9.4977%;
+}
+#colOpciones{
+    -webkit-box-flex: 0;
+  -webkit-flex: 0 0 27.17%;
+      -ms-flex: 0 0 27.17%;
+          flex: 0 0 27.17%;
+  max-width: 27.17%;
+}
+#colCuadro{
+    -webkit-box-flex: 0;
+  -webkit-flex: 0 0 4.33%;
+      -ms-flex: 0 0 4.33%;
+          flex: 0 0 4.33%;
+  max-width: 4.33%;
+}
+#Encabezado{
+    background-color: #40546a;
+    color:#fff;
+    font-weight:400;
+    height:30px;
+}
 </style>
 <div id="ew-preview" class="d-none"><!-- preview -->
     <div class="ew-nav-tabs"><!-- .ew-nav-tabs -->
         <ul class="nav nav-tabs"></ul>
         <div class="tab-content"><!-- .tab-content -->
             <div class="tab-pane fade active show"></div>
+            
+         <!--MIGUEL Encabezado abajo-->
+                <div class="row align-items-start" id="Encabezado">
+                    <div  id="colImagen">
+                    <div id="elh_grupo_imgen_grupo" class="grupo_imgen_grupo"> <?= $Page->renderSort($Page->imgen_grupo) ?></div>
+                    </div>
+                    <div id="colGrupo">
+                    <div id="elh_grupo_nombre_grupo" class="grupo_nombre_grupo"><?= $Page->renderSort($Page->nombre_grupo) ?></div>
+                    </div>
+                    <div id="colDescripcion">
+                    <div id="elh_grupo_descripcion_grupo" class="grupo_descripcion_grupo"><?= $Page->renderSort($Page->descripcion_grupo) ?></div>
+                    </div>
+                    <div id="colColor">
+                    <div id="elh_grupo_color" class="grupo_color"><?= $Page->renderSort($Page->color) ?></div>
+                    </div>
+                    <div id="colOpciones">
+                    
+                    </div>
+                    <div id="colCuadro">
+                    
+                    </div>
+                </div>
+            
+            <!--MIGUEL Encabezado abajo-->
         </div><!-- /.tab-content -->
     </div><!-- /.ew-nav-tabs -->
 </div><!-- /preview -->
@@ -162,6 +234,7 @@ $Page->RowType = ROWTYPE_AGGREGATEINIT;
 $Page->resetAttributes();
 $Page->renderRow();
 while ($Page->RecordCount < $Page->StopRecord) {
+    
     $Page->RecordCount++;
     if ($Page->RecordCount >= $Page->StartRecord) {
         $Page->RowCount++;
@@ -234,20 +307,32 @@ $Page->ListOptions->render("body", "left", $Page->RowCount);
 </span>
 </span>
 </td>
+
     <?php } ?>
+    
+   
 <?php
 // Render list options (body, right)
 $Page->ListOptions->render("body", "right", $Page->RowCount);
 ?>
+
     </tr>
+    
+    
 <?php
     }
     if (!$Page->isGridAdd()) {
         $Page->Recordset->moveNext();
     }
+    ?>
+
+
+    <?php
 }
 ?>
+
 </tbody>
+
 </table><!-- /.ew-table -->
 <?php } ?>
 </div><!-- /.ew-grid-middle-panel -->
@@ -300,3 +385,12 @@ loadjs.ready("load", function () {
 });
 </script>
 <?php } ?>
+<script>
+document.getElementsByClassName('ew-preview-row-btn ew-icon icon-expand').addEventListener('click', function() { 
+    alert("¿?");
+            })
+function insertarEncabezado(){
+    
+}
+
+</script>
