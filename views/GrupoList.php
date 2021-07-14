@@ -389,8 +389,6 @@ loadjs.ready("load", function () {
 document.getElementsByClassName('ew-preview-row-btn ew-icon icon-expand').addEventListener('click', function() { 
     alert("¿?");
             })
-function insertarEncabezado(){
-    
-}
+
 
 </script>
