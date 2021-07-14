@@ -230,8 +230,18 @@ $Page->ListOptions->render("body", "left", $Page->RowCount);
 <?php if ($Page->estado->Visible) { // estado ?>
         <!-- estado -->
         <td<?= $Page->estado->cellAttributes() ?>>
-<span<?= $Page->estado->viewAttributes() ?>>
-<?= $Page->estado->getViewValue() ?></span>
+<span<?= $Page->estado->viewAttributes() ?>><?php
+$idstatus = CurrentPage()->estado->CurrentValue;
+$idus = CurrentPage()->id_users->CurrentValue;
+if ($idstatus == 2)
+{
+//echo "<a href=\"#\" onclick=\"myFunction(this)\" ><i class=\"fa fa-user-plus\"></i></a> <br>";
+echo '<img class="mt-3 justify-content-center align-self-center " id="activador" onclick="activar('; echo $Page->id_users->getViewValue();echo ');" src="images/cheque.png" alt="activar" height="20" width="20">';
+}
+else
+	{echo 'Activo';}
+?>
+</span>
 </td>
 <?php } ?>
 <?php if ($Page->img_user->Visible) { // img_user ?>

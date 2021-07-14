@@ -401,33 +401,32 @@ loadjs.ready("head", function() {
 <?php } ?>
 <?php if ($Page->estado->Visible) { // estado ?>
     <div id="r_estado" class="form-group row">
-        <label id="elh_users_estado" for="x_estado" class="<?= $Page->LeftColumnClass ?>"><?= $Page->estado->caption() ?><?= $Page->estado->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
+        <label id="elh_users_estado" class="<?= $Page->LeftColumnClass ?>"><?= $Page->estado->caption() ?><?= $Page->estado->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->estado->cellAttributes() ?>>
 <span id="el_users_estado">
-    <select
-        id="x_estado"
-        name="x_estado"
-        class="form-control ew-select<?= $Page->estado->isInvalidClass() ?>"
-        data-select2-id="users_x_estado"
-        data-table="users"
-        data-field="x_estado"
-        data-value-separator="<?= $Page->estado->displayValueSeparatorAttribute() ?>"
-        data-placeholder="<?= HtmlEncode($Page->estado->getPlaceHolder()) ?>"
-        <?= $Page->estado->editAttributes() ?>>
-        <?= $Page->estado->selectOptionListHtml("x_estado") ?>
-    </select>
-    <?= $Page->estado->getCustomMessage() ?>
-    <div class="invalid-feedback"><?= $Page->estado->getErrorMessage() ?></div>
-<script>
-loadjs.ready("head", function() {
-    var el = document.querySelector("select[data-select2-id='users_x_estado']"),
-        options = { name: "x_estado", selectId: "users_x_estado", language: ew.LANGUAGE_ID, dir: ew.IS_RTL ? "rtl" : "ltr" };
-    options.data = ew.vars.tables.users.fields.estado.lookupOptions;
-    options.dropdownParent = $(el).closest("#ew-modal-dialog, #ew-add-opt-dialog")[0];
-    Object.assign(options, ew.vars.tables.users.fields.estado.selectOptions);
-    ew.createSelect(options);
-});
-</script>
+<template id="tp_x_estado">
+    <div class="custom-control custom-radio">
+        <input type="radio" class="custom-control-input" data-table="users" data-field="x_estado" name="x_estado" id="x_estado"<?= $Page->estado->editAttributes() ?>>
+        <label class="custom-control-label"></label>
+    </div>
+</template>
+<div id="dsl_x_estado" class="ew-item-list"></div>
+<input type="hidden"
+    is="selection-list"
+    id="x_estado"
+    name="x_estado"
+    value="<?= HtmlEncode($Page->estado->CurrentValue) ?>"
+    data-type="select-one"
+    data-template="tp_x_estado"
+    data-target="dsl_x_estado"
+    data-repeatcolumn="5"
+    class="form-control<?= $Page->estado->isInvalidClass() ?>"
+    data-table="users"
+    data-field="x_estado"
+    data-value-separator="<?= $Page->estado->displayValueSeparatorAttribute() ?>"
+    <?= $Page->estado->editAttributes() ?>>
+<?= $Page->estado->getCustomMessage() ?>
+<div class="invalid-feedback"><?= $Page->estado->getErrorMessage() ?></div>
 </span>
 </div></div>
     </div>

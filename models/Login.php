@@ -485,7 +485,7 @@ class Login extends Users
         	} else if (CurrentUserInfo("perfil") == "2") { // if username is John
         	$url = "/homesimex/TimelineExcon";
            	} else if (CurrentUserInfo("perfil") == "3"){ // case default
-        	$url = "/homesimex/TableroParticipante";
+        	$url = "/homesimex/InjectParticipante";
         	} else if (CurrentUserInfo("perfil") == "-1"){
         	$url = "/homesimex/EscenarioList";
         	}
@@ -527,6 +527,12 @@ class Login extends Users
     {
         // Enter your code here
         // To cancel, set return value to false
+        $estado = ExecuteRow("SELECT estado FROM users WHERE users.email = '".$usr."';");
+        if($estado[0] == 2)
+          {
+          $this->setFailureMessage("Username must be email");
+           return false;
+          }
         return true;
     }
 

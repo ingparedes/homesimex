@@ -5,13 +5,13 @@ namespace PHPMaker2021\simexamerica;
 // Table
 $escenario = Container("escenario");
 ?>
-<?php if ($escenario->Visible) { ?>
+<?php if ($escenario->Visible->FALSE) { ?>
 <div class="ew-master-div">
 <table id="tbl_escenariomaster" class="table ew-view-table ew-master-table ew-vertical">
     <tbody>
 <?php if ($escenario->id_escenario->Visible) { // id_escenario ?>
         <tr id="r_id_escenario">
-            <td class="<?= $escenario->TableLeftColumnClass ?>"><?= $escenario->id_escenario->caption() ?></td>
+            <td class="<?= $escenario->TableLeftColumnClass ?>"><?= $escenario->id_escenario->caption() ?> </td>
             <td <?= $escenario->id_escenario->cellAttributes() ?>>
 <span id="el_escenario_id_escenario">
 <span<?= $escenario->id_escenario->viewAttributes() ?>>
@@ -131,6 +131,7 @@ echo "<img width='25px' src='$idm'>";
 <?php
 $id = CurrentPage()->id_escenario->CurrentValue;
 echo "<a class=\"btn btn-default ew-row-link ew-view\" title=\"Grupos\" data-toggle=\"Grupos\" data-table=\"escenario\" data-caption=\"Grupo\" href=\"GrupoList?showmaster=escenario&fk_id_escenario=$id&showdetail=\" data-original-title=\"Grupo\"><i class=\"fa fa-user-plus\"data-caption=\"Grupo\"></i></a> <br>";
+echo "<a class=\"btn btn-default ew-row-link ew-view\" title=\"Grupos\" data-toggle=\"Grupos\" data-table=\"escenario\" data-caption=\"Grupo\" href=\"Grupos?ides=$id\" data-original-title=\"Grupo\"><i class=\"fa fa-users\" aria-hidden=\"true\"></i></a> <br>";
 echo "<a class=\"btn btn-default ew-row-link ew-view\" title=\"Tareas\" data-table=\"escenario\" data-caption=\"Tarea\" href=\"TareasList?showmaster=escenario&fk_id_escenario=$id\" data-original-title=\"Tareas\"><i class=\"fa fa-list-alt\" data-caption=\"Tareas\"></i></a>";
 ?>
 </div>

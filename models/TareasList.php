@@ -616,7 +616,7 @@ class TareasList extends Tareas
 
         // Setup import options
         $this->setupImportOptions();
-        $this->id_tarea->Visible = false;
+        $this->id_tarea->setVisibility();
         $this->id_escenario->Visible = false;
         $this->id_grupo->setVisibility();
         $this->titulo_tarea->setVisibility();
@@ -1517,6 +1517,7 @@ class TareasList extends Tareas
         if (Get("order") !== null) {
             $this->CurrentOrder = Get("order");
             $this->CurrentOrderType = Get("ordertype", "");
+            $this->updateSort($this->id_tarea); // id_tarea
             $this->updateSort($this->id_grupo); // id_grupo
             $this->updateSort($this->titulo_tarea); // titulo_tarea
             $this->updateSort($this->fechainireal_tarea); // fechainireal_tarea
@@ -2410,7 +2411,7 @@ class TareasList extends Tareas
                         $filterWrk .= "`id_grupo`" . SearchString("=", trim($wrk), DATATYPE_NUMBER, "");
                     }
                     $lookupFilter = function() {
-                        return (CurrentUserInfo("perfil") > 1) ?  "id_grupo = '".CurrentUserInfo("grupo")."'" : "`id_escenario` = '".Container("escenario")->id_escenario->CurrentValue."'";
+                        return (CurrentUserInfo("perfil") > 1) ?  "id_grupo = '".CurrentUserInfo("grupo")."'" : "id_escenario = '".$this->id_escenario->CurrentValue."'";
                     };
                     $lookupFilter = $lookupFilter->bindTo($this);
                     $sqlWrk = $this->id_grupo->Lookup->getSql(false, $filterWrk, $lookupFilter, $this, true, true);
@@ -2493,6 +2494,11 @@ class TareasList extends Tareas
             // color
             $this->color->ViewCustomAttributes = "";
 
+            // id_tarea
+            $this->id_tarea->LinkCustomAttributes = "";
+            $this->id_tarea->HrefValue = "";
+            $this->id_tarea->TooltipValue = "";
+
             // id_grupo
             $this->id_grupo->LinkCustomAttributes = "";
             $this->id_grupo->HrefValue = "";
@@ -2523,6 +2529,12 @@ class TareasList extends Tareas
             $this->fechafinsimulado_tarea->HrefValue = "";
             $this->fechafinsimulado_tarea->TooltipValue = "";
         } elseif ($this->RowType == ROWTYPE_SEARCH) {
+            // id_tarea
+            $this->id_tarea->EditAttrs["class"] = "form-control";
+            $this->id_tarea->EditCustomAttributes = "";
+            $this->id_tarea->EditValue = HtmlEncode($this->id_tarea->AdvancedSearch->SearchValue);
+            $this->id_tarea->PlaceHolder = RemoveHtml($this->id_tarea->caption());
+
             // id_grupo
             $this->id_grupo->EditCustomAttributes = "";
             $curVal = trim(strval($this->id_grupo->AdvancedSearch->SearchValue));
@@ -2547,7 +2559,7 @@ class TareasList extends Tareas
                     }
                 }
                 $lookupFilter = function() {
-                    return (CurrentUserInfo("perfil") > 1) ?  "id_grupo = '".CurrentUserInfo("grupo")."'" : "`id_escenario` = '".Container("escenario")->id_escenario->CurrentValue."'";
+                    return (CurrentUserInfo("perfil") > 1) ?  "id_grupo = '".CurrentUserInfo("grupo")."'" : "id_escenario = '".$this->id_escenario->CurrentValue."'";
                 };
                 $lookupFilter = $lookupFilter->bindTo($this);
                 $sqlWrk = $this->id_grupo->Lookup->getSql(true, $filterWrk, $lookupFilter, $this, false, true);
@@ -3315,10 +3327,13 @@ class TareasList extends Tareas
             $fld->Lookup->Options = [];
 
             // Set up lookup SQL and connection
+          
             switch ($fld->FieldVar) {
                 case "x_id_grupo":
                     $lookupFilter = function () {
-                        return (CurrentUserInfo("perfil") > 1) ?  "id_grupo = '".CurrentUserInfo("grupo")."'" : "`id_escenario` = '".Container("escenario")->id_escenario->CurrentValue."'";
+                      
+
+                        return (CurrentUserInfo("perfil") > 1) ?  "id_grupo = '".CurrentUserInfo("grupo")."'" : "id_escenario = 53";
                     };
                     $lookupFilter = $lookupFilter->bindTo($this);
                     break;

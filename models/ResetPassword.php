@@ -227,6 +227,13 @@ class ResetPassword extends Users
         }
         return; // Return to controller
     }
+
+    // Reset Captcha
+    protected function resetCaptcha()
+    {
+        $sessionName = Captcha()->getSessionName();
+        $_SESSION[$sessionName] = Random();
+    }
     public $Email;
     public $IsModal = false;
 
@@ -303,6 +310,22 @@ class ResetPassword extends Users
             }
             $filter = GetUserFilter(Config("LOGIN_USERNAME_FIELD_NAME"), $userName);
         }
+
+        // CAPTCHA checking
+        if (IsPost()) {
+            $captcha = Captcha();
+            $captcha->Response = Post($captcha->ResponseField);
+            if (!$captcha->validate()) { // CAPTCHA unmatched
+                if ($captcha->getFailureMessage() == "") {
+                    $captcha->setDefaultFailureMessage();
+                }
+                $validEmail = false;
+                $action = "";
+            }
+        }
+        if (!$validEmail) {
+            $this->resetCaptcha();
+        }
         if ($action != "") {
             $emailSent = false;
             $this->CurrentFilter = $filter;
@@ -373,7 +396,7 @@ class ResetPassword extends Users
             // Global Page Rendering event (in userfn*.php)
             Page_Rendering();
 
-            // Page Rendering event
+            // Page Render event
             if (method_exists($this, "pageRender")) {
                 $this->pageRender();
             }

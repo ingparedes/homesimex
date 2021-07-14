@@ -608,33 +608,6 @@ class Grupo extends DbTable
             }
         }
 
-        // Cascade Update detail table 'users'
-        $cascadeUpdate = false;
-        $rscascade = [];
-        if ($rsold && (isset($rs['id_grupo']) && $rsold['id_grupo'] != $rs['id_grupo'])) { // Update detail field 'grupo'
-            $cascadeUpdate = true;
-            $rscascade['grupo'] = $rs['id_grupo'];
-        }
-        if ($cascadeUpdate) {
-            $rswrk = Container("users")->loadRs("`grupo` = " . QuotedValue($rsold['id_grupo'], DATATYPE_NUMBER, 'DB'))->fetchAll(\PDO::FETCH_ASSOC);
-            foreach ($rswrk as $rsdtlold) {
-                $rskey = [];
-                $fldname = 'id_users';
-                $rskey[$fldname] = $rsdtlold[$fldname];
-                $rsdtlnew = array_merge($rsdtlold, $rscascade);
-                // Call Row_Updating event
-                $success = Container("users")->rowUpdating($rsdtlold, $rsdtlnew);
-                if ($success) {
-                    $success = Container("users")->update($rscascade, $rskey, $rsdtlold);
-                }
-                if (!$success) {
-                    return false;
-                }
-                // Call Row_Updated event
-                Container("users")->rowUpdated($rsdtlold, $rsdtlnew);
-            }
-        }
-
         // If no field is updated, execute may return 0. Treat as success
         $success = $this->updateSql($rs, $where, $curfilter)->execute();
         $success = ($success > 0) ? $success : true;
@@ -692,30 +665,6 @@ class Grupo extends DbTable
         if ($success) {
             foreach ($dtlrows as $dtlrow) {
                 Container("subgrupo")->rowDeleted($dtlrow);
-            }
-        }
-
-        // Cascade delete detail table 'users'
-        $dtlrows = Container("users")->loadRs("`grupo` = " . QuotedValue($rs['id_grupo'], DATATYPE_NUMBER, "DB"))->fetchAll(\PDO::FETCH_ASSOC);
-        // Call Row Deleting event
-        foreach ($dtlrows as $dtlrow) {
-            $success = Container("users")->rowDeleting($dtlrow);
-            if (!$success) {
-                break;
-            }
-        }
-        if ($success) {
-            foreach ($dtlrows as $dtlrow) {
-                $success = Container("users")->delete($dtlrow); // Delete
-                if (!$success) {
-                    break;
-                }
-            }
-        }
-        // Call Row Deleted event
-        if ($success) {
-            foreach ($dtlrows as $dtlrow) {
-                Container("users")->rowDeleted($dtlrow);
             }
         }
         if ($success) {

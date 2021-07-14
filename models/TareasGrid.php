@@ -505,7 +505,7 @@ class TareasGrid extends Tareas
 
         // Set up list options
         $this->setupListOptions();
-        $this->id_tarea->Visible = false;
+        $this->id_tarea->setVisibility();
         $this->id_escenario->Visible = false;
         $this->id_grupo->setVisibility();
         $this->titulo_tarea->setVisibility();
@@ -1042,6 +1042,7 @@ class TareasGrid extends Tareas
     // Reset form status
     public function resetFormError()
     {
+        $this->id_tarea->clearErrorMessage();
         $this->id_grupo->clearErrorMessage();
         $this->titulo_tarea->clearErrorMessage();
         $this->fechainireal_tarea->clearErrorMessage();
@@ -1410,6 +1411,12 @@ class TareasGrid extends Tareas
         global $CurrentForm;
         $CurrentForm->FormName = $this->FormName;
 
+        // Check field name 'id_tarea' first before field var 'x_id_tarea'
+        $val = $CurrentForm->hasValue("id_tarea") ? $CurrentForm->getValue("id_tarea") : $CurrentForm->getValue("x_id_tarea");
+        if (!$this->id_tarea->IsDetailKey && !$this->isGridAdd() && !$this->isAdd()) {
+            $this->id_tarea->setFormValue($val);
+        }
+
         // Check field name 'id_grupo' first before field var 'x_id_grupo'
         $val = $CurrentForm->hasValue("id_grupo") ? $CurrentForm->getValue("id_grupo") : $CurrentForm->getValue("x_id_grupo");
         if (!$this->id_grupo->IsDetailKey) {
@@ -1490,12 +1497,6 @@ class TareasGrid extends Tareas
         }
         if ($CurrentForm->hasValue("o_fechafinsimulado_tarea")) {
             $this->fechafinsimulado_tarea->setOldValue($CurrentForm->getValue("o_fechafinsimulado_tarea"));
-        }
-
-        // Check field name 'id_tarea' first before field var 'x_id_tarea'
-        $val = $CurrentForm->hasValue("id_tarea") ? $CurrentForm->getValue("id_tarea") : $CurrentForm->getValue("x_id_tarea");
-        if (!$this->id_tarea->IsDetailKey && !$this->isGridAdd() && !$this->isAdd()) {
-            $this->id_tarea->setFormValue($val);
         }
     }
 
@@ -1709,7 +1710,7 @@ class TareasGrid extends Tareas
                         $filterWrk .= "`id_grupo`" . SearchString("=", trim($wrk), DATATYPE_NUMBER, "");
                     }
                     $lookupFilter = function() {
-                        return (CurrentUserInfo("perfil") > 1) ?  "id_grupo = '".CurrentUserInfo("grupo")."'" : "`id_escenario` = '".Container("escenario")->id_escenario->CurrentValue."'";
+                        return (CurrentUserInfo("perfil") > 1) ?  "id_grupo = '".CurrentUserInfo("grupo")."'" : "id_escenario = 53";
                     };
                     $lookupFilter = $lookupFilter->bindTo($this);
                     $sqlWrk = $this->id_grupo->Lookup->getSql(false, $filterWrk, $lookupFilter, $this, true, true);
@@ -1792,6 +1793,11 @@ class TareasGrid extends Tareas
             // color
             $this->color->ViewCustomAttributes = "";
 
+            // id_tarea
+            $this->id_tarea->LinkCustomAttributes = "";
+            $this->id_tarea->HrefValue = "";
+            $this->id_tarea->TooltipValue = "";
+
             // id_grupo
             $this->id_grupo->LinkCustomAttributes = "";
             $this->id_grupo->HrefValue = "";
@@ -1822,6 +1828,8 @@ class TareasGrid extends Tareas
             $this->fechafinsimulado_tarea->HrefValue = "";
             $this->fechafinsimulado_tarea->TooltipValue = "";
         } elseif ($this->RowType == ROWTYPE_ADD) {
+            // id_tarea
+
             // id_grupo
             $this->id_grupo->EditCustomAttributes = "";
             $curVal = trim(strval($this->id_grupo->CurrentValue));
@@ -1846,7 +1854,7 @@ class TareasGrid extends Tareas
                     }
                 }
                 $lookupFilter = function() {
-                    return (CurrentUserInfo("perfil") > 1) ?  "id_grupo = '".CurrentUserInfo("grupo")."'" : "`id_escenario` = '".Container("escenario")->id_escenario->CurrentValue."'";
+                    return (CurrentUserInfo("perfil") > 1) ?  "id_grupo = '".CurrentUserInfo("grupo")."'" : "id_escenario = 53";
                 };
                 $lookupFilter = $lookupFilter->bindTo($this);
                 $sqlWrk = $this->id_grupo->Lookup->getSql(true, $filterWrk, $lookupFilter, $this, false, true);
@@ -1892,6 +1900,10 @@ class TareasGrid extends Tareas
 
             // Add refer script
 
+            // id_tarea
+            $this->id_tarea->LinkCustomAttributes = "";
+            $this->id_tarea->HrefValue = "";
+
             // id_grupo
             $this->id_grupo->LinkCustomAttributes = "";
             $this->id_grupo->HrefValue = "";
@@ -1916,6 +1928,12 @@ class TareasGrid extends Tareas
             $this->fechafinsimulado_tarea->LinkCustomAttributes = "";
             $this->fechafinsimulado_tarea->HrefValue = "";
         } elseif ($this->RowType == ROWTYPE_EDIT) {
+            // id_tarea
+            $this->id_tarea->EditAttrs["class"] = "form-control";
+            $this->id_tarea->EditCustomAttributes = "";
+            $this->id_tarea->EditValue = $this->id_tarea->CurrentValue;
+            $this->id_tarea->ViewCustomAttributes = "";
+
             // id_grupo
             $this->id_grupo->EditCustomAttributes = "";
             $curVal = trim(strval($this->id_grupo->CurrentValue));
@@ -1940,7 +1958,7 @@ class TareasGrid extends Tareas
                     }
                 }
                 $lookupFilter = function() {
-                    return (CurrentUserInfo("perfil") > 1) ?  "id_grupo = '".CurrentUserInfo("grupo")."'" : "`id_escenario` = '".Container("escenario")->id_escenario->CurrentValue."'";
+                    return (CurrentUserInfo("perfil") > 1) ?  "id_grupo = '".CurrentUserInfo("grupo")."'" : "id_escenario = 53";
                 };
                 $lookupFilter = $lookupFilter->bindTo($this);
                 $sqlWrk = $this->id_grupo->Lookup->getSql(true, $filterWrk, $lookupFilter, $this, false, true);
@@ -1986,6 +2004,10 @@ class TareasGrid extends Tareas
 
             // Edit refer script
 
+            // id_tarea
+            $this->id_tarea->LinkCustomAttributes = "";
+            $this->id_tarea->HrefValue = "";
+
             // id_grupo
             $this->id_grupo->LinkCustomAttributes = "";
             $this->id_grupo->HrefValue = "";
@@ -2028,6 +2050,11 @@ class TareasGrid extends Tareas
         // Check if validation required
         if (!Config("SERVER_VALIDATE")) {
             return true;
+        }
+        if ($this->id_tarea->Required) {
+            if (!$this->id_tarea->IsDetailKey && EmptyValue($this->id_tarea->FormValue)) {
+                $this->id_tarea->addErrorMessage(str_replace("%s", $this->id_tarea->caption(), $this->id_tarea->RequiredErrorMessage));
+            }
         }
         if ($this->id_grupo->Required) {
             if ($this->id_grupo->FormValue == "") {
@@ -2099,6 +2126,14 @@ class TareasGrid extends Tareas
         if (count($rows) == 0) {
             $this->setFailureMessage($Language->phrase("NoRecord")); // No record found
             return false;
+        }
+        foreach ($rows as $row) {
+            $rsdetail = Container("mensajes")->loadRs("`id_tarea` = " . QuotedValue($row['id_tarea'], DATATYPE_NUMBER, 'DB'))->fetch();
+            if ($rsdetail !== false) {
+                $relatedRecordMsg = str_replace("%t", "mensajes", $Language->phrase("RelatedRecordExists"));
+                $this->setFailureMessage($relatedRecordMsg);
+                return false;
+            }
         }
 
         // Clone old rows
@@ -2389,7 +2424,7 @@ class TareasGrid extends Tareas
             switch ($fld->FieldVar) {
                 case "x_id_grupo":
                     $lookupFilter = function () {
-                        return (CurrentUserInfo("perfil") > 1) ?  "id_grupo = '".CurrentUserInfo("grupo")."'" : "`id_escenario` = '".Container("escenario")->id_escenario->CurrentValue."'";
+                        return (CurrentUserInfo("perfil") > 1) ?  "id_grupo = '".CurrentUserInfo("grupo")."'" : "id_escenario = 53";
                     };
                     $lookupFilter = $lookupFilter->bindTo($this);
                     break;

@@ -227,6 +227,13 @@ class ChangePassword extends Users
         }
         return; // Return to controller
     }
+
+    // Reset Captcha
+    protected function resetCaptcha()
+    {
+        $sessionName = Captcha()->getSessionName();
+        $_SESSION[$sessionName] = Random();
+    }
     public $IsModal = false;
     public $OldPassword;
     public $NewPassword;
@@ -282,6 +289,21 @@ class ChangePassword extends Users
             $this->NewPassword->setFormValue(Post($this->NewPassword->FieldVar));
             $this->ConfirmPassword->setFormValue(Post($this->ConfirmPassword->FieldVar));
             $validate = $this->validateForm();
+        }
+
+        // CAPTCHA checking
+        if (IsPost()) {
+            $captcha = Captcha();
+            $captcha->Response = Post($captcha->ResponseField);
+            if (!$captcha->validate()) { // CAPTCHA unmatched
+                if ($captcha->getFailureMessage() == "") {
+                    $captcha->setDefaultFailureMessage();
+                }
+                $validate = false;
+            }
+        }
+        if (!$validate) {
+            $this->resetCaptcha();
         }
         $pwdUpdated = false;
         if ($postBack && $validate) {

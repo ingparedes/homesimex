@@ -1,10 +1,10 @@
 <?php 
 
 include("../config.php");
-
+date_default_timezone_set('America/Bogota');
 $idMensaje = $_GET['idMensaje'];//1
 $calificacion = $_GET['calificacion'];//1
-$fecha=  date("Y/m/d H:i");
+$fecha=  date('Y-m-d H:i:s');
 //Creamos la conexión
 
 //generamos la consulta
@@ -24,7 +24,6 @@ INSERT INTO calificacion_mensajes(
 	'$fecha'
 	)
 ";
-echo $sql;
 mysqli_set_charset($con, "utf8");
 
 //mysqli_set_charset($conexion, "utf8"); //formato de datos utf8

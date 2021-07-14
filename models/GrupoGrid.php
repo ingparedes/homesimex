@@ -1990,8 +1990,8 @@ class GrupoGrid extends Grupo
                 } else {
                     $rsnew['imgen_grupo'] = $this->imgen_grupo->Upload->FileName;
                 }
-                $this->imgen_grupo->ImageWidth = 10; // Resize width
-                $this->imgen_grupo->ImageHeight = 10; // Resize height
+                $this->imgen_grupo->ImageWidth = Config("THUMBNAIL_DEFAULT_WIDTH"); // Resize width
+                $this->imgen_grupo->ImageHeight = Config("THUMBNAIL_DEFAULT_HEIGHT"); // Resize height
             }
 
             // nombre_grupo
@@ -2183,8 +2183,8 @@ class GrupoGrid extends Grupo
             } else {
                 $rsnew['imgen_grupo'] = $this->imgen_grupo->Upload->FileName;
             }
-            $this->imgen_grupo->ImageWidth = 10; // Resize width
-            $this->imgen_grupo->ImageHeight = 10; // Resize height
+            $this->imgen_grupo->ImageWidth = Config("THUMBNAIL_DEFAULT_WIDTH"); // Resize width
+            $this->imgen_grupo->ImageHeight = Config("THUMBNAIL_DEFAULT_HEIGHT"); // Resize height
         }
 
         // nombre_grupo

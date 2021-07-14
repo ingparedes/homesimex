@@ -155,7 +155,7 @@ require_once __DIR__ . "/userlevelsettings.php";
 $CONFIG = [
 
     // Debug
-    "DEBUG" => true, // Enabled
+    "DEBUG" => false, // Enabled
     "REPORT_ALL_ERRORS" => false, // Treat PHP warnings and notices as errors
     "LOG_ERROR_TO_FILE" => false, // Log error to file
     "DEBUG_MESSAGE_TEMPLATE" => '<div class="card card-danger ew-debug"><div class="card-header">' .
@@ -171,7 +171,7 @@ $CONFIG = [
 
     // General
     "UNFORMAT_YEAR" => 50, // Unformat year
-    "RANDOM_KEY" => 'f4WF75vYL48sucpn', // Random key for encryption
+    "RANDOM_KEY" => 'K9Hc5yKjseq6uuzf', // Random key for encryption
     "ENCRYPTION_KEY" => '', // Encryption key for data protection
     "PROJECT_STYLESHEET_FILENAME" => "css/simexamerica.css", // Project stylesheet file name
     "PROJECT_CHARSET" => "utf-8", // Project charset
@@ -1129,3 +1129,4 @@ $CONFIG["PDF_TIME_LIMIT"] = 120; // Time limit
 $CONFIG["PDF_MAX_IMAGE_WIDTH"] = 650; // Make sure image width not larger than page width or "infinite table loop" error
 $CONFIG["PDF_MAX_IMAGE_HEIGHT"] = 900; // Make sure image height not larger than page height or "infinite table loop" error
 $CONFIG["PDF_IMAGE_SCALE_FACTOR"] = 1.53; // Scale factor
+$CaptchaClass = "PhpCaptcha"; // Override default CAPTCHA class

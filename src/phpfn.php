@@ -6436,6 +6436,28 @@ function SetupLoginStatus()
     $LoginStatus["loginUrl"] = $loginUrl;
     $LoginStatus["loginText"] = $Language->phrase("Login");
     $LoginStatus["canLogin"] = $loginPage && $loginUrl && !IsLoggedIn();
+    $resetPasswordPage = "resetpassword";
+    $resetPasswordUrl = "";
+    if ($currentPage != $resetPasswordPage) {
+        $resetPasswordUrl = "window.location='" . GetUrl($resetPasswordPage) . "';return false;";
+        if (!IsMobile()) {
+            $resetPasswordUrl = "return ew.modalDialogShow({lnk:this,btn:'SendPwd',caption:ew.language.phrase('ResetPassword'),size:'',url:'" . HtmlEncode(GetUrl($resetPasswordPage)) . "'});";
+        }
+    }
+    $LoginStatus["resetPasswordUrl"] = $resetPasswordUrl;
+    $LoginStatus["resetPasswordText"] = $Language->phrase("ResetPassword");
+    $LoginStatus["canResetPassword"] = $resetPasswordUrl && !IsLoggedIn();
+    $registerPage = "register";
+    $registerUrl = "";
+    if ($currentPage != $registerPage) {
+        $registerUrl = "window.location='" . GetUrl($registerPage) . "';return false;";
+        if (!IsMobile()) {
+            $registerUrl = "return ew.modalDialogShow({lnk:this,btn:'Register',caption:ew.language.phrase('Register'),url:'" . HtmlEncode(GetUrl($registerPage)) . "'});";
+        }
+    }
+    $LoginStatus["registerUrl"] = $registerUrl;
+    $LoginStatus["registerText"] = $Language->phrase("Register");
+    $LoginStatus["canRegister"] = $registerUrl && !IsLoggedIn();
     $changePasswordPage = "changepassword";
     $changePasswordUrl = "";
     if ($currentPage != $changePasswordPage) {

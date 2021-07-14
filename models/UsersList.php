@@ -738,14 +738,21 @@ class UsersList extends Users
 
             // Get default search criteria
             AddFilter($this->DefaultSearchWhere, $this->basicSearchWhere(true));
+            AddFilter($this->DefaultSearchWhere, $this->advancedSearchWhere(true));
 
             // Get basic search values
             $this->loadBasicSearchValues();
+
+            // Get and validate search values for advanced search
+            $this->loadSearchValues(); // Get search values
 
             // Process filter list
             if ($this->processFilterList()) {
                 $this->terminate();
                 return;
+            }
+            if (!$this->validateSearch()) {
+                // Nothing to do
             }
 
             // Restore search parms from Session if not searching / reset / export
@@ -762,6 +769,11 @@ class UsersList extends Users
             // Get basic search criteria
             if (!$this->hasInvalidFields()) {
                 $srchBasic = $this->basicSearchWhere();
+            }
+
+            // Get search criteria for advanced search
+            if (!$this->hasInvalidFields()) {
+                $srchAdvanced = $this->advancedSearchWhere();
             }
         }
 
@@ -785,6 +797,16 @@ class UsersList extends Users
             if ($this->BasicSearch->Keyword != "") {
                 $srchBasic = $this->basicSearchWhere();
             }
+
+            // Load advanced search from default
+            if ($this->loadAdvancedSearchDefault()) {
+                $srchAdvanced = $this->advancedSearchWhere();
+            }
+        }
+
+        // Restore search settings from Session
+        if (!$this->hasInvalidFields()) {
+            $this->loadAdvancedSearch();
         }
 
         // Build search criteria
@@ -1205,6 +1227,119 @@ class UsersList extends Users
         $this->BasicSearch->setType(@$filter[Config("TABLE_BASIC_SEARCH_TYPE")]);
     }
 
+    // Advanced search WHERE clause based on QueryString
+    protected function advancedSearchWhere($default = false)
+    {
+        global $Security;
+        $where = "";
+        if (!$Security->canSearch()) {
+            return "";
+        }
+        $this->buildSearchSql($where, $this->id_users, $default, false); // id_users
+        $this->buildSearchSql($where, $this->fecha, $default, false); // fecha
+        $this->buildSearchSql($where, $this->nombres, $default, false); // nombres
+        $this->buildSearchSql($where, $this->apellidos, $default, false); // apellidos
+        $this->buildSearchSql($where, $this->escenario, $default, false); // escenario
+        $this->buildSearchSql($where, $this->grupo, $default, false); // grupo
+        $this->buildSearchSql($where, $this->subgrupo, $default, false); // subgrupo
+        $this->buildSearchSql($where, $this->perfil, $default, false); // perfil
+        $this->buildSearchSql($where, $this->_email, $default, false); // email
+        $this->buildSearchSql($where, $this->telefono, $default, false); // telefono
+        $this->buildSearchSql($where, $this->pais, $default, false); // pais
+        $this->buildSearchSql($where, $this->pw, $default, false); // pw
+        $this->buildSearchSql($where, $this->estado, $default, false); // estado
+        $this->buildSearchSql($where, $this->horario, $default, false); // horario
+        $this->buildSearchSql($where, $this->limite, $default, false); // limite
+        $this->buildSearchSql($where, $this->img_user, $default, false); // img_user
+        $this->buildSearchSql($where, $this->blocks, $default, false); // blocks
+
+        // Set up search parm
+        if (!$default && $where != "" && in_array($this->Command, ["", "reset", "resetall"])) {
+            $this->Command = "search";
+        }
+        if (!$default && $this->Command == "search") {
+            $this->id_users->AdvancedSearch->save(); // id_users
+            $this->fecha->AdvancedSearch->save(); // fecha
+            $this->nombres->AdvancedSearch->save(); // nombres
+            $this->apellidos->AdvancedSearch->save(); // apellidos
+            $this->escenario->AdvancedSearch->save(); // escenario
+            $this->grupo->AdvancedSearch->save(); // grupo
+            $this->subgrupo->AdvancedSearch->save(); // subgrupo
+            $this->perfil->AdvancedSearch->save(); // perfil
+            $this->_email->AdvancedSearch->save(); // email
+            $this->telefono->AdvancedSearch->save(); // telefono
+            $this->pais->AdvancedSearch->save(); // pais
+            $this->pw->AdvancedSearch->save(); // pw
+            $this->estado->AdvancedSearch->save(); // estado
+            $this->horario->AdvancedSearch->save(); // horario
+            $this->limite->AdvancedSearch->save(); // limite
+            $this->img_user->AdvancedSearch->save(); // img_user
+            $this->blocks->AdvancedSearch->save(); // blocks
+        }
+        return $where;
+    }
+
+    // Build search SQL
+    protected function buildSearchSql(&$where, &$fld, $default, $multiValue)
+    {
+        $fldParm = $fld->Param;
+        $fldVal = ($default) ? $fld->AdvancedSearch->SearchValueDefault : $fld->AdvancedSearch->SearchValue;
+        $fldOpr = ($default) ? $fld->AdvancedSearch->SearchOperatorDefault : $fld->AdvancedSearch->SearchOperator;
+        $fldCond = ($default) ? $fld->AdvancedSearch->SearchConditionDefault : $fld->AdvancedSearch->SearchCondition;
+        $fldVal2 = ($default) ? $fld->AdvancedSearch->SearchValue2Default : $fld->AdvancedSearch->SearchValue2;
+        $fldOpr2 = ($default) ? $fld->AdvancedSearch->SearchOperator2Default : $fld->AdvancedSearch->SearchOperator2;
+        $wrk = "";
+        if (is_array($fldVal)) {
+            $fldVal = implode(Config("MULTIPLE_OPTION_SEPARATOR"), $fldVal);
+        }
+        if (is_array($fldVal2)) {
+            $fldVal2 = implode(Config("MULTIPLE_OPTION_SEPARATOR"), $fldVal2);
+        }
+        $fldOpr = strtoupper(trim($fldOpr));
+        if ($fldOpr == "") {
+            $fldOpr = "=";
+        }
+        $fldOpr2 = strtoupper(trim($fldOpr2));
+        if ($fldOpr2 == "") {
+            $fldOpr2 = "=";
+        }
+        if (Config("SEARCH_MULTI_VALUE_OPTION") == 1 || !IsMultiSearchOperator($fldOpr)) {
+            $multiValue = false;
+        }
+        if ($multiValue) {
+            $wrk1 = ($fldVal != "") ? GetMultiSearchSql($fld, $fldOpr, $fldVal, $this->Dbid) : ""; // Field value 1
+            $wrk2 = ($fldVal2 != "") ? GetMultiSearchSql($fld, $fldOpr2, $fldVal2, $this->Dbid) : ""; // Field value 2
+            $wrk = $wrk1; // Build final SQL
+            if ($wrk2 != "") {
+                $wrk = ($wrk != "") ? "($wrk) $fldCond ($wrk2)" : $wrk2;
+            }
+        } else {
+            $fldVal = $this->convertSearchValue($fld, $fldVal);
+            $fldVal2 = $this->convertSearchValue($fld, $fldVal2);
+            $wrk = GetSearchSql($fld, $fldVal, $fldOpr, $fldCond, $fldVal2, $fldOpr2, $this->Dbid);
+        }
+        AddFilter($where, $wrk);
+    }
+
+    // Convert search value
+    protected function convertSearchValue(&$fld, $fldVal)
+    {
+        if ($fldVal == Config("NULL_VALUE") || $fldVal == Config("NOT_NULL_VALUE")) {
+            return $fldVal;
+        }
+        $value = $fldVal;
+        if ($fld->isBoolean()) {
+            if ($fldVal != "") {
+                $value = (SameText($fldVal, "1") || SameText($fldVal, "y") || SameText($fldVal, "t")) ? $fld->TrueValue : $fld->FalseValue;
+            }
+        } elseif ($fld->DataType == DATATYPE_DATE || $fld->DataType == DATATYPE_TIME) {
+            if ($fldVal != "") {
+                $value = UnFormatDateTime($fldVal, $fld->DateTimeFormat);
+            }
+        }
+        return $value;
+    }
+
     // Return basic search SQL
     protected function basicSearchSql($arKeywords, $type)
     {
@@ -1336,6 +1471,57 @@ class UsersList extends Users
         if ($this->BasicSearch->issetSession()) {
             return true;
         }
+        if ($this->id_users->AdvancedSearch->issetSession()) {
+            return true;
+        }
+        if ($this->fecha->AdvancedSearch->issetSession()) {
+            return true;
+        }
+        if ($this->nombres->AdvancedSearch->issetSession()) {
+            return true;
+        }
+        if ($this->apellidos->AdvancedSearch->issetSession()) {
+            return true;
+        }
+        if ($this->escenario->AdvancedSearch->issetSession()) {
+            return true;
+        }
+        if ($this->grupo->AdvancedSearch->issetSession()) {
+            return true;
+        }
+        if ($this->subgrupo->AdvancedSearch->issetSession()) {
+            return true;
+        }
+        if ($this->perfil->AdvancedSearch->issetSession()) {
+            return true;
+        }
+        if ($this->_email->AdvancedSearch->issetSession()) {
+            return true;
+        }
+        if ($this->telefono->AdvancedSearch->issetSession()) {
+            return true;
+        }
+        if ($this->pais->AdvancedSearch->issetSession()) {
+            return true;
+        }
+        if ($this->pw->AdvancedSearch->issetSession()) {
+            return true;
+        }
+        if ($this->estado->AdvancedSearch->issetSession()) {
+            return true;
+        }
+        if ($this->horario->AdvancedSearch->issetSession()) {
+            return true;
+        }
+        if ($this->limite->AdvancedSearch->issetSession()) {
+            return true;
+        }
+        if ($this->img_user->AdvancedSearch->issetSession()) {
+            return true;
+        }
+        if ($this->blocks->AdvancedSearch->issetSession()) {
+            return true;
+        }
         return false;
     }
 
@@ -1348,6 +1534,9 @@ class UsersList extends Users
 
         // Clear basic search parameters
         $this->resetBasicSearchParms();
+
+        // Clear advanced search parameters
+        $this->resetAdvancedSearchParms();
     }
 
     // Load advanced search default values
@@ -1362,6 +1551,28 @@ class UsersList extends Users
         $this->BasicSearch->unsetSession();
     }
 
+    // Clear all advanced search parameters
+    protected function resetAdvancedSearchParms()
+    {
+                $this->id_users->AdvancedSearch->unsetSession();
+                $this->fecha->AdvancedSearch->unsetSession();
+                $this->nombres->AdvancedSearch->unsetSession();
+                $this->apellidos->AdvancedSearch->unsetSession();
+                $this->escenario->AdvancedSearch->unsetSession();
+                $this->grupo->AdvancedSearch->unsetSession();
+                $this->subgrupo->AdvancedSearch->unsetSession();
+                $this->perfil->AdvancedSearch->unsetSession();
+                $this->_email->AdvancedSearch->unsetSession();
+                $this->telefono->AdvancedSearch->unsetSession();
+                $this->pais->AdvancedSearch->unsetSession();
+                $this->pw->AdvancedSearch->unsetSession();
+                $this->estado->AdvancedSearch->unsetSession();
+                $this->horario->AdvancedSearch->unsetSession();
+                $this->limite->AdvancedSearch->unsetSession();
+                $this->img_user->AdvancedSearch->unsetSession();
+                $this->blocks->AdvancedSearch->unsetSession();
+    }
+
     // Restore all search parameters
     protected function restoreSearchParms()
     {
@@ -1369,6 +1580,25 @@ class UsersList extends Users
 
         // Restore basic search values
         $this->BasicSearch->load();
+
+        // Restore advanced search values
+                $this->id_users->AdvancedSearch->load();
+                $this->fecha->AdvancedSearch->load();
+                $this->nombres->AdvancedSearch->load();
+                $this->apellidos->AdvancedSearch->load();
+                $this->escenario->AdvancedSearch->load();
+                $this->grupo->AdvancedSearch->load();
+                $this->subgrupo->AdvancedSearch->load();
+                $this->perfil->AdvancedSearch->load();
+                $this->_email->AdvancedSearch->load();
+                $this->telefono->AdvancedSearch->load();
+                $this->pais->AdvancedSearch->load();
+                $this->pw->AdvancedSearch->load();
+                $this->estado->AdvancedSearch->load();
+                $this->horario->AdvancedSearch->load();
+                $this->limite->AdvancedSearch->load();
+                $this->img_user->AdvancedSearch->load();
+                $this->blocks->AdvancedSearch->load();
     }
 
     // Set up sort parameters
@@ -1792,6 +2022,150 @@ class UsersList extends Users
             $this->Command = "search";
         }
         $this->BasicSearch->setType(Get(Config("TABLE_BASIC_SEARCH_TYPE"), ""), false);
+    }
+
+    // Load search values for validation
+    protected function loadSearchValues()
+    {
+        // Load search values
+        $hasValue = false;
+
+        // id_users
+        if (!$this->isAddOrEdit() && $this->id_users->AdvancedSearch->get()) {
+            $hasValue = true;
+            if (($this->id_users->AdvancedSearch->SearchValue != "" || $this->id_users->AdvancedSearch->SearchValue2 != "") && $this->Command == "") {
+                $this->Command = "search";
+            }
+        }
+
+        // fecha
+        if (!$this->isAddOrEdit() && $this->fecha->AdvancedSearch->get()) {
+            $hasValue = true;
+            if (($this->fecha->AdvancedSearch->SearchValue != "" || $this->fecha->AdvancedSearch->SearchValue2 != "") && $this->Command == "") {
+                $this->Command = "search";
+            }
+        }
+
+        // nombres
+        if (!$this->isAddOrEdit() && $this->nombres->AdvancedSearch->get()) {
+            $hasValue = true;
+            if (($this->nombres->AdvancedSearch->SearchValue != "" || $this->nombres->AdvancedSearch->SearchValue2 != "") && $this->Command == "") {
+                $this->Command = "search";
+            }
+        }
+
+        // apellidos
+        if (!$this->isAddOrEdit() && $this->apellidos->AdvancedSearch->get()) {
+            $hasValue = true;
+            if (($this->apellidos->AdvancedSearch->SearchValue != "" || $this->apellidos->AdvancedSearch->SearchValue2 != "") && $this->Command == "") {
+                $this->Command = "search";
+            }
+        }
+
+        // escenario
+        if (!$this->isAddOrEdit() && $this->escenario->AdvancedSearch->get()) {
+            $hasValue = true;
+            if (($this->escenario->AdvancedSearch->SearchValue != "" || $this->escenario->AdvancedSearch->SearchValue2 != "") && $this->Command == "") {
+                $this->Command = "search";
+            }
+        }
+
+        // grupo
+        if (!$this->isAddOrEdit() && $this->grupo->AdvancedSearch->get()) {
+            $hasValue = true;
+            if (($this->grupo->AdvancedSearch->SearchValue != "" || $this->grupo->AdvancedSearch->SearchValue2 != "") && $this->Command == "") {
+                $this->Command = "search";
+            }
+        }
+
+        // subgrupo
+        if (!$this->isAddOrEdit() && $this->subgrupo->AdvancedSearch->get()) {
+            $hasValue = true;
+            if (($this->subgrupo->AdvancedSearch->SearchValue != "" || $this->subgrupo->AdvancedSearch->SearchValue2 != "") && $this->Command == "") {
+                $this->Command = "search";
+            }
+        }
+
+        // perfil
+        if (!$this->isAddOrEdit() && $this->perfil->AdvancedSearch->get()) {
+            $hasValue = true;
+            if (($this->perfil->AdvancedSearch->SearchValue != "" || $this->perfil->AdvancedSearch->SearchValue2 != "") && $this->Command == "") {
+                $this->Command = "search";
+            }
+        }
+
+        // email
+        if (!$this->isAddOrEdit() && $this->_email->AdvancedSearch->get()) {
+            $hasValue = true;
+            if (($this->_email->AdvancedSearch->SearchValue != "" || $this->_email->AdvancedSearch->SearchValue2 != "") && $this->Command == "") {
+                $this->Command = "search";
+            }
+        }
+
+        // telefono
+        if (!$this->isAddOrEdit() && $this->telefono->AdvancedSearch->get()) {
+            $hasValue = true;
+            if (($this->telefono->AdvancedSearch->SearchValue != "" || $this->telefono->AdvancedSearch->SearchValue2 != "") && $this->Command == "") {
+                $this->Command = "search";
+            }
+        }
+
+        // pais
+        if (!$this->isAddOrEdit() && $this->pais->AdvancedSearch->get()) {
+            $hasValue = true;
+            if (($this->pais->AdvancedSearch->SearchValue != "" || $this->pais->AdvancedSearch->SearchValue2 != "") && $this->Command == "") {
+                $this->Command = "search";
+            }
+        }
+
+        // pw
+        if (!$this->isAddOrEdit() && $this->pw->AdvancedSearch->get()) {
+            $hasValue = true;
+            if (($this->pw->AdvancedSearch->SearchValue != "" || $this->pw->AdvancedSearch->SearchValue2 != "") && $this->Command == "") {
+                $this->Command = "search";
+            }
+        }
+
+        // estado
+        if (!$this->isAddOrEdit() && $this->estado->AdvancedSearch->get()) {
+            $hasValue = true;
+            if (($this->estado->AdvancedSearch->SearchValue != "" || $this->estado->AdvancedSearch->SearchValue2 != "") && $this->Command == "") {
+                $this->Command = "search";
+            }
+        }
+
+        // horario
+        if (!$this->isAddOrEdit() && $this->horario->AdvancedSearch->get()) {
+            $hasValue = true;
+            if (($this->horario->AdvancedSearch->SearchValue != "" || $this->horario->AdvancedSearch->SearchValue2 != "") && $this->Command == "") {
+                $this->Command = "search";
+            }
+        }
+
+        // limite
+        if (!$this->isAddOrEdit() && $this->limite->AdvancedSearch->get()) {
+            $hasValue = true;
+            if (($this->limite->AdvancedSearch->SearchValue != "" || $this->limite->AdvancedSearch->SearchValue2 != "") && $this->Command == "") {
+                $this->Command = "search";
+            }
+        }
+
+        // img_user
+        if (!$this->isAddOrEdit() && $this->img_user->AdvancedSearch->get()) {
+            $hasValue = true;
+            if (($this->img_user->AdvancedSearch->SearchValue != "" || $this->img_user->AdvancedSearch->SearchValue2 != "") && $this->Command == "") {
+                $this->Command = "search";
+            }
+        }
+
+        // blocks
+        if (!$this->isAddOrEdit() && $this->blocks->AdvancedSearch->get()) {
+            $hasValue = true;
+            if (($this->blocks->AdvancedSearch->SearchValue != "" || $this->blocks->AdvancedSearch->SearchValue2 != "") && $this->Command == "") {
+                $this->Command = "search";
+            }
+        }
+        return $hasValue;
     }
 
     // Load recordset
@@ -2228,12 +2602,121 @@ class UsersList extends Users
                 $this->img_user->LinkAttrs["data-rel"] = "users_x" . $this->RowCount . "_img_user";
                 $this->img_user->LinkAttrs->appendClass("ew-lightbox");
             }
+        } elseif ($this->RowType == ROWTYPE_SEARCH) {
+            // id_users
+            $this->id_users->EditAttrs["class"] = "form-control";
+            $this->id_users->EditCustomAttributes = "";
+            $this->id_users->EditValue = HtmlEncode($this->id_users->AdvancedSearch->SearchValue);
+            $this->id_users->PlaceHolder = RemoveHtml($this->id_users->caption());
+
+            // fecha
+            $this->fecha->EditAttrs["class"] = "form-control";
+            $this->fecha->EditCustomAttributes = "";
+            $this->fecha->EditValue = HtmlEncode(FormatDateTime(UnFormatDateTime($this->fecha->AdvancedSearch->SearchValue, 5), 5));
+            $this->fecha->PlaceHolder = RemoveHtml($this->fecha->caption());
+
+            // nombres
+            $this->nombres->EditAttrs["class"] = "form-control";
+            $this->nombres->EditCustomAttributes = "";
+            if (!$this->nombres->Raw) {
+                $this->nombres->AdvancedSearch->SearchValue = HtmlDecode($this->nombres->AdvancedSearch->SearchValue);
+            }
+            $this->nombres->EditValue = HtmlEncode($this->nombres->AdvancedSearch->SearchValue);
+            $this->nombres->PlaceHolder = RemoveHtml($this->nombres->caption());
+
+            // apellidos
+            $this->apellidos->EditAttrs["class"] = "form-control";
+            $this->apellidos->EditCustomAttributes = "";
+            if (!$this->apellidos->Raw) {
+                $this->apellidos->AdvancedSearch->SearchValue = HtmlDecode($this->apellidos->AdvancedSearch->SearchValue);
+            }
+            $this->apellidos->EditValue = HtmlEncode($this->apellidos->AdvancedSearch->SearchValue);
+            $this->apellidos->PlaceHolder = RemoveHtml($this->apellidos->caption());
+
+            // grupo
+            $this->grupo->EditAttrs["class"] = "form-control";
+            $this->grupo->EditCustomAttributes = "";
+            $this->grupo->PlaceHolder = RemoveHtml($this->grupo->caption());
+
+            // subgrupo
+            $this->subgrupo->EditAttrs["class"] = "form-control";
+            $this->subgrupo->EditCustomAttributes = "";
+            $this->subgrupo->PlaceHolder = RemoveHtml($this->subgrupo->caption());
+
+            // perfil
+            $this->perfil->EditAttrs["class"] = "form-control";
+            $this->perfil->EditCustomAttributes = "";
+            if (!$Security->canAdmin()) { // System admin
+                $this->perfil->EditValue = $Language->phrase("PasswordMask");
+            } else {
+                $this->perfil->PlaceHolder = RemoveHtml($this->perfil->caption());
+            }
+
+            // email
+            $this->_email->EditAttrs["class"] = "form-control";
+            $this->_email->EditCustomAttributes = "";
+            if (!$this->_email->Raw) {
+                $this->_email->AdvancedSearch->SearchValue = HtmlDecode($this->_email->AdvancedSearch->SearchValue);
+            }
+            $this->_email->EditValue = HtmlEncode($this->_email->AdvancedSearch->SearchValue);
+            $this->_email->PlaceHolder = RemoveHtml($this->_email->caption());
+
+            // telefono
+            $this->telefono->EditAttrs["class"] = "form-control";
+            $this->telefono->EditCustomAttributes = "";
+            if (!$this->telefono->Raw) {
+                $this->telefono->AdvancedSearch->SearchValue = HtmlDecode($this->telefono->AdvancedSearch->SearchValue);
+            }
+            $this->telefono->EditValue = HtmlEncode($this->telefono->AdvancedSearch->SearchValue);
+            $this->telefono->PlaceHolder = RemoveHtml($this->telefono->caption());
+
+            // pais
+            $this->pais->EditAttrs["class"] = "form-control";
+            $this->pais->EditCustomAttributes = "";
+            $this->pais->PlaceHolder = RemoveHtml($this->pais->caption());
+
+            // estado
+            $this->estado->EditCustomAttributes = "";
+            $this->estado->EditValue = $this->estado->options(false);
+            $this->estado->PlaceHolder = RemoveHtml($this->estado->caption());
+
+            // img_user
+            $this->img_user->EditAttrs["class"] = "form-control";
+            $this->img_user->EditCustomAttributes = "";
+            if (!$this->img_user->Raw) {
+                $this->img_user->AdvancedSearch->SearchValue = HtmlDecode($this->img_user->AdvancedSearch->SearchValue);
+            }
+            $this->img_user->EditValue = HtmlEncode($this->img_user->AdvancedSearch->SearchValue);
+            $this->img_user->PlaceHolder = RemoveHtml($this->img_user->caption());
+        }
+        if ($this->RowType == ROWTYPE_ADD || $this->RowType == ROWTYPE_EDIT || $this->RowType == ROWTYPE_SEARCH) { // Add/Edit/Search row
+            $this->setupFieldTitles();
         }
 
         // Call Row Rendered event
         if ($this->RowType != ROWTYPE_AGGREGATEINIT) {
             $this->rowRendered();
         }
+    }
+
+    // Validate search
+    protected function validateSearch()
+    {
+        // Check if validation required
+        if (!Config("SERVER_VALIDATE")) {
+            return true;
+        }
+
+        // Return validate result
+        $validateSearch = !$this->hasInvalidFields();
+
+        // Call Form_CustomValidate event
+        $formCustomError = "";
+        $validateSearch = $validateSearch && $this->formCustomValidate($formCustomError);
+        if ($formCustomError != "") {
+            $this->setFailureMessage($formCustomError);
+        }
+        return $validateSearch;
     }
 
     /**
@@ -2544,6 +3027,28 @@ class UsersList extends Users
         $sql = $this->getCurrentSql();
         $conn = $this->getConnection();
         return $conn->fetchAssoc($sql);
+    }
+
+    // Load advanced search
+    public function loadAdvancedSearch()
+    {
+        $this->id_users->AdvancedSearch->load();
+        $this->fecha->AdvancedSearch->load();
+        $this->nombres->AdvancedSearch->load();
+        $this->apellidos->AdvancedSearch->load();
+        $this->escenario->AdvancedSearch->load();
+        $this->grupo->AdvancedSearch->load();
+        $this->subgrupo->AdvancedSearch->load();
+        $this->perfil->AdvancedSearch->load();
+        $this->_email->AdvancedSearch->load();
+        $this->telefono->AdvancedSearch->load();
+        $this->pais->AdvancedSearch->load();
+        $this->pw->AdvancedSearch->load();
+        $this->estado->AdvancedSearch->load();
+        $this->horario->AdvancedSearch->load();
+        $this->limite->AdvancedSearch->load();
+        $this->img_user->AdvancedSearch->load();
+        $this->blocks->AdvancedSearch->load();
     }
 
     // Get export HTML tag

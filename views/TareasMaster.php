@@ -9,6 +9,17 @@ $tareas = Container("tareas");
 <div class="ew-master-div">
 <table id="tbl_tareasmaster" class="table ew-view-table ew-master-table ew-vertical">
     <tbody>
+<?php if ($tareas->id_tarea->Visible) { // id_tarea ?>
+        <tr id="r_id_tarea">
+            <td class="<?= $tareas->TableLeftColumnClass ?>"><?= $tareas->id_tarea->caption() ?></td>
+            <td <?= $tareas->id_tarea->cellAttributes() ?>>
+<span id="el_tareas_id_tarea">
+<span<?= $tareas->id_tarea->viewAttributes() ?>>
+<?= $tareas->id_tarea->getViewValue() ?></span>
+</span>
+</td>
+        </tr>
+<?php } ?>
 <?php if ($tareas->id_grupo->Visible) { // id_grupo ?>
         <tr id="r_id_grupo">
             <td class="<?= $tareas->TableLeftColumnClass ?>"><?= $tareas->id_grupo->caption() ?></td>

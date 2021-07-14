@@ -23,7 +23,61 @@ loadjs.ready("head", function () {
     // Form object for search
     fuserslistsrch = currentSearchForm = new ew.Form("fuserslistsrch");
 
+    // Add fields
+    var currentTable = <?= JsonEncode(GetClientVar("tables", "users")) ?>,
+        fields = currentTable.fields;
+    fuserslistsrch.addFields([
+        ["id_users", [], fields.id_users.isInvalid],
+        ["fecha", [], fields.fecha.isInvalid],
+        ["nombres", [], fields.nombres.isInvalid],
+        ["apellidos", [], fields.apellidos.isInvalid],
+        ["grupo", [], fields.grupo.isInvalid],
+        ["subgrupo", [], fields.subgrupo.isInvalid],
+        ["perfil", [], fields.perfil.isInvalid],
+        ["_email", [], fields._email.isInvalid],
+        ["telefono", [], fields.telefono.isInvalid],
+        ["pais", [], fields.pais.isInvalid],
+        ["estado", [], fields.estado.isInvalid],
+        ["img_user", [], fields.img_user.isInvalid]
+    ]);
+
+    // Set invalid fields
+    $(function() {
+        fuserslistsrch.setInvalid();
+    });
+
+    // Validate form
+    fuserslistsrch.validate = function () {
+        if (!this.validateRequired)
+            return true; // Ignore validation
+        var fobj = this.getForm(),
+            $fobj = $(fobj),
+            rowIndex = "";
+        $fobj.data("rowindex", rowIndex);
+
+        // Validate fields
+        if (!this.validateFields(rowIndex))
+            return false;
+
+        // Call Form_CustomValidate event
+        if (!this.customValidate(fobj)) {
+            this.focus();
+            return false;
+        }
+        return true;
+    }
+
+    // Form_CustomValidate
+    fuserslistsrch.customValidate = function(fobj) { // DO NOT CHANGE THIS LINE!
+        // Your custom validation code here, return false if invalid.
+        return true;
+    }
+
+    // Use JavaScript validation or not
+    fuserslistsrch.validateRequired = <?= Config("CLIENT_VALIDATE") ? "true" : "false" ?>;
+
     // Dynamic selection lists
+    fuserslistsrch.lists.estado = <?= $Page->estado->toClientList($Page) ?>;
 
     // Filters
     fuserslistsrch.filterList = <?= $Page->getFilterList() ?>;
@@ -86,6 +140,60 @@ $Page->renderOtherOptions();
 <input type="hidden" name="cmd" value="search">
 <input type="hidden" name="t" value="users">
     <div class="ew-extended-search">
+<?php
+// Render search row
+$Page->RowType = ROWTYPE_SEARCH;
+$Page->resetAttributes();
+$Page->renderRow();
+?>
+<?php if ($Page->estado->Visible) { // estado ?>
+    <?php
+        $Page->SearchColumnCount++;
+        if (($Page->SearchColumnCount - 1) % $Page->SearchFieldsPerRow == 0) {
+            $Page->SearchRowCount++;
+    ?>
+<div id="xsr_<?= $Page->SearchRowCount ?>" class="ew-row d-sm-flex">
+    <?php
+        }
+     ?>
+    <div id="xsc_estado" class="ew-cell form-group">
+        <label class="ew-search-caption ew-label"><?= $Page->estado->caption() ?></label>
+        <span class="ew-search-operator">
+<?= $Language->phrase("LIKE") ?>
+<input type="hidden" name="z_estado" id="z_estado" value="LIKE">
+</span>
+        <span id="el_users_estado" class="ew-search-field">
+<template id="tp_x_estado">
+    <div class="custom-control custom-radio">
+        <input type="radio" class="custom-control-input" data-table="users" data-field="x_estado" name="x_estado" id="x_estado"<?= $Page->estado->editAttributes() ?>>
+        <label class="custom-control-label"></label>
+    </div>
+</template>
+<div id="dsl_x_estado" class="ew-item-list"></div>
+<input type="hidden"
+    is="selection-list"
+    id="x_estado"
+    name="x_estado"
+    value="<?= HtmlEncode($Page->estado->AdvancedSearch->SearchValue) ?>"
+    data-type="select-one"
+    data-template="tp_x_estado"
+    data-target="dsl_x_estado"
+    data-repeatcolumn="5"
+    class="form-control<?= $Page->estado->isInvalidClass() ?>"
+    data-table="users"
+    data-field="x_estado"
+    data-value-separator="<?= $Page->estado->displayValueSeparatorAttribute() ?>"
+    <?= $Page->estado->editAttributes() ?>>
+<div class="invalid-feedback"><?= $Page->estado->getErrorMessage(false) ?></div>
+</span>
+    </div>
+    <?php if ($Page->SearchColumnCount % $Page->SearchFieldsPerRow == 0) { ?>
+</div>
+    <?php } ?>
+<?php } ?>
+    <?php if ($Page->SearchColumnCount % $Page->SearchFieldsPerRow > 0) { ?>
+</div>
+    <?php } ?>
 <div id="xsr_<?= $Page->SearchRowCount + 1 ?>" class="ew-row d-sm-flex">
     <div class="ew-quick-search input-group">
         <input type="text" name="<?= Config("TABLE_BASIC_SEARCH") ?>" id="<?= Config("TABLE_BASIC_SEARCH") ?>" class="form-control" value="<?= HtmlEncode($Page->BasicSearch->getKeyword()) ?>" placeholder="<?= HtmlEncode($Language->phrase("Search")) ?>">
@@ -345,8 +453,18 @@ $Page->ListOptions->render("body", "left", $Page->RowCount);
     <?php if ($Page->estado->Visible) { // estado ?>
         <td data-name="estado" <?= $Page->estado->cellAttributes() ?>>
 <span id="el<?= $Page->RowCount ?>_users_estado">
-<span<?= $Page->estado->viewAttributes() ?>>
-<?= $Page->estado->getViewValue() ?></span>
+<span<?= $Page->estado->viewAttributes() ?>><?php
+$idstatus = CurrentPage()->estado->CurrentValue;
+$idus = CurrentPage()->id_users->CurrentValue;
+if ($idstatus == 2)
+{
+//echo "<a href=\"#\" onclick=\"myFunction(this)\" ><i class=\"fa fa-user-plus\"></i></a> <br>";
+echo '<img class="mt-3 justify-content-center align-self-center " id="activador" onclick="activar('; echo $Page->id_users->getViewValue();echo ');" src="images/cheque.png" alt="activar" height="20" width="20">';
+}
+else
+	{echo 'Activo';}
+?>
+</span>
 </span>
 </td>
     <?php } ?>

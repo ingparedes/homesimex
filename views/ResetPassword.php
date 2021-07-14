@@ -20,6 +20,9 @@ loadjs.ready("head", function() {
         ["email", [ew.Validators.required(ew.language.phrase("Email")), ew.Validators.email]]
     ]);
 
+    // Captcha
+    <?= Captcha()->getScript("freset_password") ?>
+
     // Set invalid fields
     $(function() {
         freset_password.setInvalid();
@@ -58,7 +61,7 @@ loadjs.ready("head", function() {
 <?php
 $Page->showMessage();
 ?>
-<form name="freset_password" id="freset_password" class="ew-form ew-forgot-pwd-form" action="<?= e=>`CurrentPageUrl(${e?Code.true:Code.false})` ?>" method="post">
+<form name="freset_password" id="freset_password" class="ew-form ew-forgot-pwd-form" action="<?= CurrentPageUrl(false) ?>" method="post">
 <?php if (Config("CHECK_TOKEN")) { ?>
 <input type="hidden" name="<?= $TokenNameKey ?>" value="<?= $TokenName ?>"><!-- CSRF token name -->
 <input type="hidden" name="<?= $TokenValueKey ?>" value="<?= $TokenValue ?>"><!-- CSRF token value -->
@@ -72,6 +75,9 @@ $Page->showMessage();
         <input type="text" name="<?= $Page->Email->FieldVar ?>" id="<?= $Page->Email->FieldVar ?>" value="<?= HtmlEncode($Page->Email->CurrentValue) ?>" size="30" maxlength="100" placeholder="<?= HtmlEncode($Language->phrase("UserEmail")) ?>"<?= $Page->Email->editAttributes() ?>>
         <div class="invalid-feedback"><?= $Language->phrase("IncorrectEmail") ?></div>
     </div>
+<!-- captcha html (begin) -->
+<?= Captcha()->getHtml(); ?>
+<!-- captcha html (end) -->
 <?php if (!$Page->IsModal) { ?>
     <button class="btn btn-primary ew-btn" name="btn-submit" id="btn-submit" type="submit"><?= $Language->phrase("SendPwd") ?></button>
 <?php } ?>

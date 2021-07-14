@@ -19,6 +19,15 @@ $Page->renderListOptions();
 // Render list options (header, left)
 $Page->ListOptions->render("header", "left");
 ?>
+<?php if ($Page->id_tarea->Visible) { // id_tarea ?>
+    <?php if ($Page->SortUrl($Page->id_tarea) == "") { ?>
+        <th class="<?= $Page->id_tarea->headerCellClass() ?>"><?= $Page->id_tarea->caption() ?></th>
+    <?php } else { ?>
+        <th class="<?= $Page->id_tarea->headerCellClass() ?>"><div class="ew-pointer" data-sort="<?= HtmlEncode($Page->id_tarea->Name) ?>" data-sort-order="<?= $Page->SortField == $Page->id_tarea->Name && $Page->SortOrder == "ASC" ? "DESC" : "ASC" ?>">
+            <div class="ew-table-header-btn"><span class="ew-table-header-caption"><?= $Page->id_tarea->caption() ?></span><span class="ew-table-header-sort"><?php if ($Page->SortField == $Page->id_tarea->Name) { ?><?php if ($Page->SortOrder == "ASC") { ?><i class="fas fa-sort-up"></i><?php } elseif ($Page->SortOrder == "DESC") { ?><i class="fas fa-sort-down"></i><?php } ?><?php } ?></span>
+        </div></div></th>
+    <?php } ?>
+<?php } ?>
 <?php if ($Page->id_grupo->Visible) { // id_grupo ?>
     <?php if ($Page->SortUrl($Page->id_grupo) == "") { ?>
         <th class="<?= $Page->id_grupo->headerCellClass() ?>"><?= $Page->id_grupo->caption() ?></th>
@@ -103,6 +112,13 @@ while ($Page->Recordset && !$Page->Recordset->EOF) {
 // Render list options (body, left)
 $Page->ListOptions->render("body", "left", $Page->RowCount);
 ?>
+<?php if ($Page->id_tarea->Visible) { // id_tarea ?>
+        <!-- id_tarea -->
+        <td<?= $Page->id_tarea->cellAttributes() ?>>
+<span<?= $Page->id_tarea->viewAttributes() ?>>
+<?= $Page->id_tarea->getViewValue() ?></span>
+</td>
+<?php } ?>
 <?php if ($Page->id_grupo->Visible) { // id_grupo ?>
         <!-- id_grupo -->
         <td<?= $Page->id_grupo->cellAttributes() ?>>

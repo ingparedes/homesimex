@@ -13,43 +13,6 @@ $_SESSION['id_user'] = CurrentUserID();
 
 
 <style>
-    .item {
-    position: relative;
-    padding-top: 10px;
-    display: inline-block;
-  }
-
-  .notify-badge {
-    position: absolute;
-    right: -10px;
-    top: 0px;
-    text-align: center;
-    border-radius: 40px 40px 40px 40px;
-    color: black;
-    padding: 4px 5px;
-    font-size: 9px;
-  }
-
-  .btn-app2 {
-    border-radius: 1px;
-    position: relative;
-    padding: 10px 5px;
-    margin: 0 0 10px 10px;
-    min-width: 80px;
-    height: 80px;
-    text-align: center;
-    color: #666;
-    border: 1px solid #ddd;
-    background-color: #fff;
-    font-size: 12px;
-  }
-  .vis-custom-time {
-    pointer-events: none;
-}
-.vis-item .vis-item-overflow {
-  overflow: visible;
-}
-
     .timeline-comment-box {
         background: #f2f3f4;
         margin-left: -10px;
@@ -86,43 +49,64 @@ $_SESSION['id_user'] = CurrentUserID();
      cursor: pointer;
      border: 1px solid #3E7DC0 !important
 }
+.item {
+    position: relative;
+    padding-top: 10px;
+    display: inline-block;
+  }
 
-.btn-circle {
-  width: 30px;
-  height: 30px;
-  text-align: center;
-  padding: 6px 0;
-  font-size: 12px;
-  line-height: 1.428571429;
-  border-radius: 15px;
-}
-.btn-circle.btn-lg {
-  width: 50px;
-  height: 50px;
-  padding: 10px 0px;
+  .notify-badge {
+    position: absolute;
+    right: -10px;
+    top: 0px;
+    text-align: center;
+    border-radius: 40px 40px 40px 40px;
+    color: black;
+    padding: 4px 5px;
+    font-size: 9px;
+  }
 
-  line-height: 1;
-  border-radius: 25px;
+  .btn-app2 {
+    border-radius: 1px;
+    position: relative;
+    padding: 10px 5px;
+    margin: 0 0 10px 10px;
+    min-width: 80px;
+    height: 80px;
+    text-align: center;
+    color: #666;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    font-size: 12px;
+  }
+  .vis-custom-time {
+    pointer-events: none;
 }
-.btn-circle.btn-xl {
-  width: 70px;
-  height: 70px;
-  padding: 10px 16px;
-   line-height: 1.33;
-  border-radius: 35px;
+.vis-item .vis-item-overflow {
+  overflow: visible;
 }
-
+#botonEstado{
+        background-color: #28a745;
+        background-color:  #28a745;
+    }
+    .dropdown-item.active, .dropdown-item:active {
+    color: #fff;
+    text-decoration: none;
+    background-color: #28a745;
+}
 </style>
 
 <!-- librerias adicionales -->
-
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 <script type="text/javascript" src="//unpkg.com/vis-timeline@latest/standalone/umd/vis-timeline-graph2d.min.js"></script>
 <link href="//unpkg.com/vis-timeline@latest/styles/vis-timeline-graph2d.min.css" rel="stylesheet" type="text/css" />
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.js"></script> -->
 
 <?php $sql_utc = ExecuteRow("SELECT p.gmt, e.fechaini_simulado, e.fechafin_simulado, e.fechaini_real, e.fechafinal_real FROM escenario  e INNER JOIN paisgmt p ON p.id_zone = e.pais_escenario WHERE e.estado IN ('1')"); ?>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 
-<script>
+<body>
+  <script>
     function notifica(idDiv) {
       // console.log(idDiv);
       var parametros = {
@@ -155,7 +139,7 @@ $_SESSION['id_user'] = CurrentUserID();
 
     });
   </script>
-    <?php
+  <?php
   // echo "UTC: " . $sql_utc[0];
   $id_user = CurrentUserID();
   $_SESSION['id_user'] = CurrentUserID();
@@ -173,26 +157,16 @@ $_SESSION['id_user'] = CurrentUserID();
 
   ?>
 
-<div class="card" id="update">
+
+  <div class="card" id="update">
     <div class="card-header">
-     
-      <span class="float-right"> 
-       
-      
-        <a class="btn btn-default" href="#" data-toggle="modal" data-target="#charping" >
-          <img src="images/chispingletras.png" alt="Image" height="42" width="42" />
-        </a>
-        <a class="btn btn-default" href="#"  data-toggle="modal" data-target="#daybook">
-            <img src="images/daybook.png" alt="Image" height="42" width="42" />
-          </a>
-        </span>
-        
+      <!--<h3 class="card-title">Tablero Control</h3>-->
     </div>
     <div class="card-body">
 
-      <div class="col-sm-12">
+      <!--<div class="col-sm-12">
 
-<!--
+
         <div class="item" id="vue-admin">
 
           <a class="btn btn-app2" href="#" onclick="url( 'views/InjectParticipante.php' );">
@@ -200,47 +174,53 @@ $_SESSION['id_user'] = CurrentUserID();
             <img src="images/mensajes.png" alt="Image" height="62" width="62" />
           </a>
         </div>
--->
-
-        
 
 
+        <div class="item">
+
+          <a class="btn btn-app2" href="#" onclick="url( 'media/twitter/index.php?id_user=<?php echo $id_user ?>' );">
+            <span id="tweeter" class="notify-badge">0</span>
+            <img src="images/chirping.png" alt="Image" height="62" width="62" />
+          </a>
+        </div>
+
+        <div class="item">
+
+          <a class="btn btn-app2" href="#" onclick="url( 'media/facebook/index.php?id_user=<?php echo $id_user ?>' );">
+            <span id="facebook" class="notify-badge">0</span>
+            <img src="images/daybook.png" alt="Image" height="62" width="62" />
+          </a>
+        </div>
 
 
-      </div>
-      <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Linea de tiempo</h3>
-
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-
-                </div>
-              </div>
-              <div class="card-body">
-                        <input type="button" id="load" value="&darr; Load" style="display:none">
-                        <div id="visualization"></div>
-                        <div id="loading">loading...</div>
-                    </div>
-            </div>
-
-
+      </div>-->
+      <input type="button" id="load" value="&darr; Load" style="display:none">
+      <div id="visualization"></div>
+    <div id="loading">loading...</div>
 
 
     </div>
   </div>
-
+  
+  </div>
 <div class="container-fluid">
     <div class="card" id="vue-chat">
 
         <div class="card-header bg-success">
             <h3 class="card-title">Mensajes</h3>
-        <form id="formulario_buscador">
+             <!--Miguel Select-->
+             <button type="button" data-toggle="dropdown" id="botonEstado" class="btn btn-success dropdown-toggle dropdown-toggle-split" aria-haspopup="true" aria-expanded="false"><span id="searchtype"></span></button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item active" href="#" onclick=""></a>
+                            <a class="dropdown-item " href="#" onclick="busquedaEstado('Pendiente');">Pendiente</a>
+                            <a class="dropdown-item " href="#" onclick="busquedaEstado('Inconcluso');">Inconcluso</a>
+                            <a class="dropdown-item " href="#" onclick="busquedaEstado('Finalizado');">Terminado</a>
+                        </div>
+            <!--MIGUel, CAMBIO UN SELEC POR UN BOTON CON UN DROPDOWN-->
+            <form id="formulario_buscador">
             <input type="text" class="form-control float-right" id="buscador" placeholder="Buscar">
+            </form>
         </div>
-        </form>
 
         <!-- /.card-header -->
         <div class="card-body" >
@@ -265,7 +245,7 @@ $_SESSION['id_user'] = CurrentUserID();
                     <div class="direct-chat-text speedup" style="background-color:#f2f3f4">
 
                     <div class = "header">
-                        <h4> {{mens.titulo_mensaje}} <!--<span class="badge badge-pill badge-primary float-right">{{mens.calificacion}}</span>--></h4> 
+                                            
                         <span
                                                 class="float-right badge "
                                                 v-bind:class="{'badge-primary': mens.calificacion == 'Pendiente', 'badge-success': mens.calificacion == 'Finalizado', 
@@ -273,19 +253,26 @@ $_SESSION['id_user'] = CurrentUserID();
                                                 >
                                                 {{mens.calificacion}}
                                         </span>
-                        <!--<span class="float-right badge badge-warning "> Inconpleto</span> -->
-                        <!--  
-                        <span
-                                                class="float-right badge "
-                                                v-bind:class="{'badge-primary': mens.calificacion == 'Pendiente', 'badge-success': mens.calificacion == 'Finalizado', 
-                                                    'badge-warning': mens.calificacion == 'Inconcluso' }"
-                                                >
-                                                {{mens.calificacion}}
-                                        </span> 
-                        <span>{{mens.titulo_tarea}}</span> -->
+                                        
+                       
                         <div> 
                             <hr>
-                            <span v-html="mens.mensaje"></span>
+                            <!--MIGUEL Acordeon punto 148-->
+                            <div id="accordion">
+                                            <div class="card">
+                                                <div class="card-header" id="headingThree">
+                                                    <button class="btn  collapsed" data-toggle="collapse" v-bind:data-target="'#collapseThree'+mens.id" aria-expanded="false" v-bind:aria-controls="'collapseThree'+mens.id">
+                                                    <h5>Titulo mensaje: {{mens.titulo_mensaje}} </h5> 
+                                                    </button>
+                                                </div>
+                                                <div v-bind:id="'collapseThree'+mens.id" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                                                <div class="card-body">
+                                                <span v-html="mens.mensaje"></span>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--MIGUEL fin acordeon 148-->
                             <div class="stats">
                             <i class="cil-paperclip"></i> <br>
                             <a v-bind:href="'files/'+mens.filename"> {{mens.filename}}</a> 
@@ -360,92 +347,18 @@ $_SESSION['id_user'] = CurrentUserID();
     </div>
 </div>
 
-<!--Modal iframe -->
-
-
-<div class="modal fade" id="charping"  role="dialog" aria-labelledby="charpingmodal" aria-hidden="true">
-  <div class="modal-dialog modal-xl" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <div class="embed-responsive embed-responsive-16by9">
-      <iframe  class="embed-responsive-item" src="media/twitter/index.php?id_user=<?php echo $id_user ?>" width="600" height="600"  frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-      </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="daybook"  role="dialog" aria-labelledby="daybookmodal" aria-hidden="true">
-  <div class="modal-dialog modal-xl" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <div class="embed-responsive embed-responsive-16by9">
-      <iframe  class="embed-responsive-item" src="media/facebook/index.php?id_user=<?php echo $id_user ?>" width="600" height="600"  frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-      </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- fin modal -->
 <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.29.9.js"></script>
 <script src="inject/pubnub.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/disableautofill@2.0.0/dist/disableautofill.min.js"></script>
-  
 <script type="text/javascript">
-//timelines
-function notifica(idDiv) {
-      // console.log(idDiv);
-      var parametros = {
-        "idDiv": idDiv
-      };
-      $.ajax({
-        data: parametros,
-        url: "dts_notifica.php?accion=notifica",
-        type: "POST",
-        success: function(respose) {
-
-          var datos = JSON.parse(respose);
-          if (datos.cant != 0) {
-            $("#" + idDiv).html(datos.cant);
-            $("#" + idDiv).css({
-              'background': 'red'
-            });
-          } else {
-            $("#" + idDiv).html('0');
-            $("#" + idDiv).css({
-              'background': 'gray'
-            });
-          }
-        }
-      });
-    }
-
-    $(document).ready(function() {
-      //mensaje('Hola');
-
-    });
-    
-
-    //Time Line
-    var btnLoad = document.getElementById('load');
+//Time line 
+var btnLoad = document.getElementById('load');
     var btnSave = document.getElementById('save');
     let utc = '<?php echo $sql_utc[0] ?>';
     let hora = utc.slice(4, 10);
     let fechaIniSimulado = '<?php echo $sql_utc['fechaini_real'] ?>';
     let fechaFinSimulado = '<?php echo $sql_utc['fechafinal_real'] ?>';
     let data_json;
-
     function loadData() {
       // ###### DESDE ACA ########
       $.ajax({
@@ -473,8 +386,6 @@ function notifica(idDiv) {
                 updateGroup: false, // drag items from one group to another
                 remove: false, // delete an item by tapping the delete button top right
                 overrideItems: false // allow these options to override item.editable
-                
-               
               },
               moment: function(date) {
                 return vis.moment(date).utcOffset(hora)
@@ -550,7 +461,7 @@ function notifica(idDiv) {
     btnLoad.onclick = loadData;
     // load the initial data
     loadData();
-//end timeline
+
 
     var app = new Vue({
         el: '#vue-chat',
@@ -735,9 +646,19 @@ function notifica(idDiv) {
         'form': '#formulario_buscador'
     });
     daf.init();
+    function busquedaEstado(estado){//MIGUEL funcion para buscar por estado
+        for(let i = 0;i < app.mensajes.length;i++){
+                let mens = app.mensajes[i];
+                mens.visible = false;
+                if(mens.calificacion==estado)
+                {
+                    mens.visible= true;
+                }
+        }
+        }
 </script>
 
 <?= GetDebugMessage() ?>
 
 
-
+<?= GetDebugMessage() ?>

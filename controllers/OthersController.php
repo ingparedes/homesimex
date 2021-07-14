@@ -33,10 +33,22 @@ class OthersController extends ControllerBase
         return $this->runPage($request, $response, $args, "Login");
     }
 
+    // resetpassword
+    public function resetpassword(Request $request, Response $response, array $args): Response
+    {
+        return $this->runPage($request, $response, $args, "ResetPassword");
+    }
+
     // changepassword
     public function changepassword(Request $request, Response $response, array $args): Response
     {
         return $this->runPage($request, $response, $args, "ChangePassword");
+    }
+
+    // register
+    public function register(Request $request, Response $response, array $args): Response
+    {
+        return $this->runPage($request, $response, $args, "Register");
     }
 
     // userpriv
@@ -49,6 +61,12 @@ class OthersController extends ControllerBase
     public function logout(Request $request, Response $response, array $args): Response
     {
         return $this->runPage($request, $response, $args, "Logout");
+    }
+
+    // captcha
+    public function captcha(Request $request, Response $response, array $args): Response
+    {
+        return $this->runPage($request, $response, $args, "Captcha");
     }
 
     // Swagger

@@ -63,9 +63,7 @@ $TimelineExcon = &$Page;
         position:relative;
         padding:1.22rem 1rem
         }
-        .vis-custom-time {
-            pointer-events: none;
-                }
+
 
         
     </style>
@@ -85,15 +83,35 @@ $TimelineExcon = &$Page;
 </head>
 
 <body>
-    <?php $sql_utc = ExecuteRow("SELECT p.gmt, e.fechaini_simulado, e.fechafin_simulado,e.fechaini_real, e.fechafinal_real, e.id_escenario FROM escenario  e INNER JOIN paisgmt p ON p.id_zone = e.pais_escenario WHERE e.estado IN ('1')");
+    <?php $sql_utc = ExecuteRow("SELECT p.gmt, e.fechaini_simulado, e.fechafin_simulado, e.id_escenario, e.nombre_escenario FROM escenario  e INNER JOIN paisgmt p ON p.id_zone = e.pais_escenario WHERE e.estado IN ('1')");//MIGUEL, añadi a la consulta el nombre de la suimulació
     $_SESSION['id_user'] = CurrentUserID();
+    $nombre=$sql_utc['nombre_escenario']; //MIGUEL variable para guardar el nombre de la simulacion
     $_SESSION['id_escenario'] = $sql_utc['id_escenario'];
    // echo "usuario: " . $_SESSION['id_user'];
     $sql_grupo = ExecuteRow("SELECT u.grupo FROM users u WHERE u.id_users = '" . CurrentUserID() . "';");
     $_SESSION['id_grupo'] = $sql_grupo[0];
+    //ADICIONES
+    $sqlActores = ExecuteRows("SELECT * FROM actor_simulado");
+    $sqlArchivo = ExecuteRows("SELECT id_file,file_name FROM archivos_doc ");
+    $sqlPara = ExecuteRows("SELECT * FROM view_from;");
+    $sqlParaP = ExecuteRows("SELECT CONCAT('Participante: ',users.nombres,' ',users.apellidos) As nombre, id_users as valor FROM `users`;");
+    $sqlParaG=ExecuteRows("SELECT  CONCAT('Grupo: ', grupo.nombre_grupo) As nombre, id_grupo as valor FROM `grupo`;");
+    $sqlParaS=ExecuteRows("SELECT  CONCAT('Subgrupo: ',subgrupo.nombre_subgrupo) As nombre, id_subgrupo as valor FROM  `subgrupo`;");
+
+    $sqlTareas = ExecuteRows("SELECT t.id_tarea,t.titulo_tarea FROM tareas t WHERE t.id_escenario = '" . $sql_utc['id_escenario'] . "';");
+
     ?>
     <div class="buttons">
         <input type="button" id="load" value="&darr; Load" style="display:none">
+        <h2> <strong>Titulo de la simulación:</strong><!--Titulo para la simulación-->
+        <br>
+        </h2>
+        <h3>
+        <?php 
+            
+            echo $nombre;//Miguel IMpresion del nombre de la simulacion
+            ?>
+            </h3>
         <!-- <input type="button" id="save" value="&uarr; Save" title="Save data from the Timeline into the textarea"> -->
         <button type="button" id="save" class="btn btn-secondary" disabled>Grabar</button>
 
@@ -125,42 +143,181 @@ $TimelineExcon = &$Page;
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+
                 <div class="modal-body">
                     <form action="dts_notifica.php?accion=saveItemMsj" method="post">
                         <div class="form-group">
                             <input type="text" class="form-control" id="id" hidden>
                             <input type="text" class="form-control" id="tipo" hidden>
-                            <label for="tituloT">Titulo </label>
-                            <input type="text" class="form-control" id="tituloT" placeholder="Título Tarea" value="">
+                            <input type="text" class="form-control" id="id_tarea" hidden>
+                            <label for="tituloT">Titulo: </label>
+                            <h3>
+                                <div id="tituloT"> </div>
+                                </hr>
+
                         </div>
+                        <hr>
                         <div class="form-group">
                             <label for="desc_tarea">Descripción </label>
                             <!-- <textarea class="form-control" id="desc_tarea" rows="3"></textarea> -->
-                            <div id="desc_tarea" class="border" contenteditable="true">
-                            </div>
+                            <em>
+                                <div id="desc_tarea"></div><em>
                         </div>
+                        <hr>
+                        <ul id="ulmjs">
+                            <li> <strong>Hora real inicial:</strong> <span id="fechainireal_tarea"> </span></li>
+                            <li> <strong>hora real final:</strong> <span id="fechafin_tarea"> </span></li>
+                            <li><strong>Hora simulada inicial: </strong><span id="fechainisimulado_tarea"> </span></li>
+                            <li><strong>Hora simulada final:</strong> <span id="fechafinsimulado_tarea"> </span> </li>
+                        </ul>
                         <div class="modal-footer">
-                            <select id="valorar" class="form-select form-select-lg mb-3" name="valorar">
+                           <!-- <button type="button" id="btnAddMensaje" onclick="modalAddMsj();" data-dismiss="modal2" class="btn btn-info btn-sm mr-auto">Crear Mensaje</button>
+-->                         <button type="button" id="editMsg"  class="btn btn-info btn-sm">Editar Mensaje</button>
+                           <!-- <select id="valorar" class="form-control-sm" name="valorar">
                                 <option value="0" selected>Valorar...</option>
-                                <option value="1">Bueno</option>
-                                <option value="3">Regular</option>
-                                <option value="2">Malo</option>
+                                <option value="1" style="background-color:white">Pendiente</option>
+                                <option value="3" style="background-color:white">A evaluar</option>
+                                <option value="2" style="background-color:white">Complido</option>
                             </select>
-                            <button type="button" id="btnAddMensaje" onclick="modalAddMsj();" data-dismiss="modal2">Crear Mensaje</button> &nbsp;
-                            <button type="button" onclick="saveMsj()" class="btn btn-primary btn-sm">Guardar</button>
-                            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cerrar</button>
+                            
+                            <button type="button" id="submint" onclick="saveMsj()" class="btn btn-primary btn-sm">Guardar</button>-->
+                            <button type="button" class="btn btn-light btn-sm" data-dismiss="modal">Cancelar</button>
+
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Modal Add Mensajes-->
-    <div class="modal fade" id="modalAddMensaje" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+
+    <!-- Modal Edit Mensajes-->
+    <div class="modal fade" id="modalEditMensaje" tabindex="-1" role="dialog" aria-labelledby="modalEditMensajeTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalLongTitle">Agregar Mensaje</h5>
+                    <h5 class="modal-title" id="e_modalLongTitle">Mensaje</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <form id="e_datosMensaje" action="dts_notifica.php?accion=editMensaje" method="post">
+
+                        <div class="container">
+
+                            <input type="hidden" class="form-control-sm" id="id_inyect" name="id_inyect">
+                            <input type="hidden" class="form-control-sm" id="e_id_tarea" name="e_id_tarea">
+
+                            <div class="form-group">
+                                <label for="titulo">Titulo </label>
+                                <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Título Mensaje" value="" required>
+                            </div>
+
+                            <label for="mensaje">Mensaje </label>
+                            <textarea class="form-control" id="mensaje" name="mensaje" rows="2"></textarea>
+                            <!-- <div id="e_mensaje" name="e_mensaje" class="border" contenteditable="true"></div> -->
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="fechareal_start">Fecha Inicio Real</label>
+                                        <input type="text" class="form-control" id="fechareal_start" name="fechareal_start">
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="fechasim_start">Fecha Inicial Simulada</label>
+                                        <input type="text" class="form-control" id="fechasim_start" name="fechasim_start">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- <label for="idGrupo">Id Grupo </label>
+                            <select name="e_idGrupo" id="e_idGrupo" class="form-control">
+                                <option selected value="">Seleccione Grupo...</option>
+                                <?php
+                                /* foreach ($sqlGrupos as $valor) {
+                                    echo "<option value=\"" . $valor[0] . "\">" . $valor[1] . "</option>";
+                                } */
+                                ?>
+
+                            </select> -->
+                            <div class="form-group">
+                                <label for="medios"> Medio</label>
+                                <select id="medios" name="medios" class="form-control" required="">
+                                    <option style="background-color:white" value="">Seleccione Medio...</option>
+                                    <option style="background-color:white" value="1">Email</option>
+                                    <option style="background-color:white" value="2">Daybook</option>
+                                    <option style="background-color:white" value="3">Chirping</option>
+                                </select>
+                                <div>
+                                    <div class="form-group">
+                                        <label for="actividad_esperada">Actividad Esperada</label>
+                                        <textarea class="form-control" id="actividad_esperada" name="actividad_esperada" rows="2"></textarea>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+
+                                            <div class="form-group">
+                                                <label for="id_actor">De:</label>
+                                                <select id="id_actor" name="id_actor" class="form-control">
+                                                    <?php
+                                                    foreach ($sqlActores as $valor) {
+                                                        echo "<option  style=\"background-color:white\" value=\"" . $valor[0] . "\">" . $valor[1] . "</option>";
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="adjunto">Subir Archivo</label>
+                                                <!--<input type="file" class="form-control" id="archivo" name="adjunto">
+                                                --><select id="adjunto" name="adjunto" class="form-control">
+                                                    <option value="0">Seleccione Adjunto...</option>";
+                                                    <?php
+                                                    foreach ($sqlArchivo as $valor) {
+                                                        echo "<option  style=\"background-color:white\" value=\"" . $valor[0] . "\">" . $valor[1] . "</option>";
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <!-- Build your select: -->
+                                            <div class="form-group">
+                                                <label for="para">Para:</label>
+                                                <select id="para" name="para[]" multiple="multiple" class="form-control">
+
+                                                    <?php
+                                                    foreach ($sqlPara as $valor) {
+                                                        echo "<option style=\"background-color:white\" value=\"" . $valor[1] . "\">" . $valor[4] . "</option>";
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </diV>
+
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary btn-sm" id="BotonGuardar" >Guardar</button>
+                                <button type="button" class="btn btn-light btn-sm" data-dismiss="modal">Cancelar</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Add Mensajes-->
+    <div class="modal fade" id="modalAddMensaje" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLongTitle">Nuevo Mensaje</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -169,24 +326,35 @@ $TimelineExcon = &$Page;
                 <div class="modal-body">
                     <form id="datosMensaje" action="dts_notifica.php?accion=addMensaje" method="post">
 
-                        <div class="form-group">
+                        <div class="container">
 
-                            <input type="text" class="form-control" id="idTarea" name="idTarea">
+                            <input type="hidden" class="form-control-sm" id="idTarea" name="idTarea">
 
-                            <label for="titleMnsje">Titulo </label>
-                            <input type="text" class="form-control" id="titleMnsje" name="titleMnsje" placeholder="Título Mensaje" value="">
+                            <div class="form-group">
+                                <label for="titulo" >Titulo </label>
+                                <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Título Mensaje"   required>
+                            </div>
 
                             <label for="mensaje">Mensaje </label>
                             <textarea class="form-control" id="mensaje" name="mensaje" rows="2"></textarea>
                             <!-- <div id="mensaje" name="mensaje" class="border" contenteditable="true"></div> -->
-                            <div class="form-group mb-2">
-                                <label for="fechaIniRealMjs" class="col-md-2 control-label">Fecha Inicio Real</label>
-                                <input type="text" class="form-control" id="fechaIniReal" name="fechaIniReal">
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="fechaIniRealMjs">Fecha Inicio Real</label>
+                                        <input type="text" class="form-control" id="fechaIniReal" name="fechaIniReal">
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="fechaIniSimMjs">Fecha Inicial Simulada</label>
+                                        <input type="text" class="form-control" id="fechaIniSimMjs" name="fechaIniSimMjs">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group mb-2">
-                                <label for="fechaIniSimMjs" class="col-md-2 control-label">Fecha Inicial Simulada</label>
-                                <input type="text" class="form-control" id="fechaIniSimMjs" name="fechaIniSimMjs">
-                            </div>
+
 
                             <!-- <label for="idGrupo">Id Grupo </label>
                             <select name="idGrupo" id="idGrupo" class="form-control">
@@ -198,49 +366,67 @@ $TimelineExcon = &$Page;
                                 ?>
 
                             </select> -->
-                            <label for="medio"> Medio</label>
-                            <select id="medio" name="medio" class="form-control">
-                                <option value="">Seleccione Medio...</option>
-                                <option value="1">Email</option>
-                                <option value="2">Daybook</option>
-                                <option value="3">Chirping</option>
-                            </select>
+                            <div class="form-group">
+                                <label for="medio"> Medio</label>
+                                <select id="medio" name="medio" class="form-control" required="">
+                                    <option style="background-color:white" value="">Seleccione Medio...</option>
+                                    <option style="background-color:white" value="1">Email</option>
+                                    <option style="background-color:white" value="2">Daybook</option>
+                                    <option style="background-color:white" value="3">Chirping</option>
+                                </select>
+                                <div>
+                                    <div class="form-group">
+                                        <label for="actividad">Actividad Esperada</label>
+                                        <textarea class="form-control" id="actividad" name="actividad" rows="2"></textarea>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
 
-                            <label for="actividad">Actividad Esperada</label>
-                            <textarea class="form-control" id="actividad" name="actividad" rows="2"></textarea>
+                                            <div class="form-group">
+                                                <label for="actor">De:</label>
+                                                <select id="actor" name="actor" class="form-control">
+                                                    <?php
+                                                    foreach ($sqlActores as $valor) {
+                                                        echo "<option  style=\"background-color:white\" value=\"" . $valor[0] . "\">" . $valor[1] . "</option>";
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="adjunto">Subir Archivo</label>
+                                               <!-- <input type="file" class="form-control" id="archivo">
+                                               --> <select id="adjunto" name="adjunto" class="form-control">
+                                                    <option value="0">Seleccione Adjunto...</option>";
+                                                    <?php
+                                                    foreach ($sqlArchivo as $valor) {
+                                                        echo "<option  style=\"background-color:white\" value=\"" . $valor[0] . "\">" . $valor[1] . "</option>";
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <!-- Build your select: -->
+                                            <div class="form-group">
+                                                <label for="para">Para:</label>
+                                                <select id="para" name="para" multiple="multiple" class="form-control">
+                                                    <?php
+                                                    foreach ($sqlPara as $valor) {
+                                                        echo "<option style=\"background-color:white\" value=\"" . $valor[1] . "\">" . $valor[4] . "</option>";
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </diV>
 
-                            <label for="actor">Actor</label>
-                            <select id="actor" name="actor" class="form-control">
-                                <?php
-                                foreach ($sqlActores as $valor) {
-                                    echo "<option value=\"" . $valor[0] . "\">" . $valor[1] . "</option>";
-                                }
-                                ?>
-                            </select>
-                            <label for="archivo">Subir Archivo</label>
-                            <select id="archivo" name="archivo">
-                                <option value="0">Seleccione Adjunto...</option>";
-                                <?php
-                                foreach ($sqlArchivo as $valor) {
-                                    echo "<option value=\"" . $valor[0] . "\">" . $valor[1] . "</option>";
-                                }
-                                ?>
-                            </select>
-
-                            <!-- Build your select: -->
-                            <label for="para">Para:</label>
-                            <select id="para" name="para[]" multiple="multiple">
-                                <?php
-                                foreach ($sqlPara as $valor) {
-                                    echo "<option value=\"" . $valor[0] . "\">" . $valor[1] . "</option>";
-                                }
-                                ?>
-                            </select>
-
-                        </div>
-                        <button type="button" class="btn btn-primary btn-sm" onclick="addMensaje()">Enviar</button>
-                        <button type="button" data-dismiss="modal">Cerrar</button>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary btn-sm" >Guardar</button>
+                                <button type="button" class="btn btn-light btn-sm" data-dismiss="modal">Cancelar</button>
                     </form>
+
                 </div>
             </div>
         </div>
@@ -323,16 +509,17 @@ $TimelineExcon = &$Page;
     <script>
         var btnLoad = document.getElementById('load');
         var btnSave = document.getElementById('save');
-
+        var boton= document.getElementById('editMsg');
+        var BotonGuardar= document.getElementById('BotonGuardar');
         let utc = '<?php echo $sql_utc[0] ?>';
         let hora = utc.slice(4, 10);
-        let fechaIniSimulado = '<?php echo $sql_utc['fechaini_real'] ?>';
-        let fechaFinSimulado = '<?php echo $sql_utc['fechafinal_real'] ?>';
+        let fechaIniSimulado = '<?php echo $sql_utc['fechaini_simulado'] ?>';
+        let fechaFinSimulado = '<?php echo $sql_utc['fechafin_simulado'] ?>';
         let data_json;
 
 
         function loadData(foco) {
-
+            //console.log('idEscnrio', esc);
             var grupos2 = "";
             $.ajax({
                 url: "dts_notifica.php?accion=loadTL&pg=excon",
@@ -340,6 +527,7 @@ $TimelineExcon = &$Page;
                     if (data == 'baduser') {
                         alert("Usuario Maestro, inicie sesión con usuario de la BD");
                     } else {
+                        
                         document.getElementById("loading").style.display = "none";
                         var container = document.getElementById("visualization");
                         // Create a DataSet (allows two way data-binding)
@@ -440,6 +628,8 @@ $TimelineExcon = &$Page;
                                     "id": id,
                                     "tipo": tipo,
                                 };
+                                boton.onclick = funcionFalsa; 
+                                BotonGuardar.onClick=funcionFalsa;
 
                                 $('#exampleModalCenter').modal('show');
                                 $.ajax({
@@ -448,35 +638,73 @@ $TimelineExcon = &$Page;
                                     type: 'post',
                                     success: function(data) {
                                         //data = JSON.stringify(data);
-                                        console.log(data);
+                                        console.log('dataDbClk', data);
                                         $('#id').val(id);
+
                                         $('#tipo').val(tipo);
-                                        $('#tituloT').val(data[0].titulo);
+                                        $('#tituloT').html(data[0].titulo);
                                         $('#desc_tarea').html(data[0].descripcion);
-
-
+                                        if(data[0].fechainireal_tarea)
+                                        {
+                                            $('#fechainireal_tarea').html(data[0].fechainireal_tarea.slice(0,16));
+                                            $('#fechafin_tarea').html(data[0].fechafin_tarea.slice(0,16));
+                                            $('#fechainisimulado_tarea').html(data[0].fechainisimulado_tarea.slice(0,16));
+                                            $('#fechafinsimulado_tarea').html(data[0].fechafinsimulado_tarea.slice(0,16));
+                                        }
+                                        else{
+                                            $('#fechainireal_tarea').html(data[0].fechainireal_tarea);
+                                            $('#fechafin_tarea').html(data[0].fechafin_tarea);
+                                            $('#fechainisimulado_tarea').html(data[0].fechainisimulado_tarea);
+                                            $('#fechafinsimulado_tarea').html(data[0].fechafinsimulado_tarea);
+                                        }
+                                        
                                         if (tipo == 'M') {
-                                            $('#modalLongTitle').html("Editar Mensaje");
+                                            $('#id_tarea').val(data[0].id_tarea);
+                                            $('#modalLongTitle').html(" Editar Mensaje");
+                                            $('#editMsg').html("Editar mensaje");
+                                            boton.onclick = v_modalEditMensaje; 
+                                            BotonGuardar.onclick = editMensajeBD;
+                                           // $('#editMsg').click(function(){
+                                            //    v_modalEditMensaje();
+                                           // });
                                             $('#valorar').hide();
                                             $('#btnAddMensaje').hide();
+                                            $('#ulmjs').hide();
+                                           
+                                            //$('#BotonGuardar').click(function(){
+                                            //    editMensajeBD()
+                                           // });
+                                            // $('#submint').hide();
+
                                             if (parseInt(data[0].enviado) != 1) {
                                                 $('#tituloT').prop('readonly', false);
 
                                                 console.log('enviado', data[0].enviado);
                                             } else {
+
                                                 $('#tituloT').prop('readonly', true);
 
                                                 $('#desc_tarea').addClass('disableddiv');
                                             }
 
                                         } else {
-                                            $('#modalLongTitle').html("Editar Tarea");
+                                            boton.onclick =v_modalSaveMensaje;
+                                            BotonGuardar.onclick = addMensaje;
+                                            $('#modalLongTitle').html("Crear Tarea");
                                             $('#idTarea').val(id);
+                                            $('#e_id_tarea').val(id);
                                             $('#valorar').show();
+                                            $('#ulmjs').show();
+                                            $('#editMsg').html("Crear mensaje");
+                                            
+                                            
+                                           // $('#BotonGuardar').click(function(){
+                                           //     addMensaje();
+                                          //  });
                                             $('#btnAddMensaje').show();
                                             $('#valorar option[value=' + data.valora + ']').attr("selected", true);
                                             $('#tituloT').prop('readonly', true);
-                                            $('#desc_tarea').addClass('disableddiv');
+                                            //  $('#desc_tarea').addClass('disableddiv');
                                         }
 
                                     },
@@ -500,9 +728,45 @@ $TimelineExcon = &$Page;
 
 
         }
-        //btnLoad.onclick = loadData;     
+        //btnLoad.onclick = loadData;  
+        $('#fechareal_start').flatpickr({
+            locale: "es",
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+            minDate: fechaIniSimulado,
+            maxDate: fechaFinSimulado,
+            defaultDate: fechaIniSimulado,
+        });
+        $('#fechareal_start').flatpickr({
+            locale: "es",
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+            minDate: fechaIniSimulado,
+            maxDate: fechaFinSimulado,
+            defaultDate: fechaFinSimulado,
+        });
+        $('#fechasim_start').flatpickr({
+            locale: "es",
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+            minDate: fechaIniSimulado,
+            maxDate: fechaFinSimulado,
+            defaultDate: fechaIniSimulado,
+        });
+        $('#fechasim_start').flatpickr({
+            locale: "es",
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+            minDate: fechaIniSimulado,
+            maxDate: fechaFinSimulado,
+            defaultDate: fechaFinSimulado,
+        });
+        function funcionFalsa(){
 
-        function saveMsj() { //graba datos del item desde la modal
+        }   
+//btnLoad.onclick = loadData;     
+
+function saveMsj() { //graba datos del item desde la modal
             id = $('#id').val();
             tipo = $('#tipo').val();
             titulo = $('#tituloT').val();
@@ -534,6 +798,7 @@ $TimelineExcon = &$Page;
                         $('#visualization').empty();
                         console.log("id-foco", tipo + ':' + id);
                         loadData(tipo + ':' + id);
+                        $('#modalAddTarea').modal('hide');
 
                     }
                 }
@@ -604,10 +869,119 @@ $TimelineExcon = &$Page;
             }
         }
         btnSave.onclick = saveData;
+        function v_modalSaveMensaje(){
+            var id = $('#id').val();
+            var tipo = $('#tipo').val();
+            $('#modalEditMensaje').modal('show');
+
+            var parametros = {
+                "id": id,
+                "tipo": tipo,
+            };
+            console.log(parametros);
+            $('#e_id_tarea').val(id);
+            
+        }
+
+        function v_modalEditMensaje() {
+            var id = $('#id').val();
+            var tipo = $('#tipo').val();
+            $('#modalEditMensaje').modal('show');
+
+            var parametros = {
+                "id": id,
+                "tipo": tipo,
+            };
+            // console.log('parametros', parametros);
+            $.ajax({
+                url: "dts_notifica.php?accion=loadItemMsj",
+                data: parametros,
+                type: 'post',
+                success: function(data) {
+                    //data = JSON.stringify(data);
+                    console.log('dataEdit', data[0].id_tarea);
+                    $('#e_id_tarea').val(data[0].id_tarea);
+                    $('#id_inyect').val(id);
+                    $('#tipo').val(tipo);
+                    $('#titulo').val(data[0].titulo);
+                    $('#mensaje').val(data[0].descripcion);
+                    $('#fechareal_start').val(data[0].fechareal_start);
+                    $('#fechasim_start').val(data[0].fechasim_start);
+                    $('#medios').val(data[0].medios);
+                    $('#para').val(data[0].para);
+                    $('#id_actor').val(data[0].id_actor);
+
+                    $('#actividad_esperada').val(data[0].actividad_esperada);
+                    $('#adjunto').val(data[0].adjunto);
+
+                    // $('#submint').hide();
+
+                    if (parseInt(data[0].enviado) != 1) {
+                        $('#tituloT').prop('readonly', false);
+
+                        console.log('enviado', data[0].enviado);
+                    } else {
+                        $('#tituloT').prop('readonly', true);
+
+                        $('#desc_tarea').addClass('disableddiv');
+                    }
+
+
+
+
+                },
+            });
+        }
+
+        function editMensajeBD() {
+            //fncion para almacenar los datos en la bd  
+            var parametros = $('#e_datosMensaje').serializeArray(); //.serialize();            
+            console.log('parametros', parametros);
+            $.ajax({
+                url: "dts_notifica.php?accion=editMensaje",
+                data: parametros,
+                type: 'post',
+                success: function(data) {
+                    console.log(data);
+                    if (data == 'ok') {
+                        $('#modalEditMensaje').modal('hide');
+                        $('#exampleModalCenter').modal('hide');
+                        $('.toast').toast('show');
+                        $('#visualization').empty();
+                        loadData('');
+                    }
+                }
+            });
+        }
+        function addMensaje() { //graba datos del item desde la modal
+            //$('#titulo').val(document.getElementById("titulo").value);
+            //alert($('#titulo'));
+            //var parametros = $('datosMensaje').serializeArray(); //.serialize();            
+            
+            var parametros = $('#e_datosMensaje').serializeArray(); //.serialize();            
+            
+            console.log('parametros', parametros);
+            $.ajax({
+                url: "dts_notifica.php?accion=addMensaje",
+                data: parametros,
+                type: 'post',
+                success: function(data) {
+                    console.log(data);
+                    if (data == 'ok') {
+                        $('#modalEditMensaje').modal('hide');
+                        $('#exampleModalCenter').modal('hide');
+                        $('.toast').toast('show');
+                        $('#visualization').empty();
+                        loadData('');
+                    }
+                }
+            });
+
+        }
 
         function modalMsj(t) {
             $('#modal2').modal('show');
-            id = $('#idMsj').val();
+            id = $('#id_inyect').val();
             tipo = $('#tipoMsj').val();
             $('#idMsj').val($('#id').val());
             $('#tipoMsj').val($('#tipo').val());
@@ -632,7 +1006,7 @@ $TimelineExcon = &$Page;
         }
 
         // load the initial data
-        loadData();
+        loadData('');
         $('#fechaIniReal').flatpickr({
             locale: "es",
             enableTime: true,
@@ -672,7 +1046,7 @@ $TimelineExcon = &$Page;
                     $('#modalAddTarea').modal('hide');
                     $('.toast').toast('show');
                     $('#visualization').empty();
-                    loadData();
+                    loadData('');
                     //$('.toast').toast('show');
 
                 },
@@ -682,26 +1056,28 @@ $TimelineExcon = &$Page;
             $('#para').multiselect({
                 enableFiltering: true
             });
+            $('#e_para').multiselect({
+                enableFiltering: true
+            });
         });
 
-        function addMensaje() { //graba datos del item desde la modal
-            var parametros = $('#datosMensaje').serializeArray(); //.serialize();            
-            console.log('parametros', parametros);
-            $.ajax({
-                url: "dts_notifica.php?accion=addMensaje",
-                data: parametros,
-                type: 'post',
-                success: function(data) {
-                    console.log(data);
-                    if (data == 'ok') {
-                        $('#modalAddMensaje').modal('hide');
-                        $('.toast').toast('show');
-                        $('#visualization').empty();
-                        loadData();
-                    }
-                }
-            });
-        }
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
     </script>
 </body>
 

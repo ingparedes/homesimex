@@ -374,7 +374,7 @@ class TareasDelete extends Tareas
     {
         global $ExportType, $CustomExportType, $ExportFileName, $UserProfile, $Language, $Security, $CurrentForm;
         $this->CurrentAction = Param("action"); // Set up current action
-        $this->id_tarea->Visible = false;
+        $this->id_tarea->setVisibility();
         $this->id_escenario->Visible = false;
         $this->id_grupo->setVisibility();
         $this->titulo_tarea->setVisibility();
@@ -657,7 +657,7 @@ class TareasDelete extends Tareas
                         $filterWrk .= "`id_grupo`" . SearchString("=", trim($wrk), DATATYPE_NUMBER, "");
                     }
                     $lookupFilter = function() {
-                        return (CurrentUserInfo("perfil") > 1) ?  "id_grupo = '".CurrentUserInfo("grupo")."'" : "`id_escenario` = '".Container("escenario")->id_escenario->CurrentValue."'";
+                        return (CurrentUserInfo("perfil") > 1) ?  "id_grupo = '".CurrentUserInfo("grupo")."'" : "id_escenario = 53";
                     };
                     $lookupFilter = $lookupFilter->bindTo($this);
                     $sqlWrk = $this->id_grupo->Lookup->getSql(false, $filterWrk, $lookupFilter, $this, true, true);
@@ -740,6 +740,11 @@ class TareasDelete extends Tareas
             // color
             $this->color->ViewCustomAttributes = "";
 
+            // id_tarea
+            $this->id_tarea->LinkCustomAttributes = "";
+            $this->id_tarea->HrefValue = "";
+            $this->id_tarea->TooltipValue = "";
+
             // id_grupo
             $this->id_grupo->LinkCustomAttributes = "";
             $this->id_grupo->HrefValue = "";
@@ -792,6 +797,14 @@ class TareasDelete extends Tareas
         if (count($rows) == 0) {
             $this->setFailureMessage($Language->phrase("NoRecord")); // No record found
             return false;
+        }
+        foreach ($rows as $row) {
+            $rsdetail = Container("mensajes")->loadRs("`id_tarea` = " . QuotedValue($row['id_tarea'], DATATYPE_NUMBER, 'DB'))->fetch();
+            if ($rsdetail !== false) {
+                $relatedRecordMsg = str_replace("%t", "mensajes", $Language->phrase("RelatedRecordExists"));
+                $this->setFailureMessage($relatedRecordMsg);
+                return false;
+            }
         }
         $conn->beginTransaction();
 
@@ -955,7 +968,7 @@ class TareasDelete extends Tareas
             switch ($fld->FieldVar) {
                 case "x_id_grupo":
                     $lookupFilter = function () {
-                        return (CurrentUserInfo("perfil") > 1) ?  "id_grupo = '".CurrentUserInfo("grupo")."'" : "`id_escenario` = '".Container("escenario")->id_escenario->CurrentValue."'";
+                        return (CurrentUserInfo("perfil") > 1) ?  "id_grupo = '".CurrentUserInfo("grupo")."'" : "id_escenario = 53";
                     };
                     $lookupFilter = $lookupFilter->bindTo($this);
                     break;

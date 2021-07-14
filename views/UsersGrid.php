@@ -784,63 +784,71 @@ loadjs.ready("head", function() {
         <td data-name="estado" <?= $Grid->estado->cellAttributes() ?>>
 <?php if ($Grid->RowType == ROWTYPE_ADD) { // Add record ?>
 <span id="el<?= $Grid->RowCount ?>_users_estado" class="form-group">
-    <select
-        id="x<?= $Grid->RowIndex ?>_estado"
-        name="x<?= $Grid->RowIndex ?>_estado"
-        class="form-control ew-select<?= $Grid->estado->isInvalidClass() ?>"
-        data-select2-id="users_x<?= $Grid->RowIndex ?>_estado"
-        data-table="users"
-        data-field="x_estado"
-        data-value-separator="<?= $Grid->estado->displayValueSeparatorAttribute() ?>"
-        data-placeholder="<?= HtmlEncode($Grid->estado->getPlaceHolder()) ?>"
-        <?= $Grid->estado->editAttributes() ?>>
-        <?= $Grid->estado->selectOptionListHtml("x{$Grid->RowIndex}_estado") ?>
-    </select>
-    <div class="invalid-feedback"><?= $Grid->estado->getErrorMessage() ?></div>
-<script>
-loadjs.ready("head", function() {
-    var el = document.querySelector("select[data-select2-id='users_x<?= $Grid->RowIndex ?>_estado']"),
-        options = { name: "x<?= $Grid->RowIndex ?>_estado", selectId: "users_x<?= $Grid->RowIndex ?>_estado", language: ew.LANGUAGE_ID, dir: ew.IS_RTL ? "rtl" : "ltr" };
-    options.data = ew.vars.tables.users.fields.estado.lookupOptions;
-    options.dropdownParent = $(el).closest("#ew-modal-dialog, #ew-add-opt-dialog")[0];
-    Object.assign(options, ew.vars.tables.users.fields.estado.selectOptions);
-    ew.createSelect(options);
-});
-</script>
+<template id="tp_x<?= $Grid->RowIndex ?>_estado">
+    <div class="custom-control custom-radio">
+        <input type="radio" class="custom-control-input" data-table="users" data-field="x_estado" name="x<?= $Grid->RowIndex ?>_estado" id="x<?= $Grid->RowIndex ?>_estado"<?= $Grid->estado->editAttributes() ?>>
+        <label class="custom-control-label"></label>
+    </div>
+</template>
+<div id="dsl_x<?= $Grid->RowIndex ?>_estado" class="ew-item-list"></div>
+<input type="hidden"
+    is="selection-list"
+    id="x<?= $Grid->RowIndex ?>_estado"
+    name="x<?= $Grid->RowIndex ?>_estado"
+    value="<?= HtmlEncode($Grid->estado->CurrentValue) ?>"
+    data-type="select-one"
+    data-template="tp_x<?= $Grid->RowIndex ?>_estado"
+    data-target="dsl_x<?= $Grid->RowIndex ?>_estado"
+    data-repeatcolumn="5"
+    class="form-control<?= $Grid->estado->isInvalidClass() ?>"
+    data-table="users"
+    data-field="x_estado"
+    data-value-separator="<?= $Grid->estado->displayValueSeparatorAttribute() ?>"
+    <?= $Grid->estado->editAttributes() ?>>
+<div class="invalid-feedback"><?= $Grid->estado->getErrorMessage() ?></div>
 </span>
 <input type="hidden" data-table="users" data-field="x_estado" data-hidden="1" name="o<?= $Grid->RowIndex ?>_estado" id="o<?= $Grid->RowIndex ?>_estado" value="<?= HtmlEncode($Grid->estado->OldValue) ?>">
 <?php } ?>
 <?php if ($Grid->RowType == ROWTYPE_EDIT) { // Edit record ?>
 <span id="el<?= $Grid->RowCount ?>_users_estado" class="form-group">
-    <select
-        id="x<?= $Grid->RowIndex ?>_estado"
-        name="x<?= $Grid->RowIndex ?>_estado"
-        class="form-control ew-select<?= $Grid->estado->isInvalidClass() ?>"
-        data-select2-id="users_x<?= $Grid->RowIndex ?>_estado"
-        data-table="users"
-        data-field="x_estado"
-        data-value-separator="<?= $Grid->estado->displayValueSeparatorAttribute() ?>"
-        data-placeholder="<?= HtmlEncode($Grid->estado->getPlaceHolder()) ?>"
-        <?= $Grid->estado->editAttributes() ?>>
-        <?= $Grid->estado->selectOptionListHtml("x{$Grid->RowIndex}_estado") ?>
-    </select>
-    <div class="invalid-feedback"><?= $Grid->estado->getErrorMessage() ?></div>
-<script>
-loadjs.ready("head", function() {
-    var el = document.querySelector("select[data-select2-id='users_x<?= $Grid->RowIndex ?>_estado']"),
-        options = { name: "x<?= $Grid->RowIndex ?>_estado", selectId: "users_x<?= $Grid->RowIndex ?>_estado", language: ew.LANGUAGE_ID, dir: ew.IS_RTL ? "rtl" : "ltr" };
-    options.data = ew.vars.tables.users.fields.estado.lookupOptions;
-    options.dropdownParent = $(el).closest("#ew-modal-dialog, #ew-add-opt-dialog")[0];
-    Object.assign(options, ew.vars.tables.users.fields.estado.selectOptions);
-    ew.createSelect(options);
-});
-</script>
+<template id="tp_x<?= $Grid->RowIndex ?>_estado">
+    <div class="custom-control custom-radio">
+        <input type="radio" class="custom-control-input" data-table="users" data-field="x_estado" name="x<?= $Grid->RowIndex ?>_estado" id="x<?= $Grid->RowIndex ?>_estado"<?= $Grid->estado->editAttributes() ?>>
+        <label class="custom-control-label"></label>
+    </div>
+</template>
+<div id="dsl_x<?= $Grid->RowIndex ?>_estado" class="ew-item-list"></div>
+<input type="hidden"
+    is="selection-list"
+    id="x<?= $Grid->RowIndex ?>_estado"
+    name="x<?= $Grid->RowIndex ?>_estado"
+    value="<?= HtmlEncode($Grid->estado->CurrentValue) ?>"
+    data-type="select-one"
+    data-template="tp_x<?= $Grid->RowIndex ?>_estado"
+    data-target="dsl_x<?= $Grid->RowIndex ?>_estado"
+    data-repeatcolumn="5"
+    class="form-control<?= $Grid->estado->isInvalidClass() ?>"
+    data-table="users"
+    data-field="x_estado"
+    data-value-separator="<?= $Grid->estado->displayValueSeparatorAttribute() ?>"
+    <?= $Grid->estado->editAttributes() ?>>
+<div class="invalid-feedback"><?= $Grid->estado->getErrorMessage() ?></div>
 </span>
 <?php } ?>
 <?php if ($Grid->RowType == ROWTYPE_VIEW) { // View record ?>
 <span id="el<?= $Grid->RowCount ?>_users_estado">
-<span<?= $Grid->estado->viewAttributes() ?>>
-<?= $Grid->estado->getViewValue() ?></span>
+<span<?= $Grid->estado->viewAttributes() ?>><?php
+$idstatus = CurrentPage()->estado->CurrentValue;
+$idus = CurrentPage()->id_users->CurrentValue;
+if ($idstatus == 2)
+{
+//echo "<a href=\"#\" onclick=\"myFunction(this)\" ><i class=\"fa fa-user-plus\"></i></a> <br>";
+echo '<img class="mt-3 justify-content-center align-self-center " id="activador" onclick="activar('; echo $Page->id_users->getViewValue();echo ');" src="images/cheque.png" alt="activar" height="20" width="20">';
+}
+else
+	{echo 'Activo';}
+?>
+</span>
 </span>
 <?php if ($Grid->isConfirm()) { ?>
 <input type="hidden" data-table="users" data-field="x_estado" data-hidden="1" name="fusersgrid$x<?= $Grid->RowIndex ?>_estado" id="fusersgrid$x<?= $Grid->RowIndex ?>_estado" value="<?= HtmlEncode($Grid->estado->FormValue) ?>">
@@ -852,7 +860,7 @@ loadjs.ready("head", function() {
     <?php if ($Grid->img_user->Visible) { // img_user ?>
         <td data-name="img_user" <?= $Grid->img_user->cellAttributes() ?>>
 <?php if ($Grid->RowAction == "insert") { // Add record ?>
-<span id="el$rowindex$_users_img_user" class="form-group users_img_user">
+<span id="el<?= $Grid->RowCount ?>_users_img_user" class="form-group users_img_user">
 <div id="fd_x<?= $Grid->RowIndex ?>_img_user">
 <div class="input-group">
     <div class="custom-file">
@@ -1215,29 +1223,28 @@ loadjs.ready("head", function() {
         <td data-name="estado">
 <?php if (!$Grid->isConfirm()) { ?>
 <span id="el$rowindex$_users_estado" class="form-group users_estado">
-    <select
-        id="x<?= $Grid->RowIndex ?>_estado"
-        name="x<?= $Grid->RowIndex ?>_estado"
-        class="form-control ew-select<?= $Grid->estado->isInvalidClass() ?>"
-        data-select2-id="users_x<?= $Grid->RowIndex ?>_estado"
-        data-table="users"
-        data-field="x_estado"
-        data-value-separator="<?= $Grid->estado->displayValueSeparatorAttribute() ?>"
-        data-placeholder="<?= HtmlEncode($Grid->estado->getPlaceHolder()) ?>"
-        <?= $Grid->estado->editAttributes() ?>>
-        <?= $Grid->estado->selectOptionListHtml("x{$Grid->RowIndex}_estado") ?>
-    </select>
-    <div class="invalid-feedback"><?= $Grid->estado->getErrorMessage() ?></div>
-<script>
-loadjs.ready("head", function() {
-    var el = document.querySelector("select[data-select2-id='users_x<?= $Grid->RowIndex ?>_estado']"),
-        options = { name: "x<?= $Grid->RowIndex ?>_estado", selectId: "users_x<?= $Grid->RowIndex ?>_estado", language: ew.LANGUAGE_ID, dir: ew.IS_RTL ? "rtl" : "ltr" };
-    options.data = ew.vars.tables.users.fields.estado.lookupOptions;
-    options.dropdownParent = $(el).closest("#ew-modal-dialog, #ew-add-opt-dialog")[0];
-    Object.assign(options, ew.vars.tables.users.fields.estado.selectOptions);
-    ew.createSelect(options);
-});
-</script>
+<template id="tp_x<?= $Grid->RowIndex ?>_estado">
+    <div class="custom-control custom-radio">
+        <input type="radio" class="custom-control-input" data-table="users" data-field="x_estado" name="x<?= $Grid->RowIndex ?>_estado" id="x<?= $Grid->RowIndex ?>_estado"<?= $Grid->estado->editAttributes() ?>>
+        <label class="custom-control-label"></label>
+    </div>
+</template>
+<div id="dsl_x<?= $Grid->RowIndex ?>_estado" class="ew-item-list"></div>
+<input type="hidden"
+    is="selection-list"
+    id="x<?= $Grid->RowIndex ?>_estado"
+    name="x<?= $Grid->RowIndex ?>_estado"
+    value="<?= HtmlEncode($Grid->estado->CurrentValue) ?>"
+    data-type="select-one"
+    data-template="tp_x<?= $Grid->RowIndex ?>_estado"
+    data-target="dsl_x<?= $Grid->RowIndex ?>_estado"
+    data-repeatcolumn="5"
+    class="form-control<?= $Grid->estado->isInvalidClass() ?>"
+    data-table="users"
+    data-field="x_estado"
+    data-value-separator="<?= $Grid->estado->displayValueSeparatorAttribute() ?>"
+    <?= $Grid->estado->editAttributes() ?>>
+<div class="invalid-feedback"><?= $Grid->estado->getErrorMessage() ?></div>
 </span>
 <?php } else { ?>
 <span id="el$rowindex$_users_estado" class="form-group users_estado">

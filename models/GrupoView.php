@@ -1107,7 +1107,6 @@ class GrupoView extends Grupo
                     $detailPageObj->grupo->IsDetailKey = true;
                     $detailPageObj->grupo->CurrentValue = $this->id_grupo->CurrentValue;
                     $detailPageObj->grupo->setSessionValue($detailPageObj->grupo->CurrentValue);
-                    $detailPageObj->subgrupo->setSessionValue(""); // Clear session key
                     $detailPageObj->escenario->setSessionValue(""); // Clear session key
                 }
             }

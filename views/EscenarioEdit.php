@@ -34,8 +34,7 @@ loadjs.ready("head", function () {
         ["fechaini_simulado", [fields.fechaini_simulado.visible && fields.fechaini_simulado.required ? ew.Validators.required(fields.fechaini_simulado.caption) : null, ew.Validators.datetime(109)], fields.fechaini_simulado.isInvalid],
         ["fechafin_simulado", [fields.fechafin_simulado.visible && fields.fechafin_simulado.required ? ew.Validators.required(fields.fechafin_simulado.caption) : null, ew.Validators.datetime(109)], fields.fechafin_simulado.isInvalid],
         ["estado", [fields.estado.visible && fields.estado.required ? ew.Validators.required(fields.estado.caption) : null], fields.estado.isInvalid],
-        ["image_escenario", [fields.image_escenario.visible && fields.image_escenario.required ? ew.Validators.fileRequired(fields.image_escenario.caption) : null], fields.image_escenario.isInvalid],
-        ["entrar", [fields.entrar.visible && fields.entrar.required ? ew.Validators.required(fields.entrar.caption) : null], fields.entrar.isInvalid]
+        ["image_escenario", [fields.image_escenario.visible && fields.image_escenario.required ? ew.Validators.fileRequired(fields.image_escenario.caption) : null], fields.image_escenario.isInvalid]
     ]);
 
     // Set invalid fields
@@ -441,18 +440,6 @@ loadjs.ready(["fescenarioedit", "datetimepicker"], function() {
 </div></div>
     </div>
 <?php } ?>
-<?php if ($Page->entrar->Visible) { // entrar ?>
-    <div id="r_entrar" class="form-group row">
-        <label id="elh_escenario_entrar" for="x_entrar" class="<?= $Page->LeftColumnClass ?>"><?= $Page->entrar->caption() ?><?= $Page->entrar->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
-        <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->entrar->cellAttributes() ?>>
-<span id="el_escenario_entrar">
-<input type="<?= $Page->entrar->getInputTextType() ?>" data-table="escenario" data-field="x_entrar" name="x_entrar" id="x_entrar" size="30" maxlength="12" placeholder="<?= HtmlEncode($Page->entrar->getPlaceHolder()) ?>" value="<?= $Page->entrar->EditValue ?>"<?= $Page->entrar->editAttributes() ?> aria-describedby="x_entrar_help">
-<?= $Page->entrar->getCustomMessage() ?>
-<div class="invalid-feedback"><?= $Page->entrar->getErrorMessage() ?></div>
-</span>
-</div></div>
-    </div>
-<?php } ?>
 </div><!-- /page* -->
 <span id="el_escenario_icon_escenario">
 <input type="hidden" data-table="escenario" data-field="x_icon_escenario" data-hidden="1" name="x_icon_escenario" id="x_icon_escenario" value="<?= HtmlEncode($Page->icon_escenario->CurrentValue) ?>">
@@ -534,7 +521,7 @@ loadjs.ready("load", function () {
     //$('div').addClass('col-sm-10 form-group').removeClass('col-sm-10');
     $('h4').text("Nueva simulación");
     <?php if (!CurrentPage()->IsCopy())  { ?>
-    $('#x_descripcion_escenario').val('<p><strong>1. DESCRIPCI&Oacute;N</strong></p><p>&nbsp;</p><p><strong>2. CARACTER&Iacute;STICAS DEL EVENTO</strong></p><p>&nbsp;</p><p><strong>3. OBJETIVOS</strong></p><p>&nbsp;</p><p><strong>4. IMPACTO</strong></p><p>&nbsp;</p><p><strong>5. </strong><strong>RESPUESTAS</strong></p><p>&nbsp;</p><p><strong>6. CONCLUSIONES</strong></p>');
+    $('#x_descripcion_escenario').val('<p><strong>1. Justificaci&oacute;n y antecedentes </strong></p><p>&nbsp;</p><p><strong>2. Prop&oacute;sito de la simulaci&oacute;n </strong></p><p>&nbsp;</p><p><strong>3. Objetivos de entrenamiento</strong></p><p>&nbsp;</p><p><strong>4. Escenarios</strong></p><p>&nbsp;</p><p><strong>5. </strong><strong>Grupos objetivos</strong></p><p>&nbsp;</p><p><strong>6. Metodolog&iacute;a</strong></p>');
     <?php } ?>
 });
 </script>

@@ -129,7 +129,7 @@ $Page->showMessage();
 <?php } ?>
 <div class="ew-add-div"><!-- page* -->
 <?php if ($Page->id_tarea->Visible) { // id_tarea ?>
-    <div id="r_id_tarea" class="form-group">
+    <div id="r_id_tarea" class="form-group row">
         <label id="elh_mensajes_id_tarea" for="x_id_tarea" class="<?= $Page->LeftColumnClass ?>"><?= $Page->id_tarea->caption() ?><?= $Page->id_tarea->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->id_tarea->cellAttributes() ?>>
 <?php if ($Page->id_tarea->getSessionValue() != "") { ?>
@@ -170,7 +170,7 @@ loadjs.ready("head", function() {
     </div>
 <?php } ?>
 <?php if ($Page->titulo->Visible) { // titulo ?>
-    <div id="r_titulo" class="form-group">
+    <div id="r_titulo" class="form-group row">
         <label id="elh_mensajes_titulo" for="x_titulo" class="<?= $Page->LeftColumnClass ?>"><?= $Page->titulo->caption() ?><?= $Page->titulo->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->titulo->cellAttributes() ?>>
 <span id="el_mensajes_titulo">
@@ -182,7 +182,7 @@ loadjs.ready("head", function() {
     </div>
 <?php } ?>
 <?php if ($Page->mensaje->Visible) { // mensaje ?>
-    <div id="r_mensaje" class="form-group">
+    <div id="r_mensaje" class="form-group row">
         <label id="elh_mensajes_mensaje" class="<?= $Page->LeftColumnClass ?>"><?= $Page->mensaje->caption() ?><?= $Page->mensaje->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->mensaje->cellAttributes() ?>>
 <span id="el_mensajes_mensaje">
@@ -200,7 +200,7 @@ loadjs.ready(["fmensajesadd", "editor"], function() {
     </div>
 <?php } ?>
 <?php if ($Page->fechareal_start->Visible) { // fechareal_start ?>
-    <div id="r_fechareal_start" class="form-group">
+    <div id="r_fechareal_start" class="form-group row">
         <label id="elh_mensajes_fechareal_start" for="x_fechareal_start" class="<?= $Page->LeftColumnClass ?>"><?= $Page->fechareal_start->caption() ?><?= $Page->fechareal_start->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->fechareal_start->cellAttributes() ?>>
 <span id="el_mensajes_fechareal_start">
@@ -212,7 +212,7 @@ loadjs.ready(["fmensajesadd", "editor"], function() {
     </div>
 <?php } ?>
 <?php if ($Page->fechasim_start->Visible) { // fechasim_start ?>
-    <div id="r_fechasim_start" class="form-group">
+    <div id="r_fechasim_start" class="form-group row">
         <label id="elh_mensajes_fechasim_start" for="x_fechasim_start" class="<?= $Page->LeftColumnClass ?>"><?= $Page->fechasim_start->caption() ?><?= $Page->fechasim_start->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->fechasim_start->cellAttributes() ?>>
 <span id="el_mensajes_fechasim_start">
@@ -224,7 +224,7 @@ loadjs.ready(["fmensajesadd", "editor"], function() {
     </div>
 <?php } ?>
 <?php if ($Page->medios->Visible) { // medios ?>
-    <div id="r_medios" class="form-group">
+    <div id="r_medios" class="form-group row">
         <label id="elh_mensajes_medios" for="x_medios" class="<?= $Page->LeftColumnClass ?>"><?= $Page->medios->caption() ?><?= $Page->medios->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->medios->cellAttributes() ?>>
 <span id="el_mensajes_medios">
@@ -257,7 +257,7 @@ loadjs.ready("head", function() {
     </div>
 <?php } ?>
 <?php if ($Page->actividad_esperada->Visible) { // actividad_esperada ?>
-    <div id="r_actividad_esperada" class="form-group">
+    <div id="r_actividad_esperada" class="form-group row">
         <label id="elh_mensajes_actividad_esperada" for="x_actividad_esperada" class="<?= $Page->LeftColumnClass ?>"><?= $Page->actividad_esperada->caption() ?><?= $Page->actividad_esperada->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->actividad_esperada->cellAttributes() ?>>
 <span id="el_mensajes_actividad_esperada">
@@ -269,7 +269,7 @@ loadjs.ready("head", function() {
     </div>
 <?php } ?>
 <?php if ($Page->id_actor->Visible) { // id_actor ?>
-    <div id="r_id_actor" class="form-group">
+    <div id="r_id_actor" class="form-group row">
         <label id="elh_mensajes_id_actor" for="x_id_actor" class="<?= $Page->LeftColumnClass ?>"><?= $Page->id_actor->caption() ?><?= $Page->id_actor->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->id_actor->cellAttributes() ?>>
 <span id="el_mensajes_id_actor">
@@ -307,7 +307,7 @@ loadjs.ready("head", function() {
     </div>
 <?php } ?>
 <?php if ($Page->para->Visible) { // para ?>
-    <div id="r_para" class="form-group">
+    <div id="r_para" class="form-group row">
         <label id="elh_mensajes_para" for="x_para" class="<?= $Page->LeftColumnClass ?>"><?= $Page->para->caption() ?><?= $Page->para->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->para->cellAttributes() ?>>
 <span id="el_mensajes_para">
@@ -344,7 +344,7 @@ loadjs.ready("head", function() {
     </div>
 <?php } ?>
 <?php if ($Page->adjunto->Visible) { // adjunto ?>
-    <div id="r_adjunto" class="form-group">
+    <div id="r_adjunto" class="form-group row">
         <label id="elh_mensajes_adjunto" for="x_adjunto" class="<?= $Page->LeftColumnClass ?>"><?= $Page->adjunto->caption() ?><?= $Page->adjunto->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->adjunto->cellAttributes() ?>>
 <span id="el_mensajes_adjunto">
@@ -391,7 +391,7 @@ loadjs.ready("head", function() {
 <?php include_once "ResmensajeGrid.php" ?>
 <?php } ?>
 <?php if (!$Page->IsModal) { ?>
-<div class="form-group"><!-- buttons .form-group -->
+<div class="form-group row"><!-- buttons .form-group -->
     <div class="<?= $Page->OffsetColumnClass ?>"><!-- buttons offset -->
 <button class="btn btn-primary ew-btn" name="btn-action" id="btn-action" type="submit"><?= $Language->phrase("AddBtn") ?></button>
 <button class="btn btn-default ew-btn" name="btn-cancel" id="btn-cancel" type="button" data-href="<?= HtmlEncode(GetUrl($Page->getReturnUrl())) ?>"><?= $Language->phrase("CancelBtn") ?></button>
@@ -412,63 +412,6 @@ loadjs.ready("head", function() {
 <script>
 loadjs.ready("load", function () {
     // Startup script
-    $("<input>").attr({id:"bnt1",name:"xxxx",value:"",type:"hidden"}).appendTo("form"),$("#btn-action").after('&nbsp; <button class="btn btn-info ew-btn"  name="btn" id="btn" type="submit"  onclick="this.form.xxxx.value=1"> Grabar y nuevo </button>');
+    $("label#elh_mensajes_titulo").remove(),$("label#elh_mensajes_mensaje").remove(),$("label#elh_mensajes_fechareal_start").remove(),$("label#elh_mensajes_fechasim_start").remove(),$("label#elh_mensajes_medios").remove(),$("label#elh_mensajes_id_actor").remove(),$("label#elh_mensajes_para").remove(),$("label#elh_mensajes_adjunto").remove(),$("label#elh_mensajes_actividad_esperada").remove(),$("<input>").attr({id:"bnt1",name:"xxxx",value:"",type:"hidden"}).appendTo("form"),$("#btn-action").after('&nbsp; <button class="btn btn-info ew-btn"  name="btn" id="btn" type="submit"  onclick="this.form.xxxx.value=1"> Grabar y nuevo </button>');
 });
-</script>
-<?php
-
-$idTarea = Container("tareas")->id_tarea->CurrentValue;
-$fecha = ExecuteRow("SELECT t.fechainireal_tarea, t.fechafin_tarea FROM tareas t WHERE t.id_tarea = '".$idTarea."';");
-$fechaSim = ExecuteRow("SELECT fechaini_simulado, fechafin_simulado FROM escenario e INNER JOIN tareas t ON e.id_escenario = t.id_escenario WHERE t.id_tarea = '".$idTarea."';" );
-
-$fechaInicial = date("Y-m-d", strtotime($fecha[0]));
-$horaInicial = date("H", strtotime($fecha[0]));
-$minInicial = date("i", strtotime($fecha[0]));
-$fechaFin = date("Y-m-d", strtotime($fecha[1]));
-$horaFin = date("H", strtotime($fecha[1]));
-$minFin = date("i", strtotime($fecha[1]));
-
-$fechaIniSimulado = date("Y-m-d", strtotime($fechaSim[0]));
-$horaIniSimulado = date("H", strtotime($fechaSim[0]));
-$minIniSimulado = date("i", strtotime($fechaSim[0]));
-$fechaFinSimulado = date("Y-m-d", strtotime($fechaSim[0]));
-$horaFinSimulado = date("H", strtotime($fechaSim[0]));
-$minFinSimulado = date("i", strtotime($fechaSim[0]));	
-
-?>
-<script>
-		
-        let fechaInicial = "<?php echo $fechaInicial ?>";
-        let horaInicial = "<?php echo $horaInicial ?>";
-        let minInicial = "<?php echo $minInicial ?>";
-        let fechaFin = "<?php echo $fechaFin ?>";
-        let horaFin = "<?php echo $horaFin ?>";
-        let minFin = "<?php echo $minFin ?>";
-
-        flatpickr("#x_fechareal_start",{
-            locale: "es",
-            enableTime: true,
-            dateFormat: "Y-m-d H:i",
-            time_24hr: true,
-            minDate: fechaInicial + " " + horaInicial + ":" + minInicial,
-            maxDate: fechaFin + " " + horaFin + ":" + minFin,
-            defaultDate: fechaInicial + " " + horaInicial + ":" + minInicial,
-        });
-        let fechaIniSimulado = "<?php echo $fechaIniSimulado ?>";
-        let horaIniSimulado = "<?php echo $horaIniSimulado ?>";
-        let minIniSimulado = "<?php echo $minIniSimulado ?>";
-        let fechaFinSimulado = "<?php echo $fechaFinSimulado ?>";
-        let horaFinSimulado = "<?php echo $horaFinSimulado ?>";
-        let minFinSimulado = "<?php echo $minFinSimulado ?>";
-
-        flatpickr("#x_fechasim_start",{
-            locale: "es",
-            enableTime: true,
-            dateFormat: "Y-m-d H:i",
-            time_24hr: true,
-            minDate: fechaIniSimulado + " " + horaIniSimulado + ":" + minIniSimulado,
-            maxDate: fechaFinSimulado + " " + horaFinSimulado + ":" + minFinSimulado,
-            defaultDate: fechaIniSimulado + " " + horaIniSimulado + ":" + minIniSimulado,
-        });
-    
 </script>

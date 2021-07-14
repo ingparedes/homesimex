@@ -27,6 +27,7 @@ loadjs.ready("head", function () {
     var currentTable = <?= JsonEncode(GetClientVar("tables", "tareas")) ?>,
         fields = currentTable.fields;
     ftareaslistsrch.addFields([
+        ["id_tarea", [], fields.id_tarea.isInvalid],
         ["id_grupo", [], fields.id_grupo.isInvalid],
         ["titulo_tarea", [], fields.titulo_tarea.isInvalid],
         ["fechainireal_tarea", [], fields.fechainireal_tarea.isInvalid],
@@ -249,7 +250,7 @@ $Page->showMessage();
 <input type="hidden" name="t" value="tareas">
 <?php if ($Page->getCurrentMasterTable() == "escenario" && $Page->CurrentAction) { ?>
 <input type="hidden" name="<?= Config("TABLE_SHOW_MASTER") ?>" value="escenario">
-<input type="hidden" name="fk_id_escenario" value="<?= HtmlEncode($Page->id_escenario->getSessionValue()) ?>">
+<input type="hidden" name="fk_id_escenario" value="<?= HtmlEncode($Page->id_escenario->getSessionValue())?>">
 <?php } ?>
 <div id="gmp_tareas" class="<?= ResponsiveTableClass() ?>card-body ew-grid-middle-panel">
 <?php if ($Page->TotalRecords > 0 || $Page->isGridEdit()) { ?>
@@ -266,6 +267,9 @@ $Page->renderListOptions();
 // Render list options (header, left)
 $Page->ListOptions->render("header", "left");
 ?>
+<?php if ($Page->id_tarea->Visible) { // id_tarea ?>
+        <th data-name="id_tarea" class="<?= $Page->id_tarea->headerCellClass() ?>"><div id="elh_tareas_id_tarea" class="tareas_id_tarea"><?= $Page->renderSort($Page->id_tarea) ?></div></th>
+<?php } ?>
 <?php if ($Page->id_grupo->Visible) { // id_grupo ?>
         <th data-name="id_grupo" class="<?= $Page->id_grupo->headerCellClass() ?>"><div id="elh_tareas_id_grupo" class="tareas_id_grupo"><?= $Page->renderSort($Page->id_grupo) ?></div></th>
 <?php } ?>
@@ -351,6 +355,14 @@ while ($Page->RecordCount < $Page->StopRecord) {
 // Render list options (body, left)
 $Page->ListOptions->render("body", "left", $Page->RowCount);
 ?>
+    <?php if ($Page->id_tarea->Visible) { // id_tarea ?>
+        <td data-name="id_tarea" <?= $Page->id_tarea->cellAttributes() ?>>
+<span id="el<?= $Page->RowCount ?>_tareas_id_tarea">
+<span<?= $Page->id_tarea->viewAttributes() ?>>
+<?= $Page->id_tarea->getViewValue() ?></span>
+</span>
+</td>
+    <?php } ?>
     <?php if ($Page->id_grupo->Visible) { // id_grupo ?>
         <td data-name="id_grupo" <?= $Page->id_grupo->cellAttributes() ?>>
 <span id="el<?= $Page->RowCount ?>_tareas_id_grupo">
@@ -447,7 +459,7 @@ loadjs.ready("head", function() {
 <script>
 loadjs.ready("load", function () {
     // Startup script
-    $("#r_id_escenario").hide(),$("#r_icon_escenario").hide(),$("#r_fechacreacion_escenario").hide(),$("#r_incidente").hide(),$("#r_entrar").hide(),$("#ftareaslistsrch").before('<div class="callout callout-primary"><em>Si necesita realizar filtro al siguiente lista por favor seleccione uno o varios grupos y por ultimo clics en el  botón buscar.</em></div>');
+    $("#r_icon_escenario").hide(),$("#r_fechacreacion_escenario").hide(),$("#r_incidente").hide(),$("#r_entrar").hide(),$("#ftareaslistsrch").before('<div class="callout callout-primary"><em>Si necesita realizar filtro al siguiente lista por favor seleccione uno o varios grupos y por ultimo clics en el  botón buscar.</em></div>');
 });
 </script>
 <?php } ?>

@@ -277,8 +277,8 @@ loadjs.ready(["ftareasadd", "editor"], function() {
 <div id="tpd_tareasadd" class="ew-custom-template"></div>
 <template id="tpm_tareasadd">
 <div id="ct_TareasAdd">  <?php
-   $id_escenario = CurrentUserInfo("escenario");
-
+    //= CurrentUserInfo("escenario");
+   $id_escenario = $Page->id_escenario->getSessionValue();
  // echo Container("escenario")->id_escenario->CurrentValue;
 //	$nombreescnario = ExecuteRow("SELECT nombre_escenario,DATE_FORMAT(fechaini_real, '%Y/%m/%d'), DATE_FORMAT(fechafinal_real, '%Y/%m/%d')  FROM escenario WHERE id_escenario =  = '".$id_escenario."';");
 	$escenID = ExecuteRow("SELECT DATE_FORMAT(fechaini_real, '%Y/%m/%d'), DATE_FORMAT(fechafinal_real, '%Y/%m/%d'),nombre_escenario FROM escenario WHERE id_escenario = '".$id_escenario."';");
@@ -457,6 +457,6 @@ loadjs.ready("head", function() {
 <script>
 loadjs.ready("load", function () {
     // Startup script
-    $("<input>").attr({id:"f",name:"xxx",value:"",type:"hidden"}).appendTo("form"),$("#btn-action").after('&nbsp; <button class="btn btn-info ew-btn"  name="btn" id="btn" type="submit"  onclick="this.form.xxx.value=1"> Grabar y nuevo </button>');
+    $("<input>").attr({id:"f",name:"xxx",value:"",type:"hidden"}).appendTo("form"),$("#btn-action").after('&nbsp; <button class="btn btn-info ew-btn"  name="btn" id="btn" type="submit"  onclick="this.form.xxx.value=1"> Grabar y nueva </button>');
 });
 </script>

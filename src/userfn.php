@@ -77,7 +77,7 @@ else
 };
     if ($menu->Id == "menu") { // Sidebar menu or change from "menu" to "navbar" for top menu
        // $menu->addMenuItem(444, "usuario", "<div> <div class='image'> <img class='img-circle elevation-1' width='45px'  height='45px' src='http://localhost/homesimex/files/$imgs'> <strong> ".$UserName.' '.$ape."</strong> <p> <small class='text-muted'> ".$UserPermissionValue."  ".$UserG."  </small></P></div></div>  " , "UsersView/$idu?showdetail", -1, "", IsLoggedIn());
-        $menu->addMenuItem(444, "usuario","<div class='card-body pt-0'><div class='row'><div class='col-2'><img src='http://localhost/homesimex/files/$fotos'   width='45px'  height='45px' alt='user-avatar' class='img-circle'></div><div class='col-10'><b class = 'float-right'>".$UserName.' '.$ape."</b><ul class='ml-10 mb-0 fa-ul'><li class='small'> ".$UserPermissionValue."</li> <li class='small'> ".$UserG."</li></ul></div></div></div>", "/homesimex/UsersList", -1, "", IsLoggedIn());
+        $menu->addMenuItem(444, "usuario","<div class='card-body pt-0'><div class='row'><div class='col-2'><img src='http://www.simexamericas.org/homesimex/files/$fotos'   width='45px'  height='45px' alt='user-avatar' class='img-circle'></div><div class='col-10'><b class = 'float-right'>".$UserName.' '.$ape."</b><ul class='ml-10 mb-0 fa-ul'><li class='small'> ".$UserPermissionValue."</li> <li class='small'> ".$UserG."</li></ul></div></div></div>", "/homesimex/UsersList", -1, "", IsLoggedIn());
         $menu->moveItem("Simulaciones", $menu->Count() - 1); // Move to last
         $menu->moveItem("Control Excon", $menu->Count() - 1); // Move to last
         $menu->moveItem("Pizarra", $menu->Count() - 1); // Move to last
@@ -121,8 +121,8 @@ SetClientVar("sqlutc",$sqlutescenario);
 SetClientVar("sqlutcuser",$sqlutcuser);
 }
 else{
-SetClientVar("sqlutc",'UTC +00:00');
-SetClientVar("sqlutcuser",'UTC +00:00');
+SetClientVar("sqlutc",'UTC +01:00');
+SetClientVar("sqlutcuser",'UTC +01:00');
 }
  $_SESSION['userid'] = CurrentUserID();
 }

@@ -5,6 +5,8 @@ namespace PHPMaker2021\simexamerica;
 
 // Page object
 $PersonalData = &$Page;
+
+
 ?>
 <?php
 $Page->showMessage();
@@ -72,15 +74,74 @@ $Page->showMessage();
     </div>
 <?php } else { ?>
     <div class="row">
-        <div class="col">
-            <p><?= $Language->phrase("PersonalDataContent") ?></p>
-            <div class="alert alert-danger d-inline-block">
-                <i class="icon fas fa-ban"></i><?= $Language->phrase("PersonalDataWarning") ?>
+    <div class="col-md-6">
+           
+     
+<?php 
+
+$User = CurrentUserInfo("nombres");
+$ape = CurrentUserInfo("apellidos");
+$imgs = CurrentUserInfo("img_user");
+$UserPer = CurrentUserInfo("perfil"); 
+$mail = CurrentUserInfo("email"); 
+$p = CurrentUserInfo("pais"); 
+$Ids= CurrentUserID();
+$UserGru = CurrentUserInfo("grupo"); 
+
+$UserP = ExecuteScalar("SELECT UserLevelName FROM userlevels WHERE UserLevelID = ".$UserPer);
+$UserGrd = ExecuteScalar("SELECT nombre_grupo FROM grupo WHERE id_grupo =".$UserGru);
+$Usersubg = ExecuteRow("SELECT nombre_subgrupo FROM subgrupo WHERE id_subgrupo =".CurrentUserInfo("subgrupo") );
+$coutry = ExecuteRow("SELECT * FROM paisgmt WHERE id_zone =".$p );
+
+if (!empty($imgs))
+{$fotos = $imgs;}
+else
+{$fotos = 'silueta.png';};
+
+
+?>
+
+            <!-- Profile Image -->
+            <div class="card card-outline">
+              <div class="card-body box-profile">
+              <div class="btn-toolbar ew-toolbar">
+                <span class="ew-action-option ew-list-option-separator text-nowrap" data-name="button">
+                    <div class="btn-group">
+                    <a class="ew-action ew-edit" data-caption="Editar" href="/homesimex/UsersEdit/<?php echo $Ids  ?>" data-original-title="Editar" title=""><i data-phrase="ViewPageEditLink" class="icon-edit ew-icon mr-2" data-caption="Editar"></i></a>
+                </div>            
             </div>
-            <p>
-                <a id="download" href="<?= HtmlEncode(GetUrl(CurrentPageUrl(false) . "?cmd=download")) ?>" class="btn btn-default"><?= $Language->phrase("DownloadBtn") ?></a>
-                <a id="delete" href="<?= HtmlEncode(GetUrl(CurrentPageUrl(false) . "?cmd=delete")) ?>" class="btn btn-default"><?= $Language->phrase("DeleteBtn") ?></a>
-            </p>
+                <div class="text-center">
+                  <img class="profile-user-img img-fluid img-circle"
+                       src="/homesimex/files/<?php echo $fotos ?>"
+                       alt="User profile picture">
+                </div>
+
+                <h3 class="profile-username text-center"><?php echo $User." ". $ape  ?></h3>
+
+                <p class="text-muted text-center"><?php echo $UserP  ?></p>
+
+                <ul class="list-group list-group-unbordered mb-3">
+                  <li class="list-group-item">
+                    <b>Grupo: <?php echo $UserGrd  ?></p></b> 
+                  </li>
+                  <li class="list-group-item">
+                    <b>Subgrupo: <em> <?php echo $Usersubg[0];  ?></em></b>  
+                  </li>
+                  <li class="list-group-item">
+                    <b>Email: <em> <?php echo $mail  ?></em></b> 
+                  </li>
+                  <li class="list-group-item">
+                    <b>País: <em> <?php echo $coutry[2]." / ". $coutry[4]   ?></em></b> 
+                  </li>
+
+                </ul>
+
+                
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+         
         </div>
     </div>
 <?php } ?>

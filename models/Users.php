@@ -211,19 +211,18 @@ class Users extends DbTable
 
         // pais
         $this->pais = new DbField('users', 'users', 'x_pais', 'pais', '`pais`', '`pais`', 3, 11, -1, false, '`pais`', false, false, false, 'FORMATTED TEXT', 'SELECT');
-        $this->pais->Required = true; // Required field
         $this->pais->Sortable = true; // Allow sort
         $this->pais->UsePleaseSelect = true; // Use PleaseSelect by default
         $this->pais->PleaseSelectText = $Language->phrase("PleaseSelect"); // "PleaseSelect" text
         switch ($CurrentLanguage) {
             case "en":
-                $this->pais->Lookup = new Lookup('pais', 'paisgmt', true, 'id_zone', ["nompais","timezone","gmt",""], [], [], [], [], [], [], '', '');
+                $this->pais->Lookup = new Lookup('pais', 'paisgmt', false, 'id_zone', ["nompais","timezone","gmt",""], [], [], [], [], [], [], '', '');
                 break;
             case "es":
-                $this->pais->Lookup = new Lookup('pais', 'paisgmt', true, 'id_zone', ["nompais","timezone","gmt",""], [], [], [], [], [], [], '', '');
+                $this->pais->Lookup = new Lookup('pais', 'paisgmt', false, 'id_zone', ["nompais","timezone","gmt",""], [], [], [], [], [], [], '', '');
                 break;
             default:
-                $this->pais->Lookup = new Lookup('pais', 'paisgmt', true, 'id_zone', ["nompais","timezone","gmt",""], [], [], [], [], [], [], '', '');
+                $this->pais->Lookup = new Lookup('pais', 'paisgmt', false, 'id_zone', ["nompais","timezone","gmt",""], [], [], [], [], [], [], '', '');
                 break;
         }
         $this->pais->DefaultErrorMessage = $Language->phrase("IncorrectInteger");
@@ -241,10 +240,8 @@ class Users extends DbTable
         $this->Fields['pw'] = &$this->pw;
 
         // estado
-        $this->estado = new DbField('users', 'users', 'x_estado', 'estado', '`estado`', '`estado`', 200, 1, -1, false, '`estado`', false, false, false, 'FORMATTED TEXT', 'SELECT');
+        $this->estado = new DbField('users', 'users', 'x_estado', 'estado', '`estado`', '`estado`', 200, 1, -1, false, '`estado`', false, false, false, 'FORMATTED TEXT', 'RADIO');
         $this->estado->Sortable = true; // Allow sort
-        $this->estado->UsePleaseSelect = true; // Use PleaseSelect by default
-        $this->estado->PleaseSelectText = $Language->phrase("PleaseSelect"); // "PleaseSelect" text
         switch ($CurrentLanguage) {
             case "en":
                 $this->estado->Lookup = new Lookup('estado', 'users', false, '', ["","","",""], [], [], [], [], [], [], '', '');
@@ -1677,9 +1674,8 @@ SORTHTML;
         $this->pw->PlaceHolder = RemoveHtml($this->pw->caption());
 
         // estado
-        $this->estado->EditAttrs["class"] = "form-control";
         $this->estado->EditCustomAttributes = "";
-        $this->estado->EditValue = $this->estado->options(true);
+        $this->estado->EditValue = $this->estado->options(false);
         $this->estado->PlaceHolder = RemoveHtml($this->estado->caption());
 
         // horario
@@ -1851,6 +1847,48 @@ SORTHTML;
         if (!$doc->ExportCustom) {
             $doc->exportTableFooter();
         }
+    }
+
+    // Send register email
+    public function sendRegisterEmail($row)
+    {
+        $email = $this->prepareRegisterEmail($row);
+        $args = [];
+        $args["rs"] = $row;
+        $emailSent = false;
+        if ($this->emailSending($email, $args)) { // Use Email_Sending server event of user table
+            $emailSent = $email->send();
+        }
+        return $emailSent;
+    }
+
+    // Prepare register email
+    public function prepareRegisterEmail($row = null, $langId = "")
+    {
+        global $CurrentForm;
+        $email = new Email();
+        $email->load(Config("EMAIL_REGISTER_TEMPLATE"), $langId);
+        $receiverEmail = $row === null ? $this->_email->CurrentValue : GetUserInfo(Config("USER_EMAIL_FIELD_NAME"), $row);
+        if ($receiverEmail == "") { // Send to recipient directly
+            $receiverEmail = Config("RECIPIENT_EMAIL");
+            $bccEmail = "";
+        } else { // Bcc recipient
+            $bccEmail = Config("RECIPIENT_EMAIL");
+        }
+        $email->replaceSender(Config("SENDER_EMAIL")); // Replace Sender
+        $email->replaceRecipient($receiverEmail); // Replace Recipient
+        if ($bccEmail != "") // Add Bcc
+            $email->addBcc($bccEmail);
+        $email->replaceContent('<!--FieldCaption_nombres-->', $this->nombres->caption());
+        $email->replaceContent('<!--nombres-->', $row === null ? strval($this->nombres->FormValue) : GetUserInfo('nombres', $row));
+        $email->replaceContent('<!--FieldCaption_apellidos-->', $this->apellidos->caption());
+        $email->replaceContent('<!--apellidos-->', $row === null ? strval($this->apellidos->FormValue) : GetUserInfo('apellidos', $row));
+        $email->replaceContent('<!--FieldCaption_email-->', $this->_email->caption());
+        $email->replaceContent('<!--email-->', $row === null ? strval($this->_email->FormValue) : GetUserInfo('email', $row));
+        $email->replaceContent('<!--FieldCaption_telefono-->', $this->telefono->caption());
+        $email->replaceContent('<!--telefono-->', $row === null ? strval($this->telefono->FormValue) : GetUserInfo('telefono', $row));
+        $email->Content = preg_replace('/<!--\s*register_activate_link_begin[\s\S]*?-->[\s\S]*?<!--\s*register_activate_link_end[\s\S]*?-->/i', '', $email->Content); // Remove activate link block
+        return $email;
     }
 
     // Get file data
@@ -2134,15 +2172,14 @@ SORTHTML;
     // Email Sending event
     public function emailSending($email, &$args)
     {
-       // var_dump($email, $args);
-     if (CurrentPageID() == "add") { // If Add page
+     /*if (CurrentPageID() == "add") { // If Add page
             $email->Recipient = $args["rsnew"]["email"]; // Change recipient to a field value in the new record
             $email->Subject = "Creación de cuenta de usuario simexamericas.org "; // Change subject
             $email->Content = "Estimado usuario, se ha creado una cuenta para usted en simexamericas.org
             				Le sugerimos cambiar su clave de acceso cuando ingrese a la aplicación en línea.
             <h3>Usuario: " .$args["rsnew"] ["email"]. " </h3>
             <h3> Clave temporal es: ".$args["rsnew"] ["pw"]."</h3>"; 
-        }
+        } */
         return true;
     }
 

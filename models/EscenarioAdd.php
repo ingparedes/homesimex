@@ -480,7 +480,7 @@ class EscenarioAdd extends Escenario
         $this->fechafin_simulado->setVisibility();
         $this->estado->setVisibility();
         $this->image_escenario->setVisibility();
-        $this->entrar->setVisibility();
+        $this->entrar->Visible = false;
         $this->hideFieldsForAddEdit();
 
         // Do not use lookup cache
@@ -820,16 +820,6 @@ class EscenarioAdd extends Escenario
             }
         }
 
-        // Check field name 'entrar' first before field var 'x_entrar'
-        $val = $CurrentForm->hasValue("entrar") ? $CurrentForm->getValue("entrar") : $CurrentForm->getValue("x_entrar");
-        if (!$this->entrar->IsDetailKey) {
-            if (IsApi() && $val === null) {
-                $this->entrar->Visible = false; // Disable update for API request
-            } else {
-                $this->entrar->setFormValue($val);
-            }
-        }
-
         // Check field name 'id_escenario' first before field var 'x_id_escenario'
         $val = $CurrentForm->hasValue("id_escenario") ? $CurrentForm->getValue("id_escenario") : $CurrentForm->getValue("x_id_escenario");
         $this->getUploadFiles(); // Get upload files
@@ -857,7 +847,6 @@ class EscenarioAdd extends Escenario
         $this->fechafin_simulado->CurrentValue = $this->fechafin_simulado->FormValue;
         $this->fechafin_simulado->CurrentValue = UnFormatDateTime($this->fechafin_simulado->CurrentValue, 109);
         $this->estado->CurrentValue = $this->estado->FormValue;
-        $this->entrar->CurrentValue = $this->entrar->FormValue;
     }
 
     /**
@@ -1257,11 +1246,6 @@ class EscenarioAdd extends Escenario
                 $this->image_escenario->LinkAttrs["data-rel"] = "escenario_x_image_escenario";
                 $this->image_escenario->LinkAttrs->appendClass("ew-lightbox");
             }
-
-            // entrar
-            $this->entrar->LinkCustomAttributes = "";
-            $this->entrar->HrefValue = "";
-            $this->entrar->TooltipValue = "";
         } elseif ($this->RowType == ROWTYPE_ADD) {
             // icon_escenario
             $this->icon_escenario->EditAttrs["class"] = "form-control";
@@ -1441,15 +1425,6 @@ class EscenarioAdd extends Escenario
                 RenderUploadField($this->image_escenario);
             }
 
-            // entrar
-            $this->entrar->EditAttrs["class"] = "form-control";
-            $this->entrar->EditCustomAttributes = "";
-            if (!$this->entrar->Raw) {
-                $this->entrar->CurrentValue = HtmlDecode($this->entrar->CurrentValue);
-            }
-            $this->entrar->EditValue = HtmlEncode($this->entrar->CurrentValue);
-            $this->entrar->PlaceHolder = RemoveHtml($this->entrar->caption());
-
             // Add refer script
 
             // icon_escenario
@@ -1516,10 +1491,6 @@ class EscenarioAdd extends Escenario
                 $this->image_escenario->HrefValue = "";
             }
             $this->image_escenario->ExportHrefValue = $this->image_escenario->UploadPath . $this->image_escenario->Upload->DbValue;
-
-            // entrar
-            $this->entrar->LinkCustomAttributes = "";
-            $this->entrar->HrefValue = "";
         }
         if ($this->RowType == ROWTYPE_ADD || $this->RowType == ROWTYPE_EDIT || $this->RowType == ROWTYPE_SEARCH) { // Add/Edit/Search row
             $this->setupFieldTitles();
@@ -1622,11 +1593,6 @@ class EscenarioAdd extends Escenario
                 $this->image_escenario->addErrorMessage(str_replace("%s", $this->image_escenario->caption(), $this->image_escenario->RequiredErrorMessage));
             }
         }
-        if ($this->entrar->Required) {
-            if (!$this->entrar->IsDetailKey && EmptyValue($this->entrar->FormValue)) {
-                $this->entrar->addErrorMessage(str_replace("%s", $this->entrar->caption(), $this->entrar->RequiredErrorMessage));
-            }
-        }
 
         // Validate detail grid
         $detailTblVar = explode(",", $this->getCurrentDetailTable());
@@ -1723,9 +1689,6 @@ class EscenarioAdd extends Escenario
             $this->image_escenario->ImageWidth = Config("THUMBNAIL_DEFAULT_WIDTH"); // Resize width
             $this->image_escenario->ImageHeight = Config("THUMBNAIL_DEFAULT_HEIGHT"); // Resize height
         }
-
-        // entrar
-        $this->entrar->setDbValueDef($rsnew, $this->entrar->CurrentValue, "", false);
         if ($this->image_escenario->Visible && !$this->image_escenario->Upload->KeepFile) {
             $oldFiles = EmptyValue($this->image_escenario->Upload->DbValue) ? [] : [$this->image_escenario->htmlDecode($this->image_escenario->Upload->DbValue)];
             if (!EmptyValue($this->image_escenario->Upload->FileName)) {

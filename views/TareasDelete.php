@@ -44,6 +44,9 @@ $Page->showMessage();
 <table class="table ew-table">
     <thead>
     <tr class="ew-table-header">
+<?php if ($Page->id_tarea->Visible) { // id_tarea ?>
+        <th class="<?= $Page->id_tarea->headerCellClass() ?>"><span id="elh_tareas_id_tarea" class="tareas_id_tarea"><?= $Page->id_tarea->caption() ?></span></th>
+<?php } ?>
 <?php if ($Page->id_grupo->Visible) { // id_grupo ?>
         <th class="<?= $Page->id_grupo->headerCellClass() ?>"><span id="elh_tareas_id_grupo" class="tareas_id_grupo"><?= $Page->id_grupo->caption() ?></span></th>
 <?php } ?>
@@ -83,6 +86,14 @@ while (!$Page->Recordset->EOF) {
     $Page->renderRow();
 ?>
     <tr <?= $Page->rowAttributes() ?>>
+<?php if ($Page->id_tarea->Visible) { // id_tarea ?>
+        <td <?= $Page->id_tarea->cellAttributes() ?>>
+<span id="el<?= $Page->RowCount ?>_tareas_id_tarea" class="tareas_id_tarea">
+<span<?= $Page->id_tarea->viewAttributes() ?>>
+<?= $Page->id_tarea->getViewValue() ?></span>
+</span>
+</td>
+<?php } ?>
 <?php if ($Page->id_grupo->Visible) { // id_grupo ?>
         <td <?= $Page->id_grupo->cellAttributes() ?>>
 <span id="el<?= $Page->RowCount ?>_tareas_id_grupo" class="tareas_id_grupo">

@@ -114,6 +114,8 @@ if ($cntProviders > 0) {
 }
 ?>
 <div class="social-auth-links text-center mt-3">
+    <a class="card-link mr-2" href="#" onclick="<?= $LoginStatus["resetPasswordUrl"] ?>"><?= $Language->phrase("ResetPassword") ?></a>
+    <a class="card-link mr-2" href="#" onclick="<?= $LoginStatus["registerUrl"] ?>"><?= $Language->phrase("Register") ?></a>
 </div>
 </div>
 </div>

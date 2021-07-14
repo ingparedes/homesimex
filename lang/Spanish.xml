@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<ew-language date="2021/7/8" version="17.0.4" id="es" name="Spanish" desc="Spanish" author="ELA83">
+<ew-language date="2021/7/13" version="17.0.4" id="es" name="Spanish" desc="Spanish" author="ELA83">
   <!--
     *** Important Notes:
     1. Language ID should follow: https://developers.google.com/recaptcha/docs/language,
@@ -855,7 +855,7 @@
     <phrase id="&lt;=" value="&amp;lt;=" />
     <phrase id="&gt;" value="&amp;gt;" />
     <phrase id="&gt;=" value="&amp;gt;=" />
-    <phrase id="like" value="contiene" />
+    <phrase id="like" value="" />
     <phrase id="not like" value="no contiene" />
     <!-- v11.0.3 -->
     <phrase id="starts with" value="comienza con" />
@@ -1592,7 +1592,7 @@
         <phrase id="fldcaption" value="Tarea" />
       </field>
       <field id="titulo">
-        <phrase id="fldcaption" value="Titulo" />
+        <phrase id="fldcaption" value="Titulo Mensaje" />
       </field>
       <field id="mensaje">
         <phrase id="fldcaption" value="Mensaje" />

@@ -908,14 +908,23 @@ return function (App $app) {
     // login
     $app->any('/login', OthersController::class . ':login')->add(PermissionMiddleware::class)->setName('login');
 
+    // reset_password
+    $app->any('/resetpassword', OthersController::class . ':resetpassword')->add(PermissionMiddleware::class)->setName('resetpassword');
+
     // change_password
     $app->any('/changepassword', OthersController::class . ':changepassword')->add(PermissionMiddleware::class)->setName('changepassword');
+
+    // register
+    $app->any('/register', OthersController::class . ':register')->add(PermissionMiddleware::class)->setName('register');
 
     // userpriv
     $app->any('/userpriv', OthersController::class . ':userpriv')->add(PermissionMiddleware::class)->setName('userpriv');
 
     // logout
     $app->any('/logout', OthersController::class . ':logout')->add(PermissionMiddleware::class)->setName('logout');
+
+    // captcha
+    $app->any('/captcha[/{page}]', OthersController::class . ':captcha')->add(PermissionMiddleware::class)->setName('captcha');
 
     // Swagger
     $app->get('/' . Config("SWAGGER_ACTION"), OthersController::class . ':swagger')->setName(Config("SWAGGER_ACTION")); // Swagger

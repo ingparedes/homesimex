@@ -22,6 +22,7 @@ loadjs.ready("head", function () {
     if (!ew.vars.tables.tareas)
         ew.vars.tables.tareas = currentTable;
     ftareasgrid.addFields([
+        ["id_tarea", [fields.id_tarea.visible && fields.id_tarea.required ? ew.Validators.required(fields.id_tarea.caption) : null], fields.id_tarea.isInvalid],
         ["id_grupo", [fields.id_grupo.visible && fields.id_grupo.required ? ew.Validators.required(fields.id_grupo.caption) : null], fields.id_grupo.isInvalid],
         ["titulo_tarea", [fields.titulo_tarea.visible && fields.titulo_tarea.required ? ew.Validators.required(fields.titulo_tarea.caption) : null], fields.titulo_tarea.isInvalid],
         ["fechainireal_tarea", [fields.fechainireal_tarea.visible && fields.fechainireal_tarea.required ? ew.Validators.required(fields.fechainireal_tarea.caption) : null, ew.Validators.datetime(109)], fields.fechainireal_tarea.isInvalid],
@@ -137,6 +138,9 @@ $Grid->renderListOptions();
 // Render list options (header, left)
 $Grid->ListOptions->render("header", "left");
 ?>
+<?php if ($Grid->id_tarea->Visible) { // id_tarea ?>
+        <th data-name="id_tarea" class="<?= $Grid->id_tarea->headerCellClass() ?>"><div id="elh_tareas_id_tarea" class="tareas_id_tarea"><?= $Grid->renderSort($Grid->id_tarea) ?></div></th>
+<?php } ?>
 <?php if ($Grid->id_grupo->Visible) { // id_grupo ?>
         <th data-name="id_grupo" class="<?= $Grid->id_grupo->headerCellClass() ?>"><div id="elh_tareas_id_grupo" class="tareas_id_grupo"><?= $Grid->renderSort($Grid->id_grupo) ?></div></th>
 <?php } ?>
@@ -268,6 +272,33 @@ while ($Grid->RecordCount < $Grid->StopRecord) {
 // Render list options (body, left)
 $Grid->ListOptions->render("body", "left", $Grid->RowCount);
 ?>
+    <?php if ($Grid->id_tarea->Visible) { // id_tarea ?>
+        <td data-name="id_tarea" <?= $Grid->id_tarea->cellAttributes() ?>>
+<?php if ($Grid->RowType == ROWTYPE_ADD) { // Add record ?>
+<span id="el<?= $Grid->RowCount ?>_tareas_id_tarea" class="form-group"></span>
+<input type="hidden" data-table="tareas" data-field="x_id_tarea" data-hidden="1" name="o<?= $Grid->RowIndex ?>_id_tarea" id="o<?= $Grid->RowIndex ?>_id_tarea" value="<?= HtmlEncode($Grid->id_tarea->OldValue) ?>">
+<?php } ?>
+<?php if ($Grid->RowType == ROWTYPE_EDIT) { // Edit record ?>
+<span id="el<?= $Grid->RowCount ?>_tareas_id_tarea" class="form-group">
+<span<?= $Grid->id_tarea->viewAttributes() ?>>
+<input type="text" readonly class="form-control-plaintext" value="<?= HtmlEncode(RemoveHtml($Grid->id_tarea->getDisplayValue($Grid->id_tarea->EditValue))) ?>"></span>
+</span>
+<input type="hidden" data-table="tareas" data-field="x_id_tarea" data-hidden="1" name="x<?= $Grid->RowIndex ?>_id_tarea" id="x<?= $Grid->RowIndex ?>_id_tarea" value="<?= HtmlEncode($Grid->id_tarea->CurrentValue) ?>">
+<?php } ?>
+<?php if ($Grid->RowType == ROWTYPE_VIEW) { // View record ?>
+<span id="el<?= $Grid->RowCount ?>_tareas_id_tarea">
+<span<?= $Grid->id_tarea->viewAttributes() ?>>
+<?= $Grid->id_tarea->getViewValue() ?></span>
+</span>
+<?php if ($Grid->isConfirm()) { ?>
+<input type="hidden" data-table="tareas" data-field="x_id_tarea" data-hidden="1" name="ftareasgrid$x<?= $Grid->RowIndex ?>_id_tarea" id="ftareasgrid$x<?= $Grid->RowIndex ?>_id_tarea" value="<?= HtmlEncode($Grid->id_tarea->FormValue) ?>">
+<input type="hidden" data-table="tareas" data-field="x_id_tarea" data-hidden="1" name="ftareasgrid$o<?= $Grid->RowIndex ?>_id_tarea" id="ftareasgrid$o<?= $Grid->RowIndex ?>_id_tarea" value="<?= HtmlEncode($Grid->id_tarea->OldValue) ?>">
+<?php } ?>
+<?php } ?>
+</td>
+    <?php } else { ?>
+            <input type="hidden" data-table="tareas" data-field="x_id_tarea" data-hidden="1" name="x<?= $Grid->RowIndex ?>_id_tarea" id="x<?= $Grid->RowIndex ?>_id_tarea" value="<?= HtmlEncode($Grid->id_tarea->CurrentValue) ?>">
+    <?php } ?>
     <?php if ($Grid->id_grupo->Visible) { // id_grupo ?>
         <td data-name="id_grupo" <?= $Grid->id_grupo->cellAttributes() ?>>
 <?php if ($Grid->RowType == ROWTYPE_ADD) { // Add record ?>
@@ -516,6 +547,20 @@ loadjs.ready(["ftareasgrid","load"], function () {
 // Render list options (body, left)
 $Grid->ListOptions->render("body", "left", $Grid->RowIndex);
 ?>
+    <?php if ($Grid->id_tarea->Visible) { // id_tarea ?>
+        <td data-name="id_tarea">
+<?php if (!$Grid->isConfirm()) { ?>
+<span id="el$rowindex$_tareas_id_tarea" class="form-group tareas_id_tarea"></span>
+<?php } else { ?>
+<span id="el$rowindex$_tareas_id_tarea" class="form-group tareas_id_tarea">
+<span<?= $Grid->id_tarea->viewAttributes() ?>>
+<input type="text" readonly class="form-control-plaintext" value="<?= HtmlEncode(RemoveHtml($Grid->id_tarea->getDisplayValue($Grid->id_tarea->ViewValue))) ?>"></span>
+</span>
+<input type="hidden" data-table="tareas" data-field="x_id_tarea" data-hidden="1" name="x<?= $Grid->RowIndex ?>_id_tarea" id="x<?= $Grid->RowIndex ?>_id_tarea" value="<?= HtmlEncode($Grid->id_tarea->FormValue) ?>">
+<?php } ?>
+<input type="hidden" data-table="tareas" data-field="x_id_tarea" data-hidden="1" name="o<?= $Grid->RowIndex ?>_id_tarea" id="o<?= $Grid->RowIndex ?>_id_tarea" value="<?= HtmlEncode($Grid->id_tarea->OldValue) ?>">
+</td>
+    <?php } ?>
     <?php if ($Grid->id_grupo->Visible) { // id_grupo ?>
         <td data-name="id_grupo">
 <?php if (!$Grid->isConfirm()) { ?>
@@ -692,7 +737,7 @@ loadjs.ready("head", function() {
 <script>
 loadjs.ready("load", function () {
     // Startup script
-    $("#r_id_escenario").hide(),$("#r_icon_escenario").hide(),$("#r_fechacreacion_escenario").hide(),$("#r_incidente").hide(),$("#r_entrar").hide(),$("#ftareaslistsrch").before('<div class="callout callout-primary"><em>Si necesita realizar filtro al siguiente lista por favor seleccione uno o varios grupos y por ultimo clics en el  botón buscar.</em></div>');
+    $("#r_icon_escenario").hide(),$("#r_fechacreacion_escenario").hide(),$("#r_incidente").hide(),$("#r_entrar").hide(),$("#ftareaslistsrch").before('<div class="callout callout-primary"><em>Si necesita realizar filtro al siguiente lista por favor seleccione uno o varios grupos y por ultimo clics en el  botón buscar.</em></div>');
 });
 </script>
 <?php } ?>

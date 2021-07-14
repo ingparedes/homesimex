@@ -236,6 +236,7 @@ echo "<img width='25px' src='$idm'>";
 <?php
 $id = CurrentPage()->id_escenario->CurrentValue;
 echo "<a class=\"btn btn-default ew-row-link ew-view\" title=\"Grupos\" data-toggle=\"Grupos\" data-table=\"escenario\" data-caption=\"Grupo\" href=\"GrupoList?showmaster=escenario&fk_id_escenario=$id&showdetail=\" data-original-title=\"Grupo\"><i class=\"fa fa-user-plus\"data-caption=\"Grupo\"></i></a> <br>";
+echo "<a class=\"btn btn-default ew-row-link ew-view\" title=\"Grupos\" data-toggle=\"Grupos\" data-table=\"escenario\" data-caption=\"Grupo\" href=\"Grupos?ides=$id\" data-original-title=\"Grupo\"><i class=\"fa fa-users\" aria-hidden=\"true\"></i></a> <br>";
 echo "<a class=\"btn btn-default ew-row-link ew-view\" title=\"Tareas\" data-table=\"escenario\" data-caption=\"Tarea\" href=\"TareasList?showmaster=escenario&fk_id_escenario=$id\" data-original-title=\"Tareas\"><i class=\"fa fa-list-alt\" data-caption=\"Tareas\"></i></a>";
 ?>
 </div>
@@ -253,46 +254,18 @@ echo "<a class=\"btn btn-default ew-row-link ew-view\" title=\"Tareas\" data-tab
     <tr>
     <td class='text-center' >
     <p class='text-center'> <slot class="ew-slot" name="tpx_escenario_image_escenario"></slot>  <p>
+   <h2 class='text-center'> Notas conceptual de la simulación </h2>
         <h2 class='text-center'><slot class="ew-slot" name="tpx_escenario_nombre_escenario"></slot></h2>
-    <h2 class='text-center'><slot class="ew-slot" name="tpx_escenario_tipo_evento"></slot> - <slot class="ew-slot" name="tpx_escenario_incidente"></slot> </h2>
+    <h2 class='text-center'> <slot class="ew-slot" name="tpx_escenario_incidente"></slot> </h2>
       <h2 class='text-center'><slot class="ew-slot" name="tpc_escenario_evento_asociado"></slot>&nbsp;<slot class="ew-slot" name="tpx_escenario_evento_asociado"></slot></h2>
     <h2 class='text-center'> País <slot class="ew-slot" name="tpx_escenario_pais_escenario"></slot></h2>
-    <h2 class='text-center'> Fecha y hora de inicio: <slot class="ew-slot" name="tpx_escenario_fechaini_real"></slot> | Fecha y hora finalización: <slot class="ew-slot" name="tpx_escenario_fechafinal_real"></slot></h2>
+    <h2 class='text-center'> Fecha y hora de inicio: <slot class="ew-slot" name="tpx_escenario_fechaini_real"></slot> <br> Fecha y hora finalización: <slot class="ew-slot" name="tpx_escenario_fechafinal_real"></slot></h2>
     </tr>
     </td>
     </table>
 <hr>
 <slot class="ew-slot" name="tpx_escenario_descripcion_escenario"></slot> 
  <hr>
- <h3>Grupos</h2>
-<?php
-$id = CurrentPage()->id_escenario->CurrentValue;
-$sql_grupos = "SELECT CONCAT('<img src= http://localhost/homesimex/files/',imgen_grupo,'  width=20px >')as Imagen, grupo.nombre_grupo,  CONCAT('<img src= http://localhost/homesimex/files/',imagen_subgrupo,' width=20px >')as Imagensub, subgrupo.nombre_subgrupo FROM grupo left JOIN subgrupo ON grupo.id_grupo = subgrupo.id_grupo where grupo.id_escenario = $id";
-echo ExecuteHtml($sql_grupos, ["fieldcaption" => TRUE, "tablename" => ["grupo", "subgrupo"]]);
-?>
- <hr>
-  <h3>Participantes</h3>
-<?php
-$sql_user ="
-  SELECT
-	users.nombres, 
-	users.apellidos, 
-	grupo.nombre_grupo, 
-	paisgmt.nompais
-FROM
-	users
-	INNER JOIN
-	grupo
-	ON 
-		users.grupo = grupo.id_grupo
-	left JOIN
-	paisgmt
-	ON 
-		users.pais = paisgmt.id_zone
-		where grupo.id_escenario = $id order by grupo.nombre_grupo";
-echo ExecuteHtml($sql_user, ["fieldcaption" => TRUE, "tablename" => ["users", "grupo", "paisgmt"]]);
-?>		
-  <hr>
 </div>
 </template>
 <?php

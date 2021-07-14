@@ -1507,9 +1507,8 @@ class UsersAdd extends Users
             $this->pw->PlaceHolder = RemoveHtml($this->pw->caption());
 
             // estado
-            $this->estado->EditAttrs["class"] = "form-control";
             $this->estado->EditCustomAttributes = "";
-            $this->estado->EditValue = $this->estado->options(true);
+            $this->estado->EditValue = $this->estado->options(false);
             $this->estado->PlaceHolder = RemoveHtml($this->estado->caption());
 
             // img_user
@@ -1682,7 +1681,7 @@ class UsersAdd extends Users
             $this->pw->addErrorMessage($Language->phrase("InvalidPasswordChars"));
         }
         if ($this->estado->Required) {
-            if (!$this->estado->IsDetailKey && EmptyValue($this->estado->FormValue)) {
+            if ($this->estado->FormValue == "") {
                 $this->estado->addErrorMessage(str_replace("%s", $this->estado->caption(), $this->estado->RequiredErrorMessage));
             }
         }
@@ -1718,60 +1717,6 @@ class UsersAdd extends Users
                 return false;
             }
         }
-
-        // Check referential integrity for master table 'users'
-        $validMasterRecord = true;
-        $masterFilter = $this->sqlMasterFilter_subgrupo();
-        if (strval($this->subgrupo->CurrentValue) != "") {
-            $masterFilter = str_replace("@id_subgrupo@", AdjustSql($this->subgrupo->CurrentValue, "DB"), $masterFilter);
-        } else {
-            $validMasterRecord = false;
-        }
-        if ($validMasterRecord) {
-            $rsmaster = Container("subgrupo")->loadRs($masterFilter)->fetch();
-            $validMasterRecord = $rsmaster !== false;
-        }
-        if (!$validMasterRecord) {
-            $relatedRecordMsg = str_replace("%t", "subgrupo", $Language->phrase("RelatedRecordRequired"));
-            $this->setFailureMessage($relatedRecordMsg);
-            return false;
-        }
-
-        // Check referential integrity for master table 'users'
-        $validMasterRecord = true;
-        $masterFilter = $this->sqlMasterFilter_grupo();
-        if (strval($this->grupo->CurrentValue) != "") {
-            $masterFilter = str_replace("@id_grupo@", AdjustSql($this->grupo->CurrentValue, "DB"), $masterFilter);
-        } else {
-            $validMasterRecord = false;
-        }
-        if ($validMasterRecord) {
-            $rsmaster = Container("grupo")->loadRs($masterFilter)->fetch();
-            $validMasterRecord = $rsmaster !== false;
-        }
-        if (!$validMasterRecord) {
-            $relatedRecordMsg = str_replace("%t", "grupo", $Language->phrase("RelatedRecordRequired"));
-            $this->setFailureMessage($relatedRecordMsg);
-            return false;
-        }
-
-        // Check referential integrity for master table 'users'
-        $validMasterRecord = true;
-        $masterFilter = $this->sqlMasterFilter_escenario();
-        if (strval($this->escenario->CurrentValue) != "") {
-            $masterFilter = str_replace("@id_escenario@", AdjustSql($this->escenario->CurrentValue, "DB"), $masterFilter);
-        } else {
-            $validMasterRecord = false;
-        }
-        if ($validMasterRecord) {
-            $rsmaster = Container("escenario")->loadRs($masterFilter)->fetch();
-            $validMasterRecord = $rsmaster !== false;
-        }
-        if (!$validMasterRecord) {
-            $relatedRecordMsg = str_replace("%t", "escenario", $Language->phrase("RelatedRecordRequired"));
-            $this->setFailureMessage($relatedRecordMsg);
-            return false;
-        }
         $conn = $this->getConnection();
 
         // Load db values from rsold
@@ -1791,7 +1736,7 @@ class UsersAdd extends Users
         $this->apellidos->setDbValueDef($rsnew, $this->apellidos->CurrentValue, null, false);
 
         // escenario
-        $this->escenario->setDbValueDef($rsnew, $this->escenario->CurrentValue, null, false);
+        $this->escenario->setDbValueDef($rsnew, $this->escenario->CurrentValue, null, strval($this->escenario->CurrentValue) == "");
 
         // grupo
         $this->grupo->setDbValueDef($rsnew, $this->grupo->CurrentValue, null, strval($this->grupo->CurrentValue) == "");
@@ -1819,7 +1764,7 @@ class UsersAdd extends Users
         }
 
         // estado
-        $this->estado->setDbValueDef($rsnew, $this->estado->CurrentValue, null, false);
+        $this->estado->setDbValueDef($rsnew, $this->estado->CurrentValue, null, strval($this->estado->CurrentValue) == "");
 
         // img_user
         if ($this->img_user->Visible && !$this->img_user->Upload->KeepFile) {
@@ -1829,8 +1774,6 @@ class UsersAdd extends Users
             } else {
                 $rsnew['img_user'] = $this->img_user->Upload->FileName;
             }
-            $this->img_user->ImageWidth = Config("THUMBNAIL_DEFAULT_WIDTH"); // Resize width
-            $this->img_user->ImageHeight = Config("THUMBNAIL_DEFAULT_HEIGHT"); // Resize height
         }
         if ($this->img_user->Visible && !$this->img_user->Upload->KeepFile) {
             $oldFiles = EmptyValue($this->img_user->Upload->DbValue) ? [] : [$this->img_user->htmlDecode($this->img_user->Upload->DbValue)];
@@ -1897,7 +1840,7 @@ class UsersAdd extends Users
                                     if (@$newFiles2[$i] != "") { // Use correct file name
                                         $newFiles[$i] = $newFiles2[$i];
                                     }
-                                    if (!$this->img_user->Upload->ResizeAndSaveToFile($this->img_user->ImageWidth, $this->img_user->ImageHeight, 100, $newFiles[$i], true, $i)) {
+                                    if (!$this->img_user->Upload->SaveToFile($newFiles[$i], true, $i)) { // Just replace
                                         $this->setFailureMessage($Language->phrase("UploadErrMsg7"));
                                         return false;
                                     }
