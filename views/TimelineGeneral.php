@@ -320,9 +320,129 @@ $TimelineGeneral = &$Page;
             </div>
         </div>
     </div>
+    <!--MODAL AÑADIR MENSAJE-->
+    <div class="modal fade" id="modalAddMensajes" tabindex="-1" role="dialog" aria-labelledby="modalAddMensajes" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="e_modalLongTitle">Editar Mensaje</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <form id="e_datosMensaje" action="dts_notifica.php?accion=editMensaje" method="post">
+
+                        <div class="container">
+
+                            <input type="hidden" class="form-control-sm" id="id_inyect" name="id_inyect">
+                            <input type="hidden" class="form-control-sm" id="e_id_tarea" name="e_id_tarea">
+
+                            <div class="form-group">
+                                <label for="titulo">Titulo </label>
+                                <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Título Mensaje" value="" required>
+                            </div>
+
+                            <label for="mensaje">Mensaje </label>
+                            <textarea class="form-control" id="mensaje" name="mensaje" rows="2"></textarea>
+                            <!-- <div id="e_mensaje" name="e_mensaje" class="border" contenteditable="true"></div> -->
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="fechareal_start">Fecha Inicio Real</label>
+                                        <input type="text" class="form-control" id="fechareal_start" name="fechareal_start">
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="fechasim_start">Fecha Inicial Simulada</label>
+                                        <input type="text" class="form-control" id="fechasim_start" name="fechasim_start">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- <label for="idGrupo">Id Grupo </label>
+                            <select name="e_idGrupo" id="e_idGrupo" class="form-control">
+                                <option selected value="">Seleccione Grupo...</option>
+                                <?php
+                                /* foreach ($sqlGrupos as $valor) {
+                                    echo "<option value=\"" . $valor[0] . "\">" . $valor[1] . "</option>";
+                                } */
+                                ?>
+
+                            </select> -->
+                            <div class="form-group">
+                                <label for="medios"> Medio</label>
+                                <select id="medios" name="medios" class="form-control" required="">
+                                    <option style="background-color:white" value="">Seleccione Medio...</option>
+                                    <option style="background-color:white" value="1">Email</option>
+                                    <option style="background-color:white" value="2">Daybook</option>
+                                    <option style="background-color:white" value="3">Chirping</option>
+                                </select>
+                                <div>
+                                    <div class="form-group">
+                                        <label for="actividad_esperada">Actividad Esperada</label>
+                                        <textarea class="form-control" id="actividad_esperada" name="actividad_esperada" rows="2"></textarea>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+
+                                            <div class="form-group">
+                                                <label for="id_actor">De:</label>
+                                                <select id="id_actor" name="id_actor" class="form-control">
+                                                    <?php
+                                                    foreach ($sqlActores as $valor) {
+                                                        echo "<option  style=\"background-color:white\" value=\"" . $valor[0] . "\">" . $valor[1] . "</option>";
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="adjunto">Subir Archivo</label>
+                                                <select id="adjunto" name="adjunto" class="form-control">
+                                                    <option value="0">Seleccione Adjunto...</option>";
+                                                    <?php
+                                                    foreach ($sqlArchivo as $valor) {
+                                                        echo "<option  style=\"background-color:white\" value=\"" . $valor[0] . "\">" . $valor[1] . "</option>";
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <!-- Build your select: -->
+                                            <div class="form-group">
+                                                <label for="para">Para:</label>
+                                                <select id="para" name="para[]" multiple="multiple" class="form-control">
+                                                    <?php
+                                                    foreach ($sqlPara as $valor) {
+                                                        echo "<option style=\"background-color:white\" value=\"" . $valor[0] . "\">" . $valor[1] . "</option>";
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </diV>
+
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary btn-sm" onclick="editMensajeBD()">Guardar</button>
+                                <button type="button" class="btn btn-light btn-sm" data-dismiss="modal">Cancelar</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Modal Add Mensajes-->
-    <div class="modal fade" id="modalAddMensaje" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="modalAddMensajeF" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -365,16 +485,6 @@ $TimelineGeneral = &$Page;
                             </div>
 
 
-                            <!-- <label for="idGrupo">Id Grupo </label>
-                            <select name="idGrupo" id="idGrupo" class="form-control">
-                                <option selected value="">Seleccione Grupo...</option>
-                                <?php
-                                /* foreach ($sqlGrupos as $valor) {
-                                    echo "<option value=\"" . $valor[0] . "\">" . $valor[1] . "</option>";
-                                } */
-                                ?>
-
-                            </select> -->
                             <div class="form-group">
                                 <label for="medio"> Medio</label>
                                 <select id="medio" name="medio" class="form-control" required="">
