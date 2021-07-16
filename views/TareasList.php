@@ -85,12 +85,103 @@ loadjs.ready("head", function () {
 .ew-table-preview-row .ew-grid {
     display: table;
 }
+#colGrupo{
+    -webkit-box-flex: 0;
+  -webkit-flex: 0 0 6.680104%;
+      -ms-flex: 0 0 6.680104%;
+          flex: 0 0 6.680104%;
+  max-width: 6.680104%;
+}
+#colTitulo{
+    -webkit-box-flex: 0;
+  -webkit-flex: 0 0 19.3861%;
+      -ms-flex: 0 0 19.3861%;
+          flex: 0 0 19.3861%;
+  max-width: 19.3861%;
+}
+#colTi{
+    -webkit-box-flex: 0;
+  -webkit-flex: 0 0 15.3461%;
+      -ms-flex: 0 0 15.3461%;
+          flex: 0 0 15.3461%;
+  max-width: 15.3461%;
+}
+#colTf{
+    -webkit-box-flex: 0;
+  -webkit-flex: 0 0 14.709%;
+      -ms-flex: 0 0 14.709%;
+          flex: 0 0 14.709%;
+  max-width: 14.709%;
+}
+#colTis{
+    -webkit-box-flex: 0;
+  -webkit-flex: 0 0 19.237%;
+      -ms-flex: 0 0 19.237%;
+          flex: 0 0 19.237%;
+  max-width: 19.237%;
+}
+#colTfs{
+    -webkit-box-flex: 0;
+  -webkit-flex: 0 0 17.262%;
+      -ms-flex: 0 0 17.262%;
+          flex: 0 0 17.262%;
+  max-width: 17.262%;
+}
+#colOp{
+    -webkit-box-flex: 0;
+  -webkit-flex: 0 0 4.492%;
+      -ms-flex: 0 0 4.492%;
+          flex: 0 0 4.492%;
+  max-width: 4.492%;
+}
+#colMas{
+    -webkit-box-flex: 0;
+  -webkit-flex: 0 0 2.38%;
+      -ms-flex: 0 0 2.38%;
+          flex: 0 0 2.38%;
+  max-width: 2.38%;
+}
+#Encabezado{
+    background-color: #40546a;
+    color:#fff;
+    font-weight:400;
+    height:30px;
+}
 </style>
 <div id="ew-preview" class="d-none"><!-- preview -->
     <div class="ew-nav-tabs"><!-- .ew-nav-tabs -->
         <ul class="nav nav-tabs"></ul>
         <div class="tab-content"><!-- .tab-content -->
             <div class="tab-pane fade active show"></div>
+            <!--MIGUEL Encabezado abajo-->
+            <div class="row align-items-start" id="Encabezado">
+                    <div  id="colGrupo">
+                    <div id="elh_tareas_id_grupo" class="tareas_id_grupo"><?= $Page->renderSort($Page->id_grupo) ?></div>
+                    </div>
+                    <div id="colTitulo">
+                    <div id="elh_tareas_titulo_tarea" class="tareas_titulo_tarea"><?= $Page->renderSort($Page->titulo_tarea) ?></div>
+                    </div>
+                    <div id="colTi">
+                    <th data-name="fechainireal_tarea" class="<?= $Page->fechainireal_tarea->headerCellClass() ?>"><div id="elh_tareas_fechainireal_tarea" class="tareas_fechainireal_tarea"><?= $Page->renderSort($Page->fechainireal_tarea) ?></div></th>
+                    </div>
+                    <div id="colTf">
+                    <div id="elh_tareas_fechafin_tarea" class="tareas_fechafin_tarea"><?= $Page->renderSort($Page->fechafin_tarea) ?></div>
+                    </div>
+                    <div id="colTis">
+                    <div id="elh_tareas_fechafin_tarea" class="tareas_fechafin_tarea"><?= $Page->renderSort($Page->fechafin_tarea) ?></div>
+                    </div>
+                    <div id="colTfs">
+                    <div id="elh_tareas_fechafinsimulado_tarea" class="tareas_fechafinsimulado_tarea"><?= $Page->renderSort($Page->fechafinsimulado_tarea) ?></div>
+                    </div>
+                    <div id="colOp">
+                    
+                    </div>
+                    <div id="colMas">
+                  
+                    </div>
+                </div>
+            
+            <!--MIGUEL Encabezado abajo-->
         </div><!-- /.tab-content -->
     </div><!-- /.ew-nav-tabs -->
 </div><!-- /preview -->

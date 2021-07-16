@@ -172,9 +172,9 @@ if ($id_user == '-1') {
             $id = $_POST['id'];
             $tipo = $_POST['tipo'];
             if ($tipo == 'T') {
-                $sel_ItemMsj = "SELECT t.titulo_tarea AS titulo, t.descripcion_tarea AS descripcion, 'T' AS tipo, valoracion as valora FROM tareas t WHERE t.id_tarea ='" . $id . "';";
+                $sel_ItemMsj = "SELECT t.fechafinsimulado_tarea AS fechafinsimulado_tarea, t.fechainisimulado_tarea AS fechainisimulado_tarea, t.fechafin_tarea AS fechafin_tarea, t.fechainireal_tarea AS fechainireal_tarea, t.titulo_tarea AS titulo, t.descripcion_tarea AS descripcion, 'T' AS tipo, valoracion as valora FROM tareas t WHERE t.id_tarea ='" . $id . "';";
             } elseif ($tipo == 'M') {
-                $sel_ItemMsj = "SELECT m.titulo AS titulo, m.mensaje AS descripcion, 'M' AS tipo, m.fechareal_start, m.fechasim_start, m.medios, m.para, m.id_actor, m.actividad_esperada, m.adjunto, m.id_tarea FROM mensajes m WHERE m.id_inyect = '" . $id . "';";
+                $sel_ItemMsj = "SELECT   m.titulo AS titulo, m.mensaje AS descripcion, 'M' AS tipo, m.fechareal_start, m.fechasim_start, m.medios, m.para, m.id_actor, m.actividad_esperada, m.adjunto, m.id_tarea FROM mensajes m WHERE m.id_inyect = '" . $id . "';";
             }
             $res_ItemMsj = mysqli_query($con, $sel_ItemMsj);
             $ItemMsj = mysqli_fetch_array($res_ItemMsj, MYSQLI_ASSOC);
@@ -250,81 +250,96 @@ if ($id_user == '-1') {
         case "addMensaje":
             $datosOrig = $_POST;
 
-            $paraOrig = $_POST['para'];
+            $paraOrig = $_POST['para[]'];
+            $pruebaPara= $_POST['para'];
             //var_dump($_POST);
             $para = "'" . implode(',', $_POST['para']) . "'";
             $datos = array_pop($_POST);
             $datos = implode(',', $_POST);
-            $datos = substr("'" . str_replace(',', '\',\'', $datos) . "'", 3);
+            $datos = "'" . str_replace(',', '\',\'', $datos) . "'";
             $id_user = $_SESSION['id_user'];
             //elimina el ultimo elelmento de la lista -> para
 
-            $sql = "INSERT INTO mensajes (id_tarea, titulo, mensaje, fechareal_start, fechasim_start, medios, actividad_esperada, id_actor, adjunto, para) VALUES (" . $datos . "," . $para . ");";
+            $sql = "INSERT INTO mensajes ( id_tarea, titulo, 
+            mensaje, fechareal_start, fechasim_start, medios, 
+            actividad_esperada, id_actor, adjunto, para) VALUES 
+            ('" . $_POST['e_id_tarea'] . "','" . $_POST['titulo'] . "',
+            '" . $_POST['mensaje'] . "','" . $_POST['fechareal_start'] . "',
+            '" . $_POST['fechasim_start'] . "','" . $_POST['medios'] . "',
+            '" . $_POST['actividad_esperada'] . "','" . $_POST['id_actor'] . "',
+            '" . $_POST['adjunto'] . "'," . $para . ");";
             //echo $sql;
             $res_sql = mysqli_query($con, $sql);
             $id_inyect = mysqli_insert_id($con);
-            if ($res_sql) {
-                echo 'ok';
-            } else {
-                echo "error al guardar";
-            }
+            
 
             //var_dump($paraOrig);
-            foreach ($paraOrig as $valor) {
+            $temporalUsuarios= explode(',', $para);
+            foreach ($temporalUsuarios as $valor) {
                 $tmp2 = explode('-', $valor);
                 $tipo = $tmp2[0];
 
                 $cod_tipo = $tmp2[1];
                 if ($cod_tipo <> '') {
                     if ($tipo == 'G') { //grupos 
-                        $sql_users = "SELECT id_users FROM users WHERE grupo = '" . $cod_tipo . "';";
+                        $sql_users = "SELECT id_users FROM users WHERE grupo = '" . $cod_tipo . ";";
                         //echo $sql_users . "<br>";
+                        //echo $sql_users;
 
-                    } else if ($tipo == 'S') { //subgrupo
-
-                        $sql_users = "SELECT id_users FROM users WHERE subgrupo = '" . $cod_tipo . "';";
-                    } else if ($tipo == 'P') {
+                    } 
+                    else if ($tipo == 'S') { //subgrupo
+                        $sql_users = "SELECT id_users FROM users WHERE subgrupo = '" . $cod_tipo . ";";
+                    } 
+                    else if ($tipo == 'P') {
                         $usuarios = $cod_tipo;
-                        $sql = "INSERT INTO mensajes_usuarios (id_user_remitente, id_user_destinatario, id_mensaje) VALUES ('" . $id_user . "','" . $usuarios . "', '" . $id_inyect . "');";
+                        $sql = "INSERT INTO mensajes_usuarios (id_user_remitente, id_user_destinatario, id_mensaje, enviado) VALUES ('" . $id_user . "','" . $usuarios . "', '" . $id_inyect . "', 0);";
                         //echo $sql;
                         $res_sql = mysqli_query($con, $sql);
 
-                        $sql_doc = "INSERT INTO permisos_doc (id_file, id_usuarios, tipo_permiso) VALUES ('" . $datosOrig['adjunto'] . "','" . $usuarios . "','1');";
+                        $sql_doc = "INSERT INTO permisos_doc (id_file, id_usuarios, tipo_permiso) VALUES ('" . $_POST['adjunto'] . "','" . $usuarios . "','1');";
                         $res_sql = mysqli_query($con, $sql_doc);
 
-                        $sql_doc_usrs = "INSERT INTO permisos_docusers (id_file, tipo_permiso, id_users) VALUES ('" . $datosOrig['adjunto'] . "','1','" . $usuarios . "');";
+                        $sql_doc_usrs = "INSERT INTO permisos_docusers (id_file, tipo_permiso, id_users) VALUES ('" . $_POST['adjunto'] . "','1','" . $usuarios . "');";
                         $res_sql = mysqli_query($con, $sql_doc_usrs);
-
+                    //    echo 'f1';
                         //aqui voy.. hacer pruebas.. 
                     }
                     if ($tipo != 'P') {
                         $res_sql = mysqli_query($con, $sql_users);
-
+                        $usuariosA=array();
                         if (mysqli_num_rows($res_sql) > 0) {
                             while ($valor = mysqli_fetch_assoc($res_sql)) {
-                                $usuarios[] = $valor;
+                                array_push($usuariosA,$valor);
+                          //      echo 'f2';
                             }
                         }
 
-                        foreach ($usuarios as $row) {
+                        foreach ($usuariosA as $row) {
+                            
                             $sql_idUser = "SELECT id_users FROM users WHERE grupo IN (SELECT grupo FROM users WHERE id_users = '" . $id_user . "') AND perfil = '2';";
                             $res_sql = mysqli_query($con, $sql_idUser);
-                            $sql_msjs = "INSERT INTO mensajes_usuarios (id_user_remitente, id_user_destinatario, id_mensaje) VALUES ('" . $id_user . "','" . $row['id_users'] . "', '" . $id_inyect . "');";
+                            $sql_msjs = "INSERT INTO mensajes_usuarios (id_user_remitente, id_user_destinatario, id_mensaje, enviado) VALUES ('" . $id_user . "','" . $row['id_users'] . "', '" . $id_inyect . "',0);";
                             $res_sql = mysqli_query($con, $sql_msjs);
-                            $sql_doc = "INSERT INTO permisos_doc (id_file, id_usuarios, tipo_permiso) VALUES ('" . $datosOrig['adjunto'] . "','" . $row['id_users'] . "','1');";
+                            $sql_doc = "INSERT INTO permisos_doc (id_file, id_usuarios, tipo_permiso) VALUES ('" . $_POST['adjunto'] . "','" . $row['id_users'] . "','1');";
                             $res_sql = mysqli_query($con, $sql_doc);
-                            $sql_doc_usrs = "INSERT INTO permisos_docusers (id_file, tipo_permiso, id_users) VALUES ('" . $datosOrig['adjunto'] . "','1','" . $row['id_users'] . "');";
+                            $sql_doc_usrs = "INSERT INTO permisos_docusers (id_file, tipo_permiso, id_users) VALUES ('" . $_POST['adjunto'] . "','1','" . $row['id_users'] . "');";
                             $res_sql = mysqli_query($con, $sql_doc_usrs);
+                      //      echo 'f3';
                         }
                     }
                 }
+            }
+            if ($res_sql) {
+                echo  'ok';
+            } else {
+                echo 'Error al guardar';
             }
 
             break;
         case "editMensaje":
             $datosOrig = $_POST;
             //var_dump($_POST);
-            $paraOrig = $_POST['para'];
+            $paraOrig = $_POST['para[]'];
             $para = "'" . implode(',', $_POST['para']) . "'";
             $datos = array_pop($_POST);
             $datos = implode(',', $_POST);
@@ -339,7 +354,7 @@ if ($id_user == '-1') {
             if ($res_sql) {
                 echo 'ok';
             } else {
-                echo "error al guardar";
+                echo  $sql;
             }
             $id_inyect = $_POST['id_inyect'];
             //var_dump($paraOrig);
@@ -350,12 +365,12 @@ if ($id_user == '-1') {
                 $cod_tipo = $tmp2[1];
                 if ($cod_tipo <> '') {
                     if ($tipo == 'G') { //grupos 
-                        $sql_users = "SELECT id_users FROM users WHERE grupo = '" . $cod_tipo . "';";
+                        $sql_users = "SELECT id_users FROM users WHERE grupo = '" . $cod_tipo . ";";
                         //echo $sql_users . "<br>";
 
                     } else if ($tipo == 'S') { //subgrupo
 
-                        $sql_users = "SELECT id_users FROM users WHERE subgrupo = '" . $cod_tipo . "';";
+                        $sql_users = "SELECT id_users FROM users WHERE subgrupo = '" . $cod_tipo . ";";
                     } else if ($tipo == 'P') {
                         $usuarios = $cod_tipo;
                         $sql = "INSERT INTO mensajes_usuarios (id_user_remitente, id_user_destinatario, id_mensaje) VALUES ('" . $id_user . "','" . $usuarios . "', '" . $id_inyect . "');";

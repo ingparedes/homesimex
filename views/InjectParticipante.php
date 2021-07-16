@@ -85,6 +85,15 @@ $_SESSION['id_user'] = CurrentUserID();
 .vis-item .vis-item-overflow {
   overflow: visible;
 }
+#botonEstado{
+        background-color: #28a745;
+        background-color:  #28a745;
+    }
+    .dropdown-item.active, .dropdown-item:active {
+    color: #fff;
+    text-decoration: none;
+    background-color: #28a745;
+}
 </style>
 
 <!-- librerias adicionales -->
@@ -199,7 +208,18 @@ $_SESSION['id_user'] = CurrentUserID();
 
         <div class="card-header bg-success">
             <h3 class="card-title">Mensajes</h3>
+             <!--Miguel Select-->
+             <button type="button" data-toggle="dropdown" id="botonEstado" class="btn btn-success dropdown-toggle dropdown-toggle-split" aria-haspopup="true" aria-expanded="false"><span id="searchtype"></span></button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item active" href="#" onclick=""></a>
+                            <a class="dropdown-item " href="#" onclick="busquedaEstado('Pendiente');">Pendiente</a>
+                            <a class="dropdown-item " href="#" onclick="busquedaEstado('Inconcluso');">Inconcluso</a>
+                            <a class="dropdown-item " href="#" onclick="busquedaEstado('Finalizado');">Terminado</a>
+                        </div>
+            <!--MIGUel, CAMBIO UN SELEC POR UN BOTON CON UN DROPDOWN-->
+            <form id="formulario_buscador">
             <input type="text" class="form-control float-right" id="buscador" placeholder="Buscar">
+            </form>
         </div>
 
         <!-- /.card-header -->
@@ -225,7 +245,7 @@ $_SESSION['id_user'] = CurrentUserID();
                     <div class="direct-chat-text speedup" style="background-color:#f2f3f4">
 
                     <div class = "header">
-                        <h4> {{mens.titulo_mensaje}} <!--<span class="badge badge-pill badge-primary float-right">{{mens.calificacion}}</span>--></h4> 
+                                            
                         <span
                                                 class="float-right badge "
                                                 v-bind:class="{'badge-primary': mens.calificacion == 'Pendiente', 'badge-success': mens.calificacion == 'Finalizado', 
@@ -233,19 +253,26 @@ $_SESSION['id_user'] = CurrentUserID();
                                                 >
                                                 {{mens.calificacion}}
                                         </span>
-                        <!--<span class="float-right badge badge-warning "> Inconpleto</span> -->
-                        <!--  
-                        <span
-                                                class="float-right badge "
-                                                v-bind:class="{'badge-primary': mens.calificacion == 'Pendiente', 'badge-success': mens.calificacion == 'Finalizado', 
-                                                    'badge-warning': mens.calificacion == 'Inconcluso' }"
-                                                >
-                                                {{mens.calificacion}}
-                                        </span> 
-                        <span>{{mens.titulo_tarea}}</span> -->
+                                        
+                       
                         <div> 
                             <hr>
-                            <span v-html="mens.mensaje"></span>
+                            <!--MIGUEL Acordeon punto 148-->
+                            <div id="accordion">
+                                            <div class="card">
+                                                <div class="card-header" id="headingThree">
+                                                    <button class="btn  collapsed" data-toggle="collapse" v-bind:data-target="'#collapseThree'+mens.id" aria-expanded="false" v-bind:aria-controls="'collapseThree'+mens.id">
+                                                    <h5>Titulo mensaje: {{mens.titulo_mensaje}} </h5> 
+                                                    </button>
+                                                </div>
+                                                <div v-bind:id="'collapseThree'+mens.id" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                                                <div class="card-body">
+                                                <span v-html="mens.mensaje"></span>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--MIGUEL fin acordeon 148-->
                             <div class="stats">
                             <i class="cil-paperclip"></i> <br>
                             <a v-bind:href="'files/'+mens.filename"> {{mens.filename}}</a> 
@@ -322,7 +349,7 @@ $_SESSION['id_user'] = CurrentUserID();
 
 <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.29.9.js"></script>
 <script src="inject/pubnub.js"></script>
-  
+<script src="https://cdn.jsdelivr.net/npm/disableautofill@2.0.0/dist/disableautofill.min.js"></script>
 <script type="text/javascript">
 //Time line 
 var btnLoad = document.getElementById('load');
@@ -615,6 +642,20 @@ var btnLoad = document.getElementById('load');
         });
         obtenerMensajesEnviados();
     });
+    var daf =new disableautofill({
+        'form': '#formulario_buscador'
+    });
+    daf.init();
+    function busquedaEstado(estado){//MIGUEL funcion para buscar por estado
+        for(let i = 0;i < app.mensajes.length;i++){
+                let mens = app.mensajes[i];
+                mens.visible = false;
+                if(mens.calificacion==estado)
+                {
+                    mens.visible= true;
+                }
+        }
+        }
 </script>
 
 <?= GetDebugMessage() ?>

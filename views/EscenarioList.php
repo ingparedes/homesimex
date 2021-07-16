@@ -210,9 +210,12 @@ $Page->renderRow();
         </div>
     </div>
 </div>
+
+
     </div><!-- /.ew-extended-search -->
 </div><!-- /.ew-search-panel -->
 </form>
+<button class="btn btn-primary" id="boton" onclick="funcionPrueba();"></button>
 <?php } ?>
 <?php } ?>
 <?php $Page->showPageHeader(); ?>
@@ -503,4 +506,10 @@ loadjs.ready("load", function () {
     $("#fescenariolistsrch").before('<div class="callout callout-primary"><em>Filtro para la lista de simulaciones,seleccione el estado de la simulación,  para buscar dar clics en el botón buscar Estado de la simulación: En configuración, Activa o Finalizada.</em></div>'),$("a.ew-detail-add").hide();
 });
 </script>
+<script>
+    function funcionPrueba(){
+        <?php $_SESSION['id_user']=1; ?>
+    }
+</script>
 <?php } ?>
+

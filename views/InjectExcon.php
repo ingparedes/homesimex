@@ -258,6 +258,17 @@ $InjectExcon = &$Page;
     overflow: auto;
     width: 100%;
     }
+    
+    #botonEstado{
+        background-color: #28a745;
+        background-color:  #28a745;
+    }
+    .dropdown-item.active, .dropdown-item:active {
+    color: #fff;
+    text-decoration: none;
+    background-color: #28a745;
+}
+
 </style>
     
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
@@ -346,9 +357,19 @@ $InjectExcon = &$Page;
                 <div class="card direct-chat direct-chat-primary">
                     <div class="card-header bg-success">
                         <h3 class="card-title">Mensajes enviados</h3>
+                        <!--Miguel Select-->
+                        <button type="button" data-toggle="dropdown" id="botonEstado" class="btn btn-success dropdown-toggle dropdown-toggle-split" aria-haspopup="true" aria-expanded="false"><span id="searchtype"></span></button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item active" href="#" onclick=""></a>
+                            <a class="dropdown-item " href="#" onclick="busquedaEstado('Pendiente');">Pendiente</a>
+                            <a class="dropdown-item " href="#" onclick="busquedaEstado('Inconcluso');">Inconcluso</a>
+                            <a class="dropdown-item " href="#" onclick="busquedaEstado('Finalizado');">Terminado</a>
+                        </div>
+                        <!--MIGUel, CAMBIO UN SELEC POR UN BOTON CON UN DROPDOWN-->
                         <form id="formulario_buscador">
                         <input type="text" class="form-control float-right" id="buscador_client" placeholder="Buscar" autocomplete='false'>
                         </form>
+                        
                     </div>
                     <div class="container" id="vue-chat">
                         <ul class="timeline" v-for="mens in mensajes" v-if="mens.visible">
@@ -390,9 +411,23 @@ $InjectExcon = &$Page;
                                     <div class="timeline-content">
                                         <p>
                                         <span><em>Tarea: {{mens.titulo_tarea}} </em></span>
-                                        <h5>Titulo mensaje: {{mens.titulo_mensaje}} </h5> 
-
-                                        <span v-html="mens.mensaje"></span>
+                                        <!--MIGUEL Acordeon punto 148-->
+                                        <div id="accordion">
+                                            <div class="card">
+                                                <div class="card-header" id="headingThree">
+                                                    <button class="btn  collapsed" data-toggle="collapse" v-bind:data-target="'#collapseThree'+mens.id" aria-expanded="false" v-bind:aria-controls="'collapseThree'+mens.id">
+                                                    <h5>Titulo mensaje: {{mens.titulo_mensaje}} </h5> 
+                                                    </button>
+                                                </div>
+                                                <div v-bind:id="'collapseThree'+mens.id" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                                                <div class="card-body">
+                                                <span v-html="mens.mensaje"></span>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--MIGUEL fin acordeon 148-->
+                                        
                                         </p>
                                     </div>
                                     <div class="timeline-likes">
@@ -707,6 +742,7 @@ $InjectExcon = &$Page;
             }
         });
         //$("#buscador_client").disableAutoFill({});
+        
         $("#buscador_client").on('keyup', function() {
             let val = $("#buscador_client").val();
             for(let i = 0;i < app.mensajes.length;i++){
@@ -732,7 +768,18 @@ $InjectExcon = &$Page;
         });
         obtenerMensajes();
         obtenerMensajesEnviados();
+        
     });
+    function busquedaEstado(estado){//MIGUEL funcion para buscar por estado
+        for(let i = 0;i < app.mensajes.length;i++){
+                let mens = app.mensajes[i];
+                mens.visible = false;
+                if(mens.calificacion==estado)
+                {
+                    mens.visible= true;
+                }
+        }
+        }
     var daf =new disableautofill({
         'form': '#formulario_buscador'
     });

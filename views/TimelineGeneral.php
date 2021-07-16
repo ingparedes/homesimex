@@ -106,7 +106,10 @@ $TimelineGeneral = &$Page;
     $sqlTareas = ExecuteRows("SELECT t.id_tarea,t.titulo_tarea FROM tareas t WHERE t.id_escenario = '" . $sql_utc['id_escenario'] . "';");
     $sql_escnrio = ExecuteRows("SELECT e.id_escenario, e.nombre_escenario FROM escenario  e INNER JOIN paisgmt p ON p.id_zone = e.pais_escenario ");
     $sqlPara = ExecuteRows("SELECT * FROM view_from;");
-    $sqlArchivo = ExecuteRows("SELECT id_file, file_name FROM view_user_msg WHERE id_usuario IN (SELECT id_users FROM users WHERE grupo IN (SELECT u.grupo from users u WHERE u.id_users ='" . $idUser . "'))");
+    $sqlParaP = ExecuteRows("SELECT CONCAT('Participante-',users.nombres,' ',users.apellidos) As nombre, id_users as valor FROM `users`;");
+    $sqlParaG=ExecuteRows("SELECT  CONCAT('Grupo-', grupo.nombre_grupo) As nombre, id_grupo as valor FROM `grupo`;");
+    $sqlParaS=ExecuteRows("SELECT  CONCAT('Subgrupo-',subgrupo.nombre_subgrupo) As nombre, id_subgrupo as valor FROM  `subgrupo`;");
+    $sqlArchivo = ExecuteRows("SELECT id_file,file_name FROM archivos_doc ");
     $sqlActores = ExecuteRows("SELECT * FROM actor_simulado");
     // echo "usuario: " . $idUser;
     $_SESSION['id_user'] = CurrentUserID();
@@ -182,16 +185,16 @@ $TimelineGeneral = &$Page;
                             <li><strong>Hora simulada final:</strong> <span id="fechafinsimulado_tarea"> </span> </li>
                         </ul>
                         <div class="modal-footer">
-                            <button type="button" id="btnAddMensaje" onclick="modalAddMsj();" data-dismiss="modal2" class="btn btn-info btn-sm mr-auto">Crear Mensaje</button>
-
-                            <select id="valorar" class="form-control-sm" name="valorar">
+                           <!-- <button type="button" id="btnAddMensaje" onclick="modalAddMsj();" data-dismiss="modal2" class="btn btn-info btn-sm mr-auto">Crear Mensaje</button>
+-->                         <button type="button" id="editMsg"  class="btn btn-info btn-sm">Editar Mensaje</button>
+                           <!-- <select id="valorar" class="form-control-sm" name="valorar">
                                 <option value="0" selected>Valorar...</option>
                                 <option value="1" style="background-color:white">Pendiente</option>
                                 <option value="3" style="background-color:white">A evaluar</option>
                                 <option value="2" style="background-color:white">Complido</option>
                             </select>
-                            <button type="button" id="editMsg" onclick="v_modalEditMensaje()" class="btn btn-info btn-sm">Editar Mensaje</button>
-                            <button type="button" id="submint" onclick="saveMsj()" class="btn btn-primary btn-sm">Guardar</button>
+                            
+                            <button type="button" id="submint" onclick="saveMsj()" class="btn btn-primary btn-sm">Guardar</button>-->
                             <button type="button" class="btn btn-light btn-sm" data-dismiss="modal">Cancelar</button>
 
                         </div>
@@ -206,7 +209,7 @@ $TimelineGeneral = &$Page;
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="e_modalLongTitle">Editar Mensaje</h5>
+                    <h5 class="modal-title" id="e_modalLongTitle">Mensaje</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -284,7 +287,8 @@ $TimelineGeneral = &$Page;
                                             </div>
                                             <div class="form-group">
                                                 <label for="adjunto">Subir Archivo</label>
-                                                <select id="adjunto" name="adjunto" class="form-control">
+                                                <!--<input type="file" class="form-control" id="archivo" name="adjunto">
+                                                --><select id="adjunto" name="adjunto" class="form-control">
                                                     <option value="0">Seleccione Adjunto...</option>";
                                                     <?php
                                                     foreach ($sqlArchivo as $valor) {
@@ -299,9 +303,10 @@ $TimelineGeneral = &$Page;
                                             <div class="form-group">
                                                 <label for="para">Para:</label>
                                                 <select id="para" name="para[]" multiple="multiple" class="form-control">
+
                                                     <?php
                                                     foreach ($sqlPara as $valor) {
-                                                        echo "<option style=\"background-color:white\" value=\"" . $valor[0] . "\">" . $valor[1] . "</option>";
+                                                        echo "<option style=\"background-color:white\" value=\"" . $valor[1] . "\">" . $valor[4] . "</option>";
                                                     }
                                                     ?>
                                                 </select>
@@ -312,7 +317,7 @@ $TimelineGeneral = &$Page;
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary btn-sm" onclick="editMensajeBD()">Guardar</button>
+                                <button type="button" class="btn btn-primary btn-sm" id="BotonGuardar" >Guardar</button>
                                 <button type="button" class="btn btn-light btn-sm" data-dismiss="modal">Cancelar</button>
                     </form>
 
@@ -460,8 +465,8 @@ $TimelineGeneral = &$Page;
                             <input type="hidden" class="form-control-sm" id="idTarea" name="idTarea">
 
                             <div class="form-group">
-                                <label for="titleMnsje">Titulo </label>
-                                <input type="text" class="form-control" id="titleMnsje" name="titleMnsje" placeholder="Título Mensaje" value="" required>
+                                <label for="titulo" >Titulo </label>
+                                <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Título Mensaje"   required>
                             </div>
 
                             <label for="mensaje">Mensaje </label>
@@ -513,7 +518,8 @@ $TimelineGeneral = &$Page;
                                             </div>
                                             <div class="form-group">
                                                 <label for="archivo">Subir Archivo</label>
-                                                <select id="archivo" name="archivo" class="form-control">
+                                               <!-- <input type="file" class="form-control" id="archivo">
+                                               --> <select id="archivo" name="archivo" class="form-control">
                                                     <option value="0">Seleccione Adjunto...</option>";
                                                     <?php
                                                     foreach ($sqlArchivo as $valor) {
@@ -527,10 +533,10 @@ $TimelineGeneral = &$Page;
                                             <!-- Build your select: -->
                                             <div class="form-group">
                                                 <label for="para">Para:</label>
-                                                <select id="para" name="para[]" multiple="multiple" class="form-control">
+                                                <select id="para" name="para" multiple="multiple" class="form-control">
                                                     <?php
                                                     foreach ($sqlPara as $valor) {
-                                                        echo "<option style=\"background-color:white\" value=\"" . $valor[0] . "\">" . $valor[1] . "</option>";
+                                                        echo "<option style=\"background-color:white\" value=\"" . $valor[1] . "\">" . $valor[4] . "</option>";
                                                     }
                                                     ?>
                                                 </select>
@@ -541,7 +547,7 @@ $TimelineGeneral = &$Page;
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary btn-sm" onclick="addMensaje()">Guardar</button>
+                                <button type="button" class="btn btn-primary btn-sm" >Guardar</button>
                                 <button type="button" class="btn btn-light btn-sm" data-dismiss="modal">Cancelar</button>
                     </form>
 
@@ -627,7 +633,8 @@ $TimelineGeneral = &$Page;
     <script>
         var btnLoad = document.getElementById('load');
         var btnSave = document.getElementById('save');
-
+        var boton= document.getElementById('editMsg');
+        var BotonGuardar= document.getElementById('BotonGuardar');
         let utc = '<?php echo $sql_utc[0] ?>';
         let hora = utc.slice(4, 10);
         let fechaIniSimulado = '<?php echo $sql_utc['fechaini_simulado'] ?>';
@@ -658,6 +665,41 @@ $TimelineGeneral = &$Page;
                 },
             });
         });
+        $('#fechareal_start').flatpickr({
+            locale: "es",
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+            minDate: fechaIniSimulado,
+            maxDate: fechaFinSimulado,
+            defaultDate: fechaIniSimulado,
+        });
+        $('#fechareal_start').flatpickr({
+            locale: "es",
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+            minDate: fechaIniSimulado,
+            maxDate: fechaFinSimulado,
+            defaultDate: fechaFinSimulado,
+        });
+        $('#fechasim_start').flatpickr({
+            locale: "es",
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+            minDate: fechaIniSimulado,
+            maxDate: fechaFinSimulado,
+            defaultDate: fechaIniSimulado,
+        });
+        $('#fechasim_start').flatpickr({
+            locale: "es",
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+            minDate: fechaIniSimulado,
+            maxDate: fechaFinSimulado,
+            defaultDate: fechaFinSimulado,
+        });
+        function funcionFalsa(){
+
+        }
 
         function loadData(foco, esc) {
             console.log('idEscnrio', esc);
@@ -768,6 +810,8 @@ $TimelineGeneral = &$Page;
                                     "id": id,
                                     "tipo": tipo,
                                 };
+                                boton.onclick = funcionFalsa; 
+                                BotonGuardar.onClick=funcionFalsa;
 
                                 $('#exampleModalCenter').modal('show');
                                 $.ajax({
@@ -782,16 +826,36 @@ $TimelineGeneral = &$Page;
                                         $('#tipo').val(tipo);
                                         $('#tituloT').html(data[0].titulo);
                                         $('#desc_tarea').html(data[0].descripcion);
-                                        $('#fechainireal_tarea').html(data[0].fechainireal_tarea);
-                                        $('#fechafin_tarea').html(data[0].fechafin_tarea);
-                                        $('#fechainisimulado_tarea').html(data[0].fechainisimulado_tarea);
-                                        $('#fechafinsimulado_tarea').html(data[0].fechafinsimulado_tarea);
+                                        if(data[0].fechainireal_tarea)
+                                        {
+                                            $('#fechainireal_tarea').html(data[0].fechainireal_tarea.slice(0,16));
+                                            $('#fechafin_tarea').html(data[0].fechafin_tarea.slice(0,16));
+                                            $('#fechainisimulado_tarea').html(data[0].fechainisimulado_tarea.slice(0,16));
+                                            $('#fechafinsimulado_tarea').html(data[0].fechafinsimulado_tarea.slice(0,16));
+                                        }
+                                        else{
+                                            $('#fechainireal_tarea').html(data[0].fechainireal_tarea);
+                                            $('#fechafin_tarea').html(data[0].fechafin_tarea);
+                                            $('#fechainisimulado_tarea').html(data[0].fechainisimulado_tarea);
+                                            $('#fechafinsimulado_tarea').html(data[0].fechafinsimulado_tarea);
+                                        }
+                                        
                                         if (tipo == 'M') {
                                             $('#id_tarea').val(data[0].id_tarea);
-                                            $('#modalLongTitle').html("Mensaje");
+                                            $('#modalLongTitle').html(" Editar Mensaje");
+                                            $('#editMsg').html("Editar mensaje");
+                                            boton.onclick = v_modalEditMensaje; 
+                                            BotonGuardar.onclick = editMensajeBD;
+                                           // $('#editMsg').click(function(){
+                                            //    v_modalEditMensaje();
+                                           // });
                                             $('#valorar').hide();
                                             $('#btnAddMensaje').hide();
                                             $('#ulmjs').hide();
+                                           
+                                            //$('#BotonGuardar').click(function(){
+                                            //    editMensajeBD()
+                                           // });
                                             // $('#submint').hide();
 
                                             if (parseInt(data[0].enviado) != 1) {
@@ -806,9 +870,19 @@ $TimelineGeneral = &$Page;
                                             }
 
                                         } else {
-                                            $('#modalLongTitle').html("Tarea");
+                                            boton.onclick =v_modalSaveMensaje;
+                                            BotonGuardar.onclick = addMensaje;
+                                            $('#modalLongTitle').html("Crear Tarea");
                                             $('#idTarea').val(id);
+                                            $('#e_id_tarea').val(id);
                                             $('#valorar').show();
+                                            $('#ulmjs').show();
+                                            $('#editMsg').html("Crear mensaje");
+                                            
+                                            
+                                           // $('#BotonGuardar').click(function(){
+                                           //     addMensaje();
+                                          //  });
                                             $('#btnAddMensaje').show();
                                             $('#valorar option[value=' + data.valora + ']').attr("selected", true);
                                             $('#tituloT').prop('readonly', true);
@@ -941,6 +1015,19 @@ $TimelineGeneral = &$Page;
             }
         }
         btnSave.onclick = saveData;
+        function v_modalSaveMensaje(){
+            var id = $('#id').val();
+            var tipo = $('#tipo').val();
+            $('#modalEditMensaje').modal('show');
+
+            var parametros = {
+                "id": id,
+                "tipo": tipo,
+            };
+            console.log(parametros);
+            $('#e_id_tarea').val(id);
+            
+        }
 
         function v_modalEditMensaje() {
             var id = $('#id').val();
@@ -972,8 +1059,6 @@ $TimelineGeneral = &$Page;
 
                     $('#actividad_esperada').val(data[0].actividad_esperada);
                     $('#adjunto').val(data[0].adjunto);
-
-                    $('#e_modalLongTitle').html("Mensaje");
 
                     // $('#submint').hide();
 
@@ -1013,6 +1098,31 @@ $TimelineGeneral = &$Page;
                     }
                 }
             });
+        }
+        function addMensaje() { //graba datos del item desde la modal
+            //$('#titulo').val(document.getElementById("titulo").value);
+            //alert($('#titulo'));
+            //var parametros = $('datosMensaje').serializeArray(); //.serialize();            
+            
+            var parametros = $('#e_datosMensaje').serializeArray(); //.serialize();            
+            
+            console.log('parametros', parametros);
+            $.ajax({
+                url: "dts_notifica.php?accion=addMensaje",
+                data: parametros,
+                type: 'post',
+                success: function(data) {
+                    console.log(data);
+                    if (data == 'ok') {
+                        $('#modalEditMensaje').modal('hide');
+                        $('#exampleModalCenter').modal('hide');
+                        $('.toast').toast('show');
+                        $('#visualization').empty();
+                        loadData('', idEscnrio);
+                    }
+                }
+            });
+
         }
 
         function modalMsj(t) {
@@ -1097,25 +1207,7 @@ $TimelineGeneral = &$Page;
             });
         });
 
-        function addMensaje() { //graba datos del item desde la modal
-            var parametros = $('#datosMensaje').serializeArray(); //.serialize();            
-            console.log('parametros', parametros);
-            $.ajax({
-                url: "dts_notifica.php?accion=addMensaje",
-                data: parametros,
-                type: 'post',
-                success: function(data) {
-                    console.log(data);
-                    if (data == 'ok') {
-                        $('#modalAddMensaje').modal('hide');
-                        $('.toast').toast('show');
-                        $('#visualization').empty();
-                        loadData('', idEscnrio);
-                    }
-                }
-            });
-
-        }
+        
     </script>
     <script>
         // Example starter JavaScript for disabling form submissions if there are invalid fields

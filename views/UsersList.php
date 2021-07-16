@@ -99,12 +99,14 @@ $Page->renderOtherOptions();
                 <a class="dropdown-item<?php if ($Page->BasicSearch->getType() == "AND") { ?> active<?php } ?>" href="#" onclick="return ew.setSearchType(this, 'AND');"><?= $Language->phrase("QuickSearchAll") ?></a>
                 <a class="dropdown-item<?php if ($Page->BasicSearch->getType() == "OR") { ?> active<?php } ?>" href="#" onclick="return ew.setSearchType(this, 'OR');"><?= $Language->phrase("QuickSearchAny") ?></a>
             </div>
+            
         </div>
     </div>
 </div>
     </div><!-- /.ew-extended-search -->
 </div><!-- /.ew-search-panel -->
 </form>
+<button class="btn btn-primary" name="inactivos" href="./UsersList?order=estado&ordertype=ASC" onclick="cargarInactivos();" id="inactivos">Ver inactivos</button>
 <?php } ?>
 <?php } ?>
 <?php $Page->showPageHeader(); ?>
@@ -346,7 +348,19 @@ $Page->ListOptions->render("body", "left", $Page->RowCount);
         <td data-name="estado" <?= $Page->estado->cellAttributes() ?>>
 <span id="el<?= $Page->RowCount ?>_users_estado">
 <span<?= $Page->estado->viewAttributes() ?>>
-<?= $Page->estado->getViewValue() ?></span>
+<?= $Page->estado->getViewValue();
+    if($Page->estado->getViewValue()<>'Activo')
+    {
+        echo '<img
+        class="mt-3 justify-content-center align-self-center " id="activador" onclick="activar(';
+        echo $Page->id_users->getViewValue();
+        echo ');" src="files/chulo.png" alt="activar" height="30"
+        width="30">';
+    }
+
+
+
+?> </span>
 </span>
 </td>
     <?php } ?>
@@ -409,4 +423,26 @@ loadjs.ready("load", function () {
     // Write your table-specific startup script here, no need to add script tags.
 });
 </script>
+
 <?php } ?>
+<script>
+
+function activar(id){
+    //alert(id);
+    $.ajax({
+            url: "inject/activarUsuario.php?idUsuario="+id,
+            success: function (es) {
+                location.reload();
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
+}
+function cargarInactivos(){
+    //location.reload();
+    window.location.href ='http://localhost/homesimex/UsersList?order=estado&ordertype=ASC' ;
+}
+    
+    
+    </script>

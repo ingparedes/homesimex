@@ -392,6 +392,7 @@ loadjs.ready("head", function() {
 <div class="input-group">
     <input type="password" name="x_pw" id="x_pw" autocomplete="new-password" data-field="x_pw" value="<?= $Page->pw->EditValue ?>" size="30" maxlength="30" placeholder="<?= HtmlEncode($Page->pw->getPlaceHolder()) ?>"<?= $Page->pw->editAttributes() ?> aria-describedby="x_pw_help">
     <div class="input-group-append"><button type="button" class="btn btn-default ew-toggle-password rounded-right" onclick="ew.togglePassword(event);"><i class="fas fa-eye"></i></button></div>
+    <div><button type="button" onclick="generarClaveAleatoria();">Generar Clave</button></div><!--MIGUEL boton para autogenerar clave-->
 </div>
 <?= $Page->pw->getCustomMessage() ?>
 <div class="invalid-feedback"><?= $Page->pw->getErrorMessage() ?></div>
@@ -473,6 +474,16 @@ $Page->showPageFooter();
 echo GetDebugMessage();
 ?>
 <script>
+function generarClaveAleatoria(){//MIGUEL Funcion para generar clave
+    var length = 5,
+        charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789*´{}-.'¿?¡!,;:_<>",//Caracteres 
+        retVal = "";
+    for (var i = 0, n = charset.length; i < length; ++i) {
+        retVal += charset.charAt(Math.floor(Math.random() * n));
+    }
+    //console.log(retVal);
+    document.getElementById('x_pw').value=retVal;
+  }
 // Field event handlers
 loadjs.ready("head", function() {
     ew.addEventHandlers("users");
@@ -483,3 +494,4 @@ loadjs.ready("load", function () {
     // Write your table-specific startup script here, no need to add script tags.
 });
 </script>
+
