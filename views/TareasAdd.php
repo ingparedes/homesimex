@@ -350,6 +350,8 @@ $fecha = ExecuteRow("SELECT fechaini_real, fechafinal_real, fechaini_simulado, f
       //datefin =  moment(fecl, "YYYY-MM-DD HH:mm").toDate();
       datefin = moment(fecl).format("YYYY-MM-DD HH:mm");      
       $('#x_fechafin_tarea').val(datefin);
+      $('#x_fechainisimulado_tarea').val(datefin);
+      $('#x_fechafinsimulado_tarea').val(datefin);
       flatpickr("#x_fechafin_tarea",{//MIGUEL--PONE QUE VALOR MINIMO EN FECHA FIN SEA EL VALOR INICIAL
 				locale: "es",
 				enableTime: true,

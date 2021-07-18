@@ -67,11 +67,12 @@ loadjs.ready("head", function () {
           flex: 0 0 4.33%;
   max-width: 4.33%;
 }
-#Encabezado{
+#Enca{
+    
+    font-weight:200;
+    font-family: "Verdana","Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
     background-color: #40546a;
     color:#fff;
-    font-weight:400;
-    height:30px;
 }
 </style>
 <div id="ew-preview" class="d-none"><!-- preview -->
@@ -80,29 +81,7 @@ loadjs.ready("head", function () {
         <div class="tab-content"><!-- .tab-content -->
             <div class="tab-pane fade active show"></div>
             
-         <!--MIGUEL Encabezado abajo-->
-                <div class="row align-items-start" id="Encabezado">
-                    <div  id="colImagen">
-                    <div id="elh_grupo_imgen_grupo" class="grupo_imgen_grupo"> <?= $Page->renderSort($Page->imgen_grupo) ?></div>
-                    </div>
-                    <div id="colGrupo">
-                    <div id="elh_grupo_nombre_grupo" class="grupo_nombre_grupo"><?= $Page->renderSort($Page->nombre_grupo) ?></div>
-                    </div>
-                    <div id="colDescripcion">
-                    <div id="elh_grupo_descripcion_grupo" class="grupo_descripcion_grupo"><?= $Page->renderSort($Page->descripcion_grupo) ?></div>
-                    </div>
-                    <div id="colColor">
-                    <div id="elh_grupo_color" class="grupo_color"><?= $Page->renderSort($Page->color) ?></div>
-                    </div>
-                    <div id="colOpciones">
-                    
-                    </div>
-                    <div id="colCuadro">
-                    
-                    </div>
-                </div>
-            
-            <!--MIGUEL Encabezado abajo-->
+        
         </div><!-- /.tab-content -->
     </div><!-- /.ew-nav-tabs -->
 </div><!-- /preview -->
@@ -317,7 +296,20 @@ $Page->ListOptions->render("body", "right", $Page->RowCount);
 ?>
 
     </tr>
-    
+<div>
+    <?php if ($Page->imgen_grupo->Visible) { // imgen_grupo ?>
+        <th id="Enca" data-name="imgen_grupo" class="<?= $Page->imgen_grupo->headerCellClass() ?>"><div id="elh_grupo_imgen_grupo" class="grupo_imgen_grupo"><?= $Page->renderSort($Page->imgen_grupo) ?></div></th>
+    <?php } ?>
+    <?php if ($Page->nombre_grupo->Visible) { // nombre_grupo ?>
+            <th id="Enca" data-name="nombre_grupo" class="<?= $Page->nombre_grupo->headerCellClass() ?>"><div id="elh_grupo_nombre_grupo" class="grupo_nombre_grupo"><?= $Page->renderSort($Page->nombre_grupo) ?></div></th>
+    <?php } ?>
+    <?php if ($Page->descripcion_grupo->Visible) { // descripcion_grupo ?>
+            <th id="Enca" data-name="descripcion_grupo" class="<?= $Page->descripcion_grupo->headerCellClass() ?>"><div id="elh_grupo_descripcion_grupo" class="grupo_descripcion_grupo"><?= $Page->renderSort($Page->descripcion_grupo) ?></div></th>
+    <?php } ?>
+    <?php if ($Page->color->Visible) { // color ?>
+            <th id="Enca" data-name="color" class="<?= $Page->color->headerCellClass() ?>"><div id="elh_grupo_color" class="grupo_color"><?= $Page->renderSort($Page->color) ?></div></th>
+    <?php } ?>
+</div>
     
 <?php
     }

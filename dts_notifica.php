@@ -50,13 +50,20 @@ if ($id_user == '-1') {
                 $grupo = "";
                 $where = "mu.id_user_remitente = '" . $id_user . "'";
             }
-            $sql_items = "SELECT DISTINCT(m.id_inyect), CONCAT('M:',m.id_inyect) as id,t.id_grupo AS 'group',  CONCAT('M:',m.id_inyect,':', m.titulo) AS content, m.fechareal_start AS start, m.id_tarea
-            FROM mensajes m 
-            INNER JOIN mensajes_usuarios mu ON m.id_inyect = mu.id_mensaje
-            INNER JOIN users u ON mu.id_user_destinatario = u.id_users
-            LEFT JOIN actor_simulado a ON m.id_actor = a.id_actor    
-            INNER JOIN tareas t ON m.id_tarea = t.id_tarea
-            WHERE " . $where . " ORDER BY m.id_inyect DESC;";
+            $sql_items = "SELECT DISTINCT(m.id_inyect), 
+            CONCAT('M:',m.id_inyect) as id,t.id_grupo AS 'group', 
+            CONCAT('M:',m.id_inyect,':', m.titulo) AS content, m.fechareal_start AS start,
+             m.id_tarea, cm.id_calificacion AS 'calificacion' 
+             FROM mensajes m 
+             INNER JOIN mensajes_usuarios mu 
+             ON m.id_inyect = mu.id_mensaje 
+             INNER JOIN users u 
+             ON mu.id_user_destinatario = u.id_users 
+             LEFT JOIN actor_simulado a 
+             ON m.id_actor = a.id_actor 
+             INNER JOIN tareas t ON m.id_tarea = t.id_tarea 
+             INNER JOIN calificacion_mensajes cm ON cm.id_mensaje=m.id_inyect 
+             WHERE " . $where . " ORDER BY m.id_inyect DESC;";
             //WHERE mu.id_user_destinatario = '$id_user' AND m.medios IN ('2','3') ORDER BY m.id_inyect DESC;";        
            // echo $sql_items;
             $res_sql = mysqli_query($con, $sql_items);
@@ -70,11 +77,23 @@ if ($id_user == '-1') {
                         $color = array("style" => "color: black; background-color: Lime;");
                         $editable = array("editable" => false);
                         $arrayI[] = array_merge(array_map('utf8_encode', $items), $color, $editable);
-                        //$arrayI[] = array_map('utf8_encode', $items);
+                        
 
                     } else {
                         //Color Azul - Mensaje  no enviado
-                        $color = array("style" => "color: black; background-color: Aqua;");
+                        if($items['calificacion']==2)
+                        {
+                            $color = array("style" => "color: black; background-color: Yellow;");
+
+                        }
+                        else if($items['calificacion']==3)
+                        {
+                            $color = array("style" => "color: black; background-color: Light Green;");
+                        }
+                        else{
+                            $color = array("style" => "color: black; background-color: Aqua;");
+                        }
+                        
                         $arrayI[] = array_merge(array_map('utf8_encode', $items), $color);
                         //$arrayI[] = array_map('utf8_encode', $items);
                     }

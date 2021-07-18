@@ -5,6 +5,7 @@ namespace PHPMaker2021\simexamerica;
 // Page object
 $MensajesAdd = &$Page;
 ?>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 <script>
 var currentForm, currentPageID;
 var fmensajesadd;
@@ -104,6 +105,8 @@ loadjs.ready("head", function () {
     loadjs.done("fmensajesadd");
 });
 </script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
 loadjs.ready("head", function () {
     // Client script
@@ -325,7 +328,207 @@ loadjs.ready("head", function() {
         <?= $Page->para->editAttributes() ?>>
         <?= $Page->para->selectOptionListHtml("x_para[]") ?>
     </select>
+    
     <?= $Page->para->getCustomMessage() ?>
+    <!--MIGUEL MODAL PARA-->
+    <button type="button" class="btn btn-default ew-add-opt-btn w-0 rounded-right " data-toggle="modal" data-target="#modalPara"><i class="fas fa-plus ew-icon"></i></button>
+<div class="modal fade" id="modalPara" tabiendex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleMddalLabel">Seleccion de destinatarios</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times</span>
+                </button>
+            </div>
+            <div class="modal-body" id="vue-admin">
+            
+            
+                <div class="form-group m-3">
+                    <label for="selectgrupo">Grupo</label>
+                    <select class="form-control" id="selectgrupo">
+                    <option value="">Seleccione un Grupo</option>    
+                        <option v-for="grupo in grupos" v-bind:value="grupo.id">{{grupo.nombre}} </option>
+                    </select>
+                </div>
+                <div class="form-group m-3" >
+                    <label for="selectsubgrupo">Sub-Grupo</label>
+                    <select class="form-control" id="selectsubgrupo">
+                    <option value="">Seleccione un SubGrupo</option>
+                    <option v-for="subgrupo in subgrupos" v-bind:value="subgrupo.id">{{subgrupo.nombre}} </option>
+                    </select>
+                </div>
+                <div class="form-group m-3 mb-5">
+                    <label for="selectparticipante">Participante</label>
+                    <select class="js-example-basic-multiple" name="states[]" multiple="multiple" id="para[]">
+                        <option value="">Seleccione un participante</option>
+                        <option v-for="participante in participantes" v-bind:value="participante.id">{{participante.nombre}} </option>
+                </select>
+                    
+                </div>
+               
+<script>$(document).ready(function() {
+    $('.js-example-basic-multiple').select2();
+});</script>
+</div>
+            <div class="modal-footer">
+                <button type="button" onclick="guardarPara();" class="btn btn-primary">Guardar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+    function guardarPara() {
+        //document.getElementById('x_para[]')=document.getElementById('para[]');
+        var obj = document.getElementById('para[]');
+        if (obj.selectedIndex==-1) return;
+    for (var i=0; opt=obj.options[i]; i++)
+        if (opt.selected) {
+            var valor=opt.value; // almacenar value
+            var txt=obj.options[i].text; // almacenar el texto
+            obj.options[i]=null; // borrar el item si está seleccionado
+            var obj2 = document.getElementById('x_para[]');
+            var opc = new Option(txt,valor);    
+            //alert(opc);
+            eval(obj2.options[obj2.options.length]=opc);    
+        } 
+        
+    }
+    
+    var app = new Vue({
+        el: '#vue-admin',
+        data: {
+            grupos: [],
+            subgrupos:[],
+            participantes:[]
+        }
+    });
+    function removerOpciones(id){
+        let Selector=document.getElementById(id);
+        var i,L=Selector.options.length-1;
+        for(i=L;i>=0;i--){
+            Selector.remove(i);
+        }
+    }
+    llenarGrupos();
+    function llenarGrupos(){
+        $.ajax({
+            url: "inject/filtroGSg.php?funcion=grupo&idUser="+<?php echo CurrentUserID();?>,
+            success: function (es) {
+                console.log(es);
+                let respuesta = JSON.parse(es);
+                for(let i = 0;i < respuesta.length;i++){
+                        let add = {
+                            "id":respuesta[i].id,
+                            "nombre":respuesta[i].nombre
+                        };
+                        app.grupos.push(add);
+                    
+                }
+                 
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
+        
+    }
+    const selectElement = document.querySelector('#selectgrupo');
+
+    selectElement.addEventListener('change', (event) => {
+        llenarSubGrupos(event.target.value);
+        llenarParticipanteG(event.target.value);
+    });
+    const selectElementS = document.querySelector('#selectsubgrupo');
+    selectElementS.addEventListener('change', (event) => {
+        llenarParticipanteSG(event.target.value);
+    });
+   
+
+    function llenarSubGrupos(id){
+        app.subgrupos=[];
+        $.ajax({
+            url: "inject/filtroGSg.php?funcion=Subgrupo&idUser=0&idGrupo="+id,
+            success: function (es) {
+                if(es=="Vacio")
+                {
+                    console.log("No existen subgrupos asociados");
+                }
+                else{
+                    console.log(es);
+                    let respuesta = JSON.parse(es);
+                    for(let i = 0;i < respuesta.length;i++){
+                            let add = {
+                                "nombre":respuesta[i].nombre,
+                                "id":respuesta[i].id
+                            };
+                            app.subgrupos.push(add);   
+                    }
+                }
+                
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
+    }
+    function llenarParticipanteG(id){
+        app.participantes=[];
+        $.ajax({
+            url: "inject/filtroGSg.php?funcion=participanteG&idUser=0&id="+id,
+            success: function (es) {
+                if(es=="Vacio")
+                {
+                    console.log("No existen participantes asociados al grupo");
+                }
+                else{
+                    console.log(es);
+                    let respuesta = JSON.parse(es);
+                    for(let i = 0;i < respuesta.length;i++){
+                            let add = {
+                                "nombre":respuesta[i].nombre,
+                                "id":respuesta[i].id
+                            };
+                            app.participantes.push(add);   
+                    }
+                }
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
+    }
+    function llenarParticipanteSG(id){
+        $.ajax({
+            url: "inject/filtroGSg.php?funcion=participanteSG&id="+id,
+            success: function (es) {
+                if(es=="Vacio")
+                {
+                    console.log("No existen participantes asociados al Subgrupo");
+                }
+                else{
+                    app.participantes=[];
+                    let respuesta = JSON.parse(es);
+                    for(let i = 0;i < respuesta.length;i++){
+                            let add = {
+                                "nombre":respuesta[i].nombre,
+                                "id":respuesta[i].id
+                            };
+                            app.participantes.push(add);   
+                    }
+                }
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
+    }
+        
+    </script>
+    
     <div class="invalid-feedback"><?= $Page->para->getErrorMessage() ?></div>
 <?= $Page->para->Lookup->getParamTag($Page, "p_x_para") ?>
 <script>
@@ -340,9 +543,12 @@ loadjs.ready("head", function() {
 });
 </script>
 </span></template>
+
 </div></div>
+       <button type="button" class="btn btn-default" data-toggle="modal" data-target="modalPara">+</button> 
     </div>
 <?php } ?>
+
 <?php if ($Page->adjunto->Visible) { // adjunto ?>
     <div id="r_adjunto" class="form-group row">
         <label id="elh_mensajes_adjunto" for="x_adjunto" class="<?= $Page->LeftColumnClass ?>"><template id="tpc_mensajes_adjunto"><?= $Page->adjunto->caption() ?><?= $Page->adjunto->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></template></label>
@@ -350,17 +556,20 @@ loadjs.ready("head", function() {
 <template id="tpx_mensajes_adjunto"><span id="el_mensajes_adjunto">
 <div class="input-group flex-nowrap">
     <select
-        id="x_adjunto"
-        name="x_adjunto"
+        id="x_adjunto[]"
+        name="x_adjunto[]"
         class="form-control ew-select<?= $Page->adjunto->isInvalidClass() ?>"
-        data-select2-id="mensajes_x_adjunto"
+        data-select2-id="mensajes_x_adjunto[]"
         data-table="mensajes"
         data-field="x_adjunto"
+        multiple
+        size="1"
         data-value-separator="<?= $Page->adjunto->displayValueSeparatorAttribute() ?>"
         data-placeholder="<?= HtmlEncode($Page->adjunto->getPlaceHolder()) ?>"
         <?= $Page->adjunto->editAttributes() ?>>
-        <?= $Page->adjunto->selectOptionListHtml("x_adjunto") ?>
+        <?= $Page->adjunto->selectOptionListHtml("x_adjunto[]") ?>
     </select>
+    
     <?php if (AllowAdd(CurrentProjectID() . "archivos_doc") && !$Page->adjunto->ReadOnly) { ?>
     <div class="input-group-append"><button type="button" class="btn btn-default ew-add-opt-btn" id="aol_x_adjunto" title="<?= HtmlTitle($Language->phrase("AddLink")) . "&nbsp;" . $Page->adjunto->caption() ?>" data-title="<?= $Page->adjunto->caption() ?>" onclick="ew.addOptionDialogShow({lnk:this,el:'x_adjunto',url:'<?= GetUrl("ArchivosDocAddopt") ?>'});"><i class="fas fa-plus ew-icon"></i></button></div>
     <?php } ?>
@@ -370,8 +579,10 @@ loadjs.ready("head", function() {
 <?= $Page->adjunto->Lookup->getParamTag($Page, "p_x_adjunto") ?>
 <script>
 loadjs.ready("head", function() {
-    var el = document.querySelector("select[data-select2-id='mensajes_x_adjunto']"),
-        options = { name: "x_adjunto", selectId: "mensajes_x_adjunto", language: ew.LANGUAGE_ID, dir: ew.IS_RTL ? "rtl" : "ltr" };
+    var el = document.querySelector("select[data-select2-id='mensajes_x_adjunto[]']"),
+        options = { name: "x_adjunto[]", selectId: "mensajes_x_adjunto[]", language: ew.LANGUAGE_ID, dir: ew.IS_RTL ? "rtl" : "ltr" };
+    options.multiple = true;
+    options.closeOnSelect = false;
     options.dropdownParent = $(el).closest("#ew-modal-dialog, #ew-add-opt-dialog")[0];
     Object.assign(options, ew.vars.tables.mensajes.fields.adjunto.selectOptions);
     ew.createSelect(options);

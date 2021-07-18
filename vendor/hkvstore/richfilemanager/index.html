@@ -228,7 +228,7 @@
 									<span data-bind="text: $root.lg.close"></span>
 								</button>
 								<!-- ko if: buttonVisibility('select') -->
-								<button class="btn btn-file-select" type="button" data-bind="event: {click: function(data, event) {bindToolbar('select')}}">
+								<button class="btn btn-file-select" type="button" data-bind=" event: {click: function(data, event) {bindToolbar('select')}, click: closePreview}">
 									<span data-bind="text: $root.lg.action_select"></span>
 								</button>
 								<!-- /ko -->

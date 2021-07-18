@@ -276,7 +276,7 @@ $InjectExcon = &$Page;
 <div class="alert alert-success" style="display:none;"></div>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-6">
+            <div class="col-6" id="vue-admin" v-if="mensajes.length>0">
                 <div class="card direct-chat direct-chat-primary">
                     <div class="card-header bg-primary">
                         <h3 class="card-title">Mensajes Programados</h3>
@@ -285,7 +285,7 @@ $InjectExcon = &$Page;
                         </form>
                     </div>
                     <!-- /.card-header -->
-                    <div class="card-body" id="vue-admin">
+                    <div class="card-body" >
                     
                         <!-- inicia mesajes programado -->
                         <div class="direct-chat-message4s"  v-for="mens in mensajes" v-if="mens.visible">
@@ -331,8 +331,18 @@ $InjectExcon = &$Page;
                                             <ul class="" v-for="destinatario in mens.destinatarios" v-if="mens.visible" >
                                                   <li> {{destinatario.destinatario}}.</li>
                                             </ul>
-                                        </div>   
-                                
+                                        </div>
+                                        <p><!--MIGUEL, Region Respuestas-->
+                                        <a  data-toggle="collapse" v-bind:href="'#respuestas'+mens.id" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
+                                            <i class="fa fa-users"></i>     
+                                            Respuestas:</a><a class="badge-danger" v-if="mens.respuestasPendientes==1">NEW</a>
+                                            </p>
+                                           
+                                            <div class="collapse multi-collapse" v-bind:id="'respuestas'+mens.id">
+                                            <ul class="" v-for="respuesta in mens.respuestas" v-if="mens.visible" >
+                                                <li><a   v-bind:href="'/homesimex/Email2View/'+respuesta.id+'?showdetail='"> {{respuesta.sujeto}}.</a></li>
+                                            </ul>
+                                        </div>  
 
                                     <hr>
                                     <div class="card-tools">
@@ -360,7 +370,7 @@ $InjectExcon = &$Page;
                         <!--Miguel Select-->
                         <button type="button" data-toggle="dropdown" id="botonEstado" class="btn btn-success dropdown-toggle dropdown-toggle-split" aria-haspopup="true" aria-expanded="false"><span id="searchtype"></span></button>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item active" href="#" onclick=""></a>
+                            <a class="dropdown-item " href="#" onclick="busquedaEstado('Todos)">Todos</a>
                             <a class="dropdown-item " href="#" onclick="busquedaEstado('Pendiente');">Pendiente</a>
                             <a class="dropdown-item " href="#" onclick="busquedaEstado('Inconcluso');">Inconcluso</a>
                             <a class="dropdown-item " href="#" onclick="busquedaEstado('Finalizado');">Terminado</a>
@@ -451,9 +461,17 @@ $InjectExcon = &$Page;
                                                   <li> {{destinatario.destinatario}}.</li>
                                             </ul>
                                         </div>
-
-                                        </div>
-                                    </div>
+                                        <p><!--MIGUEL, Region Respuestas-->
+                                        <a  data-toggle="collapse" v-bind:href="'#respuestas'+mens.id" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
+                                            <i class="fa fa-users"></i>     
+                                            Respuestas:</a><a class="badge-danger" v-if="mens.respuestasPendientes==1">NEW</a>
+                                            </p>
+                                           
+                                            <div class="collapse multi-collapse" v-bind:id="'respuestas'+mens.id">
+                                            <ul class="" v-for="respuesta in mens.respuestas" v-if="mens.visible" >
+                                                <li><a   v-bind:href="'/homesimex/Email2View/'+respuesta.id+'?showdetail='"> {{respuesta.sujeto}}.</a></li>
+                                            </ul>
+                                        </div>  
                                     <div class="timeline-footer">
                                         <a class="m-r-15 text-inverse-lighter" data-toggle="collapse" v-bind:href="'#collapse'+mens.id" >
                                             <i class="fa fa-comments fa-fw fa-lg m-r-3"></i> Comentario
@@ -614,6 +632,38 @@ $InjectExcon = &$Page;
         });
         console.log(mens);
     }
+    function obtenerRespuestas(mens,id){// MIGUEL FUNCION PARA EXTRAER RESPUESTAS DEL COMENTARIO
+        $.ajax({
+            url: "inject/obtener_respuestas.php?idMensaje="+id,
+            success: function (es) {
+                console.log(es);
+                if(es!="Vacio")
+                {
+                    let respuesta= JSON.parse(es);
+                for(let i=0; i < respuesta.length;i++){
+                    let res =respuesta[i];
+                    if(res.estado_msg==0)
+                    {
+                        console.log("entra");
+                        mens.respuestasPendientes=1;
+                    }
+                    let add = {
+                        "sujeto":res.sujeto,
+                        "id": res.id
+                    };
+
+                    mens.respuestas.push(add);
+                }
+
+                }
+                
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
+        console.log(mens);
+    }
     function obtenerComentariosVarios(mens,id){
         $.ajax({
             url: "inject/obtener_comentarios.php?idMensaje="+id,
@@ -661,10 +711,12 @@ $InjectExcon = &$Page;
                 respuesta.numero_comentarios = 0;
                 respuesta.numero_destinatarios=0;
                 respuesta.comentarios = [];
+                respuesta.respuestas=[];
                 respuesta.destinatarios=[];
                 respuesta.entrada = "";
                 respuesta.visible = true;
                 obtenerDestinatarios(respuesta,respuesta.id);
+                obtenerRespuestas(respuesta,respuesta.id);
                 app.mensajes.push(respuesta);
                 
                 obtenerComentariosVarios(respuesta,respuesta.id);
@@ -685,7 +737,9 @@ $InjectExcon = &$Page;
                 for(let i = 0;i < respuesta.length;i++){
                     let mens = respuesta[i];
                     mens.destinatarios= [];
+                    mens.respuestas=[];
                     obtenerDestinatarios(mens,mens.id);
+                    obtenerRespuestas(mens,mens.id);
                     mens.visible = true;
                     admin.mensajes.push(mens);
                 }
@@ -707,10 +761,12 @@ $InjectExcon = &$Page;
                     mens.numero_destinatarios=0;
                     mens.comentarios = [];
                     mens.destinatarios = [];
+                    mens.respuestas=[];
                     mens.entrada = "";
                     mens.visible = true;
                     app.mensajes.push(mens);
                     obtenerDestinatarios(mens,mens.id);
+                    obtenerRespuestas(mens,mens.id);
                     obtenerComentariosVarios(mens,mens.id);
                 }
             },
@@ -771,10 +827,11 @@ $InjectExcon = &$Page;
         
     });
     function busquedaEstado(estado){//MIGUEL funcion para buscar por estado
+
         for(let i = 0;i < app.mensajes.length;i++){
                 let mens = app.mensajes[i];
                 mens.visible = false;
-                if(mens.calificacion==estado)
+                if(mens.calificacion==estado || estado=='Todos')
                 {
                     mens.visible= true;
                 }
