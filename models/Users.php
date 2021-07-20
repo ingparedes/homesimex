@@ -43,8 +43,8 @@ class Users extends DbTable
     public $estado;
     public $horario;
     public $limite;
+    public $organizacion;
     public $img_user;
-    public $blocks;
 
     // Page ID
     public $PageID = ""; // To be overridden by subclass
@@ -271,18 +271,18 @@ class Users extends DbTable
         $this->limite->CustomMsg = $Language->FieldPhrase($this->TableVar, $this->limite->Param, "CustomMsg");
         $this->Fields['limite'] = &$this->limite;
 
+        // organizacion
+        $this->organizacion = new DbField('users', 'users', 'x_organizacion', 'organizacion', '`organizacion`', '`organizacion`', 200, 100, -1, false, '`organizacion`', false, false, false, 'FORMATTED TEXT', 'TEXT');
+        $this->organizacion->Sortable = true; // Allow sort
+        $this->organizacion->CustomMsg = $Language->FieldPhrase($this->TableVar, $this->organizacion->Param, "CustomMsg");
+        $this->Fields['organizacion'] = &$this->organizacion;
+
         // img_user
         $this->img_user = new DbField('users', 'users', 'x_img_user', 'img_user', '`img_user`', '`img_user`', 200, 60, -1, true, '`img_user`', false, false, false, 'IMAGE', 'FILE');
         $this->img_user->Sortable = true; // Allow sort
         $this->img_user->ImageResize = true;
         $this->img_user->CustomMsg = $Language->FieldPhrase($this->TableVar, $this->img_user->Param, "CustomMsg");
         $this->Fields['img_user'] = &$this->img_user;
-
-        // blocks
-        $this->blocks = new DbField('users', 'users', 'x_blocks', 'blocks', '`blocks`', '`blocks`', 200, 50, -1, false, '`blocks`', false, false, false, 'FORMATTED TEXT', 'TEXT');
-        $this->blocks->Sortable = true; // Allow sort
-        $this->blocks->CustomMsg = $Language->FieldPhrase($this->TableVar, $this->blocks->Param, "CustomMsg");
-        $this->Fields['blocks'] = &$this->blocks;
     }
 
     // Field Visibility
@@ -822,8 +822,8 @@ class Users extends DbTable
         $this->estado->DbValue = $row['estado'];
         $this->horario->DbValue = $row['horario'];
         $this->limite->DbValue = $row['limite'];
+        $this->organizacion->DbValue = $row['organizacion'];
         $this->img_user->Upload->DbValue = $row['img_user'];
-        $this->blocks->DbValue = $row['blocks'];
     }
 
     // Delete uploaded files
@@ -1177,9 +1177,9 @@ SORTHTML;
         $this->estado->setDbValue($row['estado']);
         $this->horario->setDbValue($row['horario']);
         $this->limite->setDbValue($row['limite']);
+        $this->organizacion->setDbValue($row['organizacion']);
         $this->img_user->Upload->DbValue = $row['img_user'];
         $this->img_user->setDbValue($this->img_user->Upload->DbValue);
-        $this->blocks->setDbValue($row['blocks']);
     }
 
     // Render list row values
@@ -1222,9 +1222,9 @@ SORTHTML;
 
         // limite
 
-        // img_user
+        // organizacion
 
-        // blocks
+        // img_user
 
         // id_users
         $this->id_users->ViewValue = $this->id_users->CurrentValue;
@@ -1250,7 +1250,7 @@ SORTHTML;
             if ($this->escenario->ViewValue === null) { // Lookup from database
                 $filterWrk = "`id_escenario`" . SearchString("=", $curVal, DATATYPE_NUMBER, "");
                 $lookupFilter = function() {
-                    return (CurrentUserInfo("perfil") != 1) ? "id_escenario = '".CurrentUserInfo("escenario")."'"  : "";
+                    return (CurrentUserInfo("perfil") > 1) ? "id_escenario = '".CurrentUserInfo("escenario")."'"  : "";
                 };
                 $lookupFilter = $lookupFilter->bindTo($this);
                 $sqlWrk = $this->escenario->Lookup->getSql(false, $filterWrk, $lookupFilter, $this, true, true);
@@ -1390,6 +1390,10 @@ SORTHTML;
         $this->limite->ViewValue = FormatDateTime($this->limite->ViewValue, 0);
         $this->limite->ViewCustomAttributes = "";
 
+        // organizacion
+        $this->organizacion->ViewValue = $this->organizacion->CurrentValue;
+        $this->organizacion->ViewCustomAttributes = "";
+
         // img_user
         if (!EmptyValue($this->img_user->Upload->DbValue)) {
             $this->img_user->ImageWidth = 50;
@@ -1400,10 +1404,6 @@ SORTHTML;
             $this->img_user->ViewValue = "";
         }
         $this->img_user->ViewCustomAttributes = "";
-
-        // blocks
-        $this->blocks->ViewValue = $this->blocks->CurrentValue;
-        $this->blocks->ViewCustomAttributes = "";
 
         // id_users
         $this->id_users->LinkCustomAttributes = "";
@@ -1480,6 +1480,11 @@ SORTHTML;
         $this->limite->HrefValue = "";
         $this->limite->TooltipValue = "";
 
+        // organizacion
+        $this->organizacion->LinkCustomAttributes = "";
+        $this->organizacion->HrefValue = "";
+        $this->organizacion->TooltipValue = "";
+
         // img_user
         $this->img_user->LinkCustomAttributes = "";
         if (!EmptyValue($this->img_user->Upload->DbValue)) {
@@ -1500,11 +1505,6 @@ SORTHTML;
             $this->img_user->LinkAttrs["data-rel"] = "users_x_img_user";
             $this->img_user->LinkAttrs->appendClass("ew-lightbox");
         }
-
-        // blocks
-        $this->blocks->LinkCustomAttributes = "";
-        $this->blocks->HrefValue = "";
-        $this->blocks->TooltipValue = "";
 
         // Call Row Rendered event
         $this->rowRendered();
@@ -1558,7 +1558,7 @@ SORTHTML;
                 if ($this->escenario->ViewValue === null) { // Lookup from database
                     $filterWrk = "`id_escenario`" . SearchString("=", $curVal, DATATYPE_NUMBER, "");
                     $lookupFilter = function() {
-                        return (CurrentUserInfo("perfil") != 1) ? "id_escenario = '".CurrentUserInfo("escenario")."'"  : "";
+                        return (CurrentUserInfo("perfil") > 1) ? "id_escenario = '".CurrentUserInfo("escenario")."'"  : "";
                     };
                     $lookupFilter = $lookupFilter->bindTo($this);
                     $sqlWrk = $this->escenario->Lookup->getSql(false, $filterWrk, $lookupFilter, $this, true, true);
@@ -1690,6 +1690,15 @@ SORTHTML;
         $this->limite->EditValue = FormatDateTime($this->limite->CurrentValue, 8);
         $this->limite->PlaceHolder = RemoveHtml($this->limite->caption());
 
+        // organizacion
+        $this->organizacion->EditAttrs["class"] = "form-control";
+        $this->organizacion->EditCustomAttributes = "";
+        if (!$this->organizacion->Raw) {
+            $this->organizacion->CurrentValue = HtmlDecode($this->organizacion->CurrentValue);
+        }
+        $this->organizacion->EditValue = $this->organizacion->CurrentValue;
+        $this->organizacion->PlaceHolder = RemoveHtml($this->organizacion->caption());
+
         // img_user
         $this->img_user->EditAttrs["class"] = "form-control";
         $this->img_user->EditCustomAttributes = "";
@@ -1704,15 +1713,6 @@ SORTHTML;
         if (!EmptyValue($this->img_user->CurrentValue)) {
             $this->img_user->Upload->FileName = $this->img_user->CurrentValue;
         }
-
-        // blocks
-        $this->blocks->EditAttrs["class"] = "form-control";
-        $this->blocks->EditCustomAttributes = "";
-        if (!$this->blocks->Raw) {
-            $this->blocks->CurrentValue = HtmlDecode($this->blocks->CurrentValue);
-        }
-        $this->blocks->EditValue = $this->blocks->CurrentValue;
-        $this->blocks->PlaceHolder = RemoveHtml($this->blocks->caption());
 
         // Call Row Rendered event
         $this->rowRendered();
@@ -1754,6 +1754,7 @@ SORTHTML;
                     $doc->exportCaption($this->pais);
                     $doc->exportCaption($this->pw);
                     $doc->exportCaption($this->estado);
+                    $doc->exportCaption($this->organizacion);
                     $doc->exportCaption($this->img_user);
                 } else {
                     $doc->exportCaption($this->id_users);
@@ -1771,8 +1772,8 @@ SORTHTML;
                     $doc->exportCaption($this->estado);
                     $doc->exportCaption($this->horario);
                     $doc->exportCaption($this->limite);
+                    $doc->exportCaption($this->organizacion);
                     $doc->exportCaption($this->img_user);
-                    $doc->exportCaption($this->blocks);
                 }
                 $doc->endExportRow();
             }
@@ -1814,6 +1815,7 @@ SORTHTML;
                         $doc->exportField($this->pais);
                         $doc->exportField($this->pw);
                         $doc->exportField($this->estado);
+                        $doc->exportField($this->organizacion);
                         $doc->exportField($this->img_user);
                     } else {
                         $doc->exportField($this->id_users);
@@ -1831,8 +1833,8 @@ SORTHTML;
                         $doc->exportField($this->estado);
                         $doc->exportField($this->horario);
                         $doc->exportField($this->limite);
+                        $doc->exportField($this->organizacion);
                         $doc->exportField($this->img_user);
-                        $doc->exportField($this->blocks);
                     }
                     $doc->endExportRow($rowCnt);
                 }
@@ -1887,6 +1889,10 @@ SORTHTML;
         $email->replaceContent('<!--email-->', $row === null ? strval($this->_email->FormValue) : GetUserInfo('email', $row));
         $email->replaceContent('<!--FieldCaption_telefono-->', $this->telefono->caption());
         $email->replaceContent('<!--telefono-->', $row === null ? strval($this->telefono->FormValue) : GetUserInfo('telefono', $row));
+        $email->replaceContent('<!--FieldCaption_pais-->', $this->pais->caption());
+        $email->replaceContent('<!--pais-->', $row === null ? strval($this->pais->FormValue) : GetUserInfo('pais', $row));
+        $email->replaceContent('<!--FieldCaption_organizacion-->', $this->organizacion->caption());
+        $email->replaceContent('<!--organizacion-->', $row === null ? strval($this->organizacion->FormValue) : GetUserInfo('organizacion', $row));
         $email->Content = preg_replace('/<!--\s*register_activate_link_begin[\s\S]*?-->[\s\S]*?<!--\s*register_activate_link_end[\s\S]*?-->/i', '', $email->Content); // Remove activate link block
         return $email;
     }
@@ -2045,6 +2051,42 @@ SORTHTML;
         }
     }
 
+    // Send email after update success
+    public function sendEmailOnEdit(&$rsold, &$rsnew)
+    {
+        global $Language;
+        $table = 'users';
+        $subject = $table . " ". $Language->phrase("RecordUpdated");
+        $action = $Language->phrase("ActionUpdated");
+
+        // Get key value
+        $key = "";
+        if ($key != "") {
+            $key .= Config("COMPOSITE_KEY_SEPARATOR");
+        }
+        $key .= $rsold['id_users'];
+        $email = new Email();
+        $email->load(Config("EMAIL_NOTIFY_TEMPLATE"));
+        $email->replaceSender(Config("SENDER_EMAIL")); // Replace Sender
+        $email->replaceRecipient(Config("RECIPIENT_EMAIL")); // Replace Recipient
+        $email->replaceSubject($subject); // Replace Subject
+        $email->replaceContent("<!--table-->", $table);
+        $email->replaceContent("<!--key-->", $key);
+        $email->replaceContent("<!--action-->", $action);
+        $args = [];
+        $args["rsold"] = &$rsold;
+        $args["rsnew"] = &$rsnew;
+        $emailSent = false;
+        if ($this->emailSending($email, $args)) {
+            $emailSent = $email->send();
+        }
+
+        // Send email failed
+        if (!$emailSent) {
+            $this->setFailureMessage($email->SendErrDescription);
+        }
+    }
+
     // Table level events
     // Recordset Selecting event
     public function recordsetSelecting(&$filter)
@@ -2172,14 +2214,16 @@ SORTHTML;
     // Email Sending event
     public function emailSending($email, &$args)
     {
-     /*if (CurrentPageID() == "add") { // If Add page
-            $email->Recipient = $args["rsnew"]["email"]; // Change recipient to a field value in the new record
-            $email->Subject = "Creación de cuenta de usuario simexamericas.org "; // Change subject
-            $email->Content = "Estimado usuario, se ha creado una cuenta para usted en simexamericas.org
-            				Le sugerimos cambiar su clave de acceso cuando ingrese a la aplicación en línea.
-            <h3>Usuario: " .$args["rsnew"] ["email"]. " </h3>
+       // var_dump($email, $args);
+     if (CurrentPageID() == "edit") { // If Add page
+            $email->Recipient = $args["rsold"]["email"]; // Change recipient to a field value in the new record
+            $email->Subject = "Activación de cuenta de usuario simexamericas.org "; // Change subject
+            $email->Content = " Estimado usuario.<br>
+            Se activó su cuenta en simexamericas.org<br>
+            Le sugerimos cambiar su clave de acceso cuando ingrese a la aplicación en línea.
+            <h3>Usuario: " .$args["rsold"] ["email"]. " </h3>
             <h3> Clave temporal es: ".$args["rsnew"] ["pw"]."</h3>"; 
-        } */
+        } 
         return true;
     }
 

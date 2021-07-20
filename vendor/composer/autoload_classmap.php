@@ -54,6 +54,7 @@ return array(
     'Mobile_Detect' => $vendorDir . '/mobiledetect/mobiledetectlib/Mobile_Detect.php',
     'Normalizer' => $vendorDir . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
     'PasswordHash' => $baseDir . '/src/PasswordHash.php',
+    'PclZip' => $vendorDir . '/pclzip/pclzip/pclzip.lib.php',
     'Sabberworm\\CSS\\CSSList\\AtRuleBlockList' => $vendorDir . '/hkvstore/dompdf/lib/php-css-parser/lib/Sabberworm/CSS/CSSList/AtRuleBlockList.php',
     'Sabberworm\\CSS\\CSSList\\AtRuleBlockListTest' => $vendorDir . '/hkvstore/dompdf/lib/php-css-parser/tests/Sabberworm/CSS/CSSList/AtRuleBlockListTest.php',
     'Sabberworm\\CSS\\CSSList\\CSSBlockList' => $vendorDir . '/hkvstore/dompdf/lib/php-css-parser/lib/Sabberworm/CSS/CSSList/CSSBlockList.php',

@@ -1990,8 +1990,8 @@ class GrupoGrid extends Grupo
                 } else {
                     $rsnew['imgen_grupo'] = $this->imgen_grupo->Upload->FileName;
                 }
-                $this->imgen_grupo->ImageWidth = Config("THUMBNAIL_DEFAULT_WIDTH"); // Resize width
-                $this->imgen_grupo->ImageHeight = Config("THUMBNAIL_DEFAULT_HEIGHT"); // Resize height
+                $this->imgen_grupo->ImageWidth = 60; // Resize width
+                $this->imgen_grupo->ImageHeight = 60; // Resize height
             }
 
             // nombre_grupo
@@ -2183,8 +2183,8 @@ class GrupoGrid extends Grupo
             } else {
                 $rsnew['imgen_grupo'] = $this->imgen_grupo->Upload->FileName;
             }
-            $this->imgen_grupo->ImageWidth = Config("THUMBNAIL_DEFAULT_WIDTH"); // Resize width
-            $this->imgen_grupo->ImageHeight = Config("THUMBNAIL_DEFAULT_HEIGHT"); // Resize height
+            $this->imgen_grupo->ImageWidth = 60; // Resize width
+            $this->imgen_grupo->ImageHeight = 60; // Resize height
         }
 
         // nombre_grupo
@@ -2407,15 +2407,13 @@ class GrupoGrid extends Grupo
     // Page Render event
     public function pageRender()
     {
-        //Log("Page Render");
-       // $this->OtherOptions["addedit"]->Items["add"]->Visible = FALSE;
     }
 
     // Page Data Rendering event
     public function pageDataRendering(&$header)
     {
         // Example:
-        //$header = "your header";
+     //$header = "";
     }
 
     // Page Data Rendered event

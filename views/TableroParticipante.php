@@ -112,14 +112,14 @@ $TableroParticipante = &$Page;
       <div class="col-sm-12">
 
 
-        <div class="item" id="vue-admin">
+        <!--<div class="item" id="vue-admin">
 
           <a class="btn btn-app2" href="#" onclick="url( 'views/InjectParticipante.php' );">
           <span id="mensajes" class="notify-badge"><span v-if="mensajesNuevos.length > 0" class="badge-danger">NEW</span></span>
             <img src="images/mensajes.png" alt="Image" height="62" width="62" />
           </a>
         </div>
-
+-->
 
         <div class="item">
 
@@ -192,7 +192,7 @@ $TableroParticipante = &$Page;
     }
   </script>
   <div class="embed-responsive embed-responsive-16by9">
-    <iframe id="frmUrl" class="embed-responsive-item" src="InjectParticipante" allowfullscreen></iframe>
+    <iframe id="frmUrl" class="embed-responsive-item" src="" allowfullscreen></iframe>
   </div>
   <script>
    //Time Line

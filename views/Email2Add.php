@@ -5,11 +5,14 @@ namespace PHPMaker2021\simexamerica;
 // Page object
 $Email2Add = &$Page;
 ?>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 <script>
 var currentForm, currentPageID;
+var $ = jQuery;
 var femail2add;
 loadjs.ready("head", function () {
-    var $ = jQuery;
+   
+    $('.text-dark').text("Reenviar/Coodinar");
     // Form object
     currentPageID = ew.PAGE_ID = "add";
     femail2add = currentForm = new ew.Form("femail2add", "add");
@@ -23,6 +26,7 @@ loadjs.ready("head", function () {
         ["sender_userid", [fields.sender_userid.visible && fields.sender_userid.required ? ew.Validators.required(fields.sender_userid.caption) : null], fields.sender_userid.isInvalid],
         ["copy_sender", [fields.copy_sender.visible && fields.copy_sender.required ? ew.Validators.required(fields.copy_sender.caption) : null], fields.copy_sender.isInvalid],
         ["sujeto", [fields.sujeto.visible && fields.sujeto.required ? ew.Validators.required(fields.sujeto.caption) : null], fields.sujeto.isInvalid],
+        ["id_mensaje", [fields.id_mensaje.visible && fields.id_mensaje.required ? ew.Validators.required(fields.id_mensaje.caption) : null], fields.id_mensaje.isInvalid],
         ["mensaje", [fields.mensaje.visible && fields.mensaje.required ? ew.Validators.required(fields.mensaje.caption) : null], fields.mensaje.isInvalid],
         ["archivo", [fields.archivo.visible && fields.archivo.required ? ew.Validators.fileRequired(fields.archivo.caption) : null], fields.archivo.isInvalid],
         ["reciever_userid", [fields.reciever_userid.visible && fields.reciever_userid.required ? ew.Validators.required(fields.reciever_userid.caption) : null], fields.reciever_userid.isInvalid]
@@ -111,31 +115,37 @@ $Page->showMessage();
 <input type="hidden" name="<?= $TokenNameKey ?>" value="<?= $TokenName ?>"><!-- CSRF token name -->
 <input type="hidden" name="<?= $TokenValueKey ?>" value="<?= $TokenValue ?>"><!-- CSRF token value -->
 <?php } ?>
+<input type="hidden" name="id_mensaje" id="id_mensaje" value="<?php echo $_GET['IdResMsg'] ?>">
 <input type="hidden" name="t" value="email2">
 <input type="hidden" name="action" id="action" value="insert">
 <input type="hidden" name="modal" value="<?= (int)$Page->IsModal ?>">
 <input type="hidden" name="<?= $Page->OldKeyName ?>" value="<?= $Page->OldKey ?>">
-<div class="ew-add-div"><!-- page* -->
+<div class="ew-add-div" ><!-- page* -->
 <?php if ($Page->sender_userid->Visible) { // sender_userid ?>
     <div id="r_sender_userid" class="form-group row">
         <label id="elh_email2_sender_userid" class="<?= $Page->LeftColumnClass ?>"><?= $Page->sender_userid->caption() ?><?= $Page->sender_userid->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->sender_userid->cellAttributes() ?>>
 <span id="el_email2_sender_userid">
-    <select
-        id="x_sender_userid[]"
-        name="x_sender_userid[]"
-        class="form-control ew-select<?= $Page->sender_userid->isInvalidClass() ?>"
-        data-select2-id="email2_x_sender_userid[]"
+    
+    
+    <div id="vue-P">
+                    <select class="js-example-basic-multiple1 form-control ew-select <?= $Page->sender_userid->isInvalidClass() ?>"  multiple="multiple" id="x_sender_userid[]"
+        name="x_sender_userid[]" data-select2-id="email2_x_sender_userid[]"
         data-table="email2"
-        data-field="x_sender_userid"
-        data-dropdown
-        multiple
-        size="1"
-        data-value-separator="<?= $Page->sender_userid->displayValueSeparatorAttribute() ?>"
-        data-placeholder="<?= HtmlEncode($Page->sender_userid->getPlaceHolder()) ?>"
-        <?= $Page->sender_userid->editAttributes() ?>>
-        <?= $Page->sender_userid->selectOptionListHtml("x_sender_userid[]") ?>
-    </select>
+        data-field="x_sender_userid" data-placeholder="<?= HtmlEncode($Page->sender_userid->getPlaceHolder()) ?>">
+                        <option v-for="participante in participantesP" v-bind:value="participante.id">{{participante.nombre}} </option>
+                    </select>
+                    
+    <!-- Miguel filtro-->
+    <button type="button" data-toggle="dropdown" id="botonEstado" class="btn btn-ligth dropdown-toggle dropdown-toggle-split" aria-haspopup="true" aria-expanded="false"><span id="searchtype"></span></button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item " href="#" onclick=""></a>
+                            <a class="dropdown-item " href="#" onclick="busquedaFiltrada('1',1);">ExCon General</a>
+                            <a class="dropdown-item " href="#" onclick="busquedaFiltrada('2',1);">Excon Grupo</a>
+                            <a class="dropdown-item " href="#" onclick="busquedaFiltrada('3',1);">Participante</a>
+                        </div>
+    </div>
+    
     <?= $Page->sender_userid->getCustomMessage() ?>
     <div class="invalid-feedback"><?= $Page->sender_userid->getErrorMessage() ?></div>
 <?= $Page->sender_userid->Lookup->getParamTag($Page, "p_x_sender_userid") ?>
@@ -168,20 +178,111 @@ loadjs.ready("head", function() {
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->copy_sender->cellAttributes() ?>>
 <span id="el_email2_copy_sender">
     <select
+     hidden
         id="x_copy_sender[]"
         name="x_copy_sender[]"
-        class="form-control ew-select<?= $Page->copy_sender->isInvalidClass() ?>"
-        data-select2-id="email2_x_copy_sender[]"
-        data-table="email2"
-        data-field="x_copy_sender"
+        class="form-control ew-select"
         data-dropdown
         multiple
         size="1"
         data-value-separator="<?= $Page->copy_sender->displayValueSeparatorAttribute() ?>"
-        data-placeholder="<?= HtmlEncode($Page->copy_sender->getPlaceHolder()) ?>"
-        <?= $Page->copy_sender->editAttributes() ?>>
-        <?= $Page->copy_sender->selectOptionListHtml("x_copy_sender[]") ?>
+        data-placeholder="<?= HtmlEncode($Page->copy_sender->getPlaceHolder()) ?>">
     </select>
+    <div id="vue-C">
+                    <select class="js-example-basic-multiple <?= $Page->copy_sender->isInvalidClass() ?>"  multiple="multiple" id="x_copy_sender[]"
+        name="x_copy_sender[]" data-select2-id="email2_x_copy_sender[]" data-table="email2"
+        data-field="x_copy_sender" data-placeholder="<?= HtmlEncode($Page->copy_sender->getPlaceHolder()) ?>">
+                        <option v-for="participante in participantesC" v-bind:value="participante.id">{{participante.nombre}} </option>
+                    </select>
+                    
+    <!-- Miguel filtro-->
+    <button type="button" data-toggle="dropdown" id="botonEstado" class="btn btn-ligth dropdown-toggle dropdown-toggle-split" aria-haspopup="true" aria-expanded="false"><span id="searchtype"></span></button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item " href="#" onclick=""></a>
+                            <a class="dropdown-item " href="#" onclick="busquedaFiltrada('1',2);">ExCon General</a>
+                            <a class="dropdown-item " href="#" onclick="busquedaFiltrada('2',2);">Excon Grupo</a>
+                            <a class="dropdown-item " href="#" onclick="busquedaFiltrada('3',2);">Participante</a>
+                        </div>
+    </div>
+    <script>$(document).ready(function() {
+        $('.js-example-basic-multiple').select2();
+});</script>
+<script>$(document).ready(function() {
+        $('.js-example-basic-multiple1').select2();
+});
+
+var app = new Vue({
+        el: '#vue-P',
+        data: {
+            participantesP:[]
+        }
+    });
+    var appC = new Vue({
+        el: '#vue-C',
+        data: {
+            participantesC:[]
+        }
+    });
+    llenar();
+    function llenar(){
+        $.ajax({
+            url: "inject/obtenerUsuarios.php?perfil="+0,
+            success: function (es) {
+                console.log(es);
+                let respuesta = JSON.parse(es);
+                for(let i = 0;i < respuesta.length;i++){
+                        let add = {
+                            "id":respuesta[i].id,
+                            "nombre":respuesta[i].nombre
+                        };
+                        app.participantesP.push(add);
+                        appC.participantesC.push(add);
+                    
+                }
+                 
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
+        
+    }
+    function busquedaFiltrada(perfil,campo) {
+        if(campo=='1')
+        {
+            app.participantesP=[];
+                }
+            else{
+                appC.participantesC=[];
+        }
+                        
+        $.ajax({
+            url: "inject/obtenerUsuarios.php?perfil="+perfil,
+            success: function (es) {
+                console.log(es);
+                let respuesta = JSON.parse(es);
+                for(let i = 0;i < respuesta.length;i++){
+                        let add = {
+                            "id":respuesta[i].id,
+                            "nombre":respuesta[i].nombre
+                        };
+                        if(campo=='1')
+                        {
+                            app.participantesP.push(add);
+                        }
+                        else{
+                            appC.participantesC.push(add);
+                        }     
+                }
+                 
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
+    }
+    </script>
+
     <?= $Page->copy_sender->getCustomMessage() ?>
     <div class="invalid-feedback"><?= $Page->copy_sender->getErrorMessage() ?></div>
 <?= $Page->copy_sender->Lookup->getParamTag($Page, "p_x_copy_sender") ?>
@@ -238,6 +339,7 @@ loadjs.ready(["femail2add", "editor"], function() {
 </div></div>
     </div>
 <?php } ?>
+
 <?php if ($Page->archivo->Visible) { // archivo ?>
     <div id="r_archivo" class="form-group row">
         <label id="elh_email2_archivo" class="<?= $Page->LeftColumnClass ?>"><?= $Page->archivo->caption() ?><?= $Page->archivo->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
@@ -254,10 +356,12 @@ loadjs.ready(["femail2add", "editor"], function() {
 <div class="invalid-feedback"><?= $Page->archivo->getErrorMessage() ?></div>
 <input type="hidden" name="fn_x_archivo" id= "fn_x_archivo" value="<?= $Page->archivo->Upload->FileName ?>">
 <input type="hidden" name="fa_x_archivo" id= "fa_x_archivo" value="0">
+<input type="hidden" name="x_id_mensaje" id="x_id_mensaje" value="<?php echo $_GET['IdResMsg'] ?>">
 <input type="hidden" name="fs_x_archivo" id= "fs_x_archivo" value="100">
 <input type="hidden" name="fx_x_archivo" id= "fx_x_archivo" value="<?= $Page->archivo->UploadAllowedFileExt ?>">
 <input type="hidden" name="fm_x_archivo" id= "fm_x_archivo" value="<?= $Page->archivo->UploadMaxFileSize ?>">
 <input type="hidden" name="fc_x_archivo" id= "fc_x_archivo" value="<?= $Page->archivo->UploadMaxFileCount ?>">
+
 </div>
 <table id="ft_x_archivo" class="table table-sm float-left ew-upload-table"><tbody class="files"></tbody></table>
 </span>
@@ -284,9 +388,11 @@ loadjs.ready("head", function() {
     ew.addEventHandlers("email2");
 });
 </script>
+
 <script>
 loadjs.ready("load", function () {
     // Startup script
-    $("label#elh_email2_sender_userid").remove(),$("label#elh_email2_sujeto").remove(),$("label#elh_email2_mensaje").remove(),$("label#elh_email2_copy_sender").remove(),$("label#elh_email2_archivo").remove(),$("h4").text("Nuevo Correo");var a=ew.vars.v,fec=ew.vars.fecha,aped=ew.vars.ape,namep=ew.vars.nom,titulo=ew.vars.titles,cuerpo=ew.vars.bodys,idresponder=ew.vars.idm,idrenviar=ew.vars.re,Idmsg=ew.vars.msg,Idreen=ew.vars.reemsg;if(void 0!==idrenviar&&idrenviar&&($("#x_sujeto").val("Fwd: "+titulo),$("#x_mensaje").html(" ---------- Forwarded message --------- <br> De: "+namep+" "+aped+"<br> Fecha: "+fec+"<br>"+cuerpo)),void 0!==idresponder&&idresponder){var archivo=ew.vars.arch,remi=ew.vars.remitente;$("#x_sujeto").val("Re: "+titulo),$("#x_mensaje").html("La Fecha "+fec+" <strong>"+namep+" "+aped+" </strong> Escribió: <br>----------"+cuerpo)}void 0!==Idmsg&&Idmsg&&($("#x_sujeto").val("Fwd: "+titulo),$("#x_mensaje").html("---------- Respuesta Mensajes --------- <br> "+titulo+"<br> "+cuerpo+"<br> -------------------------------------------<br>")),void 0!==Idreen&&Idreen&&($("#x_sujeto").val("Fwd: "+titulo),$("#x_mensaje").html("---------- Cooperación para Mensajes --------- <br> "+titulo+"<br> "+cuerpo+"<br> -------------------------------------------<br>")),$("#btn-action").html("Enviar"),$(".ew-submit").html("Enviar");
+    
+    $("label#elh_email2_sender_userid").remove(),$("label#elh_email2_sujeto").remove(),$("label#elh_email2_mensaje").remove(),$("label#elh_email2_copy_sender").remove(),$("label#elh_email2_archivo").remove(),$("h4").text("Nuevo Correo");var a=ew.vars.v,fec=ew.vars.fecha,aped=ew.vars.ape,namep=ew.vars.nom,titulo=ew.vars.titles,cuerpo=ew.vars.bodys,idresponder=ew.vars.idm,idrenviar=ew.vars.re;if(void 0!==idrenviar&&idrenviar&&($("#x_sujeto").val("Fwd: "+titulo),$("#x_mensaje").html(" ---------- Forwarded message --------- <br> De: "+namep+" "+aped+"<br> Fecha: "+fec+"<br>"+cuerpo)),void 0!==idresponder&&idresponder){var archivo=ew.vars.arch,remi=ew.vars.remitente;$("#x_sujeto").val("Re: "+titulo),$("#id_mensaje"),$("#x_mensaje").html("La Fecha "+fec+" <strong>"+namep+" "+aped+" </strong> Escribió: <br>----------"+cuerpo)}$("#btn-action").html("Enviar"),$(".ew-submit").html("Enviar");
 });
 </script>

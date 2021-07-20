@@ -634,8 +634,8 @@ class UsersList extends Users
         $this->estado->setVisibility();
         $this->horario->Visible = false;
         $this->limite->Visible = false;
+        $this->organizacion->setVisibility();
         $this->img_user->setVisibility();
-        $this->blocks->Visible = false;
         $this->hideFieldsForAddEdit();
 
         // Global Page Loading event (in userfn*.php)
@@ -1046,8 +1046,8 @@ class UsersList extends Users
         $filterList = Concat($filterList, $this->estado->AdvancedSearch->toJson(), ","); // Field estado
         $filterList = Concat($filterList, $this->horario->AdvancedSearch->toJson(), ","); // Field horario
         $filterList = Concat($filterList, $this->limite->AdvancedSearch->toJson(), ","); // Field limite
+        $filterList = Concat($filterList, $this->organizacion->AdvancedSearch->toJson(), ","); // Field organizacion
         $filterList = Concat($filterList, $this->img_user->AdvancedSearch->toJson(), ","); // Field img_user
-        $filterList = Concat($filterList, $this->blocks->AdvancedSearch->toJson(), ","); // Field blocks
         if ($this->BasicSearch->Keyword != "") {
             $wrk = "\"" . Config("TABLE_BASIC_SEARCH") . "\":\"" . JsEncode($this->BasicSearch->Keyword) . "\",\"" . Config("TABLE_BASIC_SEARCH_TYPE") . "\":\"" . JsEncode($this->BasicSearch->Type) . "\"";
             $filterList = Concat($filterList, $wrk, ",");
@@ -1208,6 +1208,14 @@ class UsersList extends Users
         $this->limite->AdvancedSearch->SearchOperator2 = @$filter["w_limite"];
         $this->limite->AdvancedSearch->save();
 
+        // Field organizacion
+        $this->organizacion->AdvancedSearch->SearchValue = @$filter["x_organizacion"];
+        $this->organizacion->AdvancedSearch->SearchOperator = @$filter["z_organizacion"];
+        $this->organizacion->AdvancedSearch->SearchCondition = @$filter["v_organizacion"];
+        $this->organizacion->AdvancedSearch->SearchValue2 = @$filter["y_organizacion"];
+        $this->organizacion->AdvancedSearch->SearchOperator2 = @$filter["w_organizacion"];
+        $this->organizacion->AdvancedSearch->save();
+
         // Field img_user
         $this->img_user->AdvancedSearch->SearchValue = @$filter["x_img_user"];
         $this->img_user->AdvancedSearch->SearchOperator = @$filter["z_img_user"];
@@ -1215,14 +1223,6 @@ class UsersList extends Users
         $this->img_user->AdvancedSearch->SearchValue2 = @$filter["y_img_user"];
         $this->img_user->AdvancedSearch->SearchOperator2 = @$filter["w_img_user"];
         $this->img_user->AdvancedSearch->save();
-
-        // Field blocks
-        $this->blocks->AdvancedSearch->SearchValue = @$filter["x_blocks"];
-        $this->blocks->AdvancedSearch->SearchOperator = @$filter["z_blocks"];
-        $this->blocks->AdvancedSearch->SearchCondition = @$filter["v_blocks"];
-        $this->blocks->AdvancedSearch->SearchValue2 = @$filter["y_blocks"];
-        $this->blocks->AdvancedSearch->SearchOperator2 = @$filter["w_blocks"];
-        $this->blocks->AdvancedSearch->save();
         $this->BasicSearch->setKeyword(@$filter[Config("TABLE_BASIC_SEARCH")]);
         $this->BasicSearch->setType(@$filter[Config("TABLE_BASIC_SEARCH_TYPE")]);
     }
@@ -1250,8 +1250,8 @@ class UsersList extends Users
         $this->buildSearchSql($where, $this->estado, $default, false); // estado
         $this->buildSearchSql($where, $this->horario, $default, false); // horario
         $this->buildSearchSql($where, $this->limite, $default, false); // limite
+        $this->buildSearchSql($where, $this->organizacion, $default, false); // organizacion
         $this->buildSearchSql($where, $this->img_user, $default, false); // img_user
-        $this->buildSearchSql($where, $this->blocks, $default, false); // blocks
 
         // Set up search parm
         if (!$default && $where != "" && in_array($this->Command, ["", "reset", "resetall"])) {
@@ -1273,8 +1273,8 @@ class UsersList extends Users
             $this->estado->AdvancedSearch->save(); // estado
             $this->horario->AdvancedSearch->save(); // horario
             $this->limite->AdvancedSearch->save(); // limite
+            $this->organizacion->AdvancedSearch->save(); // organizacion
             $this->img_user->AdvancedSearch->save(); // img_user
-            $this->blocks->AdvancedSearch->save(); // blocks
         }
         return $where;
     }
@@ -1351,6 +1351,7 @@ class UsersList extends Users
         $this->buildBasicSearchSql($where, $this->pais, $arKeywords, $type);
         $this->buildBasicSearchSql($where, $this->pw, $arKeywords, $type);
         $this->buildBasicSearchSql($where, $this->estado, $arKeywords, $type);
+        $this->buildBasicSearchSql($where, $this->organizacion, $arKeywords, $type);
         return $where;
     }
 
@@ -1516,10 +1517,10 @@ class UsersList extends Users
         if ($this->limite->AdvancedSearch->issetSession()) {
             return true;
         }
-        if ($this->img_user->AdvancedSearch->issetSession()) {
+        if ($this->organizacion->AdvancedSearch->issetSession()) {
             return true;
         }
-        if ($this->blocks->AdvancedSearch->issetSession()) {
+        if ($this->img_user->AdvancedSearch->issetSession()) {
             return true;
         }
         return false;
@@ -1569,8 +1570,8 @@ class UsersList extends Users
                 $this->estado->AdvancedSearch->unsetSession();
                 $this->horario->AdvancedSearch->unsetSession();
                 $this->limite->AdvancedSearch->unsetSession();
+                $this->organizacion->AdvancedSearch->unsetSession();
                 $this->img_user->AdvancedSearch->unsetSession();
-                $this->blocks->AdvancedSearch->unsetSession();
     }
 
     // Restore all search parameters
@@ -1597,8 +1598,8 @@ class UsersList extends Users
                 $this->estado->AdvancedSearch->load();
                 $this->horario->AdvancedSearch->load();
                 $this->limite->AdvancedSearch->load();
+                $this->organizacion->AdvancedSearch->load();
                 $this->img_user->AdvancedSearch->load();
-                $this->blocks->AdvancedSearch->load();
     }
 
     // Set up sort parameters
@@ -1619,6 +1620,7 @@ class UsersList extends Users
             $this->updateSort($this->telefono); // telefono
             $this->updateSort($this->pais); // pais
             $this->updateSort($this->estado); // estado
+            $this->updateSort($this->organizacion); // organizacion
             $this->updateSort($this->img_user); // img_user
             $this->setStartRecordNumber(1); // Reset start position
         }
@@ -1684,8 +1686,8 @@ class UsersList extends Users
                 $this->estado->setSort("");
                 $this->horario->setSort("");
                 $this->limite->setSort("");
+                $this->organizacion->setSort("");
                 $this->img_user->setSort("");
-                $this->blocks->setSort("");
             }
 
             // Reset start position
@@ -2150,18 +2152,18 @@ class UsersList extends Users
             }
         }
 
-        // img_user
-        if (!$this->isAddOrEdit() && $this->img_user->AdvancedSearch->get()) {
+        // organizacion
+        if (!$this->isAddOrEdit() && $this->organizacion->AdvancedSearch->get()) {
             $hasValue = true;
-            if (($this->img_user->AdvancedSearch->SearchValue != "" || $this->img_user->AdvancedSearch->SearchValue2 != "") && $this->Command == "") {
+            if (($this->organizacion->AdvancedSearch->SearchValue != "" || $this->organizacion->AdvancedSearch->SearchValue2 != "") && $this->Command == "") {
                 $this->Command = "search";
             }
         }
 
-        // blocks
-        if (!$this->isAddOrEdit() && $this->blocks->AdvancedSearch->get()) {
+        // img_user
+        if (!$this->isAddOrEdit() && $this->img_user->AdvancedSearch->get()) {
             $hasValue = true;
-            if (($this->blocks->AdvancedSearch->SearchValue != "" || $this->blocks->AdvancedSearch->SearchValue2 != "") && $this->Command == "") {
+            if (($this->img_user->AdvancedSearch->SearchValue != "" || $this->img_user->AdvancedSearch->SearchValue2 != "") && $this->Command == "") {
                 $this->Command = "search";
             }
         }
@@ -2251,9 +2253,9 @@ class UsersList extends Users
         $this->estado->setDbValue($row['estado']);
         $this->horario->setDbValue($row['horario']);
         $this->limite->setDbValue($row['limite']);
+        $this->organizacion->setDbValue($row['organizacion']);
         $this->img_user->Upload->DbValue = $row['img_user'];
         $this->img_user->setDbValue($this->img_user->Upload->DbValue);
-        $this->blocks->setDbValue($row['blocks']);
     }
 
     // Return a row with default values
@@ -2275,8 +2277,8 @@ class UsersList extends Users
         $row['estado'] = null;
         $row['horario'] = null;
         $row['limite'] = null;
+        $row['organizacion'] = null;
         $row['img_user'] = null;
-        $row['blocks'] = null;
         return $row;
     }
 
@@ -2344,9 +2346,9 @@ class UsersList extends Users
 
         // limite
 
-        // img_user
+        // organizacion
 
-        // blocks
+        // img_user
         if ($this->RowType == ROWTYPE_VIEW) {
             // id_users
             $this->id_users->ViewValue = $this->id_users->CurrentValue;
@@ -2372,7 +2374,7 @@ class UsersList extends Users
                 if ($this->escenario->ViewValue === null) { // Lookup from database
                     $filterWrk = "`id_escenario`" . SearchString("=", $curVal, DATATYPE_NUMBER, "");
                     $lookupFilter = function() {
-                        return (CurrentUserInfo("perfil") != 1) ? "id_escenario = '".CurrentUserInfo("escenario")."'"  : "";
+                        return (CurrentUserInfo("perfil") > 1) ? "id_escenario = '".CurrentUserInfo("escenario")."'"  : "";
                     };
                     $lookupFilter = $lookupFilter->bindTo($this);
                     $sqlWrk = $this->escenario->Lookup->getSql(false, $filterWrk, $lookupFilter, $this, true, true);
@@ -2512,6 +2514,10 @@ class UsersList extends Users
             $this->limite->ViewValue = FormatDateTime($this->limite->ViewValue, 0);
             $this->limite->ViewCustomAttributes = "";
 
+            // organizacion
+            $this->organizacion->ViewValue = $this->organizacion->CurrentValue;
+            $this->organizacion->ViewCustomAttributes = "";
+
             // img_user
             if (!EmptyValue($this->img_user->Upload->DbValue)) {
                 $this->img_user->ImageWidth = 50;
@@ -2522,10 +2528,6 @@ class UsersList extends Users
                 $this->img_user->ViewValue = "";
             }
             $this->img_user->ViewCustomAttributes = "";
-
-            // blocks
-            $this->blocks->ViewValue = $this->blocks->CurrentValue;
-            $this->blocks->ViewCustomAttributes = "";
 
             // id_users
             $this->id_users->LinkCustomAttributes = "";
@@ -2581,6 +2583,11 @@ class UsersList extends Users
             $this->estado->LinkCustomAttributes = "";
             $this->estado->HrefValue = "";
             $this->estado->TooltipValue = "";
+
+            // organizacion
+            $this->organizacion->LinkCustomAttributes = "";
+            $this->organizacion->HrefValue = "";
+            $this->organizacion->TooltipValue = "";
 
             // img_user
             $this->img_user->LinkCustomAttributes = "";
@@ -2679,6 +2686,15 @@ class UsersList extends Users
             $this->estado->EditCustomAttributes = "";
             $this->estado->EditValue = $this->estado->options(false);
             $this->estado->PlaceHolder = RemoveHtml($this->estado->caption());
+
+            // organizacion
+            $this->organizacion->EditAttrs["class"] = "form-control";
+            $this->organizacion->EditCustomAttributes = "";
+            if (!$this->organizacion->Raw) {
+                $this->organizacion->AdvancedSearch->SearchValue = HtmlDecode($this->organizacion->AdvancedSearch->SearchValue);
+            }
+            $this->organizacion->EditValue = HtmlEncode($this->organizacion->AdvancedSearch->SearchValue);
+            $this->organizacion->PlaceHolder = RemoveHtml($this->organizacion->caption());
 
             // img_user
             $this->img_user->EditAttrs["class"] = "form-control";
@@ -3047,8 +3063,8 @@ class UsersList extends Users
         $this->estado->AdvancedSearch->load();
         $this->horario->AdvancedSearch->load();
         $this->limite->AdvancedSearch->load();
+        $this->organizacion->AdvancedSearch->load();
         $this->img_user->AdvancedSearch->load();
-        $this->blocks->AdvancedSearch->load();
     }
 
     // Get export HTML tag
@@ -3521,7 +3537,7 @@ class UsersList extends Users
             switch ($fld->FieldVar) {
                 case "x_escenario":
                     $lookupFilter = function () {
-                        return (CurrentUserInfo("perfil") != 1) ? "id_escenario = '".CurrentUserInfo("escenario")."'"  : "";
+                        return (CurrentUserInfo("perfil") > 1) ? "id_escenario = '".CurrentUserInfo("escenario")."'"  : "";
                     };
                     $lookupFilter = $lookupFilter->bindTo($this);
                     break;

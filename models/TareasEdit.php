@@ -976,7 +976,7 @@ class TareasEdit extends Tareas
                         $filterWrk .= "`id_grupo`" . SearchString("=", trim($wrk), DATATYPE_NUMBER, "");
                     }
                     $lookupFilter = function() {
-                        return (CurrentUserInfo("perfil") > 1) ?  "id_grupo = '".CurrentUserInfo("grupo")."'" : "id_escenario = 53";
+                        return (CurrentUserInfo("perfil") > 1) ?  "id_grupo = '".CurrentUserInfo("grupo")."'" : "id_escenario = '".Container("escenario")->id_escenario->CurrentValue."'";
                     };
                     $lookupFilter = $lookupFilter->bindTo($this);
                     $sqlWrk = $this->id_grupo->Lookup->getSql(false, $filterWrk, $lookupFilter, $this, true, true);
@@ -1156,7 +1156,7 @@ class TareasEdit extends Tareas
                     }
                 }
                 $lookupFilter = function() {
-                    return (CurrentUserInfo("perfil") > 1) ?  "id_grupo = '".CurrentUserInfo("grupo")."'" : "id_escenario = 53";
+                    return (CurrentUserInfo("perfil") > 1) ?  "id_grupo = '".CurrentUserInfo("grupo")."'" : "id_escenario = '".Container("escenario")->id_escenario->CurrentValue."'";
                 };
                 $lookupFilter = $lookupFilter->bindTo($this);
                 $sqlWrk = $this->id_grupo->Lookup->getSql(true, $filterWrk, $lookupFilter, $this, false, true);
@@ -1658,7 +1658,7 @@ class TareasEdit extends Tareas
             switch ($fld->FieldVar) {
                 case "x_id_grupo":
                     $lookupFilter = function () {
-                        return (CurrentUserInfo("perfil") > 1) ?  "id_grupo = '".CurrentUserInfo("grupo")."'" : "id_escenario = 53";
+                        return (CurrentUserInfo("perfil") > 1) ?  "id_grupo = '".CurrentUserInfo("grupo")."'" : "id_escenario = '".Container("escenario")->id_escenario->CurrentValue."'";
                     };
                     $lookupFilter = $lookupFilter->bindTo($this);
                     break;

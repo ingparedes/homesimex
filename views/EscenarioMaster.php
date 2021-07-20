@@ -11,7 +11,7 @@ $escenario = Container("escenario");
     <tbody>
 <?php if ($escenario->id_escenario->Visible) { // id_escenario ?>
         <tr id="r_id_escenario">
-            <td class="<?= $escenario->TableLeftColumnClass ?>"><?= $escenario->id_escenario->caption() ?> </td>
+            <td class="<?= $escenario->TableLeftColumnClass ?>"><?= $escenario->id_escenario->caption() ?></td>
             <td <?= $escenario->id_escenario->cellAttributes() ?>>
 <span id="el_escenario_id_escenario">
 <span<?= $escenario->id_escenario->viewAttributes() ?>>

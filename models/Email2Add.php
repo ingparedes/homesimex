@@ -1440,6 +1440,7 @@ class Email2Add extends Email2
 
     /*SetClientVar("v",Get("texto") );*/
     //$vars $_GET['IdEmail'];
+   
     $IdEmail = Get("Idmail");
     $reenviar = Get("Idrenviar");
     $Idmsg = Get("IdResMsg");
@@ -1450,7 +1451,6 @@ class Email2Add extends Email2
     SetClientVar("reemsg",$reenviarmsg );
     if (!empty($IdEmail))
     {
-    $title = ExecuteScalar("SELECT  sujeto FROM email WHERE id_email =".$IdEmail);
     $body = ExecuteScalar("SELECT  mensaje FROM email WHERE id_email =".$IdEmail);
     $remite = ExecuteScalar("SELECT  reciever_userid FROM email WHERE id_email =".$IdEmail);
     $adj =  ExecuteScalar("SELECT archivo FROM email WHERE id_email =".$IdEmail);

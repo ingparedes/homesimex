@@ -257,7 +257,6 @@ class Escenario extends DbTable
         // image_escenario
         $this->image_escenario = new DbField('escenario', 'escenario', 'x_image_escenario', 'image_escenario', '`image_escenario`', '`image_escenario`', 200, 200, -1, true, '`image_escenario`', false, false, false, 'IMAGE', 'FILE');
         $this->image_escenario->Sortable = true; // Allow sort
-        $this->image_escenario->ImageResize = true;
         $this->image_escenario->CustomMsg = $Language->FieldPhrase($this->TableVar, $this->image_escenario->Param, "CustomMsg");
         $this->Fields['image_escenario'] = &$this->image_escenario;
 
@@ -1280,7 +1279,7 @@ SORTHTML;
         // image_escenario
         if (!EmptyValue($this->image_escenario->Upload->DbValue)) {
             $this->image_escenario->ImageWidth = 650;
-            $this->image_escenario->ImageHeight = 100;
+            $this->image_escenario->ImageHeight = 150;
             $this->image_escenario->ImageAlt = $this->image_escenario->alt();
             $this->image_escenario->ViewValue = $this->image_escenario->Upload->DbValue;
         } else {
@@ -1496,7 +1495,7 @@ SORTHTML;
         $this->image_escenario->EditCustomAttributes = "";
         if (!EmptyValue($this->image_escenario->Upload->DbValue)) {
             $this->image_escenario->ImageWidth = 650;
-            $this->image_escenario->ImageHeight = 100;
+            $this->image_escenario->ImageHeight = 150;
             $this->image_escenario->ImageAlt = $this->image_escenario->alt();
             $this->image_escenario->EditValue = $this->image_escenario->Upload->DbValue;
         } else {

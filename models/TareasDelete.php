@@ -657,7 +657,7 @@ class TareasDelete extends Tareas
                         $filterWrk .= "`id_grupo`" . SearchString("=", trim($wrk), DATATYPE_NUMBER, "");
                     }
                     $lookupFilter = function() {
-                        return (CurrentUserInfo("perfil") > 1) ?  "id_grupo = '".CurrentUserInfo("grupo")."'" : "id_escenario = 53";
+                        return (CurrentUserInfo("perfil") > 1) ?  "id_grupo = '".CurrentUserInfo("grupo")."'" : "id_escenario = '".Container("escenario")->id_escenario->CurrentValue."'";
                     };
                     $lookupFilter = $lookupFilter->bindTo($this);
                     $sqlWrk = $this->id_grupo->Lookup->getSql(false, $filterWrk, $lookupFilter, $this, true, true);
@@ -797,14 +797,6 @@ class TareasDelete extends Tareas
         if (count($rows) == 0) {
             $this->setFailureMessage($Language->phrase("NoRecord")); // No record found
             return false;
-        }
-        foreach ($rows as $row) {
-            $rsdetail = Container("mensajes")->loadRs("`id_tarea` = " . QuotedValue($row['id_tarea'], DATATYPE_NUMBER, 'DB'))->fetch();
-            if ($rsdetail !== false) {
-                $relatedRecordMsg = str_replace("%t", "mensajes", $Language->phrase("RelatedRecordExists"));
-                $this->setFailureMessage($relatedRecordMsg);
-                return false;
-            }
         }
         $conn->beginTransaction();
 
@@ -968,7 +960,7 @@ class TareasDelete extends Tareas
             switch ($fld->FieldVar) {
                 case "x_id_grupo":
                     $lookupFilter = function () {
-                        return (CurrentUserInfo("perfil") > 1) ?  "id_grupo = '".CurrentUserInfo("grupo")."'" : "id_escenario = 53";
+                        return (CurrentUserInfo("perfil") > 1) ?  "id_grupo = '".CurrentUserInfo("grupo")."'" : "id_escenario = '".Container("escenario")->id_escenario->CurrentValue."'";
                     };
                     $lookupFilter = $lookupFilter->bindTo($this);
                     break;

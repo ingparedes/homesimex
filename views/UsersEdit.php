@@ -32,6 +32,7 @@ loadjs.ready("head", function () {
         ["pais", [fields.pais.visible && fields.pais.required ? ew.Validators.required(fields.pais.caption) : null], fields.pais.isInvalid],
         ["pw", [fields.pw.visible && fields.pw.required ? ew.Validators.required(fields.pw.caption) : null], fields.pw.isInvalid],
         ["estado", [fields.estado.visible && fields.estado.required ? ew.Validators.required(fields.estado.caption) : null], fields.estado.isInvalid],
+        ["organizacion", [fields.organizacion.visible && fields.organizacion.required ? ew.Validators.required(fields.organizacion.caption) : null], fields.organizacion.isInvalid],
         ["img_user", [fields.img_user.visible && fields.img_user.required ? ew.Validators.fileRequired(fields.img_user.caption) : null], fields.img_user.isInvalid]
     ]);
 
@@ -140,7 +141,7 @@ $Page->showMessage();
 <?php } ?>
 <div class="ew-edit-div"><!-- page* -->
 <?php if ($Page->nombres->Visible) { // nombres ?>
-    <div id="r_nombres" class="form-group row">
+    <div id="r_nombres" class="form-group">
         <label id="elh_users_nombres" for="x_nombres" class="<?= $Page->LeftColumnClass ?>"><?= $Page->nombres->caption() ?><?= $Page->nombres->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->nombres->cellAttributes() ?>>
 <span id="el_users_nombres">
@@ -152,7 +153,7 @@ $Page->showMessage();
     </div>
 <?php } ?>
 <?php if ($Page->apellidos->Visible) { // apellidos ?>
-    <div id="r_apellidos" class="form-group row">
+    <div id="r_apellidos" class="form-group">
         <label id="elh_users_apellidos" for="x_apellidos" class="<?= $Page->LeftColumnClass ?>"><?= $Page->apellidos->caption() ?><?= $Page->apellidos->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->apellidos->cellAttributes() ?>>
 <span id="el_users_apellidos">
@@ -164,7 +165,7 @@ $Page->showMessage();
     </div>
 <?php } ?>
 <?php if ($Page->escenario->Visible) { // escenario ?>
-    <div id="r_escenario" class="form-group row">
+    <div id="r_escenario" class="form-group">
         <label id="elh_users_escenario" for="x_escenario" class="<?= $Page->LeftColumnClass ?>"><?= $Page->escenario->caption() ?><?= $Page->escenario->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->escenario->cellAttributes() ?>>
 <?php if ($Page->escenario->getSessionValue() != "") { ?>
@@ -206,7 +207,7 @@ loadjs.ready("head", function() {
     </div>
 <?php } ?>
 <?php if ($Page->grupo->Visible) { // grupo ?>
-    <div id="r_grupo" class="form-group row">
+    <div id="r_grupo" class="form-group">
         <label id="elh_users_grupo" for="x_grupo" class="<?= $Page->LeftColumnClass ?>"><?= $Page->grupo->caption() ?><?= $Page->grupo->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->grupo->cellAttributes() ?>>
 <?php if ($Page->grupo->getSessionValue() != "") { ?>
@@ -248,7 +249,7 @@ loadjs.ready("head", function() {
     </div>
 <?php } ?>
 <?php if ($Page->subgrupo->Visible) { // subgrupo ?>
-    <div id="r_subgrupo" class="form-group row">
+    <div id="r_subgrupo" class="form-group">
         <label id="elh_users_subgrupo" for="x_subgrupo" class="<?= $Page->LeftColumnClass ?>"><?= $Page->subgrupo->caption() ?><?= $Page->subgrupo->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->subgrupo->cellAttributes() ?>>
 <?php if ($Page->subgrupo->getSessionValue() != "") { ?>
@@ -289,7 +290,7 @@ loadjs.ready("head", function() {
     </div>
 <?php } ?>
 <?php if ($Page->perfil->Visible) { // perfil ?>
-    <div id="r_perfil" class="form-group row">
+    <div id="r_perfil" class="form-group">
         <label id="elh_users_perfil" for="x_perfil" class="<?= $Page->LeftColumnClass ?>"><?= $Page->perfil->caption() ?><?= $Page->perfil->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->perfil->cellAttributes() ?>>
 <?php if (!$Security->isAdmin() && $Security->isLoggedIn()) { // Non system admin ?>
@@ -328,7 +329,7 @@ loadjs.ready("head", function() {
     </div>
 <?php } ?>
 <?php if ($Page->_email->Visible) { // email ?>
-    <div id="r__email" class="form-group row">
+    <div id="r__email" class="form-group">
         <label id="elh_users__email" for="x__email" class="<?= $Page->LeftColumnClass ?>"><?= $Page->_email->caption() ?><?= $Page->_email->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->_email->cellAttributes() ?>>
 <span id="el_users__email">
@@ -340,7 +341,7 @@ loadjs.ready("head", function() {
     </div>
 <?php } ?>
 <?php if ($Page->telefono->Visible) { // telefono ?>
-    <div id="r_telefono" class="form-group row">
+    <div id="r_telefono" class="form-group">
         <label id="elh_users_telefono" for="x_telefono" class="<?= $Page->LeftColumnClass ?>"><?= $Page->telefono->caption() ?><?= $Page->telefono->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->telefono->cellAttributes() ?>>
 <span id="el_users_telefono">
@@ -352,7 +353,7 @@ loadjs.ready("head", function() {
     </div>
 <?php } ?>
 <?php if ($Page->pais->Visible) { // pais ?>
-    <div id="r_pais" class="form-group row">
+    <div id="r_pais" class="form-group">
         <label id="elh_users_pais" for="x_pais" class="<?= $Page->LeftColumnClass ?>"><?= $Page->pais->caption() ?><?= $Page->pais->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->pais->cellAttributes() ?>>
 <span id="el_users_pais">
@@ -385,13 +386,14 @@ loadjs.ready("head", function() {
     </div>
 <?php } ?>
 <?php if ($Page->pw->Visible) { // pw ?>
-    <div id="r_pw" class="form-group row">
+    <div id="r_pw" class="form-group">
         <label id="elh_users_pw" for="x_pw" class="<?= $Page->LeftColumnClass ?>"><?= $Page->pw->caption() ?><?= $Page->pw->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->pw->cellAttributes() ?>>
 <span id="el_users_pw">
 <div class="input-group">
     <input type="password" name="x_pw" id="x_pw" autocomplete="new-password" data-field="x_pw" value="<?= $Page->pw->EditValue ?>" size="30" maxlength="30" placeholder="<?= HtmlEncode($Page->pw->getPlaceHolder()) ?>"<?= $Page->pw->editAttributes() ?> aria-describedby="x_pw_help">
     <div class="input-group-append"><button type="button" class="btn btn-default ew-toggle-password rounded-right" onclick="ew.togglePassword(event);"><i class="fas fa-eye"></i></button></div>
+    <div><button class="btn btn-default" type="button" onclick="generarClaveAleatoria();"><i class="fa fa-key"></i></button></div><!--MIGUEL boton para autogenerar clave-->
 </div>
 <?= $Page->pw->getCustomMessage() ?>
 <div class="invalid-feedback"><?= $Page->pw->getErrorMessage() ?></div>
@@ -400,7 +402,7 @@ loadjs.ready("head", function() {
     </div>
 <?php } ?>
 <?php if ($Page->estado->Visible) { // estado ?>
-    <div id="r_estado" class="form-group row">
+    <div id="r_estado" class="form-group>
         <label id="elh_users_estado" class="<?= $Page->LeftColumnClass ?>"><?= $Page->estado->caption() ?><?= $Page->estado->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->estado->cellAttributes() ?>>
 <span id="el_users_estado">
@@ -431,8 +433,20 @@ loadjs.ready("head", function() {
 </div></div>
     </div>
 <?php } ?>
+<?php if ($Page->organizacion->Visible) { // organizacion ?>
+    <div id="r_organizacion" class="form-group">
+        <label id="elh_users_organizacion" for="x_organizacion" class="<?= $Page->LeftColumnClass ?>"><?= $Page->organizacion->caption() ?><?= $Page->organizacion->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
+        <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->organizacion->cellAttributes() ?>>
+<span id="el_users_organizacion">
+<input type="<?= $Page->organizacion->getInputTextType() ?>" data-table="users" data-field="x_organizacion" name="x_organizacion" id="x_organizacion" size="100" maxlength="100" placeholder="<?= HtmlEncode($Page->organizacion->getPlaceHolder()) ?>" value="<?= $Page->organizacion->EditValue ?>"<?= $Page->organizacion->editAttributes() ?> aria-describedby="x_organizacion_help">
+<?= $Page->organizacion->getCustomMessage() ?>
+<div class="invalid-feedback"><?= $Page->organizacion->getErrorMessage() ?></div>
+</span>
+</div></div>
+    </div>
+<?php } ?>
 <?php if ($Page->img_user->Visible) { // img_user ?>
-    <div id="r_img_user" class="form-group row">
+    <div id="r_img_user" class="form-group">
         <label id="elh_users_img_user" class="<?= $Page->LeftColumnClass ?>"><?= $Page->img_user->caption() ?><?= $Page->img_user->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->img_user->cellAttributes() ?>>
 <span id="el_users_img_user">
@@ -472,6 +486,16 @@ $Page->showPageFooter();
 echo GetDebugMessage();
 ?>
 <script>
+    function generarClaveAleatoria(){//MIGUEL Funcion para generar clave
+    var length = 8,
+        charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789<>",//Caracteres 
+        retVal = "";
+    for (var i = 0, n = charset.length; i < length; ++i) {
+        retVal += charset.charAt(Math.floor(Math.random() * n));
+    }
+    //console.log(retVal);
+    document.getElementById('x_pw').value=retVal;
+  }
 // Field event handlers
 loadjs.ready("head", function() {
     ew.addEventHandlers("users");

@@ -80,6 +80,19 @@ $Page->renderOtherOptions();
 <?php
 $Page->showMessage();
 ?>
+<?php
+   $id_escenario = HtmlEncode($Page->id_escenario->getSessionValue());
+  //echo CurrentUserID();
+//	$nombreescnario = ExecuteRow("SELECT nombre_escenario,DATE_FORMAT(fechaini_real, '%Y/%m/%d'), DATE_FORMAT(fechafinal_real, '%Y/%m/%d')  FROM escenario WHERE id_escenario =  = '".$id_escenario."';");
+	$escenID = ExecuteRow("SELECT DATE_FORMAT(fechaini_real, '%Y/%m/%d'), DATE_FORMAT(fechafinal_real, '%Y/%m/%d'),nombre_escenario FROM escenario WHERE id_escenario = '".$id_escenario."';");
+?>
+
+<div class="callout callout-primary">
+  <h4>Simulación:  <?php echo $escenID[2];  ?>  </h4>
+ <p> <em> Fecha inicio real: <?php echo $escenID[1]  ?> Fecha fin real: <?php echo $escenID[0];  ?> </em></p>
+</div>
+
+
 <?php if ($Page->TotalRecords > 0 || $Page->CurrentAction) { ?>
 <div class="card ew-card ew-grid<?php if ($Page->isAddOrEdit()) { ?> ew-grid-add-edit<?php } ?> grupo">
 <?php if (!$Page->isExport()) { ?>
@@ -87,6 +100,8 @@ $Page->showMessage();
 <?php if (!$Page->isGridAdd()) { ?>
 <form name="ew-pager-form" class="form-inline ew-form ew-pager-form" action="<?= CurrentPageUrl(false) ?>">
 <?= $Page->Pager->render() ?>
+
+
 </form>
 <?php } ?>
 <div class="ew-list-other-options">
@@ -296,7 +311,7 @@ loadjs.ready("head", function() {
 <script>
 loadjs.ready("load", function () {
     // Startup script
-    $("#r_id_escenario").hide(),$("#r_icon_escenario").hide(),$("#r_fechacreacion_escenario").hide(),$("#r_estado").hide(),$("#r_entrar").hide(),$('[class="btn-group btn-group-sm"]').remove();
+    $("#r_id_escenario").hide(),$("#r_icon_escenario").hide(),$("#r_fechacreacion_escenario").hide(),$("#r_estado").hide(),$("#r_entrar").hide();
 });
 </script>
 <?php } ?>

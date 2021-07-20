@@ -140,6 +140,7 @@ $Page->showMessage();
 </div></div>
     </div>
 <?php } ?>
+<h3> Nota conceptual de la simulación </h3>
 <?php if ($Page->nombre_escenario->Visible) { // nombre_escenario ?>
     <div id="r_nombre_escenario" class="form-group row">
         <label id="elh_escenario_nombre_escenario" for="x_nombre_escenario" class="<?= $Page->LeftColumnClass ?>"><?= $Page->nombre_escenario->caption() ?><?= $Page->nombre_escenario->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>

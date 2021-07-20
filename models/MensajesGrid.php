@@ -1295,82 +1295,12 @@ class MensajesGrid extends Mensajes
     // Set up list options (extended codes)
     protected function setupListOptionsExt()
     {
-        // Hide detail items for dropdown if necessary
-        $this->ListOptions->hideDetailItemsForDropDown();
     }
 
     // Render list options (extended codes)
     protected function renderListOptionsExt()
     {
         global $Security, $Language;
-        $links = "";
-        $btngrps = "";
-        $sqlwrk = "`id_inyect`=" . AdjustSql($this->id_inyect->CurrentValue, $this->Dbid) . "";
-
-        // Column "detail_resmensaje"
-        if ($this->DetailPages && $this->DetailPages["resmensaje"] && $this->DetailPages["resmensaje"]->Visible) {
-            $link = "";
-            $option = $this->ListOptions["detail_resmensaje"];
-            $url = "ResmensajePreview?t=mensajes&f=" . Encrypt($sqlwrk);
-            $btngrp = "<div data-table=\"resmensaje\" data-url=\"" . $url . "\">";
-            if ($Security->allowList(CurrentProjectID() . 'mensajes')) {
-                $label = $Language->TablePhrase("resmensaje", "TblCaption");
-                $link = "<li class=\"nav-item\"><a href=\"#\" class=\"nav-link\" data-toggle=\"tab\" data-table=\"resmensaje\" data-url=\"" . $url . "\">" . $label . "</a></li>";
-                $links .= $link;
-                $detaillnk = JsEncodeAttribute("ResmensajeList?" . Config("TABLE_SHOW_MASTER") . "=mensajes&" . GetForeignKeyUrl("fk_id_inyect", $this->id_inyect->CurrentValue) . "");
-                $btngrp .= "<a href=\"#\" class=\"mr-2\" title=\"" . $Language->TablePhrase("resmensaje", "TblCaption") . "\" onclick=\"window.location='" . $detaillnk . "';return false;\">" . $Language->phrase("MasterDetailListLink") . "</a>";
-            }
-            $detailPageObj = Container("ResmensajeGrid");
-            if ($detailPageObj->DetailView && $Security->canView() && $Security->allowView(CurrentProjectID() . 'mensajes')) {
-                $caption = $Language->phrase("MasterDetailViewLink");
-                $url = $this->getViewUrl(Config("TABLE_SHOW_DETAIL") . "=resmensaje");
-                $btngrp .= "<a href=\"#\" class=\"mr-2\" title=\"" . HtmlTitle($caption) . "\" onclick=\"window.location='" . HtmlEncode($url) . "';return false;\">" . $caption . "</a>";
-            }
-            if ($detailPageObj->DetailEdit && $Security->canEdit() && $Security->allowEdit(CurrentProjectID() . 'mensajes')) {
-                $caption = $Language->phrase("MasterDetailEditLink");
-                $url = $this->getEditUrl(Config("TABLE_SHOW_DETAIL") . "=resmensaje");
-                $btngrp .= "<a href=\"#\" class=\"mr-2\" title=\"" . HtmlTitle($caption) . "\" onclick=\"window.location='" . HtmlEncode($url) . "';return false;\">" . $caption . "</a>";
-            }
-            $btngrp .= "</div>";
-            if ($link != "") {
-                $btngrps .= $btngrp;
-                $option->Body .= "<div class=\"d-none ew-preview\">" . $link . $btngrp . "</div>";
-            }
-        }
-
-        // Hide detail items if necessary
-        $this->ListOptions->hideDetailItemsForDropDown();
-
-        // Column "preview"
-        $option = $this->ListOptions["preview"];
-        if (!$option) { // Add preview column
-            $option = &$this->ListOptions->add("preview");
-            $option->OnLeft = false;
-            if ($option->OnLeft) {
-                $option->moveTo($this->ListOptions->itemPos("checkbox") + 1);
-            } else {
-                $option->moveTo($this->ListOptions->itemPos("checkbox"));
-            }
-            $option->Visible = !($this->isExport() || $this->isGridAdd() || $this->isGridEdit());
-            $option->ShowInDropDown = false;
-            $option->ShowInButtonGroup = false;
-        }
-        if ($option) {
-            $option->Body = "<i class=\"ew-preview-row-btn ew-icon icon-expand\"></i>";
-            $option->Body .= "<div class=\"d-none ew-preview\">" . $links . $btngrps . "</div>";
-            if ($option->Visible) {
-                $option->Visible = $links != "";
-            }
-        }
-
-        // Column "details" (Multiple details)
-        $option = $this->ListOptions["details"];
-        if ($option) {
-            $option->Body .= "<div class=\"d-none ew-preview\">" . $links . $btngrps . "</div>";
-            if ($option->Visible) {
-                $option->Visible = $links != "";
-            }
-        }
     }
 
     // Get upload files
@@ -1785,7 +1715,7 @@ class MensajesGrid extends Mensajes
                         $filterWrk .= "`id`" . SearchString("=", trim($wrk), DATATYPE_STRING, "");
                     }
                     $lookupFilter = function() {
-                        return (CurrentUserInfo("perfil") == 2) ? "`idgrupo` = '".CurrentUserInfo("grupo")."'" : "`escenario` = '".CurrentUserInfo("escenario")."'";
+                        return (CurrentUserInfo("perfil") == 2 ) ? "`idgrupo` = '".CurrentUserInfo("grupo")."'" : "`escenario` = '".CurrentUserInfo("escenario")."'";
                     };
                     $lookupFilter = $lookupFilter->bindTo($this);
                     $sqlWrk = $this->para->Lookup->getSql(false, $filterWrk, $lookupFilter, $this, true, true);
@@ -1939,7 +1869,6 @@ class MensajesGrid extends Mensajes
             $this->id_actor->PlaceHolder = RemoveHtml($this->id_actor->caption());
 
             // para
-            $this->para->EditAttrs["class"] = "form-control";
             $this->para->EditCustomAttributes = "";
             $curVal = trim(strval($this->para->CurrentValue));
             if ($curVal != "") {
@@ -1949,6 +1878,9 @@ class MensajesGrid extends Mensajes
             }
             if ($this->para->ViewValue !== null) { // Load from cache
                 $this->para->EditValue = array_values($this->para->Lookup->Options);
+                if ($this->para->ViewValue == "") {
+                    $this->para->ViewValue = $Language->phrase("PleaseSelect");
+                }
             } else { // Lookup from database
                 if ($curVal == "") {
                     $filterWrk = "0=1";
@@ -1963,12 +1895,22 @@ class MensajesGrid extends Mensajes
                     }
                 }
                 $lookupFilter = function() {
-                    return (CurrentUserInfo("perfil") == 2) ? "`idgrupo` = '".CurrentUserInfo("grupo")."'" : "`escenario` = '".CurrentUserInfo("escenario")."'";
+                    return (CurrentUserInfo("perfil") == 2 ) ? "`idgrupo` = '".CurrentUserInfo("grupo")."'" : "`escenario` = '".CurrentUserInfo("escenario")."'";
                 };
                 $lookupFilter = $lookupFilter->bindTo($this);
                 $sqlWrk = $this->para->Lookup->getSql(true, $filterWrk, $lookupFilter, $this, false, true);
                 $rswrk = Conn()->executeQuery($sqlWrk)->fetchAll(\PDO::FETCH_BOTH);
                 $ari = count($rswrk);
+                if ($ari > 0) { // Lookup values found
+                    $this->para->ViewValue = new OptionValues();
+                    foreach ($rswrk as $row) {
+                        $arwrk = $this->para->Lookup->renderViewRow($row);
+                        $this->para->ViewValue->add($this->para->displayValue($arwrk));
+                        $ari++;
+                    }
+                } else {
+                    $this->para->ViewValue = $Language->phrase("PleaseSelect");
+                }
                 $arwrk = $rswrk;
                 $this->para->EditValue = $arwrk;
             }
@@ -2100,7 +2042,6 @@ class MensajesGrid extends Mensajes
             $this->id_actor->PlaceHolder = RemoveHtml($this->id_actor->caption());
 
             // para
-            $this->para->EditAttrs["class"] = "form-control";
             $this->para->EditCustomAttributes = "";
             $curVal = trim(strval($this->para->CurrentValue));
             if ($curVal != "") {
@@ -2110,6 +2051,9 @@ class MensajesGrid extends Mensajes
             }
             if ($this->para->ViewValue !== null) { // Load from cache
                 $this->para->EditValue = array_values($this->para->Lookup->Options);
+                if ($this->para->ViewValue == "") {
+                    $this->para->ViewValue = $Language->phrase("PleaseSelect");
+                }
             } else { // Lookup from database
                 if ($curVal == "") {
                     $filterWrk = "0=1";
@@ -2124,12 +2068,22 @@ class MensajesGrid extends Mensajes
                     }
                 }
                 $lookupFilter = function() {
-                    return (CurrentUserInfo("perfil") == 2) ? "`idgrupo` = '".CurrentUserInfo("grupo")."'" : "`escenario` = '".CurrentUserInfo("escenario")."'";
+                    return (CurrentUserInfo("perfil") == 2 ) ? "`idgrupo` = '".CurrentUserInfo("grupo")."'" : "`escenario` = '".CurrentUserInfo("escenario")."'";
                 };
                 $lookupFilter = $lookupFilter->bindTo($this);
                 $sqlWrk = $this->para->Lookup->getSql(true, $filterWrk, $lookupFilter, $this, false, true);
                 $rswrk = Conn()->executeQuery($sqlWrk)->fetchAll(\PDO::FETCH_BOTH);
                 $ari = count($rswrk);
+                if ($ari > 0) { // Lookup values found
+                    $this->para->ViewValue = new OptionValues();
+                    foreach ($rswrk as $row) {
+                        $arwrk = $this->para->Lookup->renderViewRow($row);
+                        $this->para->ViewValue->add($this->para->displayValue($arwrk));
+                        $ari++;
+                    }
+                } else {
+                    $this->para->ViewValue = $Language->phrase("PleaseSelect");
+                }
                 $arwrk = $rswrk;
                 $this->para->EditValue = $arwrk;
             }
@@ -2597,7 +2551,7 @@ class MensajesGrid extends Mensajes
                     break;
                 case "x_para":
                     $lookupFilter = function () {
-                        return (CurrentUserInfo("perfil") == 2) ? "`idgrupo` = '".CurrentUserInfo("grupo")."'" : "`escenario` = '".CurrentUserInfo("escenario")."'";
+                        return (CurrentUserInfo("perfil") == 2 ) ? "`idgrupo` = '".CurrentUserInfo("grupo")."'" : "`escenario` = '".CurrentUserInfo("escenario")."'";
                     };
                     $lookupFilter = $lookupFilter->bindTo($this);
                     break;

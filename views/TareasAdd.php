@@ -149,8 +149,8 @@ $Page->showMessage();
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->id_grupo->cellAttributes() ?>>
 <template id="tpx_tareas_id_grupo"><span id="el_tareas_id_grupo">
 <template id="tp_x_id_grupo">
-    <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" data-table="tareas" data-field="x_id_grupo" name="x_id_grupo" id="x_id_grupo"<?= $Page->id_grupo->editAttributes() ?>>
+    <div class="custom-control custom-radio">
+        <input type="radio" class="custom-control-input" data-table="tareas" data-field="x_id_grupo" name="x_id_grupo" id="x_id_grupo"<?= $Page->id_grupo->editAttributes() ?>>
         <label class="custom-control-label"></label>
     </div>
 </template>
@@ -276,10 +276,14 @@ loadjs.ready(["ftareasadd", "editor"], function() {
 </div><!-- /page* -->
 <div id="tpd_tareasadd" class="ew-custom-template"></div>
 <template id="tpm_tareasadd">
-<div id="ct_TareasAdd">  <?php
+<div id="ct_TareasAdd"> 
+
+    <?php
     //= CurrentUserInfo("escenario");
-   $id_escenario = $Page->id_escenario->getSessionValue();
- // echo Container("escenario")->id_escenario->CurrentValue;
+
+   //$id_escenario = $Page->id_escenario->getSessionValue();
+   $id_escenario = HtmlEncode($Page->id_escenario->getSessionValue());
+  //$id_escenario = Container("escenario")->id_escenario->CurrentValue;
 //	$nombreescnario = ExecuteRow("SELECT nombre_escenario,DATE_FORMAT(fechaini_real, '%Y/%m/%d'), DATE_FORMAT(fechafinal_real, '%Y/%m/%d')  FROM escenario WHERE id_escenario =  = '".$id_escenario."';");
 	$escenID = ExecuteRow("SELECT DATE_FORMAT(fechaini_real, '%Y/%m/%d'), DATE_FORMAT(fechafinal_real, '%Y/%m/%d'),nombre_escenario FROM escenario WHERE id_escenario = '".$id_escenario."';");
 ?>
@@ -350,7 +354,34 @@ $fecha = ExecuteRow("SELECT fechaini_real, fechafinal_real, fechaini_simulado, f
       //datefin =  moment(fecl, "YYYY-MM-DD HH:mm").toDate();
       datefin = moment(fecl).format("YYYY-MM-DD HH:mm");      
       $('#x_fechafin_tarea').val(datefin);
+      $('#x_fechainisimulado_tarea').val(datefin);
+      $('#x_fechafinsimulado_tarea').val(datefin);
+      flatpickr("#x_fechafin_tarea",{//MIGUEL--PONE QUE VALOR MINIMO EN FECHA FIN SEA EL VALOR INICIAL
+				locale: "es",
+				enableTime: true,
+				time_24hr: true,
+				dateFormat: "Y-m-d H:i",
+				minDate: datefin,
+				maxDate: fechaFin + " " + horaFin + ":" + minFin,
+				defaultDate: fechaInicial + " " + horaInicial + ":" + minInicial,
+			});
 });
+    $("input[name='x_fechainisimulado_tarea']").change(function() { // EVENTO CHANGE
+        fecl = new Date($('input[name=x_fechainisimulado_tarea]').val());
+        //datefin =  moment(fecl, "YYYY-MM-DD HH:mm").toDate();
+        datefin = moment(fecl).format("YYYY-MM-DD HH:mm");      
+        $('#x_fechafinsimulado_tarea').val(datefin);//MIGUEL-- ASIGNA VALOR MINIMO AL MAXIMO
+        flatpickr("#x_fechafinsimulado_tarea",{//MIGUEL---PONE QUE VALOR MINIMO EN FECHA FIN SEA EL VALOR INICIAL
+				locale: "es",
+				enableTime: true,
+				time_24hr: true,
+				dateFormat: "Y-m-d H:i",
+				minDate: datefin,
+				maxDate: fechaFinSimulado + " " + horaFinSimulado + ":" + minFinSimulado,
+				defaultDate: fechaIniSimulado + " " + horaIniSimulado + ":" + minIniSimulado,
+			});
+    });
+//centinela
 //var Xmas95 = fecl;
 //var weekday = Xmas95.getDay();
 //console.log('weekday',weekday);

@@ -5,8 +5,6 @@ namespace PHPMaker2021\simexamerica;
 
 // Page object
 $PersonalData = &$Page;
-
-
 ?>
 <?php
 $Page->showMessage();

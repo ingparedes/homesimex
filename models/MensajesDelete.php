@@ -718,7 +718,7 @@ class MensajesDelete extends Mensajes
                         $filterWrk .= "`id`" . SearchString("=", trim($wrk), DATATYPE_STRING, "");
                     }
                     $lookupFilter = function() {
-                        return (CurrentUserInfo("perfil") == 2) ? "`idgrupo` = '".CurrentUserInfo("grupo")."'" : "`escenario` = '".CurrentUserInfo("escenario")."'";
+                        return (CurrentUserInfo("perfil") == 2 ) ? "`idgrupo` = '".CurrentUserInfo("grupo")."'" : "`escenario` = '".CurrentUserInfo("escenario")."'";
                     };
                     $lookupFilter = $lookupFilter->bindTo($this);
                     $sqlWrk = $this->para->Lookup->getSql(false, $filterWrk, $lookupFilter, $this, true, true);
@@ -1008,7 +1008,7 @@ class MensajesDelete extends Mensajes
                     break;
                 case "x_para":
                     $lookupFilter = function () {
-                        return (CurrentUserInfo("perfil") == 2) ? "`idgrupo` = '".CurrentUserInfo("grupo")."'" : "`escenario` = '".CurrentUserInfo("escenario")."'";
+                        return (CurrentUserInfo("perfil") == 2 ) ? "`idgrupo` = '".CurrentUserInfo("grupo")."'" : "`escenario` = '".CurrentUserInfo("escenario")."'";
                     };
                     $lookupFilter = $lookupFilter->bindTo($this);
                     break;

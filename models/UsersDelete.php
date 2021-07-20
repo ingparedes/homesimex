@@ -389,8 +389,8 @@ class UsersDelete extends Users
         $this->estado->setVisibility();
         $this->horario->Visible = false;
         $this->limite->Visible = false;
+        $this->organizacion->setVisibility();
         $this->img_user->setVisibility();
-        $this->blocks->Visible = false;
         $this->hideFieldsForAddEdit();
 
         // Do not use lookup cache
@@ -577,9 +577,9 @@ class UsersDelete extends Users
         $this->estado->setDbValue($row['estado']);
         $this->horario->setDbValue($row['horario']);
         $this->limite->setDbValue($row['limite']);
+        $this->organizacion->setDbValue($row['organizacion']);
         $this->img_user->Upload->DbValue = $row['img_user'];
         $this->img_user->setDbValue($this->img_user->Upload->DbValue);
-        $this->blocks->setDbValue($row['blocks']);
     }
 
     // Return a row with default values
@@ -601,8 +601,8 @@ class UsersDelete extends Users
         $row['estado'] = null;
         $row['horario'] = null;
         $row['limite'] = null;
+        $row['organizacion'] = null;
         $row['img_user'] = null;
-        $row['blocks'] = null;
         return $row;
     }
 
@@ -648,9 +648,9 @@ class UsersDelete extends Users
 
         // limite
 
-        // img_user
+        // organizacion
 
-        // blocks
+        // img_user
         if ($this->RowType == ROWTYPE_VIEW) {
             // id_users
             $this->id_users->ViewValue = $this->id_users->CurrentValue;
@@ -676,7 +676,7 @@ class UsersDelete extends Users
                 if ($this->escenario->ViewValue === null) { // Lookup from database
                     $filterWrk = "`id_escenario`" . SearchString("=", $curVal, DATATYPE_NUMBER, "");
                     $lookupFilter = function() {
-                        return (CurrentUserInfo("perfil") != 1) ? "id_escenario = '".CurrentUserInfo("escenario")."'"  : "";
+                        return (CurrentUserInfo("perfil") > 1) ? "id_escenario = '".CurrentUserInfo("escenario")."'"  : "";
                     };
                     $lookupFilter = $lookupFilter->bindTo($this);
                     $sqlWrk = $this->escenario->Lookup->getSql(false, $filterWrk, $lookupFilter, $this, true, true);
@@ -816,6 +816,10 @@ class UsersDelete extends Users
             $this->limite->ViewValue = FormatDateTime($this->limite->ViewValue, 0);
             $this->limite->ViewCustomAttributes = "";
 
+            // organizacion
+            $this->organizacion->ViewValue = $this->organizacion->CurrentValue;
+            $this->organizacion->ViewCustomAttributes = "";
+
             // img_user
             if (!EmptyValue($this->img_user->Upload->DbValue)) {
                 $this->img_user->ImageWidth = 50;
@@ -826,10 +830,6 @@ class UsersDelete extends Users
                 $this->img_user->ViewValue = "";
             }
             $this->img_user->ViewCustomAttributes = "";
-
-            // blocks
-            $this->blocks->ViewValue = $this->blocks->CurrentValue;
-            $this->blocks->ViewCustomAttributes = "";
 
             // id_users
             $this->id_users->LinkCustomAttributes = "";
@@ -885,6 +885,11 @@ class UsersDelete extends Users
             $this->estado->LinkCustomAttributes = "";
             $this->estado->HrefValue = "";
             $this->estado->TooltipValue = "";
+
+            // organizacion
+            $this->organizacion->LinkCustomAttributes = "";
+            $this->organizacion->HrefValue = "";
+            $this->organizacion->TooltipValue = "";
 
             // img_user
             $this->img_user->LinkCustomAttributes = "";
@@ -1158,7 +1163,7 @@ class UsersDelete extends Users
             switch ($fld->FieldVar) {
                 case "x_escenario":
                     $lookupFilter = function () {
-                        return (CurrentUserInfo("perfil") != 1) ? "id_escenario = '".CurrentUserInfo("escenario")."'"  : "";
+                        return (CurrentUserInfo("perfil") > 1) ? "id_escenario = '".CurrentUserInfo("escenario")."'"  : "";
                     };
                     $lookupFilter = $lookupFilter->bindTo($this);
                     break;

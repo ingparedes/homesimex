@@ -81,7 +81,6 @@ class Mensajes extends DbTable
         $this->id_inyect = new DbField('mensajes', 'mensajes', 'x_id_inyect', 'id_inyect', '`id_inyect`', '`id_inyect`', 3, 11, -1, false, '`id_inyect`', false, false, false, 'FORMATTED TEXT', 'NO');
         $this->id_inyect->IsAutoIncrement = true; // Autoincrement field
         $this->id_inyect->IsPrimaryKey = true; // Primary key field
-        $this->id_inyect->IsForeignKey = true; // Foreign key field
         $this->id_inyect->Sortable = true; // Allow sort
         $this->id_inyect->DefaultErrorMessage = $Language->phrase("IncorrectInteger");
         $this->id_inyect->CustomMsg = $Language->FieldPhrase($this->TableVar, $this->id_inyect->Param, "CustomMsg");
@@ -327,32 +326,6 @@ class Mensajes extends DbTable
     public function sqlDetailFilter_tareas()
     {
         return "`id_tarea`=@id_tarea@";
-    }
-
-    // Current detail table name
-    public function getCurrentDetailTable()
-    {
-        return Session(PROJECT_NAME . "_" . $this->TableVar . "_" . Config("TABLE_DETAIL_TABLE"));
-    }
-
-    public function setCurrentDetailTable($v)
-    {
-        $_SESSION[PROJECT_NAME . "_" . $this->TableVar . "_" . Config("TABLE_DETAIL_TABLE")] = $v;
-    }
-
-    // Get detail url
-    public function getDetailUrl()
-    {
-        // Detail url
-        $detailUrl = "";
-        if ($this->getCurrentDetailTable() == "resmensaje") {
-            $detailUrl = Container("resmensaje")->getListUrl() . "?" . Config("TABLE_SHOW_MASTER") . "=" . $this->TableVar;
-            $detailUrl .= "&" . GetForeignKeyUrl("fk_id_inyect", $this->id_inyect->CurrentValue);
-        }
-        if ($detailUrl == "") {
-            $detailUrl = "MensajesList";
-        }
-        return $detailUrl;
     }
 
     // Table level SQL
@@ -682,33 +655,6 @@ class Mensajes extends DbTable
     // Update
     public function update(&$rs, $where = "", $rsold = null, $curfilter = true)
     {
-        // Cascade Update detail table 'resmensaje'
-        $cascadeUpdate = false;
-        $rscascade = [];
-        if ($rsold && (isset($rs['id_inyect']) && $rsold['id_inyect'] != $rs['id_inyect'])) { // Update detail field 'id_inyect'
-            $cascadeUpdate = true;
-            $rscascade['id_inyect'] = $rs['id_inyect'];
-        }
-        if ($cascadeUpdate) {
-            $rswrk = Container("resmensaje")->loadRs("`id_inyect` = " . QuotedValue($rsold['id_inyect'], DATATYPE_NUMBER, 'DB'))->fetchAll(\PDO::FETCH_ASSOC);
-            foreach ($rswrk as $rsdtlold) {
-                $rskey = [];
-                $fldname = 'id_resmensaje';
-                $rskey[$fldname] = $rsdtlold[$fldname];
-                $rsdtlnew = array_merge($rsdtlold, $rscascade);
-                // Call Row_Updating event
-                $success = Container("resmensaje")->rowUpdating($rsdtlold, $rsdtlnew);
-                if ($success) {
-                    $success = Container("resmensaje")->update($rscascade, $rskey, $rsdtlold);
-                }
-                if (!$success) {
-                    return false;
-                }
-                // Call Row_Updated event
-                Container("resmensaje")->rowUpdated($rsdtlold, $rsdtlnew);
-            }
-        }
-
         // If no field is updated, execute may return 0. Treat as success
         $success = $this->updateSql($rs, $where, $curfilter)->execute();
         $success = ($success > 0) ? $success : true;
@@ -744,30 +690,6 @@ class Mensajes extends DbTable
     public function delete(&$rs, $where = "", $curfilter = false)
     {
         $success = true;
-
-        // Cascade delete detail table 'resmensaje'
-        $dtlrows = Container("resmensaje")->loadRs("`id_inyect` = " . QuotedValue($rs['id_inyect'], DATATYPE_NUMBER, "DB"))->fetchAll(\PDO::FETCH_ASSOC);
-        // Call Row Deleting event
-        foreach ($dtlrows as $dtlrow) {
-            $success = Container("resmensaje")->rowDeleting($dtlrow);
-            if (!$success) {
-                break;
-            }
-        }
-        if ($success) {
-            foreach ($dtlrows as $dtlrow) {
-                $success = Container("resmensaje")->delete($dtlrow); // Delete
-                if (!$success) {
-                    break;
-                }
-            }
-        }
-        // Call Row Deleted event
-        if ($success) {
-            foreach ($dtlrows as $dtlrow) {
-                Container("resmensaje")->rowDeleted($dtlrow);
-            }
-        }
         if ($success) {
             $success = $this->deleteSql($rs, $where, $curfilter)->execute();
         }
@@ -938,11 +860,7 @@ class Mensajes extends DbTable
     // Edit URL
     public function getEditUrl($parm = "")
     {
-        if ($parm != "") {
-            $url = $this->keyUrl("MensajesEdit", $this->getUrlParm($parm));
-        } else {
-            $url = $this->keyUrl("MensajesEdit", $this->getUrlParm(Config("TABLE_SHOW_DETAIL") . "="));
-        }
+        $url = $this->keyUrl("MensajesEdit", $this->getUrlParm($parm));
         return $this->addMasterUrl($url);
     }
 
@@ -956,11 +874,7 @@ class Mensajes extends DbTable
     // Copy URL
     public function getCopyUrl($parm = "")
     {
-        if ($parm != "") {
-            $url = $this->keyUrl("MensajesAdd", $this->getUrlParm($parm));
-        } else {
-            $url = $this->keyUrl("MensajesAdd", $this->getUrlParm(Config("TABLE_SHOW_DETAIL") . "="));
-        }
+        $url = $this->keyUrl("MensajesAdd", $this->getUrlParm($parm));
         return $this->addMasterUrl($url);
     }
 
@@ -1273,7 +1187,7 @@ SORTHTML;
                     $filterWrk .= "`id`" . SearchString("=", trim($wrk), DATATYPE_STRING, "");
                 }
                 $lookupFilter = function() {
-                    return (CurrentUserInfo("perfil") == 2) ? "`idgrupo` = '".CurrentUserInfo("grupo")."'" : "`escenario` = '".CurrentUserInfo("escenario")."'";
+                    return (CurrentUserInfo("perfil") == 2 ) ? "`idgrupo` = '".CurrentUserInfo("grupo")."'" : "`escenario` = '".CurrentUserInfo("escenario")."'";
                 };
                 $lookupFilter = $lookupFilter->bindTo($this);
                 $sqlWrk = $this->para->Lookup->getSql(false, $filterWrk, $lookupFilter, $this, true, true);
@@ -1723,13 +1637,17 @@ SORTHTML;
                     }
                 }
             };
-    $evento = $rsnew['id_inyect'];
-    $fechastar = $rsnew['fechareal_start'];
-    $dbconn = Db();
-    $con = mysqli_connect($dbconn['host'],$dbconn['user'],$dbconn['password'],$dbconn['dbname']);
-    $data = mysqli_query($con,"CREATE EVENT evento_$evento ON SCHEDULE AT '$fechastar'  DO BEGIN UPDATE `simexamerica`.`mensajes` SET enviado = 1 WHERE id_inyect = $evento; UPDATE `mensajes_usuarios` SET `enviado` = 1 WHERE mensajes_usuarios.id_mensaje = $evento; END");
-    //$data = mysqli_query($con,"CREATE EVENT '" . $rsnew['id_inyect'] . "' ON SCHEDULE AT '" . $rsnew['fechareal_start'] . "' DO  UPDATE `mensajes` SET `enviado` = 1 WHERE TIMESTAMPDIFF(SECOND,TIMESTAMP(NOW()),'" . $rsnew['fechareal_start'] . "') = 1");
-    mysqli_close($con);
+        $evento = $rsnew['id_inyect'];
+        $fechastar = $rsnew['fechareal_start'];
+        $dif = $rsnew['dif_horaria'];
+        $minprograma = 300 + $dif;
+        $nuevafecha = strtotime ( "$minprograma minutes" , strtotime ($fechastar)) ;
+        $fechaSalida 	= date ( 'Y-m-d H:i:s' , $nuevafecha );
+         $dbconn = Db();
+        $con = mysqli_connect($dbconn['host'],$dbconn['user'],$dbconn['password'],$dbconn['dbname']);
+        $data = mysqli_query($con,"CREATE EVENT evento_$evento ON SCHEDULE AT '$fechaSalida'  DO BEGIN UPDATE `mensajes` SET enviado = 1 WHERE id_inyect = $evento; UPDATE `mensajes_usuarios` SET `enviado` = 1 WHERE mensajes_usuarios.id_mensaje = $evento; END");
+        //$data = mysqli_query($con,"CREATE EVENT '" . $rsnew['id_inyect'] . "' ON SCHEDULE AT '" . $rsnew['fechareal_start'] . "' DO  UPDATE `mensajes` SET `enviado` = 1 WHERE TIMESTAMPDIFF(SECOND,TIMESTAMP(NOW()),'" . $rsnew['fechareal_start'] . "') = 1");
+        mysqli_close($con);
     }
 
     // Row Updating event
@@ -1745,14 +1663,18 @@ SORTHTML;
     {
         //Log("Row Updated");
         //var_dump(rsnew); die();
-    $evento = $rsold['id_inyect'];
-    $fechastar = $rsnew['fechareal_start'];
-    $dbconn = Db();
-    $con = mysqli_connect($dbconn['host'],$dbconn['user'],$dbconn['password'],$dbconn['dbname']);
-    $eliminar = mysqli_query($con,"DROP EVENT evento_$evento");
-    $data = mysqli_query($con,"CREATE EVENT evento_$evento ON SCHEDULE AT '$fechastar'  DO UPDATE `simexamerica`.`mensajes` SET enviado = 1 WHERE id_inyect = $evento;");
-    //$data = mysqli_query($con,"CREATE EVENT '" . $rsnew['id_inyect'] . "' ON SCHEDULE AT '" . $rsnew['fechareal_start'] . "' DO  UPDATE `mensajes` SET `enviado` = 1 WHERE TIMESTAMPDIFF(SECOND,TIMESTAMP(NOW()),'" . $rsnew['fechareal_start'] . "') = 1");
-    mysqli_close($con);
+        $evento = $rsold['id_inyect'];
+        $fechastar = $rsnew['fechareal_start'];
+        $dif = $rsnew['dif_horaria'];
+        $minprograma = 300 + $dif;
+        $nuevafecha = strtotime ( "$minprograma minutes" , strtotime ($fechastar)) ;
+        $fechaSalida 	= date ( 'Y-m-d H:i:s' , $nuevafecha );
+        $dbconn = Db();
+        $con = mysqli_connect($dbconn['host'],$dbconn['user'],$dbconn['password'],$dbconn['dbname']);
+        $eliminar = mysqli_query($con,"DROP EVENT evento_$evento");
+        $data = mysqli_query($con,"CREATE EVENT evento_$evento ON SCHEDULE AT '$fechaSalida'  DO UPDATE `mensajes` SET enviado = 1 WHERE id_inyect = $evento;");
+        //$data = mysqli_query($con,"CREATE EVENT '" . $rsnew['id_inyect'] . "' ON SCHEDULE AT '" . $rsnew['fechareal_start'] . "' DO  UPDATE `mensajes` SET `enviado` = 1 WHERE TIMESTAMPDIFF(SECOND,TIMESTAMP(NOW()),'" . $rsnew['fechareal_start'] . "') = 1");
+        mysqli_close($con);
     }
 
     // Row Update Conflict event
@@ -1803,11 +1725,11 @@ SORTHTML;
     public function rowDeleted(&$rs)
     {
         //Log("Row Deleted");
-    $evento = $rs['id_inyect'];
-    $dbconn = Db();
-    $con = mysqli_connect($dbconn['host'],$dbconn['user'],$dbconn['password'],$dbconn['dbname']);
-    $eliminar = mysqli_query($con,"DROP EVENT evento_$evento");
-    mysqli_close($con);
+       $evento = $rs['id_inyect'];
+        $dbconn = Db();
+        $con = mysqli_connect($dbconn['host'],$dbconn['user'],$dbconn['password'],$dbconn['dbname']);
+        $eliminar = mysqli_query($con,"DROP EVENT evento_$evento");
+        mysqli_close($con);
     }
 
     // Email Sending event

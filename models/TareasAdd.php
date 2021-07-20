@@ -1025,7 +1025,7 @@ class TareasAdd extends Tareas
                 if ($this->id_tarearelacion->ViewValue === null) { // Lookup from database
                     $filterWrk = "`id_tarea`" . SearchString("=", $curVal, DATATYPE_NUMBER, "");
                     $lookupFilter = function() {
-                        return (CurrentUserInfo("perfil") > 1) ? "id_grupo = '".CurrentUserInfo("grupo")."'" : "id_escenario = '".CurrentUserInfo("escenario")."'";
+                        return (CurrentUserInfo("perfil") > 1) ? "id_grupo = '".CurrentUserInfo("grupo")."'" : "id_escenario = '".$this->id_escenario->CurrentValue."'";
                     };
                     $lookupFilter = $lookupFilter->bindTo($this);
                     $sqlWrk = $this->id_tarearelacion->Lookup->getSql(false, $filterWrk, $lookupFilter, $this, true, true);
@@ -1208,7 +1208,7 @@ class TareasAdd extends Tareas
                     $filterWrk = "`id_tarea`" . SearchString("=", $this->id_tarearelacion->CurrentValue, DATATYPE_NUMBER, "");
                 }
                 $lookupFilter = function() {
-                    return (CurrentUserInfo("perfil") > 1) ? "id_grupo = '".CurrentUserInfo("grupo")."'" : "id_escenario = '".CurrentUserInfo("escenario")."'";
+                    return (CurrentUserInfo("perfil") > 1) ? "id_grupo = '".CurrentUserInfo("grupo")."'" : "id_escenario = '".$this->id_escenario->CurrentValue."'";
                 };
                 $lookupFilter = $lookupFilter->bindTo($this);
                 $sqlWrk = $this->id_tarearelacion->Lookup->getSql(true, $filterWrk, $lookupFilter, $this, false, true);
@@ -1628,7 +1628,7 @@ class TareasAdd extends Tareas
                     break;
                 case "x_id_tarearelacion":
                     $lookupFilter = function () {
-                        return (CurrentUserInfo("perfil") > 1) ? "id_grupo = '".CurrentUserInfo("grupo")."'" : "id_escenario = '".CurrentUserInfo("escenario")."'";
+                        return (CurrentUserInfo("perfil") > 1) ? "id_grupo = '".CurrentUserInfo("grupo")."'" : "id_escenario = '".$this->id_escenario->CurrentValue."'";
                     };
                     $lookupFilter = $lookupFilter->bindTo($this);
                     break;

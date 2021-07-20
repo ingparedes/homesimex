@@ -2411,7 +2411,7 @@ class TareasList extends Tareas
                         $filterWrk .= "`id_grupo`" . SearchString("=", trim($wrk), DATATYPE_NUMBER, "");
                     }
                     $lookupFilter = function() {
-                        return (CurrentUserInfo("perfil") > 1) ?  "id_grupo = '".CurrentUserInfo("grupo")."'" : "id_escenario = '".$this->id_escenario->CurrentValue."'";
+                        return (CurrentUserInfo("perfil") > 1) ?  "id_grupo = '".CurrentUserInfo("grupo")."'" : "id_escenario = '".Container("escenario")->id_escenario->CurrentValue."'";
                     };
                     $lookupFilter = $lookupFilter->bindTo($this);
                     $sqlWrk = $this->id_grupo->Lookup->getSql(false, $filterWrk, $lookupFilter, $this, true, true);
@@ -2559,7 +2559,7 @@ class TareasList extends Tareas
                     }
                 }
                 $lookupFilter = function() {
-                    return (CurrentUserInfo("perfil") > 1) ?  "id_grupo = '".CurrentUserInfo("grupo")."'" : "id_escenario = '".$this->id_escenario->CurrentValue."'";
+                    return (CurrentUserInfo("perfil") > 1) ?  "id_grupo = '".CurrentUserInfo("grupo")."'" : "id_escenario = '".Container("escenario")->id_escenario->CurrentValue."'";
                 };
                 $lookupFilter = $lookupFilter->bindTo($this);
                 $sqlWrk = $this->id_grupo->Lookup->getSql(true, $filterWrk, $lookupFilter, $this, false, true);
@@ -2742,6 +2742,14 @@ class TareasList extends Tareas
                 WriteJson($res);
                 return false;
             }
+            $checkValue = true; // Clear blank header values at end
+            $headers = array_reverse(array_reduce(array_reverse($headers), function ($res, $name) use ($checkValue) {
+                if (!EmptyValue($name) || !$checkValue) {
+                    $res[] = $name;
+                    $checkValue = false; // Skip further checking
+                }
+                return $res;
+            }, []));
             foreach ($headers as $name) {
                 if (!array_key_exists($name, $this->Fields)) { // Unidentified field, not header row
                     $res["error"] = str_replace('%f', $name, $Language->phrase("ImportMessageInvalidFieldName"));
@@ -2783,6 +2791,9 @@ class TareasList extends Tareas
             foreach ($records as $values) {
                 $importSuccess = false;
                 try {
+                    if (count($values) > count($headers)) { // Make sure headers / values count matched
+                        array_splice($values, count($headers));
+                    }
                     $row = array_combine($headers, $values);
                     $cnt++;
                     $res["count"] = $cnt;
@@ -3327,13 +3338,10 @@ class TareasList extends Tareas
             $fld->Lookup->Options = [];
 
             // Set up lookup SQL and connection
-          
             switch ($fld->FieldVar) {
                 case "x_id_grupo":
                     $lookupFilter = function () {
-                      
-
-                        return (CurrentUserInfo("perfil") > 1) ?  "id_grupo = '".CurrentUserInfo("grupo")."'" : "id_escenario = 53";
+                        return (CurrentUserInfo("perfil") > 1) ?  "id_grupo = '".CurrentUserInfo("grupo")."'" : "id_escenario = '".Container("escenario")->id_escenario->CurrentValue."'";
                     };
                     $lookupFilter = $lookupFilter->bindTo($this);
                     break;

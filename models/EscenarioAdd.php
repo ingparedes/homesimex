@@ -1149,7 +1149,7 @@ class EscenarioAdd extends Escenario
             // image_escenario
             if (!EmptyValue($this->image_escenario->Upload->DbValue)) {
                 $this->image_escenario->ImageWidth = 650;
-                $this->image_escenario->ImageHeight = 100;
+                $this->image_escenario->ImageHeight = 150;
                 $this->image_escenario->ImageAlt = $this->image_escenario->alt();
                 $this->image_escenario->ViewValue = $this->image_escenario->Upload->DbValue;
             } else {
@@ -1412,7 +1412,7 @@ class EscenarioAdd extends Escenario
             $this->image_escenario->EditCustomAttributes = "";
             if (!EmptyValue($this->image_escenario->Upload->DbValue)) {
                 $this->image_escenario->ImageWidth = 650;
-                $this->image_escenario->ImageHeight = 100;
+                $this->image_escenario->ImageHeight = 150;
                 $this->image_escenario->ImageAlt = $this->image_escenario->alt();
                 $this->image_escenario->EditValue = $this->image_escenario->Upload->DbValue;
             } else {
@@ -1686,8 +1686,6 @@ class EscenarioAdd extends Escenario
             } else {
                 $rsnew['image_escenario'] = $this->image_escenario->Upload->FileName;
             }
-            $this->image_escenario->ImageWidth = Config("THUMBNAIL_DEFAULT_WIDTH"); // Resize width
-            $this->image_escenario->ImageHeight = Config("THUMBNAIL_DEFAULT_HEIGHT"); // Resize height
         }
         if ($this->image_escenario->Visible && !$this->image_escenario->Upload->KeepFile) {
             $oldFiles = EmptyValue($this->image_escenario->Upload->DbValue) ? [] : [$this->image_escenario->htmlDecode($this->image_escenario->Upload->DbValue)];
@@ -1754,7 +1752,7 @@ class EscenarioAdd extends Escenario
                                     if (@$newFiles2[$i] != "") { // Use correct file name
                                         $newFiles[$i] = $newFiles2[$i];
                                     }
-                                    if (!$this->image_escenario->Upload->ResizeAndSaveToFile($this->image_escenario->ImageWidth, $this->image_escenario->ImageHeight, 100, $newFiles[$i], true, $i)) {
+                                    if (!$this->image_escenario->Upload->SaveToFile($newFiles[$i], true, $i)) { // Just replace
                                         $this->setFailureMessage($Language->phrase("UploadErrMsg7"));
                                         return false;
                                     }

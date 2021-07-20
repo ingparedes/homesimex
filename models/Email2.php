@@ -1535,9 +1535,11 @@ SORTHTML;
         if (sizeof($tmp) >= 1) {
         	foreach ($tmp as &$valor) {                
             	$id_usuario = ExecuteRow("SELECT id_users FROM users WHERE grupo IN (SELECT grupo FROM users WHERE id_users = '" . CurrentUserID() . "') AND perfil = '2';");
-                $sql = Execute("INSERT INTO user_email (id_email, id_user_remitente,id_user_destinatario, id_mensaje) VALUES ('" .$rsnew['id_email']."', '" . CurrentUserID() . "','" . $valor . "','0')");                
+                $sql = Execute("INSERT INTO user_email (id_email, id_user_remitente,id_user_destinatario, id_mensaje) VALUES ('" .$rsnew['id_email']."', '" . CurrentUserID() . "','" . $valor . "','" .$rsnew['id_mensaje']."')");                
             }
-        }
+        };
+        
+        
     }
 
     // Row Updating event

@@ -570,9 +570,6 @@ class MensajesEdit extends Mensajes
         // Process form if post back
         if ($postBack) {
             $this->loadFormValues(); // Get form values
-
-            // Set up detail parameters
-            $this->setupDetailParms();
         }
 
         // Validate form if post back
@@ -599,16 +596,9 @@ class MensajesEdit extends Mensajes
                     $this->terminate("MensajesList"); // No matching record, return to list
                     return;
                 }
-
-                // Set up detail parameters
-                $this->setupDetailParms();
                 break;
             case "update": // Update
-                if ($this->getCurrentDetailTable() != "") { // Master/detail edit
-                    $returnUrl = $this->getViewUrl(Config("TABLE_SHOW_DETAIL") . "=" . $this->getCurrentDetailTable()); // Master/Detail view page
-                } else {
-                    $returnUrl = $this->getReturnUrl();
-                }
+                $returnUrl = $this->getReturnUrl();
                 if (GetPageName($returnUrl) == "MensajesList") {
                     $returnUrl = $this->addMasterUrl($returnUrl); // List page, return to List page with correct master key if necessary
                 }
@@ -633,9 +623,6 @@ class MensajesEdit extends Mensajes
                 } else {
                     $this->EventCancelled = true; // Event cancelled
                     $this->restoreFormValues(); // Restore form values if update failed
-
-                    // Set up detail parameters
-                    $this->setupDetailParms();
                 }
         }
 
@@ -1035,7 +1022,7 @@ class MensajesEdit extends Mensajes
                         $filterWrk .= "`id`" . SearchString("=", trim($wrk), DATATYPE_STRING, "");
                     }
                     $lookupFilter = function() {
-                        return (CurrentUserInfo("perfil") == 2) ? "`idgrupo` = '".CurrentUserInfo("grupo")."'" : "`escenario` = '".CurrentUserInfo("escenario")."'";
+                        return (CurrentUserInfo("perfil") == 2 ) ? "`idgrupo` = '".CurrentUserInfo("grupo")."'" : "`escenario` = '".CurrentUserInfo("escenario")."'";
                     };
                     $lookupFilter = $lookupFilter->bindTo($this);
                     $sqlWrk = $this->para->Lookup->getSql(false, $filterWrk, $lookupFilter, $this, true, true);
@@ -1268,7 +1255,6 @@ class MensajesEdit extends Mensajes
             $this->id_actor->PlaceHolder = RemoveHtml($this->id_actor->caption());
 
             // para
-            $this->para->EditAttrs["class"] = "form-control";
             $this->para->EditCustomAttributes = "";
             $curVal = trim(strval($this->para->CurrentValue));
             if ($curVal != "") {
@@ -1278,6 +1264,9 @@ class MensajesEdit extends Mensajes
             }
             if ($this->para->ViewValue !== null) { // Load from cache
                 $this->para->EditValue = array_values($this->para->Lookup->Options);
+                if ($this->para->ViewValue == "") {
+                    $this->para->ViewValue = $Language->phrase("PleaseSelect");
+                }
             } else { // Lookup from database
                 if ($curVal == "") {
                     $filterWrk = "0=1";
@@ -1292,12 +1281,22 @@ class MensajesEdit extends Mensajes
                     }
                 }
                 $lookupFilter = function() {
-                    return (CurrentUserInfo("perfil") == 2) ? "`idgrupo` = '".CurrentUserInfo("grupo")."'" : "`escenario` = '".CurrentUserInfo("escenario")."'";
+                    return (CurrentUserInfo("perfil") == 2 ) ? "`idgrupo` = '".CurrentUserInfo("grupo")."'" : "`escenario` = '".CurrentUserInfo("escenario")."'";
                 };
                 $lookupFilter = $lookupFilter->bindTo($this);
                 $sqlWrk = $this->para->Lookup->getSql(true, $filterWrk, $lookupFilter, $this, false, true);
                 $rswrk = Conn()->executeQuery($sqlWrk)->fetchAll(\PDO::FETCH_BOTH);
                 $ari = count($rswrk);
+                if ($ari > 0) { // Lookup values found
+                    $this->para->ViewValue = new OptionValues();
+                    foreach ($rswrk as $row) {
+                        $arwrk = $this->para->Lookup->renderViewRow($row);
+                        $this->para->ViewValue->add($this->para->displayValue($arwrk));
+                        $ari++;
+                    }
+                } else {
+                    $this->para->ViewValue = $Language->phrase("PleaseSelect");
+                }
                 $arwrk = $rswrk;
                 $this->para->EditValue = $arwrk;
             }
@@ -1463,13 +1462,6 @@ class MensajesEdit extends Mensajes
             }
         }
 
-        // Validate detail grid
-        $detailTblVar = explode(",", $this->getCurrentDetailTable());
-        $detailPage = Container("ResmensajeGrid");
-        if (in_array("resmensaje", $detailTblVar) && $detailPage->DetailEdit) {
-            $detailPage->validateGridForm();
-        }
-
         // Return validate result
         $validateForm = !$this->hasInvalidFields();
 
@@ -1497,11 +1489,6 @@ class MensajesEdit extends Mensajes
             $this->setFailureMessage($Language->phrase("NoRecord")); // Set no record message
             $editRow = false; // Update Failed
         } else {
-            // Begin transaction
-            if ($this->getCurrentDetailTable() != "") {
-                $conn->beginTransaction();
-            }
-
             // Save old values
             $this->loadDbValues($rsold);
             $rsnew = [];
@@ -1571,26 +1558,6 @@ class MensajesEdit extends Mensajes
                     $editRow = true; // No field to update
                 }
                 if ($editRow) {
-                }
-
-                // Update detail records
-                $detailTblVar = explode(",", $this->getCurrentDetailTable());
-                if ($editRow) {
-                    $detailPage = Container("ResmensajeGrid");
-                    if (in_array("resmensaje", $detailTblVar) && $detailPage->DetailEdit) {
-                        $Security->loadCurrentUserLevel($this->ProjectID . "resmensaje"); // Load user level of detail table
-                        $editRow = $detailPage->gridUpdate();
-                        $Security->loadCurrentUserLevel($this->ProjectID . $this->TableName); // Restore user level of master table
-                    }
-                }
-
-                // Commit/Rollback transaction
-                if ($this->getCurrentDetailTable() != "") {
-                    if ($editRow) {
-                        $conn->commit(); // Commit transaction
-                    } else {
-                        $conn->rollback(); // Rollback transaction
-                    }
                 }
             } else {
                 if ($this->getSuccessMessage() != "" || $this->getFailureMessage() != "") {
@@ -1692,35 +1659,6 @@ class MensajesEdit extends Mensajes
         $this->DbDetailFilter = $this->getDetailFilter(); // Get detail filter
     }
 
-    // Set up detail parms based on QueryString
-    protected function setupDetailParms()
-    {
-        // Get the keys for master table
-        $detailTblVar = Get(Config("TABLE_SHOW_DETAIL"));
-        if ($detailTblVar !== null) {
-            $this->setCurrentDetailTable($detailTblVar);
-        } else {
-            $detailTblVar = $this->getCurrentDetailTable();
-        }
-        if ($detailTblVar != "") {
-            $detailTblVar = explode(",", $detailTblVar);
-            if (in_array("resmensaje", $detailTblVar)) {
-                $detailPageObj = Container("ResmensajeGrid");
-                if ($detailPageObj->DetailEdit) {
-                    $detailPageObj->CurrentMode = "edit";
-                    $detailPageObj->CurrentAction = "gridedit";
-
-                    // Save current master table to detail table
-                    $detailPageObj->setCurrentMasterTable($this->TableVar);
-                    $detailPageObj->setStartRecordNumber(1);
-                    $detailPageObj->id_inyect->IsDetailKey = true;
-                    $detailPageObj->id_inyect->CurrentValue = $this->id_inyect->CurrentValue;
-                    $detailPageObj->id_inyect->setSessionValue($detailPageObj->id_inyect->CurrentValue);
-                }
-            }
-        }
-    }
-
     // Set up Breadcrumb
     protected function setupBreadcrumb()
     {
@@ -1753,7 +1691,7 @@ class MensajesEdit extends Mensajes
                     break;
                 case "x_para":
                     $lookupFilter = function () {
-                        return (CurrentUserInfo("perfil") == 2) ? "`idgrupo` = '".CurrentUserInfo("grupo")."'" : "`escenario` = '".CurrentUserInfo("escenario")."'";
+                        return (CurrentUserInfo("perfil") == 2 ) ? "`idgrupo` = '".CurrentUserInfo("grupo")."'" : "`escenario` = '".CurrentUserInfo("escenario")."'";
                     };
                     $lookupFilter = $lookupFilter->bindTo($this);
                     break;

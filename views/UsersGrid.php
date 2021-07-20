@@ -33,6 +33,7 @@ loadjs.ready("head", function () {
         ["telefono", [fields.telefono.visible && fields.telefono.required ? ew.Validators.required(fields.telefono.caption) : null], fields.telefono.isInvalid],
         ["pais", [fields.pais.visible && fields.pais.required ? ew.Validators.required(fields.pais.caption) : null], fields.pais.isInvalid],
         ["estado", [fields.estado.visible && fields.estado.required ? ew.Validators.required(fields.estado.caption) : null], fields.estado.isInvalid],
+        ["organizacion", [fields.organizacion.visible && fields.organizacion.required ? ew.Validators.required(fields.organizacion.caption) : null], fields.organizacion.isInvalid],
         ["img_user", [fields.img_user.visible && fields.img_user.required ? ew.Validators.fileRequired(fields.img_user.caption) : null], fields.img_user.isInvalid]
     ]);
 
@@ -104,6 +105,8 @@ loadjs.ready("head", function () {
         if (ew.valueChanged(fobj, rowIndex, "pais", false))
             return false;
         if (ew.valueChanged(fobj, rowIndex, "estado", false))
+            return false;
+        if (ew.valueChanged(fobj, rowIndex, "organizacion", false))
             return false;
         if (ew.valueChanged(fobj, rowIndex, "img_user", false))
             return false;
@@ -187,6 +190,9 @@ $Grid->ListOptions->render("header", "left");
 <?php } ?>
 <?php if ($Grid->estado->Visible) { // estado ?>
         <th data-name="estado" class="<?= $Grid->estado->headerCellClass() ?>"><div id="elh_users_estado" class="users_estado"><?= $Grid->renderSort($Grid->estado) ?></div></th>
+<?php } ?>
+<?php if ($Grid->organizacion->Visible) { // organizacion ?>
+        <th data-name="organizacion" class="<?= $Grid->organizacion->headerCellClass() ?>"><div id="elh_users_organizacion" class="users_organizacion"><?= $Grid->renderSort($Grid->organizacion) ?></div></th>
 <?php } ?>
 <?php if ($Grid->img_user->Visible) { // img_user ?>
         <th data-name="img_user" class="<?= $Grid->img_user->headerCellClass() ?>"><div id="elh_users_img_user" class="users_img_user"><?= $Grid->renderSort($Grid->img_user) ?></div></th>
@@ -837,22 +843,39 @@ loadjs.ready("head", function() {
 <?php } ?>
 <?php if ($Grid->RowType == ROWTYPE_VIEW) { // View record ?>
 <span id="el<?= $Grid->RowCount ?>_users_estado">
-<span<?= $Grid->estado->viewAttributes() ?>><?php
-$idstatus = CurrentPage()->estado->CurrentValue;
-$idus = CurrentPage()->id_users->CurrentValue;
-if ($idstatus == 2)
-{
-//echo "<a href=\"#\" onclick=\"myFunction(this)\" ><i class=\"fa fa-user-plus\"></i></a> <br>";
-echo '<img class="mt-3 justify-content-center align-self-center " id="activador" onclick="activar('; echo $Page->id_users->getViewValue();echo ');" src="images/cheque.png" alt="activar" height="20" width="20">';
-}
-else
-	{echo 'Activo';}
-?>
-</span>
+<span<?= $Grid->estado->viewAttributes() ?>>
+<?= $Grid->estado->getViewValue() ?></span>
 </span>
 <?php if ($Grid->isConfirm()) { ?>
 <input type="hidden" data-table="users" data-field="x_estado" data-hidden="1" name="fusersgrid$x<?= $Grid->RowIndex ?>_estado" id="fusersgrid$x<?= $Grid->RowIndex ?>_estado" value="<?= HtmlEncode($Grid->estado->FormValue) ?>">
 <input type="hidden" data-table="users" data-field="x_estado" data-hidden="1" name="fusersgrid$o<?= $Grid->RowIndex ?>_estado" id="fusersgrid$o<?= $Grid->RowIndex ?>_estado" value="<?= HtmlEncode($Grid->estado->OldValue) ?>">
+<?php } ?>
+<?php } ?>
+</td>
+    <?php } ?>
+    <?php if ($Grid->organizacion->Visible) { // organizacion ?>
+        <td data-name="organizacion" <?= $Grid->organizacion->cellAttributes() ?>>
+<?php if ($Grid->RowType == ROWTYPE_ADD) { // Add record ?>
+<span id="el<?= $Grid->RowCount ?>_users_organizacion" class="form-group">
+<input type="<?= $Grid->organizacion->getInputTextType() ?>" data-table="users" data-field="x_organizacion" name="x<?= $Grid->RowIndex ?>_organizacion" id="x<?= $Grid->RowIndex ?>_organizacion" size="100" maxlength="100" placeholder="<?= HtmlEncode($Grid->organizacion->getPlaceHolder()) ?>" value="<?= $Grid->organizacion->EditValue ?>"<?= $Grid->organizacion->editAttributes() ?>>
+<div class="invalid-feedback"><?= $Grid->organizacion->getErrorMessage() ?></div>
+</span>
+<input type="hidden" data-table="users" data-field="x_organizacion" data-hidden="1" name="o<?= $Grid->RowIndex ?>_organizacion" id="o<?= $Grid->RowIndex ?>_organizacion" value="<?= HtmlEncode($Grid->organizacion->OldValue) ?>">
+<?php } ?>
+<?php if ($Grid->RowType == ROWTYPE_EDIT) { // Edit record ?>
+<span id="el<?= $Grid->RowCount ?>_users_organizacion" class="form-group">
+<input type="<?= $Grid->organizacion->getInputTextType() ?>" data-table="users" data-field="x_organizacion" name="x<?= $Grid->RowIndex ?>_organizacion" id="x<?= $Grid->RowIndex ?>_organizacion" size="100" maxlength="100" placeholder="<?= HtmlEncode($Grid->organizacion->getPlaceHolder()) ?>" value="<?= $Grid->organizacion->EditValue ?>"<?= $Grid->organizacion->editAttributes() ?>>
+<div class="invalid-feedback"><?= $Grid->organizacion->getErrorMessage() ?></div>
+</span>
+<?php } ?>
+<?php if ($Grid->RowType == ROWTYPE_VIEW) { // View record ?>
+<span id="el<?= $Grid->RowCount ?>_users_organizacion">
+<span<?= $Grid->organizacion->viewAttributes() ?>>
+<?= $Grid->organizacion->getViewValue() ?></span>
+</span>
+<?php if ($Grid->isConfirm()) { ?>
+<input type="hidden" data-table="users" data-field="x_organizacion" data-hidden="1" name="fusersgrid$x<?= $Grid->RowIndex ?>_organizacion" id="fusersgrid$x<?= $Grid->RowIndex ?>_organizacion" value="<?= HtmlEncode($Grid->organizacion->FormValue) ?>">
+<input type="hidden" data-table="users" data-field="x_organizacion" data-hidden="1" name="fusersgrid$o<?= $Grid->RowIndex ?>_organizacion" id="fusersgrid$o<?= $Grid->RowIndex ?>_organizacion" value="<?= HtmlEncode($Grid->organizacion->OldValue) ?>">
 <?php } ?>
 <?php } ?>
 </td>
@@ -1254,6 +1277,23 @@ loadjs.ready("head", function() {
 <input type="hidden" data-table="users" data-field="x_estado" data-hidden="1" name="x<?= $Grid->RowIndex ?>_estado" id="x<?= $Grid->RowIndex ?>_estado" value="<?= HtmlEncode($Grid->estado->FormValue) ?>">
 <?php } ?>
 <input type="hidden" data-table="users" data-field="x_estado" data-hidden="1" name="o<?= $Grid->RowIndex ?>_estado" id="o<?= $Grid->RowIndex ?>_estado" value="<?= HtmlEncode($Grid->estado->OldValue) ?>">
+</td>
+    <?php } ?>
+    <?php if ($Grid->organizacion->Visible) { // organizacion ?>
+        <td data-name="organizacion">
+<?php if (!$Grid->isConfirm()) { ?>
+<span id="el$rowindex$_users_organizacion" class="form-group users_organizacion">
+<input type="<?= $Grid->organizacion->getInputTextType() ?>" data-table="users" data-field="x_organizacion" name="x<?= $Grid->RowIndex ?>_organizacion" id="x<?= $Grid->RowIndex ?>_organizacion" size="100" maxlength="100" placeholder="<?= HtmlEncode($Grid->organizacion->getPlaceHolder()) ?>" value="<?= $Grid->organizacion->EditValue ?>"<?= $Grid->organizacion->editAttributes() ?>>
+<div class="invalid-feedback"><?= $Grid->organizacion->getErrorMessage() ?></div>
+</span>
+<?php } else { ?>
+<span id="el$rowindex$_users_organizacion" class="form-group users_organizacion">
+<span<?= $Grid->organizacion->viewAttributes() ?>>
+<input type="text" readonly class="form-control-plaintext" value="<?= HtmlEncode(RemoveHtml($Grid->organizacion->getDisplayValue($Grid->organizacion->ViewValue))) ?>"></span>
+</span>
+<input type="hidden" data-table="users" data-field="x_organizacion" data-hidden="1" name="x<?= $Grid->RowIndex ?>_organizacion" id="x<?= $Grid->RowIndex ?>_organizacion" value="<?= HtmlEncode($Grid->organizacion->FormValue) ?>">
+<?php } ?>
+<input type="hidden" data-table="users" data-field="x_organizacion" data-hidden="1" name="o<?= $Grid->RowIndex ?>_organizacion" id="o<?= $Grid->RowIndex ?>_organizacion" value="<?= HtmlEncode($Grid->organizacion->OldValue) ?>">
 </td>
     <?php } ?>
     <?php if ($Grid->img_user->Visible) { // img_user ?>

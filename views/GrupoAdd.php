@@ -213,7 +213,7 @@ loadjs.ready("head", function() {
         <label id="elh_grupo_color" class="<?= $Page->LeftColumnClass ?>"><template id="tpc_grupo_color"><?= $Page->color->caption() ?><?= $Page->color->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></template></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->color->cellAttributes() ?>>
 <template id="tpx_grupo_color"><span id="el_grupo_color">
-<input type="<?= $Page->color->getInputTextType() ?>" data-table="grupo" data-field="x_color" name="x_color" id="x_color" size="30" maxlength="30" placeholder="<?= HtmlEncode($Page->color->getPlaceHolder()) ?>" value="<?= $Page->color->EditValue ?>"<?= $Page->color->editAttributes() ?> aria-describedby="x_color_help">
+<input type="<?= $Page->color->getInputTextType() ?>" data-table="grupo" data-field="x_color" name="x_color" id="x_color" size="15" maxlength="30" placeholder="<?= HtmlEncode($Page->color->getPlaceHolder()) ?>" value="<?= $Page->color->EditValue ?>"<?= $Page->color->editAttributes() ?> aria-describedby="x_color_help">
 <?= $Page->color->getCustomMessage() ?>
 <div class="invalid-feedback"><?= $Page->color->getErrorMessage() ?></div>
 </span></template>
@@ -253,8 +253,8 @@ loadjs.ready("head", function() {
 		border: 5px solid #fff;
 		box-shadow: 0px 0px 3px 1px #DDD;
 		position: absolute;
-		top: 35px;
-		left: 2px;
+		top: 0px;
+		left: 230px;
 	}
 	.color-holder {
   	    background: #fff;
@@ -282,7 +282,7 @@ loadjs.ready("head", function() {
 	}
 </style>
     <?php
-  $id_escenario = Container("escenario")->id_escenario->CurrentValue;
+  $id_escenario = HtmlEncode($Page->id_escenario->getSessionValue());
   //echo CurrentUserID();
 //	$nombreescnario = ExecuteRow("SELECT nombre_escenario,DATE_FORMAT(fechaini_real, '%Y/%m/%d'), DATE_FORMAT(fechafinal_real, '%Y/%m/%d')  FROM escenario WHERE id_escenario =  = '".$id_escenario."';");
 	$escenID = ExecuteRow("SELECT DATE_FORMAT(fechaini_real, '%Y/%m/%d'), DATE_FORMAT(fechafinal_real, '%Y/%m/%d'),nombre_escenario FROM escenario WHERE id_escenario = '".$id_escenario."';");
@@ -407,6 +407,6 @@ loadjs.ready("load", function () {
     //$('label#elh_grupo_participante').remove();
     //$('label#elh_grupo_excon_grupo').remove();
 
-    //$('h4').text("Nuevo grupo");
+    //$('h1').text("Grupo Nuevo");
 });
 </script>

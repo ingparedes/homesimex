@@ -1170,8 +1170,8 @@ class GrupoAdd extends Grupo
             } else {
                 $rsnew['imgen_grupo'] = $this->imgen_grupo->Upload->FileName;
             }
-            $this->imgen_grupo->ImageWidth = Config("THUMBNAIL_DEFAULT_WIDTH"); // Resize width
-            $this->imgen_grupo->ImageHeight = Config("THUMBNAIL_DEFAULT_HEIGHT"); // Resize height
+            $this->imgen_grupo->ImageWidth = 250; // Resize width
+            $this->imgen_grupo->ImageHeight = 250; // Resize height
         }
 
         // nombre_grupo
@@ -1445,6 +1445,7 @@ class GrupoAdd extends Grupo
                     $detailPageObj->grupo->IsDetailKey = true;
                     $detailPageObj->grupo->CurrentValue = $this->id_grupo->CurrentValue;
                     $detailPageObj->grupo->setSessionValue($detailPageObj->grupo->CurrentValue);
+                    $detailPageObj->subgrupo->setSessionValue(""); // Clear session key
                     $detailPageObj->escenario->setSessionValue(""); // Clear session key
                 }
             }

@@ -523,8 +523,8 @@ class UsersGrid extends Users
         $this->estado->setVisibility();
         $this->horario->Visible = false;
         $this->limite->Visible = false;
+        $this->organizacion->setVisibility();
         $this->img_user->setVisibility();
-        $this->blocks->Visible = false;
         $this->hideFieldsForAddEdit();
 
         // Global Page Loading event (in userfn*.php)
@@ -852,6 +852,31 @@ class UsersGrid extends Users
             // Call Grid_Updated event
             $this->gridUpdated($rsold, $rsnew);
             $this->clearInlineMode(); // Clear inline edit mode
+
+            // Send notify email
+            $table = 'users';
+            $subject = $table . " " . $Language->phrase("RecordUpdated");
+            $action = $Language->phrase("ActionUpdatedGridEdit");
+            $email = new Email();
+            $email->load(Config("EMAIL_NOTIFY_TEMPLATE"));
+            $email->replaceSender(Config("SENDER_EMAIL")); // Replace Sender
+            $email->replaceRecipient(Config("RECIPIENT_EMAIL")); // Replace Recipient
+            $email->replaceSubject($subject); // Replace Subject
+            $email->replaceContent("<!--table-->", $table);
+            $email->replaceContent("<!--key-->", $key);
+            $email->replaceContent("<!--action-->", $action);
+            $args = [];
+            $args["rsold"] = &$rsold;
+            $args["rsnew"] = &$rsnew;
+            $emailSent = false;
+            if ($this->emailSending($email, $args)) {
+                $emailSent = $email->send();
+            }
+
+            // Set up error message
+            if (!$emailSent) {
+                $this->setFailureMessage($email->SendErrDescription);
+            }
         } else {
             if ($this->getFailureMessage() == "") {
                 $this->setFailureMessage($Language->phrase("UpdateFailed")); // Set update failed message
@@ -1033,6 +1058,9 @@ class UsersGrid extends Users
         if ($CurrentForm->hasValue("x_estado") && $CurrentForm->hasValue("o_estado") && $this->estado->CurrentValue != $this->estado->OldValue) {
             return false;
         }
+        if ($CurrentForm->hasValue("x_organizacion") && $CurrentForm->hasValue("o_organizacion") && $this->organizacion->CurrentValue != $this->organizacion->OldValue) {
+            return false;
+        }
         if (!EmptyValue($this->img_user->Upload->Value)) {
             return false;
         }
@@ -1128,6 +1156,7 @@ class UsersGrid extends Users
         $this->telefono->clearErrorMessage();
         $this->pais->clearErrorMessage();
         $this->estado->clearErrorMessage();
+        $this->organizacion->clearErrorMessage();
         $this->img_user->clearErrorMessage();
     }
 
@@ -1414,11 +1443,11 @@ class UsersGrid extends Users
         $this->horario->OldValue = $this->horario->CurrentValue;
         $this->limite->CurrentValue = null;
         $this->limite->OldValue = $this->limite->CurrentValue;
+        $this->organizacion->CurrentValue = null;
+        $this->organizacion->OldValue = $this->organizacion->CurrentValue;
         $this->img_user->Upload->DbValue = null;
         $this->img_user->OldValue = $this->img_user->Upload->DbValue;
         $this->img_user->Upload->Index = $this->RowIndex;
-        $this->blocks->CurrentValue = null;
-        $this->blocks->OldValue = $this->blocks->CurrentValue;
     }
 
     // Load form values
@@ -1564,6 +1593,19 @@ class UsersGrid extends Users
         if ($CurrentForm->hasValue("o_estado")) {
             $this->estado->setOldValue($CurrentForm->getValue("o_estado"));
         }
+
+        // Check field name 'organizacion' first before field var 'x_organizacion'
+        $val = $CurrentForm->hasValue("organizacion") ? $CurrentForm->getValue("organizacion") : $CurrentForm->getValue("x_organizacion");
+        if (!$this->organizacion->IsDetailKey) {
+            if (IsApi() && $val === null) {
+                $this->organizacion->Visible = false; // Disable update for API request
+            } else {
+                $this->organizacion->setFormValue($val);
+            }
+        }
+        if ($CurrentForm->hasValue("o_organizacion")) {
+            $this->organizacion->setOldValue($CurrentForm->getValue("o_organizacion"));
+        }
         $this->getUploadFiles(); // Get upload files
     }
 
@@ -1585,6 +1627,7 @@ class UsersGrid extends Users
         $this->telefono->CurrentValue = $this->telefono->FormValue;
         $this->pais->CurrentValue = $this->pais->FormValue;
         $this->estado->CurrentValue = $this->estado->FormValue;
+        $this->organizacion->CurrentValue = $this->organizacion->FormValue;
     }
 
     // Load recordset
@@ -1670,10 +1713,10 @@ class UsersGrid extends Users
         $this->estado->setDbValue($row['estado']);
         $this->horario->setDbValue($row['horario']);
         $this->limite->setDbValue($row['limite']);
+        $this->organizacion->setDbValue($row['organizacion']);
         $this->img_user->Upload->DbValue = $row['img_user'];
         $this->img_user->setDbValue($this->img_user->Upload->DbValue);
         $this->img_user->Upload->Index = $this->RowIndex;
-        $this->blocks->setDbValue($row['blocks']);
     }
 
     // Return a row with default values
@@ -1696,8 +1739,8 @@ class UsersGrid extends Users
         $row['estado'] = $this->estado->CurrentValue;
         $row['horario'] = $this->horario->CurrentValue;
         $row['limite'] = $this->limite->CurrentValue;
+        $row['organizacion'] = $this->organizacion->CurrentValue;
         $row['img_user'] = $this->img_user->Upload->DbValue;
-        $row['blocks'] = $this->blocks->CurrentValue;
         return $row;
     }
 
@@ -1763,9 +1806,9 @@ class UsersGrid extends Users
 
         // limite
 
-        // img_user
+        // organizacion
 
-        // blocks
+        // img_user
         if ($this->RowType == ROWTYPE_VIEW) {
             // id_users
             $this->id_users->ViewValue = $this->id_users->CurrentValue;
@@ -1791,7 +1834,7 @@ class UsersGrid extends Users
                 if ($this->escenario->ViewValue === null) { // Lookup from database
                     $filterWrk = "`id_escenario`" . SearchString("=", $curVal, DATATYPE_NUMBER, "");
                     $lookupFilter = function() {
-                        return (CurrentUserInfo("perfil") != 1) ? "id_escenario = '".CurrentUserInfo("escenario")."'"  : "";
+                        return (CurrentUserInfo("perfil") > 1) ? "id_escenario = '".CurrentUserInfo("escenario")."'"  : "";
                     };
                     $lookupFilter = $lookupFilter->bindTo($this);
                     $sqlWrk = $this->escenario->Lookup->getSql(false, $filterWrk, $lookupFilter, $this, true, true);
@@ -1931,6 +1974,10 @@ class UsersGrid extends Users
             $this->limite->ViewValue = FormatDateTime($this->limite->ViewValue, 0);
             $this->limite->ViewCustomAttributes = "";
 
+            // organizacion
+            $this->organizacion->ViewValue = $this->organizacion->CurrentValue;
+            $this->organizacion->ViewCustomAttributes = "";
+
             // img_user
             if (!EmptyValue($this->img_user->Upload->DbValue)) {
                 $this->img_user->ImageWidth = 50;
@@ -1941,10 +1988,6 @@ class UsersGrid extends Users
                 $this->img_user->ViewValue = "";
             }
             $this->img_user->ViewCustomAttributes = "";
-
-            // blocks
-            $this->blocks->ViewValue = $this->blocks->CurrentValue;
-            $this->blocks->ViewCustomAttributes = "";
 
             // id_users
             $this->id_users->LinkCustomAttributes = "";
@@ -2000,6 +2043,11 @@ class UsersGrid extends Users
             $this->estado->LinkCustomAttributes = "";
             $this->estado->HrefValue = "";
             $this->estado->TooltipValue = "";
+
+            // organizacion
+            $this->organizacion->LinkCustomAttributes = "";
+            $this->organizacion->HrefValue = "";
+            $this->organizacion->TooltipValue = "";
 
             // img_user
             $this->img_user->LinkCustomAttributes = "";
@@ -2223,6 +2271,15 @@ class UsersGrid extends Users
             $this->estado->EditValue = $this->estado->options(false);
             $this->estado->PlaceHolder = RemoveHtml($this->estado->caption());
 
+            // organizacion
+            $this->organizacion->EditAttrs["class"] = "form-control";
+            $this->organizacion->EditCustomAttributes = "";
+            if (!$this->organizacion->Raw) {
+                $this->organizacion->CurrentValue = HtmlDecode($this->organizacion->CurrentValue);
+            }
+            $this->organizacion->EditValue = HtmlEncode($this->organizacion->CurrentValue);
+            $this->organizacion->PlaceHolder = RemoveHtml($this->organizacion->caption());
+
             // img_user
             $this->img_user->EditAttrs["class"] = "form-control";
             $this->img_user->EditCustomAttributes = "";
@@ -2286,6 +2343,10 @@ class UsersGrid extends Users
             // estado
             $this->estado->LinkCustomAttributes = "";
             $this->estado->HrefValue = "";
+
+            // organizacion
+            $this->organizacion->LinkCustomAttributes = "";
+            $this->organizacion->HrefValue = "";
 
             // img_user
             $this->img_user->LinkCustomAttributes = "";
@@ -2505,6 +2566,15 @@ class UsersGrid extends Users
             $this->estado->EditValue = $this->estado->options(false);
             $this->estado->PlaceHolder = RemoveHtml($this->estado->caption());
 
+            // organizacion
+            $this->organizacion->EditAttrs["class"] = "form-control";
+            $this->organizacion->EditCustomAttributes = "";
+            if (!$this->organizacion->Raw) {
+                $this->organizacion->CurrentValue = HtmlDecode($this->organizacion->CurrentValue);
+            }
+            $this->organizacion->EditValue = HtmlEncode($this->organizacion->CurrentValue);
+            $this->organizacion->PlaceHolder = RemoveHtml($this->organizacion->caption());
+
             // img_user
             $this->img_user->EditAttrs["class"] = "form-control";
             $this->img_user->EditCustomAttributes = "";
@@ -2568,6 +2638,10 @@ class UsersGrid extends Users
             // estado
             $this->estado->LinkCustomAttributes = "";
             $this->estado->HrefValue = "";
+
+            // organizacion
+            $this->organizacion->LinkCustomAttributes = "";
+            $this->organizacion->HrefValue = "";
 
             // img_user
             $this->img_user->LinkCustomAttributes = "";
@@ -2660,6 +2734,11 @@ class UsersGrid extends Users
         if ($this->estado->Required) {
             if ($this->estado->FormValue == "") {
                 $this->estado->addErrorMessage(str_replace("%s", $this->estado->caption(), $this->estado->RequiredErrorMessage));
+            }
+        }
+        if ($this->organizacion->Required) {
+            if (!$this->organizacion->IsDetailKey && EmptyValue($this->organizacion->FormValue)) {
+                $this->organizacion->addErrorMessage(str_replace("%s", $this->organizacion->caption(), $this->organizacion->RequiredErrorMessage));
             }
         }
         if ($this->img_user->Required) {
@@ -2831,6 +2910,9 @@ class UsersGrid extends Users
 
             // estado
             $this->estado->setDbValueDef($rsnew, $this->estado->CurrentValue, null, $this->estado->ReadOnly);
+
+            // organizacion
+            $this->organizacion->setDbValueDef($rsnew, $this->organizacion->CurrentValue, null, $this->organizacion->ReadOnly);
 
             // img_user
             if ($this->img_user->Visible && !$this->img_user->ReadOnly && !$this->img_user->Upload->KeepFile) {
@@ -3011,7 +3093,7 @@ class UsersGrid extends Users
 
         // perfil
         if ($Security->canAdmin()) { // System admin
-            $this->perfil->setDbValueDef($rsnew, $this->perfil->CurrentValue, null, false);
+            $this->perfil->setDbValueDef($rsnew, $this->perfil->CurrentValue, null, strval($this->perfil->CurrentValue) == "");
         }
 
         // email
@@ -3025,6 +3107,9 @@ class UsersGrid extends Users
 
         // estado
         $this->estado->setDbValueDef($rsnew, $this->estado->CurrentValue, null, strval($this->estado->CurrentValue) == "");
+
+        // organizacion
+        $this->organizacion->setDbValueDef($rsnew, $this->organizacion->CurrentValue, null, false);
 
         // img_user
         if ($this->img_user->Visible && !$this->img_user->Upload->KeepFile) {
@@ -3197,7 +3282,7 @@ class UsersGrid extends Users
             switch ($fld->FieldVar) {
                 case "x_escenario":
                     $lookupFilter = function () {
-                        return (CurrentUserInfo("perfil") != 1) ? "id_escenario = '".CurrentUserInfo("escenario")."'"  : "";
+                        return (CurrentUserInfo("perfil") > 1) ? "id_escenario = '".CurrentUserInfo("escenario")."'"  : "";
                     };
                     $lookupFilter = $lookupFilter->bindTo($this);
                     break;

@@ -254,12 +254,12 @@ echo "<a class=\"btn btn-default ew-row-link ew-view\" title=\"Tareas\" data-tab
     <tr>
     <td class='text-center' >
     <p class='text-center'> <slot class="ew-slot" name="tpx_escenario_image_escenario"></slot>  <p>
-   <h2 class='text-center'> Notas conceptual de la simulación </h2>
-        <h2 class='text-center'><slot class="ew-slot" name="tpx_escenario_nombre_escenario"></slot></h2>
-    <h2 class='text-center'> <slot class="ew-slot" name="tpx_escenario_incidente"></slot> </h2>
-      <h2 class='text-center'><slot class="ew-slot" name="tpc_escenario_evento_asociado"></slot>&nbsp;<slot class="ew-slot" name="tpx_escenario_evento_asociado"></slot></h2>
-    <h2 class='text-center'> País <slot class="ew-slot" name="tpx_escenario_pais_escenario"></slot></h2>
-    <h2 class='text-center'> Fecha y hora de inicio: <slot class="ew-slot" name="tpx_escenario_fechaini_real"></slot> <br> Fecha y hora finalización: <slot class="ew-slot" name="tpx_escenario_fechafinal_real"></slot></h2>
+   <h2  style="text-align:center;"> Notas conceptual de la simulación </h2>
+        <h3  style="text-align:center;"><slot class="ew-slot" name="tpx_escenario_nombre_escenario"></slot></h3>
+    <h3  style="text-align:center;"> <slot class="ew-slot" name="tpx_escenario_incidente"></slot> </h3>
+      <h3  style="text-align:center;"><slot class="ew-slot" name="tpc_escenario_evento_asociado"></slot>&nbsp;<slot class="ew-slot" name="tpx_escenario_evento_asociado"></slot></h3>
+    <h3  style="text-align:center;"> País <slot class="ew-slot" name="tpx_escenario_pais_escenario"></slot></h3>
+    <h3  style="text-align:center;"> Fecha y hora de inicio: <slot class="ew-slot" name="tpx_escenario_fechaini_real"></slot> <br> Fecha y hora finalización: <slot class="ew-slot" name="tpx_escenario_fechafinal_real"></slot></h3>
     </tr>
     </td>
     </table>

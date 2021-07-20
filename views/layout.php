@@ -183,7 +183,7 @@ ew.ready("head", [ew.PATH_BASE + "ckeditor/ckeditor.js", ew.PATH_BASE + "js/ewed
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <?php
 //edit menu class
-$NAVBAR_CLASS .= "fixed-top";
+$NAVBAR_CLASS .= "sticky-top";
 ?>
 <!-- Navbar -->
 <script type="text/html" id="navbar-menu-items" class="ew-js-template" data-name="navbar" data-seq="10" data-data="navbar" data-method="appendTo" data-target="#ew-navbar">
@@ -305,7 +305,7 @@ $NAVBAR_CLASS .= "fixed-top";
 <div class="wrapper ew-layout">
     <!-- Main Header -->
     <!-- Navbar -->
-    <nav class="<?= Config("NAVBAR_CLASS") ?>">
+    <nav class="<?= Config("NAVBAR_CLASS") ?> sticky-top">
         <!-- Left navbar links -->
         <ul id="ew-navbar" class="navbar-nav">
             <li class="nav-item d-block">
@@ -354,6 +354,10 @@ $NAVBAR_CLASS .= "fixed-top";
         <!-- Main content -->
         <section class="content">
         <div class="container-fluid">
+        <div class="card" >
+        <div class="card-body">
+        <div class="col-sm-12">
+
 <?php } ?>
 <?php } ?>
 <?= $content ?>
@@ -364,6 +368,10 @@ if (isset($DebugTimer)) {
     $DebugTimer->stop();
 }
 ?>
+
+</div>
+</div>
+</div>
         </div><!-- /.container-fluid -->
         </section>
         <!-- /.content -->

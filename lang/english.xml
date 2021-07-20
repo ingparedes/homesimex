@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<ew-language date="2021/7/13" version="17.0.5" id="en" name="English" desc="English" author="e.World Technology Limited">
+<ew-language date="2021/7/20" version="17.0.5" id="en" name="English" desc="English" author="e.World Technology Limited">
   <!--
     *** Important Notes:
     1. Language ID should follow: https://developers.google.com/recaptcha/docs/language,
@@ -1465,11 +1465,11 @@
       <field id="limite">
         <phrase id="fldcaption" value="limite" />
       </field>
+      <field id="organizacion">
+        <phrase id="fldcaption" value="organizacion" />
+      </field>
       <field id="img_user">
         <phrase id="fldcaption" value="img user" />
-      </field>
-      <field id="blocks">
-        <phrase id="fldcaption" value="blocks" />
       </field>
     </table>
     <table id="mensagens">

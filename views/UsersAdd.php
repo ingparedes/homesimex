@@ -32,6 +32,7 @@ loadjs.ready("head", function () {
         ["pais", [fields.pais.visible && fields.pais.required ? ew.Validators.required(fields.pais.caption) : null], fields.pais.isInvalid],
         ["pw", [fields.pw.visible && fields.pw.required ? ew.Validators.required(fields.pw.caption) : null], fields.pw.isInvalid],
         ["estado", [fields.estado.visible && fields.estado.required ? ew.Validators.required(fields.estado.caption) : null], fields.estado.isInvalid],
+        ["organizacion", [fields.organizacion.visible && fields.organizacion.required ? ew.Validators.required(fields.organizacion.caption) : null], fields.organizacion.isInvalid],
         ["img_user", [fields.img_user.visible && fields.img_user.required ? ew.Validators.fileRequired(fields.img_user.caption) : null], fields.img_user.isInvalid]
     ]);
 
@@ -431,6 +432,18 @@ loadjs.ready("head", function() {
 </div></div>
     </div>
 <?php } ?>
+<?php if ($Page->organizacion->Visible) { // organizacion ?>
+    <div id="r_organizacion" class="form-group row">
+        <label id="elh_users_organizacion" for="x_organizacion" class="<?= $Page->LeftColumnClass ?>"><template id="tpc_users_organizacion"><?= $Page->organizacion->caption() ?><?= $Page->organizacion->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></template></label>
+        <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->organizacion->cellAttributes() ?>>
+<template id="tpx_users_organizacion"><span id="el_users_organizacion">
+<input type="<?= $Page->organizacion->getInputTextType() ?>" data-table="users" data-field="x_organizacion" name="x_organizacion" id="x_organizacion" size="100" maxlength="100" placeholder="<?= HtmlEncode($Page->organizacion->getPlaceHolder()) ?>" value="<?= $Page->organizacion->EditValue ?>"<?= $Page->organizacion->editAttributes() ?> aria-describedby="x_organizacion_help">
+<?= $Page->organizacion->getCustomMessage() ?>
+<div class="invalid-feedback"><?= $Page->organizacion->getErrorMessage() ?></div>
+</span></template>
+</div></div>
+    </div>
+<?php } ?>
 <?php if ($Page->img_user->Visible) { // img_user ?>
     <div id="r_img_user" class="form-group row">
         <label id="elh_users_img_user" class="<?= $Page->LeftColumnClass ?>"><template id="tpc_users_img_user"><?= $Page->img_user->caption() ?><?= $Page->img_user->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></template></label>
@@ -498,6 +511,10 @@ loadjs.ready("head", function() {
     <div id="r_pw" class="form-group">
         <label for="x_pw" class="col-sm-2 col-form-label"><?= $Page->pw->caption() ?><i data-phrase="FieldRequiredIndicator" class="fas fa-asterisk ew-required" data-caption=""></i></label>
         <div class="col-sm-10"><slot class="ew-slot" name="tpx_users_pw"></slot></div>
+    </div>
+    <div id="r_organizacion" class="form-group">
+        <label for="x_organizacion" class="col-sm-2 col-form-label"><?= $Page->organizacion->caption() ?></label>
+        <div class="col-sm-10"><slot class="ew-slot" name="tpx_users_organizacion"></slot></div>
     </div>
     <div id="r_estado" class="form-group">
         <label for="x_estado" class="col-sm-2 col-form-label"><?= $Page->estado->caption() ?></label>

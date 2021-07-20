@@ -1710,7 +1710,7 @@ class TareasGrid extends Tareas
                         $filterWrk .= "`id_grupo`" . SearchString("=", trim($wrk), DATATYPE_NUMBER, "");
                     }
                     $lookupFilter = function() {
-                        return (CurrentUserInfo("perfil") > 1) ?  "id_grupo = '".CurrentUserInfo("grupo")."'" : "id_escenario = 53";
+                        return (CurrentUserInfo("perfil") > 1) ?  "id_grupo = '".CurrentUserInfo("grupo")."'" : "id_escenario = '".Container("escenario")->id_escenario->CurrentValue."'";
                     };
                     $lookupFilter = $lookupFilter->bindTo($this);
                     $sqlWrk = $this->id_grupo->Lookup->getSql(false, $filterWrk, $lookupFilter, $this, true, true);
@@ -1854,7 +1854,7 @@ class TareasGrid extends Tareas
                     }
                 }
                 $lookupFilter = function() {
-                    return (CurrentUserInfo("perfil") > 1) ?  "id_grupo = '".CurrentUserInfo("grupo")."'" : "id_escenario = 53";
+                    return (CurrentUserInfo("perfil") > 1) ?  "id_grupo = '".CurrentUserInfo("grupo")."'" : "id_escenario = '".Container("escenario")->id_escenario->CurrentValue."'";
                 };
                 $lookupFilter = $lookupFilter->bindTo($this);
                 $sqlWrk = $this->id_grupo->Lookup->getSql(true, $filterWrk, $lookupFilter, $this, false, true);
@@ -1958,7 +1958,7 @@ class TareasGrid extends Tareas
                     }
                 }
                 $lookupFilter = function() {
-                    return (CurrentUserInfo("perfil") > 1) ?  "id_grupo = '".CurrentUserInfo("grupo")."'" : "id_escenario = 53";
+                    return (CurrentUserInfo("perfil") > 1) ?  "id_grupo = '".CurrentUserInfo("grupo")."'" : "id_escenario = '".Container("escenario")->id_escenario->CurrentValue."'";
                 };
                 $lookupFilter = $lookupFilter->bindTo($this);
                 $sqlWrk = $this->id_grupo->Lookup->getSql(true, $filterWrk, $lookupFilter, $this, false, true);
@@ -2126,14 +2126,6 @@ class TareasGrid extends Tareas
         if (count($rows) == 0) {
             $this->setFailureMessage($Language->phrase("NoRecord")); // No record found
             return false;
-        }
-        foreach ($rows as $row) {
-            $rsdetail = Container("mensajes")->loadRs("`id_tarea` = " . QuotedValue($row['id_tarea'], DATATYPE_NUMBER, 'DB'))->fetch();
-            if ($rsdetail !== false) {
-                $relatedRecordMsg = str_replace("%t", "mensajes", $Language->phrase("RelatedRecordExists"));
-                $this->setFailureMessage($relatedRecordMsg);
-                return false;
-            }
         }
 
         // Clone old rows
@@ -2424,7 +2416,7 @@ class TareasGrid extends Tareas
             switch ($fld->FieldVar) {
                 case "x_id_grupo":
                     $lookupFilter = function () {
-                        return (CurrentUserInfo("perfil") > 1) ?  "id_grupo = '".CurrentUserInfo("grupo")."'" : "id_escenario = 53";
+                        return (CurrentUserInfo("perfil") > 1) ?  "id_grupo = '".CurrentUserInfo("grupo")."'" : "id_escenario = '".Container("escenario")->id_escenario->CurrentValue."'";
                     };
                     $lookupFilter = $lookupFilter->bindTo($this);
                     break;

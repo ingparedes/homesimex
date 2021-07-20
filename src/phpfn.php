@@ -5996,10 +5996,10 @@ function ExecuteHtml($sql, $options = null, $c = null)
     if ($rs->recordCount()  > 1 || $horizontal) { // Horizontal table
         $cnt = $rs->fieldCount();
         $html = "<table class=\"" . $class . "\">";
-        $html .= "<thead><tr>";
+        $html .= "<thead style='background-color:#40546a' ><tr >";
         $row = &$rs->fields;
         foreach ($row as $key => $value) {
-            $html .= "<th>" . $getFieldCaption($key) . "</th>";
+            $html .= "<th style='color:#FFF'>" . $getFieldCaption($key) . "</th>";
         }
         $html .= "</tr></thead>";
         $html .= "<tbody>";

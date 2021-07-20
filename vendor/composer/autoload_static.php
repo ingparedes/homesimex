@@ -85,6 +85,7 @@ class ComposerStaticInit4b0c5483cc0f30c0c26601b090eea869
         'Z' => 
         array (
             'ZipStream\\' => 10,
+            'Zend\\Escaper\\' => 13,
         ),
         'Y' => 
         array (
@@ -125,7 +126,9 @@ class ComposerStaticInit4b0c5483cc0f30c0c26601b090eea869
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Http\\Client\\' => 16,
             'Psr\\Container\\' => 14,
+            'PhpOffice\\PhpWord\\' => 18,
             'PhpOffice\\PhpSpreadsheet\\' => 25,
+            'PhpOffice\\Common\\' => 17,
             'PhpDocReader\\' => 13,
             'PHPMaker2021\\simexamerica\\' => 26,
             'PHPMailer\\PHPMailer\\' => 20,
@@ -188,6 +191,10 @@ class ComposerStaticInit4b0c5483cc0f30c0c26601b090eea869
         'ZipStream\\' => 
         array (
             0 => __DIR__ . '/..' . '/maennchen/zipstream-php/src',
+        ),
+        'Zend\\Escaper\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zendframework/zend-escaper/src',
         ),
         'YaLinqo\\' => 
         array (
@@ -303,9 +310,17 @@ class ComposerStaticInit4b0c5483cc0f30c0c26601b090eea869
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
         ),
+        'PhpOffice\\PhpWord\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpoffice/phpword/src/PhpWord',
+        ),
         'PhpOffice\\PhpSpreadsheet\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpoffice/phpspreadsheet/src/PhpSpreadsheet',
+        ),
+        'PhpOffice\\Common\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpoffice/common/src/Common',
         ),
         'PhpDocReader\\' => 
         array (
@@ -515,6 +530,7 @@ class ComposerStaticInit4b0c5483cc0f30c0c26601b090eea869
         'Mobile_Detect' => __DIR__ . '/..' . '/mobiledetect/mobiledetectlib/Mobile_Detect.php',
         'Normalizer' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
         'PasswordHash' => __DIR__ . '/../..' . '/src/PasswordHash.php',
+        'PclZip' => __DIR__ . '/..' . '/pclzip/pclzip/pclzip.lib.php',
         'Sabberworm\\CSS\\CSSList\\AtRuleBlockList' => __DIR__ . '/..' . '/hkvstore/dompdf/lib/php-css-parser/lib/Sabberworm/CSS/CSSList/AtRuleBlockList.php',
         'Sabberworm\\CSS\\CSSList\\AtRuleBlockListTest' => __DIR__ . '/..' . '/hkvstore/dompdf/lib/php-css-parser/tests/Sabberworm/CSS/CSSList/AtRuleBlockListTest.php',
         'Sabberworm\\CSS\\CSSList\\CSSBlockList' => __DIR__ . '/..' . '/hkvstore/dompdf/lib/php-css-parser/lib/Sabberworm/CSS/CSSList/CSSBlockList.php',

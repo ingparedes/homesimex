@@ -407,8 +407,8 @@ class UsersPreview extends Users
         $this->estado->setVisibility();
         $this->horario->Visible = false;
         $this->limite->Visible = false;
+        $this->organizacion->setVisibility();
         $this->img_user->setVisibility();
-        $this->blocks->Visible = false;
         $this->hideFieldsForAddEdit();
 
         // Do not use lookup cache
@@ -753,7 +753,7 @@ class UsersPreview extends Users
             switch ($fld->FieldVar) {
                 case "x_escenario":
                     $lookupFilter = function () {
-                        return (CurrentUserInfo("perfil") != 1) ? "id_escenario = '".CurrentUserInfo("escenario")."'"  : "";
+                        return (CurrentUserInfo("perfil") > 1) ? "id_escenario = '".CurrentUserInfo("escenario")."'"  : "";
                     };
                     $lookupFilter = $lookupFilter->bindTo($this);
                     break;

@@ -558,7 +558,7 @@ loadjs.ready("head", function() {
 <script>
 loadjs.ready("load", function () {
     // Startup script
-    $("#r_id_escenario").hide(),$("#r_icon_escenario").hide(),$("#r_fechacreacion_escenario").hide(),$("#r_estado").hide(),$("#r_entrar").hide(),$('[class="btn-group btn-group-sm"]').remove();
+    $("#r_id_escenario").hide(),$("#r_icon_escenario").hide(),$("#r_fechacreacion_escenario").hide(),$("#r_estado").hide(),$("#r_entrar").hide();
 });
 </script>
 <?php } ?>

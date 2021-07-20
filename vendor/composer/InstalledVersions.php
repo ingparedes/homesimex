@@ -81,12 +81,12 @@ private static $installed = array (
     ),
     'doctrine/cache' => 
     array (
-      'pretty_version' => '1.11.3',
-      'version' => '1.11.3.0',
+      'pretty_version' => '1.12.1',
+      'version' => '1.12.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '3bb5588cec00a0268829cc4a518490df6741af9d',
+      'reference' => '4cf401d14df219fa6f38b671f5493449151c9ad8',
     ),
     'doctrine/dbal' => 
     array (
@@ -252,12 +252,12 @@ private static $installed = array (
     ),
     'monolog/monolog' => 
     array (
-      'pretty_version' => '2.3.0',
-      'version' => '2.3.0.0',
+      'pretty_version' => '2.3.1',
+      'version' => '2.3.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'df991fd88693ab703aa403413d83e15f688dae33',
+      'reference' => '9738e495f288eec0b187e310b7cdbbb285777dbe',
     ),
     'myclabs/php-enum' => 
     array (
@@ -322,6 +322,15 @@ private static $installed = array (
       ),
       'reference' => '996434e5492cb4c3edcb9168db6fbb1359ef965a',
     ),
+    'pclzip/pclzip' => 
+    array (
+      'pretty_version' => '2.8.2',
+      'version' => '2.8.2.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '19dd1de9d3f5fc4d7d70175b4c344dee329f45fd',
+    ),
     'phenx/php-font-lib' => 
     array (
       'pretty_version' => '0.5.2',
@@ -385,6 +394,15 @@ private static $installed = array (
       ),
       'reference' => 'a5b5c43e50b7fba655f793ad27303cd74c57363c',
     ),
+    'phpoffice/common' => 
+    array (
+      'pretty_version' => '0.2.9',
+      'version' => '0.2.9.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'edb5d32b1e3400a35a5c91e2539ed6f6ce925e4d',
+    ),
     'phpoffice/phpspreadsheet' => 
     array (
       'pretty_version' => '1.18.0',
@@ -393,6 +411,15 @@ private static $installed = array (
       array (
       ),
       'reference' => '418cd304e8e6b417ea79c3b29126a25dc4b1170c',
+    ),
+    'phpoffice/phpword' => 
+    array (
+      'pretty_version' => '0.17.0',
+      'version' => '0.17.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'b8346af548d399acd9e30fc76ab0c55c2fec03a5',
     ),
     'psr/container' => 
     array (
@@ -703,6 +730,15 @@ private static $installed = array (
       array (
         0 => '2.3',
       ),
+    ),
+    'zendframework/zend-escaper' => 
+    array (
+      'pretty_version' => '2.6.1',
+      'version' => '2.6.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '3801caa21b0ca6aca57fa1c42b08d35c395ebd5f',
     ),
   ),
 );

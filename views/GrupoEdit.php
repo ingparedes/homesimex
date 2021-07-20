@@ -24,7 +24,8 @@ loadjs.ready("head", function () {
         ["imgen_grupo", [fields.imgen_grupo.visible && fields.imgen_grupo.required ? ew.Validators.fileRequired(fields.imgen_grupo.caption) : null], fields.imgen_grupo.isInvalid],
         ["nombre_grupo", [fields.nombre_grupo.visible && fields.nombre_grupo.required ? ew.Validators.required(fields.nombre_grupo.caption) : null], fields.nombre_grupo.isInvalid],
         ["descripcion_grupo", [fields.descripcion_grupo.visible && fields.descripcion_grupo.required ? ew.Validators.required(fields.descripcion_grupo.caption) : null], fields.descripcion_grupo.isInvalid],
-        ["color", [fields.color.visible && fields.color.required ? ew.Validators.required(fields.color.caption) : null], fields.color.isInvalid]
+        ["color", [fields.color.visible && fields.color.required ? ew.Validators.required(fields.color.caption) : null], fields.color.isInvalid],
+        ["color_grup", [fields.color_grup.visible && fields.color_grup.required ? ew.Validators.required(fields.color_grup.caption) : null], fields.color_grup.isInvalid]
     ]);
 
     // Set invalid fields
@@ -178,10 +179,31 @@ $Page->showMessage();
 </div></div>
     </div>
 <?php } ?>
-</div><!-- /page* -->
+<?php if ($Page->color->Visible) { // color ?>
+    <div id="r_color" class="form-group row">
+        <label id="elh_grupo_color" for="x_color" class="<?= $Page->LeftColumnClass ?>"><template id="tpc_grupo_color"><?= $Page->color->caption() ?><?= $Page->color->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></template></label>
+        <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->color->cellAttributes() ?>>
 <template id="tpx_grupo_color"><span id="el_grupo_color">
-<input type="hidden" data-table="grupo" data-field="x_color" data-hidden="1" name="x_color" id="x_color" value="<?= HtmlEncode($Page->color->CurrentValue) ?>">
+<input type="<?= $Page->color->getInputTextType() ?>" data-table="grupo" data-field="x_color" name="x_color" id="x_color" size="15" maxlength="30" placeholder="<?= HtmlEncode($Page->color->getPlaceHolder()) ?>" value="<?= $Page->color->EditValue ?>"<?= $Page->color->editAttributes() ?> aria-describedby="x_color_help">
+<?= $Page->color->getCustomMessage() ?>
+<div class="invalid-feedback"><?= $Page->color->getErrorMessage() ?></div>
 </span></template>
+</div></div>
+    </div>
+<?php } ?>
+<?php if ($Page->color_grup->Visible) { // color_grup ?>
+    <div id="r_color_grup" class="form-group row">
+        <label id="elh_grupo_color_grup" for="x_color_grup" class="<?= $Page->LeftColumnClass ?>"><template id="tpc_grupo_color_grup"><?= $Page->color_grup->caption() ?><?= $Page->color_grup->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></template></label>
+        <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->color_grup->cellAttributes() ?>>
+<template id="tpx_grupo_color_grup"><span id="el_grupo_color_grup">
+<input type="<?= $Page->color_grup->getInputTextType() ?>" data-table="grupo" data-field="x_color_grup" name="x_color_grup" id="x_color_grup" size="30" maxlength="100" placeholder="<?= HtmlEncode($Page->color_grup->getPlaceHolder()) ?>" value="<?= $Page->color_grup->EditValue ?>"<?= $Page->color_grup->editAttributes() ?> aria-describedby="x_color_grup_help">
+<?= $Page->color_grup->getCustomMessage() ?>
+<div class="invalid-feedback"><?= $Page->color_grup->getErrorMessage() ?></div>
+</span></template>
+</div></div>
+    </div>
+<?php } ?>
+</div><!-- /page* -->
 <div id="tpd_grupoedit" class="ew-custom-template"></div>
 <template id="tpm_grupoedit">
 <div id="ct_GrupoEdit"><style>
@@ -214,8 +236,8 @@ $Page->showMessage();
 		border: 5px solid #fff;
 		box-shadow: 0px 0px 3px 1px #DDD;
 		position: absolute;
-		top: 35px;
-		left: 2px;
+		top: 0px;
+		left: 230px;
 	}
 	.color-holder {
   	    background: #fff;

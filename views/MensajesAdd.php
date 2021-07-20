@@ -311,34 +311,16 @@ loadjs.ready("head", function() {
         <label id="elh_mensajes_para" for="x_para" class="<?= $Page->LeftColumnClass ?>"><?= $Page->para->caption() ?><?= $Page->para->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->para->cellAttributes() ?>>
 <span id="el_mensajes_para">
-    <select
-        id="x_para[]"
-        name="x_para[]"
-        class="form-control ew-select<?= $Page->para->isInvalidClass() ?>"
-        data-select2-id="mensajes_x_para[]"
-        data-table="mensajes"
-        data-field="x_para"
-        multiple
-        size="1"
-        data-value-separator="<?= $Page->para->displayValueSeparatorAttribute() ?>"
-        data-placeholder="<?= HtmlEncode($Page->para->getPlaceHolder()) ?>"
-        <?= $Page->para->editAttributes() ?>>
-        <?= $Page->para->selectOptionListHtml("x_para[]") ?>
-    </select>
-    <?= $Page->para->getCustomMessage() ?>
-    <div class="invalid-feedback"><?= $Page->para->getErrorMessage() ?></div>
+<div class="input-group ew-lookup-list" aria-describedby="x_para_help">
+    <div class="form-control ew-lookup-text" tabindex="-1" id="lu_x_para"><?= EmptyValue(strval($Page->para->ViewValue)) ? $Language->phrase("PleaseSelect") : $Page->para->ViewValue ?></div>
+    <div class="input-group-append">
+        <button type="button" title="<?= HtmlEncode(str_replace("%s", RemoveHtml($Page->para->caption()), $Language->phrase("LookupLink", true))) ?>" class="ew-lookup-btn btn btn-default"<?= ($Page->para->ReadOnly || $Page->para->Disabled) ? " disabled" : "" ?> onclick="ew.modalLookupShow({lnk:this,el:'x_para[]',m:1,n:10});"><i class="fas fa-search ew-icon"></i></button>
+    </div>
+</div>
+<div class="invalid-feedback"><?= $Page->para->getErrorMessage() ?></div>
+<?= $Page->para->getCustomMessage() ?>
 <?= $Page->para->Lookup->getParamTag($Page, "p_x_para") ?>
-<script>
-loadjs.ready("head", function() {
-    var el = document.querySelector("select[data-select2-id='mensajes_x_para[]']"),
-        options = { name: "x_para[]", selectId: "mensajes_x_para[]", language: ew.LANGUAGE_ID, dir: ew.IS_RTL ? "rtl" : "ltr" };
-    options.multiple = true;
-    options.closeOnSelect = false;
-    options.dropdownParent = $(el).closest("#ew-modal-dialog, #ew-add-opt-dialog")[0];
-    Object.assign(options, ew.vars.tables.mensajes.fields.para.selectOptions);
-    ew.createSelect(options);
-});
-</script>
+<input type="hidden" is="selection-list" data-table="mensajes" data-field="x_para" data-type="text" data-multiple="1" data-lookup="1" data-value-separator="<?= $Page->para->displayValueSeparatorAttribute() ?>" name="x_para[]" id="x_para[]" value="<?= $Page->para->CurrentValue ?>"<?= $Page->para->editAttributes() ?>>
 </span>
 </div></div>
     </div>
@@ -382,14 +364,6 @@ loadjs.ready("head", function() {
     </div>
 <?php } ?>
 </div><!-- /page* -->
-<?php
-    if (in_array("resmensaje", explode(",", $Page->getCurrentDetailTable())) && $resmensaje->DetailAdd) {
-?>
-<?php if ($Page->getCurrentDetailTable() != "") { ?>
-<h4 class="ew-detail-caption"><?= $Language->tablePhrase("resmensaje", "TblCaption") ?></h4>
-<?php } ?>
-<?php include_once "ResmensajeGrid.php" ?>
-<?php } ?>
 <?php if (!$Page->IsModal) { ?>
 <div class="form-group row"><!-- buttons .form-group -->
     <div class="<?= $Page->OffsetColumnClass ?>"><!-- buttons offset -->

@@ -166,9 +166,11 @@ $Page->renderRow();
 <template id="tp_x_estado">
     <div class="custom-control custom-radio">
         <input type="radio" class="custom-control-input" data-table="escenario" data-field="x_estado" name="x_estado" id="x_estado"<?= $Page->estado->editAttributes() ?>>
-        <label class="custom-control-label"></label>
+        <label class="custom-control-label"> </label>
     </div>
+    
 </template>
+
 <div id="dsl_x_estado" class="ew-item-list"></div>
 <input type="hidden"
     is="selection-list"
@@ -194,7 +196,11 @@ $Page->renderRow();
     <?php if ($Page->SearchColumnCount % $Page->SearchFieldsPerRow > 0) { ?>
 </div>
     <?php } ?>
+<p> <strong> Configuración:</strong> <em>Simulación en proceso de desarrollo</em></p>
+<p><strong>Activa:</strong> <em>Simulación en ejecución</em></p>
+<p><strong>Finalizada:</strong> <em>Simulación se encuentra finalizada.</em></p> 
 <div id="xsr_<?= $Page->SearchRowCount + 1 ?>" class="ew-row d-sm-flex">
+
     <div class="ew-quick-search input-group">
         <input type="text" name="<?= Config("TABLE_BASIC_SEARCH") ?>" id="<?= Config("TABLE_BASIC_SEARCH") ?>" class="form-control" value="<?= HtmlEncode($Page->BasicSearch->getKeyword()) ?>" placeholder="<?= HtmlEncode($Language->phrase("Search")) ?>">
         <input type="hidden" name="<?= Config("TABLE_BASIC_SEARCH_TYPE") ?>" id="<?= Config("TABLE_BASIC_SEARCH_TYPE") ?>" value="<?= HtmlEncode($Page->BasicSearch->getType()) ?>">
@@ -211,6 +217,7 @@ $Page->renderRow();
     </div>
 </div>
     </div><!-- /.ew-extended-search -->
+  
 </div><!-- /.ew-search-panel -->
 </form>
 <?php } ?>
@@ -444,8 +451,8 @@ echo "<img width='25px' src='$idm'>";
 <span<?= $Page->entrar->viewAttributes() ?>><div class = "btn-group btn-group-sm ew-btn-group">
 <?php
 $id = CurrentPage()->id_escenario->CurrentValue;
-echo "<a class=\"btn btn-default ew-row-link ew-view\" title=\"Grupos\" data-toggle=\"Grupos\" data-table=\"escenario\" data-caption=\"Grupo\" href=\"GrupoList?showmaster=escenario&fk_id_escenario=$id&showdetail=\" data-original-title=\"Grupo\"><i class=\"fa fa-user-plus\"data-caption=\"Grupo\"></i></a> <br>";
-echo "<a class=\"btn btn-default ew-row-link ew-view\" title=\"Grupos\" data-toggle=\"Grupos\" data-table=\"escenario\" data-caption=\"Grupo\" href=\"Grupos?ides=$id\" data-original-title=\"Grupo\"><i class=\"fa fa-users\" aria-hidden=\"true\"></i></a> <br>";
+echo "<a class=\"btn btn-default ew-row-link ew-view\" title=\"Grupos\" data-toggle=\"Grupos\" data-table=\"escenario\" data-caption=\"Grupo\" href=\"GrupoList?showmaster=escenario&fk_id_escenario=$id&showdetail=\" data-original-title=\"Usuarios\"><i class=\"fa fa-users \"data-caption=\"Grupo\"></i></a> <br>";
+echo "<a class=\"btn btn-default ew-row-link ew-view\" title=\"Usuarios\" data-toggle=\"Usuarios\" data-table=\"escenario\" data-caption=\"Usuarios\" href=\"Grupos?ides=$id\" data-original-title=\"Usuarios\"><i class=\"fa fa-user-plus\" aria-hidden=\"true\"></i></a> <br>";
 echo "<a class=\"btn btn-default ew-row-link ew-view\" title=\"Tareas\" data-table=\"escenario\" data-caption=\"Tarea\" href=\"TareasList?showmaster=escenario&fk_id_escenario=$id\" data-original-title=\"Tareas\"><i class=\"fa fa-list-alt\" data-caption=\"Tareas\"></i></a>";
 ?>
 </div>
@@ -501,7 +508,7 @@ loadjs.ready("head", function() {
 <script>
 loadjs.ready("load", function () {
     // Startup script
-    $("#fescenariolistsrch").before('<div class="callout callout-primary"><em>Filtro para la lista de simulaciones,seleccione el estado de la simulación,  para buscar dar clics en el botón buscar Estado de la simulación: En configuración, Activa o Finalizada.</em></div>'),$("a.ew-detail-add").hide();
+    $("#fescenariolistsrch").before('<div class="callout callout-primary"><em>Si necesita realizar filtro de la siguiente lista, por favor seleccione el estado y por último clics en el botón buscar.</em></div>'),$("a.ew-detail-add").hide();
 });
 </script>
 <?php } ?>

@@ -1935,15 +1935,13 @@ class GrupoList extends Grupo
     // Page Render event
     public function pageRender()
     {
-        //Log("Page Render");
-       // $this->OtherOptions["addedit"]->Items["add"]->Visible = FALSE;
     }
 
     // Page Data Rendering event
     public function pageDataRendering(&$header)
     {
         // Example:
-        //$header = "your header";
+     //$header = "";
     }
 
     // Page Data Rendered event

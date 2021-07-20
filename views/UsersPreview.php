@@ -118,6 +118,15 @@ $Page->ListOptions->render("header", "left");
         </div></div></th>
     <?php } ?>
 <?php } ?>
+<?php if ($Page->organizacion->Visible) { // organizacion ?>
+    <?php if ($Page->SortUrl($Page->organizacion) == "") { ?>
+        <th class="<?= $Page->organizacion->headerCellClass() ?>"><?= $Page->organizacion->caption() ?></th>
+    <?php } else { ?>
+        <th class="<?= $Page->organizacion->headerCellClass() ?>"><div class="ew-pointer" data-sort="<?= HtmlEncode($Page->organizacion->Name) ?>" data-sort-order="<?= $Page->SortField == $Page->organizacion->Name && $Page->SortOrder == "ASC" ? "DESC" : "ASC" ?>">
+            <div class="ew-table-header-btn"><span class="ew-table-header-caption"><?= $Page->organizacion->caption() ?></span><span class="ew-table-header-sort"><?php if ($Page->SortField == $Page->organizacion->Name) { ?><?php if ($Page->SortOrder == "ASC") { ?><i class="fas fa-sort-up"></i><?php } elseif ($Page->SortOrder == "DESC") { ?><i class="fas fa-sort-down"></i><?php } ?><?php } ?></span>
+        </div></div></th>
+    <?php } ?>
+<?php } ?>
 <?php if ($Page->img_user->Visible) { // img_user ?>
     <?php if ($Page->SortUrl($Page->img_user) == "") { ?>
         <th class="<?= $Page->img_user->headerCellClass() ?>"><?= $Page->img_user->caption() ?></th>
@@ -230,18 +239,15 @@ $Page->ListOptions->render("body", "left", $Page->RowCount);
 <?php if ($Page->estado->Visible) { // estado ?>
         <!-- estado -->
         <td<?= $Page->estado->cellAttributes() ?>>
-<span<?= $Page->estado->viewAttributes() ?>><?php
-$idstatus = CurrentPage()->estado->CurrentValue;
-$idus = CurrentPage()->id_users->CurrentValue;
-if ($idstatus == 2)
-{
-//echo "<a href=\"#\" onclick=\"myFunction(this)\" ><i class=\"fa fa-user-plus\"></i></a> <br>";
-echo '<img class="mt-3 justify-content-center align-self-center " id="activador" onclick="activar('; echo $Page->id_users->getViewValue();echo ');" src="images/cheque.png" alt="activar" height="20" width="20">';
-}
-else
-	{echo 'Activo';}
-?>
-</span>
+<span<?= $Page->estado->viewAttributes() ?>>
+<?= $Page->estado->getViewValue() ?></span>
+</td>
+<?php } ?>
+<?php if ($Page->organizacion->Visible) { // organizacion ?>
+        <!-- organizacion -->
+        <td<?= $Page->organizacion->cellAttributes() ?>>
+<span<?= $Page->organizacion->viewAttributes() ?>>
+<?= $Page->organizacion->getViewValue() ?></span>
 </td>
 <?php } ?>
 <?php if ($Page->img_user->Visible) { // img_user ?>

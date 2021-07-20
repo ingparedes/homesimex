@@ -153,7 +153,7 @@ CHARTJS;
                     // Set up datasets
                     $cntData = count($chartData);
                     $cntSeries = count($chartSeries);
-                    if ($cntSeries > count($chartData[0]) - 2) {
+                    if ($cntData > 0 && is_array($chartData[0]) && $cntSeries > count($chartData[0]) - 2) {
                         $cntSeries = count($chartData[0]) - 2;
                     }
                     for ($i = 0; $i < $cntSeries; $i++) {
@@ -319,8 +319,7 @@ CHARTJS;
                 }
 
                 // Get dataset
-                $dataset = $this->getDataset($data, $backgroundColor, $links);
-                $datasets = [$dataset];
+                $datasets = $cntData > 0 ? [$this->getDataset($data, $backgroundColor, $links)] : [];
 
                 // Set up Data/Options
                 $this->Data = ["labels" => $labels, "datasets" => $datasets];

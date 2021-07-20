@@ -482,8 +482,8 @@ class UsersEdit extends Users
         $this->estado->setVisibility();
         $this->horario->Visible = false;
         $this->limite->Visible = false;
+        $this->organizacion->setVisibility();
         $this->img_user->setVisibility();
-        $this->blocks->Visible = false;
         $this->hideFieldsForAddEdit();
 
         // Do not use lookup cache
@@ -796,6 +796,16 @@ class UsersEdit extends Users
             }
         }
 
+        // Check field name 'organizacion' first before field var 'x_organizacion'
+        $val = $CurrentForm->hasValue("organizacion") ? $CurrentForm->getValue("organizacion") : $CurrentForm->getValue("x_organizacion");
+        if (!$this->organizacion->IsDetailKey) {
+            if (IsApi() && $val === null) {
+                $this->organizacion->Visible = false; // Disable update for API request
+            } else {
+                $this->organizacion->setFormValue($val);
+            }
+        }
+
         // Check field name 'id_users' first before field var 'x_id_users'
         $val = $CurrentForm->hasValue("id_users") ? $CurrentForm->getValue("id_users") : $CurrentForm->getValue("x_id_users");
         if (!$this->id_users->IsDetailKey) {
@@ -822,6 +832,7 @@ class UsersEdit extends Users
         $this->pais->CurrentValue = $this->pais->FormValue;
         $this->pw->CurrentValue = $this->pw->FormValue;
         $this->estado->CurrentValue = $this->estado->FormValue;
+        $this->organizacion->CurrentValue = $this->organizacion->FormValue;
     }
 
     /**
@@ -886,9 +897,9 @@ class UsersEdit extends Users
         $this->estado->setDbValue($row['estado']);
         $this->horario->setDbValue($row['horario']);
         $this->limite->setDbValue($row['limite']);
+        $this->organizacion->setDbValue($row['organizacion']);
         $this->img_user->Upload->DbValue = $row['img_user'];
         $this->img_user->setDbValue($this->img_user->Upload->DbValue);
-        $this->blocks->setDbValue($row['blocks']);
     }
 
     // Return a row with default values
@@ -910,8 +921,8 @@ class UsersEdit extends Users
         $row['estado'] = null;
         $row['horario'] = null;
         $row['limite'] = null;
+        $row['organizacion'] = null;
         $row['img_user'] = null;
-        $row['blocks'] = null;
         return $row;
     }
 
@@ -973,9 +984,9 @@ class UsersEdit extends Users
 
         // limite
 
-        // img_user
+        // organizacion
 
-        // blocks
+        // img_user
         if ($this->RowType == ROWTYPE_VIEW) {
             // id_users
             $this->id_users->ViewValue = $this->id_users->CurrentValue;
@@ -1001,7 +1012,7 @@ class UsersEdit extends Users
                 if ($this->escenario->ViewValue === null) { // Lookup from database
                     $filterWrk = "`id_escenario`" . SearchString("=", $curVal, DATATYPE_NUMBER, "");
                     $lookupFilter = function() {
-                        return (CurrentUserInfo("perfil") != 1) ? "id_escenario = '".CurrentUserInfo("escenario")."'"  : "";
+                        return (CurrentUserInfo("perfil") > 1) ? "id_escenario = '".CurrentUserInfo("escenario")."'"  : "";
                     };
                     $lookupFilter = $lookupFilter->bindTo($this);
                     $sqlWrk = $this->escenario->Lookup->getSql(false, $filterWrk, $lookupFilter, $this, true, true);
@@ -1141,6 +1152,10 @@ class UsersEdit extends Users
             $this->limite->ViewValue = FormatDateTime($this->limite->ViewValue, 0);
             $this->limite->ViewCustomAttributes = "";
 
+            // organizacion
+            $this->organizacion->ViewValue = $this->organizacion->CurrentValue;
+            $this->organizacion->ViewCustomAttributes = "";
+
             // img_user
             if (!EmptyValue($this->img_user->Upload->DbValue)) {
                 $this->img_user->ImageWidth = 50;
@@ -1151,10 +1166,6 @@ class UsersEdit extends Users
                 $this->img_user->ViewValue = "";
             }
             $this->img_user->ViewCustomAttributes = "";
-
-            // blocks
-            $this->blocks->ViewValue = $this->blocks->CurrentValue;
-            $this->blocks->ViewCustomAttributes = "";
 
             // fecha
             $this->fecha->LinkCustomAttributes = "";
@@ -1216,6 +1227,11 @@ class UsersEdit extends Users
             $this->estado->HrefValue = "";
             $this->estado->TooltipValue = "";
 
+            // organizacion
+            $this->organizacion->LinkCustomAttributes = "";
+            $this->organizacion->HrefValue = "";
+            $this->organizacion->TooltipValue = "";
+
             // img_user
             $this->img_user->LinkCustomAttributes = "";
             if (!EmptyValue($this->img_user->Upload->DbValue)) {
@@ -1268,7 +1284,7 @@ class UsersEdit extends Users
                     if ($this->escenario->ViewValue === null) { // Lookup from database
                         $filterWrk = "`id_escenario`" . SearchString("=", $curVal, DATATYPE_NUMBER, "");
                         $lookupFilter = function() {
-                            return (CurrentUserInfo("perfil") != 1) ? "id_escenario = '".CurrentUserInfo("escenario")."'"  : "";
+                            return (CurrentUserInfo("perfil") > 1) ? "id_escenario = '".CurrentUserInfo("escenario")."'"  : "";
                         };
                         $lookupFilter = $lookupFilter->bindTo($this);
                         $sqlWrk = $this->escenario->Lookup->getSql(false, $filterWrk, $lookupFilter, $this, true, true);
@@ -1301,7 +1317,7 @@ class UsersEdit extends Users
                         $filterWrk = "`id_escenario`" . SearchString("=", $this->escenario->CurrentValue, DATATYPE_NUMBER, "");
                     }
                     $lookupFilter = function() {
-                        return (CurrentUserInfo("perfil") != 1) ? "id_escenario = '".CurrentUserInfo("escenario")."'"  : "";
+                        return (CurrentUserInfo("perfil") > 1) ? "id_escenario = '".CurrentUserInfo("escenario")."'"  : "";
                     };
                     $lookupFilter = $lookupFilter->bindTo($this);
                     $sqlWrk = $this->escenario->Lookup->getSql(true, $filterWrk, $lookupFilter, $this, false, true);
@@ -1496,6 +1512,15 @@ class UsersEdit extends Users
             $this->estado->EditValue = $this->estado->options(false);
             $this->estado->PlaceHolder = RemoveHtml($this->estado->caption());
 
+            // organizacion
+            $this->organizacion->EditAttrs["class"] = "form-control";
+            $this->organizacion->EditCustomAttributes = "";
+            if (!$this->organizacion->Raw) {
+                $this->organizacion->CurrentValue = HtmlDecode($this->organizacion->CurrentValue);
+            }
+            $this->organizacion->EditValue = HtmlEncode($this->organizacion->CurrentValue);
+            $this->organizacion->PlaceHolder = RemoveHtml($this->organizacion->caption());
+
             // img_user
             $this->img_user->EditAttrs["class"] = "form-control";
             $this->img_user->EditCustomAttributes = "";
@@ -1563,6 +1588,10 @@ class UsersEdit extends Users
             // estado
             $this->estado->LinkCustomAttributes = "";
             $this->estado->HrefValue = "";
+
+            // organizacion
+            $this->organizacion->LinkCustomAttributes = "";
+            $this->organizacion->HrefValue = "";
 
             // img_user
             $this->img_user->LinkCustomAttributes = "";
@@ -1663,6 +1692,11 @@ class UsersEdit extends Users
         if ($this->estado->Required) {
             if ($this->estado->FormValue == "") {
                 $this->estado->addErrorMessage(str_replace("%s", $this->estado->caption(), $this->estado->RequiredErrorMessage));
+            }
+        }
+        if ($this->organizacion->Required) {
+            if (!$this->organizacion->IsDetailKey && EmptyValue($this->organizacion->FormValue)) {
+                $this->organizacion->addErrorMessage(str_replace("%s", $this->organizacion->caption(), $this->organizacion->RequiredErrorMessage));
             }
         }
         if ($this->img_user->Required) {
@@ -1768,6 +1802,9 @@ class UsersEdit extends Users
 
             // estado
             $this->estado->setDbValueDef($rsnew, $this->estado->CurrentValue, null, $this->estado->ReadOnly);
+
+            // organizacion
+            $this->organizacion->setDbValueDef($rsnew, $this->organizacion->CurrentValue, null, $this->organizacion->ReadOnly);
 
             // img_user
             if ($this->img_user->Visible && !$this->img_user->ReadOnly && !$this->img_user->Upload->KeepFile) {
@@ -1881,6 +1918,11 @@ class UsersEdit extends Users
         // Call Row_Updated event
         if ($editRow) {
             $this->rowUpdated($rsold, $rsnew);
+        }
+        if ($editRow) {
+            if ($this->SendEmail) {
+                $this->sendEmailOnEdit($rsold, $rsnew);
+            }
         }
 
         // Clean upload path if any
@@ -2059,7 +2101,7 @@ class UsersEdit extends Users
             switch ($fld->FieldVar) {
                 case "x_escenario":
                     $lookupFilter = function () {
-                        return (CurrentUserInfo("perfil") != 1) ? "id_escenario = '".CurrentUserInfo("escenario")."'"  : "";
+                        return (CurrentUserInfo("perfil") > 1) ? "id_escenario = '".CurrentUserInfo("escenario")."'"  : "";
                     };
                     $lookupFilter = $lookupFilter->bindTo($this);
                     break;

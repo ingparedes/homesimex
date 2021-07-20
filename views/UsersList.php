@@ -38,6 +38,7 @@ loadjs.ready("head", function () {
         ["telefono", [], fields.telefono.isInvalid],
         ["pais", [], fields.pais.isInvalid],
         ["estado", [], fields.estado.isInvalid],
+        ["organizacion", [], fields.organizacion.isInvalid],
         ["img_user", [], fields.img_user.isInvalid]
     ]);
 
@@ -300,6 +301,9 @@ $Page->ListOptions->render("header", "left");
 <?php if ($Page->estado->Visible) { // estado ?>
         <th data-name="estado" class="<?= $Page->estado->headerCellClass() ?>"><div id="elh_users_estado" class="users_estado"><?= $Page->renderSort($Page->estado) ?></div></th>
 <?php } ?>
+<?php if ($Page->organizacion->Visible) { // organizacion ?>
+        <th data-name="organizacion" class="<?= $Page->organizacion->headerCellClass() ?>"><div id="elh_users_organizacion" class="users_organizacion"><?= $Page->renderSort($Page->organizacion) ?></div></th>
+<?php } ?>
 <?php if ($Page->img_user->Visible) { // img_user ?>
         <th data-name="img_user" class="<?= $Page->img_user->headerCellClass() ?>"><div id="elh_users_img_user" class="users_img_user"><?= $Page->renderSort($Page->img_user) ?></div></th>
 <?php } ?>
@@ -453,18 +457,16 @@ $Page->ListOptions->render("body", "left", $Page->RowCount);
     <?php if ($Page->estado->Visible) { // estado ?>
         <td data-name="estado" <?= $Page->estado->cellAttributes() ?>>
 <span id="el<?= $Page->RowCount ?>_users_estado">
-<span<?= $Page->estado->viewAttributes() ?>><?php
-$idstatus = CurrentPage()->estado->CurrentValue;
-$idus = CurrentPage()->id_users->CurrentValue;
-if ($idstatus == 2)
-{
-//echo "<a href=\"#\" onclick=\"myFunction(this)\" ><i class=\"fa fa-user-plus\"></i></a> <br>";
-echo '<img class="mt-3 justify-content-center align-self-center " id="activador" onclick="activar('; echo $Page->id_users->getViewValue();echo ');" src="images/cheque.png" alt="activar" height="20" width="20">';
-}
-else
-	{echo 'Activo';}
-?>
+<span<?= $Page->estado->viewAttributes() ?>>
+<?= $Page->estado->getViewValue() ?></span>
 </span>
+</td>
+    <?php } ?>
+    <?php if ($Page->organizacion->Visible) { // organizacion ?>
+        <td data-name="organizacion" <?= $Page->organizacion->cellAttributes() ?>>
+<span id="el<?= $Page->RowCount ?>_users_organizacion">
+<span<?= $Page->organizacion->viewAttributes() ?>>
+<?= $Page->organizacion->getViewValue() ?></span>
 </span>
 </td>
     <?php } ?>

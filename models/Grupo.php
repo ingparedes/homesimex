@@ -1524,7 +1524,11 @@ SORTHTML;
     // Row Inserted event
     public function rowInserted($rsold, &$rsnew)
     {
-        //Log("Row Inserted");
+        $nombre = $rsnew['nombre_grupo'];
+        $nomgr = $rsnew['descripcion_grupo'];
+        
+        $sqlchat = Execute("INSERT INTO `simexamerica`.`arrowchat_chatroom_rooms`(`author_id`, `name`, `description`, `welcome_message`, `type`, `length`, `is_featured`, `disallowed_groups`, `session_time`) VALUES ('1', ' $nombre', '$nomgr', 'Bienvenidos', 1, 0, 1, 's;1:\"0\":', 0)");
+
     }
 
     // Row Updating event

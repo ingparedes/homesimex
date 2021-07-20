@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<ew-language date="2021/7/13" version="17.0.4" id="es" name="Spanish" desc="Spanish" author="ELA83">
+<ew-language date="2021/7/20" version="17.0.4" id="es" name="Spanish" desc="Spanish" author="ELA83">
   <!--
     *** Important Notes:
     1. Language ID should follow: https://developers.google.com/recaptcha/docs/language,
@@ -18,7 +18,7 @@
     <phrase id="actionupdatedmultiupdate" value="Actualizado (Multi-Update)" />
     <phrase id="activateaccount" value="Su cuenta fue activada" />
     <phrase id="activatefailed" value="Falló la activación" />
-    <phrase id="add" value="Guardar" />
+    <phrase id="add" value="Nuevo" />
     <phrase id="addblankrow" value="Agregar Fila en blanco" class="fas fa-plus ew-icon" />
     <!-- v2019 -->
     <phrase id="addbtn" value="Guardar" client="1" />
@@ -576,7 +576,7 @@
     <!-- v2018 -->
     <phrase id="permissionview" value="Ver" client="1" />
     <!-- v2018 -->
-    <phrase id="personaldatabtn" value="Datos Personales" />
+    <phrase id="personaldatabtn" value="Mi cuenta" />
     <!-- v2019 -->
     <phrase id="personaldatacontent" value="Su cuenta contiene datos personales que usted brindó. Esta página le permite descargar o borrar esos datos." />
     <!-- v2019 -->
@@ -584,7 +584,7 @@
     <!-- v2019 -->
     <phrase id="personaldatadeletesuccess" value="Datos personales borrados exitosamente" />
     <!-- v2019 -->
-    <phrase id="personaldatatitle" value="Datos Personales" />
+    <phrase id="personaldatatitle" value="Mi cuenta" />
     <!-- v2019 -->
     <phrase id="personaldatawarning" value="Borrando estos datos usted elimina su cuenta, y no podrá ser recuperada." />
     <!-- v2019 -->
@@ -1062,7 +1062,7 @@
       <phrase id="menutext" value="menu" />
     </menu>
     <menu id="246">
-      <phrase id="menutext" value="Documentos" />
+      <phrase id="menutext" value="Mis documentos" />
     </menu>
     <menu id="1">
       <phrase id="menutext" value="Simulaciones" />
@@ -1172,7 +1172,7 @@
         <phrase id="fldcaption" value="Fecha" />
       </field>
       <field id="nombre_escenario">
-        <phrase id="fldcaption" value="Simulación" />
+        <phrase id="fldcaption" value="Nombre de la simulación" />
       </field>
       <field id="tipo_evento">
         <phrase id="fldcaption" value="Tipo de evento" />
@@ -1181,10 +1181,10 @@
         <phrase id="fldcaption" value="Incidente" />
       </field>
       <field id="evento_asociado">
-        <phrase id="fldcaption" value="Evento asociado" />
+        <phrase id="fldcaption" value="Evento/s asociados" />
       </field>
       <field id="pais_escenario">
-        <phrase id="fldcaption" value="País" />
+        <phrase id="fldcaption" value="País a efectuarse la simulación" />
       </field>
       <field id="zonahora_escenario">
         <phrase id="fldcaption" value="Zona" />
@@ -1193,16 +1193,16 @@
         <phrase id="fldcaption" value="Descripción" />
       </field>
       <field id="fechaini_real">
-        <phrase id="fldcaption" value="Tiempo inicio real" />
+        <phrase id="fldcaption" value="Hora inicio real" />
       </field>
       <field id="fechafinal_real">
-        <phrase id="fldcaption" value="Tiempo fin real" />
+        <phrase id="fldcaption" value="Hora fin real" />
       </field>
       <field id="fechaini_simulado">
-        <phrase id="fldcaption" value="Tiempo inicio simulado" />
+        <phrase id="fldcaption" value="Hora inicio simulado" />
       </field>
       <field id="fechafin_simulado">
-        <phrase id="fldcaption" value="Tiempo final simulado" />
+        <phrase id="fldcaption" value="Hora final simulado" />
       </field>
       <field id="estado">
         <phrase id="fldcaption" value="Estado" />
@@ -1212,16 +1212,18 @@
         <phrase id="fldtagcaption2" value="Activa" />
         <phrase id="fldtagvalue3" value="3" />
         <phrase id="fldtagcaption3" value="Finalizada" />
+        <phrase id="custommsg" value="&lt;strong&gt;Configuración:&lt;/strong&gt; Simulación en proceso de desarrollo. &lt;strong&gt;Activa:&lt;/strong&gt; Simulación en ejecución. &lt;strong&gt;Finalizada:&lt;/strong&gt; Simulación se encuentra finalizada" />
       </field>
       <field id="image_escenario">
         <phrase id="fldcaption" value="Imagen" />
+        <phrase id="custommsg" value="Dimensión recomendada 600px x 150px en formato png o jpg." />
       </field>
       <field id="entrar">
         <phrase id="fldcaption" value="Control" />
       </field>
     </table>
     <table id="grupo">
-      <phrase id="tblcaption" value="Control de usuarios" />
+      <phrase id="tblcaption" value="Grupos" />
       <field id="id_escenario">
         <phrase id="fldcaption" value="ID" />
       </field>
@@ -1308,28 +1310,28 @@
         <phrase id="fldcaption" value="ID escenario" />
       </field>
       <field id="id_grupo">
-        <phrase id="fldcaption" value="Grupo" />
+        <phrase id="fldcaption" value="Grupos" />
       </field>
       <field id="titulo_tarea">
-        <phrase id="fldcaption" value="Titulo tarea" />
+        <phrase id="fldcaption" value="Título tarea" />
       </field>
       <field id="descripcion_tarea">
         <phrase id="fldcaption" value="Descripción" />
       </field>
       <field id="fechainireal_tarea">
-        <phrase id="fldcaption" value="Tiempo inicio real" />
+        <phrase id="fldcaption" value="Hora inicio real" />
         <phrase id="custommsg" value="Por favor seleccione el tiempo real de inicio de ejecución." />
       </field>
       <field id="fechafin_tarea">
-        <phrase id="fldcaption" value="Tiempo final real" />
+        <phrase id="fldcaption" value="Hora final real" />
         <phrase id="custommsg" value="Por favor seleccione el tiempo real final de ejecución." />
       </field>
       <field id="fechainisimulado_tarea">
-        <phrase id="fldcaption" value="Tiempo inicio simulado" />
+        <phrase id="fldcaption" value="Hora inicio simulado" />
         <phrase id="custommsg" value="Por favor seleccione el tiempo simulado de inicio de ejecución." />
       </field>
       <field id="fechafinsimulado_tarea">
-        <phrase id="fldcaption" value="Tiempo fin simulado" />
+        <phrase id="fldcaption" value="Hora fin simulado" />
         <phrase id="custommsg" value="Por favor seleccione el tiempo simulado final de ejecución." />
       </field>
       <field id="id_tarearelacion">
@@ -1468,11 +1470,11 @@
       <field id="limite">
         <phrase id="fldcaption" value="limite" />
       </field>
+      <field id="organizacion">
+        <phrase id="fldcaption" value="Organización" />
+      </field>
       <field id="img_user">
         <phrase id="fldcaption" value="Imagen" />
-      </field>
-      <field id="blocks">
-        <phrase id="fldcaption" value="blocks" />
       </field>
     </table>
     <table id="mensagens">
@@ -1598,11 +1600,11 @@
         <phrase id="fldcaption" value="Mensaje" />
       </field>
       <field id="fechareal_start">
-        <phrase id="fldcaption" value="Tiempo inicio real" />
+        <phrase id="fldcaption" value="Hora inicio real" />
         <phrase id="custommsg" value="Seleccione el tiempo real para ejecución del mensaje" />
       </field>
       <field id="fechasim_start">
-        <phrase id="fldcaption" value="Tiempo inicio simulado" />
+        <phrase id="fldcaption" value="Hora inicio simulado" />
         <phrase id="custommsg" value="Seleccione el tiempo simulado para ejecución del mensaje" />
       </field>
       <field id="medios">

@@ -490,38 +490,6 @@ loadjs.ready("head", function() {
 <script>
 loadjs.ready("load", function () {
     // Startup script
-    /* Write your table-specific startup script here, no need to add script tags.
-    $('label#elh_escenario_icon_escenario').remove();
-    $('label#elh_escenario_nombre_escenario').remove();
-    $('label#elh_escenario_pais_escenario').remove();
-    $('label#elh_escenario_descripcion_escenario').remove();
-    $('label#elh_escenario_fechaini_simulado').remove();
-    $('label#elh_escenario_fechafin_simulado').remove();
-    $('label#elh_escenario_fechaini_real').remove();
-    $('label#elh_escenario_fechafinal_real').remove();
-    $('label#elh_escenario_image_escenario').remove();
-    $('label#elh_escenario_tipo_evento').remove();
-    $('label#elh_escenario_incidente').remove();*/
-    $('#r_nombre_escenario').removeClass('form-group row').addClass('form-group');
-    $('#r_pais_escenario').removeClass('form-group row').addClass('form-group');
-    $('#r_fechaini_simulado').removeClass('form-group row').addClass('form-group');
-    $('#r_tipo_evento').removeClass('form-group row').addClass('form-group');
-    $('#r_incidente').removeClass('form-group row').addClass('form-group');
-    $('#r_evento_asociado').removeClass('form-group row').addClass('form-group');
-    $('#r_descripcion_escenario').removeClass('form-group row').addClass('form-group');
-    $('#r_fechafin_simulado').removeClass('form-group row').addClass('form-group');
-    $('#r_fechaini_real').removeClass('form-group row').addClass('form-group');
-    $('#r_fechafinal_real').removeClass('form-group row').addClass('form-group');
-    $('#r_image_escenario').removeClass('form-group row').addClass('form-group');
-    $('#r_estado').removeClass('form-group row').addClass('form-group');
-
-    //$("#dsl_x_tipo_evento").before("Categoría incidente");
-    //$("#dsl_x_incidente").before("Tipo incidente");
-    $('#r_icon_escenario').hide();
-    //$('div').addClass('col-sm-10 form-group').removeClass('col-sm-10');
-    $('h4').text("Nueva simulación");
-    <?php if (!CurrentPage()->IsCopy())  { ?>
-    $('#x_descripcion_escenario').val('<p><strong>1. Justificaci&oacute;n y antecedentes </strong></p><p>&nbsp;</p><p><strong>2. Prop&oacute;sito de la simulaci&oacute;n </strong></p><p>&nbsp;</p><p><strong>3. Objetivos de entrenamiento</strong></p><p>&nbsp;</p><p><strong>4. Escenarios</strong></p><p>&nbsp;</p><p><strong>5. </strong><strong>Grupos objetivos</strong></p><p>&nbsp;</p><p><strong>6. Metodolog&iacute;a</strong></p>');
-    <?php } ?>
+    $("#r_nombre_escenario").removeClass("form-group row").addClass("form-group"),$("#r_pais_escenario").removeClass("form-group row").addClass("form-group"),$("#r_fechaini_simulado").removeClass("form-group row").addClass("form-group"),$("#r_tipo_evento").removeClass("form-group row").addClass("form-group"),$("#r_incidente").removeClass("form-group row").addClass("form-group"),$("#r_evento_asociado").removeClass("form-group row").addClass("form-group"),$("#r_descripcion_escenario").removeClass("form-group row").addClass("form-group"),$("#r_fechafin_simulado").removeClass("form-group row").addClass("form-group"),$("#r_fechaini_real").removeClass("form-group row").addClass("form-group"),$("#r_fechafinal_real").removeClass("form-group row").addClass("form-group"),$("#r_image_escenario").removeClass("form-group row").addClass("form-group"),$("#r_estado").removeClass("form-group row").addClass("form-group"),$("#r_icon_escenario").hide();
 });
 </script>

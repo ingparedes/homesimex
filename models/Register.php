@@ -600,10 +600,10 @@ class Register extends Users
         $this->horario->OldValue = $this->horario->CurrentValue;
         $this->limite->CurrentValue = null;
         $this->limite->OldValue = $this->limite->CurrentValue;
+        $this->organizacion->CurrentValue = null;
+        $this->organizacion->OldValue = $this->organizacion->CurrentValue;
         $this->img_user->Upload->DbValue = null;
         $this->img_user->OldValue = $this->img_user->Upload->DbValue;
-        $this->blocks->CurrentValue = null;
-        $this->blocks->OldValue = $this->blocks->CurrentValue;
     }
 
     // Load form values
@@ -652,6 +652,26 @@ class Register extends Users
             }
         }
 
+        // Check field name 'pais' first before field var 'x_pais'
+        $val = $CurrentForm->hasValue("pais") ? $CurrentForm->getValue("pais") : $CurrentForm->getValue("x_pais");
+        if (!$this->pais->IsDetailKey) {
+            if (IsApi() && $val === null) {
+                $this->pais->Visible = false; // Disable update for API request
+            } else {
+                $this->pais->setFormValue($val);
+            }
+        }
+
+        // Check field name 'organizacion' first before field var 'x_organizacion'
+        $val = $CurrentForm->hasValue("organizacion") ? $CurrentForm->getValue("organizacion") : $CurrentForm->getValue("x_organizacion");
+        if (!$this->organizacion->IsDetailKey) {
+            if (IsApi() && $val === null) {
+                $this->organizacion->Visible = false; // Disable update for API request
+            } else {
+                $this->organizacion->setFormValue($val);
+            }
+        }
+
         // Check field name 'id_users' first before field var 'x_id_users'
         $val = $CurrentForm->hasValue("id_users") ? $CurrentForm->getValue("id_users") : $CurrentForm->getValue("x_id_users");
     }
@@ -664,6 +684,8 @@ class Register extends Users
         $this->apellidos->CurrentValue = $this->apellidos->FormValue;
         $this->_email->CurrentValue = $this->_email->FormValue;
         $this->telefono->CurrentValue = $this->telefono->FormValue;
+        $this->pais->CurrentValue = $this->pais->FormValue;
+        $this->organizacion->CurrentValue = $this->organizacion->FormValue;
     }
 
     /**
@@ -728,9 +750,9 @@ class Register extends Users
         $this->estado->setDbValue($row['estado']);
         $this->horario->setDbValue($row['horario']);
         $this->limite->setDbValue($row['limite']);
+        $this->organizacion->setDbValue($row['organizacion']);
         $this->img_user->Upload->DbValue = $row['img_user'];
         $this->img_user->setDbValue($this->img_user->Upload->DbValue);
-        $this->blocks->setDbValue($row['blocks']);
     }
 
     // Return a row with default values
@@ -753,8 +775,8 @@ class Register extends Users
         $row['estado'] = $this->estado->CurrentValue;
         $row['horario'] = $this->horario->CurrentValue;
         $row['limite'] = $this->limite->CurrentValue;
+        $row['organizacion'] = $this->organizacion->CurrentValue;
         $row['img_user'] = $this->img_user->Upload->DbValue;
-        $row['blocks'] = $this->blocks->CurrentValue;
         return $row;
     }
 
@@ -800,9 +822,9 @@ class Register extends Users
 
         // limite
 
-        // img_user
+        // organizacion
 
-        // blocks
+        // img_user
         if ($this->RowType == ROWTYPE_VIEW) {
             // id_users
             $this->id_users->ViewValue = $this->id_users->CurrentValue;
@@ -828,7 +850,7 @@ class Register extends Users
                 if ($this->escenario->ViewValue === null) { // Lookup from database
                     $filterWrk = "`id_escenario`" . SearchString("=", $curVal, DATATYPE_NUMBER, "");
                     $lookupFilter = function() {
-                        return (CurrentUserInfo("perfil") != 1) ? "id_escenario = '".CurrentUserInfo("escenario")."'"  : "";
+                        return (CurrentUserInfo("perfil") > 1) ? "id_escenario = '".CurrentUserInfo("escenario")."'"  : "";
                     };
                     $lookupFilter = $lookupFilter->bindTo($this);
                     $sqlWrk = $this->escenario->Lookup->getSql(false, $filterWrk, $lookupFilter, $this, true, true);
@@ -968,6 +990,10 @@ class Register extends Users
             $this->limite->ViewValue = FormatDateTime($this->limite->ViewValue, 0);
             $this->limite->ViewCustomAttributes = "";
 
+            // organizacion
+            $this->organizacion->ViewValue = $this->organizacion->CurrentValue;
+            $this->organizacion->ViewCustomAttributes = "";
+
             // img_user
             if (!EmptyValue($this->img_user->Upload->DbValue)) {
                 $this->img_user->ImageWidth = 50;
@@ -978,10 +1004,6 @@ class Register extends Users
                 $this->img_user->ViewValue = "";
             }
             $this->img_user->ViewCustomAttributes = "";
-
-            // blocks
-            $this->blocks->ViewValue = $this->blocks->CurrentValue;
-            $this->blocks->ViewCustomAttributes = "";
 
             // nombres
             $this->nombres->LinkCustomAttributes = "";
@@ -1002,6 +1024,16 @@ class Register extends Users
             $this->telefono->LinkCustomAttributes = "";
             $this->telefono->HrefValue = "";
             $this->telefono->TooltipValue = "";
+
+            // pais
+            $this->pais->LinkCustomAttributes = "";
+            $this->pais->HrefValue = "";
+            $this->pais->TooltipValue = "";
+
+            // organizacion
+            $this->organizacion->LinkCustomAttributes = "";
+            $this->organizacion->HrefValue = "";
+            $this->organizacion->TooltipValue = "";
         } elseif ($this->RowType == ROWTYPE_ADD) {
             // nombres
             $this->nombres->EditAttrs["class"] = "form-control";
@@ -1039,6 +1071,40 @@ class Register extends Users
             $this->telefono->EditValue = HtmlEncode($this->telefono->CurrentValue);
             $this->telefono->PlaceHolder = RemoveHtml($this->telefono->caption());
 
+            // pais
+            $this->pais->EditAttrs["class"] = "form-control";
+            $this->pais->EditCustomAttributes = "";
+            $curVal = trim(strval($this->pais->CurrentValue));
+            if ($curVal != "") {
+                $this->pais->ViewValue = $this->pais->lookupCacheOption($curVal);
+            } else {
+                $this->pais->ViewValue = $this->pais->Lookup !== null && is_array($this->pais->Lookup->Options) ? $curVal : null;
+            }
+            if ($this->pais->ViewValue !== null) { // Load from cache
+                $this->pais->EditValue = array_values($this->pais->Lookup->Options);
+            } else { // Lookup from database
+                if ($curVal == "") {
+                    $filterWrk = "0=1";
+                } else {
+                    $filterWrk = "`id_zone`" . SearchString("=", $this->pais->CurrentValue, DATATYPE_NUMBER, "");
+                }
+                $sqlWrk = $this->pais->Lookup->getSql(true, $filterWrk, '', $this, false, true);
+                $rswrk = Conn()->executeQuery($sqlWrk)->fetchAll(\PDO::FETCH_BOTH);
+                $ari = count($rswrk);
+                $arwrk = $rswrk;
+                $this->pais->EditValue = $arwrk;
+            }
+            $this->pais->PlaceHolder = RemoveHtml($this->pais->caption());
+
+            // organizacion
+            $this->organizacion->EditAttrs["class"] = "form-control";
+            $this->organizacion->EditCustomAttributes = "";
+            if (!$this->organizacion->Raw) {
+                $this->organizacion->CurrentValue = HtmlDecode($this->organizacion->CurrentValue);
+            }
+            $this->organizacion->EditValue = HtmlEncode($this->organizacion->CurrentValue);
+            $this->organizacion->PlaceHolder = RemoveHtml($this->organizacion->caption());
+
             // Add refer script
 
             // nombres
@@ -1056,6 +1122,14 @@ class Register extends Users
             // telefono
             $this->telefono->LinkCustomAttributes = "";
             $this->telefono->HrefValue = "";
+
+            // pais
+            $this->pais->LinkCustomAttributes = "";
+            $this->pais->HrefValue = "";
+
+            // organizacion
+            $this->organizacion->LinkCustomAttributes = "";
+            $this->organizacion->HrefValue = "";
         }
         if ($this->RowType == ROWTYPE_ADD || $this->RowType == ROWTYPE_EDIT || $this->RowType == ROWTYPE_SEARCH) { // Add/Edit/Search row
             $this->setupFieldTitles();
@@ -1102,6 +1176,16 @@ class Register extends Users
                 $this->telefono->addErrorMessage(str_replace("%s", $this->telefono->caption(), $this->telefono->RequiredErrorMessage));
             }
         }
+        if ($this->pais->Required) {
+            if (!$this->pais->IsDetailKey && EmptyValue($this->pais->FormValue)) {
+                $this->pais->addErrorMessage(str_replace("%s", $this->pais->caption(), $this->pais->RequiredErrorMessage));
+            }
+        }
+        if ($this->organizacion->Required) {
+            if (!$this->organizacion->IsDetailKey && EmptyValue($this->organizacion->FormValue)) {
+                $this->organizacion->addErrorMessage(str_replace("%s", $this->organizacion->caption(), $this->organizacion->RequiredErrorMessage));
+            }
+        }
 
         // Return validate result
         $validateForm = !$this->hasInvalidFields();
@@ -1129,6 +1213,24 @@ class Register extends Users
                 return false;
             }
         }
+
+        // Check referential integrity for master table 'users'
+        $validMasterRecord = true;
+        $masterFilter = $this->sqlMasterFilter_escenario();
+        if ($this->escenario->getSessionValue() != "") {
+        $masterFilter = str_replace("@id_escenario@", AdjustSql($this->escenario->getSessionValue(), "DB"), $masterFilter);
+        } else {
+            $validMasterRecord = false;
+        }
+        if ($validMasterRecord) {
+            $rsmaster = Container("escenario")->loadRs($masterFilter)->fetch();
+            $validMasterRecord = $rsmaster !== false;
+        }
+        if (!$validMasterRecord) {
+            $relatedRecordMsg = str_replace("%t", "escenario", $Language->phrase("RelatedRecordRequired"));
+            $this->setFailureMessage($relatedRecordMsg);
+            return false;
+        }
         $conn = $this->getConnection();
 
         // Load db values from rsold
@@ -1148,6 +1250,12 @@ class Register extends Users
 
         // telefono
         $this->telefono->setDbValueDef($rsnew, $this->telefono->CurrentValue, null, false);
+
+        // pais
+        $this->pais->setDbValueDef($rsnew, $this->pais->CurrentValue, null, false);
+
+        // organizacion
+        $this->organizacion->setDbValueDef($rsnew, $this->organizacion->CurrentValue, null, false);
 
         // escenario
         if ($this->escenario->getSessionValue() != "") {
@@ -1231,7 +1339,7 @@ class Register extends Users
             switch ($fld->FieldVar) {
                 case "x_escenario":
                     $lookupFilter = function () {
-                        return (CurrentUserInfo("perfil") != 1) ? "id_escenario = '".CurrentUserInfo("escenario")."'"  : "";
+                        return (CurrentUserInfo("perfil") > 1) ? "id_escenario = '".CurrentUserInfo("escenario")."'"  : "";
                     };
                     $lookupFilter = $lookupFilter->bindTo($this);
                     break;
@@ -1325,12 +1433,11 @@ class Register extends Users
     public function emailSending($email, &$args)
     {
         //var_dump($email); var_dump($args); exit();
-            $email->Recipient = $args["rsnew"]["email"]; // Change recipient to a field value in the new record
-            $email->Subject = "Creación de cuenta de usuario simexamericas.org "; // Change subject
-            $email->Content = "Estimado usuario, se ha creado una cuenta para usted en simexamericas.org
-            				Le sugerimos cambiar su clave de acceso cuando ingrese a la aplicación en línea.
-            <h3>Usuario: " .$args["rsnew"] ["email"]. " </h3>
-            <h3> Clave temporal es: ".$args["rsnew"] ["pw"]."</h3>"; 
+                $email->Recipient = $args["rsnew"]["email"]; // Change recipient to a field value in the new record
+                $email->Subject = "Creación de cuenta de usuario simexamericas.org "; // Change subject
+                $email->Content = "Estimado usuario,<br>
+                 Se ha recibido su solicitud de creación de cuenta para simexamericas.org.<br>
+                 Debes esperar la activación de su cuenta por parte de la administración de simexamericas.";
         return true;
     }
 

@@ -390,7 +390,6 @@ return function (App $app) {
     $app->any('/ResmensajeView[/{id_resmensaje}]', ResmensajeController::class . ':view')->add(PermissionMiddleware::class)->setName('ResmensajeView-resmensaje-view'); // view
     $app->any('/ResmensajeEdit[/{id_resmensaje}]', ResmensajeController::class . ':edit')->add(PermissionMiddleware::class)->setName('ResmensajeEdit-resmensaje-edit'); // edit
     $app->any('/ResmensajeDelete[/{id_resmensaje}]', ResmensajeController::class . ':delete')->add(PermissionMiddleware::class)->setName('ResmensajeDelete-resmensaje-delete'); // delete
-    $app->any('/ResmensajePreview', ResmensajeController::class . ':preview')->add(PermissionMiddleware::class)->setName('ResmensajePreview-resmensaje-preview'); // preview
     $app->group(
         '/resmensaje',
         function (RouteCollectorProxy $group) {
@@ -399,7 +398,6 @@ return function (App $app) {
             $group->any('/' . Config("VIEW_ACTION") . '[/{id_resmensaje}]', ResmensajeController::class . ':view')->add(PermissionMiddleware::class)->setName('resmensaje/view-resmensaje-view-2'); // view
             $group->any('/' . Config("EDIT_ACTION") . '[/{id_resmensaje}]', ResmensajeController::class . ':edit')->add(PermissionMiddleware::class)->setName('resmensaje/edit-resmensaje-edit-2'); // edit
             $group->any('/' . Config("DELETE_ACTION") . '[/{id_resmensaje}]', ResmensajeController::class . ':delete')->add(PermissionMiddleware::class)->setName('resmensaje/delete-resmensaje-delete-2'); // delete
-            $group->any('/' . Config("PREVIEW_ACTION") . '', ResmensajeController::class . ':preview')->add(PermissionMiddleware::class)->setName('resmensaje/preview-resmensaje-preview-2'); // preview
         }
     );
 

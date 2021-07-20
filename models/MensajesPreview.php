@@ -728,7 +728,7 @@ class MensajesPreview extends Mensajes
                     break;
                 case "x_para":
                     $lookupFilter = function () {
-                        return (CurrentUserInfo("perfil") == 2) ? "`idgrupo` = '".CurrentUserInfo("grupo")."'" : "`escenario` = '".CurrentUserInfo("escenario")."'";
+                        return (CurrentUserInfo("perfil") == 2 ) ? "`idgrupo` = '".CurrentUserInfo("grupo")."'" : "`escenario` = '".CurrentUserInfo("escenario")."'";
                     };
                     $lookupFilter = $lookupFilter->bindTo($this);
                     break;

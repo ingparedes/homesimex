@@ -5,7 +5,7 @@ namespace PHPMaker2021\simexamerica;
 // Table
 $tareas = Container("tareas");
 ?>
-<?php if ($tareas->Visible) { ?>
+<?php if ($tareas->Visibl->false) { ?>
 <div class="ew-master-div">
 <table id="tbl_tareasmaster" class="table ew-view-table ew-master-table ew-vertical">
     <tbody>

@@ -13,6 +13,7 @@ $_SESSION['id_user'] = CurrentUserID();
 
 
 <style>
+    
     .timeline-comment-box {
         background: #f2f3f4;
         margin-left: -10px;
@@ -209,17 +210,18 @@ $_SESSION['id_user'] = CurrentUserID();
         <div class="card-header bg-success">
             <h3 class="card-title">Mensajes</h3>
              <!--Miguel Select-->
-             <button type="button" data-toggle="dropdown" id="botonEstado" class="btn btn-success dropdown-toggle dropdown-toggle-split" aria-haspopup="true" aria-expanded="false"><span id="searchtype"></span></button>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item active" href="#" onclick=""></a>
-                            <a class="dropdown-item " href="#" onclick="busquedaEstado('Pendiente');">Pendiente</a>
-                            <a class="dropdown-item " href="#" onclick="busquedaEstado('Inconcluso');">Inconcluso</a>
-                            <a class="dropdown-item " href="#" onclick="busquedaEstado('Finalizado');">Terminado</a>
-                        </div>
+       
             <!--MIGUel, CAMBIO UN SELEC POR UN BOTON CON UN DROPDOWN-->
             <form id="formulario_buscador">
             <input type="text" class="form-control float-right" id="buscador" placeholder="Buscar">
             </form>
+            <button type="button" data-toggle="dropdown" id="botonEstado" class="btn btn-success dropdown-toggle dropdown-toggle-split" aria-haspopup="true" aria-expanded="false"><span id="searchtype"></span></button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item " href="#" onclick="busquedaEstado('Todos');">Todos</a>
+                            <a class="dropdown-item " href="#" onclick="busquedaEstado('Pendiente');">Pendiente</a>
+                            <a class="dropdown-item " href="#" onclick="busquedaEstado('Inconcluso');">Inconcluso</a>
+                            <a class="dropdown-item " href="#" onclick="busquedaEstado('Finalizado');">Finalizado</a>
+                        </div>
         </div>
 
         <!-- /.card-header -->
@@ -286,7 +288,20 @@ $_SESSION['id_user'] = CurrentUserID();
                                           <li> {{destinatario.destinatario}}.</li>
                                         </ul>
                                         </div>
-                              </div>
+                              </div
+                              >
+                              <p><!--MIGUEL, Region Respuestas-->
+                                        <a  data-toggle="collapse" v-bind:href="'#respuestas'+mens.id" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
+                                            <i class="fa fa-users"></i>     
+                                            Respuestas:</a><a class="badge-danger" v-if="mens.respuestasPendientes==1">NEW</a>
+                                            </p>
+                                           
+                                            <div class="collapse multi-collapse" v-bind:id="'respuestas'+mens.id">
+                                            <ul class="" v-for="respuesta in mens.respuestas" v-if="mens.visible" >
+                                                <li><a   v-bind:href="'/homesimex/Email2View/'+respuesta.id+'?showdetail='"> {{respuesta.sujeto}}.</a></li>
+                                            </ul>
+                                        </div>  
+
                             <hr>
                             <div class="timeline-footer">
 
@@ -395,10 +410,12 @@ var btnLoad = document.getElementById('load');
               autoResize: true,
               horizontalScroll: true,
               zoomKey: "ctrlKey",
+             
               rollingMode: {
-                follow: false,
+                follow: true,
                 offset: 0.5,
               },
+
               width: '100%',
               height: '200px',
               margin: {
@@ -566,9 +583,12 @@ var btnLoad = document.getElementById('load');
                 }
                 let respuesta = ayuda[0];
                 respuesta.numero_comentarios = 0;
+                respuesta.respuestasPendientes=0;
                 respuesta.comentarios = [];
+                respuesta.respuestas=[];
                 respuesta.entrada = "";
                 respuesta.visible = true;
+                obtenerRespuestas(respuesta.respuestas,respuesta.id);
                 obtenerDestinatarios(respuesta.destinatarios,respuesta.id);
                 obtenerComentariosVarios(respuesta.comentarios,respuesta.id);
                 app.mensajes.push(respuesta);
@@ -589,12 +609,16 @@ var btnLoad = document.getElementById('load');
                 for(let i = 0;i < respuesta.length;i++){
                     let mens = respuesta[i];
                     mens.numero_comentarios = 0;
+                    mens.respuestasPendientes=0;
                     mens.comentarios = [];
                     mens.destinatarios = [];
+                    mens.respuestas = [];
                     mens.entrada = "";
                     mens.visible = true;
-                    app.mensajes.push(mens);
+                    obtenerRespuestas(mens,mens.id);
                     obtenerDestinatarios(mens,mens.id);
+                    app.mensajes.push(mens);
+                    
                     obtenerComentariosVarios(mens.comentarios,mens.id);
                 }
             },
@@ -622,7 +646,39 @@ var btnLoad = document.getElementById('load');
         });
         console.log(mens);
     }
+    function obtenerRespuestas(mens,id){// MIGUEL FUNCION PARA EXTRAER RESPUESTAS DEL COMENTARIO
+    console.log(id);
+        $.ajax({
+            url: "inject/obtener_respuestas.php?idMensaje="+id,
+            success: function (es) {
+                console.log(es);
+                if(es!="Vacio")
+                {
+                    let respuesta= JSON.parse(es);
+                for(let i=0; i < respuesta.length;i++){
+                    let res =respuesta[i];
+                    if(res.estado_msg==0)
+                    {
+                        console.log("entra");
+                        mens.respuestasPendientes=1;
+                    }
+                    let add = {
+                        "sujeto":res.sujeto,
+                        "id": res.id
+                    };
 
+                    mens.respuestas.push(add);
+                }
+
+                }
+                
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
+        console.log(mens);
+    }
     $(document).ready(function(){
         $("#buscador").on('keyup', function() {
             let val = $("#buscador").val();
@@ -650,7 +706,7 @@ var btnLoad = document.getElementById('load');
         for(let i = 0;i < app.mensajes.length;i++){
                 let mens = app.mensajes[i];
                 mens.visible = false;
-                if(mens.calificacion==estado)
+                if(mens.calificacion==estado || estado=='Todos')
                 {
                     mens.visible= true;
                 }
