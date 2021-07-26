@@ -99,7 +99,11 @@ $TimelineGeneral = &$Page;
 </head>
 
 <body>
-    <?php $sql_utc = ExecuteRow("SELECT p.gmt, e.fechaini_simulado, e.fechafin_simulado, e.id_escenario FROM escenario  e INNER JOIN paisgmt p ON p.id_zone = e.pais_escenario WHERE e.estado IN ('1')");
+    <?php $sql_utc = ExecuteRow("SELECT p.gmt, DATE_ADD(e.fechaini_real,INTERVAL (-300 +
+(RIGHT(p.gmt,2)+60*MID(p.gmt,6,2)*1))  MINUTE)  as fechaini_real, 
+DATE_ADD(e.fechafinal_real,INTERVAL (-300 +
+(RIGHT(p.gmt,2)+60*MID(p.gmt,6,2)*1))  MINUTE)  as fechafinal_real
+, e.id_escenario FROM escenario  e INNER JOIN paisgmt p ON p.id_zone = e.pais_escenario WHERE e.estado IN ('1')");
 
     $sqlGrupos = ExecuteRows("SELECT id_grupo AS id, nombre_grupo AS grupo FROM grupo g INNER JOIN escenario e ON g.id_escenario = e.id_escenario     WHERE e.estado = '1';");
 
@@ -146,7 +150,11 @@ $TimelineGeneral = &$Page;
 
     <div id="loading">loading...</div>
     <div id="visualization"></div>
-    <em> Presione CTRL + rueda del mouse para hacer zoom </em>
+    <p class = "small">  <em> Presione CTRL + rueda del mouse para hacer zoom </em> <br>
+<em> Para desplazarse en la línea de tiempo, mantener presionado el clic izquierdo del ratón. <br>
+Para retornar a la hora real del ejercicio presionar el ícono <img src = "https://simexamericas.org/homesimex/images/iconotimeline.png"  width="30" height="30"> <em> </p>
+
+
     <!-- Modal1 -->
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -451,7 +459,7 @@ $TimelineGeneral = &$Page;
         <div class="modal-dialog" style="width:100%; height: 400px;">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-tittle">Crear Tarea</h4>
+                    <h4 class="modal-tittle">Tarea</h4>
                 </div>
                 <form action="dts_notifica.php?accion=addTarea" method="post">
                     <form action="" method="post" class="form-horizontal">
@@ -527,8 +535,8 @@ $TimelineGeneral = &$Page;
         var BotonGuardar= document.getElementById('BotonGuardar');
         let utc = '<?php echo $sql_utc[0] ?>';
         let hora = utc.slice(4, 10);
-        let fechaIniSimulado = '<?php echo $sql_utc['fechaini_simulado'] ?>';
-        let fechaFinSimulado = '<?php echo $sql_utc['fechafin_simulado'] ?>';
+        let fechaIniSimulado = '<?php echo $sql_utc['fechaini_real'] ?>';
+        let fechaFinSimulado = '<?php echo $sql_utc['fechafinal_real'] ?>';
         let data_json;
         let idEscnrio = <?php echo $sql_utc['id_escenario'] ?>;
         $('#escenario').change(function() {
@@ -685,9 +693,9 @@ $TimelineGeneral = &$Page;
                         var id1 = "id1";
                         var id2 = "id2";
                         timeline.addCustomTime(new Date(fechaIniSimulado), id1);
-                        timeline.setCustomTimeMarker("Fecha Inicio<br>" + fechaIniSimulado.slice(0, 16), id1, false);
+                        timeline.setCustomTimeMarker("Inicio", id1, false);
                         timeline.addCustomTime(new Date(fechaFinSimulado), id2);
-                        timeline.setCustomTimeMarker("Fecha Fin<br>" + fechaFinSimulado.slice(0, 16), id2, false);
+                        timeline.setCustomTimeMarker("Fin", id2, false);
 
                         timeline.on('doubleClick', function(properties) {
                             var id = properties.item;
@@ -734,7 +742,8 @@ $TimelineGeneral = &$Page;
                                             $('#id_tarea').val(data[0].id_tarea);
                                             $('#modalLongTitle').html(" Editar Mensaje");
                                             $('#editMsg').html("Editar mensaje");
-                                            boton.onclick = v_modalEditMensaje; 
+                                            boton.onclick = AbrirEdicionMensaje;
+                                           // boton.onclick = v_modalEditMensaje; 
                                             BotonGuardar.onclick = editMensajeBD;
                                            // $('#editMsg').click(function(){
                                             //    v_modalEditMensaje();
@@ -760,7 +769,7 @@ $TimelineGeneral = &$Page;
                                             }
 
                                         } else {
-                                            boton.onclick =v_modalSaveMensaje;
+                                            boton.onclick =AbrirCrearMensajee;
                                             BotonGuardar.onclick = addMensaje;
                                             $('#modalLongTitle').html("Crear Tarea");
                                             $('#idTarea').val(id);
@@ -905,6 +914,13 @@ $TimelineGeneral = &$Page;
             }
         }
         btnSave.onclick = saveData;
+        function AbrirCrearMensajee(){
+            var id = $('#id').val();
+            var tipo = $('#tipo').val();
+            var id_mensaje= $('#id_tarea').val();
+            location.href='./MensajesAdd?showmaster=tareas&fk_id_tarea='+id;
+        }
+
         function v_modalSaveMensaje(){
             var id = $('#id').val();
             var tipo = $('#tipo').val();
@@ -917,6 +933,12 @@ $TimelineGeneral = &$Page;
             console.log(parametros);
             $('#e_id_tarea').val(id);
             
+        }
+        function AbrirEdicionMensaje(){
+            var id = $('#id').val();
+            var tipo = $('#tipo').val();
+            var id_mensaje= $('#id_tarea').val();
+            location.href='./MensajesEdit/'+id+'?showmaster=tareas&fk_id_tarea='+id_mensaje;
         }
 
         function v_modalEditMensaje() {

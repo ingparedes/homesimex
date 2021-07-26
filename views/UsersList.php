@@ -28,15 +28,16 @@ loadjs.ready("head", function () {
         fields = currentTable.fields;
     fuserslistsrch.addFields([
         ["id_users", [], fields.id_users.isInvalid],
-        ["fecha", [], fields.fecha.isInvalid],
-        ["nombres", [], fields.nombres.isInvalid],
-        ["apellidos", [], fields.apellidos.isInvalid],
+        ["escenario", [], fields.escenario.isInvalid],
         ["grupo", [], fields.grupo.isInvalid],
         ["subgrupo", [], fields.subgrupo.isInvalid],
         ["perfil", [], fields.perfil.isInvalid],
-        ["_email", [], fields._email.isInvalid],
-        ["telefono", [], fields.telefono.isInvalid],
+        ["nombres", [], fields.nombres.isInvalid],
+        ["apellidos", [], fields.apellidos.isInvalid],
         ["pais", [], fields.pais.isInvalid],
+        ["_email", [], fields._email.isInvalid],
+        ["fecha", [], fields.fecha.isInvalid],
+        ["telefono", [], fields.telefono.isInvalid],
         ["estado", [], fields.estado.isInvalid],
         ["organizacion", [], fields.organizacion.isInvalid],
         ["img_user", [], fields.img_user.isInvalid]
@@ -271,14 +272,8 @@ $Page->ListOptions->render("header", "left");
 <?php if ($Page->id_users->Visible) { // id_users ?>
         <th data-name="id_users" class="<?= $Page->id_users->headerCellClass() ?>"><div id="elh_users_id_users" class="users_id_users"><?= $Page->renderSort($Page->id_users) ?></div></th>
 <?php } ?>
-<?php if ($Page->fecha->Visible) { // fecha ?>
-        <th data-name="fecha" class="<?= $Page->fecha->headerCellClass() ?>"><div id="elh_users_fecha" class="users_fecha"><?= $Page->renderSort($Page->fecha) ?></div></th>
-<?php } ?>
-<?php if ($Page->nombres->Visible) { // nombres ?>
-        <th data-name="nombres" class="<?= $Page->nombres->headerCellClass() ?>"><div id="elh_users_nombres" class="users_nombres"><?= $Page->renderSort($Page->nombres) ?></div></th>
-<?php } ?>
-<?php if ($Page->apellidos->Visible) { // apellidos ?>
-        <th data-name="apellidos" class="<?= $Page->apellidos->headerCellClass() ?>"><div id="elh_users_apellidos" class="users_apellidos"><?= $Page->renderSort($Page->apellidos) ?></div></th>
+<?php if ($Page->escenario->Visible) { // escenario ?>
+        <th data-name="escenario" class="<?= $Page->escenario->headerCellClass() ?>"><div id="elh_users_escenario" class="users_escenario"><?= $Page->renderSort($Page->escenario) ?></div></th>
 <?php } ?>
 <?php if ($Page->grupo->Visible) { // grupo ?>
         <th data-name="grupo" class="<?= $Page->grupo->headerCellClass() ?>"><div id="elh_users_grupo" class="users_grupo"><?= $Page->renderSort($Page->grupo) ?></div></th>
@@ -289,14 +284,23 @@ $Page->ListOptions->render("header", "left");
 <?php if ($Page->perfil->Visible) { // perfil ?>
         <th data-name="perfil" class="<?= $Page->perfil->headerCellClass() ?>"><div id="elh_users_perfil" class="users_perfil"><?= $Page->renderSort($Page->perfil) ?></div></th>
 <?php } ?>
-<?php if ($Page->_email->Visible) { // email ?>
-        <th data-name="_email" class="<?= $Page->_email->headerCellClass() ?>"><div id="elh_users__email" class="users__email"><?= $Page->renderSort($Page->_email) ?></div></th>
+<?php if ($Page->nombres->Visible) { // nombres ?>
+        <th data-name="nombres" class="<?= $Page->nombres->headerCellClass() ?>"><div id="elh_users_nombres" class="users_nombres"><?= $Page->renderSort($Page->nombres) ?></div></th>
 <?php } ?>
-<?php if ($Page->telefono->Visible) { // telefono ?>
-        <th data-name="telefono" class="<?= $Page->telefono->headerCellClass() ?>"><div id="elh_users_telefono" class="users_telefono"><?= $Page->renderSort($Page->telefono) ?></div></th>
+<?php if ($Page->apellidos->Visible) { // apellidos ?>
+        <th data-name="apellidos" class="<?= $Page->apellidos->headerCellClass() ?>"><div id="elh_users_apellidos" class="users_apellidos"><?= $Page->renderSort($Page->apellidos) ?></div></th>
 <?php } ?>
 <?php if ($Page->pais->Visible) { // pais ?>
         <th data-name="pais" class="<?= $Page->pais->headerCellClass() ?>"><div id="elh_users_pais" class="users_pais"><?= $Page->renderSort($Page->pais) ?></div></th>
+<?php } ?>
+<?php if ($Page->_email->Visible) { // email ?>
+        <th data-name="_email" class="<?= $Page->_email->headerCellClass() ?>"><div id="elh_users__email" class="users__email"><?= $Page->renderSort($Page->_email) ?></div></th>
+<?php } ?>
+<?php if ($Page->fecha->Visible) { // fecha ?>
+        <th data-name="fecha" class="<?= $Page->fecha->headerCellClass() ?>"><div id="elh_users_fecha" class="users_fecha"><?= $Page->renderSort($Page->fecha) ?></div></th>
+<?php } ?>
+<?php if ($Page->telefono->Visible) { // telefono ?>
+        <th data-name="telefono" class="<?= $Page->telefono->headerCellClass() ?>"><div id="elh_users_telefono" class="users_telefono"><?= $Page->renderSort($Page->telefono) ?></div></th>
 <?php } ?>
 <?php if ($Page->estado->Visible) { // estado ?>
         <th data-name="estado" class="<?= $Page->estado->headerCellClass() ?>"><div id="elh_users_estado" class="users_estado"><?= $Page->renderSort($Page->estado) ?></div></th>
@@ -382,27 +386,11 @@ $Page->ListOptions->render("body", "left", $Page->RowCount);
 </span>
 </td>
     <?php } ?>
-    <?php if ($Page->fecha->Visible) { // fecha ?>
-        <td data-name="fecha" <?= $Page->fecha->cellAttributes() ?>>
-<span id="el<?= $Page->RowCount ?>_users_fecha">
-<span<?= $Page->fecha->viewAttributes() ?>>
-<?= $Page->fecha->getViewValue() ?></span>
-</span>
-</td>
-    <?php } ?>
-    <?php if ($Page->nombres->Visible) { // nombres ?>
-        <td data-name="nombres" <?= $Page->nombres->cellAttributes() ?>>
-<span id="el<?= $Page->RowCount ?>_users_nombres">
-<span<?= $Page->nombres->viewAttributes() ?>>
-<?= $Page->nombres->getViewValue() ?></span>
-</span>
-</td>
-    <?php } ?>
-    <?php if ($Page->apellidos->Visible) { // apellidos ?>
-        <td data-name="apellidos" <?= $Page->apellidos->cellAttributes() ?>>
-<span id="el<?= $Page->RowCount ?>_users_apellidos">
-<span<?= $Page->apellidos->viewAttributes() ?>>
-<?= $Page->apellidos->getViewValue() ?></span>
+    <?php if ($Page->escenario->Visible) { // escenario ?>
+        <td data-name="escenario" <?= $Page->escenario->cellAttributes() ?>>
+<span id="el<?= $Page->RowCount ?>_users_escenario">
+<span<?= $Page->escenario->viewAttributes() ?>>
+<?= $Page->escenario->getViewValue() ?></span>
 </span>
 </td>
     <?php } ?>
@@ -430,19 +418,19 @@ $Page->ListOptions->render("body", "left", $Page->RowCount);
 </span>
 </td>
     <?php } ?>
-    <?php if ($Page->_email->Visible) { // email ?>
-        <td data-name="_email" <?= $Page->_email->cellAttributes() ?>>
-<span id="el<?= $Page->RowCount ?>_users__email">
-<span<?= $Page->_email->viewAttributes() ?>>
-<?= $Page->_email->getViewValue() ?></span>
+    <?php if ($Page->nombres->Visible) { // nombres ?>
+        <td data-name="nombres" <?= $Page->nombres->cellAttributes() ?>>
+<span id="el<?= $Page->RowCount ?>_users_nombres">
+<span<?= $Page->nombres->viewAttributes() ?>>
+<?= $Page->nombres->getViewValue() ?></span>
 </span>
 </td>
     <?php } ?>
-    <?php if ($Page->telefono->Visible) { // telefono ?>
-        <td data-name="telefono" <?= $Page->telefono->cellAttributes() ?>>
-<span id="el<?= $Page->RowCount ?>_users_telefono">
-<span<?= $Page->telefono->viewAttributes() ?>>
-<?= $Page->telefono->getViewValue() ?></span>
+    <?php if ($Page->apellidos->Visible) { // apellidos ?>
+        <td data-name="apellidos" <?= $Page->apellidos->cellAttributes() ?>>
+<span id="el<?= $Page->RowCount ?>_users_apellidos">
+<span<?= $Page->apellidos->viewAttributes() ?>>
+<?= $Page->apellidos->getViewValue() ?></span>
 </span>
 </td>
     <?php } ?>
@@ -451,6 +439,30 @@ $Page->ListOptions->render("body", "left", $Page->RowCount);
 <span id="el<?= $Page->RowCount ?>_users_pais">
 <span<?= $Page->pais->viewAttributes() ?>>
 <?= $Page->pais->getViewValue() ?></span>
+</span>
+</td>
+    <?php } ?>
+    <?php if ($Page->_email->Visible) { // email ?>
+        <td data-name="_email" <?= $Page->_email->cellAttributes() ?>>
+<span id="el<?= $Page->RowCount ?>_users__email">
+<span<?= $Page->_email->viewAttributes() ?>>
+<?= $Page->_email->getViewValue() ?></span>
+</span>
+</td>
+    <?php } ?>
+    <?php if ($Page->fecha->Visible) { // fecha ?>
+        <td data-name="fecha" <?= $Page->fecha->cellAttributes() ?>>
+<span id="el<?= $Page->RowCount ?>_users_fecha">
+<span<?= $Page->fecha->viewAttributes() ?>>
+<?= $Page->fecha->getViewValue() ?></span>
+</span>
+</td>
+    <?php } ?>
+    <?php if ($Page->telefono->Visible) { // telefono ?>
+        <td data-name="telefono" <?= $Page->telefono->cellAttributes() ?>>
+<span id="el<?= $Page->RowCount ?>_users_telefono">
+<span<?= $Page->telefono->viewAttributes() ?>>
+<?= $Page->telefono->getViewValue() ?></span>
 </span>
 </td>
     <?php } ?>

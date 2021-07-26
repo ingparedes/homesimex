@@ -482,9 +482,9 @@ $InjectExcon = &$Page;
                                         Calificar
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" v-bind:href="'Inject/calificar.php?calificacion=1&idMensaje='+mens.id">Pendiente</a>
-                                        <a class="dropdown-item" v-bind:href="'Inject/calificar.php?calificacion=2&idMensaje='+mens.id">Inconcluso </a>
-                                        <a class="dropdown-item" v-bind:href="'Inject/calificar.php?calificacion=3&idMensaje='+mens.id">Finalizado</a>
+                                        <a class="dropdown-item" v-bind:href="'inject/calificar.php?calificacion=1&idMensaje='+mens.id">Pendiente</a>
+                                        <a class="dropdown-item" v-bind:href="'inject/calificar.php?calificacion=2&idMensaje='+mens.id">Inconcluso </a>
+                                        <a class="dropdown-item" v-bind:href="'inject/calificar.php?calificacion=3&idMensaje='+mens.id">Finalizado</a>
                                     </div>
                                     </div>
 
@@ -580,8 +580,8 @@ $InjectExcon = &$Page;
         }
     });
 
-    var publishKey = 'pub-c-451eac62-0cee-4afa-9f20-93eb596aedfb';
-    var subscribeKey = 'sub-c-5c30cc92-dbff-11eb-8c90-a639cde32e15';
+    var publishKey = 'pub-c-5260e585-8e9b-4d60-9ff8-1d10154850f4';
+    var subscribeKey = 'sub-c-69a803ce-dbfd-11eb-85de-ba1258ebcf9d';
 
     var pubnub = new CanalPub("canal-01",publishKey,subscribeKey);
     var pubnubAdmin = new CanalPub("canal-02",publishKey,subscribeKey);

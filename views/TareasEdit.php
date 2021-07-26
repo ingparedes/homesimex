@@ -340,13 +340,9 @@ loadjs.ready(["ftareasedit", "editor"], function() {
         <label for="x_id_tarearelacion" class="col-sm-2 col-form-label"><?= $Page->id_tarearelacion->caption() ?></label>
         <div ><slot class="ew-slot" name="tpx_tareas_id_tarearelacion"></slot></div>
     </div>
-    <div id="r_archivo" class="form-group">
-        <label for="x_archivo" class="col-sm-2 col-form-label"><?= $Page->archivo->caption() ?></label>
-        <div class="col-sm-10"><slot class="ew-slot" name="tpx_tareas_archivo"></slot></div>
-    </div>
-    	<?php
-	$fecha = ExecuteRow("SELECT fechaini_real, fechafinal_real, fechaini_simulado, fechafin_simulado FROM escenario WHERE id_escenario = '".$id_escenario."';"); ?>
-	<?php
+
+    <?php
+$fecha = ExecuteRow("SELECT fechaini_real, fechafinal_real, fechaini_simulado, fechafin_simulado,nombre_escenario FROM escenario WHERE id_escenario = '".$id_escenario."';");
 	 $fechaInicial = date("Y-m-d", strtotime($fecha[0]));
      $horaInicial = date("H", strtotime($fecha[0]));
      $minInicial = date("i", strtotime($fecha[0]));
@@ -361,6 +357,52 @@ loadjs.ready(["ftareasedit", "editor"], function() {
      $minFinsimulado = date("i",strtotime($fecha[3]));
 	 ?>
     <script>
+    var  fecl,datefin;
+    $("input[name='x_fechainireal_tarea']").change(function() { // Assume Field1 is a text input
+    fecl = new Date($('input[name=x_fechainireal_tarea]').val());
+      //datefin =  moment(fecl, "YYYY-MM-DD HH:mm").toDate();
+      datefin = moment(fecl).format("YYYY-MM-DD HH:mm");      
+      $('#x_fechafin_tarea').val(datefin);
+      $('#x_fechainisimulado_tarea').val(datefin);
+      $('#x_fechafinsimulado_tarea').val(datefin);
+      flatpickr("#x_fechafin_tarea",{//MIGUEL--PONE QUE VALOR MINIMO EN FECHA FIN SEA EL VALOR INICIAL
+				locale: "es",
+				enableTime: true,
+				time_24hr: true,
+				dateFormat: "Y-m-d H:i",
+				minDate: datefin,
+				maxDate: fechaFin + " " + horaFin + ":" + minFin,
+				defaultDate: fechaInicial + " " + horaInicial + ":" + minInicial,
+			});
+});
+    $("input[name='x_fechainisimulado_tarea']").change(function() { // EVENTO CHANGE
+        fecl = new Date($('input[name=x_fechainisimulado_tarea]').val());
+        //datefin =  moment(fecl, "YYYY-MM-DD HH:mm").toDate();
+        datefin = moment(fecl).format("YYYY-MM-DD HH:mm");      
+        $('#x_fechafinsimulado_tarea').val(datefin);//MIGUEL-- ASIGNA VALOR MINIMO AL MAXIMO
+        flatpickr("#x_fechafinsimulado_tarea",{//MIGUEL---PONE QUE VALOR MINIMO EN FECHA FIN SEA EL VALOR INICIAL
+				locale: "es",
+				enableTime: true,
+				time_24hr: true,
+				dateFormat: "Y-m-d H:i",
+				minDate: datefin,
+				maxDate: fechaFinSimulado + " " + horaFinSimulado + ":" + minFinSimulado,
+				defaultDate: fechaIniSimulado + " " + horaIniSimulado + ":" + minIniSimulado,
+			});
+    });
+//centinela
+//var Xmas95 = fecl;
+//var weekday = Xmas95.getDay();
+//console.log('weekday',weekday);
+
+//var anio2 = fecl.getFullYear();
+			/*	var mes2= datefin.getMonth();
+				var dia2 = datafin.getDay()
+			   var hor = datefin.getHours();
+			   var minu = datefin.getMinutes();
+			   var fecha2 = anio2+'-'+mes2+'-'+dia2+' '+hor+':'+minu;
+			   console.log(fecha2);
+ console.info(datefin);*/
      /* flatpickr("#x_fechafin_tarea",{
                     locale: "es",
                     dateFormat: "d/m/Y",

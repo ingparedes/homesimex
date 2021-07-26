@@ -88,7 +88,7 @@ else
                 <div class='col-4'>
                     <img src='https://simexamericas.org/homesimex/files/$fotos'   width='45px'  height='45px' alt='user-avatar' class='img-circle'>
                 </div>
-            <div class='col-8'><b class = 'float-right'>" .$UserName.''.$ape."</b>
+            <div class='col-8'><b class = 'float-right'>" .$UserName.' '.$ape."</b>
             
                 <ul class='ml-0 mb-0 fa-ul'>
                     <li class='small float-left'>".$UserPermissionValue."</li>
@@ -101,25 +101,27 @@ else
         $menu->moveItem("Simulaciones", $menu->Count() - 1); // Move to last
         $menu->moveItem("Control Excon", $menu->Count() - 1); // Move to last
         $menu->moveItem("Pizarra", $menu->Count() - 1); // Move to last
-        $menu->moveItem("Linea de tiempo total", $menu->Count() - 1); // Move to last
+         $menu->moveItem("Linea de tiempo total", $menu->Count() - 1); // Move to last
         $menu->moveItem("Linea de tiempo grupo", $menu->Count() - 1); // Move to last
         $menu->moveItem("Control", $menu->Count() - 1); // Move to last
         $menu->moveItem("Control Excon", $menu->Count() - 1); // Move to last
         $menu->moveItem("Mymail", $menu->Count() - 1); // Move to last
         $menu->moveItem("Chat", $menu->Count() - 1); // Move to last
         $menu->moveItem("Multimedia", $menu->Count() - 1); // Move to last
-        $menu->moveItem("Mis documentos", $menu->Count() - 1); // Move to
+        $menu->moveItem("Documentos", $menu->Count() - 1); // Move to
         $menu->moveItem("Administrador tareas", $menu->Count() - 1); // Move to last
         $menu->moveItem("Usuarios", $menu->Count() - 1); // Move to last
-        $menu->moveItem("Configuración", $menu->Count() - 1); // Move to last
+        $menu->moveItem("Configuraci贸n", $menu->Count() - 1); // Move to last
     };
   if ($menu->Id == "navbar") { // Sidebar menu or change from "menu" to "navbar" for top menu
   	$menu->addMenuItem(456, "usuario", "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" , "#", -1, "", IsLoggedIn());
   	$menu->addMenuItem(457, "usuario", "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" , "#", -1, "", IsLoggedIn());
   	$menu->addMenuItem(455, "usuario", "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" , "#", -1, "", IsLoggedIn());
-    $menu->addMenuItem(459, "usuario", "<div class='border rounded bg-light col-sm-12'> <span class='info-box-icon'><i class='cil-clock'></i></span> <small class='text-center'> Hora local del usuario </small> <h5 > <div class='text-center' style='line-height:10px' id='clocklocal'></div> </h5> <h6 class='text-center' style='line-height:10px'> $fe </h6>  </div>" , "#", -1, "", IsLoggedIn());
-    $menu->addMenuItem(458, "usuario", "<div class='border rounded bg-light col-sm-12'> <span class='info-box-icon'><i class='cil-clock'></i></span> <small class='text-center'> Hora real del pa&iacute;s del ejercicio</small> <h5> <div class='text-center' style='line-height:10px' id='clockreal'></div> </h5>  <h6 class='text-center' style='line-height:10px'> $fe </h6>  </div>" , "#", -1, "", IsLoggedIn());
-    $menu->addMenuItem(460, "usuario", " <div class='border rounded bg-light col-sm-12'> <span class='info-box-icon'><i class='cil-clock'></i></span> <small class='text-center'> Hora simulada</small> <h5 > <div class='text-center' style='line-height:10px'>$hsimula[0]</div> </h5> <h6 class='text-center' style='line-height:10px'> $hsimula[1]</h6>  </div>" , "#", -1, "", IsLoggedIn());
+    $menu->addMenuItem(459, "usuario", "<div class='border rounded bg-light col-sm-12'> <span class='info-box-icon'><i class='cil-clock'></i></span> <small class='text-center'> Hora local del Usuario </small> <h5 > <div class='text-center' style='line-height:10px' id='clocklocal'></div> </h5> <h6 class='text-center' style='line-height:10px'> $fe </h6>  </div>" , "#", -1, "", IsLoggedIn());
+    $menu->addMenuItem(458, "usuario", "<div class='border rounded bg-light col-sm-12'> <span class='info-box-icon'><i class='cil-clock'></i></span> <small class='text-center'> Hora real del pa&iacute;s del ejercico</small> <h5> <div class='text-center' style='line-height:10px' id='clockreal'></div> </h5>  <h6 class='text-center' style='line-height:10px'> $fe </h6>  </div>" , "#", -1, "", IsLoggedIn());
+    $menu->addMenuItem(460, "usuario", " <div class='border rounded bg-light col-sm-12'> <span class='info-box-icon'><i class='cil-clock'></i></span> <small class='text-center'> Hora de salto de tiempo</small> <h5 > <div class='text-center' style='line-height:10px'> 08:25:15</div> </h5> <h6 class='text-center' style='line-height:10px'> $fe </h6>  </div>" , "#", -1, "", IsLoggedIn());
+
+
    }
 }
 

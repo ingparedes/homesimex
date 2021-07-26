@@ -8,6 +8,16 @@ include("config.php");
 $ei = 0;
 $et = 0;
 
+$utcescenario = "SELECT p.gmt, (300 - (RIGHT(p.gmt,2)+60*MID(p.gmt,6,2)*1)) as mins FROM escenario e INNER JOIN paisgmt p ON e.pais_escenario = p.id_zone INNER JOIN users u ON e.id_escenario = u.escenario
+WHERE u.id_users = '" . $id_user . "';";
+
+$res_sqlutc = mysqli_query($con, $utcescenario);
+$sqlutc = mysqli_fetch_assoc($res_sqlutc);
+
+$minutc = $sqlutc['mins'].' minutes';
+
+//var_dump ($minutc);
+//echo $minutc;
 if ($id_user == '-1') {
     echo "baduser";
 } else {
@@ -24,7 +34,7 @@ if ($id_user == '-1') {
             WHERE leido = '0' and mu.id_user_destinatario IN ('" . $id_user . "') AND m.medios = '" . $medio . "';";
             $res_sql = mysqli_query($con, $sql);
             $sql_leido = mysqli_fetch_assoc($res_sql);
-           // echo $sql_leido['cant'];
+           //echo $sql_leido['cant'];
             break;
         case "loadTL": // carga los items en el TimeLine
             header('Content-Type: application/json charset=utf-8');
@@ -39,7 +49,8 @@ if ($id_user == '-1') {
                     $grupo = "t.id_grupo AS 'group', ";
                     $where = "t.id_escenario = '" . $id_escenario . "'";
                 } elseif ($_GET['pg'] == 'participante') {
-                    $grupo = "";
+                    $id_grupo = $_SESSION['id_grupo'];
+                    $grupo = "t.id_grupo AS 'group', ";
                     $where = "mu.id_user_destinatario = '" . $id_user . "' AND m.enviado = '1'";
                 } elseif ($_GET['pg'] == 'excon') {
                     $id_grupo = $_SESSION['id_grupo'];
@@ -52,7 +63,8 @@ if ($id_user == '-1') {
             }
             $sql_items = "SELECT DISTINCT(m.id_inyect), 
             CONCAT('M:',m.id_inyect) as id,t.id_grupo AS 'group', 
-            CONCAT('M:',m.id_inyect,':', m.titulo) AS content, m.fechareal_start AS start,
+            CONCAT('M:',m.id_inyect,':', m.titulo) AS content, 
+            DATE_ADD(m.fechareal_start,INTERVAL( -300 + (RIGHT(p.gmt,2)+60*MID(p.gmt,6,2)*1))  MINUTE) AS start,
              m.id_tarea, cm.id_calificacion AS 'calificacion' 
              FROM mensajes m 
              INNER JOIN mensajes_usuarios mu 
@@ -62,8 +74,10 @@ if ($id_user == '-1') {
              LEFT JOIN actor_simulado a 
              ON m.id_actor = a.id_actor 
              INNER JOIN tareas t ON m.id_tarea = t.id_tarea 
+             INNER JOIN escenario e ON e.id_escenario = t.id_escenario
+	         INNER JOIN paisgmt p ON p.id_zone = e.pais_escenario
              LEFT JOIN calificacion_mensajes cm ON cm.id_mensaje=m.id_inyect 
-             WHERE " . $where . " ORDER BY m.id_inyect DESC;";
+             WHERE " . $where . " ORDER BY start ASC;";
             //WHERE mu.id_user_destinatario = '$id_user' AND m.medios IN ('2','3') ORDER BY m.id_inyect DESC;";        
            // echo $sql_items;
             $res_sql = mysqli_query($con, $sql_items);
@@ -105,13 +119,23 @@ if ($id_user == '-1') {
             $json = json_encode($arrayI);
             if ($_GET['pg'] == 'Grupo') {
                 //$id_escenario = $_SESSION['id_escenario'];
-                $sql_tareas = "SELECT DISTINCT(t.id_tarea), concat('T:',t.id_tarea) AS id,t.id_grupo AS 'group',  CONCAT('T:',t.id_tarea,':', t.titulo_tarea) AS content, t.fechainireal_tarea AS start, t.fechafin_tarea AS end, 'color: white; background-color: blue;' AS style, valoracion as valora, CONCAT('background-color:','LightSlateGray','; color:white;') AS style
+                $sql_tareas = "SELECT DISTINCT(t.id_tarea), concat('T:',t.id_tarea) AS id,t.id_grupo AS 'group',  CONCAT('T:',t.id_tarea,':', t.titulo_tarea) AS content, 
+                DATE_ADD(t.fechainireal_tarea,INTERVAL(- 300 + (RIGHT(p.gmt,2)+60*MID(p.gmt,6,2)*1))  MINUTE) AS start,
+                DATE_ADD(t.fechafin_tarea,INTERVAL(- 300 + (RIGHT(p.gmt,2)+60*MID(p.gmt,6,2)*1))  MINUTE) AS end, 
+                 'color: white; background-color: blue;' AS style, valoracion as valora, CONCAT('background-color:','LightSlateGray','; color:white;') AS style
                 FROM tareas t 
+                INNER JOIN escenario e ON e.id_escenario = t.id_escenario
+	            INNER JOIN paisgmt p ON p.id_zone = e.pais_escenario
                 WHERE t.id_escenario = '" . $id_escenario . "'";
                 //echo $sql_tareas;
             } elseif ($_GET['pg'] == 'excon') {
-                $sql_tareas = "SELECT DISTINCT(t.id_tarea), concat('T:',t.id_tarea) AS id,t.id_grupo AS 'group',  CONCAT('T:',t.id_tarea,':', t.titulo_tarea) AS content, t.fechainireal_tarea AS start, t.fechafin_tarea AS end, 'color: white; background-color: blue;' AS style, valoracion as valora, CONCAT('background-color:','LightSlateGray','; color:white;') AS style
-                FROM tareas t 
+                $sql_tareas = "SELECT DISTINCT(t.id_tarea), concat('T:',t.id_tarea) AS id,t.id_grupo AS 'group',  CONCAT('T:',t.id_tarea,':', t.titulo_tarea) AS content, 
+                 DATE_ADD(t.fechainireal_tarea,INTERVAL(- 300 + (RIGHT(p.gmt,2)+60*MID(p.gmt,6,2)*1))  MINUTE) AS start, 
+                 DATE_ADD(t.fechafin_tarea,INTERVAL(- 300 + (RIGHT(p.gmt,2)+60*MID(p.gmt,6,2)*1))  MINUTE) AS end, 
+                 'color: white; background-color: blue;' AS style, valoracion as valora, CONCAT('background-color:','LightSlateGray','; color:white;') AS style
+                FROM tareas t
+                INNER JOIN escenario e ON e.id_escenario = t.id_escenario
+	            INNER JOIN paisgmt p ON p.id_zone = e.pais_escenario 
                 WHERE
                 t.id_grupo = '" . $id_grupo . "'";
             }
@@ -146,13 +170,22 @@ if ($id_user == '-1') {
             break;
         case "saveTL": // guarda la nueva fecha de las tareas y mensajes editadas en Timeline
 
-            //date_default_timezone_set('America/Bogota');
-            $fechaIn = $_POST['start'];
+            //date_default_timezone_set('America/New_York');
+               $fechaIn = $_POST['start'];
+               $tipo = $_POST['tipo'];
+
 
             if (isset($_POST['end'])) {
                 $fechaFn = date($_POST['end']);
                 $fechaIn = date($_POST['start']);
-                $sql_items = "UPDATE tareas SET fechainireal_tarea ='" . $fechaIn . "', fechafin_tarea = '" . $fechaFn . "'  WHERE  id_tarea='" . $_POST['id'] . "';";
+
+                $nuevafecha = strtotime ($minutc , strtotime($fechaFn)) ;
+                $fechaSalidaFn	= date ( 'Y-m-d H:i:s' , $nuevafecha );
+
+                $nuevafecha2 = strtotime ($minutc , strtotime($fechaIn)) ;
+                $fechaSalidaIN	= date ( 'Y-m-d H:i:s' , $nuevafecha2 );
+
+                $sql_items = "UPDATE tareas SET fechainireal_tarea ='" . $fechaSalidaIN . "', fechafin_tarea = '" . $fechaSalidaFn . "'  WHERE  id_tarea='" . $_POST['id'] . "';";
                 $res_sql = mysqli_query($con, $sql_items);
                 if ($res_sql) {
                     echo 'ok';
@@ -160,15 +193,24 @@ if ($id_user == '-1') {
                     echo "error al guardar";
                 }
             }
-            $date = date($fechaIn);
+           $date = date($fechaIn);
+           $tipom = $_POST['content'];
+           $Msj = $tipom[0];
+           if ($Msj == 'M') { 
             //echo $fechaIn . "<br>";
-            $sql_items = "UPDATE mensajes set fechareal_start ='" . $date . "' WHERE id_inyect ='" . $_POST['id'] . "';";
+            $eventoId = $_POST['id'];
+            $nuevafecha = strtotime ( $minutc , strtotime($fechaIn)) ;
+            $fechaSalida 	= date ( 'Y-m-d H:i:s' , $nuevafecha );
+            $sql_items = "UPDATE mensajes set fechareal_start ='" . $fechaSalida . "' WHERE id_inyect ='" . $_POST['id'] . "';";
             $res_sql = mysqli_query($con, $sql_items);
+            $eliminarEvent = mysqli_query($con,"DROP EVENT evento_$eventoId");
+            $dataEvent = mysqli_query($con,"CREATE EVENT evento_$eventoId ON SCHEDULE AT '$date'  DO UPDATE `mensajes` SET enviado = 1 WHERE id_inyect = $eventoId;");
             if ($res_sql) {
                 echo 'ok';
             } else {
                 echo "error al guardar";
             }
+           }
             break;
         case  "loadMSJ": //muestra en rojo la cant de mensajes no leidos en el tablero
             $medio =  $_POST['idDiv'];

@@ -1452,24 +1452,6 @@ class MensajesAdd extends Mensajes
     protected function addRow($rsold = null)
     {
         global $Language, $Security;
-
-        // Check referential integrity for master table 'mensajes'
-        $validMasterRecord = true;
-        $masterFilter = $this->sqlMasterFilter_tareas();
-        if (strval($this->id_tarea->CurrentValue) != "") {
-            $masterFilter = str_replace("@id_tarea@", AdjustSql($this->id_tarea->CurrentValue, "DB"), $masterFilter);
-        } else {
-            $validMasterRecord = false;
-        }
-        if ($validMasterRecord) {
-            $rsmaster = Container("tareas")->loadRs($masterFilter)->fetch();
-            $validMasterRecord = $rsmaster !== false;
-        }
-        if (!$validMasterRecord) {
-            $relatedRecordMsg = str_replace("%t", "tareas", $Language->phrase("RelatedRecordRequired"));
-            $this->setFailureMessage($relatedRecordMsg);
-            return false;
-        }
         $conn = $this->getConnection();
 
         // Load db values from rsold

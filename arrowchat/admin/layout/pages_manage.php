@@ -1667,7 +1667,7 @@
 							<a href="manage.php?do=traylinks&activate=<?php echo $row['active']; ?>&id=<?php echo $row['id']; ?>&token=<?php echo $token; ?>" title="<?php if ($row['active']==1) echo "Visible"; else echo "Hidden"; ?>" class="secondaryContent <?php if ($row['active']==1) echo "deactivate"; else echo "activate"; ?>"><span>Deactivate</span></a>
 							<h4>
 								<a href="manage.php?do=traylinksedit&id=<?php echo $row['id']; ?>">
-									<img border="0" src="../themes/new_facebook_full/images/icons/<?php echo $row['icon'] ?>" style="width: 12px; height: 13px; position:relative; top: 2px" />&nbsp;&nbsp;&nbsp;<?php echo $row['name']; ?>
+									<img border="0" src="<?php echo $row['icon'] ?>" style="width: 12px; height: 13px; position:relative; top: 2px" />&nbsp;&nbsp;&nbsp;<?php echo $row['name']; ?>
 								</a>
 							</h4>
 						</li>

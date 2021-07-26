@@ -1213,24 +1213,6 @@ class Register extends Users
                 return false;
             }
         }
-
-        // Check referential integrity for master table 'users'
-        $validMasterRecord = true;
-        $masterFilter = $this->sqlMasterFilter_escenario();
-        if ($this->escenario->getSessionValue() != "") {
-        $masterFilter = str_replace("@id_escenario@", AdjustSql($this->escenario->getSessionValue(), "DB"), $masterFilter);
-        } else {
-            $validMasterRecord = false;
-        }
-        if ($validMasterRecord) {
-            $rsmaster = Container("escenario")->loadRs($masterFilter)->fetch();
-            $validMasterRecord = $rsmaster !== false;
-        }
-        if (!$validMasterRecord) {
-            $relatedRecordMsg = str_replace("%t", "escenario", $Language->phrase("RelatedRecordRequired"));
-            $this->setFailureMessage($relatedRecordMsg);
-            return false;
-        }
         $conn = $this->getConnection();
 
         // Load db values from rsold

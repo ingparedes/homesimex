@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<ew-language date="2021/7/20" version="17.0.4" id="es" name="Spanish" desc="Spanish" author="ELA83">
+<ew-language date="2021/7/21" version="17.0.4" id="es" name="Spanish" desc="Spanish" author="ELA83">
   <!--
     *** Important Notes:
     1. Language ID should follow: https://developers.google.com/recaptcha/docs/language,
@@ -138,8 +138,8 @@
     <!-- v2021 -->
     <phrase id="cookieconsentsummary" value="Describa aquí sus políticas de privacidad y Cookies." client="1" />
     <!-- v2021 -->
-    <phrase id="copy" value="Copiar" />
-    <phrase id="copylink" value="Copiar" class="icon-copy ew-icon" />
+    <phrase id="copy" value="Duplicar" />
+    <phrase id="copylink" value="Duplicar" class="icon-copy ew-icon" />
     <!-- v11 -->
     <phrase id="count" value="Contar" />
     <phrase id="countselected" value="%s seleccionados" client="1" />
@@ -1062,7 +1062,7 @@
       <phrase id="menutext" value="menu" />
     </menu>
     <menu id="246">
-      <phrase id="menutext" value="Mis documentos" />
+      <phrase id="menutext" value="Documentos" />
     </menu>
     <menu id="1">
       <phrase id="menutext" value="Simulaciones" />
@@ -1113,7 +1113,7 @@
       <phrase id="menutext" value="Linea tiempo" />
     </menu>
     <menu id="53">
-      <phrase id="menutext" value="Mis documentos" />
+      <phrase id="menutext" value="Documentos" />
     </menu>
     <menu id="55">
       <phrase id="menutext" value="Docs compartidos" />
@@ -1723,7 +1723,7 @@
       <phrase id="tblcaption" value="Chat" />
     </table>
     <table id="archivos_doc">
-      <phrase id="tblcaption" value="Mis documentos" />
+      <phrase id="tblcaption" value="Documentos" />
       <field id="id_file">
         <phrase id="fldcaption" value="id" />
       </field>

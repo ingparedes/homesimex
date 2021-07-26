@@ -196,9 +196,7 @@ $Page->renderRow();
     <?php if ($Page->SearchColumnCount % $Page->SearchFieldsPerRow > 0) { ?>
 </div>
     <?php } ?>
-<p> <strong> Configuración:</strong> <em>Simulación en proceso de desarrollo</em></p>
-<p><strong>Activa:</strong> <em>Simulación en ejecución</em></p>
-<p><strong>Finalizada:</strong> <em>Simulación se encuentra finalizada.</em></p> 
+
 <div id="xsr_<?= $Page->SearchRowCount + 1 ?>" class="ew-row d-sm-flex">
 
     <div class="ew-quick-search input-group">
@@ -220,6 +218,9 @@ $Page->renderRow();
   
 </div><!-- /.ew-search-panel -->
 </form>
+<p class="small"> <strong> Configuración:</strong> <em>Simulación en proceso de desarrollo</em> <br>
+<strong>Activa:</strong> <em>Simulación en ejecución</em> <br>
+<strong>Finalizada:</strong> <em>Simulación se encuentra finalizada.</em></p> 
 <?php } ?>
 <?php } ?>
 <?php $Page->showPageHeader(); ?>
@@ -508,7 +509,7 @@ loadjs.ready("head", function() {
 <script>
 loadjs.ready("load", function () {
     // Startup script
-    $("#fescenariolistsrch").before('<div class="callout callout-primary"><em>Si necesita realizar filtro de la siguiente lista, por favor seleccione el estado y por último clics en el botón buscar.</em></div>'),$("a.ew-detail-add").hide();
+    $("#fescenariolistsrch").before('<div class="callout callout-primary"><em>Por favor seleccione los filtros y/o escriba en el campo buscar y presione el botón BUSCAR para aplicarlos.</em></div>'),$("a.ew-detail-add").hide();
 });
 </script>
 <?php } ?>

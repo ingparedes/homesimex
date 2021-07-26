@@ -2351,25 +2351,6 @@ class MensajesGrid extends Mensajes
             // adjunto
             $this->adjunto->setDbValueDef($rsnew, $this->adjunto->CurrentValue, null, $this->adjunto->ReadOnly);
 
-            // Check referential integrity for master table 'tareas'
-            $validMasterRecord = true;
-            $masterFilter = $this->sqlMasterFilter_tareas();
-            $keyValue = $rsnew['id_tarea'] ?? $rsold['id_tarea'];
-            if (strval($keyValue) != "") {
-                $masterFilter = str_replace("@id_tarea@", AdjustSql($keyValue), $masterFilter);
-            } else {
-                $validMasterRecord = false;
-            }
-            if ($validMasterRecord) {
-                $rsmaster = Container("tareas")->loadRs($masterFilter)->fetch();
-                $validMasterRecord = $rsmaster !== false;
-            }
-            if (!$validMasterRecord) {
-                $relatedRecordMsg = str_replace("%t", "tareas", $Language->phrase("RelatedRecordRequired"));
-                $this->setFailureMessage($relatedRecordMsg);
-                return false;
-            }
-
             // Call Row Updating event
             $updateRow = $this->rowUpdating($rsold, $rsnew);
             if ($updateRow) {
@@ -2422,24 +2403,6 @@ class MensajesGrid extends Mensajes
         // Set up foreign key field value from Session
         if ($this->getCurrentMasterTable() == "tareas") {
             $this->id_tarea->CurrentValue = $this->id_tarea->getSessionValue();
-        }
-
-        // Check referential integrity for master table 'mensajes'
-        $validMasterRecord = true;
-        $masterFilter = $this->sqlMasterFilter_tareas();
-        if ($this->id_tarea->getSessionValue() != "") {
-        $masterFilter = str_replace("@id_tarea@", AdjustSql($this->id_tarea->getSessionValue(), "DB"), $masterFilter);
-        } else {
-            $validMasterRecord = false;
-        }
-        if ($validMasterRecord) {
-            $rsmaster = Container("tareas")->loadRs($masterFilter)->fetch();
-            $validMasterRecord = $rsmaster !== false;
-        }
-        if (!$validMasterRecord) {
-            $relatedRecordMsg = str_replace("%t", "tareas", $Language->phrase("RelatedRecordRequired"));
-            $this->setFailureMessage($relatedRecordMsg);
-            return false;
         }
         $conn = $this->getConnection();
 

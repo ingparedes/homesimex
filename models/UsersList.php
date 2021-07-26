@@ -620,16 +620,16 @@ class UsersList extends Users
         // Setup import options
         $this->setupImportOptions();
         $this->id_users->setVisibility();
-        $this->fecha->setVisibility();
-        $this->nombres->setVisibility();
-        $this->apellidos->setVisibility();
-        $this->escenario->Visible = false;
+        $this->escenario->setVisibility();
         $this->grupo->setVisibility();
         $this->subgrupo->setVisibility();
         $this->perfil->setVisibility();
-        $this->_email->setVisibility();
-        $this->telefono->setVisibility();
+        $this->nombres->setVisibility();
+        $this->apellidos->setVisibility();
         $this->pais->setVisibility();
+        $this->_email->setVisibility();
+        $this->fecha->setVisibility();
+        $this->telefono->setVisibility();
         $this->pw->Visible = false;
         $this->estado->setVisibility();
         $this->horario->Visible = false;
@@ -1032,16 +1032,16 @@ class UsersList extends Users
         $filterList = "";
         $savedFilterList = "";
         $filterList = Concat($filterList, $this->id_users->AdvancedSearch->toJson(), ","); // Field id_users
-        $filterList = Concat($filterList, $this->fecha->AdvancedSearch->toJson(), ","); // Field fecha
-        $filterList = Concat($filterList, $this->nombres->AdvancedSearch->toJson(), ","); // Field nombres
-        $filterList = Concat($filterList, $this->apellidos->AdvancedSearch->toJson(), ","); // Field apellidos
         $filterList = Concat($filterList, $this->escenario->AdvancedSearch->toJson(), ","); // Field escenario
         $filterList = Concat($filterList, $this->grupo->AdvancedSearch->toJson(), ","); // Field grupo
         $filterList = Concat($filterList, $this->subgrupo->AdvancedSearch->toJson(), ","); // Field subgrupo
         $filterList = Concat($filterList, $this->perfil->AdvancedSearch->toJson(), ","); // Field perfil
-        $filterList = Concat($filterList, $this->_email->AdvancedSearch->toJson(), ","); // Field email
-        $filterList = Concat($filterList, $this->telefono->AdvancedSearch->toJson(), ","); // Field telefono
+        $filterList = Concat($filterList, $this->nombres->AdvancedSearch->toJson(), ","); // Field nombres
+        $filterList = Concat($filterList, $this->apellidos->AdvancedSearch->toJson(), ","); // Field apellidos
         $filterList = Concat($filterList, $this->pais->AdvancedSearch->toJson(), ","); // Field pais
+        $filterList = Concat($filterList, $this->_email->AdvancedSearch->toJson(), ","); // Field email
+        $filterList = Concat($filterList, $this->fecha->AdvancedSearch->toJson(), ","); // Field fecha
+        $filterList = Concat($filterList, $this->telefono->AdvancedSearch->toJson(), ","); // Field telefono
         $filterList = Concat($filterList, $this->pw->AdvancedSearch->toJson(), ","); // Field pw
         $filterList = Concat($filterList, $this->estado->AdvancedSearch->toJson(), ","); // Field estado
         $filterList = Concat($filterList, $this->horario->AdvancedSearch->toJson(), ","); // Field horario
@@ -1096,30 +1096,6 @@ class UsersList extends Users
         $this->id_users->AdvancedSearch->SearchOperator2 = @$filter["w_id_users"];
         $this->id_users->AdvancedSearch->save();
 
-        // Field fecha
-        $this->fecha->AdvancedSearch->SearchValue = @$filter["x_fecha"];
-        $this->fecha->AdvancedSearch->SearchOperator = @$filter["z_fecha"];
-        $this->fecha->AdvancedSearch->SearchCondition = @$filter["v_fecha"];
-        $this->fecha->AdvancedSearch->SearchValue2 = @$filter["y_fecha"];
-        $this->fecha->AdvancedSearch->SearchOperator2 = @$filter["w_fecha"];
-        $this->fecha->AdvancedSearch->save();
-
-        // Field nombres
-        $this->nombres->AdvancedSearch->SearchValue = @$filter["x_nombres"];
-        $this->nombres->AdvancedSearch->SearchOperator = @$filter["z_nombres"];
-        $this->nombres->AdvancedSearch->SearchCondition = @$filter["v_nombres"];
-        $this->nombres->AdvancedSearch->SearchValue2 = @$filter["y_nombres"];
-        $this->nombres->AdvancedSearch->SearchOperator2 = @$filter["w_nombres"];
-        $this->nombres->AdvancedSearch->save();
-
-        // Field apellidos
-        $this->apellidos->AdvancedSearch->SearchValue = @$filter["x_apellidos"];
-        $this->apellidos->AdvancedSearch->SearchOperator = @$filter["z_apellidos"];
-        $this->apellidos->AdvancedSearch->SearchCondition = @$filter["v_apellidos"];
-        $this->apellidos->AdvancedSearch->SearchValue2 = @$filter["y_apellidos"];
-        $this->apellidos->AdvancedSearch->SearchOperator2 = @$filter["w_apellidos"];
-        $this->apellidos->AdvancedSearch->save();
-
         // Field escenario
         $this->escenario->AdvancedSearch->SearchValue = @$filter["x_escenario"];
         $this->escenario->AdvancedSearch->SearchOperator = @$filter["z_escenario"];
@@ -1152,21 +1128,21 @@ class UsersList extends Users
         $this->perfil->AdvancedSearch->SearchOperator2 = @$filter["w_perfil"];
         $this->perfil->AdvancedSearch->save();
 
-        // Field email
-        $this->_email->AdvancedSearch->SearchValue = @$filter["x__email"];
-        $this->_email->AdvancedSearch->SearchOperator = @$filter["z__email"];
-        $this->_email->AdvancedSearch->SearchCondition = @$filter["v__email"];
-        $this->_email->AdvancedSearch->SearchValue2 = @$filter["y__email"];
-        $this->_email->AdvancedSearch->SearchOperator2 = @$filter["w__email"];
-        $this->_email->AdvancedSearch->save();
+        // Field nombres
+        $this->nombres->AdvancedSearch->SearchValue = @$filter["x_nombres"];
+        $this->nombres->AdvancedSearch->SearchOperator = @$filter["z_nombres"];
+        $this->nombres->AdvancedSearch->SearchCondition = @$filter["v_nombres"];
+        $this->nombres->AdvancedSearch->SearchValue2 = @$filter["y_nombres"];
+        $this->nombres->AdvancedSearch->SearchOperator2 = @$filter["w_nombres"];
+        $this->nombres->AdvancedSearch->save();
 
-        // Field telefono
-        $this->telefono->AdvancedSearch->SearchValue = @$filter["x_telefono"];
-        $this->telefono->AdvancedSearch->SearchOperator = @$filter["z_telefono"];
-        $this->telefono->AdvancedSearch->SearchCondition = @$filter["v_telefono"];
-        $this->telefono->AdvancedSearch->SearchValue2 = @$filter["y_telefono"];
-        $this->telefono->AdvancedSearch->SearchOperator2 = @$filter["w_telefono"];
-        $this->telefono->AdvancedSearch->save();
+        // Field apellidos
+        $this->apellidos->AdvancedSearch->SearchValue = @$filter["x_apellidos"];
+        $this->apellidos->AdvancedSearch->SearchOperator = @$filter["z_apellidos"];
+        $this->apellidos->AdvancedSearch->SearchCondition = @$filter["v_apellidos"];
+        $this->apellidos->AdvancedSearch->SearchValue2 = @$filter["y_apellidos"];
+        $this->apellidos->AdvancedSearch->SearchOperator2 = @$filter["w_apellidos"];
+        $this->apellidos->AdvancedSearch->save();
 
         // Field pais
         $this->pais->AdvancedSearch->SearchValue = @$filter["x_pais"];
@@ -1175,6 +1151,30 @@ class UsersList extends Users
         $this->pais->AdvancedSearch->SearchValue2 = @$filter["y_pais"];
         $this->pais->AdvancedSearch->SearchOperator2 = @$filter["w_pais"];
         $this->pais->AdvancedSearch->save();
+
+        // Field email
+        $this->_email->AdvancedSearch->SearchValue = @$filter["x__email"];
+        $this->_email->AdvancedSearch->SearchOperator = @$filter["z__email"];
+        $this->_email->AdvancedSearch->SearchCondition = @$filter["v__email"];
+        $this->_email->AdvancedSearch->SearchValue2 = @$filter["y__email"];
+        $this->_email->AdvancedSearch->SearchOperator2 = @$filter["w__email"];
+        $this->_email->AdvancedSearch->save();
+
+        // Field fecha
+        $this->fecha->AdvancedSearch->SearchValue = @$filter["x_fecha"];
+        $this->fecha->AdvancedSearch->SearchOperator = @$filter["z_fecha"];
+        $this->fecha->AdvancedSearch->SearchCondition = @$filter["v_fecha"];
+        $this->fecha->AdvancedSearch->SearchValue2 = @$filter["y_fecha"];
+        $this->fecha->AdvancedSearch->SearchOperator2 = @$filter["w_fecha"];
+        $this->fecha->AdvancedSearch->save();
+
+        // Field telefono
+        $this->telefono->AdvancedSearch->SearchValue = @$filter["x_telefono"];
+        $this->telefono->AdvancedSearch->SearchOperator = @$filter["z_telefono"];
+        $this->telefono->AdvancedSearch->SearchCondition = @$filter["v_telefono"];
+        $this->telefono->AdvancedSearch->SearchValue2 = @$filter["y_telefono"];
+        $this->telefono->AdvancedSearch->SearchOperator2 = @$filter["w_telefono"];
+        $this->telefono->AdvancedSearch->save();
 
         // Field pw
         $this->pw->AdvancedSearch->SearchValue = @$filter["x_pw"];
@@ -1236,16 +1236,16 @@ class UsersList extends Users
             return "";
         }
         $this->buildSearchSql($where, $this->id_users, $default, false); // id_users
-        $this->buildSearchSql($where, $this->fecha, $default, false); // fecha
-        $this->buildSearchSql($where, $this->nombres, $default, false); // nombres
-        $this->buildSearchSql($where, $this->apellidos, $default, false); // apellidos
         $this->buildSearchSql($where, $this->escenario, $default, false); // escenario
         $this->buildSearchSql($where, $this->grupo, $default, false); // grupo
         $this->buildSearchSql($where, $this->subgrupo, $default, false); // subgrupo
         $this->buildSearchSql($where, $this->perfil, $default, false); // perfil
-        $this->buildSearchSql($where, $this->_email, $default, false); // email
-        $this->buildSearchSql($where, $this->telefono, $default, false); // telefono
+        $this->buildSearchSql($where, $this->nombres, $default, false); // nombres
+        $this->buildSearchSql($where, $this->apellidos, $default, false); // apellidos
         $this->buildSearchSql($where, $this->pais, $default, false); // pais
+        $this->buildSearchSql($where, $this->_email, $default, false); // email
+        $this->buildSearchSql($where, $this->fecha, $default, false); // fecha
+        $this->buildSearchSql($where, $this->telefono, $default, false); // telefono
         $this->buildSearchSql($where, $this->pw, $default, false); // pw
         $this->buildSearchSql($where, $this->estado, $default, false); // estado
         $this->buildSearchSql($where, $this->horario, $default, false); // horario
@@ -1259,16 +1259,16 @@ class UsersList extends Users
         }
         if (!$default && $this->Command == "search") {
             $this->id_users->AdvancedSearch->save(); // id_users
-            $this->fecha->AdvancedSearch->save(); // fecha
-            $this->nombres->AdvancedSearch->save(); // nombres
-            $this->apellidos->AdvancedSearch->save(); // apellidos
             $this->escenario->AdvancedSearch->save(); // escenario
             $this->grupo->AdvancedSearch->save(); // grupo
             $this->subgrupo->AdvancedSearch->save(); // subgrupo
             $this->perfil->AdvancedSearch->save(); // perfil
-            $this->_email->AdvancedSearch->save(); // email
-            $this->telefono->AdvancedSearch->save(); // telefono
+            $this->nombres->AdvancedSearch->save(); // nombres
+            $this->apellidos->AdvancedSearch->save(); // apellidos
             $this->pais->AdvancedSearch->save(); // pais
+            $this->_email->AdvancedSearch->save(); // email
+            $this->fecha->AdvancedSearch->save(); // fecha
+            $this->telefono->AdvancedSearch->save(); // telefono
             $this->pw->AdvancedSearch->save(); // pw
             $this->estado->AdvancedSearch->save(); // estado
             $this->horario->AdvancedSearch->save(); // horario
@@ -1344,11 +1344,12 @@ class UsersList extends Users
     protected function basicSearchSql($arKeywords, $type)
     {
         $where = "";
+        $this->buildBasicSearchSql($where, $this->escenario, $arKeywords, $type);
         $this->buildBasicSearchSql($where, $this->nombres, $arKeywords, $type);
         $this->buildBasicSearchSql($where, $this->apellidos, $arKeywords, $type);
+        $this->buildBasicSearchSql($where, $this->pais, $arKeywords, $type);
         $this->buildBasicSearchSql($where, $this->_email, $arKeywords, $type);
         $this->buildBasicSearchSql($where, $this->telefono, $arKeywords, $type);
-        $this->buildBasicSearchSql($where, $this->pais, $arKeywords, $type);
         $this->buildBasicSearchSql($where, $this->pw, $arKeywords, $type);
         $this->buildBasicSearchSql($where, $this->estado, $arKeywords, $type);
         $this->buildBasicSearchSql($where, $this->organizacion, $arKeywords, $type);
@@ -1475,15 +1476,6 @@ class UsersList extends Users
         if ($this->id_users->AdvancedSearch->issetSession()) {
             return true;
         }
-        if ($this->fecha->AdvancedSearch->issetSession()) {
-            return true;
-        }
-        if ($this->nombres->AdvancedSearch->issetSession()) {
-            return true;
-        }
-        if ($this->apellidos->AdvancedSearch->issetSession()) {
-            return true;
-        }
         if ($this->escenario->AdvancedSearch->issetSession()) {
             return true;
         }
@@ -1496,13 +1488,22 @@ class UsersList extends Users
         if ($this->perfil->AdvancedSearch->issetSession()) {
             return true;
         }
-        if ($this->_email->AdvancedSearch->issetSession()) {
+        if ($this->nombres->AdvancedSearch->issetSession()) {
             return true;
         }
-        if ($this->telefono->AdvancedSearch->issetSession()) {
+        if ($this->apellidos->AdvancedSearch->issetSession()) {
             return true;
         }
         if ($this->pais->AdvancedSearch->issetSession()) {
+            return true;
+        }
+        if ($this->_email->AdvancedSearch->issetSession()) {
+            return true;
+        }
+        if ($this->fecha->AdvancedSearch->issetSession()) {
+            return true;
+        }
+        if ($this->telefono->AdvancedSearch->issetSession()) {
             return true;
         }
         if ($this->pw->AdvancedSearch->issetSession()) {
@@ -1556,16 +1557,16 @@ class UsersList extends Users
     protected function resetAdvancedSearchParms()
     {
                 $this->id_users->AdvancedSearch->unsetSession();
-                $this->fecha->AdvancedSearch->unsetSession();
-                $this->nombres->AdvancedSearch->unsetSession();
-                $this->apellidos->AdvancedSearch->unsetSession();
                 $this->escenario->AdvancedSearch->unsetSession();
                 $this->grupo->AdvancedSearch->unsetSession();
                 $this->subgrupo->AdvancedSearch->unsetSession();
                 $this->perfil->AdvancedSearch->unsetSession();
-                $this->_email->AdvancedSearch->unsetSession();
-                $this->telefono->AdvancedSearch->unsetSession();
+                $this->nombres->AdvancedSearch->unsetSession();
+                $this->apellidos->AdvancedSearch->unsetSession();
                 $this->pais->AdvancedSearch->unsetSession();
+                $this->_email->AdvancedSearch->unsetSession();
+                $this->fecha->AdvancedSearch->unsetSession();
+                $this->telefono->AdvancedSearch->unsetSession();
                 $this->pw->AdvancedSearch->unsetSession();
                 $this->estado->AdvancedSearch->unsetSession();
                 $this->horario->AdvancedSearch->unsetSession();
@@ -1584,16 +1585,16 @@ class UsersList extends Users
 
         // Restore advanced search values
                 $this->id_users->AdvancedSearch->load();
-                $this->fecha->AdvancedSearch->load();
-                $this->nombres->AdvancedSearch->load();
-                $this->apellidos->AdvancedSearch->load();
                 $this->escenario->AdvancedSearch->load();
                 $this->grupo->AdvancedSearch->load();
                 $this->subgrupo->AdvancedSearch->load();
                 $this->perfil->AdvancedSearch->load();
-                $this->_email->AdvancedSearch->load();
-                $this->telefono->AdvancedSearch->load();
+                $this->nombres->AdvancedSearch->load();
+                $this->apellidos->AdvancedSearch->load();
                 $this->pais->AdvancedSearch->load();
+                $this->_email->AdvancedSearch->load();
+                $this->fecha->AdvancedSearch->load();
+                $this->telefono->AdvancedSearch->load();
                 $this->pw->AdvancedSearch->load();
                 $this->estado->AdvancedSearch->load();
                 $this->horario->AdvancedSearch->load();
@@ -1610,15 +1611,16 @@ class UsersList extends Users
             $this->CurrentOrder = Get("order");
             $this->CurrentOrderType = Get("ordertype", "");
             $this->updateSort($this->id_users); // id_users
-            $this->updateSort($this->fecha); // fecha
-            $this->updateSort($this->nombres); // nombres
-            $this->updateSort($this->apellidos); // apellidos
+            $this->updateSort($this->escenario); // escenario
             $this->updateSort($this->grupo); // grupo
             $this->updateSort($this->subgrupo); // subgrupo
             $this->updateSort($this->perfil); // perfil
-            $this->updateSort($this->_email); // email
-            $this->updateSort($this->telefono); // telefono
+            $this->updateSort($this->nombres); // nombres
+            $this->updateSort($this->apellidos); // apellidos
             $this->updateSort($this->pais); // pais
+            $this->updateSort($this->_email); // email
+            $this->updateSort($this->fecha); // fecha
+            $this->updateSort($this->telefono); // telefono
             $this->updateSort($this->estado); // estado
             $this->updateSort($this->organizacion); // organizacion
             $this->updateSort($this->img_user); // img_user
@@ -1672,16 +1674,16 @@ class UsersList extends Users
                 $orderBy = "";
                 $this->setSessionOrderBy($orderBy);
                 $this->id_users->setSort("");
-                $this->fecha->setSort("");
-                $this->nombres->setSort("");
-                $this->apellidos->setSort("");
                 $this->escenario->setSort("");
                 $this->grupo->setSort("");
                 $this->subgrupo->setSort("");
                 $this->perfil->setSort("");
-                $this->_email->setSort("");
-                $this->telefono->setSort("");
+                $this->nombres->setSort("");
+                $this->apellidos->setSort("");
                 $this->pais->setSort("");
+                $this->_email->setSort("");
+                $this->fecha->setSort("");
+                $this->telefono->setSort("");
                 $this->pw->setSort("");
                 $this->estado->setSort("");
                 $this->horario->setSort("");
@@ -2040,30 +2042,6 @@ class UsersList extends Users
             }
         }
 
-        // fecha
-        if (!$this->isAddOrEdit() && $this->fecha->AdvancedSearch->get()) {
-            $hasValue = true;
-            if (($this->fecha->AdvancedSearch->SearchValue != "" || $this->fecha->AdvancedSearch->SearchValue2 != "") && $this->Command == "") {
-                $this->Command = "search";
-            }
-        }
-
-        // nombres
-        if (!$this->isAddOrEdit() && $this->nombres->AdvancedSearch->get()) {
-            $hasValue = true;
-            if (($this->nombres->AdvancedSearch->SearchValue != "" || $this->nombres->AdvancedSearch->SearchValue2 != "") && $this->Command == "") {
-                $this->Command = "search";
-            }
-        }
-
-        // apellidos
-        if (!$this->isAddOrEdit() && $this->apellidos->AdvancedSearch->get()) {
-            $hasValue = true;
-            if (($this->apellidos->AdvancedSearch->SearchValue != "" || $this->apellidos->AdvancedSearch->SearchValue2 != "") && $this->Command == "") {
-                $this->Command = "search";
-            }
-        }
-
         // escenario
         if (!$this->isAddOrEdit() && $this->escenario->AdvancedSearch->get()) {
             $hasValue = true;
@@ -2096,18 +2074,18 @@ class UsersList extends Users
             }
         }
 
-        // email
-        if (!$this->isAddOrEdit() && $this->_email->AdvancedSearch->get()) {
+        // nombres
+        if (!$this->isAddOrEdit() && $this->nombres->AdvancedSearch->get()) {
             $hasValue = true;
-            if (($this->_email->AdvancedSearch->SearchValue != "" || $this->_email->AdvancedSearch->SearchValue2 != "") && $this->Command == "") {
+            if (($this->nombres->AdvancedSearch->SearchValue != "" || $this->nombres->AdvancedSearch->SearchValue2 != "") && $this->Command == "") {
                 $this->Command = "search";
             }
         }
 
-        // telefono
-        if (!$this->isAddOrEdit() && $this->telefono->AdvancedSearch->get()) {
+        // apellidos
+        if (!$this->isAddOrEdit() && $this->apellidos->AdvancedSearch->get()) {
             $hasValue = true;
-            if (($this->telefono->AdvancedSearch->SearchValue != "" || $this->telefono->AdvancedSearch->SearchValue2 != "") && $this->Command == "") {
+            if (($this->apellidos->AdvancedSearch->SearchValue != "" || $this->apellidos->AdvancedSearch->SearchValue2 != "") && $this->Command == "") {
                 $this->Command = "search";
             }
         }
@@ -2116,6 +2094,30 @@ class UsersList extends Users
         if (!$this->isAddOrEdit() && $this->pais->AdvancedSearch->get()) {
             $hasValue = true;
             if (($this->pais->AdvancedSearch->SearchValue != "" || $this->pais->AdvancedSearch->SearchValue2 != "") && $this->Command == "") {
+                $this->Command = "search";
+            }
+        }
+
+        // email
+        if (!$this->isAddOrEdit() && $this->_email->AdvancedSearch->get()) {
+            $hasValue = true;
+            if (($this->_email->AdvancedSearch->SearchValue != "" || $this->_email->AdvancedSearch->SearchValue2 != "") && $this->Command == "") {
+                $this->Command = "search";
+            }
+        }
+
+        // fecha
+        if (!$this->isAddOrEdit() && $this->fecha->AdvancedSearch->get()) {
+            $hasValue = true;
+            if (($this->fecha->AdvancedSearch->SearchValue != "" || $this->fecha->AdvancedSearch->SearchValue2 != "") && $this->Command == "") {
+                $this->Command = "search";
+            }
+        }
+
+        // telefono
+        if (!$this->isAddOrEdit() && $this->telefono->AdvancedSearch->get()) {
+            $hasValue = true;
+            if (($this->telefono->AdvancedSearch->SearchValue != "" || $this->telefono->AdvancedSearch->SearchValue2 != "") && $this->Command == "") {
                 $this->Command = "search";
             }
         }
@@ -2239,16 +2241,16 @@ class UsersList extends Users
             return;
         }
         $this->id_users->setDbValue($row['id_users']);
-        $this->fecha->setDbValue($row['fecha']);
-        $this->nombres->setDbValue($row['nombres']);
-        $this->apellidos->setDbValue($row['apellidos']);
         $this->escenario->setDbValue($row['escenario']);
         $this->grupo->setDbValue($row['grupo']);
         $this->subgrupo->setDbValue($row['subgrupo']);
         $this->perfil->setDbValue($row['perfil']);
-        $this->_email->setDbValue($row['email']);
-        $this->telefono->setDbValue($row['telefono']);
+        $this->nombres->setDbValue($row['nombres']);
+        $this->apellidos->setDbValue($row['apellidos']);
         $this->pais->setDbValue($row['pais']);
+        $this->_email->setDbValue($row['email']);
+        $this->fecha->setDbValue($row['fecha']);
+        $this->telefono->setDbValue($row['telefono']);
         $this->pw->setDbValue($row['pw']);
         $this->estado->setDbValue($row['estado']);
         $this->horario->setDbValue($row['horario']);
@@ -2263,16 +2265,16 @@ class UsersList extends Users
     {
         $row = [];
         $row['id_users'] = null;
-        $row['fecha'] = null;
-        $row['nombres'] = null;
-        $row['apellidos'] = null;
         $row['escenario'] = null;
         $row['grupo'] = null;
         $row['subgrupo'] = null;
         $row['perfil'] = null;
-        $row['email'] = null;
-        $row['telefono'] = null;
+        $row['nombres'] = null;
+        $row['apellidos'] = null;
         $row['pais'] = null;
+        $row['email'] = null;
+        $row['fecha'] = null;
+        $row['telefono'] = null;
         $row['pw'] = null;
         $row['estado'] = null;
         $row['horario'] = null;
@@ -2318,12 +2320,6 @@ class UsersList extends Users
 
         // id_users
 
-        // fecha
-
-        // nombres
-
-        // apellidos
-
         // escenario
 
         // grupo
@@ -2332,11 +2328,17 @@ class UsersList extends Users
 
         // perfil
 
-        // email
+        // nombres
 
-        // telefono
+        // apellidos
 
         // pais
+
+        // email
+
+        // fecha
+
+        // telefono
 
         // pw
 
@@ -2353,19 +2355,6 @@ class UsersList extends Users
             // id_users
             $this->id_users->ViewValue = $this->id_users->CurrentValue;
             $this->id_users->ViewCustomAttributes = "";
-
-            // fecha
-            $this->fecha->ViewValue = $this->fecha->CurrentValue;
-            $this->fecha->ViewValue = FormatDateTime($this->fecha->ViewValue, 5);
-            $this->fecha->ViewCustomAttributes = "";
-
-            // nombres
-            $this->nombres->ViewValue = $this->nombres->CurrentValue;
-            $this->nombres->ViewCustomAttributes = "";
-
-            // apellidos
-            $this->apellidos->ViewValue = $this->apellidos->CurrentValue;
-            $this->apellidos->ViewCustomAttributes = "";
 
             // escenario
             $curVal = trim(strval($this->escenario->CurrentValue));
@@ -2463,13 +2452,13 @@ class UsersList extends Users
             }
             $this->perfil->ViewCustomAttributes = "";
 
-            // email
-            $this->_email->ViewValue = $this->_email->CurrentValue;
-            $this->_email->ViewCustomAttributes = "";
+            // nombres
+            $this->nombres->ViewValue = $this->nombres->CurrentValue;
+            $this->nombres->ViewCustomAttributes = "";
 
-            // telefono
-            $this->telefono->ViewValue = $this->telefono->CurrentValue;
-            $this->telefono->ViewCustomAttributes = "";
+            // apellidos
+            $this->apellidos->ViewValue = $this->apellidos->CurrentValue;
+            $this->apellidos->ViewCustomAttributes = "";
 
             // pais
             $curVal = trim(strval($this->pais->CurrentValue));
@@ -2491,6 +2480,19 @@ class UsersList extends Users
                 $this->pais->ViewValue = null;
             }
             $this->pais->ViewCustomAttributes = "";
+
+            // email
+            $this->_email->ViewValue = $this->_email->CurrentValue;
+            $this->_email->ViewCustomAttributes = "";
+
+            // fecha
+            $this->fecha->ViewValue = $this->fecha->CurrentValue;
+            $this->fecha->ViewValue = FormatDateTime($this->fecha->ViewValue, 5);
+            $this->fecha->ViewCustomAttributes = "";
+
+            // telefono
+            $this->telefono->ViewValue = $this->telefono->CurrentValue;
+            $this->telefono->ViewCustomAttributes = "";
 
             // pw
             $this->pw->ViewValue = $Language->phrase("PasswordMask");
@@ -2534,20 +2536,10 @@ class UsersList extends Users
             $this->id_users->HrefValue = "";
             $this->id_users->TooltipValue = "";
 
-            // fecha
-            $this->fecha->LinkCustomAttributes = "";
-            $this->fecha->HrefValue = "";
-            $this->fecha->TooltipValue = "";
-
-            // nombres
-            $this->nombres->LinkCustomAttributes = "";
-            $this->nombres->HrefValue = "";
-            $this->nombres->TooltipValue = "";
-
-            // apellidos
-            $this->apellidos->LinkCustomAttributes = "";
-            $this->apellidos->HrefValue = "";
-            $this->apellidos->TooltipValue = "";
+            // escenario
+            $this->escenario->LinkCustomAttributes = "";
+            $this->escenario->HrefValue = "";
+            $this->escenario->TooltipValue = "";
 
             // grupo
             $this->grupo->LinkCustomAttributes = "";
@@ -2564,20 +2556,35 @@ class UsersList extends Users
             $this->perfil->HrefValue = "";
             $this->perfil->TooltipValue = "";
 
-            // email
-            $this->_email->LinkCustomAttributes = "";
-            $this->_email->HrefValue = "";
-            $this->_email->TooltipValue = "";
+            // nombres
+            $this->nombres->LinkCustomAttributes = "";
+            $this->nombres->HrefValue = "";
+            $this->nombres->TooltipValue = "";
 
-            // telefono
-            $this->telefono->LinkCustomAttributes = "";
-            $this->telefono->HrefValue = "";
-            $this->telefono->TooltipValue = "";
+            // apellidos
+            $this->apellidos->LinkCustomAttributes = "";
+            $this->apellidos->HrefValue = "";
+            $this->apellidos->TooltipValue = "";
 
             // pais
             $this->pais->LinkCustomAttributes = "";
             $this->pais->HrefValue = "";
             $this->pais->TooltipValue = "";
+
+            // email
+            $this->_email->LinkCustomAttributes = "";
+            $this->_email->HrefValue = "";
+            $this->_email->TooltipValue = "";
+
+            // fecha
+            $this->fecha->LinkCustomAttributes = "";
+            $this->fecha->HrefValue = "";
+            $this->fecha->TooltipValue = "";
+
+            // telefono
+            $this->telefono->LinkCustomAttributes = "";
+            $this->telefono->HrefValue = "";
+            $this->telefono->TooltipValue = "";
 
             // estado
             $this->estado->LinkCustomAttributes = "";
@@ -2616,29 +2623,10 @@ class UsersList extends Users
             $this->id_users->EditValue = HtmlEncode($this->id_users->AdvancedSearch->SearchValue);
             $this->id_users->PlaceHolder = RemoveHtml($this->id_users->caption());
 
-            // fecha
-            $this->fecha->EditAttrs["class"] = "form-control";
-            $this->fecha->EditCustomAttributes = "";
-            $this->fecha->EditValue = HtmlEncode(FormatDateTime(UnFormatDateTime($this->fecha->AdvancedSearch->SearchValue, 5), 5));
-            $this->fecha->PlaceHolder = RemoveHtml($this->fecha->caption());
-
-            // nombres
-            $this->nombres->EditAttrs["class"] = "form-control";
-            $this->nombres->EditCustomAttributes = "";
-            if (!$this->nombres->Raw) {
-                $this->nombres->AdvancedSearch->SearchValue = HtmlDecode($this->nombres->AdvancedSearch->SearchValue);
-            }
-            $this->nombres->EditValue = HtmlEncode($this->nombres->AdvancedSearch->SearchValue);
-            $this->nombres->PlaceHolder = RemoveHtml($this->nombres->caption());
-
-            // apellidos
-            $this->apellidos->EditAttrs["class"] = "form-control";
-            $this->apellidos->EditCustomAttributes = "";
-            if (!$this->apellidos->Raw) {
-                $this->apellidos->AdvancedSearch->SearchValue = HtmlDecode($this->apellidos->AdvancedSearch->SearchValue);
-            }
-            $this->apellidos->EditValue = HtmlEncode($this->apellidos->AdvancedSearch->SearchValue);
-            $this->apellidos->PlaceHolder = RemoveHtml($this->apellidos->caption());
+            // escenario
+            $this->escenario->EditAttrs["class"] = "form-control";
+            $this->escenario->EditCustomAttributes = "";
+            $this->escenario->PlaceHolder = RemoveHtml($this->escenario->caption());
 
             // grupo
             $this->grupo->EditAttrs["class"] = "form-control";
@@ -2659,6 +2647,29 @@ class UsersList extends Users
                 $this->perfil->PlaceHolder = RemoveHtml($this->perfil->caption());
             }
 
+            // nombres
+            $this->nombres->EditAttrs["class"] = "form-control";
+            $this->nombres->EditCustomAttributes = "";
+            if (!$this->nombres->Raw) {
+                $this->nombres->AdvancedSearch->SearchValue = HtmlDecode($this->nombres->AdvancedSearch->SearchValue);
+            }
+            $this->nombres->EditValue = HtmlEncode($this->nombres->AdvancedSearch->SearchValue);
+            $this->nombres->PlaceHolder = RemoveHtml($this->nombres->caption());
+
+            // apellidos
+            $this->apellidos->EditAttrs["class"] = "form-control";
+            $this->apellidos->EditCustomAttributes = "";
+            if (!$this->apellidos->Raw) {
+                $this->apellidos->AdvancedSearch->SearchValue = HtmlDecode($this->apellidos->AdvancedSearch->SearchValue);
+            }
+            $this->apellidos->EditValue = HtmlEncode($this->apellidos->AdvancedSearch->SearchValue);
+            $this->apellidos->PlaceHolder = RemoveHtml($this->apellidos->caption());
+
+            // pais
+            $this->pais->EditAttrs["class"] = "form-control";
+            $this->pais->EditCustomAttributes = "";
+            $this->pais->PlaceHolder = RemoveHtml($this->pais->caption());
+
             // email
             $this->_email->EditAttrs["class"] = "form-control";
             $this->_email->EditCustomAttributes = "";
@@ -2668,6 +2679,12 @@ class UsersList extends Users
             $this->_email->EditValue = HtmlEncode($this->_email->AdvancedSearch->SearchValue);
             $this->_email->PlaceHolder = RemoveHtml($this->_email->caption());
 
+            // fecha
+            $this->fecha->EditAttrs["class"] = "form-control";
+            $this->fecha->EditCustomAttributes = "";
+            $this->fecha->EditValue = HtmlEncode(FormatDateTime(UnFormatDateTime($this->fecha->AdvancedSearch->SearchValue, 5), 5));
+            $this->fecha->PlaceHolder = RemoveHtml($this->fecha->caption());
+
             // telefono
             $this->telefono->EditAttrs["class"] = "form-control";
             $this->telefono->EditCustomAttributes = "";
@@ -2676,11 +2693,6 @@ class UsersList extends Users
             }
             $this->telefono->EditValue = HtmlEncode($this->telefono->AdvancedSearch->SearchValue);
             $this->telefono->PlaceHolder = RemoveHtml($this->telefono->caption());
-
-            // pais
-            $this->pais->EditAttrs["class"] = "form-control";
-            $this->pais->EditCustomAttributes = "";
-            $this->pais->PlaceHolder = RemoveHtml($this->pais->caption());
 
             // estado
             $this->estado->EditCustomAttributes = "";
@@ -2844,6 +2856,14 @@ class UsersList extends Users
                 WriteJson($res);
                 return false;
             }
+            $checkValue = true; // Clear blank header values at end
+            $headers = array_reverse(array_reduce(array_reverse($headers), function ($res, $name) use ($checkValue) {
+                if (!EmptyValue($name) || !$checkValue) {
+                    $res[] = $name;
+                    $checkValue = false; // Skip further checking
+                }
+                return $res;
+            }, []));
             foreach ($headers as $name) {
                 if (!array_key_exists($name, $this->Fields)) { // Unidentified field, not header row
                     $res["error"] = str_replace('%f', $name, $Language->phrase("ImportMessageInvalidFieldName"));
@@ -2885,6 +2905,9 @@ class UsersList extends Users
             foreach ($records as $values) {
                 $importSuccess = false;
                 try {
+                    if (count($values) > count($headers)) { // Make sure headers / values count matched
+                        array_splice($values, count($headers));
+                    }
                     $row = array_combine($headers, $values);
                     $cnt++;
                     $res["count"] = $cnt;
@@ -3049,16 +3072,16 @@ class UsersList extends Users
     public function loadAdvancedSearch()
     {
         $this->id_users->AdvancedSearch->load();
-        $this->fecha->AdvancedSearch->load();
-        $this->nombres->AdvancedSearch->load();
-        $this->apellidos->AdvancedSearch->load();
         $this->escenario->AdvancedSearch->load();
         $this->grupo->AdvancedSearch->load();
         $this->subgrupo->AdvancedSearch->load();
         $this->perfil->AdvancedSearch->load();
-        $this->_email->AdvancedSearch->load();
-        $this->telefono->AdvancedSearch->load();
+        $this->nombres->AdvancedSearch->load();
+        $this->apellidos->AdvancedSearch->load();
         $this->pais->AdvancedSearch->load();
+        $this->_email->AdvancedSearch->load();
+        $this->fecha->AdvancedSearch->load();
+        $this->telefono->AdvancedSearch->load();
         $this->pw->AdvancedSearch->load();
         $this->estado->AdvancedSearch->load();
         $this->horario->AdvancedSearch->load();

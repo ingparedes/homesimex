@@ -171,7 +171,7 @@ $CONFIG = [
 
     // General
     "UNFORMAT_YEAR" => 50, // Unformat year
-    "RANDOM_KEY" => 'D9DsAOw8U5rlZxgG', // Random key for encryption
+    "RANDOM_KEY" => 'zJq0inHJEthA3xUW', // Random key for encryption
     "ENCRYPTION_KEY" => '', // Encryption key for data protection
     "PROJECT_STYLESHEET_FILENAME" => "css/simexamerica.css", // Project stylesheet file name
     "PROJECT_CHARSET" => "utf-8", // Project charset
@@ -1129,4 +1129,8 @@ $CONFIG["PDF_TIME_LIMIT"] = 120; // Time limit
 $CONFIG["PDF_MAX_IMAGE_WIDTH"] = 650; // Make sure image width not larger than page width or "infinite table loop" error
 $CONFIG["PDF_MAX_IMAGE_HEIGHT"] = 900; // Make sure image height not larger than page height or "infinite table loop" error
 $CONFIG["PDF_IMAGE_SCALE_FACTOR"] = 1.53; // Scale factor
+
+// PHPWord
+$CONFIG["USE_PHPWORD"] = true;
+$CONFIG["EXPORT_CLASSES"]["word"] = "ExportPhpWord"; // Replace the default ExportWord class
 $CaptchaClass = "PhpCaptcha"; // Override default CAPTCHA class

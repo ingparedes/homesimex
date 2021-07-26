@@ -63,7 +63,9 @@ $TimelineExcon = &$Page;
         position:relative;
         padding:1.22rem 1rem
         }
-
+        .vis-custom-time {
+            pointer-events: none;
+        }
 
         
     </style>
@@ -83,7 +85,11 @@ $TimelineExcon = &$Page;
 </head>
 
 <body>
-    <?php $sql_utc = ExecuteRow("SELECT p.gmt, e.fechaini_simulado, e.fechafin_simulado, e.id_escenario, e.nombre_escenario FROM escenario  e INNER JOIN paisgmt p ON p.id_zone = e.pais_escenario WHERE e.estado IN ('1')");//MIGUEL, añadi a la consulta el nombre de la suimulació
+    <?php $sql_utc = ExecuteRow("SELECT p.gmt, DATE_ADD(e.fechaini_real,INTERVAL (-300 +
+(RIGHT(p.gmt,2)+60*MID(p.gmt,6,2)*1))  MINUTE)  as fechaini_real, 
+DATE_ADD(e.fechafinal_real,INTERVAL (-300 +
+(RIGHT(p.gmt,2)+60*MID(p.gmt,6,2)*1))  MINUTE)  as fechafinal_real
+, e.id_escenario, e.nombre_escenario FROM escenario  e INNER JOIN paisgmt p ON p.id_zone = e.pais_escenario WHERE e.estado IN ('1')");//MIGUEL, añadi a la consulta el nombre de la suimulació
     $_SESSION['id_user'] = CurrentUserID();
     $nombre=$sql_utc['nombre_escenario']; //MIGUEL variable para guardar el nombre de la simulacion
     $_SESSION['id_escenario'] = $sql_utc['id_escenario'];
@@ -103,15 +109,13 @@ $TimelineExcon = &$Page;
     ?>
     <div class="buttons">
         <input type="button" id="load" value="&darr; Load" style="display:none">
-        <h2> <strong>Titulo de la simulación:</strong><!--Titulo para la simulación-->
-        <br>
-        </h2>
-        <h3>
+        <h4> <strong>Titulo de la simulación:</strong><!--Titulo para la simulación-->
+      
         <?php 
             
             echo $nombre;//Miguel IMpresion del nombre de la simulacion
             ?>
-            </h3>
+            </h4>
         <!-- <input type="button" id="save" value="&uarr; Save" title="Save data from the Timeline into the textarea"> -->
         <button type="button" id="save" class="btn btn-secondary" disabled>Grabar</button>
 
@@ -132,7 +136,9 @@ $TimelineExcon = &$Page;
 
     <div id="loading">loading...</div>
     <div id="visualization"></div>
-    <em>Para hacer zoom mantenga oprimido control y mueva la rueda del ratón </em>
+    <p class = "small">  <em> Presione CTRL + rueda del mouse para hacer zoom </em> <br>
+<em> Para desplazarse en la línea de tiempo, mantener presionado el clic izquierdo del ratón. <br>
+Para retornar a la hora real del ejercicio presionar el ícono <img src = "https://simexamericas.org/homesimex/images/iconotimeline.png"  width="30" height="30"> <em> </p>
     <!-- Modal -->
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -150,7 +156,7 @@ $TimelineExcon = &$Page;
                             <input type="text" class="form-control" id="id" hidden>
                             <input type="text" class="form-control" id="tipo" hidden>
                             <input type="text" class="form-control" id="id_tarea" hidden>
-                            <label for="tituloT">Titulo: </label>
+                            <label for="tituloT">Titulo </label>
                             <h3>
                                 <div id="tituloT"> </div>
                                 </hr>
@@ -158,7 +164,7 @@ $TimelineExcon = &$Page;
                         </div>
                         <hr>
                         <div class="form-group">
-                            <label for="desc_tarea">Descripción </label>
+                            <label for="desc_tarea">Descripción: </label>
                             <!-- <textarea class="form-control" id="desc_tarea" rows="3"></textarea> -->
                             <em>
                                 <div id="desc_tarea"></div><em>
@@ -172,7 +178,7 @@ $TimelineExcon = &$Page;
                         </ul>
                         <div class="modal-footer">
                            <!-- <button type="button" id="btnAddMensaje" onclick="modalAddMsj();" data-dismiss="modal2" class="btn btn-info btn-sm mr-auto">Crear Mensaje</button>
--->                         <button type="button" id="editMsg"  class="btn btn-info btn-sm">Editar Mensaje</button>
+-->                         <button type="button" id="editMsg"  class="btn btn-info btn-sm">Mensaje</button>
                            <!-- <select id="valorar" class="form-control-sm" name="valorar">
                                 <option value="0" selected>Valorar...</option>
                                 <option value="1" style="background-color:white">Pendiente</option>
@@ -513,8 +519,8 @@ $TimelineExcon = &$Page;
         var BotonGuardar= document.getElementById('BotonGuardar');
         let utc = '<?php echo $sql_utc[0] ?>';
         let hora = utc.slice(4, 10);
-        let fechaIniSimulado = '<?php echo $sql_utc['fechaini_simulado'] ?>';
-        let fechaFinSimulado = '<?php echo $sql_utc['fechafin_simulado'] ?>';
+        let fechaIniSimulado = '<?php echo $sql_utc['fechaini_real'] ?>';
+        let fechaFinSimulado = '<?php echo $sql_utc['fechafinal_real'] ?>';
         let data_json;
 
 
@@ -613,9 +619,9 @@ $TimelineExcon = &$Page;
                         var id1 = "id1";
                         var id2 = "id2";
                         timeline.addCustomTime(new Date(fechaIniSimulado), id1);
-                        timeline.setCustomTimeMarker("Fecha Inicio<br>" + fechaIniSimulado.slice(0, 16), id1, false);
+                        timeline.setCustomTimeMarker("Inicio<br>", id1, false);
                         timeline.addCustomTime(new Date(fechaFinSimulado), id2);
-                        timeline.setCustomTimeMarker("Fecha Fin<br>" + fechaFinSimulado.slice(0, 16), id2, false);
+                        timeline.setCustomTimeMarker("Fin<br>", id2, false);
 
                         timeline.on('doubleClick', function(properties) {
                             var id = properties.item;
@@ -660,9 +666,10 @@ $TimelineExcon = &$Page;
                                         
                                         if (tipo == 'M') {
                                             $('#id_tarea').val(data[0].id_tarea);
-                                            $('#modalLongTitle').html(" Editar Mensaje");
+                                            $('#modalLongTitle').html("Mensaje");
                                             $('#editMsg').html("Editar mensaje");
-                                            boton.onclick = v_modalEditMensaje; 
+                                            boton.onclick = AbrirEdicionMensaje;
+                                            //boton.onclick = v_modalEditMensaje; 
                                             BotonGuardar.onclick = editMensajeBD;
                                            // $('#editMsg').click(function(){
                                             //    v_modalEditMensaje();
@@ -688,9 +695,10 @@ $TimelineExcon = &$Page;
                                             }
 
                                         } else {
-                                            boton.onclick =v_modalSaveMensaje;
+                                            boton.onclick =AbrirCrearMensajee;
+                                           // boton.onclick =v_modalSaveMensaje;
                                             BotonGuardar.onclick = addMensaje;
-                                            $('#modalLongTitle').html("Crear Tarea");
+                                            $('#modalLongTitle').html("Tarea");
                                             $('#idTarea').val(id);
                                             $('#e_id_tarea').val(id);
                                             $('#valorar').show();
@@ -882,7 +890,18 @@ function saveMsj() { //graba datos del item desde la modal
             $('#e_id_tarea').val(id);
             
         }
-
+        function AbrirCrearMensajee(){
+            var id = $('#id').val();
+            var tipo = $('#tipo').val();
+            var id_mensaje= $('#id_tarea').val();
+            location.href='./MensajesAdd?showmaster=tareas&fk_id_tarea='+id;
+        }
+        function AbrirEdicionMensaje(){
+            var id = $('#id').val();
+            var tipo = $('#tipo').val();
+            var id_mensaje= $('#id_tarea').val();
+            location.href='./MensajesEdit/'+id+'?showmaster=tareas&fk_id_tarea='+id_mensaje;
+        }
         function v_modalEditMensaje() {
             var id = $('#id').val();
             var tipo = $('#tipo').val();
