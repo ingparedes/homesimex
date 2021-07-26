@@ -105,12 +105,12 @@ if ($id_user == '-1') {
             $json = json_encode($arrayI);
             if ($_GET['pg'] == 'Grupo') {
                 //$id_escenario = $_SESSION['id_escenario'];
-                $sql_tareas = "SELECT DISTINCT(t.id_tarea), concat('T:',t.id_tarea) AS id,t.id_grupo AS 'group',  CONCAT('T:',t.id_tarea,':', t.titulo_tarea) AS content, t.fechainireal_tarea AS start, t.fechafin_tarea AS end, 'color: white; background-color: blue;' AS style, valoracion as valora, CONCAT('background-color:',color,'; color:white;') AS style
+                $sql_tareas = "SELECT DISTINCT(t.id_tarea), concat('T:',t.id_tarea) AS id,t.id_tarearelacion AS id_tarearelacion,t.id_grupo AS 'group',  CONCAT('T:',t.id_tarea,':', t.titulo_tarea) AS content, t.fechainireal_tarea AS start, t.fechafin_tarea AS end, 'color: white; background-color: blue;' AS style, valoracion as valora, CONCAT('background-color:',color,'; color:white;') AS style
                 FROM tareas t 
                 WHERE t.id_escenario = '" . $id_escenario . "'";
                 //echo $sql_tareas;
             } elseif ($_GET['pg'] == 'excon') {
-                $sql_tareas = "SELECT DISTINCT(t.id_tarea), concat('T:',t.id_tarea) AS id,t.id_grupo AS 'group',  CONCAT('T:',t.id_tarea,':', t.titulo_tarea) AS content, t.fechainireal_tarea AS start, t.fechafin_tarea AS end, 'color: white; background-color: blue;' AS style, valoracion as valora, CONCAT('background-color:',color,'; color:white;') AS style
+                $sql_tareas = "SELECT DISTINCT(t.id_tarea), concat('T:',t.id_tarea) AS id,t.id_tarearelacion AS id_tarearelacion,t.id_grupo AS 'group',  CONCAT('T:',t.id_tarea,':', t.titulo_tarea) AS content, t.fechainireal_tarea AS start, t.fechafin_tarea AS end, 'color: white; background-color: blue;' AS style, valoracion as valora, CONCAT('background-color:',color,'; color:white;') AS style
                 FROM tareas t 
                 WHERE
                 t.id_grupo = '" . $id_grupo . "'";
@@ -191,7 +191,7 @@ if ($id_user == '-1') {
             $id = $_POST['id'];
             $tipo = $_POST['tipo'];
             if ($tipo == 'T') {
-                $sel_ItemMsj = "SELECT t.fechafinsimulado_tarea AS fechafinsimulado_tarea, t.fechainisimulado_tarea AS fechainisimulado_tarea, t.fechafin_tarea AS fechafin_tarea, t.fechainireal_tarea AS fechainireal_tarea, t.titulo_tarea AS titulo, t.descripcion_tarea AS descripcion, 'T' AS tipo, valoracion as valora FROM tareas t WHERE t.id_tarea ='" . $id . "';";
+                $sel_ItemMsj = "SELECT  t.id_tarea AS id_tarea, t.id_tarearelacion AS id_tarearelacion, t.fechafinsimulado_tarea AS fechafinsimulado_tarea, t.fechainisimulado_tarea AS fechainisimulado_tarea, t.fechafin_tarea AS fechafin_tarea, t.fechainireal_tarea AS fechainireal_tarea, t.titulo_tarea AS titulo, t.descripcion_tarea AS descripcion, 'T' AS tipo, valoracion as valora FROM tareas t WHERE t.id_tarea ='" . $id . "';";
             } elseif ($tipo == 'M') {
                 $sel_ItemMsj = "SELECT   m.titulo AS titulo, m.mensaje AS descripcion, 'M' AS tipo, m.fechareal_start, m.fechasim_start, m.medios, m.para, m.id_actor, m.actividad_esperada, m.adjunto, m.id_tarea FROM mensajes m WHERE m.id_inyect = '" . $id . "';";
             }
