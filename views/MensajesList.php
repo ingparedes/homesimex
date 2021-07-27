@@ -63,6 +63,16 @@ if ($Page->DbMasterFilter != "" && $Page->getCurrentMasterTable() == "tareas") {
 ?>
 <?php } ?>
 <?php
+	$idTarea = Container("tareas")->id_tarea->CurrentValue;
+	$nombretarea = ExecuteRow("SELECT titulo_tarea,DATE_FORMAT(fechainireal_tarea, '%Y/%m/%d'), DATE_FORMAT(fechafin_tarea, '%Y/%m/%d') as fecha  FROM tareas  WHERE id_tarea = '".$idTarea."';");
+    $nombregrupo = ExecuteRow("SELECT grupo.nombre_grupo FROM tareas INNER JOIN grupo ON  tareas.id_grupo = grupo.id_grupo WHERE tareas.id_tarea ='".$idTarea."';");
+?>
+<div class="callout callout-primary">
+  <h4>Tarea: <?php echo $nombretarea[0];  ?>  </h4>
+  <h4>Grupo:<?php echo $nombregrupo[0];  ?> </h4>
+ <p>Fecha inicio real: <?php echo $nombretarea[1]  ?> Fecha fin real: <?php echo $nombretarea[2];  ?> </p>
+</div>
+<?php
 $Page->renderOtherOptions();
 ?>
 <?php if ($Security->canSearch()) { ?>

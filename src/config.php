@@ -1126,8 +1126,8 @@ $CONFIG_DATA = null;
 $CONFIG["PDF_STYLESHEET_FILENAME"] = "css/ewpdf.css"; // Export PDF CSS styles
 $CONFIG["PDF_MEMORY_LIMIT"] = "128M"; // Memory limit
 $CONFIG["PDF_TIME_LIMIT"] = 120; // Time limit
-$CONFIG["PDF_MAX_IMAGE_WIDTH"] = 650; // Make sure image width not larger than page width or "infinite table loop" error
-$CONFIG["PDF_MAX_IMAGE_HEIGHT"] = 900; // Make sure image height not larger than page height or "infinite table loop" error
+$CONFIG["PDF_MAX_IMAGE_WIDTH"] = 150; // Make sure image width not larger than page width or "infinite table loop" error
+$CONFIG["PDF_MAX_IMAGE_HEIGHT"] = 80; // Make sure image height not larger than page height or "infinite table loop" error
 $CONFIG["PDF_IMAGE_SCALE_FACTOR"] = 1.53; // Scale factor
 
 // PHPWord

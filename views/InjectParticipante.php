@@ -115,7 +115,7 @@ $_SESSION['id_user'] = CurrentUserID();
       };
       $.ajax({
         data: parametros,
-        url: "dts_notifica.php?accion=notifica",
+        url: "",
         type: "POST",
         success: function(respose) {
 
@@ -147,44 +147,70 @@ $_SESSION['id_user'] = CurrentUserID();
  
 
 
-   $sql_leido1 = ExecuteRow("select count(*) from mensajes_usuarios mu 
-  INNER JOIN mensajes m ON m.id_inyect = mu.id_mensaje
-  WHERE leido = '0' and mu.id_user_destinatario IN ('" . $id_user . "') AND m.medios = '1';"); //tener rn cuenta el medio
 
-  $sql_leido2 = ExecuteRow("select count(*) from mensajes_usuarios mu 
-  INNER JOIN mensajes m ON m.id_inyect = mu.id_mensaje
-  WHERE leido = '0' and mu.id_user_destinatario IN ('" . $id_user . "') AND m.medios = '2';"); //tener rn cuenta el medio 
 
 
   ?>
 
 
-  <div class="card" id="update">
+  <div class="card" >
     <div class="card-header">
-      <!--<h3 class="card-title">Tablero Control</h3>-->
+   
+      <a class="" href="#" title="chirping"  data-toggle="modal" data-target=".bd-chirping-modal-xl" data-toggle="modal"><img src="images/chirping.png" alt="Image" height="30" width="30" /></a>
+      <a class="" href="#" title="chirping"  data-toggle="modal" data-target=".bd-daybook-modal-xl" data-toggle="modal"><img src="images/daybook.png" alt="Image" height="30" width="30" /></a>
+
     </div>
     <div class="card-body">
 
-      <!--<div class="col-sm-12">
+      <div class="col-sm-12">
 
 
-        <div class="item" id="vue-admin">
+        <div class="item" >
 
-          <a class="btn btn-app2" href="#" onclick="url( 'views/InjectParticipante.php' );">
-          <span id="mensajes" class="notify-badge"><span v-if="mensajesNuevos.length > 0" class="badge-danger">NEW</span></span>
-            <img src="images/mensajes.png" alt="Image" height="62" width="62" />
-          </a>
+             
         </div>
+            <div class="modal fade bd-chirping-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+             <div class="modal-dialog modal-xl">
+             <div class="modal-content">
+             <div class="modal-header">
+                
+                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                 <span aria-hidden="true">&times;</span>
+                </button>
+               </div>
+             <div class="modal-body">
+              <div class="embed-responsive embed-responsive-16by9">
+              <iframe id="frmUrl" class="embed-responsive-item" src="media/twitter/index.php?id_user=<?php echo $id_user ?> " allowfullscreen></iframe>
+              </div>
+            </div>
+      
+             </div>
+           </div>
+           </div>
 
 
         <div class="item">
-
-          <a class="btn btn-app2" href="#" onclick="url( 'media/twitter/index.php?id_user=<?php echo $id_user ?>' );">
-            <span id="tweeter" class="notify-badge">0</span>
-            <img src="images/chirping.png" alt="Image" height="62" width="62" />
-          </a>
+          
         </div>
-
+        <div class="modal fade bd-daybook-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+             <div class="modal-dialog modal-xl">
+             <div class="modal-content">
+             <div class="modal-header">
+                
+                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                 <span aria-hidden="true">&times;</span>
+                </button>
+               </div>
+             <div class="modal-body">
+              <div class="embed-responsive embed-responsive-16by9">
+              <iframe id="frmUrl" class="embed-responsive-item" src="media/facebook/index.php?id_user=<?php echo $id_user ?>" allowfullscreen></iframe>
+              </div>
+            </div>
+      
+             </div>
+           </div>
+           </div>
+<!--
         <div class="item">
 
           <a class="btn btn-app2" href="#" onclick="url( 'media/facebook/index.php?id_user=<?php echo $id_user ?>' );">
@@ -193,12 +219,14 @@ $_SESSION['id_user'] = CurrentUserID();
           </a>
         </div>
 
-
-      </div>-->
+-->
+      </div>
       <input type="button" id="load" value="&darr; Load" style="display:none">
       <div id="visualization"></div>
     <div id="loading">loading...</div>
-
+    <p class = "small">  <em> Presione CTRL + rueda del mouse para hacer zoom </em> <br>
+<em> Para desplazarse en la línea de tiempo, mantener presionado el clic izquierdo del ratón. <br>
+Para retornar a la hora real del ejercicio presionar el ícono <img src = "https://simexamericas.org/homesimex/images/iconotimeline.png"  width="30" height="30"> <em> </p>
 
     </div>
   </div>
@@ -311,7 +339,7 @@ $_SESSION['id_user'] = CurrentUserID();
                                 </a>│
 
                                 <a class="m-r-15 text-inverse-lighter" title="" data-caption="Enviar" v-bind:href="'/homesimex/Email2Add?IdreenMsg='+mens.id" data-original-title="Enviar">
-                                Cooperación &nbsp;<i class="fa fa-random" aria-hidden="true"></i>
+                                Reenviar &nbsp;<i class="fa fa-random" aria-hidden="true"></i>
 
                                 </a> │                               
   
@@ -428,9 +456,9 @@ var btnLoad = document.getElementById('load');
             var id1 = "id1";
             var id2 = "id2";
             timeline.addCustomTime(new Date(fechaIniSimulado), id1);
-            timeline.setCustomTimeMarker("Fecha Inicio<br>" + fechaIniSimulado.slice(0, 16), id1, false);
+            timeline.setCustomTimeMarker("Fecha Inicio<br>" , id1, false);
             timeline.addCustomTime(new Date(fechaFinSimulado), id2);
-            timeline.setCustomTimeMarker("Fecha Fin<br>" + fechaFinSimulado.slice(0, 16), id2, false);
+            timeline.setCustomTimeMarker("Fecha Fin<br>" , id2, false);
 
             timeline.on('doubleClick', function(properties) {
 
@@ -713,8 +741,5 @@ var btnLoad = document.getElementById('load');
         }
         }
 </script>
-
-<?= GetDebugMessage() ?>
-
 
 <?= GetDebugMessage() ?>

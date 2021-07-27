@@ -771,7 +771,7 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = "https
                                         } else {
                                             boton.onclick =AbrirCrearMensajee;
                                             BotonGuardar.onclick = addMensaje;
-                                            $('#modalLongTitle').html("Crear Tarea");
+                                            $('#modalLongTitle').html("Tarea");
                                             $('#idTarea').val(id);
                                             $('#e_id_tarea').val(id);
                                             $('#valorar').show();

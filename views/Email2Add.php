@@ -12,7 +12,7 @@ var $ = jQuery;
 var femail2add;
 loadjs.ready("head", function () {
    
-    $('.text-dark').text("Reenviar/Coodinar");
+    $('.text-dark').text("Reenviar");
     // Form object
     currentPageID = ew.PAGE_ID = "add";
     femail2add = currentForm = new ew.Form("femail2add", "add");

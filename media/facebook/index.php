@@ -216,7 +216,7 @@ $id_user = $_GET['id_user'];
                     ?>
                         <div class="inputfbinline">
                             <div class="imgdown">
-                                <img width="100%" src="../../files/<?php echo $row['img_user'] ?>">
+                                <img width="100%" src="https://bootdey.com/img/Content/avatar/avatar1.png">
                             </div>
                             <div class="">
                                 <p> <?php echo $rmtnte  ?></p>
