@@ -779,7 +779,7 @@ class Email2Add extends Email2
         $this->mensaje->setDbValue($row['mensaje']);
         $this->archivo->Upload->DbValue = $row['archivo'];
         $this->archivo->setDbValue($this->archivo->Upload->DbValue);
-        $this->reciever_userid->setDbValue($row['reciever_userid']);
+        
         $this->tiempo->setDbValue($row['tiempo']);
         $this->estado_msg->setDbValue($row['estado_msg']);
         $this->id_mensaje->setDbValue($row['id_mensaje']);

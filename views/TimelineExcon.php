@@ -821,12 +821,33 @@ removeArrowbyItemId(id) {
                                 remove: false, // delete an item by tapping the delete button top right
                                 overrideItems: false, // allow these options to override item.editable
                             },
+                            onMoving: function (item, callback) {
+                                if (item.start < item.InicioRango) item.start = tem.InicioRango;
+                                if (item.start > item.FinRango) item.start = item.FinRango;
+                                if (item.endFalso   > item.FinRango) item.endFalso   = item.FinRango;
+                                //console.log("cambiando algo");
+                                callback(item); // send back the (possibly) changed item
+                            },
                             onMove: function(item, callback) {
                                 $('#save').removeClass('btn btn-secondary');
                                 $("#save").prop('disabled', false);
                                 $('#save').addClass('btn btn-success');
                                 callback(item); // send back adjusted item
+                                if(Date.parse(item.InicioRango)<Date.parse(item.start) && Date.parse(item.start)<Date.parse(item.FinRango))
+                                            {
+                                               
+                                                    $('#save').removeClass('btn btn-secondary');
+                                                    $("#save").prop('disabled', false);
+                                                    $('#save').addClass('btn btn-success');
 
+                                                    callback(item); // send back item as confirmation (can be changed)
+                                               
+                                      
+                                        }
+                                          else{
+                                              alert("FUERA DE LIMITE");
+                                               callback(null); // 
+                                            }
                             },
                             moment: function(date) {
                                 return vis.moment(date).utcOffset(hora)

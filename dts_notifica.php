@@ -8,13 +8,32 @@ include("config.php");
 $ei = 0;
 $et = 0;
 
-$utcescenario = "SELECT p.gmt, ((RIGHT(p.gmt,2)+60*MID(p.gmt,6,2)*1)-300) as mins FROM escenario e INNER JOIN paisgmt p ON e.pais_escenario = p.id_zone INNER JOIN users u ON e.id_escenario = u.escenario
+$utcescenario = "SELECT p.gmt, RIGHT(p.gmt,6) as mins2 FROM escenario e INNER JOIN paisgmt p ON e.pais_escenario = p.id_zone INNER JOIN users u ON e.id_escenario = u.escenario
 WHERE u.id_users = '" . $id_user . "';";
+
 
 $res_sqlutc = mysqli_query($con, $utcescenario);
 $sqlutc = mysqli_fetch_assoc($res_sqlutc);
 
+$utces=$sqlutc['mins2'];
+
+ 
+
 $minutc = $sqlutc['mins'].' minutes';
+
+$utc_usr = "SELECT RIGHT(paisgmt.gmt,6) as usrutc FROM paisgmt INNER JOIN users ON paisgmt.id_zone = users.pais WHERE users.id_users ='" . $id_user . "';";
+$res_usr= mysqli_query($con, $utc_usr);
+$sqlutcusr = mysqli_fetch_assoc($res_usr);
+$utcusr=$sqlutcusr['usrutc'];
+
+$minUScutc = (intval(substr($utcusr,'1','2')) * 60) + intval(substr($utcusr,'-2'));
+$minEScutc = (intval(substr($utces,'1','2')) * 60) + intval(substr($utces,'-2'));
+$resutcfinal = $minUScutc- $minEScutc;
+//echo $resutcfinal;
+if ( $utcusr == $utces)
+{$utcusr2 =  '-05:00';}
+else
+{$utcusr2 =  $utcusr;}
 
 //var_dump ($minutc);
 //echo $minutc;
@@ -62,22 +81,26 @@ if ($id_user == '-1') {
                 $where = "mu.id_user_remitente = '" . $id_user . "'";
             }
             $sql_items = "SELECT DISTINCT(m.id_inyect), 
-            CONCAT('M:',m.id_inyect) as id,t.id_grupo AS 'group', 
-            CONCAT('M:',m.id_inyect,':', m.titulo) AS content, 
-            DATE_ADD(m.fechareal_start,INTERVAL( -300 + (RIGHT(p.gmt,2)+60*MID(p.gmt,6,2)*1))  MINUTE) AS start,
-             m.id_tarea, cm.id_calificacion AS 'calificacion' 
-             FROM mensajes m 
-             INNER JOIN mensajes_usuarios mu 
-             ON m.id_inyect = mu.id_mensaje 
-             INNER JOIN users u 
-             ON mu.id_user_destinatario = u.id_users 
-             LEFT JOIN actor_simulado a 
-             ON m.id_actor = a.id_actor 
-             INNER JOIN tareas t ON m.id_tarea = t.id_tarea 
-             INNER JOIN escenario e ON e.id_escenario = t.id_escenario
-	         INNER JOIN paisgmt p ON p.id_zone = e.pais_escenario
-             LEFT JOIN calificacion_mensajes cm ON cm.id_mensaje=m.id_inyect 
-             WHERE " . $where . " ORDER BY start ASC;";
+                            CONCAT('M:',m.id_inyect) as id,t.id_grupo AS 'group', 
+                            CONCAT('M:',m.id_inyect,':', m.titulo) AS content, 
+                            CONVERT_TZ(m.fechareal_start,'".$utces."','".$utcusr2."') AS start,
+                            CONVERT_TZ(m.fechareal_start,'".$utces."','".$utcusr2."') AS endFalso,
+                            m.id_tarea, cm.id_calificacion AS 'calificacion',
+                            t.fechainireal_tarea AS InicioRango,
+                            t.fechafin_tarea AS FinRango
+                            FROM mensajes m 
+                            INNER JOIN mensajes_usuarios mu 
+                            ON m.id_inyect = mu.id_mensaje 
+                            INNER JOIN users u 
+                            ON mu.id_user_destinatario = u.id_users 
+                            LEFT JOIN actor_simulado a 
+                            ON m.id_actor = a.id_actor 
+                            INNER JOIN tareas t ON m.id_tarea = t.id_tarea 
+                            INNER JOIN escenario e ON e.id_escenario = t.id_escenario
+                            INNER JOIN paisgmt p ON p.id_zone = e.pais_escenario
+                            LEFT JOIN calificacion_mensajes cm ON cm.id_mensaje=m.id_inyect 
+                            WHERE " . $where . " ORDER BY start ASC;";
+
             //WHERE mu.id_user_destinatario = '$id_user' AND m.medios IN ('2','3') ORDER BY m.id_inyect DESC;";        
            // echo $sql_items;
             $res_sql = mysqli_query($con, $sql_items);
@@ -120,25 +143,45 @@ if ($id_user == '-1') {
             if ($_GET['pg'] == 'Grupo') {
                 //$id_escenario = $_SESSION['id_escenario'];
                 $sql_tareas = "SELECT DISTINCT(t.id_tarea), concat('T:',t.id_tarea) AS id,t.id_tarearelacion AS id_tarearelacion,t.id_grupo AS 'group',  CONCAT('T:',t.id_tarea,':', t.titulo_tarea) AS content,
-                 DATE_ADD(t.fechainireal_tarea,INTERVAL(300 - (RIGHT(p.gmt,2)+60*MID(p.gmt,6,2)* -1))  MINUTE) AS start,
-                 DATE_ADD(t.fechafin_tarea,INTERVAL(300 - (RIGHT(p.gmt,2)+60*MID(p.gmt,6,2)* -1))  MINUTE) AS end, 
-                 'color: white; background-color: blue;' AS style, valoracion as valora, CONCAT('background-color:','LightSlateGray','; color:white;') AS style
-                FROM tareas t 
-                INNER JOIN escenario e ON e.id_escenario = t.id_escenario
-	            INNER JOIN paisgmt p ON p.id_zone = e.pais_escenario
+                
+                CONVERT_TZ(t.fechainireal_tarea,'".$utces."','".$utcusr2."') AS start,
+                CONVERT_TZ(t.fechafin_tarea,'".$utces."','".$utcusr2."') AS end,
+                'color: white; background-color: blue;' AS style, valoracion as valora, CONCAT('background-color:','LightSlateGray','; color:white;') AS style
+               FROM tareas t 
+               INNER JOIN escenario e ON e.id_escenario = t.id_escenario
+               INNER JOIN paisgmt p ON p.id_zone = e.pais_escenario
                 WHERE t.id_escenario = '" . $id_escenario . "'";
                 //echo $sql_tareas;
             } elseif ($_GET['pg'] == 'excon') {
                 $sql_tareas = "SELECT DISTINCT(t.id_tarea), concat('T:',t.id_tarea) AS id,t.id_tarearelacion AS id_tarearelacion,t.id_grupo AS 'group',  CONCAT('T:',t.id_tarea,':', t.titulo_tarea) AS content,
-                DATE_ADD(t.fechainireal_tarea,INTERVAL((RIGHT(p.gmt,2)+60*MID(p.gmt,6,2)*1))-300  MINUTE) AS start,
-                DATE_ADD(t.fechafin_tarea,INTERVAL((RIGHT(p.gmt,2)+60*MID(p.gmt,6,2)*1))-300  MINUTE) AS end, 
+                
+                CONVERT_TZ(t.fechainireal_tarea,'".$utces."','".$utcusr2."') AS start,
+                CONVERT_TZ(t.fechafin_tarea,'".$utces."','".$utcusr2."') AS end,
                 'color: white; background-color: blue;' AS style, valoracion as valora, CONCAT('background-color:','LightSlateGray','; color:white;') AS style
                FROM tareas t 
                INNER JOIN escenario e ON e.id_escenario = t.id_escenario
                INNER JOIN paisgmt p ON p.id_zone = e.pais_escenario
                WHERE t.id_grupo = '" . $id_grupo . "'";
-            }
-            if ($_GET['pg'] != 'participante') {
+             } else{//TAREAS PARTICIPANTE
+                $sql_tareas = "SELECT DISTINCT(t.id_tarea), concat('T:',t.id_tarea) AS id,t.id_tarearelacion AS id_tarearelacion,t.id_grupo AS 'group',  CONCAT('T:',t.id_tarea,':', t.titulo_tarea) AS content,
+                CONVERT_TZ(t.fechainireal_tarea,'".$utces."','".$utcusr2."') AS start,
+                CONVERT_TZ(t.fechafin_tarea,'".$utces."','".$utcusr2."') AS end,
+                'color: white; background-color: blue;' AS style, valoracion as valora, CONCAT('background-color:','LightSlateGray','; color:white;') AS style
+                FROM mensajes m 
+                            INNER JOIN mensajes_usuarios mu 
+                            ON m.id_inyect = mu.id_mensaje 
+                            INNER JOIN users u 
+                            ON mu.id_user_destinatario = u.id_users 
+                            LEFT JOIN actor_simulado a 
+                            ON m.id_actor = a.id_actor 
+                            INNER JOIN tareas t ON m.id_tarea = t.id_tarea 
+                            INNER JOIN escenario e ON e.id_escenario = t.id_escenario
+                            INNER JOIN paisgmt p ON p.id_zone = e.pais_escenario
+                            LEFT JOIN calificacion_mensajes cm ON cm.id_mensaje=m.id_inyect 
+                            WHERE " . $where . ";";
+             }
+            
+            //if ($_GET['pg'] != 'participante') {
                 $res_tareas = mysqli_query($con, $sql_tareas);
                 $cantT = mysqli_num_rows($res_tareas);
                 if ($cantT > 0) {
@@ -157,13 +200,14 @@ if ($id_user == '-1') {
                 } elseif (($cantM == 0) && ($cantT > 0)) {
                     $array = $arrayT;
                 }
+                $json= json_encode($array);
                 if (($ei == 0) || ($et == 0)) {
                     $json = json_encode($array);
                     //var_dump($arrayT);
                 } elseif ($ei > 0) {
                     echo "Sin datos";
                 }
-            }
+            //}
             echo $json;
 
             break;
@@ -176,13 +220,16 @@ if ($id_user == '-1') {
             if (isset($_POST['end'])) {
                 $fechaFn = date($_POST['end']);
                 $fechaIn = date($_POST['start']);
-                $nuevafechaFn = strtotime ( $minutc , strtotime($fechaFn)) ;
-                $fechaSalidaFn 	= date ( 'Y-m-d H:i:s' , $nuevafechaFn );
 
-                $nuevafechaIn = strtotime ( $minutc , strtotime($fechaIn)) ;
-                $fechaSalidaIn 	= date ( 'Y-m-d H:i:s' , $nuevafechaIn );
+                $fechainicio = strtotime ( $resutcfinal.' minutes', strtotime($fechaIn)) ;
+                $fechaSalidaIn 	= date ( 'Y-m-d H:i:s' , $fechainicio );
 
-                $sql_items = "UPDATE tareas SET fechainireal_tarea ='" . $fechaSalidaIn . "', fechafin_tarea = '" . $nuevafechaFn . "'  WHERE  id_tarea='" . $_POST['id'] . "';";
+                $fechafinal = strtotime ( $resutcfinal.' minutes', strtotime($fechaFn)) ;
+                $fechaSalidaFn 	= date ( 'Y-m-d H:i:s' , $fechafinal );
+
+
+
+                $sql_items = "UPDATE tareas SET fechainireal_tarea ='" . $fechaSalidaIn . "', fechafin_tarea = '" . $fechaSalidaFn . "'  WHERE  id_tarea='" . $_POST['id'] . "';";
                 $res_sql = mysqli_query($con, $sql_items);
                 if ($res_sql) {
                     echo 'ok';
@@ -195,10 +242,9 @@ if ($id_user == '-1') {
             $Msj = $tipom[0];
             if ($Msj == 'M') { 
             //echo $fechaIn . "<br>";
-            $eventoId = $_POST['id'];
-            $sql_items = "UPDATE mensajes set fechareal_start ='" . $date . "' WHERE id_inyect ='" . $_POST['id'] . "';";
-            $nuevafecha = strtotime ( $minutc , strtotime($fechaIn)) ;
+            $nuevafecha = strtotime ( $resutcfinal.' minutes', strtotime($fechaIn)) ;
             $fechaSalida 	= date ( 'Y-m-d H:i:s' , $nuevafecha );
+            $eventoId = $_POST['id'];
             $sql_items = "UPDATE mensajes set fechareal_start ='" . $fechaSalida . "' WHERE id_inyect ='" . $_POST['id'] . "';";
             $res_sql = mysqli_query($con, $sql_items);
             $eliminarEvent = mysqli_query($con,"DROP EVENT evento_$eventoId");
