@@ -572,12 +572,6 @@ class Register extends Users
     {
         $this->id_users->CurrentValue = null;
         $this->id_users->OldValue = $this->id_users->CurrentValue;
-        $this->fecha->CurrentValue = null;
-        $this->fecha->OldValue = $this->fecha->CurrentValue;
-        $this->nombres->CurrentValue = null;
-        $this->nombres->OldValue = $this->nombres->CurrentValue;
-        $this->apellidos->CurrentValue = null;
-        $this->apellidos->OldValue = $this->apellidos->CurrentValue;
         $this->escenario->CurrentValue = null;
         $this->escenario->OldValue = $this->escenario->CurrentValue;
         $this->grupo->CurrentValue = null;
@@ -586,12 +580,18 @@ class Register extends Users
         $this->subgrupo->OldValue = $this->subgrupo->CurrentValue;
         $this->perfil->CurrentValue = null;
         $this->perfil->OldValue = $this->perfil->CurrentValue;
-        $this->_email->CurrentValue = null;
-        $this->_email->OldValue = $this->_email->CurrentValue;
-        $this->telefono->CurrentValue = null;
-        $this->telefono->OldValue = $this->telefono->CurrentValue;
+        $this->nombres->CurrentValue = null;
+        $this->nombres->OldValue = $this->nombres->CurrentValue;
+        $this->apellidos->CurrentValue = null;
+        $this->apellidos->OldValue = $this->apellidos->CurrentValue;
         $this->pais->CurrentValue = null;
         $this->pais->OldValue = $this->pais->CurrentValue;
+        $this->_email->CurrentValue = null;
+        $this->_email->OldValue = $this->_email->CurrentValue;
+        $this->fecha->CurrentValue = null;
+        $this->fecha->OldValue = $this->fecha->CurrentValue;
+        $this->telefono->CurrentValue = null;
+        $this->telefono->OldValue = $this->telefono->CurrentValue;
         $this->pw->CurrentValue = null;
         $this->pw->OldValue = $this->pw->CurrentValue;
         $this->estado->CurrentValue = null;
@@ -632,6 +632,16 @@ class Register extends Users
             }
         }
 
+        // Check field name 'pais' first before field var 'x_pais'
+        $val = $CurrentForm->hasValue("pais") ? $CurrentForm->getValue("pais") : $CurrentForm->getValue("x_pais");
+        if (!$this->pais->IsDetailKey) {
+            if (IsApi() && $val === null) {
+                $this->pais->Visible = false; // Disable update for API request
+            } else {
+                $this->pais->setFormValue($val);
+            }
+        }
+
         // Check field name 'email' first before field var 'x__email'
         $val = $CurrentForm->hasValue("email") ? $CurrentForm->getValue("email") : $CurrentForm->getValue("x__email");
         if (!$this->_email->IsDetailKey) {
@@ -649,16 +659,6 @@ class Register extends Users
                 $this->telefono->Visible = false; // Disable update for API request
             } else {
                 $this->telefono->setFormValue($val);
-            }
-        }
-
-        // Check field name 'pais' first before field var 'x_pais'
-        $val = $CurrentForm->hasValue("pais") ? $CurrentForm->getValue("pais") : $CurrentForm->getValue("x_pais");
-        if (!$this->pais->IsDetailKey) {
-            if (IsApi() && $val === null) {
-                $this->pais->Visible = false; // Disable update for API request
-            } else {
-                $this->pais->setFormValue($val);
             }
         }
 
@@ -682,9 +682,9 @@ class Register extends Users
         global $CurrentForm;
         $this->nombres->CurrentValue = $this->nombres->FormValue;
         $this->apellidos->CurrentValue = $this->apellidos->FormValue;
+        $this->pais->CurrentValue = $this->pais->FormValue;
         $this->_email->CurrentValue = $this->_email->FormValue;
         $this->telefono->CurrentValue = $this->telefono->FormValue;
-        $this->pais->CurrentValue = $this->pais->FormValue;
         $this->organizacion->CurrentValue = $this->organizacion->FormValue;
     }
 
@@ -736,16 +736,16 @@ class Register extends Users
             return;
         }
         $this->id_users->setDbValue($row['id_users']);
-        $this->fecha->setDbValue($row['fecha']);
-        $this->nombres->setDbValue($row['nombres']);
-        $this->apellidos->setDbValue($row['apellidos']);
         $this->escenario->setDbValue($row['escenario']);
         $this->grupo->setDbValue($row['grupo']);
         $this->subgrupo->setDbValue($row['subgrupo']);
         $this->perfil->setDbValue($row['perfil']);
-        $this->_email->setDbValue($row['email']);
-        $this->telefono->setDbValue($row['telefono']);
+        $this->nombres->setDbValue($row['nombres']);
+        $this->apellidos->setDbValue($row['apellidos']);
         $this->pais->setDbValue($row['pais']);
+        $this->_email->setDbValue($row['email']);
+        $this->fecha->setDbValue($row['fecha']);
+        $this->telefono->setDbValue($row['telefono']);
         $this->pw->setDbValue($row['pw']);
         $this->estado->setDbValue($row['estado']);
         $this->horario->setDbValue($row['horario']);
@@ -761,16 +761,16 @@ class Register extends Users
         $this->loadDefaultValues();
         $row = [];
         $row['id_users'] = $this->id_users->CurrentValue;
-        $row['fecha'] = $this->fecha->CurrentValue;
-        $row['nombres'] = $this->nombres->CurrentValue;
-        $row['apellidos'] = $this->apellidos->CurrentValue;
         $row['escenario'] = $this->escenario->CurrentValue;
         $row['grupo'] = $this->grupo->CurrentValue;
         $row['subgrupo'] = $this->subgrupo->CurrentValue;
         $row['perfil'] = $this->perfil->CurrentValue;
-        $row['email'] = $this->_email->CurrentValue;
-        $row['telefono'] = $this->telefono->CurrentValue;
+        $row['nombres'] = $this->nombres->CurrentValue;
+        $row['apellidos'] = $this->apellidos->CurrentValue;
         $row['pais'] = $this->pais->CurrentValue;
+        $row['email'] = $this->_email->CurrentValue;
+        $row['fecha'] = $this->fecha->CurrentValue;
+        $row['telefono'] = $this->telefono->CurrentValue;
         $row['pw'] = $this->pw->CurrentValue;
         $row['estado'] = $this->estado->CurrentValue;
         $row['horario'] = $this->horario->CurrentValue;
@@ -794,12 +794,6 @@ class Register extends Users
 
         // id_users
 
-        // fecha
-
-        // nombres
-
-        // apellidos
-
         // escenario
 
         // grupo
@@ -808,11 +802,17 @@ class Register extends Users
 
         // perfil
 
-        // email
+        // nombres
 
-        // telefono
+        // apellidos
 
         // pais
+
+        // email
+
+        // fecha
+
+        // telefono
 
         // pw
 
@@ -829,19 +829,6 @@ class Register extends Users
             // id_users
             $this->id_users->ViewValue = $this->id_users->CurrentValue;
             $this->id_users->ViewCustomAttributes = "";
-
-            // fecha
-            $this->fecha->ViewValue = $this->fecha->CurrentValue;
-            $this->fecha->ViewValue = FormatDateTime($this->fecha->ViewValue, 5);
-            $this->fecha->ViewCustomAttributes = "";
-
-            // nombres
-            $this->nombres->ViewValue = $this->nombres->CurrentValue;
-            $this->nombres->ViewCustomAttributes = "";
-
-            // apellidos
-            $this->apellidos->ViewValue = $this->apellidos->CurrentValue;
-            $this->apellidos->ViewCustomAttributes = "";
 
             // escenario
             $curVal = trim(strval($this->escenario->CurrentValue));
@@ -939,13 +926,13 @@ class Register extends Users
             }
             $this->perfil->ViewCustomAttributes = "";
 
-            // email
-            $this->_email->ViewValue = $this->_email->CurrentValue;
-            $this->_email->ViewCustomAttributes = "";
+            // nombres
+            $this->nombres->ViewValue = $this->nombres->CurrentValue;
+            $this->nombres->ViewCustomAttributes = "";
 
-            // telefono
-            $this->telefono->ViewValue = $this->telefono->CurrentValue;
-            $this->telefono->ViewCustomAttributes = "";
+            // apellidos
+            $this->apellidos->ViewValue = $this->apellidos->CurrentValue;
+            $this->apellidos->ViewCustomAttributes = "";
 
             // pais
             $curVal = trim(strval($this->pais->CurrentValue));
@@ -967,6 +954,19 @@ class Register extends Users
                 $this->pais->ViewValue = null;
             }
             $this->pais->ViewCustomAttributes = "";
+
+            // email
+            $this->_email->ViewValue = $this->_email->CurrentValue;
+            $this->_email->ViewCustomAttributes = "";
+
+            // fecha
+            $this->fecha->ViewValue = $this->fecha->CurrentValue;
+            $this->fecha->ViewValue = FormatDateTime($this->fecha->ViewValue, 5);
+            $this->fecha->ViewCustomAttributes = "";
+
+            // telefono
+            $this->telefono->ViewValue = $this->telefono->CurrentValue;
+            $this->telefono->ViewCustomAttributes = "";
 
             // pw
             $this->pw->ViewValue = $Language->phrase("PasswordMask");
@@ -1015,6 +1015,11 @@ class Register extends Users
             $this->apellidos->HrefValue = "";
             $this->apellidos->TooltipValue = "";
 
+            // pais
+            $this->pais->LinkCustomAttributes = "";
+            $this->pais->HrefValue = "";
+            $this->pais->TooltipValue = "";
+
             // email
             $this->_email->LinkCustomAttributes = "";
             $this->_email->HrefValue = "";
@@ -1024,11 +1029,6 @@ class Register extends Users
             $this->telefono->LinkCustomAttributes = "";
             $this->telefono->HrefValue = "";
             $this->telefono->TooltipValue = "";
-
-            // pais
-            $this->pais->LinkCustomAttributes = "";
-            $this->pais->HrefValue = "";
-            $this->pais->TooltipValue = "";
 
             // organizacion
             $this->organizacion->LinkCustomAttributes = "";
@@ -1052,24 +1052,6 @@ class Register extends Users
             }
             $this->apellidos->EditValue = HtmlEncode($this->apellidos->CurrentValue);
             $this->apellidos->PlaceHolder = RemoveHtml($this->apellidos->caption());
-
-            // email
-            $this->_email->EditAttrs["class"] = "form-control";
-            $this->_email->EditCustomAttributes = "";
-            if (!$this->_email->Raw) {
-                $this->_email->CurrentValue = HtmlDecode($this->_email->CurrentValue);
-            }
-            $this->_email->EditValue = HtmlEncode($this->_email->CurrentValue);
-            $this->_email->PlaceHolder = RemoveHtml($this->_email->caption());
-
-            // telefono
-            $this->telefono->EditAttrs["class"] = "form-control";
-            $this->telefono->EditCustomAttributes = "";
-            if (!$this->telefono->Raw) {
-                $this->telefono->CurrentValue = HtmlDecode($this->telefono->CurrentValue);
-            }
-            $this->telefono->EditValue = HtmlEncode($this->telefono->CurrentValue);
-            $this->telefono->PlaceHolder = RemoveHtml($this->telefono->caption());
 
             // pais
             $this->pais->EditAttrs["class"] = "form-control";
@@ -1096,6 +1078,24 @@ class Register extends Users
             }
             $this->pais->PlaceHolder = RemoveHtml($this->pais->caption());
 
+            // email
+            $this->_email->EditAttrs["class"] = "form-control";
+            $this->_email->EditCustomAttributes = "";
+            if (!$this->_email->Raw) {
+                $this->_email->CurrentValue = HtmlDecode($this->_email->CurrentValue);
+            }
+            $this->_email->EditValue = HtmlEncode($this->_email->CurrentValue);
+            $this->_email->PlaceHolder = RemoveHtml($this->_email->caption());
+
+            // telefono
+            $this->telefono->EditAttrs["class"] = "form-control";
+            $this->telefono->EditCustomAttributes = "";
+            if (!$this->telefono->Raw) {
+                $this->telefono->CurrentValue = HtmlDecode($this->telefono->CurrentValue);
+            }
+            $this->telefono->EditValue = HtmlEncode($this->telefono->CurrentValue);
+            $this->telefono->PlaceHolder = RemoveHtml($this->telefono->caption());
+
             // organizacion
             $this->organizacion->EditAttrs["class"] = "form-control";
             $this->organizacion->EditCustomAttributes = "";
@@ -1115,6 +1115,10 @@ class Register extends Users
             $this->apellidos->LinkCustomAttributes = "";
             $this->apellidos->HrefValue = "";
 
+            // pais
+            $this->pais->LinkCustomAttributes = "";
+            $this->pais->HrefValue = "";
+
             // email
             $this->_email->LinkCustomAttributes = "";
             $this->_email->HrefValue = "";
@@ -1122,10 +1126,6 @@ class Register extends Users
             // telefono
             $this->telefono->LinkCustomAttributes = "";
             $this->telefono->HrefValue = "";
-
-            // pais
-            $this->pais->LinkCustomAttributes = "";
-            $this->pais->HrefValue = "";
 
             // organizacion
             $this->organizacion->LinkCustomAttributes = "";
@@ -1160,6 +1160,11 @@ class Register extends Users
                 $this->apellidos->addErrorMessage(str_replace("%s", $this->apellidos->caption(), $this->apellidos->RequiredErrorMessage));
             }
         }
+        if ($this->pais->Required) {
+            if (!$this->pais->IsDetailKey && EmptyValue($this->pais->FormValue)) {
+                $this->pais->addErrorMessage(str_replace("%s", $this->pais->caption(), $this->pais->RequiredErrorMessage));
+            }
+        }
         if ($this->_email->Required) {
             if (!$this->_email->IsDetailKey && EmptyValue($this->_email->FormValue)) {
                 $this->_email->addErrorMessage($Language->phrase("EnterUserName"));
@@ -1174,11 +1179,6 @@ class Register extends Users
         if ($this->telefono->Required) {
             if (!$this->telefono->IsDetailKey && EmptyValue($this->telefono->FormValue)) {
                 $this->telefono->addErrorMessage(str_replace("%s", $this->telefono->caption(), $this->telefono->RequiredErrorMessage));
-            }
-        }
-        if ($this->pais->Required) {
-            if (!$this->pais->IsDetailKey && EmptyValue($this->pais->FormValue)) {
-                $this->pais->addErrorMessage(str_replace("%s", $this->pais->caption(), $this->pais->RequiredErrorMessage));
             }
         }
         if ($this->organizacion->Required) {
@@ -1227,14 +1227,14 @@ class Register extends Users
         // apellidos
         $this->apellidos->setDbValueDef($rsnew, $this->apellidos->CurrentValue, null, false);
 
+        // pais
+        $this->pais->setDbValueDef($rsnew, $this->pais->CurrentValue, null, false);
+
         // email
         $this->_email->setDbValueDef($rsnew, $this->_email->CurrentValue, null, false);
 
         // telefono
         $this->telefono->setDbValueDef($rsnew, $this->telefono->CurrentValue, null, false);
-
-        // pais
-        $this->pais->setDbValueDef($rsnew, $this->pais->CurrentValue, null, false);
 
         // organizacion
         $this->organizacion->setDbValueDef($rsnew, $this->organizacion->CurrentValue, null, false);

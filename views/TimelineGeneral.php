@@ -99,11 +99,19 @@ $TimelineGeneral = &$Page;
 </head>
 
 <body>
-    <?php $sql_utc = ExecuteRow("SELECT p.gmt, DATE_ADD(e.fechaini_real,INTERVAL (-300 +
-(RIGHT(p.gmt,2)+60*MID(p.gmt,6,2)*1))  MINUTE)  as fechaini_real, 
-DATE_ADD(e.fechafinal_real,INTERVAL (-300 +
-(RIGHT(p.gmt,2)+60*MID(p.gmt,6,2)*1))  MINUTE)  as fechafinal_real
-, e.id_escenario FROM escenario  e INNER JOIN paisgmt p ON p.id_zone = e.pais_escenario WHERE e.estado IN ('1')");
+    <?php $sql_utc = ExecuteRow("SELECT p.gmt,
+CONVERT_TZ( fechaini_real, RIGHT(p.gmt,6), '-05:00') as fechaini_real,
+CONVERT_TZ( fechafinal_real, RIGHT(p.gmt,6), '-05:00') as	fechafinal_real,
+e.id_escenario, 
+e.nombre_escenario, 
+users.id_users,
+pu.gmt as gtmus,
+CONVERT_TZ( fechaini_real, RIGHT(p.gmt,6), RIGHT(pu.gmt,6)) as starsd 
+FROM
+escenario AS e
+INNER JOIN paisgmt AS p ON 	p.id_zone = e.pais_escenario
+INNER JOIN 	users 	ON 		e.id_escenario = users.escenario
+INNER JOIN paisgmt as pu on pu.id_zone = users.pais");
 
     $sqlGrupos = ExecuteRows("SELECT id_grupo AS id, nombre_grupo AS grupo FROM grupo g INNER JOIN escenario e ON g.id_escenario = e.id_escenario     WHERE e.estado = '1';");
 
@@ -157,7 +165,7 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = "https
 
     <!-- Modal1 -->
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalLongTitle">Editar Datos</h5>
@@ -528,6 +536,8 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = "https
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert@1.1.3/dist/sweetalert.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/sweetalert@1.1.3/dist/sweetalert.css" rel="stylesheet" type="text/css"/>
     <script>
         var btnLoad = document.getElementById('load');
         var btnSave = document.getElementById('save');
@@ -579,6 +589,7 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = "https
             maxDate: fechaFinSimulado,
             defaultDate: fechaFinSimulado,
         });
+       
         $('#fechasim_start').flatpickr({
             locale: "es",
             enableTime: true,
@@ -616,6 +627,7 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = "https
 
                         items = new vis.DataSet(data);
                         data_json = data;
+                       
 
                         console.log('data', data);
                         // Configuration for the Timeline   
@@ -653,12 +665,51 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = "https
                                 updateGroup: false, // drag items from one group to another
                                 remove: false, // delete an item by tapping the delete button top right
                                 overrideItems: false, // allow these options to override item.editable
+
+                            },
+                            onMoving: function (item, callback) {
+                                if (item.start < item.InicioRango) item.start = tem.InicioRango;
+                                if (item.start > item.FinRango) item.start = item.FinRango;
+                                if (item.endFalso   > item.FinRango) item.endFalso   = item.FinRango;
+                                //console.log("cambiando algo");
+                                callback(item); // send back the (possibly) changed item
                             },
                             onMove: function(item, callback) {
-                                $('#save').removeClass('btn btn-secondary');
-                                $("#save").prop('disabled', false);
-                                $('#save').addClass('btn btn-success');
-                                callback(item); // send back adjusted item
+                                //$('#save').removeClass('btn btn-secondary');
+                                //$("#save").prop('disabled', false);
+                                //$('#save').addClass('btn btn-success');
+                                //callback(item); // send back adjusted item
+                                //alert('¿Seguro desea mover el mensaje a:' +item.endFalso +'?'+item.start);
+                                //alert("inicio:"+Date.parse(item.InicioRango)+"nueva"+Date.parse(item.start) +"nueva:"+ Date.parse(item.start)+"fin"+Date.parse(item.FinRango));
+                                //alert("inicio:"+item.InicioRango+"nueva"+item.start +"nueva:"+ item.start+"fin"+item.FinRango);
+                                //console.log(item);
+                                if(item.id.slice(0, 1)=="M")
+                                {
+                                if(Date.parse(item.InicioRango)<=Date.parse(item.start) && Date.parse(item.start)<=Date.parse(item.FinRango))
+                                            {
+                                               
+                                                    $('#save').removeClass('btn btn-secondary');
+                                                    $("#save").prop('disabled', false);
+                                                    $('#save').addClass('btn btn-success');
+
+                                                    callback(item); // send back item as confirmation (can be changed)
+                                               
+                                      
+                                        }
+                                          else{
+                                              alert("FUERA DE LIMITE");
+                                               callback(null); // 
+                                            }
+                                        }
+                                else{
+                                    $('#save').removeClass('btn btn-secondary');
+                                                    $("#save").prop('disabled', false);
+                                                    $('#save').addClass('btn btn-success');
+
+                                                    callback(item); // send back item as confirmation (can be changed)
+                                               
+                                }
+                                        
 
                             },
                             moment: function(date) {
@@ -793,6 +844,7 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = "https
                             }
                         });
                     }
+               
                 },
                 error: function(err) {
                     console.log("Error", err);
@@ -810,6 +862,15 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = "https
 
         }
         //btnLoad.onclick = loadData;     
+        function prettyConfirm(title, text, callback) {
+            swal({
+            title: title,
+            text: text,
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55"
+            }, callback);
+        }
 
         function saveMsj() { //graba datos del item desde la modal
             id = $('#id').val();

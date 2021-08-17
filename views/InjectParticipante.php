@@ -95,6 +95,13 @@ $_SESSION['id_user'] = CurrentUserID();
     text-decoration: none;
     background-color: #28a745;
 }
+[data-toggle="collapse"] .fa:before {  
+  content: "\f139";
+}
+
+[data-toggle="collapse"].collapsed .fa:before {
+  content: "\f13a";
+}
 </style>
 
 <!-- librerias adicionales -->
@@ -103,51 +110,17 @@ $_SESSION['id_user'] = CurrentUserID();
 <link href="//unpkg.com/vis-timeline@latest/styles/vis-timeline-graph2d.min.css" rel="stylesheet" type="text/css" />
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.js"></script> -->
 
-<?php $sql_utc = ExecuteRow("SELECT p.gmt, e.fechaini_simulado, e.fechafin_simulado, e.fechaini_real, e.fechafinal_real FROM escenario  e INNER JOIN paisgmt p ON p.id_zone = e.pais_escenario WHERE e.estado IN ('1')"); ?>
+<?php $sql_utc = ExecuteRow("SELECT p.gmt, DATE_ADD(e.fechaini_real,INTERVAL ((RIGHT(p.gmt,2)+60*MID(p.gmt,6,2)*1))-300  MINUTE)  as fechaini_real, 
+DATE_ADD(e.fechafinal_real,INTERVAL ((RIGHT(p.gmt,2)+60*MID(p.gmt,6,2)*1))-300  MINUTE)  as fechafinal_real
+, e.id_escenario, e.nombre_escenario FROM escenario  e INNER JOIN paisgmt p ON p.id_zone = e.pais_escenario WHERE e.estado IN ('1')"); ?>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 
 <body>
-  <script>
-    function notifica(idDiv) {
-      // console.log(idDiv);
-      var parametros = {
-        "idDiv": idDiv
-      };
-      $.ajax({
-        data: parametros,
-        url: "",
-        type: "POST",
-        success: function(respose) {
-
-          var datos = JSON.parse(respose);
-          if (datos.cant != 0) {
-            $("#" + idDiv).html(datos.cant);
-            $("#" + idDiv).css({
-              'background': 'red'
-            });
-          } else {
-            $("#" + idDiv).html('0');
-            $("#" + idDiv).css({
-              'background': 'gray'
-            });
-          }
-        }
-      });
-    }
-
-    $(document).ready(function() {
-      //mensaje('Hola');
-
-    });
-  </script>
+ 
   <?php
   // echo "UTC: " . $sql_utc[0];
   $id_user = CurrentUserID();
   $_SESSION['id_user'] = CurrentUserID();
- 
-
-
-
 
 
   ?>
@@ -179,9 +152,9 @@ $_SESSION['id_user'] = CurrentUserID();
                 </button>
                </div>
              <div class="modal-body">
-              <div class="embed-responsive embed-responsive-16by9">
-              <iframe id="frmUrl" class="embed-responsive-item" src="media/twitter/index.php?id_user=<?php echo $id_user ?> " allowfullscreen></iframe>
-              </div>
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe id="frmUrl" class="embed-responsive-item" src="media/twitter/index.php?id_user=<?php echo $id_user ?> " allowfullscreen></iframe>
+                    </div>
             </div>
       
              </div>
@@ -224,9 +197,9 @@ $_SESSION['id_user'] = CurrentUserID();
       <input type="button" id="load" value="&darr; Load" style="display:none">
       <div id="visualization"></div>
     <div id="loading">loading...</div>
-    <p class = "small">  <em> Presione CTRL + rueda del mouse para hacer zoom </em> <br>
-<em> Para desplazarse en la línea de tiempo, mantener presionado el clic izquierdo del ratón. <br>
-Para retornar a la hora real del ejercicio presionar el ícono <img src = "https://simexamericas.org/homesimex/images/iconotimeline.png"  width="30" height="30"> <em> </p>
+    <p class = "small">  <em> Presione CTRL + rueda del mouse para hacer zoom  <br>
+Para desplazarse en la línea de tiempo, mantener presionado el clic izquierdo del ratón. <br>
+Para retornar a la hora real del ejercicio presionar el ícono <img src = "https://simexamericas.org/homesimex/images/iconotimeline.png"  width="30" height="30"> </em> </p>
 
     </div>
   </div>
@@ -263,9 +236,9 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = "https
                                     <span class="direct-chat-name float-left">{{mens.actor}}</span>
                                     <span class="direct-chat-timestamp float-right">
                                         <i class='far fa-clock text-primary'></i> 
-                                        Hora real {{mens.fstar}} <br> 
+                                        Hora real del país del ejercicio {{mens.fstar}} <br> 
                                         <i class='far fa-clock text-info'></i> 
-                                        Hora Simulada  {{mens.fstarsim}} 
+                                        Hora simulada  {{mens.fstarsim}} 
                                     </span>
                                    </div>
                     </div>
@@ -288,20 +261,17 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = "https
                         <div> 
                             <hr>
                             <!--MIGUEL Acordeon punto 148-->
-                            <div id="accordion">
-                                            <div class="card">
-                                                <div class="card-header" id="headingThree">
-                                                    <button class="btn  collapsed" data-toggle="collapse" v-bind:data-target="'#collapseThree'+mens.id" aria-expanded="false" v-bind:aria-controls="'collapseThree'+mens.id">
-                                                    <h5>Titulo mensaje: {{mens.titulo_mensaje}} </h5> 
-                                                    </button>
-                                                </div>
-                                                <div v-bind:id="'collapseThree'+mens.id" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                                                <div class="card-body">
-                                                <span v-html="mens.mensaje"></span>
-                                                </div>
-                                                </div>
+                            <a data-toggle="collapse" v-bind:href="'#descripcion'+mens.id" role="button" aria-expanded="false">
+                                    <h4>Título del mensaje:{{mens.titulo_mensaje}} <i class="fa" aria-hidden="true"></i></h4>   </a> 
+                                   
+                                    </div> 
+
+                                    <hr>
+                                    <div class="collapse" v-bind:id="'descripcion'+mens.id">
+                                            <div class="card card-body">
+                                            <span v-html="mens.mensaje"></span>
                                             </div>
-                                        </div>
+                                    </div>
                                         <!--MIGUEL fin acordeon 148-->
                             <div class="stats">
                             <i class="cil-paperclip"></i> <br>
@@ -321,7 +291,7 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = "https
                               <p><!--MIGUEL, Region Respuestas-->
                                         <a  data-toggle="collapse" v-bind:href="'#respuestas'+mens.id" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
                                             <i class="fa fa-users"></i>     
-                                            Respuestas:</a><a class="badge-danger" v-if="mens.respuestasPendientes==1">NEW</a>
+                                            Respuestas:</a><a class="badge badge-danger" v-if="mens.respuestasPendientes==1">Nuevo</a>
                                             </p>
                                            
                                             <div class="collapse multi-collapse" v-bind:id="'respuestas'+mens.id">
@@ -333,7 +303,7 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = "https
                             <hr>
                             <div class="timeline-footer">
 
-                                <a class="m-r-15 text-inverse-lighter" title="" data-caption="Enviar" v-bind:href="'/homesimex/Email2Add?IdResMsg='+mens.id" data-original-title="Enviar">
+                                <a class="m-r-15 text-inverse-lighter" title="" data-caption="Enviar" v-bind:href="'/homesimex/Email2Add/'+mens.id+'?IdResMsg='+mens.id" data-original-title="Enviar">
                                     Responder&nbsp;<i class="fa fa-reply" aria-hidden="true"></i>
 
                                 </a>│
@@ -602,6 +572,8 @@ var btnLoad = document.getElementById('load');
                 return;
             }
         }
+        document.getElementById("visualization").innerHTML="";
+        loadData();
         $.ajax({
             url: "inject/pedir_mensajecliente.php?idMensaje="+code,
             success: function (es) {

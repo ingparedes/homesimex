@@ -84,9 +84,10 @@ class Email2 extends DbTable
         $this->Fields['id_email'] = &$this->id_email;
 
         // sender_userid
-        $this->sender_userid = new DbField('email2', 'email', 'x_sender_userid', 'sender_userid', '`sender_userid`', '`sender_userid`', 200, 30, -1, false, '`EV__sender_userid`', true, true, false, 'FORMATTED TEXT', 'CHECKBOX');
+        $this->sender_userid = new DbField('email2', 'email', 'x_sender_userid', 'sender_userid', '`sender_userid`', '`sender_userid`', 200, 30, -1, false, '`EV__sender_userid`', true, true, false, 'FORMATTED TEXT', 'SELECT');
         $this->sender_userid->Required = true; // Required field
         $this->sender_userid->Sortable = true; // Allow sort
+        $this->sender_userid->SelectMultiple = true; // Multiple select
         switch ($CurrentLanguage) {
             case "en":
                 $this->sender_userid->Lookup = new Lookup('sender_userid', 'users', false, 'id_users', ["nombres","apellidos","",""], [], [], [], [], [], [], '`nombres` ASC', '');
@@ -162,7 +163,7 @@ class Email2 extends DbTable
         $this->Fields['estado_msg'] = &$this->estado_msg;
 
         // id_mensaje
-        $this->id_mensaje = new DbField('email2', 'email', 'x_id_mensaje', 'id_mensaje', '`id_mensaje`', '`id_mensaje`', 3, 11, -1, false, '`id_mensaje`', false, false, false, 'FORMATTED TEXT', 'TEXT');
+        $this->id_mensaje = new DbField('email2', 'email', 'x_id_mensaje', 'id_mensaje', '`id_mensaje`', '`id_mensaje`', 3, 11, -1, false, '`id_mensaje`', false, false, false, 'FORMATTED TEXT', 'HIDDEN');
         $this->id_mensaje->Sortable = true; // Allow sort
         $this->id_mensaje->DefaultErrorMessage = $Language->phrase("IncorrectInteger");
         $this->id_mensaje->CustomMsg = $Language->FieldPhrase($this->TableVar, $this->id_mensaje->Param, "CustomMsg");
@@ -262,7 +263,7 @@ class Email2 extends DbTable
     public function getSqlWhere() // Where
     {
         $where = ($this->SqlWhere != "") ? $this->SqlWhere : "";
-        $this->DefaultFilter = "`reciever_userid`='".CurrentUserID()."'";
+        $this->DefaultFilter = "`reciever_userid` = '".CurrentUserID()."'";
         AddFilter($where, $this->DefaultFilter);
         return $where;
     }
@@ -1235,9 +1236,7 @@ SORTHTML;
 
         // id_mensaje
         $this->id_mensaje->EditAttrs["class"] = "form-control";
-        $this->id_mensaje->EditCustomAttributes = "";
-        $this->id_mensaje->EditValue = $this->id_mensaje->CurrentValue;
-        $this->id_mensaje->PlaceHolder = RemoveHtml($this->id_mensaje->caption());
+        $this->id_mensaje->EditCustomAttributes = "hidden";
 
         // Call Row Rendered event
         $this->rowRendered();
@@ -1522,6 +1521,18 @@ SORTHTML;
     // Row Inserting event
     public function rowInserting($rsold, &$rsnew)
     {
+        
+        $sqlem = "SELECT
+                    CONVERT_TZ( NOW(),'-05:00' , RIGHT(p.gmt,6)) as realS
+                    FROM
+                    escenario AS e
+                    INNER JOIN paisgmt AS p ON 	p.id_zone = e.pais_escenario
+                    INNER JOIN 	users 	ON 		e.id_escenario = users.escenario
+                    INNER JOIN paisgmt as pu on pu.id_zone = users.pais
+                    WHERE users.id_users = '".CurrentUserInfo("id_users")."'";
+
+$infos = ExecuteRow($sqlem);
+        $rsnew['tiempo'] =$infos[0] ;
         // Enter your code here
         // To cancel, set return value to false
         return true;
@@ -1530,16 +1541,16 @@ SORTHTML;
     // Row Inserted event
     public function rowInserted($rsold, &$rsnew)
     {
+        
+
         $tmp = $rsnew['sender_userid'];
         $tmp = explode(',', $tmp);
         if (sizeof($tmp) >= 1) {
         	foreach ($tmp as &$valor) {                
             	$id_usuario = ExecuteRow("SELECT id_users FROM users WHERE grupo IN (SELECT grupo FROM users WHERE id_users = '" . CurrentUserID() . "') AND perfil = '2';");
-                $sql = Execute("INSERT INTO user_email (id_email, id_user_remitente,id_user_destinatario, id_mensaje) VALUES ('" .$rsnew['id_email']."', '" . CurrentUserID() . "','" . $valor . "','" .$rsnew['id_mensaje']."')");                
+                $sql = Execute("INSERT INTO user_email (id_email, id_user_remitente,id_user_destinatario, id_mensaje) VALUES ('" .$rsnew['id_email']."', '" . CurrentUserID() . "','" . $valor . "','0')");                
             }
-        };
-        
-        
+        }
     }
 
     // Row Updating event

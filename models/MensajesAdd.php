@@ -494,7 +494,6 @@ class MensajesAdd extends Mensajes
         $this->setupLookupOptions($this->id_tarea);
         $this->setupLookupOptions($this->id_actor);
         $this->setupLookupOptions($this->para);
-        $this->setupLookupOptions($this->adjunto);
 
         // Check modal
         if ($this->IsModal) {
@@ -626,6 +625,9 @@ class MensajesAdd extends Mensajes
     protected function getUploadFiles()
     {
         global $CurrentForm, $Language;
+        $this->adjunto->Upload->Index = $CurrentForm->Index;
+        $this->adjunto->Upload->uploadFile();
+        $this->adjunto->CurrentValue = $this->adjunto->Upload->FileName;
     }
 
     // Load default values
@@ -653,8 +655,9 @@ class MensajesAdd extends Mensajes
         $this->enviado->OldValue = $this->enviado->CurrentValue;
         $this->para->CurrentValue = null;
         $this->para->OldValue = $this->para->CurrentValue;
-        $this->adjunto->CurrentValue = null;
-        $this->adjunto->OldValue = $this->adjunto->CurrentValue;
+        $this->adjunto->Upload->DbValue = null;
+        $this->adjunto->OldValue = $this->adjunto->Upload->DbValue;
+        $this->adjunto->CurrentValue = null; // Clear file related field
         $this->dif_horaria->CurrentValue = 0;
     }
 
@@ -756,18 +759,9 @@ class MensajesAdd extends Mensajes
             }
         }
 
-        // Check field name 'adjunto' first before field var 'x_adjunto'
-        $val = $CurrentForm->hasValue("adjunto") ? $CurrentForm->getValue("adjunto") : $CurrentForm->getValue("x_adjunto");
-        if (!$this->adjunto->IsDetailKey) {
-            if (IsApi() && $val === null) {
-                $this->adjunto->Visible = false; // Disable update for API request
-            } else {
-                $this->adjunto->setFormValue($val);
-            }
-        }
-
         // Check field name 'id_inyect' first before field var 'x_id_inyect'
         $val = $CurrentForm->hasValue("id_inyect") ? $CurrentForm->getValue("id_inyect") : $CurrentForm->getValue("x_id_inyect");
+        $this->getUploadFiles(); // Get upload files
     }
 
     // Restore form values
@@ -785,7 +779,6 @@ class MensajesAdd extends Mensajes
         $this->actividad_esperada->CurrentValue = $this->actividad_esperada->FormValue;
         $this->id_actor->CurrentValue = $this->id_actor->FormValue;
         $this->para->CurrentValue = $this->para->FormValue;
-        $this->adjunto->CurrentValue = $this->adjunto->FormValue;
     }
 
     /**
@@ -846,7 +839,8 @@ class MensajesAdd extends Mensajes
         $this->id_actor->setDbValue($row['id_actor']);
         $this->enviado->setDbValue($row['enviado']);
         $this->para->setDbValue($row['para']);
-        $this->adjunto->setDbValue($row['adjunto']);
+        $this->adjunto->Upload->DbValue = $row['adjunto'];
+        $this->adjunto->setDbValue($this->adjunto->Upload->DbValue);
         $this->dif_horaria->setDbValue($row['dif_horaria']);
     }
 
@@ -866,7 +860,7 @@ class MensajesAdd extends Mensajes
         $row['id_actor'] = $this->id_actor->CurrentValue;
         $row['enviado'] = $this->enviado->CurrentValue;
         $row['para'] = $this->para->CurrentValue;
-        $row['adjunto'] = $this->adjunto->CurrentValue;
+        $row['adjunto'] = $this->adjunto->Upload->DbValue;
         $row['dif_horaria'] = $this->dif_horaria->CurrentValue;
         return $row;
     }
@@ -1038,23 +1032,10 @@ class MensajesAdd extends Mensajes
             $this->para->ViewCustomAttributes = "";
 
             // adjunto
-            $curVal = trim(strval($this->adjunto->CurrentValue));
-            if ($curVal != "") {
-                $this->adjunto->ViewValue = $this->adjunto->lookupCacheOption($curVal);
-                if ($this->adjunto->ViewValue === null) { // Lookup from database
-                    $filterWrk = "`id_file`" . SearchString("=", $curVal, DATATYPE_NUMBER, "");
-                    $sqlWrk = $this->adjunto->Lookup->getSql(false, $filterWrk, '', $this, true, true);
-                    $rswrk = Conn()->executeQuery($sqlWrk)->fetchAll(\PDO::FETCH_BOTH);
-                    $ari = count($rswrk);
-                    if ($ari > 0) { // Lookup values found
-                        $arwrk = $this->adjunto->Lookup->renderViewRow($rswrk[0]);
-                        $this->adjunto->ViewValue = $this->adjunto->displayValue($arwrk);
-                    } else {
-                        $this->adjunto->ViewValue = $this->adjunto->CurrentValue;
-                    }
-                }
+            if (!EmptyValue($this->adjunto->Upload->DbValue)) {
+                $this->adjunto->ViewValue = $this->adjunto->Upload->DbValue;
             } else {
-                $this->adjunto->ViewValue = null;
+                $this->adjunto->ViewValue = "";
             }
             $this->adjunto->ViewCustomAttributes = "";
 
@@ -1114,8 +1095,8 @@ class MensajesAdd extends Mensajes
 
             // adjunto
             $this->adjunto->LinkCustomAttributes = "";
-            if (!EmptyValue($this->adjunto->CurrentValue)) {
-                $this->adjunto->HrefValue = (!empty($this->adjunto->ViewValue) && !is_array($this->adjunto->ViewValue) ? RemoveHtml($this->adjunto->ViewValue) : $this->adjunto->CurrentValue); // Add prefix/suffix
+            if (!EmptyValue($this->adjunto->Upload->DbValue)) {
+                $this->adjunto->HrefValue = "%u"; // Add prefix/suffix
                 $this->adjunto->LinkAttrs["target"] = "_blank"; // Add target
                 if ($this->isExport()) {
                     $this->adjunto->HrefValue = FullUrl($this->adjunto->HrefValue, "href");
@@ -1123,6 +1104,7 @@ class MensajesAdd extends Mensajes
             } else {
                 $this->adjunto->HrefValue = "";
             }
+            $this->adjunto->ExportHrefValue = $this->adjunto->UploadPath . $this->adjunto->Upload->DbValue;
             $this->adjunto->TooltipValue = "";
         } elseif ($this->RowType == ROWTYPE_ADD) {
             // id_tarea
@@ -1288,27 +1270,17 @@ class MensajesAdd extends Mensajes
             // adjunto
             $this->adjunto->EditAttrs["class"] = "form-control";
             $this->adjunto->EditCustomAttributes = "";
-            $curVal = trim(strval($this->adjunto->CurrentValue));
-            if ($curVal != "") {
-                $this->adjunto->ViewValue = $this->adjunto->lookupCacheOption($curVal);
+            if (!EmptyValue($this->adjunto->Upload->DbValue)) {
+                $this->adjunto->EditValue = $this->adjunto->Upload->DbValue;
             } else {
-                $this->adjunto->ViewValue = $this->adjunto->Lookup !== null && is_array($this->adjunto->Lookup->Options) ? $curVal : null;
+                $this->adjunto->EditValue = "";
             }
-            if ($this->adjunto->ViewValue !== null) { // Load from cache
-                $this->adjunto->EditValue = array_values($this->adjunto->Lookup->Options);
-            } else { // Lookup from database
-                if ($curVal == "") {
-                    $filterWrk = "0=1";
-                } else {
-                    $filterWrk = "`id_file`" . SearchString("=", $this->adjunto->CurrentValue, DATATYPE_NUMBER, "");
-                }
-                $sqlWrk = $this->adjunto->Lookup->getSql(true, $filterWrk, '', $this, false, true);
-                $rswrk = Conn()->executeQuery($sqlWrk)->fetchAll(\PDO::FETCH_BOTH);
-                $ari = count($rswrk);
-                $arwrk = $rswrk;
-                $this->adjunto->EditValue = $arwrk;
+            if (!EmptyValue($this->adjunto->CurrentValue)) {
+                $this->adjunto->Upload->FileName = $this->adjunto->CurrentValue;
             }
-            $this->adjunto->PlaceHolder = RemoveHtml($this->adjunto->caption());
+            if ($this->isShow() || $this->isCopy()) {
+                RenderUploadField($this->adjunto);
+            }
 
             // Add refer script
 
@@ -1350,8 +1322,8 @@ class MensajesAdd extends Mensajes
 
             // adjunto
             $this->adjunto->LinkCustomAttributes = "";
-            if (!EmptyValue($this->adjunto->CurrentValue)) {
-                $this->adjunto->HrefValue = (!empty($this->adjunto->EditValue) && !is_array($this->adjunto->EditValue) ? RemoveHtml($this->adjunto->EditValue) : $this->adjunto->CurrentValue); // Add prefix/suffix
+            if (!EmptyValue($this->adjunto->Upload->DbValue)) {
+                $this->adjunto->HrefValue = "%u"; // Add prefix/suffix
                 $this->adjunto->LinkAttrs["target"] = "_blank"; // Add target
                 if ($this->isExport()) {
                     $this->adjunto->HrefValue = FullUrl($this->adjunto->HrefValue, "href");
@@ -1359,6 +1331,7 @@ class MensajesAdd extends Mensajes
             } else {
                 $this->adjunto->HrefValue = "";
             }
+            $this->adjunto->ExportHrefValue = $this->adjunto->UploadPath . $this->adjunto->Upload->DbValue;
         }
         if ($this->RowType == ROWTYPE_ADD || $this->RowType == ROWTYPE_EDIT || $this->RowType == ROWTYPE_SEARCH) { // Add/Edit/Search row
             $this->setupFieldTitles();
@@ -1431,7 +1404,7 @@ class MensajesAdd extends Mensajes
             }
         }
         if ($this->adjunto->Required) {
-            if (!$this->adjunto->IsDetailKey && EmptyValue($this->adjunto->FormValue)) {
+            if ($this->adjunto->Upload->FileName == "" && !$this->adjunto->Upload->KeepFile) {
                 $this->adjunto->addErrorMessage(str_replace("%s", $this->adjunto->caption(), $this->adjunto->RequiredErrorMessage));
             }
         }
@@ -1488,7 +1461,55 @@ class MensajesAdd extends Mensajes
         $this->para->setDbValueDef($rsnew, $this->para->CurrentValue, null, false);
 
         // adjunto
-        $this->adjunto->setDbValueDef($rsnew, $this->adjunto->CurrentValue, null, strval($this->adjunto->CurrentValue) == "");
+        if ($this->adjunto->Visible && !$this->adjunto->Upload->KeepFile) {
+            $this->adjunto->Upload->DbValue = ""; // No need to delete old file
+            if ($this->adjunto->Upload->FileName == "") {
+                $rsnew['adjunto'] = null;
+            } else {
+                $rsnew['adjunto'] = $this->adjunto->Upload->FileName;
+            }
+        }
+        if ($this->adjunto->Visible && !$this->adjunto->Upload->KeepFile) {
+            $oldFiles = EmptyValue($this->adjunto->Upload->DbValue) ? [] : explode(Config("MULTIPLE_UPLOAD_SEPARATOR"), $this->adjunto->htmlDecode(strval($this->adjunto->Upload->DbValue)));
+            if (!EmptyValue($this->adjunto->Upload->FileName)) {
+                $newFiles = explode(Config("MULTIPLE_UPLOAD_SEPARATOR"), strval($this->adjunto->Upload->FileName));
+                $NewFileCount = count($newFiles);
+                for ($i = 0; $i < $NewFileCount; $i++) {
+                    if ($newFiles[$i] != "") {
+                        $file = $newFiles[$i];
+                        $tempPath = UploadTempPath($this->adjunto, $this->adjunto->Upload->Index);
+                        if (file_exists($tempPath . $file)) {
+                            if (Config("DELETE_UPLOADED_FILES")) {
+                                $oldFileFound = false;
+                                $oldFileCount = count($oldFiles);
+                                for ($j = 0; $j < $oldFileCount; $j++) {
+                                    $oldFile = $oldFiles[$j];
+                                    if ($oldFile == $file) { // Old file found, no need to delete anymore
+                                        array_splice($oldFiles, $j, 1);
+                                        $oldFileFound = true;
+                                        break;
+                                    }
+                                }
+                                if ($oldFileFound) { // No need to check if file exists further
+                                    continue;
+                                }
+                            }
+                            $file1 = UniqueFilename($this->adjunto->physicalUploadPath(), $file); // Get new file name
+                            if ($file1 != $file) { // Rename temp file
+                                while (file_exists($tempPath . $file1) || file_exists($this->adjunto->physicalUploadPath() . $file1)) { // Make sure no file name clash
+                                    $file1 = UniqueFilename([$this->adjunto->physicalUploadPath(), $tempPath], $file1, true); // Use indexed name
+                                }
+                                rename($tempPath . $file, $tempPath . $file1);
+                                $newFiles[$i] = $file1;
+                            }
+                        }
+                    }
+                }
+                $this->adjunto->Upload->DbValue = empty($oldFiles) ? "" : implode(Config("MULTIPLE_UPLOAD_SEPARATOR"), $oldFiles);
+                $this->adjunto->Upload->FileName = implode(Config("MULTIPLE_UPLOAD_SEPARATOR"), $newFiles);
+                $this->adjunto->setDbValueDef($rsnew, $this->adjunto->Upload->FileName, null, strval($this->adjunto->CurrentValue) == "");
+            }
+        }
 
         // Call Row Inserting event
         $insertRow = $this->rowInserting($rsold, $rsnew);
@@ -1500,6 +1521,37 @@ class MensajesAdd extends Mensajes
                 $this->setFailureMessage($e->getMessage());
             }
             if ($addRow) {
+                if ($this->adjunto->Visible && !$this->adjunto->Upload->KeepFile) {
+                    $oldFiles = EmptyValue($this->adjunto->Upload->DbValue) ? [] : explode(Config("MULTIPLE_UPLOAD_SEPARATOR"), $this->adjunto->htmlDecode(strval($this->adjunto->Upload->DbValue)));
+                    if (!EmptyValue($this->adjunto->Upload->FileName)) {
+                        $newFiles = explode(Config("MULTIPLE_UPLOAD_SEPARATOR"), $this->adjunto->Upload->FileName);
+                        $newFiles2 = explode(Config("MULTIPLE_UPLOAD_SEPARATOR"), $this->adjunto->htmlDecode($rsnew['adjunto']));
+                        $newFileCount = count($newFiles);
+                        for ($i = 0; $i < $newFileCount; $i++) {
+                            if ($newFiles[$i] != "") {
+                                $file = UploadTempPath($this->adjunto, $this->adjunto->Upload->Index) . $newFiles[$i];
+                                if (file_exists($file)) {
+                                    if (@$newFiles2[$i] != "") { // Use correct file name
+                                        $newFiles[$i] = $newFiles2[$i];
+                                    }
+                                    if (!$this->adjunto->Upload->SaveToFile($newFiles[$i], true, $i)) { // Just replace
+                                        $this->setFailureMessage($Language->phrase("UploadErrMsg7"));
+                                        return false;
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        $newFiles = [];
+                    }
+                    if (Config("DELETE_UPLOADED_FILES")) {
+                        foreach ($oldFiles as $oldFile) {
+                            if ($oldFile != "" && !in_array($oldFile, $newFiles)) {
+                                @unlink($this->adjunto->oldPhysicalUploadPath() . $oldFile);
+                            }
+                        }
+                    }
+                }
             }
         } else {
             if ($this->getSuccessMessage() != "" || $this->getFailureMessage() != "") {
@@ -1519,6 +1571,8 @@ class MensajesAdd extends Mensajes
 
         // Clean upload path if any
         if ($addRow) {
+            // adjunto
+            CleanUploadTempPath($this->adjunto, $this->adjunto->Upload->Index);
         }
 
         // Write JSON for API request
@@ -1633,8 +1687,6 @@ class MensajesAdd extends Mensajes
                         return (CurrentUserInfo("perfil") == 2 ) ? "`idgrupo` = '".CurrentUserInfo("grupo")."'" : "`escenario` = '".CurrentUserInfo("escenario")."'";
                     };
                     $lookupFilter = $lookupFilter->bindTo($this);
-                    break;
-                case "x_adjunto":
                     break;
                 default:
                     $lookupFilter = "";

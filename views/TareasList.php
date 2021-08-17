@@ -86,12 +86,23 @@ loadjs.ready("head", function () {
 .ew-table-preview-row .ew-grid {
     display: table;
 }
+#Enca{
+    
+    font-weight:200;
+    font-family: "Verdana","Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
+    background-color: #40546a;
+    color:#fff;
+}
 </style>
 <div id="ew-preview" class="d-none"><!-- preview -->
     <div class="ew-nav-tabs"><!-- .ew-nav-tabs -->
         <ul class="nav nav-tabs"></ul>
         <div class="tab-content"><!-- .tab-content -->
             <div class="tab-pane fade active show"></div>
+            <!--MIGUEL Encabezado abajo-->
+           
+           
+            
         </div><!-- /.tab-content -->
     </div><!-- /.ew-nav-tabs -->
 </div><!-- /preview -->
@@ -132,7 +143,7 @@ loadjs.ready("head", function () {
 <?php
 if ($Page->DbMasterFilter != "" && $Page->getCurrentMasterTable() == "escenario") {
     if ($Page->MasterRecordExists) {
-        include_once "views/EscenarioMaster.php";
+        //include_once "views/EscenarioMaster.php";
     }
 }
 ?>
@@ -227,16 +238,6 @@ $Page->renderRow();
 <?php
 $Page->showMessage();
 ?>
-<?php
-  $id_escenario = HtmlEncode($Page->id_escenario->getSessionValue());
-  //echo CurrentUserID();
-//	$nombreescnario = ExecuteRow("SELECT nombre_escenario,DATE_FORMAT(fechaini_real, '%Y/%m/%d'), DATE_FORMAT(fechafinal_real, '%Y/%m/%d')  FROM escenario WHERE id_escenario =  = '".$id_escenario."';");
-	$escenID = ExecuteRow("SELECT DATE_FORMAT(fechaini_real, '%Y/%m/%d'), DATE_FORMAT(fechafinal_real, '%Y/%m/%d'),nombre_escenario FROM escenario WHERE id_escenario = '".$id_escenario."';");
-?>
-<div class="callout callout-primary">
-  <h4>Simulación:  <?php echo $escenID[2];  ?>  </h4>
- <p> <em> Fecha inicio real: <?php echo $escenID[1]  ?> Fecha fin real: <?php echo $escenID[0];  ?> </em></p>
-</div>
 <?php if ($Page->TotalRecords > 0 || $Page->CurrentAction) { ?>
 <div class="card ew-card ew-grid<?php if ($Page->isAddOrEdit()) { ?> ew-grid-add-edit<?php } ?> tareas">
 <?php if (!$Page->isExport()) { ?>
@@ -244,18 +245,10 @@ $Page->showMessage();
 <?php if (!$Page->isGridAdd()) { ?>
 <form name="ew-pager-form" class="form-inline ew-form ew-pager-form" action="<?= CurrentPageUrl(false) ?>">
 <?= $Page->Pager->render() ?>
-
 </form>
 <?php } ?>
 <div class="ew-list-other-options">
-<div class="btn-group btn-group-sm ew-btn-group">
-    <a class="btn btn-default ew-add-edit ew-add" title="" data-caption="Nuevo" href="/homesimex/TareasAdd?showdetail=" data-original-title="Nuevo"><i data-phrase="AddLink" class="fas fa-plus ew-icon" data-caption="Nuevo"></i></strong></strong></a></div>
-
-
-
-
-
-
+<?php $Page->OtherOptions->render("body") ?>
 </div>
 <div class="clearfix"></div>
 </div>
@@ -274,7 +267,7 @@ $Page->showMessage();
 <?php if ($Page->TotalRecords > 0 || $Page->isGridEdit()) { ?>
 <table id="tbl_tareaslist" class="table ew-table"><!-- .ew-table -->
 <thead>
-    <tr class="ew-table-header"> 
+    <tr class="ew-table-header">
 <?php
 // Header row
 $Page->RowType = ROWTYPE_HEADER;
@@ -286,7 +279,7 @@ $Page->renderListOptions();
 $Page->ListOptions->render("header", "left");
 ?>
 <?php if ($Page->id_tarea->Visible) { // id_tarea ?>
-        <th data-name="id_tarea" class="<?= $Page->id_tarea->headerCellClass() ?>"><div id="elh_tareas_id_tarea" class="tareas_id_tarea"><?= $Page->renderSort($Page->id_tarea); ?></div></th>
+        <th data-name="id_tarea" class="<?= $Page->id_tarea->headerCellClass() ?>"><div id="elh_tareas_id_tarea" class="tareas_id_tarea"><?= $Page->renderSort($Page->id_tarea) ?></div></th>
 <?php } ?>
 <?php if ($Page->id_grupo->Visible) { // id_grupo ?>
         <th data-name="id_grupo" class="<?= $Page->id_grupo->headerCellClass() ?>"><div id="elh_tareas_id_grupo" class="tareas_id_grupo"><?= $Page->renderSort($Page->id_grupo) ?></div></th>
@@ -434,6 +427,35 @@ $Page->ListOptions->render("body", "left", $Page->RowCount);
 $Page->ListOptions->render("body", "right", $Page->RowCount);
 ?>
     </tr>
+    <div >
+<?php if ($Page->id_tarea->Visible) { // id_grupo ?>
+        <th id="Enca" data-name="id_tarea" class="<?= $Page->id_tarea->headerCellClass() ?>"><div id="elh_tareas_id_tarea" class="tareas_id_tarea"><?= $Page->renderSort($Page->id_tarea) ?></div></th>
+<?php } ?>
+    <?php if ($Page->id_grupo->Visible) { // id_grupo ?>
+        <th id="Enca" data-name="id_grupo" class="<?= $Page->id_grupo->headerCellClass() ?>"><div id="elh_tareas_id_grupo" class="tareas_id_grupo"><?= $Page->renderSort($Page->id_grupo) ?></div></th>
+<?php } ?>
+<?php if ($Page->titulo_tarea->Visible) { // titulo_tarea ?>
+        <th id="Enca" data-name="titulo_tarea" class="<?= $Page->titulo_tarea->headerCellClass() ?>"><div id="elh_tareas_titulo_tarea" class="tareas_titulo_tarea"><?= $Page->renderSort($Page->titulo_tarea) ?></div></th>
+<?php } ?>
+<?php if ($Page->fechainireal_tarea->Visible) { // fechainireal_tarea ?>
+        <th id="Enca" data-name="fechainireal_tarea" class="<?= $Page->fechainireal_tarea->headerCellClass() ?>"><div id="elh_tareas_fechainireal_tarea" class="tareas_fechainireal_tarea"><?= $Page->renderSort($Page->fechainireal_tarea) ?></div></th>
+<?php } ?>
+<?php if ($Page->fechafin_tarea->Visible) { // fechafin_tarea ?>
+        <th  id="Enca" data-name="fechafin_tarea" class="<?= $Page->fechafin_tarea->headerCellClass() ?>"><div id="elh_tareas_fechafin_tarea" class="tareas_fechafin_tarea"><?= $Page->renderSort($Page->fechafin_tarea) ?></div></th>
+<?php } ?>
+<?php if ($Page->fechainisimulado_tarea->Visible) { // fechainisimulado_tarea ?>
+        <th id="Enca" data-name="fechainisimulado_tarea" class="<?= $Page->fechainisimulado_tarea->headerCellClass() ?>"><div id="elh_tareas_fechainisimulado_tarea" class="tareas_fechainisimulado_tarea"><?= $Page->renderSort($Page->fechainisimulado_tarea) ?></div></th>
+<?php } ?>
+<?php if ($Page->fechafinsimulado_tarea->Visible) { // fechafinsimulado_tarea ?>
+        <th id="Enca" data-name="fechafinsimulado_tarea" class="<?= $Page->fechafinsimulado_tarea->headerCellClass() ?>"><div id="elh_tareas_fechafinsimulado_tarea" class="tareas_fechafinsimulado_tarea"><?= $Page->renderSort($Page->fechafinsimulado_tarea) ?></div></th>
+<?php } ?>
+<?php if ($Page->fechafinsimulado_tarea->Visible) { // fechafinsimulado_tarea ?>
+        <th id="Enca" data-name="fechafinsimulado_tarea" class="<?= $Page->fechafinsimulado_tarea->headerCellClass() ?>"><div id="elh_tareas_fechafinsimulado_tarea" class="tareas_fechafinsimulado_tarea"></div></th>
+<?php } ?>
+<?php if ($Page->fechafinsimulado_tarea->Visible) { // fechafinsimulado_tarea ?>
+        <th id="Enca" data-name="fechafinsimulado_tarea" class="<?= $Page->fechafinsimulado_tarea->headerCellClass() ?>"><div id="elh_tareas_fechafinsimulado_tarea" class="tareas_fechafinsimulado_tarea"></div></th>
+<?php } ?>
+</div>
 <?php
     }
     if (!$Page->isGridAdd()) {
@@ -477,7 +499,7 @@ loadjs.ready("head", function() {
 <script>
 loadjs.ready("load", function () {
     // Startup script
-    $("#r_icon_escenario").hide(),$("#r_fechacreacion_escenario").hide(),$("#r_incidente").hide(),$("#r_entrar").hide(),$("#ftareaslistsrch").before('<div class="callout callout-info"><em>Si necesita realizar filtro al siguiente lista por favor seleccione uno o varios grupos y por ultimo clics en el  botón buscar.</em></div>');
+    $("#r_icon_escenario").hide(),$("#r_fechacreacion_escenario").hide(),$("#r_incidente").hide(),$("#r_entrar").hide(),$("#ftareaslistsrch").before('<div class="callout callout-primary"><em>Si necesita realizar filtro al siguiente lista por favor seleccione uno o varios grupos y por ultimo clics en el  botón buscar.</em></div>');
 });
 </script>
 <?php } ?>

@@ -13,8 +13,8 @@ $idUs = CurrentUserID();
 $sql_doc = "SELECT
 file_name ,
 concat('<a class=\"btn btn-default ew-row-link ew-view\" data-table=\"escenario\" href=\"PermisosDocAdd?showmaster=archivos_doc&amp;fk_id_file=',id_file,'\" ><i class=\"fa fa-list-alt\" ></i></a>') as Compartir,
-concat('<a class=\"btn btn-default ew-row-link ew-view\" data-caption=\"Ver\" href=\"/homesimex/ArchivosDocView/',id_file,'?showdetail=\" data-original-title=\"Ver\"><i data-phrase=\"ViewLink\" class=\"icon-view ew-icon\" data-caption=\"Ver\"></i></a>',
-'<a class=\"btn btn-default ew-row-link ew-delete\" onclick=\"return ew.confirmDelete(this);\" data-caption=\"Delete\" href=\"http://localhost/homesimex//ArchivosDocDelete/',id_file,'\" data-original-title=\"Delete\"><i data-phrase=\"DeleteLink\" class=\"fas fa-trash ew-icon\" data-caption=\"Delete\"></i></a>') as Control
+concat('<a class=\"btn btn-default ew-row-link ew-view\" data-caption=\"Ver\" href=\"./ArchivosDocView/',id_file,'?showdetail=\" data-original-title=\"Ver\"><i data-phrase=\"ViewLink\" class=\"icon-view ew-icon\" data-caption=\"Ver\"></i></a>',
+'<a class=\"btn btn-default ew-row-link ew-delete\" onclick=\"return ew.confirmDelete(this);\" data-caption=\"Delete\" href=\"./ArchivosDocDelete/',id_file,'\" data-original-title=\"Delete\"><i data-phrase=\"DeleteLink\" class=\"fas fa-trash ew-icon\" data-caption=\"Delete\"></i></a>') as Control
 FROM archivos_doc
 WHERE id_users =$idUs";
 $sql_docompartir = "SELECT archivos_doc.file_name,

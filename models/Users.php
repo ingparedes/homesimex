@@ -2219,7 +2219,7 @@ SORTHTML;
             $email->Recipient = $args["rsold"]["email"]; // Change recipient to a field value in the new record
             $email->Subject = "Activación de cuenta de usuario simexamericas.org "; // Change subject
             $email->Content = " Estimado usuario.<br>
-            Se activó su cuenta en simexamericas.org<br>
+            Se activó su cuenta en <a href='https://simexamericas.org/'  target=/'_blank/'>simexamericas.org</a><br>
             Le sugerimos cambiar su clave de acceso cuando ingrese a la aplicación en línea.
             <h3>Usuario: " .$args["rsold"] ["email"]. " </h3>
             <h3> Clave temporal es: ".$args["rsnew"] ["pw"]."</h3>"; 

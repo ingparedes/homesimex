@@ -43,6 +43,7 @@ while($row = mysqli_fetch_array($result))
     $fstarsim = $row['fstarsim'];
     $id=$row['id_inyect'];
     $filename = $row['file_name'];
+	$adjunto = $row['adjunto'];
 	$sq2 = "
 	SELECT
 		calificacion.descripcion
@@ -88,7 +89,8 @@ while($row = mysqli_fetch_array($result))
             "fstarsim"=> $fstarsim,
 			"calificacion"=>$calificacion,
             "id"=>intval($id),
-            "filename"=> $filename
+			"adjunto"=> $adjunto,
+			 "filename"=> $filename
 		]
 	);
 }

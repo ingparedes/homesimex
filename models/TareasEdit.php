@@ -1227,8 +1227,6 @@ class TareasEdit extends Tareas
                     $this->id_tarearelacion->ViewValue = $Language->phrase("PleaseSelect");
                 }
                 $arwrk = $rswrk;
-                foreach ($arwrk as &$row)
-                    $row = $this->id_tarearelacion->Lookup->renderViewRow($row);
                 $this->id_tarearelacion->EditValue = $arwrk;
             }
             $this->id_tarearelacion->PlaceHolder = RemoveHtml($this->id_tarearelacion->caption());
@@ -1432,25 +1430,6 @@ class TareasEdit extends Tareas
 
             // id_tarearelacion
             $this->id_tarearelacion->setDbValueDef($rsnew, $this->id_tarearelacion->CurrentValue, null, $this->id_tarearelacion->ReadOnly);
-
-            // Check referential integrity for master table 'escenario'
-            $validMasterRecord = true;
-            $masterFilter = $this->sqlMasterFilter_escenario();
-            $keyValue = $rsnew['id_escenario'] ?? $rsold['id_escenario'];
-            if (strval($keyValue) != "") {
-                $masterFilter = str_replace("@id_escenario@", AdjustSql($keyValue), $masterFilter);
-            } else {
-                $validMasterRecord = false;
-            }
-            if ($validMasterRecord) {
-                $rsmaster = Container("escenario")->loadRs($masterFilter)->fetch();
-                $validMasterRecord = $rsmaster !== false;
-            }
-            if (!$validMasterRecord) {
-                $relatedRecordMsg = str_replace("%t", "escenario", $Language->phrase("RelatedRecordRequired"));
-                $this->setFailureMessage($relatedRecordMsg);
-                return false;
-            }
 
             // Call Row Updating event
             $updateRow = $this->rowUpdating($rsold, $rsnew);

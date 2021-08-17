@@ -2225,25 +2225,6 @@ class TareasGrid extends Tareas
             // fechafinsimulado_tarea
             $this->fechafinsimulado_tarea->setDbValueDef($rsnew, UnFormatDateTime($this->fechafinsimulado_tarea->CurrentValue, 109), null, $this->fechafinsimulado_tarea->ReadOnly);
 
-            // Check referential integrity for master table 'escenario'
-            $validMasterRecord = true;
-            $masterFilter = $this->sqlMasterFilter_escenario();
-            $keyValue = $rsnew['id_escenario'] ?? $rsold['id_escenario'];
-            if (strval($keyValue) != "") {
-                $masterFilter = str_replace("@id_escenario@", AdjustSql($keyValue), $masterFilter);
-            } else {
-                $validMasterRecord = false;
-            }
-            if ($validMasterRecord) {
-                $rsmaster = Container("escenario")->loadRs($masterFilter)->fetch();
-                $validMasterRecord = $rsmaster !== false;
-            }
-            if (!$validMasterRecord) {
-                $relatedRecordMsg = str_replace("%t", "escenario", $Language->phrase("RelatedRecordRequired"));
-                $this->setFailureMessage($relatedRecordMsg);
-                return false;
-            }
-
             // Call Row Updating event
             $updateRow = $this->rowUpdating($rsold, $rsnew);
             if ($updateRow) {
@@ -2296,24 +2277,6 @@ class TareasGrid extends Tareas
         // Set up foreign key field value from Session
         if ($this->getCurrentMasterTable() == "escenario") {
             $this->id_escenario->CurrentValue = $this->id_escenario->getSessionValue();
-        }
-
-        // Check referential integrity for master table 'tareas'
-        $validMasterRecord = true;
-        $masterFilter = $this->sqlMasterFilter_escenario();
-        if ($this->id_escenario->getSessionValue() != "") {
-        $masterFilter = str_replace("@id_escenario@", AdjustSql($this->id_escenario->getSessionValue(), "DB"), $masterFilter);
-        } else {
-            $validMasterRecord = false;
-        }
-        if ($validMasterRecord) {
-            $rsmaster = Container("escenario")->loadRs($masterFilter)->fetch();
-            $validMasterRecord = $rsmaster !== false;
-        }
-        if (!$validMasterRecord) {
-            $relatedRecordMsg = str_replace("%t", "escenario", $Language->phrase("RelatedRecordRequired"));
-            $this->setFailureMessage($relatedRecordMsg);
-            return false;
         }
         $conn = $this->getConnection();
 

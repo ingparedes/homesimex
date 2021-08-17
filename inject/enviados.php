@@ -22,7 +22,9 @@ SELECT
 	tareas.id_grupo, 
 	actor_simulado.nombre_actor, 
 	IF(	actor_simulado.nombre_actor IS NULL, 'EXCON', nombre_actor) as actor,
+	mensajes.adjunto, 
 	archivos_doc.file_name
+
 FROM
 	mensajes
 	INNER JOIN
@@ -66,6 +68,7 @@ while($row = mysqli_fetch_array($result))
     $fstar=$row['fstar'];
     $fstarsim = $row['fstarsim'];
 	$filename =  $row['file_name'];
+	$adjunto =  $row['adjunto'];
     $id=$row['id_inyect'];
     $sq2 = "
 	SELECT
@@ -113,6 +116,7 @@ while($row = mysqli_fetch_array($result))
 			"fstar"=> $fstar,
             "fstarsim"=> $fstarsim,
 			"filename"=> $filename,
+			"adjunto"=> $adjunto,
 			"calificacion"=>$calificacion,
 			"id"=> intval($id)
 

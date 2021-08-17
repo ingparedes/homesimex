@@ -38,14 +38,14 @@ class EscenarioView extends Escenario
     public $ExportPrintUrl;
     public $ExportHtmlUrl;
     public $ExportExcelUrl;
-    public $ExportWordUrl;
+    //public $ExportWordUrl;
     public $ExportXmlUrl;
     public $ExportCsvUrl;
     public $ExportPdfUrl;
 
     // Custom export
     public $ExportExcelCustom = true;
-    public $ExportWordCustom = true;
+    //public $ExportWordCustom = true;
     public $ExportPdfCustom = true;
     public $ExportEmailCustom = true;
 
@@ -175,7 +175,7 @@ class EscenarioView extends Escenario
         $this->ExportPrintUrl = $pageUrl . "export=print";
         $this->ExportHtmlUrl = $pageUrl . "export=html";
         $this->ExportExcelUrl = $pageUrl . "export=excel";
-        $this->ExportWordUrl = $pageUrl . "export=word";
+       // $this->ExportWordUrl = $pageUrl . "export=word";
         $this->ExportXmlUrl = $pageUrl . "export=xml";
         $this->ExportCsvUrl = $pageUrl . "export=csv";
         $this->ExportPdfUrl = $pageUrl . "export=pdf";
@@ -573,15 +573,15 @@ class EscenarioView extends Escenario
         if (Config("USE_PHPEXCEL")) {
             $this->ExportExcelCustom = false;
         }
-        if (Config("USE_PHPWORD")) {
-            $this->ExportWordCustom = false;
-        }
+        //if (Config("USE_PHPWORD")) {
+          //  $this->ExportWordCustom = false;
+        //}
         if ($this->ExportExcelCustom) {
             $this->ExportExcelUrl .= "&amp;custom=1";
         }
-        if ($this->ExportWordCustom) {
-            $this->ExportWordUrl .= "&amp;custom=1";
-        }
+        //if ($this->ExportWordCustom) {
+          //  $this->ExportWordUrl .= "&amp;custom=1";
+//        }
         if ($this->ExportPdfCustom) {
             $this->ExportPdfUrl .= "&amp;custom=1";
         }
@@ -1403,12 +1403,12 @@ class EscenarioView extends Escenario
             } else {
                 return "<a href=\"" . $this->ExportExcelUrl . "\" class=\"ew-export-link ew-excel\" title=\"" . HtmlEncode($Language->phrase("ExportToExcelText")) . "\" data-caption=\"" . HtmlEncode($Language->phrase("ExportToExcelText")) . "\">" . $Language->phrase("ExportToExcel") . "</a>";
             }
-        } elseif (SameText($type, "word")) {
-            if ($custom) {
-                return "<a href=\"#\" class=\"ew-export-link ew-word\" title=\"" . HtmlEncode($Language->phrase("ExportToWordText")) . "\" data-caption=\"" . HtmlEncode($Language->phrase("ExportToWordText")) . "\" onclick=\"return ew.export(document.fescenarioview, '" . $this->ExportWordUrl . "', 'word', true);\">" . $Language->phrase("ExportToWord") . "</a>";
-            } else {
-                return "<a href=\"" . $this->ExportWordUrl . "\" class=\"ew-export-link ew-word\" title=\"" . HtmlEncode($Language->phrase("ExportToWordText")) . "\" data-caption=\"" . HtmlEncode($Language->phrase("ExportToWordText")) . "\">" . $Language->phrase("ExportToWord") . "</a>";
-            }
+       // } //elseif (SameText($type, "word")) {
+            //if ($custom) {
+              //  return "<a href=\"#\" class=\"ew-export-link ew-word\" title=\"" . HtmlEncode($Language->phrase("ExportToWordText")) . "\" data-caption=\"" . HtmlEncode($Language->phrase("ExportToWordText")) . "\" onclick=\"return ew.export(document.fescenarioview, '" . $this->ExportWordUrl . "', 'word', true);\">" . $Language->phrase("ExportToWord") . "</a>";
+            //} else {
+              //  return "<a href=\"" . $this->ExportWordUrl . "\" class=\"ew-export-link ew-word\" title=\"" . HtmlEncode($Language->phrase("ExportToWordText")) . "\" data-caption=\"" . HtmlEncode($Language->phrase("ExportToWordText")) . "\">" . $Language->phrase("ExportToWord") . "</a>";
+            //}
         } elseif (SameText($type, "pdf")) {
             if ($custom) {
                 return "<a href=\"#\" class=\"ew-export-link ew-pdf\" title=\"" . HtmlEncode($Language->phrase("ExportToPDFText")) . "\" data-caption=\"" . HtmlEncode($Language->phrase("ExportToPDFText")) . "\" onclick=\"return ew.export(document.fescenarioview, '" . $this->ExportPdfUrl . "', 'pdf', true);\">" . $Language->phrase("ExportToPDF") . "</a>";
@@ -1445,9 +1445,9 @@ class EscenarioView extends Escenario
         $item->Visible = false;
 
         // Export to Word
-        $item = &$this->ExportOptions->add("word");
-        $item->Body = $this->getExportTag("word", $this->ExportWordCustom);
-        $item->Visible = true;
+        //$item = &$this->ExportOptions->add("word");
+        //$item->Body = $this->getExportTag("word", $this->ExportWordCustom);
+        //$item->Visible = true;
 
         // Export to Html
         $item = &$this->ExportOptions->add("html");

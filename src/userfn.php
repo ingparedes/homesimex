@@ -63,16 +63,35 @@ $ape = CurrentUserInfo("apellidos");
 $imgs = CurrentUserInfo("img_user");
 $idu = CurrentUserID("id_users");
 $UserPer = CurrentUserInfo("perfil");
+$usrpais = CurrentUserInfo("pais");
 $UserPermissionValue = ExecuteScalar("SELECT UserLevelName FROM userlevels WHERE UserLevelID = " . $UserPer);
 $UserGrupo = CurrentUserInfo("grupo"); 
 $UserG = ExecuteScalar("SELECT nombre_grupo FROM grupo WHERE id_grupo =" . $UserGrupo);
-$fe = date("Y/m/d");
+$fesc = ExecuteRow("SELECT DATE_FORMAT(e.fechaini_real, '%Y/%m/%d'), DATE_FORMAT(e.fechafinal_real,'%Y/%m/%d') FROM escenario  e INNER JOIN paisgmt p ON p.id_zone = e.pais_escenario INNER JOIN users u ON e.id_escenario = u.escenario WHERE e.estado = 1;");
+$timez = ExecuteScalar("SELECT p.timezone FROM paisgmt p WHERE  p.id_zone = '".$usrpais."';");
 $hsimula = ExecuteRow("
-SELECT 	DATE_FORMAT(fechareal_start, '%H:%i')as hora, 	DATE_FORMAT(fechareal_start, '%Y/%m/%d')as fecha
-FROM mensajes INNER JOIN 	tareas 	ON  mensajes.id_tarea = tareas.id_tarea	
-	WHERE tareas.id_grupo = ".$UserGrupo." and enviado = 1
-	ORDER BY fechareal_start DESC limit 1");
+SELECT 	DATE_FORMAT(fechasim_start, '%H:%i')as hora, 	DATE_FORMAT(fechasim_start, '%Y/%m/%d')as fecha
+FROM mensajes INNER JOIN 	tareas 	ON  mensajes.id_tarea = tareas.id_tarea	 
+	WHERE tareas.id_grupo = ".$UserGrupo." and enviado = 1 
+	ORDER BY fechareal_start DESC limit 1 ");
 //
+if (!empty($hsimula[0]))
+{$hsimu0 = $hsimula[0];
+$hsimu1 = $hsimula[1];
+} else{
+$hsimu0 = '00:00:00';
+$hsimu1 = '0000/00/00';
+}
+
+$fe0 = date("Y/m/d");
+
+
+if (!empty($fesc[1]))
+{$fe1 = $fe0 = date("Y/m/d");
+} else{
+$fe1 = '0000/00/00';
+}
+
  if (!empty($imgs))
 {$fotos = $imgs;}
 else
@@ -99,29 +118,28 @@ else
         </div>", "/homesimex/UsersList", -1, "", IsLoggedIn());
         
         $menu->moveItem("Simulaciones", $menu->Count() - 1); // Move to last
-        $menu->moveItem("Control Excon", $menu->Count() - 1); // Move to last
+        $menu->moveItem("Tablero Simulación EXCON", $menu->Count() - 1); // Move to last
         $menu->moveItem("Pizarra", $menu->Count() - 1); // Move to last
-         $menu->moveItem("Linea de tiempo total", $menu->Count() - 1); // Move to last
-        $menu->moveItem("Linea de tiempo grupo", $menu->Count() - 1); // Move to last
-        $menu->moveItem("Control", $menu->Count() - 1); // Move to last
-        $menu->moveItem("Control Excon", $menu->Count() - 1); // Move to last
+        $menu->moveItem("Tablero", $menu->Count() - 1); // Move to last
+        $menu->moveItem("Linea de tiempo total", $menu->Count() - 1); // Move to last
+        $menu->moveItem("Linea de tiempo EXCON", $menu->Count() - 1); // Move to last
         $menu->moveItem("Mymail", $menu->Count() - 1); // Move to last
         $menu->moveItem("Chat", $menu->Count() - 1); // Move to last
         $menu->moveItem("Multimedia", $menu->Count() - 1); // Move to last
         $menu->moveItem("Documentos", $menu->Count() - 1); // Move to
         $menu->moveItem("Administrador tareas", $menu->Count() - 1); // Move to last
         $menu->moveItem("Usuarios", $menu->Count() - 1); // Move to last
-        $menu->moveItem("Configuraci贸n", $menu->Count() - 1); // Move to last
+        $menu->moveItem("Configuración", $menu->Count() - 1); // Move to last
     };
   if ($menu->Id == "navbar") { // Sidebar menu or change from "menu" to "navbar" for top menu
   	$menu->addMenuItem(456, "usuario", "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" , "#", -1, "", IsLoggedIn());
   	$menu->addMenuItem(457, "usuario", "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" , "#", -1, "", IsLoggedIn());
   	$menu->addMenuItem(455, "usuario", "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" , "#", -1, "", IsLoggedIn());
-    $menu->addMenuItem(459, "usuario", "<div class='border rounded bg-light col-sm-12'> <span class='info-box-icon'><i class='cil-clock'></i></span> <small class='text-center'> Hora local del Usuario </small> <h5 > <div class='text-center' style='line-height:10px' id='clocklocal'></div> </h5> <h6 class='text-center' style='line-height:10px'> $fe </h6>  </div>" , "#", -1, "", IsLoggedIn());
-    $menu->addMenuItem(458, "usuario", "<div class='border rounded bg-light col-sm-12'> <span class='info-box-icon'><i class='cil-clock'></i></span> <small class='text-center'> Hora real del pa&iacute;s del ejercico</small> <h5> <div class='text-center' style='line-height:10px' id='clockreal'></div> </h5>  <h6 class='text-center' style='line-height:10px'> $fe </h6>  </div>" , "#", -1, "", IsLoggedIn());
-    $menu->addMenuItem(460, "usuario", " <div class='border rounded bg-light col-sm-12'> <span class='info-box-icon'><i class='cil-clock'></i></span> <small class='text-center'> Hora de salto de tiempo</small> <h5 > <div class='text-center' style='line-height:10px'> 08:25:15</div> </h5> <h6 class='text-center' style='line-height:10px'> $fe </h6>  </div>" , "#", -1, "", IsLoggedIn());
+    $menu->addMenuItem(459, "usuario", "<div class='border rounded bg-light col-sm-12'> <span class='info-box-icon'><i class='cil-clock'></i></span> <small class='text-center'> Hora local del Usuario </small> <h5 > <div class='text-center' style='line-height:10px'   id='clocklocal'></div> </h5> <h6 class='text-center' style='line-height:10px'> $fe0 </h6>  </div>" , "#", -1, "", IsLoggedIn());
+    $menu->addMenuItem(458, "usuario", "<div class='border rounded bg-light col-sm-12'> <span class='info-box-icon'><i class='cil-clock'></i></span> <small class='text-center'> Hora real del pa&iacute;s del ejercicio</small> <h5> <div class='text-center' style='line-height:10px' id='clockreal'></div> </h5>  <h6 class='text-center' style='line-height:10px'> $fe1 </h6>  </div>" , "#", -1, "", IsLoggedIn());
+    $menu->addMenuItem(460, "usuario", " <div class='border rounded bg-light col-sm-12'> <span class='info-box-icon'><i class='cil-clock'></i></span> <small class='text-center'> Hora simulada</small> <h5 > <div class='text-center' style='line-height:10px'> $hsimu0 </div> </h5> <h6 class='text-center' style='line-height:10px'> $hsimu1  </h6>  </div>" , "#", -1, "", IsLoggedIn());
 
-
+                
    }
 }
 
@@ -136,15 +154,18 @@ function Page_Loading()
         global $EW_XSS_ARRAY;
     $EW_XSS_ARRAY = array_diff($EW_XSS_ARRAY, array("<embed", "<object", "<iframe", "<frame", "<frameset"));
 $uID = CurrentUserID();
-$sqlutescenario = ExecuteScalar("SELECT p.gmt, e.fechaini_simulado, e.fechafin_simulado, e.fechaini_real, e.fechafinal_real FROM escenario  e INNER JOIN paisgmt p ON p.id_zone = e.pais_escenario WHERE e.estado IN ('1')");
+$sqlutescenario = ExecuteScalar("SELECT IF(e.estado = '1', p.gmt ,'') as uno FROM escenario  e INNER JOIN paisgmt p ON p.id_zone = e.pais_escenario WHERE e.estado = '1'");
+
 $sqlutcuser = ExecuteScalar("SELECT paisgmt.gmt FROM users LEFT JOIN paisgmt ON users.pais = paisgmt.id_zone WHERE id_users ='".$uID."'");
-if ((!empty($sqlutcuser)) && (!empty($sqlutescenario))){
-SetClientVar("sqlutc",$sqlutescenario);
-SetClientVar("sqlutcuser",$sqlutcuser);
+
+
+if (!empty($sqlutescenario)){
+    SetClientVar("sqlutc",$sqlutescenario);
+    SetClientVar("sqlutcuser",$sqlutcuser);
 }
 else{
-SetClientVar("sqlutc",'UTC +01:00');
-SetClientVar("sqlutcuser",'UTC +01:00');
+SetClientVar("sqlutc",'UTC +00:00');
+SetClientVar("sqlutcuser",$sqlutcuser);
 }
  $_SESSION['userid'] = CurrentUserID();
 }

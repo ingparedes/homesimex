@@ -68,7 +68,7 @@ loadjs.ready("head", function () {
 <?php
 if ($Page->DbMasterFilter != "" && $Page->getCurrentMasterTable() == "escenario") {
     if ($Page->MasterRecordExists) {
-        include_once "views/EscenarioMaster.php";
+      //  include_once "views/EscenarioMaster.php";
     }
 }
 ?>

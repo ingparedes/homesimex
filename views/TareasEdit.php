@@ -107,6 +107,9 @@ loadjs.ready("head", function () {
 });
 </script>
 <?php $Page->showPageHeader(); ?>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="../js/flatpickr.js" charset="uft-8"></script>
+<script src="../js/flatpickr-locale-es.js" charset="uft-8"></script>
 <?php
 $Page->showMessage();
 ?>
@@ -123,44 +126,44 @@ $Page->showMessage();
 <input type="hidden" name="<?= Config("TABLE_SHOW_MASTER") ?>" value="escenario">
 <input type="hidden" name="fk_id_escenario" value="<?= HtmlEncode($Page->id_escenario->getSessionValue()) ?>">
 <?php } ?>
-<div class="ew-edit-div d-none"><!-- page* -->
+<div class="ew-edit-div"><!-- page* -->
 <?php if ($Page->id_tarea->Visible) { // id_tarea ?>
-    <div id="r_id_tarea" class="form-group row">
-        <label id="elh_tareas_id_tarea" class="<?= $Page->LeftColumnClass ?>"><template id="tpc_tareas_id_tarea"><?= $Page->id_tarea->caption() ?><?= $Page->id_tarea->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></template></label>
+    <div id="r_id_tarea" class="form-group">
+       
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->id_tarea->cellAttributes() ?>>
-<template id="tpx_tareas_id_tarea"><span id="el_tareas_id_tarea">
+<span id="el_tareas_id_tarea">
 <span<?= $Page->id_tarea->viewAttributes() ?>>
-<input type="text" readonly class="form-control-plaintext" value="<?= HtmlEncode(RemoveHtml($Page->id_tarea->getDisplayValue($Page->id_tarea->EditValue))) ?>"></span>
-</span></template>
+<input type="hidden" readonly class="form-control-plaintext" value="<?= HtmlEncode(RemoveHtml($Page->id_tarea->getDisplayValue($Page->id_tarea->EditValue))) ?>"></span>
+</span>
 <input type="hidden" data-table="tareas" data-field="x_id_tarea" data-hidden="1" name="x_id_tarea" id="x_id_tarea" value="<?= HtmlEncode($Page->id_tarea->CurrentValue) ?>">
 </div></div>
     </div>
 <?php } ?>
 <?php if ($Page->id_escenario->Visible) { // id_escenario ?>
-    <div id="r_id_escenario" class="form-group row">
-        <label id="elh_tareas_id_escenario" for="x_id_escenario" class="<?= $Page->LeftColumnClass ?>"><template id="tpc_tareas_id_escenario"><?= $Page->id_escenario->caption() ?><?= $Page->id_escenario->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></template></label>
+    <div id="r_id_escenario" class="form-group">
+       
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->id_escenario->cellAttributes() ?>>
 <?php if ($Page->id_escenario->getSessionValue() != "") { ?>
-<template id="tpx_tareas_id_escenario"><span id="el_tareas_id_escenario">
+<span id="el_tareas_id_escenario">
 <span<?= $Page->id_escenario->viewAttributes() ?>>
-<input type="text" readonly class="form-control-plaintext" value="<?= HtmlEncode(RemoveHtml($Page->id_escenario->getDisplayValue($Page->id_escenario->ViewValue))) ?>"></span>
-</span></template>
+<input type="hidden" readonly class="form-control-plaintext" value="<?= HtmlEncode(RemoveHtml($Page->id_escenario->getDisplayValue($Page->id_escenario->ViewValue))) ?>"></span>
+</span>
 <input type="hidden" id="x_id_escenario" name="x_id_escenario" value="<?= HtmlEncode($Page->id_escenario->CurrentValue) ?>" data-hidden="1">
 <?php } else { ?>
-<template id="tpx_tareas_id_escenario"><span id="el_tareas_id_escenario">
+<span id="el_tareas_id_escenario">
 <input type="<?= $Page->id_escenario->getInputTextType() ?>" data-table="tareas" data-field="x_id_escenario" name="x_id_escenario" id="x_id_escenario" size="30" placeholder="<?= HtmlEncode($Page->id_escenario->getPlaceHolder()) ?>" value="<?= $Page->id_escenario->EditValue ?>"<?= $Page->id_escenario->editAttributes() ?> aria-describedby="x_id_escenario_help">
 <?= $Page->id_escenario->getCustomMessage() ?>
 <div class="invalid-feedback"><?= $Page->id_escenario->getErrorMessage() ?></div>
-</span></template>
+</span>
 <?php } ?>
 </div></div>
     </div>
 <?php } ?>
 <?php if ($Page->id_grupo->Visible) { // id_grupo ?>
-    <div id="r_id_grupo" class="form-group row">
-        <label id="elh_tareas_id_grupo" class="<?= $Page->LeftColumnClass ?>"><template id="tpc_tareas_id_grupo"><?= $Page->id_grupo->caption() ?><?= $Page->id_grupo->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></template></label>
+    <div id="r_id_grupo" class="form-group">
+        <label id="elh_tareas_id_grupo" class="<?= $Page->LeftColumnClass ?>"><?= $Page->id_grupo->caption() ?><?= $Page->id_grupo->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->id_grupo->cellAttributes() ?>>
-<template id="tpx_tareas_id_grupo"><span id="el_tareas_id_grupo">
+<span id="el_tareas_id_grupo">
 <template id="tp_x_id_grupo">
     <div class="custom-control custom-checkbox">
         <input type="checkbox" class="custom-control-input" data-table="tareas" data-field="x_id_grupo" name="x_id_grupo" id="x_id_grupo"<?= $Page->id_grupo->editAttributes() ?>>
@@ -185,27 +188,27 @@ $Page->showMessage();
 <?= $Page->id_grupo->getCustomMessage() ?>
 <div class="invalid-feedback"><?= $Page->id_grupo->getErrorMessage() ?></div>
 <?= $Page->id_grupo->Lookup->getParamTag($Page, "p_x_id_grupo") ?>
-</span></template>
+</span>
 </div></div>
     </div>
 <?php } ?>
 <?php if ($Page->titulo_tarea->Visible) { // titulo_tarea ?>
-    <div id="r_titulo_tarea" class="form-group row">
-        <label id="elh_tareas_titulo_tarea" for="x_titulo_tarea" class="<?= $Page->LeftColumnClass ?>"><template id="tpc_tareas_titulo_tarea"><?= $Page->titulo_tarea->caption() ?><?= $Page->titulo_tarea->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></template></label>
+    <div id="r_titulo_tarea" class="form-group">
+        <label id="elh_tareas_titulo_tarea" for="x_titulo_tarea" class="<?= $Page->LeftColumnClass ?>"><?= $Page->titulo_tarea->caption() ?><?= $Page->titulo_tarea->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->titulo_tarea->cellAttributes() ?>>
-<template id="tpx_tareas_titulo_tarea"><span id="el_tareas_titulo_tarea">
+<span id="el_tareas_titulo_tarea">
 <input type="<?= $Page->titulo_tarea->getInputTextType() ?>" data-table="tareas" data-field="x_titulo_tarea" name="x_titulo_tarea" id="x_titulo_tarea" size="100" maxlength="100" placeholder="<?= HtmlEncode($Page->titulo_tarea->getPlaceHolder()) ?>" value="<?= $Page->titulo_tarea->EditValue ?>"<?= $Page->titulo_tarea->editAttributes() ?> aria-describedby="x_titulo_tarea_help">
 <?= $Page->titulo_tarea->getCustomMessage() ?>
 <div class="invalid-feedback"><?= $Page->titulo_tarea->getErrorMessage() ?></div>
-</span></template>
+</span>
 </div></div>
     </div>
 <?php } ?>
 <?php if ($Page->descripcion_tarea->Visible) { // descripcion_tarea ?>
-    <div id="r_descripcion_tarea" class="form-group row">
-        <label id="elh_tareas_descripcion_tarea" class="<?= $Page->LeftColumnClass ?>"><template id="tpc_tareas_descripcion_tarea"><?= $Page->descripcion_tarea->caption() ?><?= $Page->descripcion_tarea->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></template></label>
+    <div id="r_descripcion_tarea" class="form-group">
+        <label id="elh_tareas_descripcion_tarea" class="<?= $Page->LeftColumnClass ?>"><?= $Page->descripcion_tarea->caption() ?><?= $Page->descripcion_tarea->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->descripcion_tarea->cellAttributes() ?>>
-<template id="tpx_tareas_descripcion_tarea"><span id="el_tareas_descripcion_tarea">
+<span id="el_tareas_descripcion_tarea">
 <?php $Page->descripcion_tarea->EditAttrs->appendClass("editor"); ?>
 <textarea data-table="tareas" data-field="x_descripcion_tarea" name="x_descripcion_tarea" id="x_descripcion_tarea" cols="50" rows="4" placeholder="<?= HtmlEncode($Page->descripcion_tarea->getPlaceHolder()) ?>"<?= $Page->descripcion_tarea->editAttributes() ?> aria-describedby="x_descripcion_tarea_help"><?= $Page->descripcion_tarea->EditValue ?></textarea>
 <?= $Page->descripcion_tarea->getCustomMessage() ?>
@@ -215,63 +218,63 @@ loadjs.ready(["ftareasedit", "editor"], function() {
 	ew.createEditor("ftareasedit", "x_descripcion_tarea", 50, 4, <?= $Page->descripcion_tarea->ReadOnly || false ? "true" : "false" ?>);
 });
 </script>
-</span></template>
+</span>
 </div></div>
     </div>
 <?php } ?>
 <?php if ($Page->fechainireal_tarea->Visible) { // fechainireal_tarea ?>
-    <div id="r_fechainireal_tarea" class="form-group row">
-        <label id="elh_tareas_fechainireal_tarea" for="x_fechainireal_tarea" class="<?= $Page->LeftColumnClass ?>"><template id="tpc_tareas_fechainireal_tarea"><?= $Page->fechainireal_tarea->caption() ?><?= $Page->fechainireal_tarea->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></template></label>
+    <div id="r_fechainireal_tarea" class="form-group">
+        <label id="elh_tareas_fechainireal_tarea" for="x_fechainireal_tarea" class="<?= $Page->LeftColumnClass ?>"><?= $Page->fechainireal_tarea->caption() ?><?= $Page->fechainireal_tarea->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->fechainireal_tarea->cellAttributes() ?>>
-<template id="tpx_tareas_fechainireal_tarea"><span id="el_tareas_fechainireal_tarea">
+<span id="el_tareas_fechainireal_tarea">
 <input type="<?= $Page->fechainireal_tarea->getInputTextType() ?>" data-table="tareas" data-field="x_fechainireal_tarea" data-format="109" name="x_fechainireal_tarea" id="x_fechainireal_tarea" placeholder="<?= HtmlEncode($Page->fechainireal_tarea->getPlaceHolder()) ?>" value="<?= $Page->fechainireal_tarea->EditValue ?>"<?= $Page->fechainireal_tarea->editAttributes() ?> aria-describedby="x_fechainireal_tarea_help">
 <?= $Page->fechainireal_tarea->getCustomMessage() ?>
 <div class="invalid-feedback"><?= $Page->fechainireal_tarea->getErrorMessage() ?></div>
-</span></template>
+</span>
 </div></div>
     </div>
 <?php } ?>
 <?php if ($Page->fechafin_tarea->Visible) { // fechafin_tarea ?>
-    <div id="r_fechafin_tarea" class="form-group row">
-        <label id="elh_tareas_fechafin_tarea" for="x_fechafin_tarea" class="<?= $Page->LeftColumnClass ?>"><template id="tpc_tareas_fechafin_tarea"><?= $Page->fechafin_tarea->caption() ?><?= $Page->fechafin_tarea->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></template></label>
+    <div id="r_fechafin_tarea" class="form-group">
+        <label id="elh_tareas_fechafin_tarea" for="x_fechafin_tarea" class="<?= $Page->LeftColumnClass ?>"><?= $Page->fechafin_tarea->caption() ?><?= $Page->fechafin_tarea->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->fechafin_tarea->cellAttributes() ?>>
-<template id="tpx_tareas_fechafin_tarea"><span id="el_tareas_fechafin_tarea">
+<span id="el_tareas_fechafin_tarea">
 <input type="<?= $Page->fechafin_tarea->getInputTextType() ?>" data-table="tareas" data-field="x_fechafin_tarea" data-format="109" name="x_fechafin_tarea" id="x_fechafin_tarea" placeholder="<?= HtmlEncode($Page->fechafin_tarea->getPlaceHolder()) ?>" value="<?= $Page->fechafin_tarea->EditValue ?>"<?= $Page->fechafin_tarea->editAttributes() ?> aria-describedby="x_fechafin_tarea_help">
 <?= $Page->fechafin_tarea->getCustomMessage() ?>
 <div class="invalid-feedback"><?= $Page->fechafin_tarea->getErrorMessage() ?></div>
-</span></template>
+</span>
 </div></div>
     </div>
 <?php } ?>
 <?php if ($Page->fechainisimulado_tarea->Visible) { // fechainisimulado_tarea ?>
-    <div id="r_fechainisimulado_tarea" class="form-group row">
-        <label id="elh_tareas_fechainisimulado_tarea" for="x_fechainisimulado_tarea" class="<?= $Page->LeftColumnClass ?>"><template id="tpc_tareas_fechainisimulado_tarea"><?= $Page->fechainisimulado_tarea->caption() ?><?= $Page->fechainisimulado_tarea->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></template></label>
+    <div id="r_fechainisimulado_tarea" class="form-group">
+        <label id="elh_tareas_fechainisimulado_tarea" for="x_fechainisimulado_tarea" class="<?= $Page->LeftColumnClass ?>"><?= $Page->fechainisimulado_tarea->caption() ?><?= $Page->fechainisimulado_tarea->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->fechainisimulado_tarea->cellAttributes() ?>>
-<template id="tpx_tareas_fechainisimulado_tarea"><span id="el_tareas_fechainisimulado_tarea">
+<span id="el_tareas_fechainisimulado_tarea">
 <input type="<?= $Page->fechainisimulado_tarea->getInputTextType() ?>" data-table="tareas" data-field="x_fechainisimulado_tarea" data-format="109" name="x_fechainisimulado_tarea" id="x_fechainisimulado_tarea" placeholder="<?= HtmlEncode($Page->fechainisimulado_tarea->getPlaceHolder()) ?>" value="<?= $Page->fechainisimulado_tarea->EditValue ?>"<?= $Page->fechainisimulado_tarea->editAttributes() ?> aria-describedby="x_fechainisimulado_tarea_help">
 <?= $Page->fechainisimulado_tarea->getCustomMessage() ?>
 <div class="invalid-feedback"><?= $Page->fechainisimulado_tarea->getErrorMessage() ?></div>
-</span></template>
+</span>
 </div></div>
     </div>
 <?php } ?>
 <?php if ($Page->fechafinsimulado_tarea->Visible) { // fechafinsimulado_tarea ?>
-    <div id="r_fechafinsimulado_tarea" class="form-group row">
-        <label id="elh_tareas_fechafinsimulado_tarea" for="x_fechafinsimulado_tarea" class="<?= $Page->LeftColumnClass ?>"><template id="tpc_tareas_fechafinsimulado_tarea"><?= $Page->fechafinsimulado_tarea->caption() ?><?= $Page->fechafinsimulado_tarea->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></template></label>
+    <div id="r_fechafinsimulado_tarea" class="form-group">
+        <label id="elh_tareas_fechafinsimulado_tarea" for="x_fechafinsimulado_tarea" class="<?= $Page->LeftColumnClass ?>"><?= $Page->fechafinsimulado_tarea->caption() ?><?= $Page->fechafinsimulado_tarea->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->fechafinsimulado_tarea->cellAttributes() ?>>
-<template id="tpx_tareas_fechafinsimulado_tarea"><span id="el_tareas_fechafinsimulado_tarea">
+<span id="el_tareas_fechafinsimulado_tarea">
 <input type="<?= $Page->fechafinsimulado_tarea->getInputTextType() ?>" data-table="tareas" data-field="x_fechafinsimulado_tarea" data-format="109" name="x_fechafinsimulado_tarea" id="x_fechafinsimulado_tarea" placeholder="<?= HtmlEncode($Page->fechafinsimulado_tarea->getPlaceHolder()) ?>" value="<?= $Page->fechafinsimulado_tarea->EditValue ?>"<?= $Page->fechafinsimulado_tarea->editAttributes() ?> aria-describedby="x_fechafinsimulado_tarea_help">
 <?= $Page->fechafinsimulado_tarea->getCustomMessage() ?>
 <div class="invalid-feedback"><?= $Page->fechafinsimulado_tarea->getErrorMessage() ?></div>
-</span></template>
+</span>
 </div></div>
     </div>
 <?php } ?>
 <?php if ($Page->id_tarearelacion->Visible) { // id_tarearelacion ?>
-    <div id="r_id_tarearelacion" class="form-group row">
-        <label id="elh_tareas_id_tarearelacion" for="x_id_tarearelacion" class="<?= $Page->LeftColumnClass ?>"><template id="tpc_tareas_id_tarearelacion"><?= $Page->id_tarearelacion->caption() ?><?= $Page->id_tarearelacion->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></template></label>
+    <div id="r_id_tarearelacion" class="form-group">
+        <label id="elh_tareas_id_tarearelacion" for="x_id_tarearelacion" class="<?= $Page->LeftColumnClass ?>"><?= $Page->id_tarearelacion->caption() ?><?= $Page->id_tarearelacion->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->id_tarearelacion->cellAttributes() ?>>
-<template id="tpx_tareas_id_tarearelacion"><span id="el_tareas_id_tarearelacion">
+<span id="el_tareas_id_tarearelacion">
 <div class="input-group ew-lookup-list" aria-describedby="x_id_tarearelacion_help">
     <div class="form-control ew-lookup-text" tabindex="-1" id="lu_x_id_tarearelacion"><?= EmptyValue(strval($Page->id_tarearelacion->ViewValue)) ? $Language->phrase("PleaseSelect") : $Page->id_tarearelacion->ViewValue ?></div>
     <div class="input-group-append">
@@ -282,66 +285,33 @@ loadjs.ready(["ftareasedit", "editor"], function() {
 <?= $Page->id_tarearelacion->getCustomMessage() ?>
 <?= $Page->id_tarearelacion->Lookup->getParamTag($Page, "p_x_id_tarearelacion") ?>
 <input type="hidden" is="selection-list" data-table="tareas" data-field="x_id_tarearelacion" data-type="text" data-multiple="0" data-lookup="1" data-value-separator="<?= $Page->id_tarearelacion->displayValueSeparatorAttribute() ?>" name="x_id_tarearelacion" id="x_id_tarearelacion" value="<?= $Page->id_tarearelacion->CurrentValue ?>"<?= $Page->id_tarearelacion->editAttributes() ?>>
-</span></template>
+</span>
 </div></div>
     </div>
 <?php } ?>
 </div><!-- /page* -->
-<div id="tpd_tareasedit" class="ew-custom-template"></div>
-<template id="tpm_tareasedit">
-<div id="ct_TareasEdit">    <?php
-  $id_escenario = CurrentUserInfo("escenario");
-  //echo CurrentUserID();
-//	$nombreescnario = ExecuteRow("SELECT nombre_escenario,DATE_FORMAT(fechaini_real, '%Y/%m/%d'), DATE_FORMAT(fechafinal_real, '%Y/%m/%d')  FROM escenario WHERE id_escenario =  = '".$id_escenario."';");
-	$escenID = ExecuteRow("SELECT DATE_FORMAT(fechaini_real, '%Y/%m/%d'), DATE_FORMAT(fechafinal_real, '%Y/%m/%d'),nombre_escenario FROM escenario WHERE id_escenario = '".$id_escenario."';");
+<?php
+    if (in_array("mensajes", explode(",", $Page->getCurrentDetailTable())) && $mensajes->DetailEdit) {
 ?>
-<div class="callout callout-primary">
-  <h4>Simulación:  <?php echo $escenID[2];  ?>  </h4>
- <p> <em> Fecha inicio real: <?php echo $escenID[1]  ?> Fecha fin real: <?php echo $escenID[0];  ?> </em></p>
-</div>
-<div class="form-group col-md-4">
-        <label for="x_id_grupo" ><?= $Page->id_grupo->caption() ?></label>
-        <div><slot class="ew-slot" name="tpx_tareas_id_grupo"></slot></div>
-      </div>
-     <div class="form-group col-md-4">
-        <label for="x_titulo_tarea" ><?= $Page->titulo_tarea->caption() ?></label>
-        <div><slot class="ew-slot" name="tpx_tareas_titulo_tarea"></slot></div>
-     </div>
-  </div>
-    <div id="r_descripcion_tarea" class="form-group">    
-        <label for="x_descripcion_tarea"><?= $Page->descripcion_tarea->caption() ?></label>
-        <div ><slot class="ew-slot" name="tpx_tareas_descripcion_tarea"></slot></div>
-  <div id="r_fechainireal_tarea" class="form-row border" >
-  	<div class="form-group col-md-4">
-        <label for="x_fechainireal_tarea" ><?= $Page->fechainireal_tarea->caption() ?></label>
-        <div ><slot class="ew-slot" name="tpx_tareas_fechainireal_tarea"></slot>
-     <a class="input-button" title="toggle" data-toggle>
-        <i class="icon-calendar"></i>
-    </a>
-        </div>
-    </div>
-    <div class="form-group col-md-4">
-        <label for="x_fechafin_tarea" ><?= $Page->fechafin_tarea->caption() ?></label>
-        <div ><slot class="ew-slot" name="tpx_tareas_fechafin_tarea"></slot></div>
-    </div>
-   </div>
-   <span> <br></span>
-  <div id="r_fechainisimulado_tarea" class="form-row border" >
-      <div class="form-group col-md-4">
-        <label for="x_fechainisimulado_tarea" ><?= $Page->fechainisimulado_tarea->caption() ?></label>
-        <div><slot class="ew-slot" name="tpx_tareas_fechainisimulado_tarea"></slot></div>
-    </div>
-    <div class="form-group col-md-4">
-        <label for="x_fechafinsimulado_tarea" ><?= $Page->fechafinsimulado_tarea->caption() ?></label>
-        <div><slot class="ew-slot" name="tpx_tareas_fechafinsimulado_tarea"></slot></div>
-      </div>
-   </div>
-    <div id="r_id_tarearelacion" class="form-group">
-        <label for="x_id_tarearelacion" class="col-sm-2 col-form-label"><?= $Page->id_tarearelacion->caption() ?></label>
-        <div ><slot class="ew-slot" name="tpx_tareas_id_tarearelacion"></slot></div>
-    </div>
-
-    <?php
+<?php if ($Page->getCurrentDetailTable() != "") { ?>
+<h4 class="ew-detail-caption"><?= $Language->tablePhrase("mensajes", "TblCaption") ?></h4>
+<?php } ?>
+<?php include_once "MensajesGrid.php" ?>
+<?php } ?>
+<?php if (!$Page->IsModal) { ?>
+<div class="form-group"><!-- buttons .form-group -->
+    <div class="<?= $Page->OffsetColumnClass ?>"><!-- buttons offset -->
+<button class="btn btn-primary ew-btn" name="btn-action" id="btn-action" type="submit"><?= $Language->phrase("SaveBtn") ?></button>
+<button class="btn btn-default ew-btn" name="btn-cancel" id="btn-cancel" type="button" data-href="<?= HtmlEncode(GetUrl($Page->getReturnUrl())) ?>"><?= $Language->phrase("CancelBtn") ?></button>
+    </div><!-- /buttons offset -->
+</div><!-- /buttons .form-group -->
+<?php } ?>
+</form>
+<?php
+$Page->showPageFooter();
+echo GetDebugMessage();
+?>
+	<?php
 $fecha = ExecuteRow("SELECT fechaini_real, fechafinal_real, fechaini_simulado, fechafin_simulado,nombre_escenario FROM escenario WHERE id_escenario = '".$id_escenario."';");
 	 $fechaInicial = date("Y-m-d", strtotime($fecha[0]));
      $horaInicial = date("H", strtotime($fecha[0]));
@@ -458,36 +428,6 @@ $fecha = ExecuteRow("SELECT fechaini_real, fechafinal_real, fechaini_simulado, f
 				defaultDate: fechaIniSimulado + " " + horaIniSimulado + ":" + minIniSimulado,
 			});
     </script>
-</div>
-</template>
-<?php
-    if (in_array("mensajes", explode(",", $Page->getCurrentDetailTable())) && $mensajes->DetailEdit) {
-?>
-<?php if ($Page->getCurrentDetailTable() != "") { ?>
-<h4 class="ew-detail-caption"><?= $Language->tablePhrase("mensajes", "TblCaption") ?></h4>
-<?php } ?>
-<?php include_once "MensajesGrid.php" ?>
-<?php } ?>
-<?php if (!$Page->IsModal) { ?>
-<div class="form-group row"><!-- buttons .form-group -->
-    <div class="<?= $Page->OffsetColumnClass ?>"><!-- buttons offset -->
-<button class="btn btn-primary ew-btn" name="btn-action" id="btn-action" type="submit"><?= $Language->phrase("SaveBtn") ?></button>
-<button class="btn btn-default ew-btn" name="btn-cancel" id="btn-cancel" type="button" data-href="<?= HtmlEncode(GetUrl($Page->getReturnUrl())) ?>"><?= $Language->phrase("CancelBtn") ?></button>
-    </div><!-- /buttons offset -->
-</div><!-- /buttons .form-group -->
-<?php } ?>
-</form>
-<script class="ew-apply-template">
-loadjs.ready(["jsrender", "makerjs"], function() {
-    ew.templateData = { rows: <?= JsonEncode($Page->Rows) ?> };
-    ew.applyTemplate("tpd_tareasedit", "tpm_tareasedit", "tareasedit", "<?= $Page->CustomExport ?>", ew.templateData.rows[0]);
-    loadjs.done("customtemplate");
-});
-</script>
-<?php
-$Page->showPageFooter();
-echo GetDebugMessage();
-?>
 <script>
 // Field event handlers
 loadjs.ready("head", function() {
@@ -497,6 +437,7 @@ loadjs.ready("head", function() {
 <script>
 loadjs.ready("load", function () {
     // Startup script
-    $("label#elh_tareas_titulo_tarea").remove(),$("label#elh_tareas_id_tarea").remove(),$("label#elh_tareas_descripcion_tarea").remove(),$("label#elh_tareas_fechainisimulado_tarea").remove(),$("label#elh_tareas_fechafinsimulado_tarea").remove(),$("label#elh_tareas_fechainireal_tarea").remove(),$("label#elh_tareas_fechafin_tarea").remove(),$("label#elh_tareas_archivo").remove(),$("label#elh_tareas_medios").remove(),$("label#elh_tareas_id_grupo").remove(),$("label#elh_tareas_id_tarearelacion").remove();
+    $('h1').html("<span class='text-muted'>Editar</span> tarea");
+    
 });
 </script>

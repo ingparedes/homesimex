@@ -7,6 +7,7 @@ use Doctrine\DBAL\ParameterType;
 /**
  * Page class
  */
+
 class Email2Add extends Email2
 {
     use MessagesTrait;
@@ -473,7 +474,7 @@ class Email2Add extends Email2
         $this->reciever_userid->setVisibility();
         $this->tiempo->Visible = false;
         $this->estado_msg->Visible = false;
-        $this->id_mensaje->Visible = false;
+        $this->id_mensaje->setVisibility();
         $this->hideFieldsForAddEdit();
 
         // Do not use lookup cache
@@ -704,6 +705,16 @@ class Email2Add extends Email2
             }
         }
 
+        // Check field name 'id_mensaje' first before field var 'x_id_mensaje'
+        $val = $CurrentForm->hasValue("id_mensaje") ? $CurrentForm->getValue("id_mensaje") : $CurrentForm->getValue("x_id_mensaje");
+        if (!$this->id_mensaje->IsDetailKey) {
+            if (IsApi() && $val === null) {
+                $this->id_mensaje->Visible = false; // Disable update for API request
+            } else {
+                $this->id_mensaje->setFormValue($val);
+            }
+        }
+
         // Check field name 'id_email' first before field var 'x_id_email'
         $val = $CurrentForm->hasValue("id_email") ? $CurrentForm->getValue("id_email") : $CurrentForm->getValue("x_id_email");
         $this->getUploadFiles(); // Get upload files
@@ -718,6 +729,7 @@ class Email2Add extends Email2
         $this->sujeto->CurrentValue = $this->sujeto->FormValue;
         $this->mensaje->CurrentValue = $this->mensaje->FormValue;
         $this->reciever_userid->CurrentValue = $this->reciever_userid->FormValue;
+        $this->id_mensaje->CurrentValue = $this->id_mensaje->FormValue;
     }
 
     /**
@@ -768,7 +780,29 @@ class Email2Add extends Email2
             return;
         }
         $this->id_email->setDbValue($row['id_email']);
-        $this->sender_userid->setDbValue($row['sender_userid']);
+        $id_email2=$_GET['id_email'];
+
+     
+
+        if( isset($id_email2))
+        {  
+            $reen = ExecuteScalar("SELECT  reciever_userid FROM email WHERE id_email =".$id_email2);
+            $this->sender_userid->setDbValue($reen);
+            
+         }
+         else
+          { ;
+            $sqlre = "SELECT id_users FROM `users` WHERE users.perfil in ('2','1') and users.grupo =  '".CurrentUserInfo("grupo")."'";
+            $stmt = executeQuery($sqlre);
+          while ($row = $stmt->fetch()) {
+              $value[] = $row["id_users"];
+            }
+           $valor = implode(",", $value);
+           $this->sender_userid->setDbValue($valor);
+        }
+
+
+
         if (array_key_exists('EV__sender_userid', $row)) {
             $this->sender_userid->VirtualValue = $row['EV__sender_userid']; // Set up virtual field value
         } else {
@@ -779,8 +813,10 @@ class Email2Add extends Email2
         $this->mensaje->setDbValue($row['mensaje']);
         $this->archivo->Upload->DbValue = $row['archivo'];
         $this->archivo->setDbValue($this->archivo->Upload->DbValue);
+        $this->reciever_userid->setDbValue($row['reciever_userid']);
+        $this->tiempo->setDbValue('2021/08/07 09:59:38');
+
         
-        $this->tiempo->setDbValue($row['tiempo']);
         $this->estado_msg->setDbValue($row['estado_msg']);
         $this->id_mensaje->setDbValue($row['id_mensaje']);
     }
@@ -999,6 +1035,11 @@ class Email2Add extends Email2
             $this->reciever_userid->LinkCustomAttributes = "";
             $this->reciever_userid->HrefValue = "";
             $this->reciever_userid->TooltipValue = "";
+
+            // id_mensaje
+            $this->id_mensaje->LinkCustomAttributes = "";
+            $this->id_mensaje->HrefValue = "";
+            $this->id_mensaje->TooltipValue = "";
         } elseif ($this->RowType == ROWTYPE_ADD) {
             // sender_userid
             $this->sender_userid->EditCustomAttributes = "";
@@ -1124,6 +1165,12 @@ class Email2Add extends Email2
 
             // reciever_userid
 
+            // id_mensaje
+            $this->id_mensaje->EditAttrs["class"] = "form-control";
+            $this->id_mensaje->EditCustomAttributes = "hidden";
+            $this->id_mensaje->EditValue = HtmlEncode($this->id_mensaje->CurrentValue);
+            $this->id_mensaje->PlaceHolder = RemoveHtml($this->id_mensaje->caption());
+
             // Add refer script
 
             // sender_userid
@@ -1158,6 +1205,10 @@ class Email2Add extends Email2
             // reciever_userid
             $this->reciever_userid->LinkCustomAttributes = "";
             $this->reciever_userid->HrefValue = "";
+
+            // id_mensaje
+            $this->id_mensaje->LinkCustomAttributes = "";
+            $this->id_mensaje->HrefValue = "";
         }
         if ($this->RowType == ROWTYPE_ADD || $this->RowType == ROWTYPE_EDIT || $this->RowType == ROWTYPE_SEARCH) { // Add/Edit/Search row
             $this->setupFieldTitles();
@@ -1206,6 +1257,11 @@ class Email2Add extends Email2
         if ($this->reciever_userid->Required) {
             if (!$this->reciever_userid->IsDetailKey && EmptyValue($this->reciever_userid->FormValue)) {
                 $this->reciever_userid->addErrorMessage(str_replace("%s", $this->reciever_userid->caption(), $this->reciever_userid->RequiredErrorMessage));
+            }
+        }
+        if ($this->id_mensaje->Required) {
+            if (!$this->id_mensaje->IsDetailKey && EmptyValue($this->id_mensaje->FormValue)) {
+                $this->id_mensaje->addErrorMessage(str_replace("%s", $this->id_mensaje->caption(), $this->id_mensaje->RequiredErrorMessage));
             }
         }
 
@@ -1258,6 +1314,9 @@ class Email2Add extends Email2
         // reciever_userid
         $this->reciever_userid->CurrentValue = CurrentUserID();
         $this->reciever_userid->setDbValueDef($rsnew, $this->reciever_userid->CurrentValue, null);
+
+        // id_mensaje
+        $this->id_mensaje->setDbValueDef($rsnew, $this->id_mensaje->CurrentValue, null, false);
         if ($this->archivo->Visible && !$this->archivo->Upload->KeepFile) {
             $oldFiles = EmptyValue($this->archivo->Upload->DbValue) ? [] : explode(Config("MULTIPLE_UPLOAD_SEPARATOR"), $this->archivo->htmlDecode(strval($this->archivo->Upload->DbValue)));
             if (!EmptyValue($this->archivo->Upload->FileName)) {
@@ -1440,10 +1499,10 @@ class Email2Add extends Email2
 
     /*SetClientVar("v",Get("texto") );*/
     //$vars $_GET['IdEmail'];
-   
-    $IdEmail = Get("Idmail");
+    $IdEmail = Get("id_email");
     $reenviar = Get("Idrenviar");
     $Idmsg = Get("IdResMsg");
+
     $reenviarmsg = Get("IdreenMsg");
     SetClientVar("idm",$IdEmail );
     SetClientVar("re",$reenviar );
@@ -1451,6 +1510,7 @@ class Email2Add extends Email2
     SetClientVar("reemsg",$reenviarmsg );
     if (!empty($IdEmail))
     {
+    $title = ExecuteScalar("SELECT  sujeto FROM email WHERE id_email =".$IdEmail);
     $body = ExecuteScalar("SELECT  mensaje FROM email WHERE id_email =".$IdEmail);
     $remite = ExecuteScalar("SELECT  reciever_userid FROM email WHERE id_email =".$IdEmail);
     $adj =  ExecuteScalar("SELECT archivo FROM email WHERE id_email =".$IdEmail);
@@ -1484,10 +1544,12 @@ class Email2Add extends Email2
     }
     if (!empty($Idmsg))
     {
+   
     $title = ExecuteScalar("SELECT  titulo FROM mensajes WHERE id_inyect =".$Idmsg);
     $body = ExecuteScalar("SELECT  mensaje FROM mensajes WHERE id_inyect =".$Idmsg);
     SetClientVar("titles",$title );
     SetClientVar("bodys",$body );
+    SetClientVar("idmsgs",$Idmsg );
     }
     if (!empty($reenviarmsg))
     {

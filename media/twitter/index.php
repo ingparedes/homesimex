@@ -255,8 +255,8 @@ $id_user = $_GET['id_user'];
                                 $rmtnte = $row[0];
                                 $email = $row[1];
                             }
-                            $sql_updte_leido = "UPDATE mensajes_usuarios mu SET leido = 1 WHERE mu.id_user_destinatario IN ('" . $id_user . "');";
-                            $res_updte_leido = mysqli_query($con, $sql_updte_leido);
+                         //   $sql_updte_leido = "UPDATE mensajes_usuarios mu SET leido = 1 WHERE mu.id_user_destinatario IN ('" . $id_user . "');";
+                         //   $res_updte_leido = mysqli_query($con, $sql_updte_leido);
                         ?>
                             <li class="tweet-card">
                                 <div class="tweet-content">

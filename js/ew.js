@@ -3836,7 +3836,8 @@
     if (search) {
       var searchParams = new URLSearchParams(search);
       searchParams.forEach(function (value, key) {
-        return searchParams.set(key, ew.sanitize(value));
+        value = decodeURIComponent(value);
+        if (['<>', '<=', '>=', '>', '<'].includes(value)) searchParams.set(key, value);else searchParams.set(key, ew.sanitize(value));
       });
       search = searchParams.toString();
     }

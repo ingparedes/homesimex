@@ -85,7 +85,7 @@ $Page->showMessage();
 <template id="tpx_imbox_mail_alerta" class="imbox_mailview">
 <?php
 $idpage = CurrentPage()->id_email->CurrentValue;
-$row = ExecuteRow("SELECT status FROM user_email WHERE id_email =".$idpage);
+$row = ExecuteRow("SELECT status FROM user_email WHERE id_email = '".$idpage."'  AND id_user_destinatario = '".CurrentUserID()."'" );
 if ($row[0] == 0){ 
 ?>
 <span class="badge badge-danger">Nuevo</span>
@@ -263,7 +263,7 @@ print " <div class='mailbox-attachment-info'>
                 </li>
               </ul>
               <div class="card-footer">
-        <a class="btn btn-default ew-add-edit " title="" data-caption="Enviar" href="/homesimex/Email2Add?Idmail=<?php echo CurrentPage()->id_email->CurrentValue; ?>" data-original-title="Enviar">
+        <a class="btn btn-default ew-add-edit " title="" data-caption="Enviar" href="/homesimex/Email2Add?id_email=<?php echo CurrentPage()->id_email->CurrentValue; ?>" data-original-title="Enviar">
          <i class="fas fa-reply"></i> &nbsp;Responder
         </a>
            <a class="btn btn-default ew-add-edit " title="" data-caption="Enviar" href="/homesimex/Email2Add?Idrenviar=<?php echo CurrentPage()->id_email->CurrentValue; ?>" data-original-title="Enviar">

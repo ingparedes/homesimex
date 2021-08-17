@@ -23,7 +23,8 @@ SELECT
 	mensajes.enviado, 
 	tareas.titulo_tarea, 
 	tareas.id_grupo, 
-	actor_simulado.nombre_actor, 
+	actor_simulado.nombre_actor,
+	mensajes.adjunto,
 	archivos_doc.file_name
 FROM
 	mensajes
@@ -69,6 +70,7 @@ while($row = mysqli_fetch_array($result))
     $fstar=$row['fstar'];
     $fstarsim = $row['fstarsim'];
 	$filename =  $row['file_name'];
+	$adjunto =  $row['adjunto'];
     $id=$row['id_inyect'];
   
     
@@ -81,6 +83,8 @@ while($row = mysqli_fetch_array($result))
 			"fstar"=> $fstar,
             "fstarsim"=> $fstarsim,
 			"filename"=> $filename,
+			"adjunto" => $adjunto,
+
 			"id"=>intval($id)
 		]
 	);

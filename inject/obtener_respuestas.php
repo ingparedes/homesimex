@@ -1,7 +1,7 @@
 <?php 
 $idMensaje = $_GET['idMensaje'];
 //Creamos la conexión
-include("config.php");
+include("../config.php");
 
 //generamos la consulta
 $sql = "
@@ -9,16 +9,11 @@ SELECT
 `id_email`, `sender_userid`, `copy_sender`, `reciever_userid`, `sujeto`, `mensaje`, `tiempo`, `archivo`, `estado_msg`, `id_mensaje` 
 FROM 
 `email` 
-WHERE `id_mensaje`=$idMensaje
-";
-
-
+WHERE `id_mensaje`= $idMensaje";
 
 mysqli_set_charset($con, "utf8");
 
 //mysqli_set_charset($conexion, "utf8"); //formato de datos utf8
-
-
 if(!$result = mysqli_query($con,$sql)){
 	echo("Error description: " . mysqli_error($con));
 	die();

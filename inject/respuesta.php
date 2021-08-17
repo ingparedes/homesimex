@@ -21,6 +21,7 @@ SELECT
 	tareas.titulo_tarea, 
 	tareas.id_grupo, 
 	actor_simulado.nombre_actor, 
+	mensajes.adjunto,
 	file_name
 FROM
 	mensajes
@@ -38,7 +39,7 @@ FROM
 		mensajes.adjunto = archivos_doc.id_file
 WHERE
 	mensajes.enviado = 0 AND
-	tareas.id_grupo = $idGrupo ORDER BY fstar DESC";
+	tareas.id_grupo = $idGrupo ORDER BY fstar asc";
 mysqli_set_charset($con, "utf8");
 
 //mysqli_set_charset($conexion, "utf8"); //formato de datos utf8
@@ -63,6 +64,7 @@ while($row = mysqli_fetch_array($result))
 	$mensaje=$row['mensaje'];
     $fstar=$row['fstar'];
     $fstarsim = $row['fstarsim'];
+	$adjunto = $row['adjunto'];
 	$filename = $row['file_name'];
     $id=$row['id_inyect'];
   
@@ -75,6 +77,7 @@ while($row = mysqli_fetch_array($result))
 			"mensaje"=>$mensaje,
 			"fstar"=> $fstar,
             "fstarsim"=> $fstarsim,
+			"adjunto"=> $adjunto,
 			"filename"=> $filename,
 			"id"=>intval($id)
 		]

@@ -167,13 +167,13 @@ class Tareas extends DbTable
         $this->id_tarearelacion->PleaseSelectText = $Language->phrase("PleaseSelect"); // "PleaseSelect" text
         switch ($CurrentLanguage) {
             case "en":
-                $this->id_tarearelacion->Lookup = new Lookup('id_tarearelacion', 'tareas', false, 'id_tarea', ["id_grupo","titulo_tarea","",""], [], [], [], [], [], [], '', '');
+                $this->id_tarearelacion->Lookup = new Lookup('id_tarearelacion', 'tareas', false, 'id_tarea', ["id_tarea","titulo_tarea","",""], [], [], [], [], [], [], '', '');
                 break;
             case "es":
-                $this->id_tarearelacion->Lookup = new Lookup('id_tarearelacion', 'tareas', false, 'id_tarea', ["id_grupo","titulo_tarea","",""], [], [], [], [], [], [], '', '');
+                $this->id_tarearelacion->Lookup = new Lookup('id_tarearelacion', 'tareas', false, 'id_tarea', ["id_tarea","titulo_tarea","",""], [], [], [], [], [], [], '', '');
                 break;
             default:
-                $this->id_tarearelacion->Lookup = new Lookup('id_tarearelacion', 'tareas', false, 'id_tarea', ["id_grupo","titulo_tarea","",""], [], [], [], [], [], [], '', '');
+                $this->id_tarearelacion->Lookup = new Lookup('id_tarearelacion', 'tareas', false, 'id_tarea', ["id_tarea","titulo_tarea","",""], [], [], [], [], [], [], '', '');
                 break;
         }
         $this->id_tarearelacion->DefaultErrorMessage = $Language->phrase("IncorrectInteger");
@@ -358,7 +358,7 @@ class Tareas extends DbTable
     public function getSqlWhere() // Where
     {
         $where = ($this->SqlWhere != "") ? $this->SqlWhere : "";
-        $this->DefaultFilter = (CurrentUserInfo("perfil") > 1) ? "`id_grupo` = '".CurrentUserInfo("grupo")."'" : "";
+        $this->DefaultFilter = "";
         AddFilter($where, $this->DefaultFilter);
         return $where;
     }
@@ -651,33 +651,6 @@ class Tareas extends DbTable
     // Update
     public function update(&$rs, $where = "", $rsold = null, $curfilter = true)
     {
-        // Cascade Update detail table 'mensajes'
-        $cascadeUpdate = false;
-        $rscascade = [];
-        if ($rsold && (isset($rs['id_tarea']) && $rsold['id_tarea'] != $rs['id_tarea'])) { // Update detail field 'id_tarea'
-            $cascadeUpdate = true;
-            $rscascade['id_tarea'] = $rs['id_tarea'];
-        }
-        if ($cascadeUpdate) {
-            $rswrk = Container("mensajes")->loadRs("`id_tarea` = " . QuotedValue($rsold['id_tarea'], DATATYPE_NUMBER, 'DB'))->fetchAll(\PDO::FETCH_ASSOC);
-            foreach ($rswrk as $rsdtlold) {
-                $rskey = [];
-                $fldname = 'id_inyect';
-                $rskey[$fldname] = $rsdtlold[$fldname];
-                $rsdtlnew = array_merge($rsdtlold, $rscascade);
-                // Call Row_Updating event
-                $success = Container("mensajes")->rowUpdating($rsdtlold, $rsdtlnew);
-                if ($success) {
-                    $success = Container("mensajes")->update($rscascade, $rskey, $rsdtlold);
-                }
-                if (!$success) {
-                    return false;
-                }
-                // Call Row_Updated event
-                Container("mensajes")->rowUpdated($rsdtlold, $rsdtlnew);
-            }
-        }
-
         // If no field is updated, execute may return 0. Treat as success
         $success = $this->updateSql($rs, $where, $curfilter)->execute();
         $success = ($success > 0) ? $success : true;
@@ -713,30 +686,6 @@ class Tareas extends DbTable
     public function delete(&$rs, $where = "", $curfilter = false)
     {
         $success = true;
-
-        // Cascade delete detail table 'mensajes'
-        $dtlrows = Container("mensajes")->loadRs("`id_tarea` = " . QuotedValue($rs['id_tarea'], DATATYPE_NUMBER, "DB"))->fetchAll(\PDO::FETCH_ASSOC);
-        // Call Row Deleting event
-        foreach ($dtlrows as $dtlrow) {
-            $success = Container("mensajes")->rowDeleting($dtlrow);
-            if (!$success) {
-                break;
-            }
-        }
-        if ($success) {
-            foreach ($dtlrows as $dtlrow) {
-                $success = Container("mensajes")->delete($dtlrow); // Delete
-                if (!$success) {
-                    break;
-                }
-            }
-        }
-        // Call Row Deleted event
-        if ($success) {
-            foreach ($dtlrows as $dtlrow) {
-                Container("mensajes")->rowDeleted($dtlrow);
-            }
-        }
         if ($success) {
             $success = $this->deleteSql($rs, $where, $curfilter)->execute();
         }

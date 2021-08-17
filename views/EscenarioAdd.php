@@ -140,7 +140,7 @@ $Page->showMessage();
 </div></div>
     </div>
 <?php } ?>
-<h3> Nota conceptual de la simulación </h3>
+<h3 class = 'text-muted'> Nota conceptual de la simulación </h3>
 <?php if ($Page->nombre_escenario->Visible) { // nombre_escenario ?>
     <div id="r_nombre_escenario" class="form-group row">
         <label id="elh_escenario_nombre_escenario" for="x_nombre_escenario" class="<?= $Page->LeftColumnClass ?>"><?= $Page->nombre_escenario->caption() ?><?= $Page->nombre_escenario->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
@@ -517,7 +517,7 @@ loadjs.ready("load", function () {
     //$("#dsl_x_incidente").before("Tipo incidente");
     $('#r_icon_escenario').hide();
     //$('div').addClass('col-sm-10 form-group').removeClass('col-sm-10');
-    $('h4').text("Nueva simulación");
+    $('h1').html("<span class='text-muted'>Nueva</span> simulación");
     <?php if (!CurrentPage()->IsCopy())  { ?>
     $('#x_descripcion_escenario').val('<p><strong>1. Justificaci&oacute;n y antecedentes </strong></p><p>&nbsp;</p><p><strong>2. Prop&oacute;sito de la simulaci&oacute;n </strong></p><p>&nbsp;</p><p><strong>3. Objetivos de entrenamiento</strong></p><p>&nbsp;</p><p><strong>4. Escenarios</strong></p><p>&nbsp;</p><p><strong>5. </strong><strong>Grupos objetivos</strong></p><p>&nbsp;</p><p><strong>6. Metodolog&iacute;a</strong></p>');
     <?php } ?>

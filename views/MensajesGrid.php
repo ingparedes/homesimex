@@ -29,7 +29,7 @@ loadjs.ready("head", function () {
         ["fechasim_start", [fields.fechasim_start.visible && fields.fechasim_start.required ? ew.Validators.required(fields.fechasim_start.caption) : null, ew.Validators.datetime(109)], fields.fechasim_start.isInvalid],
         ["id_actor", [fields.id_actor.visible && fields.id_actor.required ? ew.Validators.required(fields.id_actor.caption) : null], fields.id_actor.isInvalid],
         ["para", [fields.para.visible && fields.para.required ? ew.Validators.required(fields.para.caption) : null], fields.para.isInvalid],
-        ["adjunto", [fields.adjunto.visible && fields.adjunto.required ? ew.Validators.required(fields.adjunto.caption) : null], fields.adjunto.isInvalid]
+        ["adjunto", [fields.adjunto.visible && fields.adjunto.required ? ew.Validators.fileRequired(fields.adjunto.caption) : null], fields.adjunto.isInvalid]
     ]);
 
     // Set invalid fields
@@ -112,7 +112,6 @@ loadjs.ready("head", function () {
     // Dynamic selection lists
     fmensajesgrid.lists.id_actor = <?= $Grid->id_actor->toClientList($Grid) ?>;
     fmensajesgrid.lists.para = <?= $Grid->para->toClientList($Grid) ?>;
-    fmensajesgrid.lists.adjunto = <?= $Grid->adjunto->toClientList($Grid) ?>;
     loadjs.done("fmensajesgrid");
 });
 </script>
@@ -556,85 +555,51 @@ loadjs.ready("head", function() {
     <?php } ?>
     <?php if ($Grid->adjunto->Visible) { // adjunto ?>
         <td data-name="adjunto" <?= $Grid->adjunto->cellAttributes() ?>>
-<?php if ($Grid->RowType == ROWTYPE_ADD) { // Add record ?>
-<span id="el<?= $Grid->RowCount ?>_mensajes_adjunto" class="form-group">
-<div class="input-group flex-nowrap">
-    <select
-        id="x<?= $Grid->RowIndex ?>_adjunto"
-        name="x<?= $Grid->RowIndex ?>_adjunto"
-        class="form-control ew-select<?= $Grid->adjunto->isInvalidClass() ?>"
-        data-select2-id="mensajes_x<?= $Grid->RowIndex ?>_adjunto"
-        data-table="mensajes"
-        data-field="x_adjunto"
-        data-value-separator="<?= $Grid->adjunto->displayValueSeparatorAttribute() ?>"
-        data-placeholder="<?= HtmlEncode($Grid->adjunto->getPlaceHolder()) ?>"
-        <?= $Grid->adjunto->editAttributes() ?>>
-        <?= $Grid->adjunto->selectOptionListHtml("x{$Grid->RowIndex}_adjunto") ?>
-    </select>
-    <?php if (AllowAdd(CurrentProjectID() . "archivos_doc") && !$Grid->adjunto->ReadOnly) { ?>
-    <div class="input-group-append"><button type="button" class="btn btn-default ew-add-opt-btn" id="aol_x<?= $Grid->RowIndex ?>_adjunto" title="<?= HtmlTitle($Language->phrase("AddLink")) . "&nbsp;" . $Grid->adjunto->caption() ?>" data-title="<?= $Grid->adjunto->caption() ?>" onclick="ew.addOptionDialogShow({lnk:this,el:'x<?= $Grid->RowIndex ?>_adjunto',url:'<?= GetUrl("ArchivosDocAddopt") ?>'});"><i class="fas fa-plus ew-icon"></i></button></div>
-    <?php } ?>
+<?php if ($Grid->RowAction == "insert") { // Add record ?>
+<span id="el<?= $Grid->RowCount ?>_mensajes_adjunto" class="form-group mensajes_adjunto">
+<div id="fd_x<?= $Grid->RowIndex ?>_adjunto">
+<div class="input-group">
+    <div class="custom-file">
+        <input type="file" class="custom-file-input" title="<?= $Grid->adjunto->title() ?>" data-table="mensajes" data-field="x_adjunto" name="x<?= $Grid->RowIndex ?>_adjunto" id="x<?= $Grid->RowIndex ?>_adjunto" lang="<?= CurrentLanguageID() ?>" multiple<?= $Grid->adjunto->editAttributes() ?><?= ($Grid->adjunto->ReadOnly || $Grid->adjunto->Disabled) ? " disabled" : "" ?>>
+        <label class="custom-file-label ew-file-label" for="x<?= $Grid->RowIndex ?>_adjunto"><?= $Language->phrase("ChooseFiles") ?></label>
+    </div>
 </div>
 <div class="invalid-feedback"><?= $Grid->adjunto->getErrorMessage() ?></div>
-<?= $Grid->adjunto->Lookup->getParamTag($Grid, "p_x" . $Grid->RowIndex . "_adjunto") ?>
-<script>
-loadjs.ready("head", function() {
-    var el = document.querySelector("select[data-select2-id='mensajes_x<?= $Grid->RowIndex ?>_adjunto']"),
-        options = { name: "x<?= $Grid->RowIndex ?>_adjunto", selectId: "mensajes_x<?= $Grid->RowIndex ?>_adjunto", language: ew.LANGUAGE_ID, dir: ew.IS_RTL ? "rtl" : "ltr" };
-    options.dropdownParent = $(el).closest("#ew-modal-dialog, #ew-add-opt-dialog")[0];
-    Object.assign(options, ew.vars.tables.mensajes.fields.adjunto.selectOptions);
-    ew.createSelect(options);
-});
-</script>
+<input type="hidden" name="fn_x<?= $Grid->RowIndex ?>_adjunto" id= "fn_x<?= $Grid->RowIndex ?>_adjunto" value="<?= $Grid->adjunto->Upload->FileName ?>">
+<input type="hidden" name="fa_x<?= $Grid->RowIndex ?>_adjunto" id= "fa_x<?= $Grid->RowIndex ?>_adjunto" value="0">
+<input type="hidden" name="fs_x<?= $Grid->RowIndex ?>_adjunto" id= "fs_x<?= $Grid->RowIndex ?>_adjunto" value="200">
+<input type="hidden" name="fx_x<?= $Grid->RowIndex ?>_adjunto" id= "fx_x<?= $Grid->RowIndex ?>_adjunto" value="<?= $Grid->adjunto->UploadAllowedFileExt ?>">
+<input type="hidden" name="fm_x<?= $Grid->RowIndex ?>_adjunto" id= "fm_x<?= $Grid->RowIndex ?>_adjunto" value="<?= $Grid->adjunto->UploadMaxFileSize ?>">
+<input type="hidden" name="fc_x<?= $Grid->RowIndex ?>_adjunto" id= "fc_x<?= $Grid->RowIndex ?>_adjunto" value="<?= $Grid->adjunto->UploadMaxFileCount ?>">
+</div>
+<table id="ft_x<?= $Grid->RowIndex ?>_adjunto" class="table table-sm float-left ew-upload-table"><tbody class="files"></tbody></table>
 </span>
 <input type="hidden" data-table="mensajes" data-field="x_adjunto" data-hidden="1" name="o<?= $Grid->RowIndex ?>_adjunto" id="o<?= $Grid->RowIndex ?>_adjunto" value="<?= HtmlEncode($Grid->adjunto->OldValue) ?>">
-<?php } ?>
-<?php if ($Grid->RowType == ROWTYPE_EDIT) { // Edit record ?>
-<span id="el<?= $Grid->RowCount ?>_mensajes_adjunto" class="form-group">
-<div class="input-group flex-nowrap">
-    <select
-        id="x<?= $Grid->RowIndex ?>_adjunto"
-        name="x<?= $Grid->RowIndex ?>_adjunto"
-        class="form-control ew-select<?= $Grid->adjunto->isInvalidClass() ?>"
-        data-select2-id="mensajes_x<?= $Grid->RowIndex ?>_adjunto"
-        data-table="mensajes"
-        data-field="x_adjunto"
-        data-value-separator="<?= $Grid->adjunto->displayValueSeparatorAttribute() ?>"
-        data-placeholder="<?= HtmlEncode($Grid->adjunto->getPlaceHolder()) ?>"
-        <?= $Grid->adjunto->editAttributes() ?>>
-        <?= $Grid->adjunto->selectOptionListHtml("x{$Grid->RowIndex}_adjunto") ?>
-    </select>
-    <?php if (AllowAdd(CurrentProjectID() . "archivos_doc") && !$Grid->adjunto->ReadOnly) { ?>
-    <div class="input-group-append"><button type="button" class="btn btn-default ew-add-opt-btn" id="aol_x<?= $Grid->RowIndex ?>_adjunto" title="<?= HtmlTitle($Language->phrase("AddLink")) . "&nbsp;" . $Grid->adjunto->caption() ?>" data-title="<?= $Grid->adjunto->caption() ?>" onclick="ew.addOptionDialogShow({lnk:this,el:'x<?= $Grid->RowIndex ?>_adjunto',url:'<?= GetUrl("ArchivosDocAddopt") ?>'});"><i class="fas fa-plus ew-icon"></i></button></div>
-    <?php } ?>
-</div>
-<div class="invalid-feedback"><?= $Grid->adjunto->getErrorMessage() ?></div>
-<?= $Grid->adjunto->Lookup->getParamTag($Grid, "p_x" . $Grid->RowIndex . "_adjunto") ?>
-<script>
-loadjs.ready("head", function() {
-    var el = document.querySelector("select[data-select2-id='mensajes_x<?= $Grid->RowIndex ?>_adjunto']"),
-        options = { name: "x<?= $Grid->RowIndex ?>_adjunto", selectId: "mensajes_x<?= $Grid->RowIndex ?>_adjunto", language: ew.LANGUAGE_ID, dir: ew.IS_RTL ? "rtl" : "ltr" };
-    options.dropdownParent = $(el).closest("#ew-modal-dialog, #ew-add-opt-dialog")[0];
-    Object.assign(options, ew.vars.tables.mensajes.fields.adjunto.selectOptions);
-    ew.createSelect(options);
-});
-</script>
-</span>
-<?php } ?>
-<?php if ($Grid->RowType == ROWTYPE_VIEW) { // View record ?>
+<?php } elseif ($Grid->RowType == ROWTYPE_VIEW) { // View record ?>
 <span id="el<?= $Grid->RowCount ?>_mensajes_adjunto">
 <span<?= $Grid->adjunto->viewAttributes() ?>>
-<?php if (!EmptyString($Grid->adjunto->getViewValue()) && $Grid->adjunto->linkAttributes() != "") { ?>
-<a<?= $Grid->adjunto->linkAttributes() ?>><?= $Grid->adjunto->getViewValue() ?></a>
-<?php } else { ?>
-<?= $Grid->adjunto->getViewValue() ?>
-<?php } ?>
+<?= GetFileViewTag($Grid->adjunto, $Grid->adjunto->getViewValue(), false) ?>
 </span>
 </span>
-<?php if ($Grid->isConfirm()) { ?>
-<input type="hidden" data-table="mensajes" data-field="x_adjunto" data-hidden="1" name="fmensajesgrid$x<?= $Grid->RowIndex ?>_adjunto" id="fmensajesgrid$x<?= $Grid->RowIndex ?>_adjunto" value="<?= HtmlEncode($Grid->adjunto->FormValue) ?>">
-<input type="hidden" data-table="mensajes" data-field="x_adjunto" data-hidden="1" name="fmensajesgrid$o<?= $Grid->RowIndex ?>_adjunto" id="fmensajesgrid$o<?= $Grid->RowIndex ?>_adjunto" value="<?= HtmlEncode($Grid->adjunto->OldValue) ?>">
-<?php } ?>
+<?php } else  { // Edit record ?>
+<span id="el<?= $Grid->RowCount ?>_mensajes_adjunto" class="form-group mensajes_adjunto">
+<div id="fd_x<?= $Grid->RowIndex ?>_adjunto">
+<div class="input-group">
+    <div class="custom-file">
+        <input type="file" class="custom-file-input" title="<?= $Grid->adjunto->title() ?>" data-table="mensajes" data-field="x_adjunto" name="x<?= $Grid->RowIndex ?>_adjunto" id="x<?= $Grid->RowIndex ?>_adjunto" lang="<?= CurrentLanguageID() ?>" multiple<?= $Grid->adjunto->editAttributes() ?><?= ($Grid->adjunto->ReadOnly || $Grid->adjunto->Disabled) ? " disabled" : "" ?>>
+        <label class="custom-file-label ew-file-label" for="x<?= $Grid->RowIndex ?>_adjunto"><?= $Language->phrase("ChooseFiles") ?></label>
+    </div>
+</div>
+<div class="invalid-feedback"><?= $Grid->adjunto->getErrorMessage() ?></div>
+<input type="hidden" name="fn_x<?= $Grid->RowIndex ?>_adjunto" id= "fn_x<?= $Grid->RowIndex ?>_adjunto" value="<?= $Grid->adjunto->Upload->FileName ?>">
+<input type="hidden" name="fa_x<?= $Grid->RowIndex ?>_adjunto" id= "fa_x<?= $Grid->RowIndex ?>_adjunto" value="<?= (Post("fa_x<?= $Grid->RowIndex ?>_adjunto") == "0") ? "0" : "1" ?>">
+<input type="hidden" name="fs_x<?= $Grid->RowIndex ?>_adjunto" id= "fs_x<?= $Grid->RowIndex ?>_adjunto" value="200">
+<input type="hidden" name="fx_x<?= $Grid->RowIndex ?>_adjunto" id= "fx_x<?= $Grid->RowIndex ?>_adjunto" value="<?= $Grid->adjunto->UploadAllowedFileExt ?>">
+<input type="hidden" name="fm_x<?= $Grid->RowIndex ?>_adjunto" id= "fm_x<?= $Grid->RowIndex ?>_adjunto" value="<?= $Grid->adjunto->UploadMaxFileSize ?>">
+<input type="hidden" name="fc_x<?= $Grid->RowIndex ?>_adjunto" id= "fc_x<?= $Grid->RowIndex ?>_adjunto" value="<?= $Grid->adjunto->UploadMaxFileCount ?>">
+</div>
+<table id="ft_x<?= $Grid->RowIndex ?>_adjunto" class="table table-sm float-left ew-upload-table"><tbody class="files"></tbody></table>
+</span>
 <?php } ?>
 </td>
     <?php } ?>
@@ -846,49 +811,24 @@ loadjs.ready("head", function() {
     <?php } ?>
     <?php if ($Grid->adjunto->Visible) { // adjunto ?>
         <td data-name="adjunto">
-<?php if (!$Grid->isConfirm()) { ?>
 <span id="el$rowindex$_mensajes_adjunto" class="form-group mensajes_adjunto">
-<div class="input-group flex-nowrap">
-    <select
-        id="x<?= $Grid->RowIndex ?>_adjunto"
-        name="x<?= $Grid->RowIndex ?>_adjunto"
-        class="form-control ew-select<?= $Grid->adjunto->isInvalidClass() ?>"
-        data-select2-id="mensajes_x<?= $Grid->RowIndex ?>_adjunto"
-        data-table="mensajes"
-        data-field="x_adjunto"
-        data-value-separator="<?= $Grid->adjunto->displayValueSeparatorAttribute() ?>"
-        data-placeholder="<?= HtmlEncode($Grid->adjunto->getPlaceHolder()) ?>"
-        <?= $Grid->adjunto->editAttributes() ?>>
-        <?= $Grid->adjunto->selectOptionListHtml("x{$Grid->RowIndex}_adjunto") ?>
-    </select>
-    <?php if (AllowAdd(CurrentProjectID() . "archivos_doc") && !$Grid->adjunto->ReadOnly) { ?>
-    <div class="input-group-append"><button type="button" class="btn btn-default ew-add-opt-btn" id="aol_x<?= $Grid->RowIndex ?>_adjunto" title="<?= HtmlTitle($Language->phrase("AddLink")) . "&nbsp;" . $Grid->adjunto->caption() ?>" data-title="<?= $Grid->adjunto->caption() ?>" onclick="ew.addOptionDialogShow({lnk:this,el:'x<?= $Grid->RowIndex ?>_adjunto',url:'<?= GetUrl("ArchivosDocAddopt") ?>'});"><i class="fas fa-plus ew-icon"></i></button></div>
-    <?php } ?>
+<div id="fd_x<?= $Grid->RowIndex ?>_adjunto">
+<div class="input-group">
+    <div class="custom-file">
+        <input type="file" class="custom-file-input" title="<?= $Grid->adjunto->title() ?>" data-table="mensajes" data-field="x_adjunto" name="x<?= $Grid->RowIndex ?>_adjunto" id="x<?= $Grid->RowIndex ?>_adjunto" lang="<?= CurrentLanguageID() ?>" multiple<?= $Grid->adjunto->editAttributes() ?><?= ($Grid->adjunto->ReadOnly || $Grid->adjunto->Disabled) ? " disabled" : "" ?>>
+        <label class="custom-file-label ew-file-label" for="x<?= $Grid->RowIndex ?>_adjunto"><?= $Language->phrase("ChooseFiles") ?></label>
+    </div>
 </div>
 <div class="invalid-feedback"><?= $Grid->adjunto->getErrorMessage() ?></div>
-<?= $Grid->adjunto->Lookup->getParamTag($Grid, "p_x" . $Grid->RowIndex . "_adjunto") ?>
-<script>
-loadjs.ready("head", function() {
-    var el = document.querySelector("select[data-select2-id='mensajes_x<?= $Grid->RowIndex ?>_adjunto']"),
-        options = { name: "x<?= $Grid->RowIndex ?>_adjunto", selectId: "mensajes_x<?= $Grid->RowIndex ?>_adjunto", language: ew.LANGUAGE_ID, dir: ew.IS_RTL ? "rtl" : "ltr" };
-    options.dropdownParent = $(el).closest("#ew-modal-dialog, #ew-add-opt-dialog")[0];
-    Object.assign(options, ew.vars.tables.mensajes.fields.adjunto.selectOptions);
-    ew.createSelect(options);
-});
-</script>
+<input type="hidden" name="fn_x<?= $Grid->RowIndex ?>_adjunto" id= "fn_x<?= $Grid->RowIndex ?>_adjunto" value="<?= $Grid->adjunto->Upload->FileName ?>">
+<input type="hidden" name="fa_x<?= $Grid->RowIndex ?>_adjunto" id= "fa_x<?= $Grid->RowIndex ?>_adjunto" value="0">
+<input type="hidden" name="fs_x<?= $Grid->RowIndex ?>_adjunto" id= "fs_x<?= $Grid->RowIndex ?>_adjunto" value="200">
+<input type="hidden" name="fx_x<?= $Grid->RowIndex ?>_adjunto" id= "fx_x<?= $Grid->RowIndex ?>_adjunto" value="<?= $Grid->adjunto->UploadAllowedFileExt ?>">
+<input type="hidden" name="fm_x<?= $Grid->RowIndex ?>_adjunto" id= "fm_x<?= $Grid->RowIndex ?>_adjunto" value="<?= $Grid->adjunto->UploadMaxFileSize ?>">
+<input type="hidden" name="fc_x<?= $Grid->RowIndex ?>_adjunto" id= "fc_x<?= $Grid->RowIndex ?>_adjunto" value="<?= $Grid->adjunto->UploadMaxFileCount ?>">
+</div>
+<table id="ft_x<?= $Grid->RowIndex ?>_adjunto" class="table table-sm float-left ew-upload-table"><tbody class="files"></tbody></table>
 </span>
-<?php } else { ?>
-<span id="el$rowindex$_mensajes_adjunto" class="form-group mensajes_adjunto">
-<span<?= $Grid->adjunto->viewAttributes() ?>>
-<?php if (!EmptyString($Grid->adjunto->ViewValue) && $Grid->adjunto->linkAttributes() != "") { ?>
-<a<?= $Grid->adjunto->linkAttributes() ?>><input type="text" readonly class="form-control-plaintext" value="<?= HtmlEncode(RemoveHtml($Grid->adjunto->getDisplayValue($Grid->adjunto->ViewValue))) ?>"></a>
-<?php } else { ?>
-<input type="text" readonly class="form-control-plaintext" value="<?= HtmlEncode(RemoveHtml($Grid->adjunto->getDisplayValue($Grid->adjunto->ViewValue))) ?>">
-<?php } ?>
-</span>
-</span>
-<input type="hidden" data-table="mensajes" data-field="x_adjunto" data-hidden="1" name="x<?= $Grid->RowIndex ?>_adjunto" id="x<?= $Grid->RowIndex ?>_adjunto" value="<?= HtmlEncode($Grid->adjunto->FormValue) ?>">
-<?php } ?>
 <input type="hidden" data-table="mensajes" data-field="x_adjunto" data-hidden="1" name="o<?= $Grid->RowIndex ?>_adjunto" id="o<?= $Grid->RowIndex ?>_adjunto" value="<?= HtmlEncode($Grid->adjunto->OldValue) ?>">
 </td>
     <?php } ?>

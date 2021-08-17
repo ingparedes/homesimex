@@ -69,7 +69,7 @@ $Page->showMessage();
             </td>
         </tr>
     <?php } ?>
-    <?php if ($Page->id_users->Visible) { // id_users ?>
+    <?php if ($Page->id_users->Visible->FALSE) { // id_users ?>
         <tr id="r_id_users">
             <td class="<?= $Page->TableLeftColumnClass ?>"><span id="elh_archivos_doc_id_users"><?= $Page->id_users->caption() ?></span></td>
             <td data-name="id_users" <?= $Page->id_users->cellAttributes() ?>>
@@ -80,7 +80,7 @@ $Page->showMessage();
             </td>
         </tr>
     <?php } ?>
-    <?php if ($Page->file_name->Visible) { // file_name ?>
+    <?php if ($Page->file_name->Visible->false) { // file_name ?>
         <tr id="r_file_name">
             <td class="<?= $Page->TableLeftColumnClass ?>"><span id="elh_archivos_doc_file_name"><?= $Page->file_name->caption() ?></span></td>
             <td data-name="file_name" <?= $Page->file_name->cellAttributes() ?>>
@@ -92,7 +92,7 @@ $Page->showMessage();
             </td>
         </tr>
     <?php } ?>
-    <?php if ($Page->fecha_created->Visible) { // fecha_created ?>
+    <?php if ($Page->fecha_created->Visible->FALSE) { // fecha_created ?>
         <tr id="r_fecha_created">
             <td class="<?= $Page->TableLeftColumnClass ?>"><span id="elh_archivos_doc_fecha_created"><?= $Page->fecha_created->caption() ?></span></td>
             <td data-name="fecha_created" <?= $Page->fecha_created->cellAttributes() ?>>
@@ -103,7 +103,7 @@ $Page->showMessage();
             </td>
         </tr>
     <?php } ?>
-    <?php if ($Page->boton->Visible) { // boton ?>
+    <?php if ($Page->boton->Visible->false) { // boton ?>
         <tr id="r_boton">
             <td class="<?= $Page->TableLeftColumnClass ?>"><span id="elh_archivos_doc_boton"><?= $Page->boton->caption() ?></span></td>
             <td data-name="boton" <?= $Page->boton->cellAttributes() ?>>

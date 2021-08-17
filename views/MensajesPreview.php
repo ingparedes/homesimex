@@ -181,11 +181,7 @@ $Page->ListOptions->render("body", "left", $Page->RowCount);
         <!-- adjunto -->
         <td<?= $Page->adjunto->cellAttributes() ?>>
 <span<?= $Page->adjunto->viewAttributes() ?>>
-<?php if (!EmptyString($Page->adjunto->getViewValue()) && $Page->adjunto->linkAttributes() != "") { ?>
-<a<?= $Page->adjunto->linkAttributes() ?>><?= $Page->adjunto->getViewValue() ?></a>
-<?php } else { ?>
-<?= $Page->adjunto->getViewValue() ?>
-<?php } ?>
+<?= GetFileViewTag($Page->adjunto, $Page->adjunto->getViewValue(), false) ?>
 </span>
 </td>
 <?php } ?>

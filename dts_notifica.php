@@ -86,8 +86,8 @@ if ($id_user == '-1') {
                             CONVERT_TZ(m.fechareal_start,'".$utces."','".$utcusr2."') AS start,
                             CONVERT_TZ(m.fechareal_start,'".$utces."','".$utcusr2."') AS endFalso,
                             m.id_tarea, cm.id_calificacion AS 'calificacion',
-                            t.fechainireal_tarea AS InicioRango,
-                            t.fechafin_tarea AS FinRango
+                            CONVERT_TZ(t.fechainireal_tarea,'".$utces."','".$utcusr2."') as InicioRango,
+                            CONVERT_TZ(t.fechafin_tarea,'".$utces."','".$utcusr2."') AS FinRango
                             FROM mensajes m 
                             INNER JOIN mensajes_usuarios mu 
                             ON m.id_inyect = mu.id_mensaje 

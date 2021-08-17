@@ -661,11 +661,11 @@ class UsersAdd extends Users
         $this->apellidos->OldValue = $this->apellidos->CurrentValue;
         $this->escenario->CurrentValue = null;
         $this->escenario->OldValue = $this->escenario->CurrentValue;
-        $this->grupo->CurrentValue = null;
+        $this->grupo->CurrentValue = "0";
         $this->grupo->OldValue = $this->grupo->CurrentValue;
         $this->subgrupo->CurrentValue = null;
         $this->subgrupo->OldValue = $this->subgrupo->CurrentValue;
-        $this->perfil->CurrentValue = null;
+        $this->perfil->CurrentValue = "0";
         $this->perfil->OldValue = $this->perfil->CurrentValue;
         $this->_email->CurrentValue = null;
         $this->_email->OldValue = $this->_email->CurrentValue;

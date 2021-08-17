@@ -3290,14 +3290,14 @@ class TareasList extends Tareas
             }
         }
         if ($validMaster) {
+            // Save current master table
+            $this->setCurrentMasterTable($masterTblVar);
+
             // Update URL
             $this->AddUrl = $this->addMasterUrl($this->AddUrl);
             $this->InlineAddUrl = $this->addMasterUrl($this->InlineAddUrl);
             $this->GridAddUrl = $this->addMasterUrl($this->GridAddUrl);
             $this->GridEditUrl = $this->addMasterUrl($this->GridEditUrl);
-
-            // Save current master table
-            $this->setCurrentMasterTable($masterTblVar);
 
             // Reset start record counter (new master key)
             if (!$this->isAddOrEdit()) {

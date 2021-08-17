@@ -1205,9 +1205,7 @@ class Email2Edit extends Email2
 
             // id_mensaje
             $this->id_mensaje->EditAttrs["class"] = "form-control";
-            $this->id_mensaje->EditCustomAttributes = "";
-            $this->id_mensaje->EditValue = HtmlEncode($this->id_mensaje->CurrentValue);
-            $this->id_mensaje->PlaceHolder = RemoveHtml($this->id_mensaje->caption());
+            $this->id_mensaje->EditCustomAttributes = "hidden";
 
             // Edit refer script
 
@@ -1322,9 +1320,6 @@ class Email2Edit extends Email2
             if (!$this->id_mensaje->IsDetailKey && EmptyValue($this->id_mensaje->FormValue)) {
                 $this->id_mensaje->addErrorMessage(str_replace("%s", $this->id_mensaje->caption(), $this->id_mensaje->RequiredErrorMessage));
             }
-        }
-        if (!CheckInteger($this->id_mensaje->FormValue)) {
-            $this->id_mensaje->addErrorMessage($this->id_mensaje->getErrorMessage(false));
         }
 
         // Return validate result

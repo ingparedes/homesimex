@@ -81,7 +81,7 @@ loadjs.ready("head", function () {
 <?php
 if ($Page->DbMasterFilter != "" && $Page->getCurrentMasterTable() == "mensajes") {
     if ($Page->MasterRecordExists) {
-        include_once "views/MensajesMaster.php";
+       // include_once "views/MensajesMaster.php";
     }
 }
 ?>

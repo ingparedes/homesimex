@@ -212,22 +212,11 @@ class Mensajes extends DbTable
         $this->Fields['para'] = &$this->para;
 
         // adjunto
-        $this->adjunto = new DbField('mensajes', 'mensajes', 'x_adjunto', 'adjunto', '`adjunto`', '`adjunto`', 3, 11, -1, false, '`adjunto`', false, false, false, 'FORMATTED TEXT', 'SELECT');
+        $this->adjunto = new DbField('mensajes', 'mensajes', 'x_adjunto', 'adjunto', '`adjunto`', '`adjunto`', 200, 200, -1, true, '`adjunto`', false, false, false, 'FORMATTED TEXT', 'FILE');
         $this->adjunto->Sortable = true; // Allow sort
-        $this->adjunto->UsePleaseSelect = true; // Use PleaseSelect by default
-        $this->adjunto->PleaseSelectText = $Language->phrase("PleaseSelect"); // "PleaseSelect" text
-        switch ($CurrentLanguage) {
-            case "en":
-                $this->adjunto->Lookup = new Lookup('adjunto', 'archivos_doc', false, 'id_file', ["file_name","","",""], [], [], [], [], [], [], '', '');
-                break;
-            case "es":
-                $this->adjunto->Lookup = new Lookup('adjunto', 'archivos_doc', false, 'id_file', ["file_name","","",""], [], [], [], [], [], [], '', '');
-                break;
-            default:
-                $this->adjunto->Lookup = new Lookup('adjunto', 'archivos_doc', false, 'id_file', ["file_name","","",""], [], [], [], [], [], [], '', '');
-                break;
-        }
-        $this->adjunto->DefaultErrorMessage = $Language->phrase("IncorrectInteger");
+        $this->adjunto->UploadMultiple = true;
+        $this->adjunto->Upload->UploadMultiple = true;
+        $this->adjunto->UploadMaxFileCount = 0;
         $this->adjunto->CustomMsg = $Language->FieldPhrase($this->TableVar, $this->adjunto->Param, "CustomMsg");
         $this->Fields['adjunto'] = &$this->adjunto;
 
@@ -713,7 +702,7 @@ class Mensajes extends DbTable
         $this->id_actor->DbValue = $row['id_actor'];
         $this->enviado->DbValue = $row['enviado'];
         $this->para->DbValue = $row['para'];
-        $this->adjunto->DbValue = $row['adjunto'];
+        $this->adjunto->Upload->DbValue = $row['adjunto'];
         $this->dif_horaria->DbValue = $row['dif_horaria'];
     }
 
@@ -721,6 +710,12 @@ class Mensajes extends DbTable
     public function deleteUploadedFiles($row)
     {
         $this->loadDbValues($row);
+        $oldFiles = EmptyValue($row['adjunto']) ? [] : explode(Config("MULTIPLE_UPLOAD_SEPARATOR"), $row['adjunto']);
+        foreach ($oldFiles as $oldFile) {
+            if (file_exists($this->adjunto->oldPhysicalUploadPath() . $oldFile)) {
+                @unlink($this->adjunto->oldPhysicalUploadPath() . $oldFile);
+            }
+        }
     }
 
     // Record filter WHERE clause
@@ -1050,7 +1045,8 @@ SORTHTML;
         $this->id_actor->setDbValue($row['id_actor']);
         $this->enviado->setDbValue($row['enviado']);
         $this->para->setDbValue($row['para']);
-        $this->adjunto->setDbValue($row['adjunto']);
+        $this->adjunto->Upload->DbValue = $row['adjunto'];
+        $this->adjunto->setDbValue($this->adjunto->Upload->DbValue);
         $this->dif_horaria->setDbValue($row['dif_horaria']);
     }
 
@@ -1209,23 +1205,10 @@ SORTHTML;
         $this->para->ViewCustomAttributes = "";
 
         // adjunto
-        $curVal = trim(strval($this->adjunto->CurrentValue));
-        if ($curVal != "") {
-            $this->adjunto->ViewValue = $this->adjunto->lookupCacheOption($curVal);
-            if ($this->adjunto->ViewValue === null) { // Lookup from database
-                $filterWrk = "`id_file`" . SearchString("=", $curVal, DATATYPE_NUMBER, "");
-                $sqlWrk = $this->adjunto->Lookup->getSql(false, $filterWrk, '', $this, true, true);
-                $rswrk = Conn()->executeQuery($sqlWrk)->fetchAll(\PDO::FETCH_BOTH);
-                $ari = count($rswrk);
-                if ($ari > 0) { // Lookup values found
-                    $arwrk = $this->adjunto->Lookup->renderViewRow($rswrk[0]);
-                    $this->adjunto->ViewValue = $this->adjunto->displayValue($arwrk);
-                } else {
-                    $this->adjunto->ViewValue = $this->adjunto->CurrentValue;
-                }
-            }
+        if (!EmptyValue($this->adjunto->Upload->DbValue)) {
+            $this->adjunto->ViewValue = $this->adjunto->Upload->DbValue;
         } else {
-            $this->adjunto->ViewValue = null;
+            $this->adjunto->ViewValue = "";
         }
         $this->adjunto->ViewCustomAttributes = "";
 
@@ -1300,8 +1283,8 @@ SORTHTML;
 
         // adjunto
         $this->adjunto->LinkCustomAttributes = "";
-        if (!EmptyValue($this->adjunto->CurrentValue)) {
-            $this->adjunto->HrefValue = (!empty($this->adjunto->ViewValue) && !is_array($this->adjunto->ViewValue) ? RemoveHtml($this->adjunto->ViewValue) : $this->adjunto->CurrentValue); // Add prefix/suffix
+        if (!EmptyValue($this->adjunto->Upload->DbValue)) {
+            $this->adjunto->HrefValue = "%u"; // Add prefix/suffix
             $this->adjunto->LinkAttrs["target"] = "_blank"; // Add target
             if ($this->isExport()) {
                 $this->adjunto->HrefValue = FullUrl($this->adjunto->HrefValue, "href");
@@ -1309,6 +1292,7 @@ SORTHTML;
         } else {
             $this->adjunto->HrefValue = "";
         }
+        $this->adjunto->ExportHrefValue = $this->adjunto->UploadPath . $this->adjunto->Upload->DbValue;
         $this->adjunto->TooltipValue = "";
 
         // dif_horaria
@@ -1423,7 +1407,14 @@ SORTHTML;
         // adjunto
         $this->adjunto->EditAttrs["class"] = "form-control";
         $this->adjunto->EditCustomAttributes = "";
-        $this->adjunto->PlaceHolder = RemoveHtml($this->adjunto->caption());
+        if (!EmptyValue($this->adjunto->Upload->DbValue)) {
+            $this->adjunto->EditValue = $this->adjunto->Upload->DbValue;
+        } else {
+            $this->adjunto->EditValue = "";
+        }
+        if (!EmptyValue($this->adjunto->CurrentValue)) {
+            $this->adjunto->Upload->FileName = $this->adjunto->CurrentValue;
+        }
 
         // dif_horaria
         $this->dif_horaria->EditAttrs["class"] = "form-control";
@@ -1545,7 +1536,120 @@ SORTHTML;
     // Get file data
     public function getFileData($fldparm, $key, $resize, $width = 0, $height = 0, $plugins = [])
     {
-        // No binary fields
+        $width = ($width > 0) ? $width : Config("THUMBNAIL_DEFAULT_WIDTH");
+        $height = ($height > 0) ? $height : Config("THUMBNAIL_DEFAULT_HEIGHT");
+
+        // Set up field name / file name field / file type field
+        $fldName = "";
+        $fileNameFld = "";
+        $fileTypeFld = "";
+        if ($fldparm == 'adjunto') {
+            $fldName = "adjunto";
+            $fileNameFld = "adjunto";
+        } else {
+            return false; // Incorrect field
+        }
+
+        // Set up key values
+        $ar = explode(Config("COMPOSITE_KEY_SEPARATOR"), $key);
+        if (count($ar) == 1) {
+            $this->id_inyect->CurrentValue = $ar[0];
+        } else {
+            return false; // Incorrect key
+        }
+
+        // Set up filter (WHERE Clause)
+        $filter = $this->getRecordFilter();
+        $this->CurrentFilter = $filter;
+        $sql = $this->getCurrentSql();
+        $conn = $this->getConnection();
+        $dbtype = GetConnectionType($this->Dbid);
+        if ($row = $conn->fetchAssoc($sql)) {
+            $val = $row[$fldName];
+            if (!EmptyValue($val)) {
+                $fld = $this->Fields[$fldName];
+
+                // Binary data
+                if ($fld->DataType == DATATYPE_BLOB) {
+                    if ($dbtype != "MYSQL") {
+                        if (is_resource($val) && get_resource_type($val) == "stream") { // Byte array
+                            $val = stream_get_contents($val);
+                        }
+                    }
+                    if ($resize) {
+                        ResizeBinary($val, $width, $height, 100, $plugins);
+                    }
+
+                    // Write file type
+                    if ($fileTypeFld != "" && !EmptyValue($row[$fileTypeFld])) {
+                        AddHeader("Content-type", $row[$fileTypeFld]);
+                    } else {
+                        AddHeader("Content-type", ContentType($val));
+                    }
+
+                    // Write file name
+                    $downloadPdf = !Config("EMBED_PDF") && Config("DOWNLOAD_PDF_FILE");
+                    if ($fileNameFld != "" && !EmptyValue($row[$fileNameFld])) {
+                        $fileName = $row[$fileNameFld];
+                        $pathinfo = pathinfo($fileName);
+                        $ext = strtolower(@$pathinfo["extension"]);
+                        $isPdf = SameText($ext, "pdf");
+                        if ($downloadPdf || !$isPdf) { // Skip header if not download PDF
+                            AddHeader("Content-Disposition", "attachment; filename=\"" . $fileName . "\"");
+                        }
+                    } else {
+                        $ext = ContentExtension($val);
+                        $isPdf = SameText($ext, ".pdf");
+                        if ($isPdf && $downloadPdf) { // Add header if download PDF
+                            AddHeader("Content-Disposition", "attachment; filename=\"" . $fileName . "\"");
+                        }
+                    }
+
+                    // Write file data
+                    if (
+                        StartsString("PK", $val) &&
+                        ContainsString($val, "[Content_Types].xml") &&
+                        ContainsString($val, "_rels") &&
+                        ContainsString($val, "docProps")
+                    ) { // Fix Office 2007 documents
+                        if (!EndsString("\0\0\0", $val)) { // Not ends with 3 or 4 \0
+                            $val .= "\0\0\0\0";
+                        }
+                    }
+
+                    // Clear any debug message
+                    if (ob_get_length()) {
+                        ob_end_clean();
+                    }
+
+                    // Write binary data
+                    Write($val);
+
+                // Upload to folder
+                } else {
+                    if ($fld->UploadMultiple) {
+                        $files = explode(Config("MULTIPLE_UPLOAD_SEPARATOR"), $val);
+                    } else {
+                        $files = [$val];
+                    }
+                    $data = [];
+                    $ar = [];
+                    foreach ($files as $file) {
+                        if (!EmptyValue($file)) {
+                            if (Config("ENCRYPT_FILE_PATH")) {
+                                $ar[$file] = FullUrl(GetApiUrl(Config("API_FILE_ACTION") .
+                                    "/" . $this->TableVar . "/" . Encrypt($fld->physicalUploadPath() . $file)));
+                            } else {
+                                $ar[$file] = FullUrl($fld->hrefPath() . $file);
+                            }
+                        }
+                    }
+                    $data[$fld->Param] = $ar;
+                    WriteJson($data);
+                }
+            }
+            return true;
+        }
         return false;
     }
 
@@ -1622,17 +1726,29 @@ SORTHTML;
                            // $id_usuario = ExecuteRow("SELECT id_users FROM users WHERE grupo IN (SELECT grupo FROM users WHERE id_users = '" . CurrentUserID() . "') AND perfil = '2';");
                             $sql = Execute("INSERT INTO mensajes_usuarios (id_user_remitente, id_user_destinatario, id_mensaje, enviado) VALUES ('" . CurrentUserID() . "','" . $usuarios . "', '" . $rsnew['id_inyect'] . "','0');");
                             if ($rsnew['adjunto'] <> "") {
-                            	$sql_doc = Execute("INSERT INTO permisos_doc (id_file, id_usuarios, tipo_permiso) VALUES ('" . $rsnew['adjunto'] . "','" . $usuarios . "','1');");
-                            	$sql_doc_usrs = Execute("INSERT INTO permisos_docusers (id_file, tipo_permiso, id_users) VALUES ('" . $rsnew['adjunto'] . "','1','" . $usuarios . "');");
+                            $adj = explode(',', $rsnew['adjunto']);
+                            foreach ($adj as $valoradj) {
+
+                                $sql_doc = Execute("INSERT INTO `archivos_doc`(`id_users`, `file_name`, `fecha_created`) VALUES ('" . $usuarios . "', '". $valoradj."', NOW())");
+                                $ult = ExecuteScalar("SELECT MAX(id_file) AS id FROM archivos_doc");
+                                $sql_doc = Execute("INSERT INTO permisos_doc (id_file, id_usuarios, tipo_permiso,fecha_created) VALUES ('" . $ult . "','" . $usuarios . "','1',NOW());");
+                            	//$sql_doc = Execute("INSERT INTO permisos_doc (id_file, id_usuarios, tipo_permiso) VALUES ('" . $rsnew['adjunto'] . "','" . $usuarios . "','1');");
+                            	$sql_doc_usrs = Execute("INSERT INTO permisos_docusers (id_file, tipo_permiso, id_users, date_created) VALUES ('" . $ult . "','1','" . $usuarios . "',NOW());");
+                            }
                             }
                         }
                         foreach ($usuarios as $row) {
                             $id_usuario = ExecuteRow("SELECT id_users FROM users WHERE grupo IN (SELECT grupo FROM users WHERE id_users = '" . CurrentUserID() . "') AND perfil = '2';");
                             $sql = Execute("INSERT INTO mensajes_usuarios (id_user_remitente, id_user_destinatario, id_mensaje, enviado) VALUES ('" . CurrentUserID() . "','" . $row['id_users'] . "', '" . $rsnew['id_inyect'] . "','0');");
                             if ($rsnew['adjunto'] <> "") {
-                            	$sql_doc = Execute("INSERT INTO permisos_doc (id_file, id_usuarios, tipo_permiso) VALUES ('" . $rsnew['adjunto'] . "','" . $row['id_users'] . "','1');");
-                            	$sql_doc_usrs = Execute("INSERT INTO permisos_docusers (id_file, tipo_permiso, id_users) VALUES ('" . $rsnew['adjunto'] . "','1','" . $row['id_users'] . "');");
+                                $adj = explode(',', $rsnew['adjunto']);
+                                foreach ($adj as $valoradj) {
+                                $sql_doc = Execute("INSERT INTO `archivos_doc`(`id_users`, `file_name`, `fecha_created`) VALUES ('" . $usuarios . "', '". $valoradj."', NOW())");
+                                $ult = ExecuteScalar("SELECT MAX(id_file) AS id FROM archivos_doc");
+                            	$sql_doc = Execute("INSERT INTO permisos_doc (id_file, id_usuarios, tipo_permiso, fecha_created ) VALUES ('" . $rsnew['adjunto'] . "','" . $row['id_users'] . "','1', NOW() );");
+                            	$sql_doc_usrs = Execute("INSERT INTO permisos_docusers (id_file, tipo_permiso, id_users, date_created) VALUES ('" . $rsnew['adjunto'] . "','1','" . $row['id_users'] . "', NOW());");
                             }
+                          }
                         }
                     }
                 }
@@ -1642,7 +1758,7 @@ SORTHTML;
         $dif = $rsnew['dif_horaria'];
         $minprograma = 300 + $dif;
         $minfinal = -1 * $minprograma;
-        $nuevafecha = strtotime ( "$minfinal  minutes" , strtotime ($fechastar)) ;
+        $nuevafecha = strtotime ( "$minfinal minutes" , strtotime ($fechastar)) ;
         $fechaSalida 	= date ( 'Y-m-d H:i:s' , $nuevafecha );
          $dbconn = Db();
         $con = mysqli_connect($dbconn['host'],$dbconn['user'],$dbconn['password'],$dbconn['dbname']);

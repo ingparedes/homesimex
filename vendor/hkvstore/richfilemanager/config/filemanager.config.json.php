@@ -32,6 +32,7 @@ $json = <<<'EOD'
         "capabilities": [
             "select",
             "upload",
+            "download",
             "rename",
             "copy",
             "move",

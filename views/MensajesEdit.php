@@ -30,7 +30,7 @@ loadjs.ready("head", function () {
         ["actividad_esperada", [fields.actividad_esperada.visible && fields.actividad_esperada.required ? ew.Validators.required(fields.actividad_esperada.caption) : null], fields.actividad_esperada.isInvalid],
         ["id_actor", [fields.id_actor.visible && fields.id_actor.required ? ew.Validators.required(fields.id_actor.caption) : null], fields.id_actor.isInvalid],
         ["para", [fields.para.visible && fields.para.required ? ew.Validators.required(fields.para.caption) : null], fields.para.isInvalid],
-        ["adjunto", [fields.adjunto.visible && fields.adjunto.required ? ew.Validators.required(fields.adjunto.caption) : null], fields.adjunto.isInvalid]
+        ["adjunto", [fields.adjunto.visible && fields.adjunto.required ? ew.Validators.fileRequired(fields.adjunto.caption) : null], fields.adjunto.isInvalid]
     ]);
 
     // Set invalid fields
@@ -101,7 +101,6 @@ loadjs.ready("head", function () {
     fmensajesedit.lists.medios = <?= $Page->medios->toClientList($Page) ?>;
     fmensajesedit.lists.id_actor = <?= $Page->id_actor->toClientList($Page) ?>;
     fmensajesedit.lists.para = <?= $Page->para->toClientList($Page) ?>;
-    fmensajesedit.lists.adjunto = <?= $Page->adjunto->toClientList($Page) ?>;
     loadjs.done("fmensajesedit");
 });
 </script>
@@ -112,6 +111,9 @@ loadjs.ready("head", function () {
 });
 </script>
 <?php $Page->showPageHeader(); ?>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="../js/flatpickr.js" charset="uft-8"></script>
+<script src="../js/flatpickr-locale-es.js" charset="uft-8"></script>
 <?php
 $Page->showMessage();
 ?>
@@ -130,7 +132,7 @@ $Page->showMessage();
 <?php } ?>
 <div class="ew-edit-div"><!-- page* -->
 <?php if ($Page->id_inyect->Visible) { // id_inyect ?>
-    <div id="r_id_inyect" class="form-group row">
+    <div id="r_id_inyect" class="form-group">
         <label id="elh_mensajes_id_inyect" class="<?= $Page->LeftColumnClass ?>"><?= $Page->id_inyect->caption() ?><?= $Page->id_inyect->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->id_inyect->cellAttributes() ?>>
 <span id="el_mensajes_id_inyect">
@@ -142,7 +144,7 @@ $Page->showMessage();
     </div>
 <?php } ?>
 <?php if ($Page->id_tarea->Visible) { // id_tarea ?>
-    <div id="r_id_tarea" class="form-group row">
+    <div id="r_id_tarea" class="form-group">
         <label id="elh_mensajes_id_tarea" for="x_id_tarea" class="<?= $Page->LeftColumnClass ?>"><?= $Page->id_tarea->caption() ?><?= $Page->id_tarea->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->id_tarea->cellAttributes() ?>>
 <?php if ($Page->id_tarea->getSessionValue() != "") { ?>
@@ -183,7 +185,7 @@ loadjs.ready("head", function() {
     </div>
 <?php } ?>
 <?php if ($Page->titulo->Visible) { // titulo ?>
-    <div id="r_titulo" class="form-group row">
+    <div id="r_titulo" class="form-group">
         <label id="elh_mensajes_titulo" for="x_titulo" class="<?= $Page->LeftColumnClass ?>"><?= $Page->titulo->caption() ?><?= $Page->titulo->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->titulo->cellAttributes() ?>>
 <span id="el_mensajes_titulo">
@@ -195,7 +197,7 @@ loadjs.ready("head", function() {
     </div>
 <?php } ?>
 <?php if ($Page->mensaje->Visible) { // mensaje ?>
-    <div id="r_mensaje" class="form-group row">
+    <div id="r_mensaje" class="form-group">
         <label id="elh_mensajes_mensaje" class="<?= $Page->LeftColumnClass ?>"><?= $Page->mensaje->caption() ?><?= $Page->mensaje->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->mensaje->cellAttributes() ?>>
 <span id="el_mensajes_mensaje">
@@ -213,7 +215,7 @@ loadjs.ready(["fmensajesedit", "editor"], function() {
     </div>
 <?php } ?>
 <?php if ($Page->fechareal_start->Visible) { // fechareal_start ?>
-    <div id="r_fechareal_start" class="form-group row">
+    <div id="r_fechareal_start" class="form-group">
         <label id="elh_mensajes_fechareal_start" for="x_fechareal_start" class="<?= $Page->LeftColumnClass ?>"><?= $Page->fechareal_start->caption() ?><?= $Page->fechareal_start->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->fechareal_start->cellAttributes() ?>>
 <span id="el_mensajes_fechareal_start">
@@ -225,7 +227,7 @@ loadjs.ready(["fmensajesedit", "editor"], function() {
     </div>
 <?php } ?>
 <?php if ($Page->fechasim_start->Visible) { // fechasim_start ?>
-    <div id="r_fechasim_start" class="form-group row">
+    <div id="r_fechasim_start" class="form-group">
         <label id="elh_mensajes_fechasim_start" for="x_fechasim_start" class="<?= $Page->LeftColumnClass ?>"><?= $Page->fechasim_start->caption() ?><?= $Page->fechasim_start->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->fechasim_start->cellAttributes() ?>>
 <span id="el_mensajes_fechasim_start">
@@ -237,7 +239,7 @@ loadjs.ready(["fmensajesedit", "editor"], function() {
     </div>
 <?php } ?>
 <?php if ($Page->medios->Visible) { // medios ?>
-    <div id="r_medios" class="form-group row">
+    <div id="r_medios" class="form-group">
         <label id="elh_mensajes_medios" for="x_medios" class="<?= $Page->LeftColumnClass ?>"><?= $Page->medios->caption() ?><?= $Page->medios->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->medios->cellAttributes() ?>>
 <span id="el_mensajes_medios">
@@ -270,7 +272,7 @@ loadjs.ready("head", function() {
     </div>
 <?php } ?>
 <?php if ($Page->actividad_esperada->Visible) { // actividad_esperada ?>
-    <div id="r_actividad_esperada" class="form-group row">
+    <div id="r_actividad_esperada" class="form-group">
         <label id="elh_mensajes_actividad_esperada" for="x_actividad_esperada" class="<?= $Page->LeftColumnClass ?>"><?= $Page->actividad_esperada->caption() ?><?= $Page->actividad_esperada->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->actividad_esperada->cellAttributes() ?>>
 <span id="el_mensajes_actividad_esperada">
@@ -282,7 +284,7 @@ loadjs.ready("head", function() {
     </div>
 <?php } ?>
 <?php if ($Page->id_actor->Visible) { // id_actor ?>
-    <div id="r_id_actor" class="form-group row">
+    <div id="r_id_actor" class="form-group">
         <label id="elh_mensajes_id_actor" for="x_id_actor" class="<?= $Page->LeftColumnClass ?>"><?= $Page->id_actor->caption() ?><?= $Page->id_actor->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->id_actor->cellAttributes() ?>>
 <span id="el_mensajes_id_actor">
@@ -320,7 +322,7 @@ loadjs.ready("head", function() {
     </div>
 <?php } ?>
 <?php if ($Page->para->Visible) { // para ?>
-    <div id="r_para" class="form-group row">
+    <div id="r_para" class="form-group">
         <label id="elh_mensajes_para" for="x_para" class="<?= $Page->LeftColumnClass ?>"><?= $Page->para->caption() ?><?= $Page->para->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->para->cellAttributes() ?>>
 <span id="el_mensajes_para">
@@ -339,46 +341,34 @@ loadjs.ready("head", function() {
     </div>
 <?php } ?>
 <?php if ($Page->adjunto->Visible) { // adjunto ?>
-    <div id="r_adjunto" class="form-group row">
-        <label id="elh_mensajes_adjunto" for="x_adjunto" class="<?= $Page->LeftColumnClass ?>"><?= $Page->adjunto->caption() ?><?= $Page->adjunto->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
+    <div id="r_adjunto" class="form-group">
+        <label id="elh_mensajes_adjunto" class="<?= $Page->LeftColumnClass ?>"><?= $Page->adjunto->caption() ?><?= $Page->adjunto->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->adjunto->cellAttributes() ?>>
 <span id="el_mensajes_adjunto">
-<div class="input-group flex-nowrap">
-    <select
-        id="x_adjunto"
-        name="x_adjunto"
-        class="form-control ew-select<?= $Page->adjunto->isInvalidClass() ?>"
-        data-select2-id="mensajes_x_adjunto"
-        data-table="mensajes"
-        data-field="x_adjunto"
-        data-value-separator="<?= $Page->adjunto->displayValueSeparatorAttribute() ?>"
-        data-placeholder="<?= HtmlEncode($Page->adjunto->getPlaceHolder()) ?>"
-        <?= $Page->adjunto->editAttributes() ?>>
-        <?= $Page->adjunto->selectOptionListHtml("x_adjunto") ?>
-    </select>
-    <?php if (AllowAdd(CurrentProjectID() . "archivos_doc") && !$Page->adjunto->ReadOnly) { ?>
-    <div class="input-group-append"><button type="button" class="btn btn-default ew-add-opt-btn" id="aol_x_adjunto" title="<?= HtmlTitle($Language->phrase("AddLink")) . "&nbsp;" . $Page->adjunto->caption() ?>" data-title="<?= $Page->adjunto->caption() ?>" onclick="ew.addOptionDialogShow({lnk:this,el:'x_adjunto',url:'<?= GetUrl("ArchivosDocAddopt") ?>'});"><i class="fas fa-plus ew-icon"></i></button></div>
-    <?php } ?>
+<div id="fd_x_adjunto">
+<div class="input-group">
+    <div class="custom-file">
+        <input type="file" class="custom-file-input" title="<?= $Page->adjunto->title() ?>" data-table="mensajes" data-field="x_adjunto" name="x_adjunto" id="x_adjunto" lang="<?= CurrentLanguageID() ?>" multiple<?= $Page->adjunto->editAttributes() ?><?= ($Page->adjunto->ReadOnly || $Page->adjunto->Disabled) ? " disabled" : "" ?> aria-describedby="x_adjunto_help">
+        <label class="custom-file-label ew-file-label" for="x_adjunto"><?= $Language->phrase("ChooseFiles") ?></label>
+    </div>
 </div>
 <?= $Page->adjunto->getCustomMessage() ?>
 <div class="invalid-feedback"><?= $Page->adjunto->getErrorMessage() ?></div>
-<?= $Page->adjunto->Lookup->getParamTag($Page, "p_x_adjunto") ?>
-<script>
-loadjs.ready("head", function() {
-    var el = document.querySelector("select[data-select2-id='mensajes_x_adjunto']"),
-        options = { name: "x_adjunto", selectId: "mensajes_x_adjunto", language: ew.LANGUAGE_ID, dir: ew.IS_RTL ? "rtl" : "ltr" };
-    options.dropdownParent = $(el).closest("#ew-modal-dialog, #ew-add-opt-dialog")[0];
-    Object.assign(options, ew.vars.tables.mensajes.fields.adjunto.selectOptions);
-    ew.createSelect(options);
-});
-</script>
+<input type="hidden" name="fn_x_adjunto" id= "fn_x_adjunto" value="<?= $Page->adjunto->Upload->FileName ?>">
+<input type="hidden" name="fa_x_adjunto" id= "fa_x_adjunto" value="<?= (Post("fa_x_adjunto") == "0") ? "0" : "1" ?>">
+<input type="hidden" name="fs_x_adjunto" id= "fs_x_adjunto" value="200">
+<input type="hidden" name="fx_x_adjunto" id= "fx_x_adjunto" value="<?= $Page->adjunto->UploadAllowedFileExt ?>">
+<input type="hidden" name="fm_x_adjunto" id= "fm_x_adjunto" value="<?= $Page->adjunto->UploadMaxFileSize ?>">
+<input type="hidden" name="fc_x_adjunto" id= "fc_x_adjunto" value="<?= $Page->adjunto->UploadMaxFileCount ?>">
+</div>
+<table id="ft_x_adjunto" class="table table-sm float-left ew-upload-table"><tbody class="files"></tbody></table>
 </span>
 </div></div>
     </div>
 <?php } ?>
 </div><!-- /page* -->
 <?php if (!$Page->IsModal) { ?>
-<div class="form-group row"><!-- buttons .form-group -->
+<div class="form-group"><!-- buttons .form-group -->
     <div class="<?= $Page->OffsetColumnClass ?>"><!-- buttons offset -->
 <button class="btn btn-primary ew-btn" name="btn-action" id="btn-action" type="submit"><?= $Language->phrase("SaveBtn") ?></button>
 <button class="btn btn-default ew-btn" name="btn-cancel" id="btn-cancel" type="button" data-href="<?= HtmlEncode(GetUrl($Page->getReturnUrl())) ?>"><?= $Language->phrase("CancelBtn") ?></button>
@@ -391,6 +381,38 @@ $Page->showPageFooter();
 echo GetDebugMessage();
 ?>
 <script>
+			let fechaInicial = "<?php echo $fechaInicial ?>";
+			let horaInicial = "<?php echo $horaInicial ?>";
+			let minInicial = "<?php echo $minInicial ?>";
+			let fechaFin = "<?php echo $fechaFin ?>";
+			let horaFin = "<?php echo $horaFin ?>";
+			let minFin = "<?php echo $minFin ?>";
+			flatpickr("#x_fechareal_start",{
+				locale: "es",
+				enableTime: true,
+				dateFormat: "Y-m-d H:i",
+				time_24hr: true,
+				minDate: fechaInicial + " " + horaInicial + ":" + minInicial,
+				maxDate: fechaFin + " " + horaFin + ":" + minFin,
+				defaultDate: fechaInicial + " " + horaInicial + ":" + minInicial,
+			});
+			let fechaIniSimulado = "<?php echo $fechaIniSimulado ?>";
+			let horaIniSimulado = "<?php echo $horaIniSimulado ?>";
+			let minIniSimulado = "<?php echo $minIniSimulado ?>";
+			let fechaFinSimulado = "<?php echo $fechaFinSimulado ?>";
+			let horaFinSimulado = "<?php echo $horaFinSimulado ?>";
+			let minFinSimulado = "<?php echo $minFinSimulado ?>";
+			flatpickr("#x_fechasim_start",{
+				locale: "es",
+				enableTime: true,
+				dateFormat: "Y-m-d H:i",
+				time_24hr: true,
+				minDate: fechaIniSimulado + " " + horaIniSimulado + ":" + minIniSimulado,
+				maxDate: fechaFinSimulado + " " + horaFinSimulado + ":" + minFinSimulado,
+				defaultDate: fechaIniSimulado + " " + horaIniSimulado + ":" + minIniSimulado,
+			});
+	</script>
+<script>
 // Field event handlers
 loadjs.ready("head", function() {
     ew.addEventHandlers("mensajes");
@@ -399,6 +421,7 @@ loadjs.ready("head", function() {
 <script>
 loadjs.ready("load", function () {
     // Startup script
-    $("label#elh_mensajes_id_tareas").remove(),$("label#elh_mensajes_titulo").remove(),$("label#elh_mensajes_mensaje").remove(),$("label#elh_mensajes_fechareal_start").remove(),$("label#elh_mensajes_fechasim_start").remove(),$("label#elh_mensajes_medios").remove(),$("label#elh_mensajes_id_actor").remove(),$("label#elh_mensajes_para").remove(),$("label#elh_mensajes_adjunto").remove(),$("label#elh_mensajes_actividad_esperada").remove();
+    // Write your table-specific startup script here, no need to add script tags.
+    $('h1').html("<span class='text-muted'>Editar</span> Mensaje");
 });
 </script>

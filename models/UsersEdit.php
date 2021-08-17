@@ -910,9 +910,9 @@ class UsersEdit extends Users
         $row['fecha'] = null;
         $row['nombres'] = null;
         $row['apellidos'] = null;
-        $row['escenario'] = null;
-        $row['grupo'] = null;
-        $row['subgrupo'] = null;
+        $row['escenario'] = "0";
+        $row['grupo'] = "0";
+        $row['subgrupo'] = "0";
         $row['perfil'] = null;
         $row['email'] = null;
         $row['telefono'] = null;

@@ -17,7 +17,8 @@ DATE_FORMAT( mensajes.fechareal_start, '%Y/%m/%d %H:%i' ) AS fstar,
 DATE_FORMAT( mensajes.fechasim_start, '%Y/%m/%d %H:%i' ) AS fstarsim, 
 mensajes.titulo, 
 mensajes.mensaje, 
-archivos_doc.file_name, 
+archivos_doc.file_name,
+mensajes.adjunto, 
 IF(	actor_simulado.nombre_actor IS NULL, 'EXCON', nombre_actor) as actor,
 mensajes.enviado
 FROM mensajes INNER JOIN mensajes_usuarios 	ON  mensajes.id_inyect = mensajes_usuarios.id_mensaje 
@@ -48,6 +49,7 @@ while($row = mysqli_fetch_array($result))
     $fstar=$row['fstar'];
     $fstarsim = $row['fstarsim'];
 	$filename =  $row['file_name'];
+	$adjunto =  $row['adjunto'];
     $id=$row['id_inyect'];
   
     
@@ -59,6 +61,7 @@ while($row = mysqli_fetch_array($result))
 			"fstar"=> $fstar,
             "fstarsim"=> $fstarsim,
 			"filename" => $filename,
+			"adjunto" => $adjunto,
 			"id"=>intval($id)
 		]
 	);

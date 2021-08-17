@@ -1,0 +1,2730 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ew-language date="2021/8/16" version="17.0.0" id="pt-br" name="Portuguese" desc="PTBR" author="Silvio Garbes">
+  <!--
+*** Important Notes:
+
+    Language ID should follow: https://developers.google.com/recaptcha/docs/language,
+    Locale settings are placed in a separate locale files under the "locales" folder,
+    Locale files must be named with language ID of language file (and converted to lowercase), e.g. en.json,
+    Locale files are ALWAYS used, regardless of whether the project is single language or multiple language.
+    -->
+  <global>
+    <phrase id="accept" value="Aceitar" />
+    <!-- v2019 -->
+    <phrase id="actiondeleted" value="Excluido" />
+    <phrase id="actioninserted" value="Inserido" />
+    <phrase id="actioninsertedgridadd" value="Inserido (Grid-Add)" />
+    <phrase id="actionupdated" value="Atualizado" />
+    <phrase id="actionupdatedgridedit" value="Atualizado (Grid-Edit)" />
+    <phrase id="actionupdatedmultiupdate" value="Atualizado (Multi-Update)" />
+    <phrase id="activateaccount" value="Sua conta esta ativada" />
+    <phrase id="activatefailed" value="Ativacao falhou" />
+    <phrase id="add" value="Adicionar" />
+    <phrase id="addblankrow" value="Adicionar linha em branco" class="fa fa-plus ew-icon" />
+    <!-- v2019 -->
+    <phrase id="addbtn" value="Adicionar" client="1" />
+    <!-- v2018 -->
+    <phrase id="addlink" value="Adicionar" class="fa fa-plus ew-icon" />
+    <!-- v2019 -->
+    <phrase id="addmasterdetaillink" value="Adicionar Master/Detail" class="icon-md-add ew-icon" />
+    <!-- v11 -->
+    <phrase id="addsuccess" value="Adicionado com sucesso" />
+    <phrase id="advancedsearch" value="Pesquisa avancada" />
+    <!-- v11 -->
+    <phrase id="advancedsearchbtn" value="Pesquisa avancada" class="icon-advanced-search ew-icon" />
+    <!-- v11 -->
+    <phrase id="aggregatecolon" value=": " />
+    <!-- v2020 (report) -->
+    <phrase id="aggregateequal" value="=" />
+    <!-- v2020 (report) -->
+    <phrase id="allrecords" value="Todos" />
+    <phrase id="allword" value="Todas as palavras" />
+    <phrase id="alwaysask" value="Sempre pergunte pelo meu nome de usuario e senha" />
+    <!-- Deprecated since v2018 -->
+    <phrase id="anyword" value="Qualquer palavra" />
+    <phrase id="audittrailautologin" value="Login automatico" />
+    <phrase id="audittrailfailedattempt" value="Tentativa falhada: %n" />
+    <phrase id="audittrailuserloggedin" value="Usuario ja logado" />
+    <phrase id="audittrailpasswordexpired" value="Senha expirada" />
+    <phrase id="audittraillogin" value="Entrar" />
+    <phrase id="audittraillogout" value="Sair" />
+    <phrase id="autologin" value="Login automatico ate eu sair explicitamente" />
+    <!-- Deprecated since v2018 -->
+    <phrase id="autologinfailed" value="Login automatico falhou" />
+    <!-- v2018 -->
+    <phrase id="average" value="Media" />
+    <phrase id="backtolist" value="Voltar para a lista" />
+    <phrase id="backtologin" value="Voltar a pagina de login" />
+    <phrase id="backtomasterrecordpage" value="Voltar a tabela principal" />
+    <phrase id="batchdeletebegin" value="*** Apagar em lote iniciando " />
+    <phrase id="batchdeleterollback" value=" Exclusao reversa de lote " />
+    <phrase id="batchdeletesuccess" value=" Apagar em lote com sucesso " />
+    <phrase id="batchinsertbegin" value=" Inserir em lote iniciando " />
+    <phrase id="batchinsertrollback" value=" Reversao de insercao de lote " />
+    <phrase id="batchinsertsuccess" value=" Inserir em lote com sucesso " />
+    <phrase id="batchupdatebegin" value=" Atualizacao de lote iniciando " />
+    <phrase id="batchupdaterollback" value=" Reversao de atualizacao em lote " />
+    <phrase id="batchupdatesuccess" value=" Atualizacao em lote bem-sucedida " />
+    <phrase id="booleanno" value="Nao" />
+    <!-- v2020 (report) -->
+    <phrase id="booleanyes" value="Sim" />
+    <!-- v2020 (report) -->
+    <phrase id="buttonactions" value="Acoes" class="icon-options ew-icon" />
+    <!-- v11 -->
+    <phrase id="buttonaddedit" value="Adicionar / Editar" class="icon-addedit ew-icon" />
+    <!-- v11 -->
+    <phrase id="buttondetails" value="Mestre / Detalhes" class="icon-master-detail ew-icon" />
+    <!-- v11 -->
+    <phrase id="buttonexport" value="Exportar" class="fa fa-download ew-icon" />
+    <!-- v2019 -->
+    <phrase id="buttonimport" value="Importar" class="fa fa-upload ew-icon" />
+    <!-- v2019 -->
+    <phrase id="buttonlistoptions" value="Opcoes" class="icon-options ew-icon" />
+    <!-- v11 -->
+    <phrase id="buttonsearch" value="Pesquisar" class="icon-search ew-icon" />
+    <!-- v11 -->
+    <phrase id="cancelbtn" value="Cancelar" client="1" />
+    <!-- v2017 -->
+    <phrase id="cancellink" value="Cancelar" class="fa fa-times ew-icon" />
+    <!-- v2019 -->
+    <phrase id="changepassword" value="Alterar senha" client="1" />
+    <!-- v2020 -->
+    <phrase id="changepasswordmessage" value="Alterar senha" />
+    <!-- v2019 -->
+    <phrase id="changepasswordpage" value="Alterar senha" />
+    <phrase id="changepasswordbtn" value="Alterar" />
+    <phrase id="chartexporterrmsg1" value="Não foi possível obter %t imagem de %e." />
+    <!-- v2021 -->
+    <phrase id="chartexporterrmsg2" value="Nome de arquivo ausente." />
+    <!-- v2021 -->
+    <phrase id="chartexporterrmsg3" value="A pasta de upload não existe." />
+    <!-- v2021 -->
+    <phrase id="chartexporterrmsg4" value="A pasta de upload não é gravável." />
+    <!-- v2021 -->
+    <phrase id="chartorder" value="Ordenar por" />
+    <!-- v2020 (report) -->
+    <phrase id="chartorderxasc" value="Rotulos Ascendente" />
+    <!-- v2020 (report) -->
+    <phrase id="chartorderxdesc" value="Rotulos Descendente" />
+    <!-- v2020 (report) -->
+    <phrase id="chartorderyasc" value="Valores Ascendente" />
+    <!-- v2020 (report) -->
+    <phrase id="chartorderydesc" value="Valores Descendente" />
+    <!-- v2020 (report) -->
+    <phrase id="choosefilebtn" value="Escolher ..." />
+    <!-- v11 -->
+    <phrase id="choosefile" value="Escolher arquivo" />
+    <!-- v11 -->
+    <phrase id="choosefiles" value="Escolher arquivos" />
+    <!-- v11 -->
+    <phrase id="clickrecaptcha" value="Por favor, clique em reCAPTCHA" client="1" />
+    <!-- v12 -->
+    <phrase id="clicktodrilldown" value="Clique para detalhar" />
+    <!-- v2020 (report) -->
+    <phrase id="closeaccountbtn" value="Excluir dados e sair da minha conta" />
+    <!-- v2019 -->
+    <phrase id="closebtn" value="Fechar" client="1" />
+    <!-- v2017 -->
+    <phrase id="confirm" value="Confirmar" />
+    <phrase id="confirmbtn" value="Confirmar" client="1" />
+    <!-- v2017 -->
+    <phrase id="confirmcancel" value="Deseja cancelar?" client="1" />
+    <!-- v12 -->
+    <phrase id="confirmpassword" value="Confirmar senha" client="1" />
+    <!-- v2021 -->
+    <phrase id="conflictcancellink" value="Cancelar" />
+    <phrase id="cookieconsenttitle" value="Cookies" client="1" />
+    <!-- v2021 -->
+    <phrase id="cookieconsentsummary" value="Use este espaco para resumir sua politica de privacidade e uso de cookies." client="1" />
+    <!-- v2021 -->
+    <phrase id="copy" value="Copiar" />
+    <phrase id="copylink" value="Copiar" class="icon-copy ew-icon" />
+    <!-- v11 -->
+    <phrase id="count" value="Contar" />
+    <phrase id="countselected" value="%s selecionado" client="1" />
+    <!-- v12 -->
+    <phrase id="ctbsumhead" value="Sumario" />
+    <!-- v2020 (report) -->
+    <phrase id="currentfilters" value="Filtros atuais:" />
+    <!-- v2020 (report) -->
+    <phrase id="currentpassword" value="Senha atual: " client="1" />
+    <!-- v12 -->
+    <phrase id="customactioncompleted" value="'%s' concluido" />
+    <phrase id="customactioncancelled" value="'%s' cancelado" />
+    <phrase id="customactionfailed" value="'%s' falhou" />
+    <!-- v12 -->
+    <phrase id="customactionnotallowed" value="'%s' nao permitido" />
+    <!-- v12 -->
+    <phrase id="customview" value="VISUALIZAcaO PERSONALIZADA" />
+    <phrase id="danger" value="Erro" client="1" />
+    <!-- v2020 -->
+    <phrase id="delete" value="Excluir" />
+    <phrase id="deletebtn" value="Excluir" />
+    <phrase id="deletecancelled" value="Excluir cancelado" />
+    <phrase id="deleteconfirmmsg" value="Tem certeza de que deseja excluir?" client="1" />
+    <phrase id="deletefilter" value="Excluir filtro" />
+    <!-- v12 -->
+    <phrase id="deletefilterconfirm" value="Excluir filtro %s?" client="1" />
+    <!-- v12 -->
+    <phrase id="deletelink" value="Excluir" class="fa fa-trash ew-icon" />
+    <!-- v2019 -->
+    <phrase id="deleteselectedlink" value="Excluir registros selecionados" class="fa fa-trash ew-icon" />
+    <!-- v2019 -->
+    <phrase id="deletesuccess" value="Excluido com sucesso" />
+    <phrase id="detaillink" value="" />
+    <phrase id="detailcount" value="&lt;span class='badge badge-info ew-detail-count%c'&gt;%c&lt;/span&gt;" />
+    <!-- v2019 -->
+    <phrase id="downloadbtn" value="Download" />
+    <!-- v2019 -->
+    <phrase id="drilldownallrecords" value="Todos os registros" />
+    <!-- v2020 (report) -->
+    <phrase id="drilldownfilters" value="Filtros detalhados:" />
+    <!-- v2020 (report) -->
+    <phrase id="dupindex" value="Valor duplicado '%v' para o indice exclusivo '%f'" />
+    <phrase id="dupkey" value="Chave primaria duplicada: '%f'" />
+    <phrase id="edit" value="Editar" />
+    <phrase id="editbtn" value="Editar" client="1" />
+    <!-- v2018 -->
+    <phrase id="editlink" value="Editar" class="icon-edit ew-icon" />
+    <!-- v11 -->
+    <phrase id="email" value="Email" client="1" />
+    <!-- v2021 -->
+    <phrase id="emailformsender" value="De" />
+    <phrase id="emailformrecipient" value="Para" />
+    <phrase id="emailformcc" value="Cc" />
+    <phrase id="emailformbcc" value="Bcc" />
+    <phrase id="emailformsubject" value="Assunto" />
+    <phrase id="emailformmessage" value="Mensagem" />
+    <phrase id="emailformcontenttype" value="Envia como" />
+    <phrase id="emailformcontenttypeurl" value="URL" />
+    <phrase id="emailformcontenttypehtml" value="HTML" />
+    <phrase id="emptylabel" value="(Vazio)" />
+    <!-- v2020 (report) -->
+    <phrase id="enterfiltername" value="Digite o nome do filtro" client="1" />
+    <!-- v12 -->
+    <phrase id="enternewpassword" value="Por favor digite a nova senha" client="1" />
+    <phrase id="enteroldpassword" value="Por favor, insira a senha antiga" client="1" />
+    <phrase id="enterpassword" value="Por favor digite a senha" client="1" />
+    <phrase id="enterrequiredfield" value="Por favor, insira o campo obrigatorio - %s" client="1" />
+    <!-- v2021 -->
+    <phrase id="entersearchcriteria" value="Por favor, insira os criterios de pesquisa" />
+    <phrase id="enterusername" value="Por favor digite o nome do usuario" client="1" />
+    <phrase id="entervalidatecode" value="Insira o codigo de validacao mostrado" client="1" />
+    <!-- v11 -->
+    <phrase id="enterpropersenderemail" value="Excedido a contagem maxima de emails do remetente ou o endereco de email incorreto" client="1" />
+    <phrase id="enterproperrecipientemail" value="Contagem maxima de e-mails de destinatarios ou endereco de e-mail incorreto" client="1" />
+    <phrase id="enterproperccemail" value="Excedido contagem maxima de e-mail cc ou endereco de e-mail incorreto" client="1" />
+    <phrase id="enterproperbccemail" value="Excedido contagem maxima de e-mail bcc ou endereco de e-mail incorreto" client="1" />
+    <phrase id="entersubject" value="Por favor, digite o assunto" client="1" />
+    <phrase id="entervalue" value="Por favor insira o valor" client="1" />
+    <!-- v2021 -->
+    <phrase id="entervalue2" value="Por favor, insira o segundo valor" client="1" />
+    <!-- v2021 -->
+    <phrase id="error" value="Erro" />
+    <!-- v2021 -->
+    <phrase id="exactphrase" value="Frase exata" />
+    <phrase id="exceedmaxretry" value="Excedido a contagem maxima de tentativas de login. A conta esta bloqueada. Tente novamente em %t minutos" />
+    <phrase id="exceedmaxemailexport" value="Excedido o numero maximo de emails de exportacao. Por favor, tente novamente mais tarde" />
+    <phrase id="exportchart" value="Exportando grafico: " client="1" />
+    <!-- v2020 (report) -->
+    <phrase id="exportchartdata" value="Exportando dados do grafico" client="1" />
+    <!-- v2020 (report) -->
+    <phrase id="exportcharterror" value="Falha ao exportar grafico: " client="1" />
+    <!-- v2020 (report) -->
+    <phrase id="exportclassnotfound" value="Classe de exportacao nao encontrada" />
+    <!-- v2019 -->
+    <phrase id="exporting" value="Exportando, por favor aguarde..." client="1" />
+    <!-- v2018 -->
+    <phrase id="exportingchart" value="Exportando grafico (%c de %t), por favor aguarde..." client="1" />
+    <!-- v2020 (report) -->
+    <phrase id="exporttocsv" value="Exportar para CSV" class="icon-csv ew-icon" />
+    <!-- v11 -->
+    <phrase id="exporttocsvtext" value="CSV" />
+    <phrase id="exporttoemail" value="Email" class="icon-email ew-icon" />
+    <!-- v11 -->
+    <phrase id="exporttoemailtext" value="Email" client="1" />
+    <phrase id="exporttoexcel" value="Exportar para Excel" class="icon-excel ew-icon" />
+    <!-- v11 -->
+    <phrase id="exporttoexceltext" value="Excel" />
+    <phrase id="exporttohtml" value="Exportar para HTML" class="icon-html ew-icon" />
+    <!-- v11 -->
+    <phrase id="exporttohtmltext" value="HTML" />
+    <phrase id="exporttopdf" value="Exportar para PDF" class="icon-pdf ew-icon" />
+    <!-- v11 -->
+    <phrase id="exporttopdftext" value="PDF" />
+    <phrase id="exporttoword" value="Exportar para Word" class="icon-word ew-icon" />
+    <!-- v11 -->
+    <phrase id="exporttowordtext" value="Word" />
+    <phrase id="exporttoxml" value="Exportar para XML" class="icon-xml ew-icon" />
+    <!-- v11 -->
+    <phrase id="exporttoxmltext" value="XML" />
+    <phrase id="failedtoexport" value="Falha ao exportar" client="1" />
+    <!-- v2018 -->
+    <phrase id="failedtosendmail" value="Falha ao enviar e-mail." />
+    <phrase id="fieldname" value="Nome do campo" />
+    <phrase id="fieldrequiredindicator" class="fa fa-asterisk ew-required" />
+    <!-- v2019 -->
+    <phrase id="filenotfound" value="Arquivo nao encontrado" />
+    <!-- * characters need to be supported by TEMP_IMAGE_FONT * -->
+    <phrase id="filter" value="Filtro" />
+    <!-- v12 -->
+    <phrase id="filtername" value="Nome do filtro" client="1" />
+    <!-- v12 -->
+    <phrase id="filters" value="Filtros" class="icon-filter ew-icon" />
+    <!-- v12 -->
+    <phrase id="forgotpasswordresponse" value="Voce recebera instrucoes de recuperacao de senha em breve se o seu endereco de e-mail estiver registrado." />
+    <!-- v2019 -->
+    <phrase id="forgotpwd" value="Esqueceu a senha" client="1" />
+    <!-- v2020 -->
+    <phrase id="generatepassword" value="Gerar senha" class="fa fa-bolt ew-icon" />
+    <!-- v2019 -->
+    <phrase id="goback" value="Voltar" />
+    <phrase id="gridaddcancelled" value="Adicionar a grade cancelada" />
+    <!-- v11 -->
+    <phrase id="gridaddlink" value="Adicionar a grade" class="icon-grid-add ew-icon" />
+    <!-- v11 -->
+    <phrase id="gridcancellink" value="Cancelar" class="fa fa-times ew-icon" />
+    <!-- v2019 -->
+    <phrase id="grideditcancelled" value="Edicao de grade cancelada" />
+    <!-- v11 -->
+    <phrase id="grideditlink" value="Edicao em grade" class="icon-grid-edit ew-icon" />
+    <!-- v11 -->
+    <phrase id="gridinsertlink" value="Inserir" class="fa fa-check ew-icon" />
+    <!-- v2019 -->
+    <phrase id="gridsavelink" value="Salvar" class="fa fa-check ew-icon" />
+    <!-- v2019 -->
+    <phrase id="group" value="Grupos" />
+    <!-- v2020 (report) -->
+    <phrase id="groupsperpage" value="Grupos por pagina" />
+    <!-- v2020 (report) -->
+    <phrase id="highlight" value="Destaque" />
+    <!-- v11 -->
+    <phrase id="highlightbtn" value="Destaque" class="icon-highlight ew-icon" />
+    <!-- v11 -->
+    <phrase id="homepage" value="Principal" class="fa fa-home ew-icon" />
+    <!-- v2019 -->
+    <phrase id="import" value="Importar" class="fa fa-upload ew-icon" />
+    <!-- v2019 -->
+    <phrase id="importbtn" value="Importar" />
+    <!-- v2019 -->
+    <phrase id="importmessageerror1" value="Importado %c de %t registros de %f (sucesso: %s, falha: %e)" client="1" />
+    <!-- v2019 -->
+    <phrase id="importmessageerror2" value=", erro: %e" client="1" />
+    <!-- v2019 -->
+    <phrase id="importmessageerror3" value="linha %i: %d" client="1" />
+    <!-- v2019 -->
+    <phrase id="importmessageerror4" value="arquivo de log: %l" client="1" />
+    <!-- v2019 -->
+    <phrase id="importmessageinvalidfileextension" value="Extensao de arquivo invalida '%e'" />
+    <!-- v2019 -->
+    <phrase id="importmessageinvalidfieldname" value="Nome do campo invalido: %f" />
+    <!-- v2019 -->
+    <phrase id="importmessageinvalidfieldvalue" value="Valor do campo invalido (nome do campo %f): %v" />
+    <!-- v2019 -->
+    <phrase id="importmessagemore" value="(%s mais)" client="1" />
+    <!-- v2019 -->
+    <phrase id="importmessagenoheaderrow" value="Nenhuma linha de cabecalho para importacao" />
+    <!-- v2019 -->
+    <phrase id="importmessageprogress" value="Importando %c de %t registros de %f..." client="1" />
+    <!-- v2019 -->
+    <phrase id="importmessageservererror" value="Erro do servidor %s: %t" client="1" />
+    <!-- v2019 -->
+    <phrase id="importmessagesuccess" value="Importado %c de %t registros de %f com sucesso" client="1" />
+    <!-- v2019 -->
+    <phrase id="importmessageuploaderror" value="Falha ao carregar %f: %s" client="1" />
+    <!-- v2019 -->
+    <phrase id="importmessageuploadcomplete" value="Envio concluido" client="1" />
+    <!-- v2019 -->
+    <phrase id="importmessageuploadprogress" value="Enviando...(p%)" client="1" />
+    <!-- v2019 -->
+    <phrase id="importmessagepleaseselect" value="Por favor, selecione o arquivo" client="1" />
+    <!-- v2019 -->
+    <phrase id="importmessageincorrectfiletype" value="Tipo de arquivo incorreto" client="1" />
+    <!-- v2019 -->
+    <phrase id="importtext" value="Importar" client="1" />
+    <!-- v2019 -->
+    <phrase id="incorrectcreditcard" value="Numero de cartao de credito incorreto" client="1" />
+    <!-- v2021 -->
+    <phrase id="incorrectdate" value="Data incorreta (%s)" client="1" />
+    <!-- v2021 -->
+    <phrase id="incorrectdateymd" value="Data incorreta (yyyy%smm%sdd)" client="1" />
+    <!-- v2021 -->
+    <phrase id="incorrectdatemdy" value="Data incorreta (mm%sdd%syyyy)" client="1" />
+    <!-- v2021 -->
+    <phrase id="incorrectdatedmy" value="Data incorreta (dd%smm%syyyy)" client="1" />
+    <!-- v2021 -->
+    <phrase id="incorrectshortdateymd" value="Data incorreta (yy%smm%sdd)" client="1" />
+    <!-- v2021 -->
+    <phrase id="incorrectshortdatemdy" value="Data incorreta (mm%sdd%syy)" client="1" />
+    <!-- v2021 -->
+    <phrase id="incorrectshortdatedmy" value="Data incorreta (dd%smm%syy)" client="1" />
+    <!-- v2021 -->
+    <phrase id="incorrectemail" value="E-mail incorreto" client="1" />
+    <phrase id="incorrectfield" value="Campo incorreto" client="1" />
+    <phrase id="incorrectfloat" value="Numero de ponto flutuante incorreto" client="1" />
+    <phrase id="incorrectguid" value="GUID incorreto" client="1" />
+    <phrase id="incorrectinteger" value="Numero inteiro incorreto" client="1" />
+    <phrase id="incorrectphone" value="Numero de telefone incorreto" client="1" />
+    <phrase id="incorrectrange" value="O numero deve estar entre %1 e %2" client="1" />
+    <phrase id="incorrectregexp" value="Expressao regular nao correspondida" client="1" />
+    <phrase id="incorrectssn" value="Numero de seguranca social incorreto" client="1" />
+    <phrase id="incorrecttime" value="Hora incorreta (hh%smm(%sss))" client="1" />
+    <!-- v2021 -->
+    <phrase id="incorrectvalidationcode" value="Código de validação incorreto, insira novamente." client="1" />
+    <!-- v2021 -->
+    <phrase id="incorrectzip" value="Codigo postal incorreto" client="1" />
+    <phrase id="info" value="Informacao" client="1" />
+    <!-- v2020 -->
+    <phrase id="inlineaddlink" value="Adicionar na linha" class="icon-inline-add ew-icon" />
+    <!-- v11 -->
+    <phrase id="inlinecopylink" value="Copiar na linha" class="icon-inline-copy ew-icon" />
+    <!-- v11 -->
+    <phrase id="inlineeditlink" value="Editar na linha" class="icon-inline-edit ew-icon" />
+    <!-- v11 -->
+    <phrase id="insertcancelled" value="Insercao cancelada" />
+    <phrase id="insertfailed" value="Insercao falhou" client="1" />
+    <phrase id="insertlink" value="Inserir" class="fa fa-check ew-icon" />
+    <!-- v2019 -->
+    <phrase id="insertsuccess" value="Inserido com sucesso" />
+    <phrase id="invaliddate" value="Data inválida" client="1" />
+    <!-- v2021 -->
+    <phrase id="invalidkeyvalue" value="Valor da chave invalida" />
+    <phrase id="invalidrecord" value="Registro invalido! A chave e nula" client="1" />
+    <phrase id="invalidpostrequest" value="Pedido de publicacao invalido" />
+    <!-- v11 -->
+    <phrase id="invalidparameter" value="Parametro invalido" />
+    <phrase id="invalidpassword" value="Senha invalida" />
+    <phrase id="invalidpasswordchars" value="A senha não deve conter: &amp;, &lt;, &gt;, &quot;, or '" client="1" />
+    <!-- v2021 -->
+    <phrase id="invalidnewpassword" value="Nova senha invalida" />
+    <phrase id="invaliduidpwd" value="Nome de usuario ou senha incorretos" />
+    <phrase id="invalidusernamechars" value="O nome de usuário não deve conter: &amp;, &lt;, &gt;, &quot;, or '" client="1" />
+    <!-- v2021 -->
+    <phrase id="keep" value="Manter" />
+    <phrase id="language" value="Idioma" />
+    <phrase id="learnmore" value="Saiba mais" />
+    <!-- v2019 -->
+    <phrase id="lightboxtitle" value=" " client="1" />
+    <!-- v11 -->
+    <phrase id="lightboxcurrent" value="imagem {current} de {total}" client="1" />
+    <!-- Note: DO NOT translate "{current}" and "{total}" -->
+    <!-- v11 -->
+    <phrase id="lightboxprevious" value="anterior" client="1" />
+    <!-- v11 -->
+    <phrase id="lightboxnext" value="proximo" client="1" />
+    <!-- v11 -->
+    <phrase id="lightboxclose" value="fechar" client="1" />
+    <!-- v11 -->
+    <phrase id="lightboxxhrerror" value="Este conteudo nao foi carregado." client="1" />
+    <!-- v11 -->
+    <phrase id="lightboximgerror" value="Esta imagem falhou ao carregar." client="1" />
+    <!-- v11 -->
+    <phrase id="list" value="Lista" />
+    <!-- v2019 -->
+    <phrase id="listactionbutton" value="Acoes" class="icon-user ew-icon" />
+    <!-- v12 -->
+    <phrase id="loading" value="Carregando..." client="1" />
+    <phrase id="login" value="Login" client="1" />
+    <!-- v2020 -->
+    <phrase id="logincancelled" value="Login cancelado" />
+    <phrase id="loginfacebook" value="Login com Facebook" />
+    <!-- v2018 -->
+    <phrase id="loginfailed" value="Login com %p falhou" />
+    <!-- v2018 -->
+    <phrase id="logingoogle" value="Login com Google" />
+    <!-- v2018 -->
+    <phrase id="loginmsg" value="Entre para iniciar sua sessao" />
+    <!-- v2019 -->
+    <phrase id="loginoptions" value="Opcoes" />
+    <!-- v11 -->
+    <phrase id="loginor" value="- OU -" />
+    <!-- v2018 -->
+    <phrase id="loginpage" value="Login" />
+    <phrase id="logout" value="Logout" />
+    <phrase id="lookuplink" value="Pesquisa - %s" class="fa fa-search ew-icon" />
+    <!-- v2019 -->
+    <phrase id="masterdetailcopylink" value="Copiar Master/Detail" class="icon-md-copy ew-icon" />
+    <!-- v11 -->
+    <phrase id="masterdetaileditlink" value="Editar Master/Detail" class="icon-md-edit ew-icon" />
+    <!-- v11 -->
+    <phrase id="masterdetaillistlink" value="Lista de Detalhes" class="icon-table ew-icon" />
+    <!-- v11 -->
+    <phrase id="masterdetailviewlink" value="Visualizar Master/Detail" class="icon-md-view ew-icon" />
+    <!-- v11 -->
+    <phrase id="masterrecord" value="Registro mestre: " />
+    <phrase id="maxfilesize" value="Tamanho maximo do arquivo (%s bytes) excedido." client="1" />
+    <phrase id="midnight" value="meia-noite" client="1" />
+    <!-- v2017 -->
+    <phrase id="mismatchpassword" value="Senha Incompativel" client="1" />
+    <phrase id="missinglookuptablename" value="Nome da tabela de pesquisa ausente" />
+    <phrase id="missingdisplayfieldname" value="Nome do campo de exibicao ausente" />
+    <phrase id="missingdisplayfieldvalue" value="Valor do campo de exibicao ausente" />
+    <phrase id="missingpdfobject" value="PDFObject ausente" client="1" />
+    <!-- v2020 -->
+    <phrase id="missinguserlevelid" value="ID do nivel de usuario ausente" />
+    <phrase id="missinguserlevelname" value="Nome do nivel de usuario ausente" />
+    <phrase id="mobilemenu" value="Menu" />
+    <phrase id="monthjan" value="Jan" />
+    <!-- v2020 (report) -->
+    <phrase id="monthfeb" value="Fev" />
+    <!-- v2020 (report) -->
+    <phrase id="monthmar" value="Mar" />
+    <!-- v2020 (report) -->
+    <phrase id="monthapr" value="Abr" />
+    <!-- v2020 (report) -->
+    <phrase id="monthmay" value="Mai" />
+    <!-- v2020 (report) -->
+    <phrase id="monthjun" value="Jun" />
+    <!-- v2020 (report) -->
+    <phrase id="monthjul" value="Jul" />
+    <!-- v2020 (report) -->
+    <phrase id="monthaug" value="Ago" />
+    <!-- v2020 (report) -->
+    <phrase id="monthsep" value="Set" />
+    <!-- v2020 (report) -->
+    <phrase id="monthoct" value="Out" />
+    <!-- v2020 (report) -->
+    <phrase id="monthnov" value="Nov" />
+    <!-- v2020 (report) -->
+    <phrase id="monthdec" value="Dez" />
+    <!-- v2020 (report) -->
+    <phrase id="more" value="Mais" client="1" />
+    <!-- v2018 -->
+    <phrase id="multiplemasterdetails" value="Master/Detail" class="icon-master-detail ew-icon" />
+    <!-- v11 -->
+    <phrase id="new" value="Novo" />
+    <phrase id="newpassword" value="Nova senha" client="1" />
+    <!-- v2021 -->
+    <phrase id="newvalue" value="Novo valor" />
+    <!-- v12 -->
+    <phrase id="next" value="Proximo" client="1" />
+    <!-- v12 -->
+    <phrase id="noaddrecord" value="Nenhum registro a ser adicionado" client="1" />
+    <phrase id="nofieldselected" value="Nenhum campo selecionado para atualizacao" client="1" />
+    <phrase id="nopermission" value="Voce nao tem permissao para acessar %s." />
+    <!-- v12.0.6 -->
+    <phrase id="noaddpermission" value="Voce nao tem permissao para adicionar o registro." />
+    <phrase id="nochartdata" value="Nenhum dado para exibir" client="1" />
+    <!-- v2020 -->
+    <phrase id="nodeletepermission" value="Voce nao tem permissao para excluir o registro." />
+    <phrase id="nodistinctcolvals" value="Nao ha valores de coluna distintos para o SQL: " />
+    <!-- v2020 (report) -->
+    <phrase id="noeditpermission" value="Voce nao tem permissao para editar o registro." />
+    <phrase id="noon" value="meio-dia" />
+    <!-- v2017 -->
+    <phrase id="norecord" value="Nenhum registro encontrado" client="1" />
+    <!-- v2017 -->
+    <phrase id="norecordforkey" value="Nenhum registro encontrado para a chave = " />
+    <phrase id="noreportorcharts" value="Nao ha relatorios ou graficos disponiveis para esta pagina." />
+    <!-- v2020 (report) -->
+    <phrase id="norecordselected" value="Nenhum registro selecionado" client="1" />
+    <phrase id="notablegenerated" value="Nenhuma tabela gerada" />
+    <phrase id="nouserlevel" value="Nenhuma configuracao de nivel de usuario." />
+    <phrase id="nulllabel" value="(Nulo)" />
+    <!-- v2020 (report) -->
+    <phrase id="of" value="de" client="1" />
+    <!-- v2017 -->
+    <phrase id="okbtn" value="OK" client="1" />
+    <!-- v2021 -->
+    <phrase id="old" value="Antigo" />
+    <phrase id="oldpassword" value="Senha antiga" client="1" />
+    <!-- v2021 -->
+    <phrase id="optionalreadyexist" value="Opcao ja existe" />
+    <phrase id="overwritebtn" value="Sobrescrever" client="1" />
+    <!-- v2017 -->
+    <phrase id="overwritelink" value="Sobrescrever" />
+    <phrase id="page" value="Pagina" client="1" />
+    <!-- v2017 -->
+    <phrase id="pagenotfound" value="Rota '%p' não encontrada." />
+    <!-- v2021 -->
+    <phrase id="pagerfirst" value="Primeira" />
+    <phrase id="pagerlast" value="ultima" />
+    <phrase id="pagernext" value="Proxima" />
+    <phrase id="pagerprevious" value="Anterior" />
+    <phrase id="password" value="Senha" client="1" />
+    <!-- v2021 -->
+    <phrase id="passwordmask" value="*****" />
+    <!-- v12 -->
+    <phrase id="passwordrequest" value="Pedido de senha" />
+    <phrase id="passwordchanged" value="Senha alterada" />
+    <phrase id="passwordexpired" value="Senha expirada. Por favor, altere a senha." />
+    <phrase id="passwordstrength" value="Forca: %p" client="1" />
+    <!-- v12 -->
+    <phrase id="passwordtoosimple" value="Sua senha e muito simples" client="1" />
+    <!-- v12 -->
+    <phrase id="permission" value="Permissoes" class="icon-user ew-icon" />
+    <!-- v11 -->
+    <phrase id="permissionadd" value="Adicionar / Copiar" client="1" />
+    <!-- v2020 -->
+    <phrase id="permissionadmin" value="Admin" client="1" />
+    <!-- v2019 -->
+    <phrase id="permissiondelete" value="Excluir" client="1" />
+    <!-- v2018 -->
+    <phrase id="permissionedit" value="Editar" client="1" />
+    <!-- v2018 -->
+    <phrase id="permissionimport" value="Importar" client="1" />
+    <!-- v2020 -->
+    <phrase id="permissionlistsearchview" value="Lista / Pesquisa / Visualiza" client="1" />
+    <!-- v2018 -->
+    <phrase id="permissionlist" value="Lista" client="1" />
+    <!-- v2018 -->
+    <phrase id="permissionlookup" value="Procurar" client="1" />
+    <!-- v2020 -->
+    <phrase id="permissionsearch" value="Pesquisar" client="1" />
+    <!-- v2018 -->
+    <phrase id="permissionview" value="Ver" client="1" />
+    <!-- v2018 -->
+    <phrase id="personaldatabtn" value="Dados Pessoais" />
+    <!-- v2019 -->
+    <phrase id="personaldatacontent" value="Sua conta contem dados pessoais que voce nos forneceu. Esta pagina permite baixar ou excluir esses dados." />
+    <!-- v2019 -->
+    <phrase id="personaldatadeletefailure" value="Ocorreu um erro inesperado ao excluir usuario" />
+    <!-- v2019 -->
+    <phrase id="personaldatadeletesuccess" value="Dados pessoais excluidos com sucesso" />
+    <!-- v2019 -->
+    <phrase id="personaldatatitle" value="Dados pessoais" />
+    <!-- v2019 -->
+    <phrase id="personaldatawarning" value="Excluindo esses dados permanentemente removera sua conta, e isso nao podera ser recuperado." />
+    <!-- v2019 -->
+    <phrase id="pickdate" value="Escolha uma data" />
+    <phrase id="pleaseselect" value="Por favor, selecione" client="1" />
+    <!-- v12 -->
+    <phrase id="pleasewait" value="Por favor aguarde..." client="1" />
+    <phrase id="prev" value="Anterior" client="1" />
+    <!-- v12 -->
+    <phrase id="primarykeyunspecified" value="Chave primaria nao especificada" />
+    <phrase id="printerfriendly" value="Compativel com Impressao" class="icon-print ew-icon" />
+    <!-- v11 -->
+    <phrase id="printerfriendlytext" value="Impressao amigavel" />
+    <phrase id="privacypolicy" value="Politica de Privacidade" />
+    <!-- v2019 -->
+    <phrase id="privacypolicycontent" value="Use esta pagina para detalhar a politica de privacidade do seu site." />
+    <!-- v2019 -->
+    <phrase id="qtr1" value="1º trimestre" />
+    <!-- v2020 (report) -->
+    <phrase id="qtr2" value="2º trimestre" />
+    <!-- v2020 (report) -->
+    <phrase id="qtr3" value="3º trimestre" />
+    <!-- v2020 (report) -->
+    <phrase id="qtr4" value="4º trimestre" />
+    <!-- v2020 (report) -->
+    <phrase id="quicksearch" value="Pesquisa rapida" />
+    <phrase id="quicksearchbtn" value="Pesquisar" />
+    <phrase id="quicksearchauto" value="Auto" client="1" />
+    <!-- v11 -->
+    <phrase id="quicksearchautoshort" value="" client="1" />
+    <!-- v11 -->
+    <phrase id="quicksearchall" value="Todas as palavras-chave" client="1" />
+    <!-- v11 -->
+    <phrase id="quicksearchallshort" value="Todos" client="1" />
+    <!-- v11 -->
+    <phrase id="quicksearchany" value="Qualquer palavra-chave" client="1" />
+    <!-- v11 -->
+    <phrase id="quicksearchanyshort" value="Qualquer" client="1" />
+    <!-- v11 -->
+    <phrase id="quicksearchexact" value="Correspondencia exata" client="1" />
+    <!-- v11 -->
+    <phrase id="quicksearchexactshort" value="Exato" client="1" />
+    <!-- v11 -->
+    <phrase id="recipient" value="Recebedor(res)" client="1" />
+    <!-- v2021 -->
+    <phrase id="record" value="Registros" client="1" />
+    <!-- v2017 -->
+    <phrase id="recordchangedbyotheruser" value="Os dados foram alterados por outro usuario. Clique em [Recarregar] para recuperar os dados alterados (seus dados no formulario serao sobrescritos) ou clique em [Sobrescrever] para sobrescrever os dados alterados." />
+    <phrase id="recorddeleted" value="registro(s) excluido" />
+    <phrase id="recordinserted" value="registro(s) inserido" />
+    <phrase id="recordupdated" value="registro(s) atualizado" />
+    <phrase id="recordsperpage" value="Tamanho da pagina" client="1" />
+    <!-- v2017 -->
+    <phrase id="register" value="Registrar" client="1" />
+    <!-- v2020 -->
+    <phrase id="registerbtn" value="Registrar" />
+    <phrase id="registersuccess" value="Registro efetuado" />
+    <phrase id="registersuccessactivate" value="Registro efetuado. Um e-mail foi enviado para o seu endereco de e-mail. Clique no link do e-mail para ativar sua conta." />
+    <phrase id="registerpage" value="Cadastro" />
+    <phrase id="relatedrecordrequired" value="Voce nao pode adicionar ou atualizar um registro porque o valor da chave estrangeira nao existe na tabela mestre '%t'" />
+    <phrase id="relatedrecordexists" value="Voce nao pode deletar um registro porque existem registros relacionados na tabela de detalhes '%t'" />
+    <phrase id="reloadbtn" value="Atualizar" client="1" />
+    <!-- v2017 -->
+    <phrase id="reloadlink" value="Atualizar" />
+    <phrase id="rememberme" value="Lembrar de mim" />
+    <phrase id="remove" value="Remover" />
+    <phrase id="replace" value="Substituir" />
+    <phrase id="report" value="Relatorio" />
+    <phrase id="resetpwd" value="Solicitar senha" />
+    <!-- v2020 -->
+    <phrase id="resetpwdmsg" value="Solicitar senha" />
+    <!-- v2020 -->
+    <phrase id="resendregisteremailbtn" value="Reenviar e-mail de registro" />
+    <!-- v12 -->
+    <phrase id="resendregisteremailsuccess" value="E-mail de inscricao para o usuario '%u' foi reenviado" />
+    <!-- v12 -->
+    <phrase id="resendregisteremailfailure" value="Falha ao reenviar e-mail de registro para o usuario '%u'" />
+    <!-- v12 -->
+    <phrase id="reset" value="Redefinir" />
+    <phrase id="resetallfilter" value="Redefinir todos os filtros" class="icon-reset-search ew-icon" />
+    <!-- v2020 (report) -->
+    <phrase id="resetconcurrentuserbtn" value="Redefinir sessao de usuario simultanea" />
+    <!-- v12 -->
+    <phrase id="resetconcurrentusersuccess" value="A sessao para o usuario '%u' foi redefinida" />
+    <!-- v12 -->
+    <phrase id="resetconcurrentuserfailure" value="Falha ao redefinir a sessao para o usuario '%u'" />
+    <!-- v12 -->
+    <phrase id="resetloginretrybtn" value="Reiniciar contagem de novas tentativas de login" />
+    <!-- v12 -->
+    <phrase id="resetloginretrysuccess" value="Contagem de novas tentativas de login para o usuario '%u' foi reiniciado" />
+    <!-- v12 -->
+    <phrase id="resetloginretryfailure" value="Falha ao reiniciar a contagem de novas tentativas de login do usuario '%u'" />
+    <!-- v12 -->
+    <phrase id="resetsearchbtn" value="Redefinir" class="icon-reset-search ew-icon" />
+    <!-- v11 -->
+    <phrase id="resetsearch" value="Redefinir" />
+    <phrase id="rptavg" value="MeDIA" />
+    <!-- v2020 (report) -->
+    <phrase id="rptcnt" value="CONTAGEM" />
+    <!-- v2020 (report) -->
+    <phrase id="rptdtlrec" value=" registros detalhados" />
+    <!-- v2020 (report) -->
+    <phrase id="rptgrandsummary" value="Grande Resumo" />
+    <!-- v2020 (report) -->
+    <phrase id="rptmax" value="MAX" />
+    <!-- v2020 (report) -->
+    <phrase id="rptmin" value="MIN" />
+    <!-- v2020 (report) -->
+    <phrase id="rptpagesummary" value="Resumo da pagina" />
+    <!-- v2020 (report) -->
+    <phrase id="rptsum" value="SOMA" />
+    <!-- v2020 (report) -->
+    <phrase id="rptsumhead" value="Resumo de %c: %v" />
+    <!-- v2020 (report) -->
+    <phrase id="savebtn" value="Salvar" client="1" />
+    <!-- v2018 -->
+    <phrase id="savecurrentfilter" value="Salvar filtro atual" />
+    <!-- v12 -->
+    <phrase id="saveusername" value="Salvar meu nome de usuario" />
+    <!-- Deprecated since v2018 -->
+    <phrase id="search" value="Pesquisar" client="1" />
+    <!-- v2017 -->
+    <phrase id="searchbtn" value="Pesquisar" client="1" />
+    <!-- v2018 -->
+    <phrase id="searchlink" value="Pesquisar" class="fa fa-search ew-icon" />
+    <!-- v2019 -->
+    <phrase id="searchpanel" value="Painel de pesquisa" />
+    <!-- v11 -->
+    <phrase id="selectbtn" value="Selecionar" client="1" />
+    <!-- v2017 -->
+    <phrase id="sendemailbtn" value="Enviar" />
+    <phrase id="sendemailsuccess" value="E-mail enviado com sucesso" client="1" />
+    <phrase id="sender" value="Remetente" client="1" />
+    <!-- v2021 -->
+    <phrase id="sendpwd" value="Enviar" client="1" />
+    <!-- v2020 -->
+    <phrase id="sequencenumber" value="%s." />
+    <phrase id="servercommunicationerror" value="Ocorreu um erro durante a comunicacao com o servidor." />
+    <!-- v2017 -->
+    <phrase id="servererror" value="Ocorreu um erro interno ao processar sua solicitação." />
+    <!-- v2021 -->
+    <phrase id="sessionwillexpire" value="Sua sessao ira expirar em %s segundos. Clique em OK para continuar sua sessao." client="1" />
+    <!-- v12 -->
+    <phrase id="sessionexpired" value="Sua sessao expirou." client="1" />
+    <!-- v12 -->
+    <phrase id="setpasswordexpiredbtn" value="Definir senha expirada" />
+    <!-- v12 -->
+    <phrase id="setpasswordexpiredsuccess" value="A senha para o usuario '%u' foi definida como expirada" />
+    <!-- v12 -->
+    <phrase id="setpasswordexpiredfailure" value="Falha ao definir senha para o usuario '%u' como expirado" />
+    <!-- v12 -->
+    <phrase id="showallbtn" value="Mostrar todos" class="icon-reset-search ew-icon" />
+    <!-- v11 -->
+    <phrase id="showall" value="Mostrar todos" />
+    <!-- v11 -->
+    <phrase id="subject" value="Assunto" client="1" />
+    <!-- v2021 -->
+    <phrase id="success" value="Sucesso" client="1" />
+    <!-- v2020 -->
+    <phrase id="summary" value="Resumo" />
+    <!-- v2020 (report) -->
+    <phrase id="summarycolon" value=": " />
+    <!-- v2020 (report) -->
+    <phrase id="table" value="TABELAS" />
+    <phrase id="tableorview" value="Tabelas" client="1" />
+    <!-- v2018 -->
+    <phrase id="tasks" value="Tarefas" />
+    <!-- v2020 (report) -->
+    <phrase id="tbltypetable" value="Tabela: " />
+    <phrase id="tbltypeview" value="View: " />
+    <phrase id="tbltypecustomview" value="View Personalizada: " />
+    <phrase id="tbltypereport" value="Relatorio: " />
+    <phrase id="to" value="ate" />
+    <phrase id="top" value="Topo" />
+    <!-- v2020 (report) -->
+    <phrase id="total" value="Total" />
+    <phrase id="unauthorizeduserid" value="O usuario atual (%c) nao esta autorizado a atribuir o ID do usuario (%u)." />
+    <phrase id="unauthorizedparentuserid" value="O usuario atual (%c) nao esta autorizado a atribuir o ID do usuario pai (%p)." />
+    <phrase id="unauthorizedmasteruserid" value="O usuario atual (%c) nao esta autorizado a inserir o registro. Filtro mestre: %f" />
+    <phrase id="update" value="Atualizar" />
+    <phrase id="updatebtn" value="Atualizar" client="1" />
+    <!-- v2017 -->
+    <phrase id="updatecancelled" value="Atualizacao cancelado" />
+    <phrase id="updatefailed" value="Falha na atualizacao" />
+    <phrase id="updatelink" value="Atualizar" class="fa fa-check ew-icon" />
+    <!-- v2019 -->
+    <phrase id="updateselectall" value="Selecionar tudo" />
+    <!-- v11 -->
+    <phrase id="updateselectedlink" value="Atualizar registros selecionados" class="icon-edit ew-icon" />
+    <!-- v11 -->
+    <phrase id="updatesuccess" value="Atualizado com sucesso" />
+    <phrase id="uploading" value="Enviando..." client="1" />
+    <phrase id="uploadstart" value="Iniciar" client="1" />
+    <phrase id="uploadcancel" value="Cancelar" client="1" />
+    <phrase id="uploaddelete" value="Excluir" client="1" />
+    <phrase id="uploadoverwrite" value="Substituir o arquivo antigo?" client="1" />
+    <phrase id="uploaderrmsg1" value="O arquivo enviado excede a diretiva upload_max_filesize no php.ini" />
+    <phrase id="uploaderrmsg2" value="O arquivo enviado excede a diretiva MAX_FILE_SIZE especificada no formulario HTML" />
+    <phrase id="uploaderrmsg3" value="O arquivo enviado foi apenas parcialmente carregado" />
+    <phrase id="uploaderrmsg4" value="Nenhum arquivo foi enviado" />
+    <phrase id="uploaderrmsg6" value="Faltando uma pasta temporaria" />
+    <phrase id="uploaderrmsg7" value="Falha ao gravar o arquivo no disco" />
+    <phrase id="uploaderrmsg8" value="Uma extensao do PHP parou o upload do arquivo" />
+    <phrase id="uploaderrmsgpostmaxsize" value="O arquivo enviado excede a diretiva post_max_size no php.ini" />
+    <phrase id="uploaderrmsgmaxfilesize" value="O arquivo e muito grande" client="1" />
+    <phrase id="uploaderrmsgminfilesize" value="O arquivo e muito pequeno" client="1" />
+    <phrase id="uploaderrmsgacceptfiletypes" value="Tipo de arquivo nao permitido" client="1" />
+    <phrase id="uploaderrmsgmaxnumberoffiles" value="Numero maximo de arquivos excedidos" client="1" />
+    <phrase id="uploaderrmsgmaxwidth" value="Imagem excede a largura maxima" />
+    <phrase id="uploaderrmsgminwidth" value="Imagem requer uma largura minima" />
+    <phrase id="uploaderrmsgmaxheight" value="Imagem excede a altura maxima" />
+    <phrase id="uploaderrmsgminheight" value="Imagem requer altura minima" />
+    <phrase id="uploaderrmsgmaxfilelength" value="Comprimento total de nomes de arquivos excede o comprimento do campo" client="1" />
+    <phrase id="useradministrator" value="Administrador" client="1" />
+    <!-- v12 -->
+    <phrase id="useranonymous" value="Anonimo" client="1" />
+    <!-- v12 -->
+    <phrase id="userdefault" value="Padrao" client="1" />
+    <!-- v12 -->
+    <phrase id="useremail" value="E-mail" />
+    <phrase id="userexists" value="Usuario ja existe" />
+    <phrase id="userlevel" value="Nivel do usuario: " />
+    <phrase id="userleveladministratorname" value="O nome do nivel de usuario para o nivel de usuario -1 deve ser 'Administrador'" client="1" />
+    <phrase id="userlevelanonymousname" value="O nome do nivel de usuario para o nivel de usuario -2 deve ser 'Anonimo'" client="1" />
+    <!-- v12 -->
+    <phrase id="userlevelpermission" value="Permissoes de nivel de usuario" />
+    <phrase id="userlevelidinteger" value="O ID do nivel do usuario deve ser inteiro" client="1" />
+    <phrase id="userleveldefaultname" value="O nome do nivel de usuario para o nivel de usuario 0 deve ser 'Padrao'" client="1" />
+    <phrase id="userlevelidincorrect" value="O ID de nivel de usuario definido pelo usuario deve ser maior que 0" client="1" />
+    <phrase id="userlevelnameincorrect" value="O nome do usuario nao pode ser 'Administrador' ou 'Padrao'" client="1" />
+    <phrase id="userloggedin" value="Usuario '%u' ja logado" />
+    <phrase id="username" value="Nome do usuario" client="1" />
+    <!-- v2021 -->
+    <phrase id="usernotfound" value="Usuario '%u' nao encontrado" />
+    <!-- v2018 -->
+    <phrase id="userprofilecorrupted" value="O perfil do usuario esta corrompido. Faca o logout e faca o login novamente" />
+    <phrase id="valuenotexist" value="O valor nao existe" client="1" />
+    <!-- v11 -->
+    <phrase id="view" value="Ver" />
+    <phrase id="viewimagegallery" value="Clique para ver a imagem" />
+    <!-- v12 -->
+    <phrase id="viewlink" value="Ver" class="icon-view ew-icon" />
+    <!-- v11 -->
+    <phrase id="viewpageaddlink" value="Adicionar" class="fa fa-plus ew-icon" />
+    <!-- v2019 -->
+    <phrase id="viewpagecopylink" value="Copiar" class="icon-copy ew-icon" />
+    <!-- v11 -->
+    <phrase id="viewpagedeletelink" value="Excluir" class="fa fa-trash ew-icon" />
+    <!-- v2019 -->
+    <phrase id="viewpagedetaillink" value="" />
+    <phrase id="viewpageeditlink" value="Editar" class="icon-edit ew-icon" />
+    <!-- v11 -->
+    <phrase id="warning" value="Aviso" client="1" />
+    <!-- v2020 -->
+    <phrase id="week" value="Semana" />
+    <!-- v2020 (report) -->
+    <phrase id="wrongfiletype" value="O tipo de arquivo nao e permitido." client="1" />
+    <phrase id="year" value="Ano" />
+    <!-- v2020 (report) -->
+    <phrase id="=" value="&amp;nbsp;" />
+    <!-- v12 -->
+    <phrase id="equal" value="=" />
+    <!-- v12 -->
+    <phrase id="&lt;&gt;" value="&amp;lt;&amp;gt;" />
+    <phrase id="&lt;" value="&amp;lt;" />
+    <phrase id="&lt;=" value="&amp;lt;=" />
+    <phrase id="&gt;" value="&amp;gt;" />
+    <phrase id="&gt;=" value="&amp;gt;=" />
+    <phrase id="like" value="contem" />
+    <phrase id="not like" value="nao contem" />
+    <!-- v11.0.3 -->
+    <phrase id="starts with" value="comeca com" />
+    <phrase id="ends with" value="termina com" />
+    <phrase id="is null" value="e nulo" />
+    <phrase id="is not null" value="nao e nulo" />
+    <phrase id="between" value="entre" />
+    <phrase id="and" value="e" />
+    <phrase id="or" value="ou" />
+    <phrase id="am" value="AM" client="1" />
+    <!-- v2017 -->
+    <phrase id="pm" value="PM" client="1" />
+    <!-- v2017 -->
+    <!-- Menu Prefix/Suffix (report) -->
+    <!-- v2020 -->
+    <phrase id="simplereportmenuitemprefix" value="Prefixo do item do relatorio simples" />
+    <phrase id="simplereportmenuitemsuffix" value="Sufixo do item do relatorio simples" />
+    <phrase id="detailsummaryreportmenuitemprefix" value="Prefixo do item do relatorio detalhado" />
+    <phrase id="detailsummaryreportmenuitemsuffix" value="Sufixo do item do relatorio detalhado" />
+    <phrase id="crosstabreportmenuitemprefix" value="Prefixo do item do relatorio em tabela" />
+    <phrase id="crosstabreportmenuitemsuffix" value="Sufixo do item do relatorio em tabela" />
+    <phrase id="chartreportmenuitemprefix" value="Prefixo do item do relatorio em grafico" />
+    <phrase id="chartreportmenuitemsuffix" value="Sufixo do item do relatorio em grafico" />
+    <!-- Advanced Filter (report) -->
+    <!-- v2020 -->
+    <phrase id="future" value="Futuro" />
+    <phrase id="past" value="Passado" />
+    <phrase id="last14days" value="ultimos 14 dias" />
+    <phrase id="last30days" value="ultimos 30 dias" />
+    <phrase id="last7days" value="ultimos 7 dias" />
+    <phrase id="next14days" value="Proximos 14 dias" />
+    <phrase id="next30days" value="Proximos 30 dias" />
+    <phrase id="next7days" value="Proximos 7 dias" />
+    <phrase id="today" value="Hoje" />
+    <phrase id="tomorrow" value="Amanha" />
+    <phrase id="yesterday" value="Ontem" />
+    <phrase id="lastmonth" value="ultimo mes" />
+    <phrase id="nextmonth" value="Proximo mes" />
+    <phrase id="thismonth" value="Este mes" />
+    <phrase id="lasttwoweeks" value="ultimas duas semanas" />
+    <phrase id="lastweek" value="Semana passada" />
+    <phrase id="nexttwoweeks" value="Proximas duas semanas" />
+    <phrase id="nextweek" value="Semana que vem" />
+    <phrase id="thisweek" value="Esta semana" />
+    <phrase id="lastyear" value="Ano passado" />
+    <phrase id="nextyear" value="Ano que vem" />
+    <phrase id="thisyear" value="Este ano" />
+    <!-- Exceptions -->
+    <!-- v2021 -->
+    <phrase id="400" value="Bad Request" />
+    <phrase id="400desc" value="O servidor não pode ou não irá processar o pedido devido a um aparente erro do cliente." />
+    <phrase id="401" value="Unauthorized" />
+    <phrase id="401desc" value="A solicitação requer autenticação de usuário válida." />
+    <phrase id="403" value="Forbidden" />
+    <phrase id="403desc" value="Você não tem permissão para realizar a operação solicitada." />
+    <phrase id="404" value="Not Found" />
+    <phrase id="404desc" value="O recurso solicitado não foi encontrado. Verifique o URI e tente novamente." />
+    <phrase id="405" value="Method Not Allowed" />
+    <phrase id="405desc" value="O método de solicitação não é compatível com o recurso solicitado." />
+    <phrase id="500" value="Internal Server Error" />
+    <phrase id="500desc" value="Condição inesperada encontrada impedindo o servidor de atender à solicitação." />
+    <phrase id="501" value="Not Implemented" />
+    <phrase id="501desc" value="O servidor não suporta a funcionalidade necessária para atender à solicitação." />
+  </global>
+  <project>
+    <phrase id="bodytitle" value="SIMEXAMERICA" />
+    <phrase id="footertext" value="© Pan American Health Organization. All rights reserved." />
+    <menu id="253">
+      <phrase id="menutext" value="vista doc" />
+    </menu>
+    <menu id="254">
+      <phrase id="menutext" value="docver" />
+    </menu>
+    <menu id="255">
+      <phrase id="menutext" value="fileuser" />
+    </menu>
+    <menu id="252">
+      <phrase id="menutext" value="pizarra" />
+    </menu>
+    <menu id="250">
+      <phrase id="menutext" value="InjectExcon" />
+    </menu>
+    <menu id="247">
+      <phrase id="menutext" value="Edit Grupo" />
+    </menu>
+    <menu id="248">
+      <phrase id="menutext" value="evento asociado" />
+    </menu>
+    <menu id="249">
+      <phrase id="menutext" value="view evento asociado" />
+    </menu>
+    <menu id="147">
+      <phrase id="menutext" value="arrowchat" />
+    </menu>
+    <menu id="148">
+      <phrase id="menutext" value="arrowchat admin" />
+    </menu>
+    <menu id="149">
+      <phrase id="menutext" value="arrowchat applications" />
+    </menu>
+    <menu id="150">
+      <phrase id="menutext" value="arrowchat banlist" />
+    </menu>
+    <menu id="151">
+      <phrase id="menutext" value="arrowchat chatroom banlist" />
+    </menu>
+    <menu id="152">
+      <phrase id="menutext" value="arrowchat chatroom messages" />
+    </menu>
+    <menu id="153">
+      <phrase id="menutext" value="arrowchat chatroom rooms" />
+    </menu>
+    <menu id="154">
+      <phrase id="menutext" value="arrowchat chatroom users" />
+    </menu>
+    <menu id="155">
+      <phrase id="menutext" value="arrowchat config" />
+    </menu>
+    <menu id="156">
+      <phrase id="menutext" value="arrowchat graph log" />
+    </menu>
+    <menu id="157">
+      <phrase id="menutext" value="arrowchat notifications" />
+    </menu>
+    <menu id="158">
+      <phrase id="menutext" value="arrowchat notifications markup" />
+    </menu>
+    <menu id="159">
+      <phrase id="menutext" value="arrowchat reports" />
+    </menu>
+    <menu id="160">
+      <phrase id="menutext" value="arrowchat smilies" />
+    </menu>
+    <menu id="161">
+      <phrase id="menutext" value="arrowchat status" />
+    </menu>
+    <menu id="162">
+      <phrase id="menutext" value="arrowchat themes" />
+    </menu>
+    <menu id="163">
+      <phrase id="menutext" value="arrowchat trayicons" />
+    </menu>
+    <menu id="164">
+      <phrase id="menutext" value="arrowchat warnings" />
+    </menu>
+    <menu id="167">
+      <phrase id="menutext" value="tbl task" />
+    </menu>
+    <menu id="143">
+      <phrase id="menutext" value="calificacion" />
+    </menu>
+    <menu id="166">
+      <phrase id="menutext" value="tbl status" />
+    </menu>
+    <menu id="144">
+      <phrase id="menutext" value="calificacion email" />
+    </menu>
+    <menu id="145">
+      <phrase id="menutext" value="user email" />
+    </menu>
+    <menu id="146">
+      <phrase id="menutext" value="view user msg" />
+    </menu>
+    <menu id="140">
+      <phrase id="menutext" value="notiemail" />
+    </menu>
+    <menu id="142" />
+    <menu id="97">
+      <phrase id="menutext" value="view compartidos" />
+    </menu>
+    <menu id="56">
+      <phrase id="menutext" value="resmensaje" />
+    </menu>
+    <menu id="54">
+      <phrase id="menutext" value="permisos doc" />
+    </menu>
+    <menu id="51">
+      <phrase id="menutext" value="Documentos" />
+    </menu>
+    <menu id="47">
+      <phrase id="menutext" value="mensajes usuarios" />
+    </menu>
+    <menu id="49" />
+    <menu id="50" />
+    <menu id="46">
+      <phrase id="menutext" value="actor simulado" />
+    </menu>
+    <menu id="45">
+      <phrase id="menutext" value="historico" />
+    </menu>
+    <menu id="43">
+      <phrase id="menutext" value="todos" />
+    </menu>
+    <menu id="44">
+      <phrase id="menutext" value="view from" />
+    </menu>
+    <menu id="41">
+      <phrase id="menutext" value="x" />
+    </menu>
+    <menu id="42">
+      <phrase id="menutext" value="xx" />
+    </menu>
+    <menu id="39">
+      <phrase id="menutext" value="mensajes" />
+    </menu>
+    <menu id="37">
+      <phrase id="menutext" value="audittrail" />
+    </menu>
+    <menu id="38">
+      <phrase id="menutext" value="menu" />
+    </menu>
+    <menu id="246">
+      <phrase id="menutext" value="doc_agrupados" />
+    </menu>
+    <menu id="1">
+      <phrase id="menutext" value="escenario" />
+    </menu>
+    <menu id="36">
+      <phrase id="menutext" value="config" />
+    </menu>
+    <menu id="18">
+      <phrase id="menutext" value="tipo" />
+    </menu>
+    <menu id="17">
+      <phrase id="menutext" value="incidente" />
+    </menu>
+    <menu id="10">
+      <phrase id="menutext" value="paisgmt" />
+    </menu>
+    <menu id="11">
+      <phrase id="menutext" value="myemail" />
+    </menu>
+    <menu id="137">
+      <phrase id="menutext" value="Correo" />
+    </menu>
+    <menu id="12">
+      <phrase id="menutext" value="Enviados" />
+    </menu>
+    <menu id="14">
+      <phrase id="menutext" value="mensagens" />
+    </menu>
+    <menu id="139">
+      <phrase id="menutext" value="Recibidos" />
+    </menu>
+    <menu id="33">
+      <phrase id="menutext" value="usuarios" />
+    </menu>
+    <menu id="13">
+      <phrase id="menutext" value="users" />
+    </menu>
+    <menu id="48">
+      <phrase id="menutext" value="asignar usuarios" />
+    </menu>
+    <menu id="20">
+      <phrase id="menutext" value="userlevels" />
+    </menu>
+    <menu id="19">
+      <phrase id="menutext" value="userlevelpermissions" />
+    </menu>
+    <menu id="170">
+      <phrase id="menutext" value="lina tiemopo" />
+    </menu>
+    <menu id="53">
+      <phrase id="menutext" value="Domuentos" />
+    </menu>
+    <menu id="55">
+      <phrase id="menutext" value="permisos docusers" />
+    </menu>
+    <menu id="165">
+      <phrase id="menutext" value="kanban" />
+    </menu>
+    <menu id="251">
+      <phrase id="menutext" value="injectParticipante" />
+    </menu>
+    <menu id="40">
+      <phrase id="menutext" value="Chat" />
+    </menu>
+    <menu id="52">
+      <phrase id="menutext" value="cil-chat-bubble" />
+    </menu>
+    <menu id="96">
+      <phrase id="menutext" value="Biblioteca" />
+    </menu>
+    <menu id="57">
+      <phrase id="menutext" value="Tablero" />
+    </menu>
+    <menu id="171">
+      <phrase id="menutext" value="timeline General" />
+    </menu>
+    <menu id="169">
+      <phrase id="menutext" value="Tableroppte" />
+    </menu>
+    <menu id="172">
+      <phrase id="menutext" value="TimeLine ExconGrupo" />
+    </menu>
+    <menu id="245">
+      <phrase id="menutext" value="Ejecución" />
+    </menu>
+    <menu id="2">
+      <phrase id="menutext" value="grupo" />
+    </menu>
+    <menu id="3">
+      <phrase id="menutext" value="participantes" />
+    </menu>
+    <menu id="4">
+      <phrase id="menutext" value="subgrupo" />
+    </menu>
+    <menu id="5">
+      <phrase id="menutext" value="tareas" />
+    </menu>
+    <menu id="6">
+      <phrase id="menutext" value="Escenario" />
+    </menu>
+    <table id="actor_simulado">
+      <phrase id="tblcaption" value="actor simulado" />
+      <field id="id_actor">
+        <phrase id="fldcaption" value="id actor" />
+      </field>
+      <field id="nombre_actor">
+        <phrase id="fldcaption" value="nombre actor" />
+      </field>
+    </table>
+    <table id="archivos_doc">
+      <phrase id="tblcaption" value="archivos doc" />
+      <field id="id_file">
+        <phrase id="fldcaption" value="id file" />
+      </field>
+      <field id="id_users">
+        <phrase id="fldcaption" value="user id" />
+      </field>
+      <field id="file_name">
+        <phrase id="fldcaption" value="file name" />
+      </field>
+      <field id="fecha_created">
+        <phrase id="fldcaption" value="fecha created" />
+      </field>
+      <field id="boton">
+        <phrase id="fldcaption" value="Compartrir" />
+      </field>
+    </table>
+    <table id="arrowchat">
+      <phrase id="tblcaption" value="arrowchat" />
+      <field id="id">
+        <phrase id="fldcaption" value="id" />
+      </field>
+      <field id="_from">
+        <phrase id="fldcaption" value="from" />
+      </field>
+      <field id="to">
+        <phrase id="fldcaption" value="to" />
+      </field>
+      <field id="message">
+        <phrase id="fldcaption" value="message" />
+      </field>
+      <field id="sent">
+        <phrase id="fldcaption" value="sent" />
+      </field>
+      <field id="read">
+        <phrase id="fldcaption" value="read" />
+      </field>
+      <field id="user_read">
+        <phrase id="fldcaption" value="user read" />
+        <phrase id="fldtagvalue1" value="1" />
+        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagvalue2" value="0" />
+        <phrase id="fldtagcaption2" value="No" />
+      </field>
+      <field id="direction">
+        <phrase id="fldcaption" value="direction" />
+      </field>
+    </table>
+    <table id="arrowchat_admin">
+      <phrase id="tblcaption" value="arrowchat admin" />
+      <field id="id">
+        <phrase id="fldcaption" value="id" />
+      </field>
+      <field id="_username">
+        <phrase id="fldcaption" value="username" />
+      </field>
+      <field id="_password">
+        <phrase id="fldcaption" value="password" />
+      </field>
+      <field id="_email">
+        <phrase id="fldcaption" value="email" />
+      </field>
+    </table>
+    <table id="arrowchat_applications">
+      <phrase id="tblcaption" value="arrowchat applications" />
+      <field id="id">
+        <phrase id="fldcaption" value="id" />
+      </field>
+      <field id="name">
+        <phrase id="fldcaption" value="name" />
+      </field>
+      <field id="folder">
+        <phrase id="fldcaption" value="folder" />
+      </field>
+      <field id="icon">
+        <phrase id="fldcaption" value="icon" />
+      </field>
+      <field id="width">
+        <phrase id="fldcaption" value="width" />
+      </field>
+      <field id="height">
+        <phrase id="fldcaption" value="height" />
+      </field>
+      <field id="bar_width">
+        <phrase id="fldcaption" value="bar width" />
+      </field>
+      <field id="bar_name">
+        <phrase id="fldcaption" value="bar name" />
+      </field>
+      <field id="dont_reload">
+        <phrase id="fldcaption" value="dont reload" />
+        <phrase id="fldtagvalue1" value="1" />
+        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagvalue2" value="0" />
+        <phrase id="fldtagcaption2" value="No" />
+      </field>
+      <field id="default_bookmark">
+        <phrase id="fldcaption" value="default bookmark" />
+        <phrase id="fldtagvalue1" value="1" />
+        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagvalue2" value="0" />
+        <phrase id="fldtagcaption2" value="No" />
+      </field>
+      <field id="show_to_guests">
+        <phrase id="fldcaption" value="show to guests" />
+        <phrase id="fldtagvalue1" value="1" />
+        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagvalue2" value="0" />
+        <phrase id="fldtagcaption2" value="No" />
+      </field>
+      <field id="link">
+        <phrase id="fldcaption" value="link" />
+      </field>
+      <field id="update_link">
+        <phrase id="fldcaption" value="update link" />
+      </field>
+      <field id="version">
+        <phrase id="fldcaption" value="version" />
+      </field>
+      <field id="active">
+        <phrase id="fldcaption" value="active" />
+        <phrase id="fldtagvalue1" value="1" />
+        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagvalue2" value="0" />
+        <phrase id="fldtagcaption2" value="No" />
+      </field>
+    </table>
+    <table id="arrowchat_banlist">
+      <phrase id="tblcaption" value="arrowchat banlist" />
+      <field id="ban_id">
+        <phrase id="fldcaption" value="ban id" />
+      </field>
+      <field id="ban_userid">
+        <phrase id="fldcaption" value="ban userid" />
+      </field>
+      <field id="ban_ip">
+        <phrase id="fldcaption" value="ban ip" />
+      </field>
+      <field id="banned_by">
+        <phrase id="fldcaption" value="banned by" />
+      </field>
+      <field id="banned_time">
+        <phrase id="fldcaption" value="banned time" />
+      </field>
+    </table>
+    <table id="arrowchat_chatroom_banlist">
+      <phrase id="tblcaption" value="arrowchat chatroom banlist" />
+      <field id="id">
+        <phrase id="fldcaption" value="id" />
+      </field>
+      <field id="user_id">
+        <phrase id="fldcaption" value="user id" />
+      </field>
+      <field id="chatroom_id">
+        <phrase id="fldcaption" value="chatroom id" />
+      </field>
+      <field id="ban_length">
+        <phrase id="fldcaption" value="ban length" />
+      </field>
+      <field id="ban_time">
+        <phrase id="fldcaption" value="ban time" />
+      </field>
+      <field id="ip_address">
+        <phrase id="fldcaption" value="ip address" />
+      </field>
+    </table>
+    <table id="arrowchat_chatroom_messages">
+      <phrase id="tblcaption" value="arrowchat chatroom messages" />
+      <field id="id">
+        <phrase id="fldcaption" value="id" />
+      </field>
+      <field id="chatroom_id">
+        <phrase id="fldcaption" value="chatroom id" />
+      </field>
+      <field id="user_id">
+        <phrase id="fldcaption" value="user id" />
+      </field>
+      <field id="_username">
+        <phrase id="fldcaption" value="username" />
+      </field>
+      <field id="message">
+        <phrase id="fldcaption" value="message" />
+      </field>
+      <field id="global_message">
+        <phrase id="fldcaption" value="global message" />
+        <phrase id="fldtagvalue1" value="1" />
+        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagvalue2" value="0" />
+        <phrase id="fldtagcaption2" value="No" />
+      </field>
+      <field id="is_mod">
+        <phrase id="fldcaption" value="is mod" />
+        <phrase id="fldtagvalue1" value="1" />
+        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagvalue2" value="0" />
+        <phrase id="fldtagcaption2" value="No" />
+      </field>
+      <field id="is_admin">
+        <phrase id="fldcaption" value="is admin" />
+        <phrase id="fldtagvalue1" value="1" />
+        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagvalue2" value="0" />
+        <phrase id="fldtagcaption2" value="No" />
+      </field>
+      <field id="sent">
+        <phrase id="fldcaption" value="sent" />
+      </field>
+      <field id="_action">
+        <phrase id="fldcaption" value="action" />
+        <phrase id="fldtagvalue1" value="1" />
+        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagvalue2" value="0" />
+        <phrase id="fldtagcaption2" value="No" />
+      </field>
+    </table>
+    <table id="arrowchat_chatroom_rooms">
+      <phrase id="tblcaption" value="arrowchat chatroom rooms" />
+      <field id="id">
+        <phrase id="fldcaption" value="id" />
+      </field>
+      <field id="author_id">
+        <phrase id="fldcaption" value="author id" />
+      </field>
+      <field id="name">
+        <phrase id="fldcaption" value="name" />
+      </field>
+      <field id="description">
+        <phrase id="fldcaption" value="description" />
+      </field>
+      <field id="welcome_message">
+        <phrase id="fldcaption" value="welcome message" />
+      </field>
+      <field id="image">
+        <phrase id="fldcaption" value="image" />
+      </field>
+      <field id="type">
+        <phrase id="fldcaption" value="type" />
+        <phrase id="fldtagvalue1" value="1" />
+        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagvalue2" value="0" />
+        <phrase id="fldtagcaption2" value="No" />
+      </field>
+      <field id="_password">
+        <phrase id="fldcaption" value="password" />
+      </field>
+      <field id="length">
+        <phrase id="fldcaption" value="length" />
+      </field>
+      <field id="is_featured">
+        <phrase id="fldcaption" value="is featured" />
+        <phrase id="fldtagvalue1" value="1" />
+        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagvalue2" value="0" />
+        <phrase id="fldtagcaption2" value="No" />
+      </field>
+      <field id="max_users">
+        <phrase id="fldcaption" value="max users" />
+      </field>
+      <field id="limit_message_num">
+        <phrase id="fldcaption" value="limit message num" />
+      </field>
+      <field id="limit_seconds_num">
+        <phrase id="fldcaption" value="limit seconds num" />
+      </field>
+      <field id="disallowed_groups">
+        <phrase id="fldcaption" value="disallowed groups" />
+      </field>
+      <field id="session_time">
+        <phrase id="fldcaption" value="session time" />
+      </field>
+    </table>
+    <table id="arrowchat_chatroom_users">
+      <phrase id="tblcaption" value="arrowchat chatroom users" />
+      <field id="user_id">
+        <phrase id="fldcaption" value="user id" />
+      </field>
+      <field id="chatroom_id">
+        <phrase id="fldcaption" value="chatroom id" />
+      </field>
+      <field id="is_admin">
+        <phrase id="fldcaption" value="is admin" />
+        <phrase id="fldtagvalue1" value="1" />
+        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagvalue2" value="0" />
+        <phrase id="fldtagcaption2" value="No" />
+      </field>
+      <field id="is_mod">
+        <phrase id="fldcaption" value="is mod" />
+        <phrase id="fldtagvalue1" value="1" />
+        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagvalue2" value="0" />
+        <phrase id="fldtagcaption2" value="No" />
+      </field>
+      <field id="block_chats">
+        <phrase id="fldcaption" value="block chats" />
+      </field>
+      <field id="silence_length">
+        <phrase id="fldcaption" value="silence length" />
+      </field>
+      <field id="silence_time">
+        <phrase id="fldcaption" value="silence time" />
+      </field>
+      <field id="session_time">
+        <phrase id="fldcaption" value="session time" />
+      </field>
+    </table>
+    <table id="arrowchat_config">
+      <phrase id="tblcaption" value="arrowchat config" />
+      <field id="config_name">
+        <phrase id="fldcaption" value="config name" />
+      </field>
+      <field id="config_value">
+        <phrase id="fldcaption" value="config value" />
+      </field>
+      <field id="is_dynamic">
+        <phrase id="fldcaption" value="is dynamic" />
+        <phrase id="fldtagvalue1" value="1" />
+        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagvalue2" value="0" />
+        <phrase id="fldtagcaption2" value="No" />
+      </field>
+    </table>
+    <table id="arrowchat_graph_log">
+      <phrase id="tblcaption" value="arrowchat graph log" />
+      <field id="id">
+        <phrase id="fldcaption" value="id" />
+      </field>
+      <field id="date">
+        <phrase id="fldcaption" value="date" />
+      </field>
+      <field id="user_messages">
+        <phrase id="fldcaption" value="user messages" />
+      </field>
+      <field id="chat_room_messages">
+        <phrase id="fldcaption" value="chat room messages" />
+      </field>
+    </table>
+    <table id="arrowchat_notifications">
+      <phrase id="tblcaption" value="arrowchat notifications" />
+      <field id="id">
+        <phrase id="fldcaption" value="id" />
+      </field>
+      <field id="to_id">
+        <phrase id="fldcaption" value="to id" />
+      </field>
+      <field id="author_id">
+        <phrase id="fldcaption" value="author id" />
+      </field>
+      <field id="author_name">
+        <phrase id="fldcaption" value="author name" />
+      </field>
+      <field id="misc1">
+        <phrase id="fldcaption" value="misc 1" />
+      </field>
+      <field id="misc2">
+        <phrase id="fldcaption" value="misc 2" />
+      </field>
+      <field id="misc3">
+        <phrase id="fldcaption" value="misc 3" />
+      </field>
+      <field id="type">
+        <phrase id="fldcaption" value="type" />
+      </field>
+      <field id="alert_read">
+        <phrase id="fldcaption" value="alert read" />
+      </field>
+      <field id="user_read">
+        <phrase id="fldcaption" value="user read" />
+      </field>
+      <field id="alert_time">
+        <phrase id="fldcaption" value="alert time" />
+      </field>
+    </table>
+    <table id="arrowchat_notifications_markup">
+      <phrase id="tblcaption" value="arrowchat notifications markup" />
+      <field id="id">
+        <phrase id="fldcaption" value="id" />
+      </field>
+      <field id="name">
+        <phrase id="fldcaption" value="name" />
+      </field>
+      <field id="type">
+        <phrase id="fldcaption" value="type" />
+      </field>
+      <field id="markup">
+        <phrase id="fldcaption" value="markup" />
+      </field>
+    </table>
+    <table id="arrowchat_reports">
+      <phrase id="tblcaption" value="arrowchat reports" />
+      <field id="id">
+        <phrase id="fldcaption" value="id" />
+      </field>
+      <field id="report_from">
+        <phrase id="fldcaption" value="report from" />
+      </field>
+      <field id="report_about">
+        <phrase id="fldcaption" value="report about" />
+      </field>
+      <field id="report_chatroom">
+        <phrase id="fldcaption" value="report chatroom" />
+      </field>
+      <field id="report_time">
+        <phrase id="fldcaption" value="report time" />
+      </field>
+      <field id="working_by">
+        <phrase id="fldcaption" value="working by" />
+      </field>
+      <field id="working_time">
+        <phrase id="fldcaption" value="working time" />
+      </field>
+      <field id="completed_by">
+        <phrase id="fldcaption" value="completed by" />
+      </field>
+      <field id="completed_time">
+        <phrase id="fldcaption" value="completed time" />
+      </field>
+    </table>
+    <table id="arrowchat_smilies">
+      <phrase id="tblcaption" value="arrowchat smilies" />
+      <field id="id">
+        <phrase id="fldcaption" value="id" />
+      </field>
+      <field id="name">
+        <phrase id="fldcaption" value="name" />
+      </field>
+      <field id="code">
+        <phrase id="fldcaption" value="code" />
+      </field>
+    </table>
+    <table id="arrowchat_status">
+      <phrase id="tblcaption" value="arrowchat status" />
+      <field id="_userid">
+        <phrase id="fldcaption" value="userid" />
+      </field>
+      <field id="guest_name">
+        <phrase id="fldcaption" value="guest name" />
+      </field>
+      <field id="message">
+        <phrase id="fldcaption" value="message" />
+      </field>
+      <field id="status">
+        <phrase id="fldcaption" value="status" />
+      </field>
+      <field id="theme">
+        <phrase id="fldcaption" value="theme" />
+      </field>
+      <field id="popout">
+        <phrase id="fldcaption" value="popout" />
+      </field>
+      <field id="typing">
+        <phrase id="fldcaption" value="typing" />
+      </field>
+      <field id="hide_bar">
+        <phrase id="fldcaption" value="hide bar" />
+        <phrase id="fldtagvalue1" value="1" />
+        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagvalue2" value="0" />
+        <phrase id="fldtagcaption2" value="No" />
+      </field>
+      <field id="play_sound">
+        <phrase id="fldcaption" value="play sound" />
+        <phrase id="fldtagvalue1" value="1" />
+        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagvalue2" value="0" />
+        <phrase id="fldtagcaption2" value="No" />
+      </field>
+      <field id="window_open">
+        <phrase id="fldcaption" value="window open" />
+        <phrase id="fldtagvalue1" value="1" />
+        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagvalue2" value="0" />
+        <phrase id="fldtagcaption2" value="No" />
+      </field>
+      <field id="only_names">
+        <phrase id="fldcaption" value="only names" />
+        <phrase id="fldtagvalue1" value="1" />
+        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagvalue2" value="0" />
+        <phrase id="fldtagcaption2" value="No" />
+      </field>
+      <field id="chatroom_window">
+        <phrase id="fldcaption" value="chatroom window" />
+      </field>
+      <field id="chatroom_stay">
+        <phrase id="fldcaption" value="chatroom stay" />
+      </field>
+      <field id="chatroom_unfocus">
+        <phrase id="fldcaption" value="chatroom unfocus" />
+      </field>
+      <field id="chatroom_show_names">
+        <phrase id="fldcaption" value="chatroom show names" />
+        <phrase id="fldtagvalue1" value="1" />
+        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagvalue2" value="0" />
+        <phrase id="fldtagcaption2" value="No" />
+      </field>
+      <field id="chatroom_block_chats">
+        <phrase id="fldcaption" value="chatroom block chats" />
+        <phrase id="fldtagvalue1" value="1" />
+        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagvalue2" value="0" />
+        <phrase id="fldtagcaption2" value="No" />
+      </field>
+      <field id="chatroom_sound">
+        <phrase id="fldcaption" value="chatroom sound" />
+        <phrase id="fldtagvalue1" value="1" />
+        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagvalue2" value="0" />
+        <phrase id="fldtagcaption2" value="No" />
+      </field>
+      <field id="announcement">
+        <phrase id="fldcaption" value="announcement" />
+        <phrase id="fldtagvalue1" value="1" />
+        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagvalue2" value="0" />
+        <phrase id="fldtagcaption2" value="No" />
+      </field>
+      <field id="unfocus_chat">
+        <phrase id="fldcaption" value="unfocus chat" />
+      </field>
+      <field id="focus_chat">
+        <phrase id="fldcaption" value="focus chat" />
+      </field>
+      <field id="last_message">
+        <phrase id="fldcaption" value="last message" />
+      </field>
+      <field id="clear_chats">
+        <phrase id="fldcaption" value="clear chats" />
+      </field>
+      <field id="apps_bookmarks">
+        <phrase id="fldcaption" value="apps bookmarks" />
+      </field>
+      <field id="apps_other">
+        <phrase id="fldcaption" value="apps other" />
+      </field>
+      <field id="apps_open">
+        <phrase id="fldcaption" value="apps open" />
+      </field>
+      <field id="apps_load">
+        <phrase id="fldcaption" value="apps load" />
+      </field>
+      <field id="block_chats">
+        <phrase id="fldcaption" value="block chats" />
+      </field>
+      <field id="session_time">
+        <phrase id="fldcaption" value="session time" />
+      </field>
+      <field id="is_admin">
+        <phrase id="fldcaption" value="is admin" />
+        <phrase id="fldtagvalue1" value="1" />
+        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagvalue2" value="0" />
+        <phrase id="fldtagcaption2" value="No" />
+      </field>
+      <field id="is_mod">
+        <phrase id="fldcaption" value="is mod" />
+        <phrase id="fldtagvalue1" value="1" />
+        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagvalue2" value="0" />
+        <phrase id="fldtagcaption2" value="No" />
+      </field>
+      <field id="hash_id">
+        <phrase id="fldcaption" value="hash id" />
+      </field>
+      <field id="ip_address">
+        <phrase id="fldcaption" value="ip address" />
+      </field>
+    </table>
+    <table id="arrowchat_themes">
+      <phrase id="tblcaption" value="arrowchat themes" />
+      <field id="id">
+        <phrase id="fldcaption" value="id" />
+      </field>
+      <field id="folder">
+        <phrase id="fldcaption" value="folder" />
+      </field>
+      <field id="name">
+        <phrase id="fldcaption" value="name" />
+      </field>
+      <field id="active">
+        <phrase id="fldcaption" value="active" />
+        <phrase id="fldtagvalue1" value="1" />
+        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagvalue2" value="0" />
+        <phrase id="fldtagcaption2" value="No" />
+      </field>
+      <field id="update_link">
+        <phrase id="fldcaption" value="update link" />
+      </field>
+      <field id="version">
+        <phrase id="fldcaption" value="version" />
+      </field>
+      <field id="_default">
+        <phrase id="fldcaption" value="default" />
+        <phrase id="fldtagvalue1" value="1" />
+        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagvalue2" value="0" />
+        <phrase id="fldtagcaption2" value="No" />
+      </field>
+    </table>
+    <table id="arrowchat_trayicons">
+      <phrase id="tblcaption" value="arrowchat trayicons" />
+      <field id="id">
+        <phrase id="fldcaption" value="id" />
+      </field>
+      <field id="name">
+        <phrase id="fldcaption" value="name" />
+      </field>
+      <field id="icon">
+        <phrase id="fldcaption" value="icon" />
+      </field>
+      <field id="location">
+        <phrase id="fldcaption" value="location" />
+      </field>
+      <field id="target">
+        <phrase id="fldcaption" value="target" />
+      </field>
+      <field id="width">
+        <phrase id="fldcaption" value="width" />
+      </field>
+      <field id="height">
+        <phrase id="fldcaption" value="height" />
+      </field>
+      <field id="tray_width">
+        <phrase id="fldcaption" value="tray width" />
+      </field>
+      <field id="tray_name">
+        <phrase id="fldcaption" value="tray name" />
+      </field>
+      <field id="tray_location">
+        <phrase id="fldcaption" value="tray location" />
+      </field>
+      <field id="active">
+        <phrase id="fldcaption" value="active" />
+        <phrase id="fldtagvalue1" value="1" />
+        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagvalue2" value="0" />
+        <phrase id="fldtagcaption2" value="No" />
+      </field>
+    </table>
+    <table id="arrowchat_warnings">
+      <phrase id="tblcaption" value="arrowchat warnings" />
+      <field id="id">
+        <phrase id="fldcaption" value="id" />
+      </field>
+      <field id="user_id">
+        <phrase id="fldcaption" value="user id" />
+      </field>
+      <field id="warn_reason">
+        <phrase id="fldcaption" value="warn reason" />
+      </field>
+      <field id="warned_by">
+        <phrase id="fldcaption" value="warned by" />
+      </field>
+      <field id="warning_time">
+        <phrase id="fldcaption" value="warning time" />
+      </field>
+      <field id="user_read">
+        <phrase id="fldcaption" value="user read" />
+        <phrase id="fldtagvalue1" value="1" />
+        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagvalue2" value="0" />
+        <phrase id="fldtagcaption2" value="No" />
+      </field>
+    </table>
+    <table id="audittrail">
+      <phrase id="tblcaption" value="audittrail" />
+      <field id="id">
+        <phrase id="fldcaption" value="id" />
+      </field>
+      <field id="datetime">
+        <phrase id="fldcaption" value="datetime" />
+      </field>
+      <field id="script">
+        <phrase id="fldcaption" value="script" />
+      </field>
+      <field id="user">
+        <phrase id="fldcaption" value="user" />
+      </field>
+      <field id="_action">
+        <phrase id="fldcaption" value="action" />
+      </field>
+      <field id="_table">
+        <phrase id="fldcaption" value="table" />
+      </field>
+      <field id="field">
+        <phrase id="fldcaption" value="field" />
+      </field>
+      <field id="keyvalue">
+        <phrase id="fldcaption" value="keyvalue" />
+      </field>
+      <field id="oldvalue">
+        <phrase id="fldcaption" value="oldvalue" />
+      </field>
+      <field id="newvalue">
+        <phrase id="fldcaption" value="newvalue" />
+      </field>
+    </table>
+    <table id="biblioteca">
+      <phrase id="tblcaption" value="Biblioteca" />
+    </table>
+    <table id="calificacion">
+      <phrase id="tblcaption" value="calificacion" />
+      <field id="id_calificacion">
+        <phrase id="fldcaption" value="id calificacion" />
+      </field>
+      <field id="descripcion">
+        <phrase id="fldcaption" value="descripcion" />
+      </field>
+    </table>
+    <table id="calificacion_mensajes">
+      <phrase id="tblcaption" value="calificacion email" />
+      <field id="id_calificacion">
+        <phrase id="fldcaption" value="id calificacion" />
+      </field>
+      <field id="id_calificacion_msg">
+        <phrase id="fldcaption" value="id calificacion msg" />
+      </field>
+      <field id="id_mensaje">
+        <phrase id="fldcaption" value="id mensaje" />
+      </field>
+      <field id="fecha_calificacion">
+        <phrase id="fldcaption" value="Fecha calificacion" />
+      </field>
+    </table>
+    <table id="chat_ini">
+      <phrase id="tblcaption" value="Chat" />
+    </table>
+    <table id="config2" />
+    <table id="correo">
+      <phrase id="tblcaption" value="email" />
+    </table>
+    <table id="documentos">
+      <phrase id="tblcaption" value="doc_agrupados" />
+    </table>
+    <table id="docver">
+      <phrase id="tblcaption" value="docver" />
+      <field id="id_file">
+        <phrase id="fldcaption" value="id file" />
+      </field>
+      <field id="perfil">
+        <phrase id="fldcaption" value="perfil" />
+      </field>
+      <field id="escenario">
+        <phrase id="fldcaption" value="escenario" />
+      </field>
+      <field id="file_name">
+        <phrase id="fldcaption" value="file name" />
+      </field>
+    </table>
+    <table id="editgrupos">
+      <phrase id="tblcaption" value="Edit Grupo" />
+    </table>
+    <table id="email2">
+      <phrase id="tblcaption" value="email" />
+      <field id="id_email">
+        <phrase id="fldcaption" value="id email" />
+      </field>
+      <field id="sender_userid">
+        <phrase id="fldcaption" value="sender userid" />
+      </field>
+      <field id="copy_sender">
+        <phrase id="fldcaption" value="copy sender" />
+      </field>
+      <field id="sujeto">
+        <phrase id="fldcaption" value="sujeto" />
+      </field>
+      <field id="mensaje">
+        <phrase id="fldcaption" value="message" />
+      </field>
+      <field id="archivo">
+        <phrase id="fldcaption" value="archivo" />
+      </field>
+      <field id="reciever_userid">
+        <phrase id="fldcaption" value="reciever userid" />
+      </field>
+      <field id="tiempo">
+        <phrase id="fldcaption" value="tiempo" />
+      </field>
+      <field id="estado_msg">
+        <phrase id="fldcaption" value="status" />
+      </field>
+      <field id="id_mensaje">
+        <phrase id="fldcaption" value="id mensaje" />
+      </field>
+    </table>
+    <table id="escenario">
+      <phrase id="tblcaption" value="escenario" />
+      <field id="id_escenario">
+        <phrase id="fldcaption" value="id escenario" />
+      </field>
+      <field id="icon_escenario">
+        <phrase id="fldcaption" value="icon escenario" />
+      </field>
+      <field id="fechacreacion_escenario">
+        <phrase id="fldcaption" value="fechacreacion escenario" />
+      </field>
+      <field id="nombre_escenario">
+        <phrase id="fldcaption" value="nombre escenario" />
+      </field>
+      <field id="tipo_evento">
+        <phrase id="fldcaption" value="tipo evento" />
+      </field>
+      <field id="incidente">
+        <phrase id="fldcaption" value="incidente" />
+      </field>
+      <field id="evento_asociado">
+        <phrase id="fldcaption" value="evento asociado" />
+      </field>
+      <field id="pais_escenario">
+        <phrase id="fldcaption" value="pais escenario" />
+      </field>
+      <field id="zonahora_escenario">
+        <phrase id="fldcaption" value="zonahora escenario" />
+      </field>
+      <field id="descripcion_escenario">
+        <phrase id="fldcaption" value="descripcion escenario" />
+      </field>
+      <field id="fechaini_real">
+        <phrase id="fldcaption" value="fechaini real" />
+      </field>
+      <field id="fechafinal_real">
+        <phrase id="fldcaption" value="fechafinal real" />
+      </field>
+      <field id="fechaini_simulado">
+        <phrase id="fldcaption" value="fechaini simulado" />
+      </field>
+      <field id="fechafin_simulado">
+        <phrase id="fldcaption" value="fechafin simulado" />
+      </field>
+      <field id="estado">
+        <phrase id="fldcaption" value="estado" />
+        <phrase id="fldtagvalue1" value="2" />
+        <phrase id="fldtagcaption1" value="Configuración" />
+        <phrase id="fldtagvalue2" value="1" />
+        <phrase id="fldtagcaption2" value="Activa" />
+        <phrase id="fldtagvalue3" value="3" />
+        <phrase id="fldtagcaption3" value="Finalizada" />
+      </field>
+      <field id="image_escenario">
+        <phrase id="fldcaption" value="image escenario" />
+      </field>
+      <field id="entrar">
+        <phrase id="fldcaption" value="control" />
+      </field>
+    </table>
+    <table id="evento_asociado">
+      <phrase id="tblcaption" value="evento asociado" />
+      <field id="id_incidente">
+        <phrase id="fldcaption" value="id incidente" />
+      </field>
+      <field id="id_tipo">
+        <phrase id="fldcaption" value="id tipo" />
+      </field>
+      <field id="inc_es">
+        <phrase id="fldcaption" value="CONCAT('&amp;nbsp;&amp;nbsp; ',incidente es)" />
+      </field>
+      <field id="inc_en">
+        <phrase id="fldcaption" value="CONCAT(' &amp;nbsp;&amp;nbsp;',incidente en)" />
+      </field>
+    </table>
+    <table id="fileuser">
+      <phrase id="tblcaption" value="fileuser" />
+      <field id="numfile">
+        <phrase id="fldcaption" value="numfile" />
+      </field>
+      <field id="perfil">
+        <phrase id="fldcaption" value="perfil" />
+      </field>
+      <field id="escen">
+        <phrase id="fldcaption" value="escen" />
+      </field>
+      <field id="file_name">
+        <phrase id="fldcaption" value="file name" />
+      </field>
+    </table>
+    <table id="grupo">
+      <phrase id="tblcaption" value="grupo" />
+      <field id="id_escenario">
+        <phrase id="fldcaption" value="id escenario" />
+      </field>
+      <field id="id_grupo">
+        <phrase id="fldcaption" value="id grupo" />
+      </field>
+      <field id="imgen_grupo">
+        <phrase id="fldcaption" value="imgen grupo" />
+      </field>
+      <field id="nombre_grupo">
+        <phrase id="fldcaption" value="nombre grupo" />
+      </field>
+      <field id="descripcion_grupo">
+        <phrase id="fldcaption" value="descripcion grupo" />
+      </field>
+      <field id="color">
+        <phrase id="fldcaption" value="color" />
+        <phrase id="fldtagvalue1" value="1" />
+        <phrase id="fldtagcaption1" value="rojo" />
+        <phrase id="fldtagvalue2" value="#000" />
+        <phrase id="fldtagcaption2" value="negro" />
+      </field>
+      <field id="color_grup">
+        <phrase id="fldcaption" value="color grup" />
+      </field>
+    </table>
+    <table id="grupos">
+      <phrase id="tblcaption" value="Grupos" />
+    </table>
+    <table id="historico">
+      <phrase id="tblcaption" value="historico" />
+    </table>
+    <table id="imbox_mail">
+      <phrase id="tblcaption" value="imbox mail" />
+      <field id="id_email">
+        <phrase id="fldcaption" value="id email" />
+      </field>
+      <field id="sender_userid">
+        <phrase id="fldcaption" value="sender userid" />
+      </field>
+      <field id="reciever_userid">
+        <phrase id="fldcaption" value="reciever userid" />
+      </field>
+      <field id="alerta" />
+      <field id="copy_sender">
+        <phrase id="fldcaption" value="copy sender" />
+      </field>
+      <field id="sujeto">
+        <phrase id="fldcaption" value="sujeto" />
+      </field>
+      <field id="mensaje">
+        <phrase id="fldcaption" value="message" />
+      </field>
+      <field id="archivo">
+        <phrase id="fldcaption" value="archivo" />
+      </field>
+      <field id="tiempo">
+        <phrase id="fldcaption" value="tiempo" />
+      </field>
+      <field id="estado_msg">
+        <phrase id="fldcaption" value="status" />
+      </field>
+      <field id="id_mensaje">
+        <phrase id="fldcaption" value="id mensaje" />
+      </field>
+    </table>
+    <table id="incidente">
+      <phrase id="tblcaption" value="incidente" />
+      <field id="id_incidente">
+        <phrase id="fldcaption" value="id incidente" />
+      </field>
+      <field id="id_tipo">
+        <phrase id="fldcaption" value="id tipo" />
+      </field>
+      <field id="incidente_es">
+        <phrase id="fldcaption" value="incidente es" />
+      </field>
+      <field id="incidente_en">
+        <phrase id="fldcaption" value="incidente en" />
+      </field>
+      <field id="icono">
+        <phrase id="fldcaption" value="icono" />
+      </field>
+    </table>
+    <table id="inicio">
+      <phrase id="tblcaption" value="Escenario" />
+    </table>
+    <table id="inject_excon">
+      <phrase id="tblcaption" value="InjectExcon" />
+    </table>
+    <table id="inject_participante">
+      <phrase id="tblcaption" value="injectParticipante" />
+    </table>
+    <table id="kanban">
+      <phrase id="tblcaption" value="kanban" />
+    </table>
+    <table id="linea_tiempo">
+      <phrase id="tblcaption" value="lina tiemopo" />
+    </table>
+    <table id="mensagens">
+      <phrase id="tblcaption" value="mensagens" />
+      <field id="id">
+        <phrase id="fldcaption" value="id" />
+      </field>
+      <field id="id_de">
+        <phrase id="fldcaption" value="id de" />
+      </field>
+      <field id="id_para">
+        <phrase id="fldcaption" value="id para" />
+      </field>
+      <field id="mensagem">
+        <phrase id="fldcaption" value="mensagem" />
+      </field>
+      <field id="time">
+        <phrase id="fldcaption" value="time" />
+      </field>
+      <field id="lido">
+        <phrase id="fldcaption" value="lido" />
+      </field>
+    </table>
+    <table id="mensajes">
+      <phrase id="tblcaption" value="mensajes" />
+      <field id="id_inyect">
+        <phrase id="fldcaption" value="id inyect" />
+      </field>
+      <field id="id_tarea">
+        <phrase id="fldcaption" value="id tareas" />
+      </field>
+      <field id="titulo">
+        <phrase id="fldcaption" value="titulo" />
+      </field>
+      <field id="mensaje">
+        <phrase id="fldcaption" value="mensaje" />
+      </field>
+      <field id="fechareal_start">
+        <phrase id="fldcaption" value="fechareal start" />
+      </field>
+      <field id="fechasim_start">
+        <phrase id="fldcaption" value="fechasim start" />
+      </field>
+      <field id="medios">
+        <phrase id="fldcaption" value="medios" />
+        <phrase id="fldtagvalue1" value="1" />
+        <phrase id="fldtagcaption1" value="Email" />
+        <phrase id="fldtagvalue2" value="2" />
+        <phrase id="fldtagcaption2" value="Daybook" />
+        <phrase id="fldtagvalue3" value="3" />
+        <phrase id="fldtagcaption3" value="Chirping" />
+      </field>
+      <field id="actividad_esperada">
+        <phrase id="fldcaption" value="actividad esperada" />
+      </field>
+      <field id="id_actor">
+        <phrase id="fldcaption" value="id actor" />
+      </field>
+      <field id="enviado">
+        <phrase id="fldcaption" value="enviado" />
+      </field>
+      <field id="para">
+        <phrase id="fldcaption" value="para" />
+      </field>
+      <field id="adjunto">
+        <phrase id="fldcaption" value="adjunto" />
+      </field>
+      <field id="dif_horaria">
+        <phrase id="fldcaption" value="dif horaria" />
+      </field>
+    </table>
+    <table id="mensajes_usuarios">
+      <phrase id="tblcaption" value="mensajes usuarios" />
+      <field id="id_mensaje_usuario">
+        <phrase id="fldcaption" value="id mensaje usuario" />
+      </field>
+      <field id="id_user_remitente">
+        <phrase id="fldcaption" value="id user remitente" />
+      </field>
+      <field id="id_user_destinatario">
+        <phrase id="fldcaption" value="id user destinatario" />
+      </field>
+      <field id="id_mensaje">
+        <phrase id="fldcaption" value="id mensaje" />
+      </field>
+      <field id="leido">
+        <phrase id="fldcaption" value="leido" />
+        <phrase id="fldtagvalue1" value="1" />
+        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagvalue2" value="0" />
+        <phrase id="fldtagcaption2" value="No" />
+      </field>
+      <field id="enviado">
+        <phrase id="fldcaption" value="enviado" />
+        <phrase id="fldtagvalue1" value="1" />
+        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagvalue2" value="0" />
+        <phrase id="fldtagcaption2" value="No" />
+      </field>
+    </table>
+    <table id="menucontenedor">
+      <phrase id="tblcaption" value="menu" />
+    </table>
+    <table id="notiemail">
+      <phrase id="tblcaption" value="notiemail" />
+      <field id="id_notiemail">
+        <phrase id="fldcaption" value="id notiemail" />
+      </field>
+      <field id="id_email">
+        <phrase id="fldcaption" value="id email" />
+      </field>
+      <field id="id_usersender">
+        <phrase id="fldcaption" value="id usersender" />
+      </field>
+      <field id="leido">
+        <phrase id="fldcaption" value="leido" />
+        <phrase id="fldtagvalue1" value="1" />
+        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagvalue2" value="0" />
+        <phrase id="fldtagcaption2" value="No" />
+      </field>
+      <field id="id_mensaje">
+        <phrase id="fldcaption" value="id mensaje" />
+      </field>
+    </table>
+    <table id="notifica_email" />
+    <table id="onlyoffice">
+      <phrase id="tblcaption" value="Documentos" />
+    </table>
+    <table id="paisgmt">
+      <phrase id="tblcaption" value="paisgmt" />
+      <field id="id_zone">
+        <phrase id="fldcaption" value="id zone" />
+      </field>
+      <field id="codpais">
+        <phrase id="fldcaption" value="codpais" />
+      </field>
+      <field id="nompais">
+        <phrase id="fldcaption" value="nompais" />
+      </field>
+      <field id="timezone">
+        <phrase id="fldcaption" value="timezone" />
+      </field>
+      <field id="gmt">
+        <phrase id="fldcaption" value="gmt" />
+      </field>
+      <field id="codiso3">
+        <phrase id="fldcaption" value="codiso 3" />
+      </field>
+    </table>
+    <table id="participantes">
+      <phrase id="tblcaption" value="participantes" />
+      <field id="id_participantes">
+        <phrase id="fldcaption" value="id participantes" />
+      </field>
+      <field id="nombres">
+        <phrase id="fldcaption" value="nombres" />
+      </field>
+      <field id="apellidos">
+        <phrase id="fldcaption" value="apellidos" />
+      </field>
+      <field id="_login">
+        <phrase id="fldcaption" value="login" />
+      </field>
+      <field id="_password">
+        <phrase id="fldcaption" value="password" />
+      </field>
+      <field id="_email">
+        <phrase id="fldcaption" value="email" />
+      </field>
+      <field id="grupo">
+        <phrase id="fldcaption" value="grupo" />
+      </field>
+      <field id="subgrupo">
+        <phrase id="fldcaption" value="subgrupo" />
+      </field>
+      <field id="imagen_participante">
+        <phrase id="fldcaption" value="imagen participante" />
+      </field>
+      <field id="id_escenario">
+        <phrase id="fldcaption" value="id escenario" />
+      </field>
+    </table>
+    <table id="permisos_doc">
+      <phrase id="tblcaption" value="permisos doc" />
+      <field id="id_permiso">
+        <phrase id="fldcaption" value="id permiso" />
+      </field>
+      <field id="id_file">
+        <phrase id="fldcaption" value="file numero" />
+      </field>
+      <field id="tipo_permiso">
+        <phrase id="fldcaption" value="tipo permiso" />
+        <phrase id="fldtagvalue1" value="1" />
+        <phrase id="fldtagcaption1" value="Edición" />
+        <phrase id="fldtagvalue2" value="2" />
+        <phrase id="fldtagcaption2" value="Visualización" />
+      </field>
+      <field id="fecha_created">
+        <phrase id="fldcaption" value="fecha created" />
+      </field>
+      <field id="id_usuarios">
+        <phrase id="fldcaption" value="id usuarios" />
+      </field>
+    </table>
+    <table id="permisos_docusers">
+      <phrase id="tblcaption" value="permisos docusers" />
+      <field id="id_permisiosuser">
+        <phrase id="fldcaption" value="id permisiosuser" />
+      </field>
+      <field id="id_file">
+        <phrase id="fldcaption" value="id file" />
+      </field>
+      <field id="tipo_permiso">
+        <phrase id="fldcaption" value="tipo permiso" />
+        <phrase id="fldtagvalue1" value="1" />
+        <phrase id="fldtagcaption1" value="Edición" />
+        <phrase id="fldtagvalue2" value="2" />
+        <phrase id="fldtagcaption2" value="Visualización" />
+      </field>
+      <field id="id_users">
+        <phrase id="fldcaption" value="id users" />
+      </field>
+      <field id="date_created">
+        <phrase id="fldcaption" value="date created" />
+      </field>
+    </table>
+    <table id="pizarra">
+      <phrase id="tblcaption" value="pizarra" />
+    </table>
+    <table id="resmensaje">
+      <phrase id="tblcaption" value="resmensaje" />
+      <field id="id_resmensaje">
+        <phrase id="fldcaption" value="id resmensaje" />
+      </field>
+      <field id="id_users">
+        <phrase id="fldcaption" value="id users" />
+      </field>
+      <field id="id_inyect">
+        <phrase id="fldcaption" value="id inyect" />
+      </field>
+      <field id="resmensaje">
+        <phrase id="fldcaption" value="resmensaje" />
+      </field>
+      <field id="resadjunto">
+        <phrase id="fldcaption" value="resadjunto" />
+      </field>
+    </table>
+    <table id="stream" />
+    <table id="subgrupo">
+      <phrase id="tblcaption" value="subgrupo" />
+      <field id="id_subgrupo">
+        <phrase id="fldcaption" value="id subgrupo" />
+      </field>
+      <field id="id_grupo">
+        <phrase id="fldcaption" value="id grupo" />
+      </field>
+      <field id="imagen_subgrupo">
+        <phrase id="fldcaption" value="imagen subgrupo" />
+      </field>
+      <field id="nombre_subgrupo">
+        <phrase id="fldcaption" value="nombre subgrupo" />
+      </field>
+      <field id="descripcion_subgrupo">
+        <phrase id="fldcaption" value="descripcion subgrupo" />
+      </field>
+    </table>
+    <table id="submit" />
+    <table id="tablero_excon">
+      <phrase id="tblcaption" value="Tablero" />
+    </table>
+    <table id="tablero_participante">
+      <phrase id="tblcaption" value="Tableroppte" />
+    </table>
+    <table id="tareas">
+      <phrase id="tblcaption" value="tareas" />
+      <field id="id_tarea">
+        <phrase id="fldcaption" value="id tarea" />
+      </field>
+      <field id="id_escenario">
+        <phrase id="fldcaption" value="id escenario" />
+      </field>
+      <field id="id_grupo">
+        <phrase id="fldcaption" value="id grupo" />
+      </field>
+      <field id="titulo_tarea">
+        <phrase id="fldcaption" value="titulo tarea" />
+      </field>
+      <field id="descripcion_tarea">
+        <phrase id="fldcaption" value="descripcion tarea" />
+      </field>
+      <field id="fechainireal_tarea">
+        <phrase id="fldcaption" value="fechainireal tarea" />
+      </field>
+      <field id="fechafin_tarea">
+        <phrase id="fldcaption" value="fechafin tarea" />
+      </field>
+      <field id="fechainisimulado_tarea">
+        <phrase id="fldcaption" value="fechainisimulado tarea" />
+      </field>
+      <field id="fechafinsimulado_tarea">
+        <phrase id="fldcaption" value="fechafinsimulado tarea" />
+      </field>
+      <field id="id_tarearelacion">
+        <phrase id="fldcaption" value="id tarearelacion" />
+      </field>
+      <field id="archivo">
+        <phrase id="fldcaption" value="archivo" />
+        <phrase id="fldtagvalue1" value="1" />
+        <phrase id="fldtagcaption1" value="Myemail" />
+        <phrase id="fldtagvalue2" value="2" />
+        <phrase id="fldtagcaption2" value="Daybook" />
+        <phrase id="fldtagvalue3" value="3" />
+        <phrase id="fldtagcaption3" value="Chirping" />
+        <phrase id="fldtagvalue4" value="4" />
+        <phrase id="fldtagcaption4" value="Wzup" />
+      </field>
+      <field id="id_subgrupo">
+        <phrase id="fldcaption" value="id subgrupo" />
+      </field>
+      <field id="valoracion">
+        <phrase id="fldcaption" value="valoracion" />
+      </field>
+      <field id="color">
+        <phrase id="fldcaption" value="color" />
+      </field>
+    </table>
+    <table id="tbl_status">
+      <phrase id="tblcaption" value="tbl status" />
+      <field id="id">
+        <phrase id="fldcaption" value="id" />
+      </field>
+      <field id="status_name">
+        <phrase id="fldcaption" value="status name" />
+      </field>
+    </table>
+    <table id="tbl_task">
+      <phrase id="tblcaption" value="tbl task" />
+      <field id="id">
+        <phrase id="fldcaption" value="id" />
+      </field>
+      <field id="title">
+        <phrase id="fldcaption" value="title" />
+      </field>
+      <field id="description">
+        <phrase id="fldcaption" value="description" />
+      </field>
+      <field id="project_name">
+        <phrase id="fldcaption" value="project name" />
+      </field>
+      <field id="status_id">
+        <phrase id="fldcaption" value="status id" />
+      </field>
+      <field id="created_at">
+        <phrase id="fldcaption" value="created at" />
+      </field>
+      <field id="id_users">
+        <phrase id="fldcaption" value="id users" />
+      </field>
+    </table>
+    <table id="timeline">
+      <phrase id="tblcaption" value="tablero excon" />
+    </table>
+    <table id="timeline_excon">
+      <phrase id="tblcaption" value="TimeLine ExconGrupo" />
+    </table>
+    <table id="timeline_general">
+      <phrase id="tblcaption" value="timeline General" />
+    </table>
+    <table id="tipo">
+      <phrase id="tblcaption" value="tipo" />
+      <field id="id_tipo">
+        <phrase id="fldcaption" value="id tipo" />
+      </field>
+      <field id="tipo_es">
+        <phrase id="fldcaption" value="tipo es" />
+      </field>
+      <field id="tipo_en">
+        <phrase id="fldcaption" value="tipo en" />
+      </field>
+    </table>
+    <table id="todos">
+      <phrase id="tblcaption" value="todos" />
+      <field id="id">
+        <phrase id="fldcaption" value="id" />
+      </field>
+      <field id="nombres">
+        <phrase id="fldcaption" value="nombres" />
+      </field>
+    </table>
+    <table id="user_email">
+      <phrase id="tblcaption" value="user email" />
+      <field id="id_user_email">
+        <phrase id="fldcaption" value="id user email" />
+      </field>
+      <field id="status">
+        <phrase id="fldcaption" value="status" />
+      </field>
+      <field id="id_email">
+        <phrase id="fldcaption" value="id email" />
+      </field>
+      <field id="id_user_remitente">
+        <phrase id="fldcaption" value="id user remitente" />
+      </field>
+      <field id="id_user_destinatario">
+        <phrase id="fldcaption" value="id user destinatario" />
+      </field>
+      <field id="id_mensaje">
+        <phrase id="fldcaption" value="id mensaje" />
+      </field>
+    </table>
+    <table id="userlevelpermissions">
+      <phrase id="tblcaption" value="userlevelpermissions" />
+      <field id="userlevelid">
+        <phrase id="fldcaption" value="userlevelid" />
+      </field>
+      <field id="_tablename">
+        <phrase id="fldcaption" value="tablename" />
+      </field>
+      <field id="_permission">
+        <phrase id="fldcaption" value="permission" />
+      </field>
+    </table>
+    <table id="userlevels">
+      <phrase id="tblcaption" value="userlevels" />
+      <field id="userlevelid">
+        <phrase id="fldcaption" value="userlevelid" />
+      </field>
+      <field id="userlevelname">
+        <phrase id="fldcaption" value="userlevelname" />
+      </field>
+    </table>
+    <table id="users">
+      <phrase id="tblcaption" value="users" />
+      <field id="id_users">
+        <phrase id="fldcaption" value="id users" />
+      </field>
+      <field id="escenario">
+        <phrase id="fldcaption" value="excon subgrupo" />
+      </field>
+      <field id="grupo">
+        <phrase id="fldcaption" value="grupo" />
+      </field>
+      <field id="subgrupo">
+        <phrase id="fldcaption" value="subgrupo" />
+      </field>
+      <field id="perfil">
+        <phrase id="fldcaption" value="perfil" />
+      </field>
+      <field id="nombres">
+        <phrase id="fldcaption" value="nombres" />
+      </field>
+      <field id="apellidos">
+        <phrase id="fldcaption" value="apellidos" />
+      </field>
+      <field id="pais">
+        <phrase id="fldcaption" value="pais" />
+      </field>
+      <field id="_email">
+        <phrase id="fldcaption" value="email" />
+      </field>
+      <field id="fecha">
+        <phrase id="fldcaption" value="fecha" />
+      </field>
+      <field id="telefono">
+        <phrase id="fldcaption" value="telefono" />
+      </field>
+      <field id="pw">
+        <phrase id="fldcaption" value="pw" />
+      </field>
+      <field id="estado">
+        <phrase id="fldcaption" value="estado" />
+        <phrase id="fldtagvalue1" value="1" />
+        <phrase id="fldtagcaption1" value="Activo" />
+        <phrase id="fldtagvalue2" value="2" />
+        <phrase id="fldtagcaption2" value="Inactivo" />
+      </field>
+      <field id="horario">
+        <phrase id="fldcaption" value="horario" />
+      </field>
+      <field id="limite">
+        <phrase id="fldcaption" value="limite" />
+      </field>
+      <field id="organizacion">
+        <phrase id="fldcaption" value="organizacion" />
+      </field>
+      <field id="img_user">
+        <phrase id="fldcaption" value="img user" />
+      </field>
+    </table>
+    <table id="valida" />
+    <table id="view_compartidos">
+      <phrase id="tblcaption" value="view compartidos" />
+      <field id="tipo">
+        <phrase id="fldcaption" value="tipo" />
+      </field>
+      <field id="id_file">
+        <phrase id="fldcaption" value="id file" />
+      </field>
+      <field id="tipo_permiso">
+        <phrase id="fldcaption" value="tipo permiso" />
+      </field>
+      <field id="id_users">
+        <phrase id="fldcaption" value="id users" />
+      </field>
+      <field id="date_created">
+        <phrase id="fldcaption" value="date created" />
+      </field>
+    </table>
+    <table id="view_evento_asociado">
+      <phrase id="tblcaption" value="view evento asociado" />
+      <field id="id_incidente">
+        <phrase id="fldcaption" value="id incidente" />
+      </field>
+      <field id="id_tipo">
+        <phrase id="fldcaption" value="id tipo" />
+      </field>
+      <field id="inc_es">
+        <phrase id="fldcaption" value="inc es" />
+      </field>
+      <field id="inc_en">
+        <phrase id="fldcaption" value="inc en" />
+      </field>
+    </table>
+    <table id="view_from">
+      <phrase id="tblcaption" value="view from" />
+      <field id="nombre_agrupacion">
+        <phrase id="fldcaption" value="nombre agrupacion" />
+      </field>
+      <field id="id">
+        <phrase id="fldcaption" value="id" />
+      </field>
+      <field id="escenario">
+        <phrase id="fldcaption" value="escenario" />
+      </field>
+      <field id="tipo">
+        <phrase id="fldcaption" value="tipo" />
+      </field>
+      <field id="idgrupo">
+        <phrase id="fldcaption" value="idgrupo" />
+      </field>
+      <field id="idsubgrupo">
+        <phrase id="fldcaption" value="idsubgrupo" />
+      </field>
+    </table>
+    <table id="view_user_msg">
+      <phrase id="tblcaption" value="view user msg" />
+      <field id="file_name">
+        <phrase id="fldcaption" value="file name" />
+      </field>
+      <field id="id_file">
+        <phrase id="fldcaption" value="id file" />
+      </field>
+      <field id="id_usuario">
+        <phrase id="fldcaption" value="user id" />
+      </field>
+      <field id="grupo">
+        <phrase id="fldcaption" value="grupo" />
+      </field>
+    </table>
+    <table id="vista_doc">
+      <phrase id="tblcaption" value="vista doc" />
+      <field id="id_file">
+        <phrase id="fldcaption" value="id file" />
+      </field>
+      <field id="perfil">
+        <phrase id="fldcaption" value="perfil" />
+      </field>
+      <field id="escenario">
+        <phrase id="fldcaption" value="escenario" />
+      </field>
+      <field id="file_name">
+        <phrase id="fldcaption" value="file name" />
+      </field>
+    </table>
+  </project>
+</ew-language>

@@ -614,7 +614,6 @@ class MensajesList extends Mensajes
         $this->setupLookupOptions($this->id_tarea);
         $this->setupLookupOptions($this->id_actor);
         $this->setupLookupOptions($this->para);
-        $this->setupLookupOptions($this->adjunto);
 
         // Search filters
         $srchAdvanced = ""; // Advanced search filter
@@ -1707,7 +1706,8 @@ class MensajesList extends Mensajes
         $this->id_actor->setDbValue($row['id_actor']);
         $this->enviado->setDbValue($row['enviado']);
         $this->para->setDbValue($row['para']);
-        $this->adjunto->setDbValue($row['adjunto']);
+        $this->adjunto->Upload->DbValue = $row['adjunto'];
+        $this->adjunto->setDbValue($this->adjunto->Upload->DbValue);
         $this->dif_horaria->setDbValue($row['dif_horaria']);
     }
 
@@ -1901,23 +1901,10 @@ class MensajesList extends Mensajes
             $this->para->ViewCustomAttributes = "";
 
             // adjunto
-            $curVal = trim(strval($this->adjunto->CurrentValue));
-            if ($curVal != "") {
-                $this->adjunto->ViewValue = $this->adjunto->lookupCacheOption($curVal);
-                if ($this->adjunto->ViewValue === null) { // Lookup from database
-                    $filterWrk = "`id_file`" . SearchString("=", $curVal, DATATYPE_NUMBER, "");
-                    $sqlWrk = $this->adjunto->Lookup->getSql(false, $filterWrk, '', $this, true, true);
-                    $rswrk = Conn()->executeQuery($sqlWrk)->fetchAll(\PDO::FETCH_BOTH);
-                    $ari = count($rswrk);
-                    if ($ari > 0) { // Lookup values found
-                        $arwrk = $this->adjunto->Lookup->renderViewRow($rswrk[0]);
-                        $this->adjunto->ViewValue = $this->adjunto->displayValue($arwrk);
-                    } else {
-                        $this->adjunto->ViewValue = $this->adjunto->CurrentValue;
-                    }
-                }
+            if (!EmptyValue($this->adjunto->Upload->DbValue)) {
+                $this->adjunto->ViewValue = $this->adjunto->Upload->DbValue;
             } else {
-                $this->adjunto->ViewValue = null;
+                $this->adjunto->ViewValue = "";
             }
             $this->adjunto->ViewCustomAttributes = "";
 
@@ -1967,8 +1954,8 @@ class MensajesList extends Mensajes
 
             // adjunto
             $this->adjunto->LinkCustomAttributes = "";
-            if (!EmptyValue($this->adjunto->CurrentValue)) {
-                $this->adjunto->HrefValue = (!empty($this->adjunto->ViewValue) && !is_array($this->adjunto->ViewValue) ? RemoveHtml($this->adjunto->ViewValue) : $this->adjunto->CurrentValue); // Add prefix/suffix
+            if (!EmptyValue($this->adjunto->Upload->DbValue)) {
+                $this->adjunto->HrefValue = "%u"; // Add prefix/suffix
                 $this->adjunto->LinkAttrs["target"] = "_blank"; // Add target
                 if ($this->isExport()) {
                     $this->adjunto->HrefValue = FullUrl($this->adjunto->HrefValue, "href");
@@ -1976,6 +1963,7 @@ class MensajesList extends Mensajes
             } else {
                 $this->adjunto->HrefValue = "";
             }
+            $this->adjunto->ExportHrefValue = $this->adjunto->UploadPath . $this->adjunto->Upload->DbValue;
             $this->adjunto->TooltipValue = "";
         }
 
@@ -2073,14 +2061,14 @@ class MensajesList extends Mensajes
             }
         }
         if ($validMaster) {
+            // Save current master table
+            $this->setCurrentMasterTable($masterTblVar);
+
             // Update URL
             $this->AddUrl = $this->addMasterUrl($this->AddUrl);
             $this->InlineAddUrl = $this->addMasterUrl($this->InlineAddUrl);
             $this->GridAddUrl = $this->addMasterUrl($this->GridAddUrl);
             $this->GridEditUrl = $this->addMasterUrl($this->GridEditUrl);
-
-            // Save current master table
-            $this->setCurrentMasterTable($masterTblVar);
 
             // Reset start record counter (new master key)
             if (!$this->isAddOrEdit()) {
@@ -2133,8 +2121,6 @@ class MensajesList extends Mensajes
                         return (CurrentUserInfo("perfil") == 2 ) ? "`idgrupo` = '".CurrentUserInfo("grupo")."'" : "`escenario` = '".CurrentUserInfo("escenario")."'";
                     };
                     $lookupFilter = $lookupFilter->bindTo($this);
-                    break;
-                case "x_adjunto":
                     break;
                 default:
                     $lookupFilter = "";

@@ -481,13 +481,13 @@ class Login extends Users
         // Example:
         if (IsLoggedIn()) {
         	if (CurrentUserInfo("perfil") == "1") { // if username is Paul
-        	$url = "/homesimex/EscenarioList";
+        	$url = "./EscenarioList";
         	} else if (CurrentUserInfo("perfil") == "2") { // if username is John
-        	$url = "/homesimex/TimelineExcon";
+        	$url = "./TimelineExcon";
            	} else if (CurrentUserInfo("perfil") == "3"){ // case default
-        	$url = "/homesimex/InjectParticipante";
+        	$url = "./InjectParticipante";
         	} else if (CurrentUserInfo("perfil") == "-1"){
-        	$url = "/homesimex/EscenarioList";
+        	$url = "./EscenarioList";
         	}
        }
      // else

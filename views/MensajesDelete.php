@@ -156,11 +156,7 @@ while (!$Page->Recordset->EOF) {
         <td <?= $Page->adjunto->cellAttributes() ?>>
 <span id="el<?= $Page->RowCount ?>_mensajes_adjunto" class="mensajes_adjunto">
 <span<?= $Page->adjunto->viewAttributes() ?>>
-<?php if (!EmptyString($Page->adjunto->getViewValue()) && $Page->adjunto->linkAttributes() != "") { ?>
-<a<?= $Page->adjunto->linkAttributes() ?>><?= $Page->adjunto->getViewValue() ?></a>
-<?php } else { ?>
-<?= $Page->adjunto->getViewValue() ?>
-<?php } ?>
+<?= GetFileViewTag($Page->adjunto, $Page->adjunto->getViewValue(), false) ?>
 </span>
 </span>
 </td>

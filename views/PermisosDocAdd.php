@@ -270,6 +270,7 @@ loadjs.ready("head", function() {
 <script>
 loadjs.ready("load", function () {
     // Startup script
+    $('#ew-page-caption').html("Documentos");
     $("#btn-action").html("Compartir");
 });
 </script>

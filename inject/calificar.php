@@ -36,7 +36,7 @@ if(!$result){
 } else {
 
 	$updatecali = " UPDATE `calificacion_mensajes` SET `id_calificacion` = $calificacion WHERE `id_mensaje` = $idMensaje";
-	echo $updatecali;
+	//echo $updatecali;
 	$resultup = mysqli_query($con,$updatecali);
 
 	if(!$resultup){

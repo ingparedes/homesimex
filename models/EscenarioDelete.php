@@ -878,14 +878,6 @@ class EscenarioDelete extends Escenario
                 return false;
             }
         }
-        foreach ($rows as $row) {
-            $rsdetail = Container("tareas")->loadRs("`id_escenario` = " . QuotedValue($row['id_escenario'], DATATYPE_NUMBER, 'DB'))->fetch();
-            if ($rsdetail !== false) {
-                $relatedRecordMsg = str_replace("%t", "tareas", $Language->phrase("RelatedRecordExists"));
-                $this->setFailureMessage($relatedRecordMsg);
-                return false;
-            }
-        }
         $conn->beginTransaction();
 
         // Clone old rows

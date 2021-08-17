@@ -28,7 +28,7 @@ loadjs.ready("head", function () {
         ["reciever_userid", [fields.reciever_userid.visible && fields.reciever_userid.required ? ew.Validators.required(fields.reciever_userid.caption) : null], fields.reciever_userid.isInvalid],
         ["tiempo", [fields.tiempo.visible && fields.tiempo.required ? ew.Validators.required(fields.tiempo.caption) : null], fields.tiempo.isInvalid],
         ["estado_msg", [fields.estado_msg.visible && fields.estado_msg.required ? ew.Validators.required(fields.estado_msg.caption) : null, ew.Validators.integer], fields.estado_msg.isInvalid],
-        ["id_mensaje", [fields.id_mensaje.visible && fields.id_mensaje.required ? ew.Validators.required(fields.id_mensaje.caption) : null, ew.Validators.integer], fields.id_mensaje.isInvalid]
+        ["id_mensaje", [fields.id_mensaje.visible && fields.id_mensaje.required ? ew.Validators.required(fields.id_mensaje.caption) : null], fields.id_mensaje.isInvalid]
     ]);
 
     // Set invalid fields
@@ -138,7 +138,7 @@ $Page->showMessage();
 <?php } ?>
 <?php if ($Page->sender_userid->Visible) { // sender_userid ?>
     <div id="r_sender_userid" class="form-group row">
-        <label id="elh_email2_sender_userid" class="<?= $Page->LeftColumnClass ?>"><?= $Page->sender_userid->caption() ?><?= $Page->sender_userid->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
+        <label id="elh_email2_sender_userid" for="x_sender_userid" class="<?= $Page->LeftColumnClass ?>"><?= $Page->sender_userid->caption() ?><?= $Page->sender_userid->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->sender_userid->cellAttributes() ?>>
 <span id="el_email2_sender_userid">
     <select
@@ -148,7 +148,6 @@ $Page->showMessage();
         data-select2-id="email2_x_sender_userid[]"
         data-table="email2"
         data-field="x_sender_userid"
-        data-dropdown
         multiple
         size="1"
         data-value-separator="<?= $Page->sender_userid->displayValueSeparatorAttribute() ?>"
@@ -165,14 +164,6 @@ loadjs.ready("head", function() {
         options = { name: "x_sender_userid[]", selectId: "email2_x_sender_userid[]", language: ew.LANGUAGE_ID, dir: ew.IS_RTL ? "rtl" : "ltr" };
     options.multiple = true;
     options.closeOnSelect = false;
-    options.columns = el.dataset.repeatcolumn || 3;
-    options.dropdown = !ew.IS_MOBILE && options.columns > 0; // Use custom dropdown
-    if (options.dropdown) {
-        options.dropdownAutoWidth = true;
-        options.dropdownCssClass = "ew-select-dropdown ew-select-multiple";
-        if (options.columns > 1)
-            options.dropdownCssClass += " ew-repeat-column";
-    }
     options.dropdownParent = $(el).closest("#ew-modal-dialog, #ew-add-opt-dialog")[0];
     Object.assign(options, ew.vars.tables.email2.fields.sender_userid.selectOptions);
     ew.createSelect(options);
@@ -250,19 +241,10 @@ loadjs.ready(["femail2edit", "editor"], function() {
 </div></div>
     </div>
 <?php } ?>
-<?php if ($Page->id_mensaje->Visible) { // id_mensaje ?>
-    <div id="r_id_mensaje" class="form-group row">
-        <label id="elh_email2_id_mensaje" for="x_id_mensaje" class="<?= $Page->LeftColumnClass ?>"><?= $Page->id_mensaje->caption() ?><?= $Page->id_mensaje->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
-        <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->id_mensaje->cellAttributes() ?>>
-<span id="el_email2_id_mensaje">
-<input type="<?= $Page->id_mensaje->getInputTextType() ?>" data-table="email2" data-field="x_id_mensaje" name="x_id_mensaje" id="x_id_mensaje" size="30" placeholder="<?= HtmlEncode($Page->id_mensaje->getPlaceHolder()) ?>" value="<?= $Page->id_mensaje->EditValue ?>"<?= $Page->id_mensaje->editAttributes() ?> aria-describedby="x_id_mensaje_help">
-<?= $Page->id_mensaje->getCustomMessage() ?>
-<div class="invalid-feedback"><?= $Page->id_mensaje->getErrorMessage() ?></div>
-</span>
-</div></div>
-    </div>
-<?php } ?>
 </div><!-- /page* -->
+<span id="el_email2_id_mensaje">
+<input type="hidden" data-table="email2" data-field="x_id_mensaje" data-hidden="1" name="x_id_mensaje" id="x_id_mensaje" value="<?= HtmlEncode($Page->id_mensaje->CurrentValue) ?>">
+</span>
 <?php if (!$Page->IsModal) { ?>
 <div class="form-group row"><!-- buttons .form-group -->
     <div class="<?= $Page->OffsetColumnClass ?>"><!-- buttons offset -->

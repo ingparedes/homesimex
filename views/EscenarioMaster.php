@@ -5,7 +5,7 @@ namespace PHPMaker2021\simexamerica;
 // Table
 $escenario = Container("escenario");
 ?>
-<?php if ($escenario->Visible->FALSE) { ?>
+<?php if ($escenario->Visible) { ?>
 <div class="ew-master-div">
 <table id="tbl_escenariomaster" class="table ew-view-table ew-master-table ew-vertical">
     <tbody>

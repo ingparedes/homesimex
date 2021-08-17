@@ -240,7 +240,7 @@ $Page->ListOptions->render("body", "left", $Page->RowCount, "block", $Page->Tabl
 <template id="tpx<?= $Page->RowCount ?>_imbox_mail_alerta" class="imbox_maillist">
 <?php
 $idpage = CurrentPage()->id_email->CurrentValue;
-$row = ExecuteRow("SELECT status FROM user_email WHERE id_email =".$idpage);
+$row = ExecuteRow("SELECT status FROM user_email WHERE id_email = '".$idpage."'  AND id_user_destinatario = '".CurrentUserID()."' ");
 if ($row[0] == 0){ 
 ?>
 <span class="badge badge-danger">Nuevo</span>

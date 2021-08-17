@@ -488,6 +488,7 @@ loadjs.ready("head", function() {
 <script>
 loadjs.ready("load", function () {
     // Startup script
+    $('h1').html("<span class='text-muted'>Nueva</span> tarea");
     $("<input>").attr({id:"f",name:"xxx",value:"",type:"hidden"}).appendTo("form"),$("#btn-action").after('&nbsp; <button class="btn btn-info ew-btn"  name="btn" id="btn" type="submit"  onclick="this.form.xxx.value=1"> Grabar y nueva </button>');
 });
 </script>

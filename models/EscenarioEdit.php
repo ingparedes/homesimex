@@ -1147,7 +1147,7 @@ class EscenarioEdit extends Escenario
             // image_escenario
             if (!EmptyValue($this->image_escenario->Upload->DbValue)) {
                 $this->image_escenario->ImageWidth = 650;
-                $this->image_escenario->ImageHeight = 150;
+                $this->image_escenario->ImageHeight = 80;
                 $this->image_escenario->ImageAlt = $this->image_escenario->alt();
                 $this->image_escenario->ViewValue = $this->image_escenario->Upload->DbValue;
             } else {
@@ -1416,7 +1416,7 @@ class EscenarioEdit extends Escenario
             $this->image_escenario->EditCustomAttributes = "";
             if (!EmptyValue($this->image_escenario->Upload->DbValue)) {
                 $this->image_escenario->ImageWidth = 650;
-                $this->image_escenario->ImageHeight = 150;
+                $this->image_escenario->ImageHeight = 80;
                 $this->image_escenario->ImageAlt = $this->image_escenario->alt();
                 $this->image_escenario->EditValue = $this->image_escenario->Upload->DbValue;
             } else {

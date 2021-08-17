@@ -425,7 +425,6 @@ class MensajesPreview extends Mensajes
         $this->setupLookupOptions($this->id_tarea);
         $this->setupLookupOptions($this->id_actor);
         $this->setupLookupOptions($this->para);
-        $this->setupLookupOptions($this->adjunto);
 
         // Load filter
         $filter = Get("f", "");
@@ -731,8 +730,6 @@ class MensajesPreview extends Mensajes
                         return (CurrentUserInfo("perfil") == 2 ) ? "`idgrupo` = '".CurrentUserInfo("grupo")."'" : "`escenario` = '".CurrentUserInfo("escenario")."'";
                     };
                     $lookupFilter = $lookupFilter->bindTo($this);
-                    break;
-                case "x_adjunto":
                     break;
                 default:
                     $lookupFilter = "";

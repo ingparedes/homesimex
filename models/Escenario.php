@@ -1278,7 +1278,7 @@ SORTHTML;
 
         // image_escenario
         if (!EmptyValue($this->image_escenario->Upload->DbValue)) {
-            $this->image_escenario->ImageWidth = 150;
+            $this->image_escenario->ImageWidth = 650;
             $this->image_escenario->ImageHeight = 80;
             $this->image_escenario->ImageAlt = $this->image_escenario->alt();
             $this->image_escenario->ViewValue = $this->image_escenario->Upload->DbValue;
@@ -1494,7 +1494,7 @@ SORTHTML;
         $this->image_escenario->EditAttrs["class"] = "form-control";
         $this->image_escenario->EditCustomAttributes = "";
         if (!EmptyValue($this->image_escenario->Upload->DbValue)) {
-            $this->image_escenario->ImageWidth = 150;
+            $this->image_escenario->ImageWidth = 650;
             $this->image_escenario->ImageHeight = 80;
             $this->image_escenario->ImageAlt = $this->image_escenario->alt();
             $this->image_escenario->EditValue = $this->image_escenario->Upload->DbValue;

@@ -268,10 +268,18 @@ $InjectExcon = &$Page;
     text-decoration: none;
     background-color: #28a745;
 }
+[data-toggle="collapse"] .fa:before {  
+  content: "\f139";
+}
+
+[data-toggle="collapse"].collapsed .fa:before {
+  content: "\f13a";
+}
 
 </style>
     
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+
 
 <div class="alert alert-success" style="display:none;"></div>
     <div class="container-fluid">
@@ -308,16 +316,25 @@ $InjectExcon = &$Page;
                                 <div class="direct-chat-text" style="background-color:#f2f3f4" >
                                     <div class = "header">
                                     <span><em>Tarea: {{mens.titulo_tarea}} </em></span>
-                                        <h4>Mensaje:{{mens.titulo_mensaje}} </h4> 
-                                        
+                                    <a data-toggle="collapse" v-bind:href="'#descripcion'+mens.id" role="button" aria-expanded="false">
+                                    <h4>Título del mensaje:{{mens.titulo_mensaje}} <i class="fa" ></i></h4>   </a> 
+                                   
                                     </div> 
+
                                     <hr>
-                                    <span v-html="mens.mensaje"></span>
+                                    <div class="collapse" v-bind:id="'descripcion'+mens.id">
+                                            <div class="card card-body">
+                                            <span v-html="mens.mensaje"></span>
+                                            </div>
+                                    </div>
+                                    
                                     
                                     <div class="stats">
                                                  <i class="cil-paperclip"></i> <br>
                                           
-                                             <a v-bind:href="'files/'+mens.filename"> {{mens.filename}}</a>                                                                                    
+                                        <div v-for="adjunto in mens.adjunto">
+                                        <a v-bind:href="'files/'+mens.adjunto" download="archivo">{{mens.adjunto}}</a>
+                                        </div>                                                                                 
                                         </div>
                                         <hr>
                                            <p>
@@ -335,12 +352,12 @@ $InjectExcon = &$Page;
                                         <p><!--MIGUEL, Region Respuestas-->
                                         <a  data-toggle="collapse" v-bind:href="'#respuestas'+mens.id" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
                                             <i class="fa fa-users"></i>     
-                                            Respuestas:</a><a class="badge-danger" v-if="mens.respuestasPendientes==1">NEW</a>
+                                            Respuestas:</a><a class="badge badge-danger" v-if="mens.respuestasPendientes==1">MSG</a>
                                             </p>
                                            
                                             <div class="collapse multi-collapse" v-bind:id="'respuestas'+mens.id">
                                             <ul class="" v-for="respuesta in mens.respuestas" v-if="mens.visible" >
-                                                <li><a   v-bind:href="'/homesimex/Email2View/'+respuesta.id+'?showdetail='"> {{respuesta.sujeto}}.</a></li>
+                                                <li><a   v-bind:href="'./ImboxMailView/'+respuesta.id+'?showdetail='"> {{respuesta.sujeto}}.</a></li>
                                             </ul>
                                         </div>  
 
@@ -348,9 +365,7 @@ $InjectExcon = &$Page;
                                     <div class="card-tools">
                                     <a class="btn btn-tool" v-bind:href="'inject/actualizarProgramacion.php?opcion=1&idMensaje='+mens.id"><i class="fas fa-play"></i></a>
                                     <a class="btn btn-tool" v-bind:href="'inject/actualizarProgramacion.php?opcion=2&idMensaje='+mens.id"><i class="fas fa-stop"></i></a>
-                                   <button type="button" class="btn btn-tool" title="Contacts" data-widget="chat-pane-toggle" onclick="window.location.href='MensajesEdit/176?showmaster=tareas&fk_id_tarea=104'" >
-                                            <i class="fas fa-pen"></i>
-                                    </button>
+                                    <a class="btn btn-tool" v-bind:href="'MensajesEdit/'+mens.id"><i class="fas fa-pen"></i></a>
                                     </div>
                                 </div>
                                 <!-- /.direct-chat-text -->
@@ -422,20 +437,19 @@ $InjectExcon = &$Page;
                                         <p>
                                         <span><em>Tarea: {{mens.titulo_tarea}} </em></span>
                                         <!--MIGUEL Acordeon punto 148-->
-                                        <div id="accordion">
-                                            <div class="card">
-                                                <div class="card-header" id="headingThree">
-                                                    <button class="btn  collapsed" data-toggle="collapse" v-bind:data-target="'#collapseThree'+mens.id" aria-expanded="false" v-bind:aria-controls="'collapseThree'+mens.id">
-                                                    <h5>Titulo mensaje: {{mens.titulo_mensaje}} </h5> 
-                                                    </button>
-                                                </div>
-                                                <div v-bind:id="'collapseThree'+mens.id" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                                                <div class="card-body">
-                                                <span v-html="mens.mensaje"></span>
-                                                </div>
-                                                </div>
+                                        <a data-toggle="collapse" v-bind:href="'#descripcions'+mens.id" role="button" aria-expanded="false">
+                                    <h4>  Título Mensaje:{{mens.titulo_mensaje}} <i class="fa" aria-hidden="true"></i></h4>   </a> 
+
+                                        
+                                    <div class="collapse" v-bind:id="'descripcions'+mens.id">
+                                            <div class="card card-body">
+                                            <span v-html="mens.mensaje"></span>
                                             </div>
-                                        </div>
+                                    </div>
+                                                
+                                               
+                                            
+                                       
                                         <!--MIGUEL fin acordeon 148-->
                                         
                                         </p>
@@ -446,8 +460,10 @@ $InjectExcon = &$Page;
                                         </div>
                                         <div class="stats">
                                         <i class="cil-paperclip"></i><br>
-                                          
-                                           <a v-bind:href="'files/'+mens.filename"> {{mens.filename}}</a>
+
+                                        <div v-for="adjunto in mens.adjunto">
+                                        <a v-bind:href="'files/'+mens.adjunto" download="archivo">{{mens.adjunto}}</a>
+                                        </div>
                                            <hr>
                                            <p>
                                        
@@ -464,12 +480,12 @@ $InjectExcon = &$Page;
                                         <p><!--MIGUEL, Region Respuestas-->
                                         <a  data-toggle="collapse" v-bind:href="'#respuestas'+mens.id" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
                                             <i class="fa fa-users"></i>     
-                                            Respuestas:</a><a class="badge-danger" v-if="mens.respuestasPendientes==1">NEW</a>
+                                            Respuestas:</a><a class="badge badge-warning" v-if="mens.respuestasPendientes==1"> <i class="fa fa-envelope" aria-hidden="true"></i></a>
                                             </p>
                                            
                                             <div class="collapse multi-collapse" v-bind:id="'respuestas'+mens.id">
                                             <ul class="" v-for="respuesta in mens.respuestas" v-if="mens.visible" >
-                                                <li><a   v-bind:href="'/homesimex/Email2View/'+respuesta.id+'?showdetail='"> {{respuesta.sujeto}}.</a></li>
+                                                <li><a   v-bind:href="'./ImboxMailView/'+respuesta.id+'?showdetail='"> {{respuesta.sujeto}}.</a></li>
                                             </ul>
                                         </div>  
                                     <div class="timeline-footer">
@@ -537,7 +553,9 @@ $InjectExcon = &$Page;
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/disableautofill@2.0.0/dist/disableautofill.min.js"></script>
 <script>
-   
+    function myFunction(x) {
+  x.classList.toggle("fa-thumbs-down");
+}
     var app = new Vue({
         el: '#vue-chat',
         data: {

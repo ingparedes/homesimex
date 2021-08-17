@@ -8,7 +8,7 @@ $TimelineExcon = &$Page;
 <html>
 
 <head>
-    <title>Timeline General</title>
+
     
 <style>
         textarea {
@@ -59,10 +59,10 @@ $TimelineExcon = &$Page;
             opacity: 1;
             cursor: auto;
         }
-        .navbar {
-        position:relative;
-        padding:1.22rem 1rem
-        }
+
+
+
+
         .vis-custom-time {
             pointer-events: none;
         }
@@ -73,24 +73,34 @@ $TimelineExcon = &$Page;
     <script src="js/vis-timeline-graph2d.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link href="//unpkg.com/vis-timeline@latest/styles/vis-timeline-graph2d.min.css" rel="stylesheet" type="text/css" />
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="https://npmcdn.com/flatpickr/dist/l10n/es.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
     <!-- MultiSelect Include the plugin's CSS and JS: -->
-    <script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
-        <script type="text/javascript" src="js/bootstrap.min.js"></script> 
-    <link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css" />
+
+        
+
    <!--  <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" /> -->
 </head>
 
 <body>
-    <?php $sql_utc = ExecuteRow("SELECT p.gmt, DATE_ADD(e.fechaini_real,INTERVAL (-300 +
-(RIGHT(p.gmt,2)+60*MID(p.gmt,6,2)*1))  MINUTE)  as fechaini_real, 
-DATE_ADD(e.fechafinal_real,INTERVAL (-300 +
-(RIGHT(p.gmt,2)+60*MID(p.gmt,6,2)*1))  MINUTE)  as fechafinal_real
-, e.id_escenario, e.nombre_escenario FROM escenario  e INNER JOIN paisgmt p ON p.id_zone = e.pais_escenario WHERE e.estado IN ('1')");//MIGUEL, añadi a la consulta el nombre de la suimulació
+    <?php $sql_utc = ExecuteRow("SELECT p.gmt,
+CONVERT_TZ( fechaini_real, RIGHT(p.gmt,6), RIGHT(pu.gmt,6)) as fechaini_real,
+CONVERT_TZ( fechafinal_real, RIGHT(p.gmt,6), RIGHT(pu.gmt,6)) as	fechafinal_real,
+e.id_escenario, 
+e.nombre_escenario, 
+users.id_users,
+pu.gmt as gtmus,
+CONVERT_TZ( fechaini_real, RIGHT(p.gmt,6), RIGHT(pu.gmt,6)) as starsd 
+FROM
+escenario AS e
+INNER JOIN paisgmt AS p ON 	p.id_zone = e.pais_escenario
+INNER JOIN 	users 	ON 		e.id_escenario = users.escenario
+INNER JOIN paisgmt as pu on pu.id_zone = users.pais
+WHERE users.id_users = '" . CurrentUserID() . "';");
+
+//MIGUEL, añadi a la consulta el nombre de la suimulació
     $_SESSION['id_user'] = CurrentUserID();
+
+
     $nombre=$sql_utc['nombre_escenario']; //MIGUEL variable para guardar el nombre de la simulacion
     $_SESSION['id_escenario'] = $sql_utc['id_escenario'];
    // echo "usuario: " . $_SESSION['id_user'];
@@ -107,16 +117,15 @@ DATE_ADD(e.fechafinal_real,INTERVAL (-300 +
     $sqlTareas = ExecuteRows("SELECT t.id_tarea,t.titulo_tarea FROM tareas t WHERE t.id_escenario = '" . $sql_utc['id_escenario'] . "';");
 
     ?>
-    <div class="buttons">
-        <input type="button" id="load" value="&darr; Load" style="display:none">
-        <h2> <strong>Titulo de la simulación:</strong><!--Titulo para la simulación-->
-        <br>
-        </h2>
+    <div class="buttons"> <input type="button" id="load" value="&darr; Load" style="display:none">
         <h3>
         <?php 
             
-            echo $nombre;//Miguel IMpresion del nombre de la simulacion
+            echo $sql_utc["nombre_escenario"];//Miguel IMpresion del nombre de la simulacion
+
             ?>
+
+            
             </h3>
         <!-- <input type="button" id="save" value="&uarr; Save" title="Save data from the Timeline into the textarea"> -->
         <button type="button" id="save" class="btn btn-secondary" disabled>Grabar</button>
@@ -127,23 +136,20 @@ DATE_ADD(e.fechafinal_real,INTERVAL (-300 +
     <!-- <div class="toast position-fixed bottom-100 end-300 p-5" style="z-index: 5" aria-atomic="true"> -->
     <div class="toast position-fixed bottom-10" role="alert" aria-live="assertive" data-delay="2000">
         <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" data-delay="2000">
-            <div class="toast-header bg-success text-white">
-                <small>Datos almacenados</small>
-            </div>
             <div class="toast-body bg-success text-white">
-                Datos almacenados
+            <?php   echo $Language->TablePhrase("timeline_excon", "toast"); ?>  
             </div>
         </div>
     </div>
 
     <div id="loading">loading...</div>
     <div id="visualization"></div>
-    <p class = "small">  <em> Presione CTRL + rueda del mouse para hacer zoom </em> <br>
-<em> Para desplazarse en la línea de tiempo, mantener presionado el clic izquierdo del ratón. <br>
-Para retornar a la hora real del ejercicio presionar el ícono <img src = "https://simexamericas.org/homesimex/images/iconotimeline.png"  width="30" height="30"> <em> </p>
+    <p class = "small">  <em>  Presione CTRL + rueda del mouse para hacer zoom  <br>
+Para desplazarse en la línea de tiempo, mantener presionado el clic izquierdo del ratón. <br>
+Para retornar a la hora real del ejercicio presionar el ícono <img src = 'https://simexamericas.org/homesimex/images/iconotimeline.png'  width='30' height='30'></em> </p>
     <!-- Modal -->
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalLongTitle">Editar Datos</h5>
@@ -158,15 +164,15 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = "https
                             <input type="text" class="form-control" id="id" hidden>
                             <input type="text" class="form-control" id="tipo" hidden>
                             <input type="text" class="form-control" id="id_tarea" hidden>
-                            <label for="tituloT">Titulo: </label>
-                            <h3>
-                                <div id="tituloT"> </div>
+                            <label id="titulo"> </label> <br>
+                            <div id="tituloT"> </div>
+                                                        
                                 </hr>
 
                         </div>
                         <hr>
                         <div class="form-group">
-                            <label for="desc_tarea">Descripción </label>
+                            <label id="descripcion">Descripción </label>
                             <!-- <textarea class="form-control" id="desc_tarea" rows="3"></textarea> -->
                             <em>
                                 <div id="desc_tarea"></div><em>
@@ -180,7 +186,7 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = "https
                         </ul>
                         <div class="modal-footer">
                            <!-- <button type="button" id="btnAddMensaje" onclick="modalAddMsj();" data-dismiss="modal2" class="btn btn-info btn-sm mr-auto">Crear Mensaje</button>
--->                         <button type="button" id="editMsg"  class="btn btn-info btn-sm">Mensaje</button>
+-->                         <button type="button" id="editMsg"  class="btn btn-primary">Mensaje</button>
                            <!-- <select id="valorar" class="form-control-sm" name="valorar">
                                 <option value="0" selected>Valorar...</option>
                                 <option value="1" style="background-color:white">Pendiente</option>
@@ -189,7 +195,7 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = "https
                             </select>
                             
                             <button type="button" id="submint" onclick="saveMsj()" class="btn btn-primary btn-sm">Guardar</button>-->
-                            <button type="button" class="btn btn-light btn-sm" data-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
 
                         </div>
                     </form>
@@ -218,7 +224,7 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = "https
                             <input type="hidden" class="form-control-sm" id="e_id_tarea" name="e_id_tarea">
 
                             <div class="form-group">
-                                <label for="titulo">Titulo </label>
+                                <label for="titulo">Título </label>
                                 <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Título Mensaje" value="" required>
                             </div>
 
@@ -311,8 +317,8 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = "https
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary btn-sm" id="BotonGuardar" >Guardar</button>
-                                <button type="button" class="btn btn-light btn-sm" data-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-primary" id="BotonGuardar" >Guardar</button>
+                                <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
                     </form>
 
                 </div>
@@ -339,7 +345,7 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = "https
                             <input type="hidden" class="form-control-sm" id="idTarea" name="idTarea">
 
                             <div class="form-group">
-                                <label for="titulo" >Titulo </label>
+                                <label for="titulo" >Título </label>
                                 <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Título Mensaje"   required>
                             </div>
 
@@ -462,7 +468,7 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = "https
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="titleTarea">Titulo </label>
+                            <label for="titleTarea">Título </label>
                             <input type="text" class="form-control" id="titleTarea" placeholder="Título Tarea" value="">
                         </div>
                         <div class="form-group">
@@ -829,25 +835,35 @@ removeArrowbyItemId(id) {
                                 callback(item); // send back the (possibly) changed item
                             },
                             onMove: function(item, callback) {
-                                $('#save').removeClass('btn btn-secondary');
-                                $("#save").prop('disabled', false);
-                                $('#save').addClass('btn btn-success');
-                                callback(item); // send back adjusted item
-                                if(Date.parse(item.InicioRango)<Date.parse(item.start) && Date.parse(item.start)<Date.parse(item.FinRango))
-                                            {
-                                               
-                                                    $('#save').removeClass('btn btn-secondary');
+                              //  $('#save').removeClass('btn btn-secondary');
+                                // $("#save").prop('disabled', false);
+                               // $('#save').addClass('btn btn-success');
+                               // callback(item); // send back adjusted item
+                               if(item.id.slice(0, 1)=="M")
+                                {
+                               if(Date.parse(item.InicioRango)<=Date.parse(item.start) && Date.parse(item.start)<=Date.parse(item.FinRango))
+                               {
+                                                   $('#save').removeClass('btn btn-secondary');
                                                     $("#save").prop('disabled', false);
                                                     $('#save').addClass('btn btn-success');
 
                                                     callback(item); // send back item as confirmation (can be changed)
-                                               
-                                      
                                         }
                                           else{
                                               alert("FUERA DE LIMITE");
                                                callback(null); // 
                                             }
+                                        }
+                                else{
+                                    $('#save').removeClass('btn btn-secondary');
+                                                    $("#save").prop('disabled', false);
+                                                    $('#save').addClass('btn btn-success');
+
+                                                    callback(item); // send back item as confirmation (can be changed)
+                                               
+                                }
+                            
+                                        
                             },
                             moment: function(date) {
                                 return vis.moment(date).utcOffset(hora)
@@ -865,8 +881,12 @@ removeArrowbyItemId(id) {
                             width: '100%',
                             height: '500px',
                             margin: {
-                                item: 20
+                                item : {
+                                horizontal : -25
+                                }
                             },
+
+
                             /* timeAxis: {
                                 scale: 'hour',
                                 step: 1
@@ -930,6 +950,8 @@ removeArrowbyItemId(id) {
                                         if (tipo == 'M') {
                                             $('#id_tarea').val(data[0].id_tarea);
                                             $('#modalLongTitle').html("Mensaje");
+                                            $('#titulo').html("Título del mensaje");
+                                            $('#descripcion').html("Descripción del mensaje");
                                             $('#editMsg').html("Editar mensaje");
                                             boton.onclick = AbrirEdicionMensaje; 
                                             BotonGuardar.onclick = editMensajeBD;
@@ -960,6 +982,8 @@ removeArrowbyItemId(id) {
                                             boton.onclick =AbrirCrearMensajee;
                                             BotonGuardar.onclick = addMensaje;
                                             $('#modalLongTitle').html("Tarea");
+                                            $('#titulo').html("Título de la tarea");
+                                            $('#descripcion').html("Descripción de la tarea");
                                             $('#idTarea').val(id);
                                             $('#e_id_tarea').val(id);
                                             $('#valorar').show();
@@ -998,38 +1022,7 @@ removeArrowbyItemId(id) {
 
         }
         //btnLoad.onclick = loadData;  
-        $('#fechareal_start').flatpickr({
-            locale: "es",
-            enableTime: true,
-            dateFormat: "Y-m-d H:i",
-            minDate: fechaIniSimulado,
-            maxDate: fechaFinSimulado,
-            defaultDate: fechaIniSimulado,
-        });
-        $('#fechareal_start').flatpickr({
-            locale: "es",
-            enableTime: true,
-            dateFormat: "Y-m-d H:i",
-            minDate: fechaIniSimulado,
-            maxDate: fechaFinSimulado,
-            defaultDate: fechaFinSimulado,
-        });
-        $('#fechasim_start').flatpickr({
-            locale: "es",
-            enableTime: true,
-            dateFormat: "Y-m-d H:i",
-            minDate: fechaIniSimulado,
-            maxDate: fechaFinSimulado,
-            defaultDate: fechaIniSimulado,
-        });
-        $('#fechasim_start').flatpickr({
-            locale: "es",
-            enableTime: true,
-            dateFormat: "Y-m-d H:i",
-            minDate: fechaIniSimulado,
-            maxDate: fechaFinSimulado,
-            defaultDate: fechaFinSimulado,
-        });
+       
         function funcionFalsa(){
 
         }   
@@ -1138,6 +1131,12 @@ function saveMsj() { //graba datos del item desde la modal
             }
         }
         btnSave.onclick = saveData;
+        function AbrirCrearMensajee(){
+            var id = $('#id').val();
+            var tipo = $('#tipo').val();
+            var id_mensaje= $('#id_tarea').val();
+            location.href='./MensajesAdd?showmaster=tareas&fk_id_tarea='+id;
+        }
         function v_modalSaveMensaje(){
             var id = $('#id').val();
             var tipo = $('#tipo').val();
@@ -1282,22 +1281,7 @@ function saveMsj() { //graba datos del item desde la modal
 
         // load the initial data
         loadData('');
-        $('#fechaIniReal').flatpickr({
-            locale: "es",
-            enableTime: true,
-            dateFormat: "Y-m-d H:i",
-            minDate: fechaIniSimulado,
-            maxDate: fechaFinSimulado,
-            defaultDate: fechaIniSimulado,
-        });
-        $('#fechaFinReal').flatpickr({
-            locale: "es",
-            enableTime: true,
-            dateFormat: "Y-m-d H:i",
-            minDate: fechaIniSimulado,
-            maxDate: fechaFinSimulado,
-            defaultDate: fechaFinSimulado,
-        });
+
 
         function addTarea() {
             var parametros = {
@@ -1327,14 +1311,7 @@ function saveMsj() { //graba datos del item desde la modal
                 },
             });
         }
-        $(document).ready(function() {
-            $('#para').multiselect({
-                enableFiltering: true
-            });
-            $('#e_para').multiselect({
-                enableFiltering: true
-            });
-        });
+
 
         (function() {
             'use strict';

@@ -29,7 +29,7 @@ loadjs.ready("head", function () {
         ["actividad_esperada", [fields.actividad_esperada.visible && fields.actividad_esperada.required ? ew.Validators.required(fields.actividad_esperada.caption) : null], fields.actividad_esperada.isInvalid],
         ["id_actor", [fields.id_actor.visible && fields.id_actor.required ? ew.Validators.required(fields.id_actor.caption) : null], fields.id_actor.isInvalid],
         ["para", [fields.para.visible && fields.para.required ? ew.Validators.required(fields.para.caption) : null], fields.para.isInvalid],
-        ["adjunto", [fields.adjunto.visible && fields.adjunto.required ? ew.Validators.required(fields.adjunto.caption) : null], fields.adjunto.isInvalid]
+        ["adjunto", [fields.adjunto.visible && fields.adjunto.required ? ew.Validators.fileRequired(fields.adjunto.caption) : null], fields.adjunto.isInvalid]
     ]);
 
     // Set invalid fields
@@ -100,7 +100,6 @@ loadjs.ready("head", function () {
     fmensajesadd.lists.medios = <?= $Page->medios->toClientList($Page) ?>;
     fmensajesadd.lists.id_actor = <?= $Page->id_actor->toClientList($Page) ?>;
     fmensajesadd.lists.para = <?= $Page->para->toClientList($Page) ?>;
-    fmensajesadd.lists.adjunto = <?= $Page->adjunto->toClientList($Page) ?>;
     loadjs.done("fmensajesadd");
 });
 </script>
@@ -128,26 +127,24 @@ $Page->showMessage();
 <input type="hidden" name="fk_id_tarea" value="<?= HtmlEncode($Page->id_tarea->getSessionValue()) ?>">
 <?php } ?>
 <div class="ew-add-div"><!-- page* -->
-
 <?php
 	$idTarea = Container("tareas")->id_tarea->CurrentValue;
-	$nombretarea = ExecuteRow("SELECT titulo_tarea,DATE_FORMAT(fechainireal_tarea, '%Y/%m/%d'), DATE_FORMAT(fechafin_tarea, '%Y/%m/%d') as fecha  FROM tareas  WHERE id_tarea = '".$idTarea."';");
+	$nombretarea = ExecuteRow("SELECT titulo_tarea,DATE_FORMAT(fechainireal_tarea, '%Y/%m/%d, %H:%i' ), DATE_FORMAT(fechafin_tarea, '%Y/%m/%d, %H:%i') as fecha  FROM tareas  WHERE id_tarea = '".$idTarea."';");
     $nombregrupo = ExecuteRow("SELECT grupo.nombre_grupo FROM tareas INNER JOIN grupo ON  tareas.id_grupo = grupo.id_grupo WHERE tareas.id_tarea ='".$idTarea."';");
 ?>
 <div class="callout callout-primary">
+<h4> Grupo:<?php echo $nombregrupo[0];  ?> </h4>
   <h4>Tarea: <?php echo $nombretarea[0];  ?>  </h4>
-  <h4> Grupo:<?php echo $nombregrupo[0];  ?> </h4>
- <p>Fecha inicio real: <?php echo $nombretarea[1]  ?> Fecha fin real: <?php echo $nombretarea[2];  ?> </p>
+  <p>Fecha inicio real: <?php echo $nombretarea[1]  ?> Fecha fin real: <?php echo $nombretarea[2];  ?> </p>
 </div>
-
 <?php if ($Page->id_tarea->Visible) { // id_tarea ?>
     <div id="r_id_tarea" class="form-group">
-        <label id="elh_mensajes_id_tarea" for="x_id_tarea" class="<?= $Page->LeftColumnClass ?>"><?= $Page->id_tarea->caption() ?><?= $Page->id_tarea->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
+       <!-- <label id="elh_mensajes_id_tarea" for="x_id_tarea" class="<?= $Page->LeftColumnClass ?>"><?= $Page->id_tarea->caption() ?><?= $Page->id_tarea->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label> -->
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->id_tarea->cellAttributes() ?>>
 <?php if ($Page->id_tarea->getSessionValue() != "") { ?>
 <span id="el_mensajes_id_tarea">
 <span<?= $Page->id_tarea->viewAttributes() ?>>
-<input type="text" readonly class="form-control-plaintext" value="<?= HtmlEncode(RemoveHtml($Page->id_tarea->getDisplayValue($Page->id_tarea->ViewValue))) ?>"></span>
+<input type="hidden" readonly class="form-control-plaintext" value="<?= HtmlEncode(RemoveHtml($Page->id_tarea->getDisplayValue($Page->id_tarea->ViewValue))) ?>"></span>
 </span>
 <input type="hidden" id="x_id_tarea" name="x_id_tarea" value="<?= HtmlEncode($Page->id_tarea->CurrentValue) ?>" data-hidden="1">
 <?php } else { ?>
@@ -181,6 +178,7 @@ loadjs.ready("head", function() {
 </div></div>
     </div>
 <?php } ?>
+
 <?php if ($Page->titulo->Visible) { // titulo ?>
     <div id="r_titulo" class="form-group">
         <label id="elh_mensajes_titulo" for="x_titulo" class="<?= $Page->LeftColumnClass ?>"><?= $Page->titulo->caption() ?><?= $Page->titulo->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
@@ -339,38 +337,26 @@ loadjs.ready("head", function() {
 <?php } ?>
 <?php if ($Page->adjunto->Visible) { // adjunto ?>
     <div id="r_adjunto" class="form-group">
-        <label id="elh_mensajes_adjunto" for="x_adjunto" class="<?= $Page->LeftColumnClass ?>"><?= $Page->adjunto->caption() ?><?= $Page->adjunto->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
+        <label id="elh_mensajes_adjunto" class="<?= $Page->LeftColumnClass ?>"><?= $Page->adjunto->caption() ?><?= $Page->adjunto->Required ? $Language->phrase("FieldRequiredIndicator") : "" ?></label>
         <div class="<?= $Page->RightColumnClass ?>"><div <?= $Page->adjunto->cellAttributes() ?>>
 <span id="el_mensajes_adjunto">
-<div class="input-group flex-nowrap">
-    <select
-        id="x_adjunto"
-        name="x_adjunto"
-        class="form-control ew-select<?= $Page->adjunto->isInvalidClass() ?>"
-        data-select2-id="mensajes_x_adjunto"
-        data-table="mensajes"
-        data-field="x_adjunto"
-        data-value-separator="<?= $Page->adjunto->displayValueSeparatorAttribute() ?>"
-        data-placeholder="<?= HtmlEncode($Page->adjunto->getPlaceHolder()) ?>"
-        <?= $Page->adjunto->editAttributes() ?>>
-        <?= $Page->adjunto->selectOptionListHtml("x_adjunto") ?>
-    </select>
-    <?php if (AllowAdd(CurrentProjectID() . "archivos_doc") && !$Page->adjunto->ReadOnly) { ?>
-    <div class="input-group-append"><button type="button" class="btn btn-default ew-add-opt-btn" id="aol_x_adjunto" title="<?= HtmlTitle($Language->phrase("AddLink")) . "&nbsp;" . $Page->adjunto->caption() ?>" data-title="<?= $Page->adjunto->caption() ?>" onclick="ew.addOptionDialogShow({lnk:this,el:'x_adjunto',url:'<?= GetUrl("ArchivosDocAddopt") ?>'});"><i class="fas fa-plus ew-icon"></i></button></div>
-    <?php } ?>
+<div id="fd_x_adjunto">
+<div class="input-group">
+    <div class="custom-file">
+        <input type="file" class="custom-file-input" title="<?= $Page->adjunto->title() ?>" data-table="mensajes" data-field="x_adjunto" name="x_adjunto" id="x_adjunto" lang="<?= CurrentLanguageID() ?>" multiple<?= $Page->adjunto->editAttributes() ?><?= ($Page->adjunto->ReadOnly || $Page->adjunto->Disabled) ? " disabled" : "" ?> aria-describedby="x_adjunto_help">
+        <label class="custom-file-label ew-file-label" for="x_adjunto"><?= $Language->phrase("ChooseFiles") ?></label>
+    </div>
 </div>
 <?= $Page->adjunto->getCustomMessage() ?>
 <div class="invalid-feedback"><?= $Page->adjunto->getErrorMessage() ?></div>
-<?= $Page->adjunto->Lookup->getParamTag($Page, "p_x_adjunto") ?>
-<script>
-loadjs.ready("head", function() {
-    var el = document.querySelector("select[data-select2-id='mensajes_x_adjunto']"),
-        options = { name: "x_adjunto", selectId: "mensajes_x_adjunto", language: ew.LANGUAGE_ID, dir: ew.IS_RTL ? "rtl" : "ltr" };
-    options.dropdownParent = $(el).closest("#ew-modal-dialog, #ew-add-opt-dialog")[0];
-    Object.assign(options, ew.vars.tables.mensajes.fields.adjunto.selectOptions);
-    ew.createSelect(options);
-});
-</script>
+<input type="hidden" name="fn_x_adjunto" id= "fn_x_adjunto" value="<?= $Page->adjunto->Upload->FileName ?>">
+<input type="hidden" name="fa_x_adjunto" id= "fa_x_adjunto" value="0">
+<input type="hidden" name="fs_x_adjunto" id= "fs_x_adjunto" value="200">
+<input type="hidden" name="fx_x_adjunto" id= "fx_x_adjunto" value="<?= $Page->adjunto->UploadAllowedFileExt ?>">
+<input type="hidden" name="fm_x_adjunto" id= "fm_x_adjunto" value="<?= $Page->adjunto->UploadMaxFileSize ?>">
+<input type="hidden" name="fc_x_adjunto" id= "fc_x_adjunto" value="<?= $Page->adjunto->UploadMaxFileCount ?>">
+</div>
+<table id="ft_x_adjunto" class="table table-sm float-left ew-upload-table"><tbody class="files"></tbody></table>
 </span>
 </div></div>
     </div>
@@ -386,9 +372,8 @@ loadjs.ready("head", function() {
 <?php } ?>
 </form>
 <?php
-	$idTarea = Container("tareas")->id_tarea->CurrentValue;
 	$fecha = ExecuteRow("SELECT t.fechainireal_tarea, t.fechafin_tarea FROM tareas t WHERE t.id_tarea = '".$idTarea."';");
-	$fechaSim = ExecuteRow("SELECT fechainisimulado_tarea, fechafinsimulado_tarea FROM tareas WHERE id_tarea = '".$idTarea."';" );
+	$fechaSim = ExecuteRow("SELECT fechaini_simulado, fechafin_simulado FROM escenario e INNER JOIN tareas t ON e.id_escenario = t.id_escenario WHERE t.id_tarea = '".$idTarea."';" );
 	$fechaInicial = date("Y-m-d", strtotime($fecha[0]));
 	$horaInicial = date("H", strtotime($fecha[0]));
 	$minInicial = date("i", strtotime($fecha[0]));
@@ -398,9 +383,9 @@ loadjs.ready("head", function() {
 	$fechaIniSimulado = date("Y-m-d", strtotime($fechaSim[0]));
 	$horaIniSimulado = date("H", strtotime($fechaSim[0]));
 	$minIniSimulado = date("i", strtotime($fechaSim[0]));
-	$fechaFinSimulado = date("Y-m-d", strtotime($fechaSim[1]));
-	$horaFinSimulado = date("H", strtotime($fechaSim[1]));
-	$minFinSimulado = date("i", strtotime($fechaSim[1]));	
+	$fechaFinSimulado = date("Y-m-d", strtotime($fechaSim[0]));
+	$horaFinSimulado = date("H", strtotime($fechaSim[0]));
+	$minFinSimulado = date("i", strtotime($fechaSim[0]));	
 	?>
 	<script>
 			let fechaInicial = "<?php echo $fechaInicial ?>";
@@ -447,6 +432,7 @@ loadjs.ready("head", function() {
 <script>
 loadjs.ready("load", function () {
     // Startup script
+    $('h1').html("<span class='text-muted'>Nuevo</span> mensaje");
     $("<input>").attr({id:"bnt1",name:"xxxx",value:"",type:"hidden"}).appendTo("form"),$("#btn-action").after('&nbsp; <button class="btn btn-info ew-btn"  name="btn" id="btn" type="submit"  onclick="this.form.xxxx.value=1"> Grabar y nuevo </button>');
 });
 </script>

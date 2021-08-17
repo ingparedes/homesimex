@@ -155,6 +155,8 @@ class Correo
 
         // Page is terminated
         $this->terminated = true;
+        global $OldSkipHeaderFooter, $SkipHeaderFooter;
+        $SkipHeaderFooter = $OldSkipHeaderFooter;
 
          // Page Unload event
         if (method_exists($this, "pageUnload")) {
@@ -205,6 +207,9 @@ class Correo
         if (Get("export") !== null) {
             $ExportType = Get("export"); // Get export parameter, used in header
         }
+        global $OldSkipHeaderFooter, $SkipHeaderFooter;
+        $OldSkipHeaderFooter = $SkipHeaderFooter;
+        $SkipHeaderFooter = true;
 
         // Global Page Loading event (in userfn*.php)
         Page_Loading();

@@ -18,9 +18,11 @@ echo $topMenu->toScript();
 
 // Sidebar menu
 $sideMenu = new Menu("menu", true, false);
+$sideMenu->addMenuItem(253, "mi_vista_doc", $MenuLanguage->MenuPhrase("253", "MenuText"), $MenuRelativePath . "VistaDocList", -1, "", AllowListMenu('{E72B71B0-0142-48A2-8D2C-143364E37B13}vista_doc'), false, false, "", "", false);
+$sideMenu->addMenuItem(254, "mi_docver", $MenuLanguage->MenuPhrase("254", "MenuText"), $MenuRelativePath . "DocverList", -1, "", AllowListMenu('{E72B71B0-0142-48A2-8D2C-143364E37B13}docver'), false, false, "", "", false);
+$sideMenu->addMenuItem(255, "mi_fileuser", $MenuLanguage->MenuPhrase("255", "MenuText"), $MenuRelativePath . "FileuserList", -1, "", AllowListMenu('{E72B71B0-0142-48A2-8D2C-143364E37B13}fileuser'), false, false, "", "", false);
 $sideMenu->addMenuItem(252, "mi_pizarra", $MenuLanguage->MenuPhrase("252", "MenuText"), $MenuRelativePath . "Pizarra", -1, "", AllowListMenu('{E72B71B0-0142-48A2-8D2C-143364E37B13}pizarra.php'), false, false, "cil-contact", "", false);
 $sideMenu->addMenuItem(250, "mi_inject_excon", $MenuLanguage->MenuPhrase("250", "MenuText"), $MenuRelativePath . "InjectExcon", -1, "", AllowListMenu('{E72B71B0-0142-48A2-8D2C-143364E37B13}inject_excon.php'), false, false, "cil-comment-square", "", false);
-$sideMenu->addMenuItem(251, "mi_inject_participante", $MenuLanguage->MenuPhrase("251", "MenuText"), $MenuRelativePath . "InjectParticipante", -1, "", AllowListMenu('{E72B71B0-0142-48A2-8D2C-143364E37B13}inject_participante.php'), false, false, "cil-comment-square", "", false);
 $sideMenu->addMenuItem(246, "mi_documentos", $MenuLanguage->MenuPhrase("246", "MenuText"), $MenuRelativePath . "Documentos", -1, "", AllowListMenu('{E72B71B0-0142-48A2-8D2C-143364E37B13}documentos.php'), false, false, "cil-folder-open", "", false);
 $sideMenu->addMenuItem(1, "mi_escenario", $MenuLanguage->MenuPhrase("1", "MenuText"), $MenuRelativePath . "EscenarioList", -1, "", AllowListMenu('{E72B71B0-0142-48A2-8D2C-143364E37B13}escenario'), false, false, "cil-airplay", "", false);
 $sideMenu->addMenuItem(36, "mci_config", $MenuLanguage->MenuPhrase("36", "MenuText"), "", -1, "", true, false, true, "cil-cog", "", false);
@@ -33,6 +35,7 @@ $sideMenu->addMenuItem(139, "mi_imbox_mail", $MenuLanguage->MenuPhrase("139", "M
 $sideMenu->addMenuItem(33, "mci_usuarios", $MenuLanguage->MenuPhrase("33", "MenuText"), "", -1, "", true, false, true, "cil-user", "", false);
 $sideMenu->addMenuItem(13, "mi_users", $MenuLanguage->MenuPhrase("13", "MenuText"), $MenuRelativePath . "UsersList?cmd=resetall", 33, "", AllowListMenu('{E72B71B0-0142-48A2-8D2C-143364E37B13}users'), false, false, "cil-people", "", false);
 $sideMenu->addMenuItem(20, "mi_userlevels", $MenuLanguage->MenuPhrase("20", "MenuText"), $MenuRelativePath . "UserlevelsList", 33, "", AllowListMenu('{E72B71B0-0142-48A2-8D2C-143364E37B13}userlevels'), false, false, "cil-layers", "", false);
+$sideMenu->addMenuItem(251, "mi_inject_participante", $MenuLanguage->MenuPhrase("251", "MenuText"), $MenuRelativePath . "InjectParticipante", -1, "", AllowListMenu('{E72B71B0-0142-48A2-8D2C-143364E37B13}inject_participante.php'), false, false, "cil-comment-square", "", false);
 $sideMenu->addMenuItem(40, "mi_chat_ini", $MenuLanguage->MenuPhrase("40", "MenuText"), $MenuRelativePath . "ChatIni", -1, "", AllowListMenu('{E72B71B0-0142-48A2-8D2C-143364E37B13}chat_ini.php'), false, false, "cil-chat-bubble", "", false);
 $sideMenu->addMenuItem(96, "mi_biblioteca", $MenuLanguage->MenuPhrase("96", "MenuText"), $MenuRelativePath . "Biblioteca", -1, "", AllowListMenu('{E72B71B0-0142-48A2-8D2C-143364E37B13}biblioteca.php'), false, false, "cil-library", "", false);
 $sideMenu->addMenuItem(171, "mi_timeline_general", $MenuLanguage->MenuPhrase("171", "MenuText"), $MenuRelativePath . "TimelineGeneral", -1, "", AllowListMenu('{E72B71B0-0142-48A2-8D2C-143364E37B13}timeline_general.php'), false, false, "cil-list-rich", "", false);
