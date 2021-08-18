@@ -7,7 +7,7 @@ $Kanban = &$Page;
 ?>
 <html>
 <head>
-<title>Trello Like Drag and Drop Cards for Project Management Software</title>
+<title><?php echo $Language->TablePhrase("kanban", "titulo"); ?></title>
 
 
 

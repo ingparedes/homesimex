@@ -19,32 +19,32 @@ $Timeline2 = &$Page;
         <script src="js/flatpickr.js" charset="utf-8"></script>
         <script src="js/flatpickr-locale-es.js" charset="utf-8"></script>
 
-        <title>Creando datepickers con Flatpickr</title>
+        <title><?php echo $Language->TablePhrase("Timeline2", "titulo"); ?></title>
     </head>
     <body>
         <div class="container">
             <div class="mb-1">
-                <label for="dpFecha">Fecha</label>
+                <label for="dpFecha"><?php echo $Language->TablePhrase("Timeline2", "fech"); ?></label>
                 <input type="text" id="dpFecha" class="form-control" placeholder="Clic aquí para seleccionar">
             </div>
             <div class="mb-1">
-                <label for="dpFecha2">Fecha de Nacimiento</label>
+                <label for="dpFecha2"><?php echo $Language->TablePhrase("Timeline2", "fn"); ?></label>
                 <input type="text" id="dpFecha2" class="form-control" placeholder="Clic aquí para seleccionar">
             </div>
             <div class="mb-1">
-                <label for="dpFecha3">Fecha de Ingreso</label>
+                <label for="dpFecha3"><?php echo $Language->TablePhrase("Timeline2", "fi"); ?></label>
                 <input type="text" id="dpFecha3" class="form-control" placeholder="Clic aquí para seleccionar">
             </div>
             <div class="mb-1">
-                <label for="dpFecha4">Fecha de Cita</label>
+                <label for="dpFecha4"><?php echo $Language->TablePhrase("Timeline2", "fc"); ?></label>
                 <input type="text" id="dpFecha4" class="form-control" placeholder="Clic aquí para seleccionar">
             </div>
             <div class="mb-1">
-                <label for="dpFecha5">Fecha de Quincena</label>
+                <label for="dpFecha5"><?php echo $Language->TablePhrase("Timeline2", "fq"); ?></label>
                 <input type="text" id="dpFecha5" class="form-control" placeholder="Clic aquí para seleccionar">
             </div>
             <div class="mb-1">
-                <label for="dpFecha6">Fecha de días de la semana</label>
+                <label for="dpFecha6"><?php echo $Language->TablePhrase("Timeline2", "fds"); ?></label>
                 <input type="text" id="dpFecha6" class="form-control" placeholder="Clic aquí para seleccionar">
             </div>
         </div>

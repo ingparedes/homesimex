@@ -315,7 +315,7 @@ $Page->ListOptions->render("body", "right", $Page->RowCount, "block", $Page->Tab
         <div class="col-md-3">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Folder</h3>
+              <h3 class="card-title"><?php echo $Language->TablePhrase("Email2List", "carpeta"); ?></h3>
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
                   <i class="fas fa-minus"></i>
@@ -326,13 +326,13 @@ $Page->ListOptions->render("body", "right", $Page->RowCount, "block", $Page->Tab
                 <ul class="nav nav-pills flex-column">
                   <li class="nav-item">
                     <a href="Email2List" class="nav-link">
-                      <i class="cil-envelope-closed"></i> Enviados 
+                      <i class="cil-envelope-closed"></i> <?php echo $Language->TablePhrase("Email2List", "enviadosEm"); ?>
                       <span class="badge bg-primary float-right"></span>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="ImboxMailList" class="nav-link">
-                      <i class="cil-inbox"></i> Recibidos
+                      <i class="cil-inbox"></i> <?php echo $Language->TablePhrase("Email2List", "recibidosEm"); ?>
                     </a>
                   </li>
               </ul>
@@ -347,7 +347,7 @@ $Page->ListOptions->render("body", "right", $Page->RowCount, "block", $Page->Tab
         <div class="col-9">
           <div class="card card-primary card-outline">
             <div class="card-header">
-              <h3 class="card-title">Enviados</h3>
+              <h3 class="card-title"><?php echo $Language->TablePhrase("Email2List", "enviadosEm2"); ?></h3>
               <!-- /.card-tools -->
           </div>
             <!-- /.card-header -->
@@ -356,7 +356,7 @@ $Page->ListOptions->render("body", "right", $Page->RowCount, "block", $Page->Tab
                 <table class="table table-hover table-striped">
                   <tbody>
                   <tr>
-                  <td class="mailbox-name" width="10%">Para</td>
+                  <td class="mailbox-name" width="10%"><?php echo $Language->TablePhrase("Email2List", "paraEm"); ?></td>
                    <td class="mailbox-name" width="30%"><slot class="ew-slot" name="tpx<?= $i ?>_email2_sender_userid"></slot></td>
                     <td class="mailbox-subject" width="30%"><b><slot class="ew-slot" name="tpx<?= $i ?>_email2_sujeto"></slot></b> 
                     </td>

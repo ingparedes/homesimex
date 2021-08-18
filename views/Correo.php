@@ -42,13 +42,13 @@ e.id_mensaje = $idmsg");
 <div class="col-md-9">
           <div class="card card-primary card-outline">
             <div class="card-header">
-              <h3 class="card-title">Leer Correo</h3>
+              <h3 class="card-title"><?php echo $Language->TablePhrase("Correo", "leerCorreo"); ?></h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body p-0">
               <div class="mailbox-read-info">
                 <h5><?php echo $sql_mail["sujeto"]?></h5>
-                <h6>De: <?php echo $sql_mail["destino"]?>
+                <h6><?php echo $Language->TablePhrase("Correo", "de"); ?> <?php echo $sql_mail["destino"]?>
                   <span class="mailbox-read-time float-right"><?php echo $sql_mail["tiempo"]?></span></h6>
               </div>
                <!-- /.btn-group -->
@@ -64,8 +64,8 @@ e.id_mensaje = $idmsg");
             <!-- /.card-footer -->
             <div class="card-footer">
               <div class="float-right">
-                <button type="button" class="btn btn-default"><i class="fas fa-reply"></i> Reply</button>
-                <button type="button" class="btn btn-default"><i class="fas fa-share"></i> Forward</button>
+                <button type="button" class="btn btn-default"><i class="fas fa-reply"></i> <?php echo $Language->TablePhrase("Correo", "respuesta"); ?></button>
+                <button type="button" class="btn btn-default"><i class="fas fa-share"></i> <?php echo $Language->TablePhrase("Correo", "reenviar"); ?></button>
               </div>
              </div>
             <!-- /.card-footer -->

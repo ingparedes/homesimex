@@ -271,8 +271,8 @@ $Page->showMessage();
 	$escenID = ExecuteRow("SELECT DATE_FORMAT(fechaini_real, '%Y/%m/%d'), DATE_FORMAT(fechafinal_real, '%Y/%m/%d'),nombre_escenario FROM escenario WHERE id_escenario = '".$id_escenario."';");
 ?>
 <div class="callout callout-primary">
-  <h4>Simulación:  <?php echo $escenID[2];  ?>  </h4>
- <p> <em> Fecha inicio real: <?php echo $escenID[1]  ?> Fecha fin real: <?php echo $escenID[0];  ?> </em></p>
+  <h4><?php echo $Language->TablePhrase("editgrupos", "simu"); ?>  <?php echo $escenID[2];  ?>  </h4>
+ <p> <em><?php echo $Language->TablePhrase("editgrupos", "fir"); ?>   <?php echo $escenID[1]  ?> <?php echo $Language->TablePhrase("editgrupos", "ffr"); ?>   <?php echo $escenID[0];  ?> </em></p>
 </div>
     <div id="r_nombre_grupo" class="form-group">
         <label for="x_nombre_grupo" class="col-sm-2 col-form-label"><?= $Page->nombre_grupo->caption() ?></label>

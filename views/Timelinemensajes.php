@@ -7,7 +7,7 @@ $Timelinemensajes = &$Page;
 ?>
 <?php $_SESSION['userid'] = CurrentUserID(); ?>
 <div class="container py-2">
-    <h2 class="font-weight-light text-center text-muted py-3">Bootstrap 4 Timeline</h2>
+    <h2 class="font-weight-light text-center text-muted py-3"><?php echo $Language->TablePhrase("timeline_mensajes", "boots"); ?></h2>
 
     <!-- timeline item 1 -->
     <div class="row">
@@ -29,9 +29,9 @@ $Timelinemensajes = &$Page;
         <div class="col py-2">
             <div class="card">
                 <div class="card-body">
-                    <div class="float-right text-muted">Mon, Jan 9th 2020 7:00 AM</div>
-                    <h4 class="card-title text-muted">Day 1 Orientation</h4>
-                    <p class="card-text">Welcome to the campus, introduction and get started with the tour.</p>
+                    <div class="float-right text-muted"><?php echo $Language->TablePhrase("timeline_mensajes", "monjan"); ?></div>
+                    <h4 class="card-title text-muted"><?php echo $Language->TablePhrase("timeline_mensajes", "day1"); ?></h4>
+                    <p class="card-text"><?php echo $Language->TablePhrase("timeline_mensajes", "bienvenida"); ?></p>
                 </div>
             </div>
         </div>
@@ -55,16 +55,16 @@ $Timelinemensajes = &$Page;
         <div class="col py-2">
             <div class="card border-success shadow">
                 <div class="card-body">
-                    <div class="float-right text-success">Tue, Jan 10th 2019 8:30 AM</div>
-                    <h4 class="card-title text-success">Day 2 Sessions</h4>
-                    <p class="card-text">Sign-up for the lessons and speakers that coincide with your course syllabus. Meet and greet with instructors.</p>
-                    <button class="btn btn-sm btn-outline-secondary" type="button" data-target="#t2_details" data-toggle="collapse">Show Details ▼</button>
+                    <div class="float-right text-success"><?php echo $Language->TablePhrase("timeline_mensajes", "jan10"); ?></p></div>
+                    <h4 class="card-title text-success"><?php echo $Language->TablePhrase("timeline_mensajes", "day2"); ?></p></h4>
+                    <p class="card-text"><?php echo $Language->TablePhrase("timeline_mensajes", "instrucci"); ?></p></p>
+                    <button class="btn btn-sm btn-outline-secondary" type="button" data-target="#t2_details" data-toggle="collapse"><?php echo $Language->TablePhrase("timeline_mensajes", "detalles"); ?></p></button>
                     <div class="collapse border" id="t2_details">
                         <div class="p-2 text-monospace">
-                            <div>08:30 - 09:00 Breakfast in CR 2A</div>
-                            <div>09:00 - 10:30 Live sessions in CR 3</div>
-                            <div>10:30 - 10:45 Break</div>
-                            <div>10:45 - 12:00 Live sessions in CR 3</div>
+                            <div><?php echo $Language->TablePhrase("timeline_mensajes", "desay"); ?></p></div>
+                            <div><?php echo $Language->TablePhrase("timeline_mensajes", "session"); ?></p></div>
+                            <div><?php echo $Language->TablePhrase("timeline_mensajes", "almuerz"); ?></p></div>
+                            <div><?php echo $Language->TablePhrase("timeline_mensajes", "sessionL"); ?></p></div>
                         </div>
                     </div>
                 </div>
@@ -90,11 +90,9 @@ $Timelinemensajes = &$Page;
         <div class="col py-2">
             <div class="card">
                 <div class="card-body">
-                    <div class="float-right text-muted">Wed, Jan 11th 2019 8:30 AM</div>
-                    <h4 class="card-title">Day 3 Sessions</h4>
-                    <p>Shoreditch vegan artisan Helvetica. Tattooed Codeply Echo Park Godard kogi, next level irony ennui twee squid fap selvage. Meggings flannel Brooklyn literally small batch, mumblecore PBR try-hard kale chips. Brooklyn vinyl lumbersexual
-                        bicycle rights, viral fap cronut leggings squid chillwave pickled gentrify mustache. 3 wolf moon hashtag church-key Odd Future. Austin messenger bag normcore, Helvetica Williamsburg sartorial tote bag distillery Portland before
-                        they sold out gastropub taxidermy Vice.</p>
+                    <div class="float-right text-muted"><?php echo $Language->TablePhrase("timeline_mensajes", "jan11"); ?></p></div>
+                    <h4 class="card-title"><?php echo $Language->TablePhrase("timeline_mensajes", "day3"); ?></p></h4>
+                    <p><?php echo $Language->TablePhrase("timeline_mensajes", "vegan"); ?></p></p>
                 </div>
             </div>
         </div>
@@ -118,9 +116,9 @@ $Timelinemensajes = &$Page;
         <div class="col py-2">
             <div class="card">
                 <div class="card-body">
-                    <div class="float-right text-muted">Thu, Jan 12th 2019 11:30 AM</div>
-                    <h4 class="card-title">Day 4 Wrap-up</h4>
-                    <p>Join us for lunch in Bootsy's cafe across from the Campus Center.</p>
+                    <div class="float-right text-muted"><?php echo $Language->TablePhrase("timeline_mensajes", "jan12"); ?></p></div>
+                    <h4 class="card-title"><?php echo $Language->TablePhrase("timeline_mensajes", "day4"); ?></p></h4>
+                    <p><?php echo $Language->TablePhrase("timeline_mensajes", "almuerzzo"); ?></p></p>
                 </div>
             </div>
         </div>
@@ -154,9 +152,9 @@ $Timelinemensajes = &$Page;
         <div class="col-sm py-2">
             <div class="card">
                 <div class="card-body">
-                    <div class="float-right text-muted small">Jan 9th 2019 7:00 AM</div>
-                    <h4 class="card-title text-muted">Day 1 Orientation</h4>
-                    <p class="card-text">Welcome to the campus, introduction and get started with the tour.</p>
+                    <div class="float-right text-muted small"><?php echo $Language->TablePhrase("timeline_mensajes", "jan9"); ?></div>
+                    <h4 class="card-title text-muted"><?php echo $Language->TablePhrase("timeline_mensajes", "day1"); ?></h4>
+                    <p class="card-text"><?php echo $Language->TablePhrase("timeline_mensajes", "bienvenida"); ?></p>
                 </div>
             </div>
         </div>
@@ -167,16 +165,16 @@ $Timelinemensajes = &$Page;
         <div class="col-sm py-2">
             <div class="card border-success shadow">
                 <div class="card-body">
-                    <div class="float-right text-success small">Jan 10th 2019 8:30 AM</div>
-                    <h4 class="card-title text-success">Day 2 Sessions</h4>
-                    <p class="card-text">Sign-up for the lessons and speakers that coincide with your course syllabus. Meet and greet with instructors.</p>
-                    <button class="btn btn-sm btn-outline-secondary" type="button" data-target="#t22_details" data-toggle="collapse">Show Details ▼</button>
+                    <div class="float-right text-success small"><?php echo $Language->TablePhrase("timeline_mensajes", "jan10"); ?></div>
+                    <h4 class="card-title text-success"><?php echo $Language->TablePhrase("timeline_mensajes", "day2"); ?></h4>
+                    <p class="card-text"><?php echo $Language->TablePhrase("timeline_mensajes", "signup"); ?></p>
+                    <button class="btn btn-sm btn-outline-secondary" type="button" data-target="#t22_details" data-toggle="collapse"><?php echo $Language->TablePhrase("timeline_mensajes", "detalles"); ?></button>
                     <div class="collapse border" id="t22_details">
                         <div class="p-2 text-monospace">
-                            <div>08:30 - 09:00 Breakfast in CR 2A</div>
-                            <div>09:00 - 10:30 Live sessions in CR 3</div>
-                            <div>10:30 - 10:45 Break</div>
-                            <div>10:45 - 12:00 Live sessions in CR 3</div>
+                            <div><?php echo $Language->TablePhrase("timeline_mensajes", "desay"); ?></div>
+                            <div><?php echo $Language->TablePhrase("timeline_mensajes", "session"); ?></div>
+                            <div><?php echo $Language->TablePhrase("timeline_mensajes", "almuerz"); ?></div>
+                            <div><?php echo $Language->TablePhrase("timeline_mensajes", "sessionL"); ?></div>
                         </div>
                     </div>
                 </div>
@@ -217,10 +215,9 @@ $Timelinemensajes = &$Page;
         <div class="col-sm py-2">
             <div class="card">
                 <div class="card-body">
-                    <div class="float-right text-muted small">Jan 11th 2019 8:30 AM</div>
-                    <h4 class="card-title">Day 3 Sessions</h4>
-                    <p>Shoreditch vegan artisan Helvetica. Tattooed Codeply Echo Park Godard kogi, next level irony ennui twee squid fap selvage. Meggings flannel Brooklyn literally small batch, mumblecore PBR try-hard kale chips. Brooklyn vinyl lumbersexual
-                        bicycle rights, viral fap cronut leggings squid chillwave pickled gentrify mustache.</p>
+                    <div class="float-right text-muted small"><?php echo $Language->TablePhrase("timeline_mensajes", "jan11"); ?></div>
+                    <h4 class="card-title"><?php echo $Language->TablePhrase("timeline_mensajes", "day3"); ?></h4>
+                    <p><?php echo $Language->TablePhrase("timeline_mensajes", "bicicle"); ?></p>
                 </div>
             </div>
         </div>
@@ -231,9 +228,9 @@ $Timelinemensajes = &$Page;
         <div class="col-sm py-2">
             <div class="card">
                 <div class="card-body">
-                    <div class="float-right text-muted small">Jan 12th 2019 11:30 AM</div>
-                    <h4 class="card-title">Day 4 Wrap-up</h4>
-                    <p>Join us for lunch in Bootsy's cafe across from the Campus Center.</p>
+                    <div class="float-right text-muted small"><?php echo $Language->TablePhrase("timeline_mensajes", "jan12"); ?></div>
+                    <h4 class="card-title"><?php echo $Language->TablePhrase("timeline_mensajes", "day4"); ?></h4>
+                    <p><?php echo $Language->TablePhrase("timeline_mensajes", "almuerzzo"); ?></p>
                 </div>
             </div>
         </div>

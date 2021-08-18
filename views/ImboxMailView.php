@@ -187,7 +187,7 @@ if ($arcxmail != '') {
 <div id="tpd_imbox_mailview" class="ew-custom-template"></div>
 <template id="tpm_imbox_mailview">
 <div id="ct_ImboxMailView">    <head>
-<title>Refresh Div withour refershing the page completely</title>
+<title><?php echo $Language->TablePhrase("imboxMailView", "actualizar"); ?></title>
 <meta name="generator" content="PHPMaker 2021.0.9">
 </head>
 <section class="content">
@@ -197,7 +197,7 @@ if ($arcxmail != '') {
           <a class="btn btn-default ew-add-edit ew-add" title="" data-table="email2" data-caption="Agregar" href="#" onclick="return ew.modalDialogShow({lnk:this,btn:'AddBtn',url:'/homesimex/Email2Add'});" data-original-title="Agregar"><i data-phrase="AddLink" class="fas fa-plus ew-icon" data-caption="Agregar"></i></a>
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Folders</h3>
+                <h3 class="card-title"><?php echo $Language->TablePhrase("imboxMailView", "carpetas"); ?></h3>
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
                     <i class="fas fa-minus"></i>
@@ -208,13 +208,13 @@ if ($arcxmail != '') {
                 <ul class="nav nav-pills flex-column">
                   <li class="nav-item">
                     <a href="../Email2List" class="nav-link">
-                      <i class="cil-envelope-closed"></i> Enviados 
+                      <i class="cil-envelope-closed"></i> <?php echo $Language->TablePhrase("imboxMailView", "env"); ?> 
                       <span class="badge bg-primary float-right"></span>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="../ImboxMailList" class="nav-link">
-                      <i class="cil-inbox"></i> Recibidos
+                      <i class="cil-inbox"></i> <?php echo $Language->TablePhrase("imboxMailView", "rec"); ?>
                     </a>
                   </li>
                 </ul>
@@ -228,13 +228,13 @@ if ($arcxmail != '') {
         <div class="col-md-9">
           <div class="card card-primary card-outline">
             <div class="card-header">
-              <h3 class="card-title">Leer Mensaje</h3>
+              <h3 class="card-title"><?php echo $Language->TablePhrase("imboxMailView", "leermens"); ?></h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body p-0">
               <div class="mailbox-read-info">
-                <h5>Sujeto: <slot class="ew-slot" name="tpx_imbox_mail_sujeto"></slot></h5>
-                <h6>De: <slot class="ew-slot" name="tpx_imbox_mail_reciever_userid"></slot>
+                <h5><?php echo $Language->TablePhrase("imboxMailView", "suj"); ?> <slot class="ew-slot" name="tpx_imbox_mail_sujeto"></slot></h5>
+                <h6><?php echo $Language->TablePhrase("imboxMailView", "de"); ?> <slot class="ew-slot" name="tpx_imbox_mail_reciever_userid"></slot>
                   <span class="mailbox-read-time float-right"><slot class="ew-slot" name="tpx_imbox_mail_tiempo"></slot></span></h6>
               </div>
               <!-- /.mailbox-read-info -->
@@ -264,10 +264,10 @@ print " <div class='mailbox-attachment-info'>
               </ul>
               <div class="card-footer">
         <a class="btn btn-default ew-add-edit " title="" data-caption="Enviar" href="/homesimex/Email2Add?id_email=<?php echo CurrentPage()->id_email->CurrentValue; ?>" data-original-title="Enviar">
-         <i class="fas fa-reply"></i> &nbsp;Responder
+         <i class="fas fa-reply"></i> &nbsp;<?php echo $Language->TablePhrase("imboxMailView", "res"); ?>
         </a>
            <a class="btn btn-default ew-add-edit " title="" data-caption="Enviar" href="/homesimex/Email2Add?Idrenviar=<?php echo CurrentPage()->id_email->CurrentValue; ?>" data-original-title="Enviar">
-         Reenviar&nbsp;<i class="fas fa-sign-out-alt"></i> 
+           <?php echo $Language->TablePhrase("imboxMailView", "reenv"); ?>&nbsp;<i class="fas fa-sign-out-alt"></i> 
         </a>
         </div>
         <!--

@@ -196,10 +196,10 @@ DATE_ADD(e.fechafinal_real,INTERVAL ((RIGHT(p.gmt,2)+60*MID(p.gmt,6,2)*1))-300  
       </div>
       <input type="button" id="load" value="&darr; Load" style="display:none">
       <div id="visualization"></div>
-    <div id="loading">loading...</div>
-    <p class = "small">  <em> Presione CTRL + rueda del mouse para hacer zoom  <br>
-Para desplazarse en la línea de tiempo, mantener presionado el clic izquierdo del ratón. <br>
-Para retornar a la hora real del ejercicio presionar el ícono <img src = "https://simexamericas.org/homesimex/images/iconotimeline.png"  width="30" height="30"> </em> </p>
+    <div id="loading"><?php echo $Language->TablePhrase("inject_participante", "cargando"); ?></div>
+    <p class = "small">  <em> <?php echo $Language->TablePhrase("inject_participante", "ctrlzoom"); ?> <br>
+    <?php echo $Language->TablePhrase("inject_participante", "clicizq"); ?> <br>
+    <?php echo $Language->TablePhrase("inject_participante", "rhr"); ?> <img src = "https://simexamericas.org/homesimex/images/iconotimeline.png"  width="30" height="30"> </em> </p>
 
     </div>
   </div>
@@ -209,7 +209,7 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = "https
     <div class="card" id="vue-chat">
 
         <div class="card-header bg-success">
-            <h3 class="card-title">Mensajes</h3>
+            <h3 class="card-title"><?php echo $Language->TablePhrase("inject_participante", "mens"); ?></h3>
              <!--Miguel Select-->
        
             <!--MIGUel, CAMBIO UN SELEC POR UN BOTON CON UN DROPDOWN-->
@@ -218,10 +218,10 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = "https
             </form>
             <button type="button" data-toggle="dropdown" id="botonEstado" class="btn btn-success dropdown-toggle dropdown-toggle-split" aria-haspopup="true" aria-expanded="false"><span id="searchtype"></span></button>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item " href="#" onclick="busquedaEstado('Todos');">Todos</a>
-                            <a class="dropdown-item " href="#" onclick="busquedaEstado('Pendiente');">Pendiente</a>
-                            <a class="dropdown-item " href="#" onclick="busquedaEstado('Inconcluso');">Inconcluso</a>
-                            <a class="dropdown-item " href="#" onclick="busquedaEstado('Finalizado');">Finalizado</a>
+                            <a class="dropdown-item " href="#" onclick="busquedaEstado('Todos');"><?php echo $Language->TablePhrase("inject_participante", "todos"); ?></a>
+                            <a class="dropdown-item " href="#" onclick="busquedaEstado('Pendiente');"><?php echo $Language->TablePhrase("inject_participante", "pendiente"); ?></a>
+                            <a class="dropdown-item " href="#" onclick="busquedaEstado('Inconcluso');"><?php echo $Language->TablePhrase("inject_participante", "inconcluso"); ?></a>
+                            <a class="dropdown-item " href="#" onclick="busquedaEstado('Finalizado');"><?php echo $Language->TablePhrase("inject_participante", "finalizado"); ?></a>
                         </div>
         </div>
 
@@ -236,9 +236,9 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = "https
                                     <span class="direct-chat-name float-left">{{mens.actor}}</span>
                                     <span class="direct-chat-timestamp float-right">
                                         <i class='far fa-clock text-primary'></i> 
-                                        Hora real del país del ejercicio {{mens.fstar}} <br> 
+                                        <?php echo $Language->TablePhrase("inject_participante", "hr"); ?> {{mens.fstar}} <br> 
                                         <i class='far fa-clock text-info'></i> 
-                                        Hora simulada  {{mens.fstarsim}} 
+                                        <?php echo $Language->TablePhrase("inject_participante", "hs"); ?>{{mens.fstarsim}} 
                                     </span>
                                    </div>
                     </div>
@@ -262,7 +262,7 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = "https
                             <hr>
                             <!--MIGUEL Acordeon punto 148-->
                             <a data-toggle="collapse" v-bind:href="'#descripcion'+mens.id" role="button" aria-expanded="false">
-                                    <h4>Título del mensaje:{{mens.titulo_mensaje}} <i class="fa" aria-hidden="true"></i></h4>   </a> 
+                                    <h4><?php echo $Language->TablePhrase("inject_participante", "tmens"); ?>{{mens.titulo_mensaje}} <i class="fa" aria-hidden="true"></i></h4>   </a> 
                                    
                                     </div> 
 
@@ -280,7 +280,7 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = "https
                             <a  data-toggle="collapse" v-bind:href="'#para'+mens.id" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
                                             <i class="fa fa-users"></i> 
 
-                                            Para:</a>
+                                            <?php echo $Language->TablePhrase("inject_participante", "para"); ?>:</a>
                             <div class="collapse multi-collapse" v-bind:id="'para'+mens.id">
                                         <ul  v-for="destinatario in mens.destinatarios" v-if="mens.visible">
                                           <li> {{destinatario.destinatario}}.</li>
@@ -291,7 +291,7 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = "https
                               <p><!--MIGUEL, Region Respuestas-->
                                         <a  data-toggle="collapse" v-bind:href="'#respuestas'+mens.id" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
                                             <i class="fa fa-users"></i>     
-                                            Respuestas:</a><a class="badge badge-danger" v-if="mens.respuestasPendientes==1">Nuevo</a>
+                                            <?php echo $Language->TablePhrase("inject_participante", "res"); ?></a><a class="badge badge-danger" v-if="mens.respuestasPendientes==1">Nuevo</a>
                                             </p>
                                            
                                             <div class="collapse multi-collapse" v-bind:id="'respuestas'+mens.id">
@@ -304,18 +304,18 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = "https
                             <div class="timeline-footer">
 
                                 <a class="m-r-15 text-inverse-lighter" title="" data-caption="Enviar" v-bind:href="'/homesimex/Email2Add/'+mens.id+'?IdResMsg='+mens.id" data-original-title="Enviar">
-                                    Responder&nbsp;<i class="fa fa-reply" aria-hidden="true"></i>
+                                <?php echo $Language->TablePhrase("inject_participante", "respon"); ?>&nbsp;<i class="fa fa-reply" aria-hidden="true"></i>
 
                                 </a>│
 
                                 <a class="m-r-15 text-inverse-lighter" title="" data-caption="Enviar" v-bind:href="'/homesimex/Email2Add?IdreenMsg='+mens.id" data-original-title="Enviar">
-                                Reenviar &nbsp;<i class="fa fa-random" aria-hidden="true"></i>
+                                <?php echo $Language->TablePhrase("inject_participante", "reen"); ?> &nbsp;<i class="fa fa-random" aria-hidden="true"></i>
 
                                 </a> │                               
   
 
                                 <a type="button" class="m-r-15 text-inverse-lighter" data-toggle="collapse" v-bind:href="'#collapse'+mens.id" >
-                                    <i class="fa fa-comments fa-fw fa-lg m-r-3"></i> Comentario
+                                    <i class="fa fa-comments fa-fw fa-lg m-r-3"></i> <?php echo $Language->TablePhrase("inject_participante", "comen"); ?>
                                 </a> 
                             </div>
             
@@ -329,7 +329,7 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = "https
                                             <textarea type="text" class="textarealine" v-model="mens.entrada"></textarea>
                                         </div>
                                         <div class="mt-2 text-right">
-                                            <button class="btn btn-primary btn-sm shadow-none" v-on:click="hacerComentario(mens)" type="button">Envio
+                                            <button class="btn btn-primary btn-sm shadow-none" v-on:click="hacerComentario(mens)" type="button"><?php echo $Language->TablePhrase("inject_participante", "env"); ?>
                                         </div>
                                         <hr>       
                                         <div v-for="coment in mens.comentarios">   

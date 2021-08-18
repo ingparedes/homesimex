@@ -8,7 +8,7 @@ $LineaTiempo = &$Page;
 <html>
 
 <head>
-    <title>Timeline | dataHandling | Data serialization</title>
+    <title><?php echo $Language->TablePhrase("timeline", "titulo"); ?></title>
 
     <style>
         body,
@@ -39,7 +39,7 @@ $LineaTiempo = &$Page;
 
 <body>
 
-    <h1>Lienea de tiempo mensajes y tareas</h1>
+    <h1><?php echo $Language->TablePhrase("timeline", "timeline_m_t"); ?></h1>
 
     <?php $sql_utc = ExecuteRow("SELECT p.gmt, e.fechaini_simulado, e.fechafin_simulado FROM escenario  e INNER JOIN paisgmt p ON p.id_zone = e.pais_escenario WHERE e.estado IN ('1')");
     $_SESSION['id_user'] = CurrentUserID();
@@ -48,23 +48,23 @@ $LineaTiempo = &$Page;
     <div class="buttons">
         <input type="button" id="load" value="&darr; Load" style="display:none">
         <!-- <input type="button" id="save" value="&uarr; Save" title="Save data from the Timeline into the textarea"> -->
-        <button type="button" id="save" class="btn btn-success">Save</button>
+        <button type="button" id="save" class="btn btn-success"><?php echo $Language->TablePhrase("timeline", "guardar"); ?></button>
 
     </div>
     <div class="position-fixed bottom-100 end-300 p-5" style="z-index: 5">
         <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header bg-success text-white">
 
-                <small>Datos almacenados</small>
+                <small><?php echo $Language->TablePhrase("timeline", "datos_almacenados"); ?></small>
 
             </div>
             <div class="toast-body bg-success text-white">
-                Datos almacenados Ok
+            <?php echo $Language->TablePhrase("timeline", "datos_almacenados_ok"); ?>
             </div>
         </div>
     </div>
 
-    <div id="loading">loading...</div>
+    <div id="loading"><?php echo $Language->TablePhrase("timeline", "cargand"); ?></div>
     <div id="visualization"></div>
 
 
@@ -73,7 +73,7 @@ $LineaTiempo = &$Page;
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Editar Datos</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle"><?php echo $Language->TablePhrase("timeline", "editar_datos"); ?></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -83,16 +83,16 @@ $LineaTiempo = &$Page;
                         <div class="form-group">
                             <input type="text" class="form-control" id="id" hidden>
                             <input type="text" class="form-control" id="tipo" hidden>
-                            <label for="tituloT">Titulo </label>
+                            <label for="tituloT"><?php echo $Language->TablePhrase("timeline", "titul"); ?> </label>
                             <input type="text" class="form-control" id="tituloT" placeholder="Título Tarea" value="hola">
                         </div>
                         <div class="form-group">
-                            <label for="desc_tarea">Descripción </label>
+                            <label for="desc_tarea"><?php echo $Language->TablePhrase("timeline", "descrip"); ?> </label>
                             <textarea class="form-control" id="desc_tarea" rows="3"></textarea>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                            <button type="button" onclick="saveMsj()" class="btn btn-primary">Guardar</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo $Language->TablePhrase("timeline", "cerrar"); ?></button>
+                            <button type="button" onclick="saveMsj()" class="btn btn-primary"><?php echo $Language->TablePhrase("timeline", "guardar"); ?></button>
                         </div>
                     </form>
 

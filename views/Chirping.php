@@ -53,12 +53,12 @@ $id_user = $_GET['id_user'];
         <div class="dropdown navbar-user-dropdown display-mobile">
             <button class="btn btn-secondary dropdown-toggle btn-circle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
+                <a class="dropdown-item" href="#"><?php echo $Language->TablePhrase("Chirping", "actionChirping"); ?></a>
+                <a class="dropdown-item" href="#"><?php echo $Language->TablePhrase("Chirping", "anotherChirping"); ?></a>
+                <a class="dropdown-item" href="#"><?php echo $Language->TablePhrase("Chirping", "somethingChirping"); ?></a>
             </div>
         </div>
-        <button class="btn btn-search-bar display-mobile">Tweet</button>
+        <button class="btn btn-search-bar display-mobile"><?php echo $Language->TablePhrase("Chirping", "tweetChirping"); ?></button>
         <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -66,16 +66,16 @@ $id_user = $_GET['id_user'];
 
             <ul class="navbar-nav mr-auto" id="navbarsExampleDefault">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#"><i class="octicon octicon-home iconify" data-icon="ant-design:home-filled" data-inline="false" class="" aria-hidden="true"></i> Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="#"><i class="octicon octicon-home iconify" data-icon="ant-design:home-filled" data-inline="false" class="" aria-hidden="true"></i> <?php echo $Language->TablePhrase("Chirping", "homechirping"); ?> <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="octicon octicon-zap iconify" data-icon="bi:lightning-fill" data-inline="false"></i> Moments</a>
+                    <a class="nav-link" href="#"><i class="octicon octicon-zap iconify" data-icon="bi:lightning-fill" data-inline="false"></i> <?php echo $Language->TablePhrase("Chirping", "momentChirping"); ?></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="iconify octicon octicon-bell" data-icon="ic:baseline-notifications" data-inline="false"></i> Notifications</a>
+                    <a class="nav-link" href="#"><i class="iconify octicon octicon-bell" data-icon="ic:baseline-notifications" data-inline="false"></i> <?php echo $Language->TablePhrase("Chirping", "notiChirping"); ?></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="octicon octicon-inbox iconify" data-icon="wpf:message" data-inline="false"></i> Messages</a>
+                    <a class="nav-link" href="#"><i class="octicon octicon-inbox iconify" data-icon="wpf:message" data-inline="false"></i> <?php echo $Language->TablePhrase("Chirping", "mensajesChirping"); ?></a>
                 </li>
             </ul>
             <a class="navbar-brand display-desktop" href="#"><svg viewBox="0 0 24 24" class="r-13gxpu9 r-4qtqp9 r-yyyyoo r-16y2uox r-1q142lx r-8kz0gk r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-1srniue">
@@ -101,7 +101,7 @@ $id_user = $_GET['id_user'];
                     <!-- END: Navbar User menu -->
                     <!-- Navbar Tweet button -->
                 </div>
-                <button class="btn btn-search-bar display-desktop" id="refrescar" value="Actualizar">Chirping</button>
+                <button class="btn btn-search-bar display-desktop" id="refrescar" value="Actualizar"><?php echo $Language->TablePhrase("Chirping", "chirping1"); ?></button>
           
 
     </nav>
@@ -273,17 +273,17 @@ $id_user = $_GET['id_user'];
                                     </div>
                                     <div class="tweet-footer">
                                         <a class="tweet-footer-btn">
-                                            <i class="iconify" data-icon="akar-icons:arrow-back-thick-fill" data-inline="true"></i><span> Responder</span>
+                                            <i class="iconify" data-icon="akar-icons:arrow-back-thick-fill" data-inline="true"></i><span> <?php echo $Language->TablePhrase("Chirping", "responderCh"); ?></span>
 
                                         </a>
                                         <a class="tweet-footer-btn">
-                                            <i class="iconify" data-icon="akar-icons:arrow-forward-thick-fill" data-inline="true"></i><span> Reenviar</span>
+                                            <i class="iconify" data-icon="akar-icons:arrow-forward-thick-fill" data-inline="true"></i><span> <?php echo $Language->TablePhrase("Chirping", "reenviarCh"); ?></span>
                                         </a>
                                         <a class="tweet-footer-btn">
-                                            <i class="iconify" data-icon="ic:baseline-mark-email-read" data-inline="true"></i><span> Leido</span>
+                                            <i class="iconify" data-icon="ic:baseline-mark-email-read" data-inline="true"></i><span> <?php echo $Language->TablePhrase("Chirping", "leidoCh"); ?></span>
                                         </a>
                                         <a class="tweet-footer-btn">
-                                            <i class="iconify" data-icon="ion:trash-bin-sharp" data-inline="true"></i><span> Eliminar</span>
+                                            <i class="iconify" data-icon="ion:trash-bin-sharp" data-inline="true"></i><span> <?php echo $Language->TablePhrase("Chirping", "eliminarCh"); ?></span>
                                         </a>
                                     </div>
                                 </div>

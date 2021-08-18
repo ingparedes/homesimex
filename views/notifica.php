@@ -1,5 +1,5 @@
 <head>
-    <title>Refresh Div withour refershing the page completely</title>
+    <title><?php echo $Language->TablePhrase("notica", "titulo"); ?></title>
     <script src="https://code.jquery.com/jquery-latest.js"></script>
     <script>
         $(document).ready(function() {

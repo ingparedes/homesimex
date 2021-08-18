@@ -144,15 +144,15 @@ WHERE users.id_users = '" . CurrentUserID() . "';");
 
     <div id="loading">loading...</div>
     <div id="visualization"></div>
-    <p class = "small">  <em>  Presione CTRL + rueda del mouse para hacer zoom  <br>
-Para desplazarse en la línea de tiempo, mantener presionado el clic izquierdo del ratón. <br>
-Para retornar a la hora real del ejercicio presionar el ícono <img src = 'https://simexamericas.org/homesimex/images/iconotimeline.png'  width='30' height='30'></em> </p>
+    <p class = "small">  <em>  <?php   echo $Language->TablePhrase("timeline_excon", "ctrzoom"); ?>  <br>
+    <?php   echo $Language->TablePhrase("timeline_excon", "cltizq"); ?> <br>
+    <?php   echo $Language->TablePhrase("timeline_excon", "rthr"); ?><img src = 'https://simexamericas.org/homesimex/images/iconotimeline.png'  width='30' height='30'></em> </p>
     <!-- Modal -->
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalLongTitle">Editar Datos</h5>
+                    <h5 class="modal-title" id="modalLongTitle"><?php   echo $Language->TablePhrase("timeline_excon", "editar_dat"); ?></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -172,21 +172,21 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = 'https
                         </div>
                         <hr>
                         <div class="form-group">
-                            <label id="descripcion">Descripción </label>
+                            <label id="descripcion"><?php   echo $Language->TablePhrase("timeline_excon", "descrip"); ?> </label>
                             <!-- <textarea class="form-control" id="desc_tarea" rows="3"></textarea> -->
                             <em>
                                 <div id="desc_tarea"></div><em>
                         </div>
                         <hr>
                         <ul id="ulmjs">
-                            <li> <strong>Hora real inicial:</strong> <span id="fechainireal_tarea"> </span></li>
-                            <li> <strong>hora real final:</strong> <span id="fechafin_tarea"> </span></li>
-                            <li><strong>Hora simulada inicial: </strong><span id="fechainisimulado_tarea"> </span></li>
-                            <li><strong>Hora simulada final:</strong> <span id="fechafinsimulado_tarea"> </span> </li>
+                            <li> <strong><?php   echo $Language->TablePhrase("timeline_excon", "hri"); ?></strong> <span id="fechainireal_tarea"> </span></li>
+                            <li> <strong><?php   echo $Language->TablePhrase("timeline_excon", "hrf"); ?></strong> <span id="fechafin_tarea"> </span></li>
+                            <li><strong><?php   echo $Language->TablePhrase("timeline_excon", "hsi"); ?> </strong><span id="fechainisimulado_tarea"> </span></li>
+                            <li><strong><?php   echo $Language->TablePhrase("timeline_excon", "hsf"); ?></strong> <span id="fechafinsimulado_tarea"> </span> </li>
                         </ul>
                         <div class="modal-footer">
                            <!-- <button type="button" id="btnAddMensaje" onclick="modalAddMsj();" data-dismiss="modal2" class="btn btn-info btn-sm mr-auto">Crear Mensaje</button>
--->                         <button type="button" id="editMsg"  class="btn btn-primary">Mensaje</button>
+-->                         <button type="button" id="editMsg"  class="btn btn-primary"><?php   echo $Language->TablePhrase("timeline_excon", "titulo_modalmsg"); ?></button>
                            <!-- <select id="valorar" class="form-control-sm" name="valorar">
                                 <option value="0" selected>Valorar...</option>
                                 <option value="1" style="background-color:white">Pendiente</option>
@@ -195,7 +195,7 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = 'https
                             </select>
                             
                             <button type="button" id="submint" onclick="saveMsj()" class="btn btn-primary btn-sm">Guardar</button>-->
-                            <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-light" data-dismiss="modal"><?php   echo $Language->TablePhrase("timeline_excon", "cancel"); ?></button>
 
                         </div>
                     </form>
@@ -209,7 +209,7 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = 'https
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="e_modalLongTitle">Mensaje</h5>
+                    <h5 class="modal-title" id="e_modalLongTitle"><?php   echo $Language->TablePhrase("timeline_excon", "titulo_modalmsg"); ?></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -224,25 +224,25 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = 'https
                             <input type="hidden" class="form-control-sm" id="e_id_tarea" name="e_id_tarea">
 
                             <div class="form-group">
-                                <label for="titulo">Título </label>
+                                <label for="titulo"><?php   echo $Language->TablePhrase("timeline_excon", "titul"); ?> </label>
                                 <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Título Mensaje" value="" required>
                             </div>
 
-                            <label for="mensaje">Mensaje </label>
+                            <label for="mensaje"><?php   echo $Language->TablePhrase("timeline_excon", "titulo_modalmsg"); ?> </label>
                             <textarea class="form-control" id="mensaje" name="mensaje" rows="2"></textarea>
                             <!-- <div id="e_mensaje" name="e_mensaje" class="border" contenteditable="true"></div> -->
 
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <label for="fechareal_start">Fecha Inicio Real</label>
+                                        <label for="fechareal_start"><?php   echo $Language->TablePhrase("timeline_excon", "fir"); ?></label>
                                         <input type="text" class="form-control" id="fechareal_start" name="fechareal_start">
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <label for="fechasim_start">Fecha Inicial Simulada</label>
+                                        <label for="fechasim_start"><?php  echo $Language->TablePhrase("timeline_excon", "fis"); ?></label>
                                         <input type="text" class="form-control" id="fechasim_start" name="fechasim_start">
                                     </div>
                                 </div>
@@ -260,23 +260,23 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = 'https
 
                             </select> -->
                             <div class="form-group">
-                                <label for="medios"> Medio</label>
+                                <label for="medios"> <?php  echo $Language->TablePhrase("timeline_excon", "medio"); ?></label>
                                 <select id="medios" name="medios" class="form-control" required="">
-                                    <option style="background-color:white" value="">Seleccione Medio...</option>
+                                    <option style="background-color:white" value=""><?php  echo $Language->TablePhrase("timeline_excon", "seleccion_medio"); ?></option>
                                     <option style="background-color:white" value="1">Email</option>
                                     <option style="background-color:white" value="2">Daybook</option>
                                     <option style="background-color:white" value="3">Chirping</option>
                                 </select>
                                 <div>
                                     <div class="form-group">
-                                        <label for="actividad_esperada">Actividad Esperada</label>
+                                        <label for="actividad_esperada"><?php  echo $Language->TablePhrase("timeline_excon", "acti_es"); ?></label>
                                         <textarea class="form-control" id="actividad_esperada" name="actividad_esperada" rows="2"></textarea>
                                     </div>
                                     <div class="row">
                                         <div class="col-6">
 
                                             <div class="form-group">
-                                                <label for="id_actor">De:</label>
+                                                <label for="id_actor"><?php  echo $Language->TablePhrase("timeline_excon", "de"); ?></label>
                                                 <select id="id_actor" name="id_actor" class="form-control">
                                                     <?php
                                                     foreach ($sqlActores as $valor) {
@@ -286,10 +286,10 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = 'https
                                                 </select>
                                             </div>
                                             <div class="form-group">
-                                                <label for="adjunto">Subir Archivo</label>
+                                                <label for="adjunto"><?php  echo $Language->TablePhrase("timeline_excon", "subir_file"); ?> </label>
                                                 <!--<input type="file" class="form-control" id="archivo" name="adjunto">
                                                 --><select id="adjunto" name="adjunto" class="form-control">
-                                                    <option value="0">Seleccione Adjunto...</option>";
+                                                    <option value="0"><?php  echo $Language->TablePhrase("timeline_excon", "seleccione_adjunto"); ?> </option>";
                                                     <?php
                                                     foreach ($sqlArchivo as $valor) {
                                                         echo "<option  style=\"background-color:white\" value=\"" . $valor[0] . "\">" . $valor[1] . "</option>";
@@ -301,7 +301,7 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = 'https
                                         <div class="col-6">
                                             <!-- Build your select: -->
                                             <div class="form-group">
-                                                <label for="para">Para:</label>
+                                                <label for="para"><?php  echo $Language->TablePhrase("timeline_excon", "para"); ?></label>
                                                 <select id="para" name="para[]" multiple="multiple" class="form-control">
 
                                                     <?php
@@ -317,8 +317,8 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = 'https
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" id="BotonGuardar" >Guardar</button>
-                                <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-primary" id="BotonGuardar" ><?php  echo $Language->TablePhrase("timeline_excon", "guarda"); ?></button>
+                                <button type="button" class="btn btn-light" data-dismiss="modal"><?php  echo $Language->TablePhrase("timeline_excon", "cancel"); ?></button>
                     </form>
 
                 </div>
@@ -331,7 +331,7 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = 'https
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalLongTitle">Nuevo Mensaje</h5>
+                    <h5 class="modal-title" id="modalLongTitle"><?php  echo $Language->TablePhrase("timeline_excon", "nuevo_mensaje"); ?></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -356,14 +356,14 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = 'https
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <label for="fechaIniRealMjs">Fecha Inicio Real</label>
+                                        <label for="fechaIniRealMjs"><?php  echo $Language->TablePhrase("timeline_excon", "fir"); ?></label>
                                         <input type="text" class="form-control" id="fechaIniReal" name="fechaIniReal">
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <label for="fechaIniSimMjs">Fecha Inicial Simulada</label>
+                                        <label for="fechaIniSimMjs"><?php  echo $Language->TablePhrase("timeline_excon", "fis"); ?></label>
                                         <input type="text" class="form-control" id="fechaIniSimMjs" name="fechaIniSimMjs">
                                     </div>
                                 </div>
@@ -381,23 +381,23 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = 'https
 
                             </select> -->
                             <div class="form-group">
-                                <label for="medio"> Medio</label>
+                                <label for="medio"> <?php  echo $Language->TablePhrase("timeline_excon", "medio"); ?></label>
                                 <select id="medio" name="medio" class="form-control" required="">
-                                    <option style="background-color:white" value="">Seleccione Medio...</option>
+                                    <option style="background-color:white" value=""><?php  echo $Language->TablePhrase("timeline_excon", "seleccion_medio"); ?></option>
                                     <option style="background-color:white" value="1">Email</option>
                                     <option style="background-color:white" value="2">Daybook</option>
                                     <option style="background-color:white" value="3">Chirping</option>
                                 </select>
                                 <div>
                                     <div class="form-group">
-                                        <label for="actividad">Actividad Esperada</label>
+                                        <label for="actividad"><?php  echo $Language->TablePhrase("timeline_excon", "acti_es"); ?></label>
                                         <textarea class="form-control" id="actividad" name="actividad" rows="2"></textarea>
                                     </div>
                                     <div class="row">
                                         <div class="col-6">
 
                                             <div class="form-group">
-                                                <label for="actor">De:</label>
+                                                <label for="actor"><?php  echo $Language->TablePhrase("timeline_excon", "de"); ?></label>
                                                 <select id="actor" name="actor" class="form-control">
                                                     <?php
                                                     foreach ($sqlActores as $valor) {
@@ -407,10 +407,10 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = 'https
                                                 </select>
                                             </div>
                                             <div class="form-group">
-                                                <label for="adjunto">Subir Archivo</label>
+                                                <label for="adjunto"><?php  echo $Language->TablePhrase("timeline_excon", "subir_file"); ?></label>
                                                <!-- <input type="file" class="form-control" id="archivo">
                                                --> <select id="adjunto" name="adjunto" class="form-control">
-                                                    <option value="0">Seleccione Adjunto...</option>";
+                                                    <option value="0"><?php  echo $Language->TablePhrase("timeline_excon", "seleccione_adjunto"); ?></option>
                                                     <?php
                                                     foreach ($sqlArchivo as $valor) {
                                                         echo "<option  style=\"background-color:white\" value=\"" . $valor[0] . "\">" . $valor[1] . "</option>";
@@ -422,7 +422,7 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = 'https
                                         <div class="col-6">
                                             <!-- Build your select: -->
                                             <div class="form-group">
-                                                <label for="para">Para:</label>
+                                                <label for="para"><?php  echo $Language->TablePhrase("timeline_excon", "para"); ?></label>
                                                 <select id="para" name="para" multiple="multiple" class="form-control">
                                                     <?php
                                                     foreach ($sqlPara as $valor) {
@@ -437,8 +437,8 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = 'https
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary btn-sm" >Guardar</button>
-                                <button type="button" class="btn btn-light btn-sm" data-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-primary btn-sm" ><?php  echo $Language->TablePhrase("timeline_excon", "guarda"); ?></button>
+                                <button type="button" class="btn btn-light btn-sm" data-dismiss="modal"><?php  echo $Language->TablePhrase("timeline_excon", "cancel"); ?></button>
                     </form>
 
                 </div>
@@ -451,15 +451,15 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = 'https
         <div class="modal-dialog" style="width:100%; height: 400px;">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-tittle">Crear Tarea</h4>
+                    <h4 class="modal-tittle"><?php  echo $Language->TablePhrase("timeline_excon", "crear_tarea"); ?></h4>
                 </div>
                 <form action="dts_notifica.php?accion=addTarea" method="post">
                     <form action="" method="post" class="form-horizontal">
                         <div class="form-group">
                             <input type="text" class="form-control" id="idTarea" hidden>
-                            <label for="idGrupo">Grupo</label>
+                            <label for="idGrupo"><?php  echo $Language->TablePhrase("timeline_excon", "grup"); ?></label>
                             <select name="idGrupo" id="idGrupo" class="form-control">
-                                <option selected value="">Seleccione Grupo...</option>
+                                <option selected value=""><?php  echo $Language->TablePhrase("timeline_excon", "seleccion_grup"); ?></option>
                                 <?php
                                 foreach ($sqlGrupos as $valor) {
                                     echo "<option value=\"" . $valor[0] . "\">" . $valor[1] . "</option>";
@@ -468,37 +468,37 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = 'https
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="titleTarea">Título </label>
+                            <label for="titleTarea"><?php  echo $Language->TablePhrase("timeline_excon", "titul"); ?> </label>
                             <input type="text" class="form-control" id="titleTarea" placeholder="Título Tarea" value="">
                         </div>
                         <div class="form-group">
-                            <label for="descTarea">Descripción </label>
+                            <label for="descTarea"><?php  echo $Language->TablePhrase("timeline_excon", "descrip"); ?> </label>
                             <textarea class="form-control" id="desc_tarea" rows="3"></textarea>
                             <!--
                             <div id="descTarea" class="border" contenteditable="true">
                             </div>-->
                         </div>
                         <div class="form-group">
-                            <label for="fechaIniReal" class="col-md-2 control-label">Fecha Inicio Real</label>
+                            <label for="fechaIniReal" class="col-md-2 control-label"><?php  echo $Language->TablePhrase("timeline_excon", "fir"); ?></label>
                             <input type="text" class="form-control" id="fechaIniReal">
                         </div>
                         <div class="form-group mb-2">
-                            <label for="fechaFinReal" class="col-md-2 control-label">Fecha Fin Real</label>
+                            <label for="fechaFinReal" class="col-md-2 control-label"><?php  echo $Language->TablePhrase("timeline_excon", "ffr"); ?></label>
                             <input type="text" class="form-control" id="fechaFinReal">
                         </div>
 
                         <div class="form-group">
-                            <label for="fechaIniSim">Fecha Inicio Simulado</label>
+                            <label for="fechaIniSim"><?php  echo $Language->TablePhrase("timeline_excon", "fis"); ?></label>
                             <input type="text" class="form-control" id="fechaIniSim">
                         </div>
                         <div class="form-group">
-                            <label for="fechaFinSim">Fecha Fin Simulado</label>
+                            <label for="fechaFinSim"><?php  echo $Language->TablePhrase("timeline_excon", "ffs"); ?></label>
                             <input type="text" class="form-control" id="fechaFinSim">
                         </div>
                         <div class="form-group">
-                            <label for="idTareaRelacion">Relación Tarea</label>
+                            <label for="idTareaRelacion"><?php  echo $Language->TablePhrase("timeline_excon", "relacion_tarea"); ?></label>
                             <select id="idTareaRelacion" class="form-control">
-                                <option value="">Tareas...</option>
+                                <option value=""><?php  echo $Language->TablePhrase("timeline_excon", "tareas"); ?></option>
                                 <?php
                                 foreach ($sqlTareas as $valor) {
                                     echo "<option value=\"" . $valor[0] . "\">" . $valor[1] . "</option>";
@@ -507,14 +507,14 @@ Para retornar a la hora real del ejercicio presionar el ícono <img src = 'https
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="archivo">Subir Archivo</label>
+                            <label for="archivo"><?php  echo $Language->TablePhrase("timeline_excon", "subir_file"); ?></label>
                             <input type="file" class="form-control" id="archivo">
                         </div>
 
                     </form>
                     <div class="modal-footer">
-                        <button type="button" onclick="addTarea()" class="btn btn-primary btn-sm">Guardar</button>
-                        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cerrar</button>
+                        <button type="button" onclick="addTarea()" class="btn btn-primary btn-sm"><?php  echo $Language->TablePhrase("timeline_excon", "guarda"); ?></button>
+                        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal"><?php  echo $Language->TablePhrase("timeline_excon", "cerrar"); ?></button>
                     </div>
                 </form>
             </div>
