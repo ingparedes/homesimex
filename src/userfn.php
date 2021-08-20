@@ -132,12 +132,15 @@ else
         $menu->moveItem("Configuración", $menu->Count() - 1); // Move to last
     };
   if ($menu->Id == "navbar") { // Sidebar menu or change from "menu" to "navbar" for top menu
+    //$l1=$Language->TablePhrase("userfn", "hora_local");
+    //$l2=$Language->TablePhrase("userfn", "hora_real");
+    //$l3=$Language->TablePhrase("userfn", "hora_simulada");
   	$menu->addMenuItem(456, "usuario", "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" , "#", -1, "", IsLoggedIn());
   	$menu->addMenuItem(457, "usuario", "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" , "#", -1, "", IsLoggedIn());
   	$menu->addMenuItem(455, "usuario", "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" , "#", -1, "", IsLoggedIn());
-    $menu->addMenuItem(459, "usuario", "<div class='border rounded bg-light col-sm-12'> <span class='info-box-icon'><i class='cil-clock'></i></span> <small class='text-center'> Hora local del Usuario </small> <h5 > <div class='text-center' style='line-height:10px'   id='clocklocal'></div> </h5> <h6 class='text-center' style='line-height:10px'> $fe0 </h6>  </div>" , "#", -1, "", IsLoggedIn());
-    $menu->addMenuItem(458, "usuario", "<div class='border rounded bg-light col-sm-12'> <span class='info-box-icon'><i class='cil-clock'></i></span> <small class='text-center'> Hora real del pa&iacute;s del ejercicio</small> <h5> <div class='text-center' style='line-height:10px' id='clockreal'></div> </h5>  <h6 class='text-center' style='line-height:10px'> $fe1 </h6>  </div>" , "#", -1, "", IsLoggedIn());
-    $menu->addMenuItem(460, "usuario", " <div class='border rounded bg-light col-sm-12'> <span class='info-box-icon'><i class='cil-clock'></i></span> <small class='text-center'> Hora simulada</small> <h5 > <div class='text-center' style='line-height:10px'> $hsimu0 </div> </h5> <h6 class='text-center' style='line-height:10px'> $hsimu1  </h6>  </div>" , "#", -1, "", IsLoggedIn());
+    $menu->addMenuItem(459, "usuario", "<div class='border rounded bg-light col-sm-12'> <span class='info-box-icon'><i class='cil-clock'></i></span> <small class='text-center'>hora </small> <h5 > <div class='text-center' style='line-height:10px'   id='clocklocal'></div> </h5> <h6 class='text-center' style='line-height:10px'> $fe0 </h6>  </div>" , "#", -1, "", IsLoggedIn());
+    $menu->addMenuItem(458, "usuario", "<div class='border rounded bg-light col-sm-12'> <span class='info-box-icon'><i class='cil-clock'></i></span> <small class='text-center'> hora</small> <h5> <div class='text-center' style='line-height:10px' id='clockreal'></div> </h5>  <h6 class='text-center' style='line-height:10px'> $fe1 </h6>  </div>" , "#", -1, "", IsLoggedIn());
+    $menu->addMenuItem(460, "usuario", " <div class='border rounded bg-light col-sm-12'> <span class='info-box-icon'><i class='cil-clock'></i></span> <small class='text-center'>hora</small> <h5 > <div class='text-center' style='line-height:10px'> $hsimu0 </div> </h5> <h6 class='text-center' style='line-height:10px'> $hsimu1  </h6>  </div>" , "#", -1, "", IsLoggedIn());
 
                 
    }

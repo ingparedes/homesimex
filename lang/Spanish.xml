@@ -2669,6 +2669,11 @@
         <phrase id="fldcaption" value="id users" />
       </field>
     </table>
+    <table id="userfn">
+      <phrase id="hora_local" value="Hora local del Usuario" />
+      <phrase id="hora_real" value="Hora real del país del ejercicio" />
+      <phrase id="hora_simulada" value="Hora Simulada" />
+    </table>
     <table id="timeline">
       <phrase id="tblcaption" value="Chat" />
       <phrase id="titulo" value="Timeline | dataHandling | Data serialization" />
