@@ -96,7 +96,7 @@
     <phrase id="changepwdbtn" value="Changer" />
     <phrase id="chartexporterrmsg1" value="Unable to get %t image from %e." />
     <!-- v2021 -->
-    <phrase id="chartexporterrmsg2" value="Missing file name." />
+    <phrase id="chartexporterrmsg2" value="Missing nom de fichier." />
     <!-- v2021 -->
     <phrase id="chartexporterrmsg3" value="Upload folder does not exist." />
     <!-- v2021 -->
@@ -245,7 +245,7 @@
     <phrase id="exporttocsvtext" value="CSV" />
     <phrase id="exporttoemail" value="Exporter au format Email" class="icon-email ew-icon" />
     <!-- v11 -->
-    <phrase id="exporttoemailtext" value="Email" client="1" />
+    <phrase id="exporttoemailtext" value="e-mail" client="1" />
     <phrase id="exporttoexcel" value="Exporter au format Excel" class="icon-excel ew-icon" />
     <!-- v11 -->
     <phrase id="exporttoexceltext" value="Excel" />
@@ -361,9 +361,9 @@
     <!-- v2021 -->
     <phrase id="incorrectshortdatedmy" value="Date incorrecte (dd%smm%syy)" client="1" />
     <!-- v2021 -->
-    <phrase id="incorrectemail" value="Email incorrect" client="1" />
+    <phrase id="incorrectemail" value="e-mail incorrect" client="1" />
     <phrase id="incorrectfield" value="Champ incorrect" client="1" />
-    <phrase id="incorrectfloat" value="Nombre en virgule flottante incorrect." client="1" />
+    <phrase id="incorrectfloat" value="nom  en virgule flottante incorrect." client="1" />
     <phrase id="incorrectguid" value="GUID incorrect" client="1" />
     <phrase id="incorrectinteger" value="Entier incorrect" client="1" />
     <phrase id="incorrectphone" value="Numéro de téléphone incorrect" client="1" />
@@ -476,9 +476,9 @@
     <!-- v2020 (report) -->
     <phrase id="monthmay" value="Mai" />
     <!-- v2020 (report) -->
-    <phrase id="monthjun" value="Jun" />
+    <phrase id="monthjun" value="Juin" />
     <!-- v2020 (report) -->
-    <phrase id="monthjul" value="Jul" />
+    <phrase id="monthjul" value="Juil" />
     <!-- v2020 (report) -->
     <phrase id="monthaug" value="Aou" />
     <!-- v2020 (report) -->
@@ -516,7 +516,7 @@
     <!-- v2017 -->
     <phrase id="norecord" value="Aucun enregistrement trouvé" client="1" />
     <!-- v2017 -->
-    <phrase id="norecordforkey" value="Aucun enregistrement trouvé pour la clé = " />
+    <phrase id="norecordforkey" value="Aucun enregistrement trouvé pour la clé=" />
     <phrase id="noreportorcharts" value="Aucun rapport ou graphique n'est disponible pour cette page." />
     <!-- v2020 (report) -->
     <phrase id="norecordselected" value="Aucun enregistrement sélectionné" client="1" />
@@ -718,7 +718,7 @@
     <phrase id="selectbtn" value="Sélectionner" client="1" />
     <!-- v2017 -->
     <phrase id="sendemailbtn" value="Envoyer" />
-    <phrase id="sendemailsuccess" value="Email envoyé" client="1" />
+    <phrase id="sendemailsuccess" value="e-mail envoyé" client="1" />
     <phrase id="sender" value="Sender" client="1" />
     <!-- v2021 -->
     <phrase id="sendpwd" value="Envoyer" client="1" />
@@ -751,7 +751,7 @@
     <phrase id="summarycolon" value=": " />
     <!-- v2020 (report) -->
     <phrase id="table" value="TABLE" />
-    <phrase id="tableorview" value="Tables" client="1" />
+    <phrase id="tableorview" value="Les Tables" client="1" />
     <!-- v2018 -->
     <phrase id="tasks" value="Tâches" />
     <!-- v2020 (report) -->
@@ -808,7 +808,7 @@
     <!-- v12 -->
     <phrase id="userdefault" value="Défaut" client="1" />
     <!-- v12 -->
-    <phrase id="useremail" value="Email" />
+    <phrase id="useremail" value="e-mail" />
     <phrase id="userexists" value="L'utilisateur existe déjà" />
     <phrase id="userlevel" value="Niveau utilisateur: " />
     <phrase id="userleveladministratorname" value="Le nom de niveau utilisateur pour le niveau utilisateur -1 doit être 'Administrateur'" client="1" />
@@ -924,7 +924,7 @@
     <phrase id="bodytitle" value="SIMEXAMERICA" />
     <phrase id="footertext" value="© Pan American Health Organization. All rights reserved." />
     <menu id="253">
-      <phrase id="menutext" value="vista doc" />
+      <phrase id="menutext" value="vue doc" />
     </menu>
     <menu id="254">
       <phrase id="menutext" value="docver" />
@@ -933,19 +933,19 @@
       <phrase id="menutext" value="fileuser" />
     </menu>
     <menu id="252">
-      <phrase id="menutext" value="pizarra" />
+      <phrase id="menutext" value="tableau" />
     </menu>
     <menu id="250">
       <phrase id="menutext" value="InjectExcon" />
     </menu>
     <menu id="247">
-      <phrase id="menutext" value="Edit Grupo" />
+      <phrase id="menutext" value="modifier le groupe" />
     </menu>
     <menu id="248">
-      <phrase id="menutext" value="evento asociado" />
+      <phrase id="menutext" value="événement associé" />
     </menu>
     <menu id="249">
-      <phrase id="menutext" value="view evento asociado" />
+      <phrase id="menutext" value="voir l'événement associé" />
     </menu>
     <menu id="147">
       <phrase id="menutext" value="arrowchat" />
@@ -972,7 +972,7 @@
       <phrase id="menutext" value="arrowchat chatroom users" />
     </menu>
     <menu id="155">
-      <phrase id="menutext" value="arrowchat config" />
+      <phrase id="menutext" value="arrowchat configuration" />
     </menu>
     <menu id="156">
       <phrase id="menutext" value="arrowchat graph log" />
@@ -1002,55 +1002,55 @@
       <phrase id="menutext" value="arrowchat warnings" />
     </menu>
     <menu id="167">
-      <phrase id="menutext" value="tbl task" />
+      <phrase id="menutext" value="tbl tâche" />
     </menu>
     <menu id="143">
-      <phrase id="menutext" value="calificacion" />
+      <phrase id="menutext" value="qualification" />
     </menu>
     <menu id="166">
       <phrase id="menutext" value="tbl status" />
     </menu>
     <menu id="144">
-      <phrase id="menutext" value="calificacion email" />
+      <phrase id="menutext" value="qualification e-mail" />
     </menu>
     <menu id="145">
-      <phrase id="menutext" value="user email" />
+      <phrase id="menutext" value="utilisateurs e-mail" />
     </menu>
     <menu id="146">
-      <phrase id="menutext" value="view user msg" />
+      <phrase id="menutext" value="voir l'utilisateur msg" />
     </menu>
     <menu id="140">
       <phrase id="menutext" value="notiemail" />
     </menu>
     <menu id="142" />
     <menu id="97">
-      <phrase id="menutext" value="view compartidos" />
+      <phrase id="menutext" vvalue="vue partagé" />
     </menu>
     <menu id="56">
-      <phrase id="menutext" value="resmensaje" />
+      <phrase id="menutext" value="resmessage" />
     </menu>
     <menu id="54">
-      <phrase id="menutext" value="permisos doc" />
+      <phrase id="menutext" value="permis doc" />
     </menu>
     <menu id="51">
-      <phrase id="menutext" value="Documentos" />
+      <phrase id="menutext" value="Documents" />
     </menu>
     <menu id="47">
-      <phrase id="menutext" value="mensajes usuarios" />
+      <phrase id="menutext" value="organisateur utilisateurs" />
     </menu>
     <menu id="49" />
     <menu id="50" />
     <menu id="46">
-      <phrase id="menutext" value="actor simulado" />
+      <phrase id="menutext" value="acteur simulé" />
     </menu>
     <menu id="45">
-      <phrase id="menutext" value="historico" />
+      <phrase id="menutext" value="historique" />
     </menu>
     <menu id="43">
-      <phrase id="menutext" value="todos" />
+      <phrase id="menutext" value="Tout le monde" />
     </menu>
     <menu id="44">
-      <phrase id="menutext" value="view from" />
+      <phrase id="menutext" value="Vue de" />
     </menu>
     <menu id="41">
       <phrase id="menutext" value="x" />
@@ -1059,7 +1059,7 @@
       <phrase id="menutext" value="xx" />
     </menu>
     <menu id="39">
-      <phrase id="menutext" value="mensajes" />
+      <phrase id="menutext" value="organisateur" />
     </menu>
     <menu id="37">
       <phrase id="menutext" value="audittrail" />
@@ -1068,46 +1068,46 @@
       <phrase id="menutext" value="menu" />
     </menu>
     <menu id="246">
-      <phrase id="menutext" value="doc_agrupados" />
+      <phrase id="menutext" value="doc_groupé" />
     </menu>
     <menu id="1">
-      <phrase id="menutext" value="escenario" />
+      <phrase id="menutext" value="organisateur" />
     </menu>
     <menu id="36">
-      <phrase id="menutext" value="config" />
+      <phrase id="menutext" value="configuration" />
     </menu>
     <menu id="18">
-      <phrase id="menutext" value="tipo" />
+      <phrase id="menutext" value="Type" />
     </menu>
     <menu id="17">
-      <phrase id="menutext" value="incidente" />
+      <phrase id="menutext" value="Incident" />
     </menu>
     <menu id="10">
-      <phrase id="menutext" value="paisgmt" />
+      <phrase id="menutext" value="Paysgmt" />
     </menu>
     <menu id="11">
       <phrase id="menutext" value="myemail" />
     </menu>
     <menu id="137">
-      <phrase id="menutext" value="Correo" />
+      <phrase id="menutext" value="Courrier" />
     </menu>
     <menu id="12">
-      <phrase id="menutext" value="Enviados" />
+      <phrase id="menutext" value="Envoyé" />
     </menu>
     <menu id="14">
-      <phrase id="menutext" value="mensagens" />
+      <phrase id="menutext" value="des postes" />
     </menu>
     <menu id="139">
-      <phrase id="menutext" value="Recibidos" />
+      <phrase id="menutext" value="A reçu" />
     </menu>
     <menu id="33">
-      <phrase id="menutext" value="usuarios" />
+      <phrase id="menutext" value="Utilisateurs" />
     </menu>
     <menu id="13">
-      <phrase id="menutext" value="users" />
+      <phrase id="menutext" value="Utilisateurs" />
     </menu>
     <menu id="48">
-      <phrase id="menutext" value="asignar usuarios" />
+      <phrase id="menutext" value="Attribuer des utilisateurs" />
     </menu>
     <menu id="20">
       <phrase id="menutext" value="userlevels" />
@@ -1116,13 +1116,13 @@
       <phrase id="menutext" value="userlevelpermissions" />
     </menu>
     <menu id="170">
-      <phrase id="menutext" value="lina tiemopo" />
+      <phrase id="menutext" value="Ligne de temps" />
     </menu>
     <menu id="53">
-      <phrase id="menutext" value="Domuentos" />
+      <phrase id="menutext" value="Documents" />
     </menu>
     <menu id="55">
-      <phrase id="menutext" value="permisos docusers" />
+      <phrase id="menutext" value="permis docusers" />
     </menu>
     <menu id="165">
       <phrase id="menutext" value="kanban" />
@@ -1131,69 +1131,69 @@
       <phrase id="menutext" value="injectParticipante" />
     </menu>
     <menu id="40">
-      <phrase id="menutext" value="Chat" />
+      <phrase id="menutext" value="Discuter" />
     </menu>
     <menu id="52">
-      <phrase id="menutext" value="cil-chat-bubble" />
+      <phrase id="menutext" value="cil-Discuter-bubble" />
     </menu>
     <menu id="96">
-      <phrase id="menutext" value="Biblioteca" />
+      <phrase id="menutext" value="Bibliothèque" />
     </menu>
     <menu id="57">
-      <phrase id="menutext" value="Tablero" />
+      <phrase id="menutext" value="Planche" />
     </menu>
     <menu id="171">
-      <phrase id="menutext" value="timeline General" />
+      <phrase id="menutext" value="chronologie générale" />
     </menu>
     <menu id="169">
-      <phrase id="menutext" value="Tableroppte" />
+      <phrase id="menutext" value="Plancheppte" />
     </menu>
     <menu id="172">
-      <phrase id="menutext" value="TimeLine ExconGrupo" />
+      <phrase id="menutext" value="chronologie ExconGrupo" />
     </menu>
     <menu id="245">
-      <phrase id="menutext" value="Ejecución" />
+      <phrase id="menutext" value="Exécution" />
     </menu>
     <menu id="2">
-      <phrase id="menutext" value="grupo" />
+      <phrase id="menutext" value="grouper" />
     </menu>
     <menu id="3">
-      <phrase id="menutext" value="participantes" />
+      <phrase id="menutext" value="participants" />
     </menu>
     <menu id="4">
-      <phrase id="menutext" value="subgrupo" />
+      <phrase id="menutext" value="sous-groupe" />
     </menu>
     <menu id="5">
-      <phrase id="menutext" value="tareas" />
+      <phrase id="menutext" value="Corvées" />
     </menu>
     <menu id="6">
-      <phrase id="menutext" value="Escenario" />
+      <phrase id="menutext" value="organisateur" />
     </menu>
     <table id="actor_simulado">
-      <phrase id="tblcaption" value="actor simulado" />
+      <phrase id="tblcaption" value="acteur simulé" />
       <field id="id_actor">
-        <phrase id="fldcaption" value="id actor" />
+        <phrase id="fldcaption" value="id acteur" />
       </field>
       <field id="nombre_actor">
-        <phrase id="fldcaption" value="nombre actor" />
+        <phrase id="fldcaption" value="nom de l'acteur" />
       </field>
     </table>
     <table id="archivos_doc">
-      <phrase id="tblcaption" value="archivos doc" />
+      <phrase id="tblcaption" value="fichier doc" />
       <field id="id_file">
-        <phrase id="fldcaption" value="id file" />
+        <phrase id="fldcaption" value="id Tâche" />
       </field>
       <field id="id_users">
-        <phrase id="fldcaption" value="user id" />
+        <phrase id="fldcaption" value="utilisateur id" />
       </field>
       <field id="file_name">
-        <phrase id="fldcaption" value="file name" />
+        <phrase id="fldcaption" value="nom de fichier" />
       </field>
       <field id="fecha_created">
-        <phrase id="fldcaption" value="fecha created" />
+        <phrase id="fldcaption" value="date créée" />
       </field>
       <field id="boton">
-        <phrase id="fldcaption" value="Compartrir" />
+        <phrase id="fldcaption" value="Partager" />
       </field>
     </table>
     <table id="arrowchat">
@@ -1211,17 +1211,17 @@
         <phrase id="fldcaption" value="message" />
       </field>
       <field id="sent">
-        <phrase id="fldcaption" value="sent" />
+        <phrase id="fldcaption" value="envoyé" />
       </field>
       <field id="read">
-        <phrase id="fldcaption" value="read" />
+        <phrase id="fldcaption" value="lire" />
       </field>
       <field id="user_read">
-        <phrase id="fldcaption" value="user read" />
+        <phrase id="fldcaption" value="lecture par l'utilisateur" />
         <phrase id="fldtagvalue1" value="1" />
-        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagcaption1" value="Oiu" />
         <phrase id="fldtagvalue2" value="0" />
-        <phrase id="fldtagcaption2" value="No" />
+        <phrase id="fldtagcaption2" value="Non" />
       </field>
       <field id="direction">
         <phrase id="fldcaption" value="direction" />
@@ -1233,13 +1233,13 @@
         <phrase id="fldcaption" value="id" />
       </field>
       <field id="_username">
-        <phrase id="fldcaption" value="username" />
+        <phrase id="fldcaption" value="Nom d'utilisateur" />
       </field>
       <field id="_password">
-        <phrase id="fldcaption" value="password" />
+        <phrase id="fldcaption" value="le mot de passe" />
       </field>
       <field id="_email">
-        <phrase id="fldcaption" value="email" />
+        <phrase id="fldcaption" value="e-mail" />
       </field>
     </table>
     <table id="arrowchat_applications">
@@ -1248,13 +1248,13 @@
         <phrase id="fldcaption" value="id" />
       </field>
       <field id="name">
-        <phrase id="fldcaption" value="name" />
+        <phrase id="fldcaption" value="Nom" />
       </field>
       <field id="folder">
-        <phrase id="fldcaption" value="folder" />
+        <phrase id="fldcaption" value="dossier" />
       </field>
       <field id="icon">
-        <phrase id="fldcaption" value="icon" />
+        <phrase id="fldcaption" value="icône" />
       </field>
       <field id="width">
         <phrase id="fldcaption" value="width" />
@@ -1269,31 +1269,31 @@
         <phrase id="fldcaption" value="bar name" />
       </field>
       <field id="dont_reload">
-        <phrase id="fldcaption" value="dont reload" />
+        <phrase id="fldcaption" value="ne pas recharger" />
         <phrase id="fldtagvalue1" value="1" />
-        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagcaption1" value="Oiu" />
         <phrase id="fldtagvalue2" value="0" />
-        <phrase id="fldtagcaption2" value="No" />
+        <phrase id="fldtagcaption2" value="Non" />
       </field>
       <field id="default_bookmark">
-        <phrase id="fldcaption" value="default bookmark" />
+        <phrase id="fldcaption" value="signet par défaut" />
         <phrase id="fldtagvalue1" value="1" />
-        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagcaption1" value="Oiu" />
         <phrase id="fldtagvalue2" value="0" />
-        <phrase id="fldtagcaption2" value="No" />
+        <phrase id="fldtagcaption2" value="Non" />
       </field>
       <field id="show_to_guests">
-        <phrase id="fldcaption" value="show to guests" />
+        <phrase id="fldcaption" value="montrer aux invités" />
         <phrase id="fldtagvalue1" value="1" />
-        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagcaption1" value="Oiu" />
         <phrase id="fldtagvalue2" value="0" />
-        <phrase id="fldtagcaption2" value="No" />
+        <phrase id="fldtagcaption2" value="Non" />
       </field>
       <field id="link">
-        <phrase id="fldcaption" value="link" />
+        <phrase id="fldcaption" value="relier" />
       </field>
       <field id="update_link">
-        <phrase id="fldcaption" value="update link" />
+        <phrase id="fldcaption" value="lien de mise à jour" />
       </field>
       <field id="version">
         <phrase id="fldcaption" value="version" />
@@ -1301,9 +1301,9 @@
       <field id="active">
         <phrase id="fldcaption" value="active" />
         <phrase id="fldtagvalue1" value="1" />
-        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagcaption1" value="Oiu" />
         <phrase id="fldtagvalue2" value="0" />
-        <phrase id="fldtagcaption2" value="No" />
+        <phrase id="fldtagcaption2" value="Non" />
       </field>
     </table>
     <table id="arrowchat_banlist">
@@ -1321,7 +1321,7 @@
         <phrase id="fldcaption" value="banned by" />
       </field>
       <field id="banned_time">
-        <phrase id="fldcaption" value="banned time" />
+        <phrase id="fldcaption" value="bannedtemps" />
       </field>
     </table>
     <table id="arrowchat_chatroom_banlist">
@@ -1330,7 +1330,7 @@
         <phrase id="fldcaption" value="id" />
       </field>
       <field id="user_id">
-        <phrase id="fldcaption" value="user id" />
+        <phrase id="fldcaption" value="utilisateur id" />
       </field>
       <field id="chatroom_id">
         <phrase id="fldcaption" value="chatroom id" />
@@ -1339,7 +1339,7 @@
         <phrase id="fldcaption" value="ban length" />
       </field>
       <field id="ban_time">
-        <phrase id="fldcaption" value="ban time" />
+        <phrase id="fldcaption" value="bantemps" />
       </field>
       <field id="ip_address">
         <phrase id="fldcaption" value="ip address" />
@@ -1354,10 +1354,10 @@
         <phrase id="fldcaption" value="chatroom id" />
       </field>
       <field id="user_id">
-        <phrase id="fldcaption" value="user id" />
+        <phrase id="fldcaption" value="utilisateur id" />
       </field>
       <field id="_username">
-        <phrase id="fldcaption" value="username" />
+        <phrase id="fldcaption" value="Nom d'utilisateur" />
       </field>
       <field id="message">
         <phrase id="fldcaption" value="message" />
@@ -1365,33 +1365,33 @@
       <field id="global_message">
         <phrase id="fldcaption" value="global message" />
         <phrase id="fldtagvalue1" value="1" />
-        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagcaption1" value="Oiu" />
         <phrase id="fldtagvalue2" value="0" />
-        <phrase id="fldtagcaption2" value="No" />
+        <phrase id="fldtagcaption2" value="Non" />
       </field>
       <field id="is_mod">
         <phrase id="fldcaption" value="is mod" />
         <phrase id="fldtagvalue1" value="1" />
-        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagcaption1" value="Oiu" />
         <phrase id="fldtagvalue2" value="0" />
-        <phrase id="fldtagcaption2" value="No" />
+        <phrase id="fldtagcaption2" value="Non" />
       </field>
       <field id="is_admin">
         <phrase id="fldcaption" value="is admin" />
         <phrase id="fldtagvalue1" value="1" />
-        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagcaption1" value="Oiu" />
         <phrase id="fldtagvalue2" value="0" />
-        <phrase id="fldtagcaption2" value="No" />
+        <phrase id="fldtagcaption2" value="Non" />
       </field>
       <field id="sent">
-        <phrase id="fldcaption" value="sent" />
+        <phrase id="fldcaption" value="envoyé" />
       </field>
       <field id="_action">
         <phrase id="fldcaption" value="action" />
         <phrase id="fldtagvalue1" value="1" />
-        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagcaption1" value="Oiu" />
         <phrase id="fldtagvalue2" value="0" />
-        <phrase id="fldtagcaption2" value="No" />
+        <phrase id="fldtagcaption2" value="Non" />
       </field>
     </table>
     <table id="arrowchat_chatroom_rooms">
@@ -1400,16 +1400,16 @@
         <phrase id="fldcaption" value="id" />
       </field>
       <field id="author_id">
-        <phrase id="fldcaption" value="author id" />
+        <phrase id="fldcaption" value="Auteur id" />
       </field>
       <field id="name">
-        <phrase id="fldcaption" value="name" />
+        <phrase id="fldcaption" value="Nom" />
       </field>
       <field id="description">
         <phrase id="fldcaption" value="description" />
       </field>
       <field id="welcome_message">
-        <phrase id="fldcaption" value="welcome message" />
+        <phrase id="fldcaption" value="Message de bienvenue" />
       </field>
       <field id="image">
         <phrase id="fldcaption" value="image" />
@@ -1417,12 +1417,12 @@
       <field id="type">
         <phrase id="fldcaption" value="type" />
         <phrase id="fldtagvalue1" value="1" />
-        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagcaption1" value="Oiu" />
         <phrase id="fldtagvalue2" value="0" />
-        <phrase id="fldtagcaption2" value="No" />
+        <phrase id="fldtagcaption2" value="Non" />
       </field>
       <field id="_password">
-        <phrase id="fldcaption" value="password" />
+        <phrase id="fldcaption" value="le mot de passe" />
       </field>
       <field id="length">
         <phrase id="fldcaption" value="length" />
@@ -1430,12 +1430,12 @@
       <field id="is_featured">
         <phrase id="fldcaption" value="is featured" />
         <phrase id="fldtagvalue1" value="1" />
-        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagcaption1" value="Oiu" />
         <phrase id="fldtagvalue2" value="0" />
-        <phrase id="fldtagcaption2" value="No" />
+        <phrase id="fldtagcaption2" value="Non" />
       </field>
       <field id="max_users">
-        <phrase id="fldcaption" value="max users" />
+        <phrase id="fldcaption" value="mas utilisateurs" />
       </field>
       <field id="limit_message_num">
         <phrase id="fldcaption" value="limit message num" />
@@ -1447,13 +1447,13 @@
         <phrase id="fldcaption" value="disallowed groups" />
       </field>
       <field id="session_time">
-        <phrase id="fldcaption" value="session time" />
+        <phrase id="fldcaption" value="sessiontemps" />
       </field>
     </table>
     <table id="arrowchat_chatroom_users">
       <phrase id="tblcaption" value="arrowchat chatroom users" />
       <field id="user_id">
-        <phrase id="fldcaption" value="user id" />
+        <phrase id="fldcaption" value="utilisateur id" />
       </field>
       <field id="chatroom_id">
         <phrase id="fldcaption" value="chatroom id" />
@@ -1461,16 +1461,16 @@
       <field id="is_admin">
         <phrase id="fldcaption" value="is admin" />
         <phrase id="fldtagvalue1" value="1" />
-        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagcaption1" value="Oiu" />
         <phrase id="fldtagvalue2" value="0" />
-        <phrase id="fldtagcaption2" value="No" />
+        <phrase id="fldtagcaption2" value="Non" />
       </field>
       <field id="is_mod">
         <phrase id="fldcaption" value="is mod" />
         <phrase id="fldtagvalue1" value="1" />
-        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagcaption1" value="Oiu" />
         <phrase id="fldtagvalue2" value="0" />
-        <phrase id="fldtagcaption2" value="No" />
+        <phrase id="fldtagcaption2" value="Non" />
       </field>
       <field id="block_chats">
         <phrase id="fldcaption" value="block chats" />
@@ -1479,26 +1479,26 @@
         <phrase id="fldcaption" value="silence length" />
       </field>
       <field id="silence_time">
-        <phrase id="fldcaption" value="silence time" />
+        <phrase id="fldcaption" value="silencetemps" />
       </field>
       <field id="session_time">
-        <phrase id="fldcaption" value="session time" />
+        <phrase id="fldcaption" value="sessiontemps" />
       </field>
     </table>
     <table id="arrowchat_config">
-      <phrase id="tblcaption" value="arrowchat config" />
+      <phrase id="tblcaption" value="arrowchat configuration" />
       <field id="config_name">
-        <phrase id="fldcaption" value="config name" />
+        <phrase id="fldcaption" value="configuration nom" />
       </field>
       <field id="config_value">
-        <phrase id="fldcaption" value="config value" />
+        <phrase id="fldcaption" value="configuration valeur" />
       </field>
       <field id="is_dynamic">
         <phrase id="fldcaption" value="is dynamic" />
         <phrase id="fldtagvalue1" value="1" />
-        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagcaption1" value="Oiu" />
         <phrase id="fldtagvalue2" value="0" />
-        <phrase id="fldtagcaption2" value="No" />
+        <phrase id="fldtagcaption2" value="Non" />
       </field>
     </table>
     <table id="arrowchat_graph_log">
@@ -1510,10 +1510,10 @@
         <phrase id="fldcaption" value="date" />
       </field>
       <field id="user_messages">
-        <phrase id="fldcaption" value="user messages" />
+        <phrase id="fldcaption" value="utilisateur  messages" />
       </field>
       <field id="chat_room_messages">
-        <phrase id="fldcaption" value="chat room messages" />
+        <phrase id="fldcaption" value="Discuter room messages" />
       </field>
     </table>
     <table id="arrowchat_notifications">
@@ -1525,10 +1525,10 @@
         <phrase id="fldcaption" value="to id" />
       </field>
       <field id="author_id">
-        <phrase id="fldcaption" value="author id" />
+        <phrase id="fldcaption" value="Auteur id" />
       </field>
       <field id="author_name">
-        <phrase id="fldcaption" value="author name" />
+        <phrase id="fldcaption" value="Auteur nom" />
       </field>
       <field id="misc1">
         <phrase id="fldcaption" value="misc 1" />
@@ -1543,13 +1543,13 @@
         <phrase id="fldcaption" value="type" />
       </field>
       <field id="alert_read">
-        <phrase id="fldcaption" value="alert read" />
+        <phrase id="fldcaption" value="alerte lire" />
       </field>
       <field id="user_read">
-        <phrase id="fldcaption" value="user read" />
+        <phrase id="fldcaption" value="lecture par l'utilisateur" />
       </field>
       <field id="alert_time">
-        <phrase id="fldcaption" value="alert time" />
+        <phrase id="fldcaption" value="alerte temps" />
       </field>
     </table>
     <table id="arrowchat_notifications_markup">
@@ -1558,7 +1558,7 @@
         <phrase id="fldcaption" value="id" />
       </field>
       <field id="name">
-        <phrase id="fldcaption" value="name" />
+        <phrase id="fldcaption" value="Nom" />
       </field>
       <field id="type">
         <phrase id="fldcaption" value="type" />
@@ -1568,33 +1568,33 @@
       </field>
     </table>
     <table id="arrowchat_reports">
-      <phrase id="tblcaption" value="arrowchat reports" />
+      <phrase id="tblcaption" value="arrowchat rapport" />
       <field id="id">
         <phrase id="fldcaption" value="id" />
       </field>
       <field id="report_from">
-        <phrase id="fldcaption" value="report from" />
+        <phrase id="fldcaption" value="rapport from" />
       </field>
       <field id="report_about">
-        <phrase id="fldcaption" value="report about" />
+        <phrase id="fldcaption" value="rapport about" />
       </field>
       <field id="report_chatroom">
-        <phrase id="fldcaption" value="report chatroom" />
+        <phrase id="fldcaption" value="rapport chatroom" />
       </field>
       <field id="report_time">
-        <phrase id="fldcaption" value="report time" />
+        <phrase id="fldcaption" value="reporttemps" />
       </field>
       <field id="working_by">
         <phrase id="fldcaption" value="working by" />
       </field>
       <field id="working_time">
-        <phrase id="fldcaption" value="working time" />
+        <phrase id="fldcaption" value="workingtemps" />
       </field>
       <field id="completed_by">
         <phrase id="fldcaption" value="completed by" />
       </field>
       <field id="completed_time">
-        <phrase id="fldcaption" value="completed time" />
+        <phrase id="fldcaption" value="completedtemps" />
       </field>
     </table>
     <table id="arrowchat_smilies">
@@ -1603,7 +1603,7 @@
         <phrase id="fldcaption" value="id" />
       </field>
       <field id="name">
-        <phrase id="fldcaption" value="name" />
+        <phrase id="fldcaption" value="Nom" />
       </field>
       <field id="code">
         <phrase id="fldcaption" value="code" />
@@ -1621,7 +1621,7 @@
         <phrase id="fldcaption" value="message" />
       </field>
       <field id="status">
-        <phrase id="fldcaption" value="status" />
+        <phrase id="fldcaption" value="statut" />
       </field>
       <field id="theme">
         <phrase id="fldcaption" value="theme" />
@@ -1635,30 +1635,30 @@
       <field id="hide_bar">
         <phrase id="fldcaption" value="hide bar" />
         <phrase id="fldtagvalue1" value="1" />
-        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagcaption1" value="Oiu" />
         <phrase id="fldtagvalue2" value="0" />
-        <phrase id="fldtagcaption2" value="No" />
+        <phrase id="fldtagcaption2" value="Non" />
       </field>
       <field id="play_sound">
         <phrase id="fldcaption" value="play sound" />
         <phrase id="fldtagvalue1" value="1" />
-        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagcaption1" value="Oiu" />
         <phrase id="fldtagvalue2" value="0" />
-        <phrase id="fldtagcaption2" value="No" />
+        <phrase id="fldtagcaption2" value="Non" />
       </field>
       <field id="window_open">
         <phrase id="fldcaption" value="window open" />
         <phrase id="fldtagvalue1" value="1" />
-        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagcaption1" value="Oiu" />
         <phrase id="fldtagvalue2" value="0" />
-        <phrase id="fldtagcaption2" value="No" />
+        <phrase id="fldtagcaption2" value="Non" />
       </field>
       <field id="only_names">
         <phrase id="fldcaption" value="only names" />
         <phrase id="fldtagvalue1" value="1" />
-        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagcaption1" value="Oiu" />
         <phrase id="fldtagvalue2" value="0" />
-        <phrase id="fldtagcaption2" value="No" />
+        <phrase id="fldtagcaption2" value="Non" />
       </field>
       <field id="chatroom_window">
         <phrase id="fldcaption" value="chatroom window" />
@@ -1672,36 +1672,36 @@
       <field id="chatroom_show_names">
         <phrase id="fldcaption" value="chatroom show names" />
         <phrase id="fldtagvalue1" value="1" />
-        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagcaption1" value="Oiu" />
         <phrase id="fldtagvalue2" value="0" />
-        <phrase id="fldtagcaption2" value="No" />
+        <phrase id="fldtagcaption2" value="Non" />
       </field>
       <field id="chatroom_block_chats">
         <phrase id="fldcaption" value="chatroom block chats" />
         <phrase id="fldtagvalue1" value="1" />
-        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagcaption1" value="Oiu" />
         <phrase id="fldtagvalue2" value="0" />
-        <phrase id="fldtagcaption2" value="No" />
+        <phrase id="fldtagcaption2" value="Non" />
       </field>
       <field id="chatroom_sound">
         <phrase id="fldcaption" value="chatroom sound" />
         <phrase id="fldtagvalue1" value="1" />
-        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagcaption1" value="Oiu" />
         <phrase id="fldtagvalue2" value="0" />
-        <phrase id="fldtagcaption2" value="No" />
+        <phrase id="fldtagcaption2" value="Non" />
       </field>
       <field id="announcement">
         <phrase id="fldcaption" value="announcement" />
         <phrase id="fldtagvalue1" value="1" />
-        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagcaption1" value="Oiu" />
         <phrase id="fldtagvalue2" value="0" />
-        <phrase id="fldtagcaption2" value="No" />
+        <phrase id="fldtagcaption2" value="Non" />
       </field>
       <field id="unfocus_chat">
-        <phrase id="fldcaption" value="unfocus chat" />
+        <phrase id="fldcaption" value="unfocus Discuter" />
       </field>
       <field id="focus_chat">
-        <phrase id="fldcaption" value="focus chat" />
+        <phrase id="fldcaption" value="focus Discuter" />
       </field>
       <field id="last_message">
         <phrase id="fldcaption" value="last message" />
@@ -1725,21 +1725,21 @@
         <phrase id="fldcaption" value="block chats" />
       </field>
       <field id="session_time">
-        <phrase id="fldcaption" value="session time" />
+        <phrase id="fldcaption" value="sessiontemps" />
       </field>
       <field id="is_admin">
         <phrase id="fldcaption" value="is admin" />
         <phrase id="fldtagvalue1" value="1" />
-        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagcaption1" value="Oiu" />
         <phrase id="fldtagvalue2" value="0" />
-        <phrase id="fldtagcaption2" value="No" />
+        <phrase id="fldtagcaption2" value="Non" />
       </field>
       <field id="is_mod">
         <phrase id="fldcaption" value="is mod" />
         <phrase id="fldtagvalue1" value="1" />
-        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagcaption1" value="Oiu" />
         <phrase id="fldtagvalue2" value="0" />
-        <phrase id="fldtagcaption2" value="No" />
+        <phrase id="fldtagcaption2" value="Non" />
       </field>
       <field id="hash_id">
         <phrase id="fldcaption" value="hash id" />
@@ -1754,20 +1754,20 @@
         <phrase id="fldcaption" value="id" />
       </field>
       <field id="folder">
-        <phrase id="fldcaption" value="folder" />
+        <phrase id="fldcaption" value="dossier" />
       </field>
       <field id="name">
-        <phrase id="fldcaption" value="name" />
+        <phrase id="fldcaption" value="Nom" />
       </field>
       <field id="active">
         <phrase id="fldcaption" value="active" />
         <phrase id="fldtagvalue1" value="1" />
-        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagcaption1" value="Oiu" />
         <phrase id="fldtagvalue2" value="0" />
-        <phrase id="fldtagcaption2" value="No" />
+        <phrase id="fldtagcaption2" value="Non" />
       </field>
       <field id="update_link">
-        <phrase id="fldcaption" value="update link" />
+        <phrase id="fldcaption" value="lien de mise à jour" />
       </field>
       <field id="version">
         <phrase id="fldcaption" value="version" />
@@ -1775,9 +1775,9 @@
       <field id="_default">
         <phrase id="fldcaption" value="default" />
         <phrase id="fldtagvalue1" value="1" />
-        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagcaption1" value="Oiu" />
         <phrase id="fldtagvalue2" value="0" />
-        <phrase id="fldtagcaption2" value="No" />
+        <phrase id="fldtagcaption2" value="Non" />
       </field>
     </table>
     <table id="arrowchat_trayicons">
@@ -1786,13 +1786,13 @@
         <phrase id="fldcaption" value="id" />
       </field>
       <field id="name">
-        <phrase id="fldcaption" value="name" />
+        <phrase id="fldcaption" value="Nom" />
       </field>
       <field id="icon">
-        <phrase id="fldcaption" value="icon" />
+        <phrase id="fldcaption" value="icône" />
       </field>
       <field id="location">
-        <phrase id="fldcaption" value="location" />
+        <phrase id="fldcaption" value="localisation" />
       </field>
       <field id="target">
         <phrase id="fldcaption" value="target" />
@@ -1807,17 +1807,17 @@
         <phrase id="fldcaption" value="tray width" />
       </field>
       <field id="tray_name">
-        <phrase id="fldcaption" value="tray name" />
+        <phrase id="fldcaption" value="tray nom" />
       </field>
       <field id="tray_location">
-        <phrase id="fldcaption" value="tray location" />
+        <phrase id="fldcaption" value="tray localisation" />
       </field>
       <field id="active">
         <phrase id="fldcaption" value="active" />
         <phrase id="fldtagvalue1" value="1" />
-        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagcaption1" value="Oiu" />
         <phrase id="fldtagvalue2" value="0" />
-        <phrase id="fldtagcaption2" value="No" />
+        <phrase id="fldtagcaption2" value="Non" />
       </field>
     </table>
     <table id="arrowchat_warnings">
@@ -1826,7 +1826,7 @@
         <phrase id="fldcaption" value="id" />
       </field>
       <field id="user_id">
-        <phrase id="fldcaption" value="user id" />
+        <phrase id="fldcaption" value="utilisateur id" />
       </field>
       <field id="warn_reason">
         <phrase id="fldcaption" value="warn reason" />
@@ -1835,14 +1835,14 @@
         <phrase id="fldcaption" value="warned by" />
       </field>
       <field id="warning_time">
-        <phrase id="fldcaption" value="warning time" />
+        <phrase id="fldcaption" value="warningtemps" />
       </field>
       <field id="user_read">
-        <phrase id="fldcaption" value="user read" />
+        <phrase id="fldcaption" value="lecture par l'utilisateur" />
         <phrase id="fldtagvalue1" value="1" />
-        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagcaption1" value="Oiu" />
         <phrase id="fldtagvalue2" value="0" />
-        <phrase id="fldtagcaption2" value="No" />
+        <phrase id="fldtagcaption2" value="Non" />
       </field>
     </table>
     <table id="audittrail">
@@ -1851,13 +1851,13 @@
         <phrase id="fldcaption" value="id" />
       </field>
       <field id="datetime">
-        <phrase id="fldcaption" value="datetime" />
+        <phrase id="fldcaption" value="dateheure" />
       </field>
       <field id="script">
         <phrase id="fldcaption" value="script" />
       </field>
       <field id="user">
-        <phrase id="fldcaption" value="user" />
+        <phrase id="fldcaption" value="utilisateur " />
       </field>
       <field id="_action">
         <phrase id="fldcaption" value="action" />
@@ -1879,67 +1879,67 @@
       </field>
     </table>
     <table id="biblioteca">
-      <phrase id="tblcaption" value="Biblioteca" />
+      <phrase id="tblcaption" value="Bibliothèque" />
     </table>
     <table id="calificacion">
-      <phrase id="tblcaption" value="calificacion" />
+      <phrase id="tblcaption" value="qualification" />
       <field id="id_calificacion">
-        <phrase id="fldcaption" value="id calificacion" />
+        <phrase id="fldcaption" value="id qualification" />
       </field>
       <field id="descripcion">
-        <phrase id="fldcaption" value="descripcion" />
+        <phrase id="fldcaption" value="description" />
       </field>
     </table>
     <table id="calificacion_mensajes">
-      <phrase id="tblcaption" value="calificacion email" />
+      <phrase id="tblcaption" value="qualification e-mail" />
       <field id="id_calificacion">
-        <phrase id="fldcaption" value="id calificacion" />
+        <phrase id="fldcaption" value="id qualification" />
       </field>
       <field id="id_calificacion_msg">
-        <phrase id="fldcaption" value="id calificacion msg" />
+        <phrase id="fldcaption" value="id qualification msg" />
       </field>
       <field id="id_mensaje">
-        <phrase id="fldcaption" value="id mensaje" />
+        <phrase id="fldcaption" value="id message" />
       </field>
       <field id="fecha_calificacion">
-        <phrase id="fldcaption" value="Fecha calificacion" />
+        <phrase id="fldcaption" value="date de qualification" />
       </field>
     </table>
     <table id="chat_ini">
-      <phrase id="tblcaption" value="Chat" />
+      <phrase id="tblcaption" value="Discuter" />
     </table>
     <table id="config2" />
     <table id="correo">
-      <phrase id="tblcaption" value="email" />
+      <phrase id="tblcaption" value="e-mail" />
     </table>
     <table id="documentos">
-      <phrase id="tblcaption" value="doc_agrupados" />
+      <phrase id="tblcaption" value="doc_groupé" />
     </table>
     <table id="docver">
       <phrase id="tblcaption" value="docver" />
       <field id="id_file">
-        <phrase id="fldcaption" value="id file" />
+        <phrase id="fldcaption" value="id Tâche" />
       </field>
       <field id="perfil">
-        <phrase id="fldcaption" value="perfil" />
+        <phrase id="fldcaption" value="profil" />
       </field>
       <field id="escenario">
-        <phrase id="fldcaption" value="escenario" />
+        <phrase id="fldcaption" value="organisateur" />
       </field>
       <field id="file_name">
-        <phrase id="fldcaption" value="file name" />
+        <phrase id="fldcaption" value="nom de fichier" />
       </field>
     </table>
     <table id="editgrupos">
-      <phrase id="tblcaption" value="Edit Grupo" />
-       <phrase id="simu" value="Simulación:" />
-      <phrase id="fir" value="Fecha inicio real:" />
-      <phrase id="ffr" value="Fecha fin real:" />
+      <phrase id="tblcaption" value="modifier le groupe" />
+       <phrase id="simu" value="Simulation:" />
+      <phrase id="fir" value="Date de début réelle:" />
+      <phrase id="ffr" value="Date de fin réelle:" />
     </table>
     <table id="email2">
-      <phrase id="tblcaption" value="email" />
+      <phrase id="tblcaption" value="e-mail" />
       <field id="id_email">
-        <phrase id="fldcaption" value="id email" />
+        <phrase id="fldcaption" value="id e-mail" />
       </field>
       <field id="sender_userid">
         <phrase id="fldcaption" value="sender userid" />
@@ -1948,79 +1948,79 @@
         <phrase id="fldcaption" value="copy sender" />
       </field>
       <field id="sujeto">
-        <phrase id="fldcaption" value="sujeto" />
+        <phrase id="fldcaption" value="matière" />
       </field>
       <field id="mensaje">
         <phrase id="fldcaption" value="message" />
       </field>
       <field id="archivo">
-        <phrase id="fldcaption" value="archivo" />
+        <phrase id="fldcaption" value="fichier" />
       </field>
       <field id="reciever_userid">
         <phrase id="fldcaption" value="reciever userid" />
       </field>
       <field id="tiempo">
-        <phrase id="fldcaption" value="tiempo" />
+        <phrase id="fldcaption" value="temps" />
       </field>
       <field id="estado_msg">
-        <phrase id="fldcaption" value="status" />
+        <phrase id="fldcaption" value="statut" />
       </field>
       <field id="id_mensaje">
-        <phrase id="fldcaption" value="id mensaje" />
+        <phrase id="fldcaption" value="id message" />
       </field>
     </table>
     <table id="escenario">
-      <phrase id="tblcaption" value="escenario" />
+      <phrase id="tblcaption" value="organisateur" />
       <field id="id_escenario">
-        <phrase id="fldcaption" value="id escenario" />
+        <phrase id="fldcaption" value="id organiser" />
       </field>
       <field id="icon_escenario">
-        <phrase id="fldcaption" value="icon escenario" />
+        <phrase id="fldcaption" value="icône organiser" />
       </field>
       <field id="fechacreacion_escenario">
         <phrase id="fldcaption" value="fechacreacion escenario" />
       </field>
       <field id="nombre_escenario">
-        <phrase id="fldcaption" value="nombre escenario" />
+        <phrase id="fldcaption" value="nom  organiser" />
       </field>
       <field id="tipo_evento">
-        <phrase id="fldcaption" value="tipo evento" />
+        <phrase id="fldcaption" value="type d'événement" />
       </field>
       <field id="incidente">
-        <phrase id="fldcaption" value="incidente" />
+        <phrase id="fldcaption" value="Incident" />
       </field>
       <field id="evento_asociado">
-        <phrase id="fldcaption" value="evento asociado" />
+        <phrase id="fldcaption" value="événement associé" />
       </field>
       <field id="pais_escenario">
-        <phrase id="fldcaption" value="pais escenario" />
+        <phrase id="fldcaption" value="Pays organiser" />
       </field>
       <field id="zonahora_escenario">
-        <phrase id="fldcaption" value="zonahora escenario" />
+        <phrase id="fldcaption" value="zonahora organiser" />
       </field>
       <field id="descripcion_escenario">
-        <phrase id="fldcaption" value="descripcion escenario" />
+        <phrase id="fldcaption" value="description organiser" />
       </field>
       <field id="fechaini_real">
-        <phrase id="fldcaption" value="fechaini real" />
+        <phrase id="fldcaption" value="datedébut réelle" />
       </field>
       <field id="fechafinal_real">
-        <phrase id="fldcaption" value="fechafinal real" />
+        <phrase id="fldcaption" value="datefin réelle" />
       </field>
       <field id="fechaini_simulado">
-        <phrase id="fldcaption" value="fechaini simulado" />
+        <phrase id="fldcaption" value="datedébut simulée" />
       </field>
       <field id="fechafin_simulado">
-        <phrase id="fldcaption" value="fechafin simulado" />
+        <phrase id="fldcaption" value="datefin simulée" />
       </field>
       <field id="estado">
-        <phrase id="fldcaption" value="estado" />
+        <phrase id="fldcaption" value="Etat" />
         <phrase id="fldtagvalue1" value="2" />
-        <phrase id="fldtagcaption1" value="Configuración" />
+        <phrase id="fldtagcaption1" value="réglage" />
         <phrase id="fldtagvalue2" value="1" />
-        <phrase id="fldtagcaption2" value="Activa" />
+        <phrase id="fldtagcaption2" value="actif" />
         <phrase id="fldtagvalue3" value="3" />
-        <phrase id="fldtagcaption3" value="Finalizada" />
+        <phrase id="fldtagcaption3" value="fini" />
       </field>
       <field id="image_escenario">
         <phrase id="fldcaption" value="image escenario" />
@@ -2030,18 +2030,18 @@
       </field>
     </table>
     <table id="evento_asociado">
-      <phrase id="tblcaption" value="evento asociado" />
+      <phrase id="tblcaption" value="événement associé" />
       <field id="id_incidente">
-        <phrase id="fldcaption" value="id incidente" />
+        <phrase id="fldcaption" value="id incident" />
       </field>
       <field id="id_tipo">
-        <phrase id="fldcaption" value="id tipo" />
+        <phrase id="fldcaption" value="id type" />
       </field>
       <field id="inc_es">
-        <phrase id="fldcaption" value="CONCAT('&amp;nbsp;&amp;nbsp; ',incidente es)" />
+        <phrase id="fldcaption" value="CONCAT('&amp;nbsp;&amp;nbsp; ',incident es)" />
       </field>
       <field id="inc_en">
-        <phrase id="fldcaption" value="CONCAT(' &amp;nbsp;&amp;nbsp;',incidente en)" />
+        <phrase id="fldcaption" value="CONCAT(' &amp;nbsp;&amp;nbsp;',incident en)" />
       </field>
     </table>
     <table id="fileuser">
@@ -2050,65 +2050,65 @@
         <phrase id="fldcaption" value="numfile" />
       </field>
       <field id="perfil">
-        <phrase id="fldcaption" value="perfil" />
+        <phrase id="fldcaption" value="profil" />
       </field>
       <field id="escen">
-        <phrase id="fldcaption" value="escen" />
+        <phrase id="fldcaption" value="organiser" />
       </field>
       <field id="file_name">
-        <phrase id="fldcaption" value="file name" />
+        <phrase id="fldcaption" value="nom de fichier" />
       </field>
     </table>
     <table id="grupo">
-      <phrase id="tblcaption" value="grupo" />
+      <phrase id="tblcaption" value="grouper" />
       <field id="id_escenario">
-        <phrase id="fldcaption" value="id escenario" />
+        <phrase id="fldcaption" value="id organiser" />
       </field>
       <field id="id_grupo">
-        <phrase id="fldcaption" value="id grupo" />
+        <phrase id="fldcaption" value="id grouper" />
       </field>
       <field id="imgen_grupo">
-        <phrase id="fldcaption" value="imgen grupo" />
+        <phrase id="fldcaption" value="imgen grouper" />
       </field>
       <field id="nombre_grupo">
-        <phrase id="fldcaption" value="nombre grupo" />
+        <phrase id="fldcaption" value="nom  grouper" />
       </field>
       <field id="descripcion_grupo">
-        <phrase id="fldcaption" value="descripcion grupo" />
+        <phrase id="fldcaption" value="description grouper" />
       </field>
       <field id="color">
-        <phrase id="fldcaption" value="color" />
+        <phrase id="fldcaption" value="couleur" />
         <phrase id="fldtagvalue1" value="1" />
-        <phrase id="fldtagcaption1" value="rojo" />
+        <phrase id="fldtagcaption1" value="rouge" />
         <phrase id="fldtagvalue2" value="#000" />
-        <phrase id="fldtagcaption2" value="negro" />
+        <phrase id="fldtagcaption2" value="le noir " />
       </field>
       <field id="color_grup">
-        <phrase id="fldcaption" value="color grup" />
+        <phrase id="fldcaption" value="couleur grouper" />
       </field>
     </table>
      <table id="Documentos">
-        <phrase id="mis_documentos" value="Mis documentos" />
-        <phrase id="documentos_compartido" value="Documentos compartidos conmigo" />
+        <phrase id="mis_documentos" value="mes documents" />
+        <phrase id="documentos_compartido" value="Documents partagés avec moi" />
       </table>
     <table id="grupos">
-      <phrase id="tblcaption" value="Grupos" />
-       <phrase id="simu" value="Simulación:" />
-      <phrase id="fir" value="Fecha inicio real:" />
-      <phrase id="ffr" value="Fecha fin real:" />
-      <phrase id="usu" value="Usuarios" />
-      <phrase id="gys" value="Grupos y subgrupos" />
-      <phrase id="grup" value="Grupo:" />
+      <phrase id="tblcaption" value="groupes" />
+       <phrase id="simu" value="Simulation:" />
+      <phrase id="fir" value="Date de début réelle:" />
+      <phrase id="ffr" value="Date de fin réelle:" />
+      <phrase id="usu" value="Utilisateurs" />
+      <phrase id="gys" value="groupes et sous-groupes" />
+      <phrase id="grup" value="grouper:" />
       <phrase id="exc" value="Excon:" />
-      <phrase id="subg" value="SubGrupo:" />
+      <phrase id="subg" value="sous-groupe:" />
     </table>
     <table id="historico">
-      <phrase id="tblcaption" value="historico" />
+      <phrase id="tblcaption" value="historique" />
     </table>
     <table id="imbox_mail">
-      <phrase id="tblcaption" value="imbox mail" />
+      <phrase id="tblcaption" value="boîte de réception e-mail" />
       <field id="id_email">
-        <phrase id="fldcaption" value="id email" />
+        <phrase id="fldcaption" value="id e-mail" />
       </field>
       <field id="sender_userid">
         <phrase id="fldcaption" value="sender userid" />
@@ -2121,109 +2121,109 @@
         <phrase id="fldcaption" value="copy sender" />
       </field>
       <field id="sujeto">
-        <phrase id="fldcaption" value="sujeto" />
+        <phrase id="fldcaption" value="matière" />
       </field>
       <field id="mensaje">
         <phrase id="fldcaption" value="message" />
       </field>
       <field id="archivo">
-        <phrase id="fldcaption" value="archivo" />
+        <phrase id="fldcaption" value="fichier" />
       </field>
       <field id="tiempo">
-        <phrase id="fldcaption" value="tiempo" />
+        <phrase id="fldcaption" value="temps" />
       </field>
       <field id="estado_msg">
-        <phrase id="fldcaption" value="status" />
+        <phrase id="fldcaption" value="statut" />
       </field>
       <field id="id_mensaje">
-        <phrase id="fldcaption" value="id mensaje" />
+        <phrase id="fldcaption" value="id message" />
       </field>
     </table>
     <table id="incidente">
-      <phrase id="tblcaption" value="incidente" />
+      <phrase id="tblcaption" value="Incident" />
       <field id="id_incidente">
-        <phrase id="fldcaption" value="id incidente" />
+        <phrase id="fldcaption" value="id incident" />
       </field>
       <field id="id_tipo">
-        <phrase id="fldcaption" value="id tipo" />
+        <phrase id="fldcaption" value="id type" />
       </field>
       <field id="incidente_es">
-        <phrase id="fldcaption" value="incidente es" />
+        <phrase id="fldcaption" value="Incident es" />
       </field>
       <field id="incidente_en">
-        <phrase id="fldcaption" value="incidente en" />
+        <phrase id="fldcaption" value="Incident en" />
       </field>
       <field id="icono">
-        <phrase id="fldcaption" value="icono" />
+        <phrase id="fldcaption" value="icône" />
       </field>
     </table>
     <table id="inicio">
-      <phrase id="tblcaption" value="Escenario" />
-      <phrase id="mp" value="Mensajes Programados" />
-      <phrase id="hr" value="Hora real" />
-      <phrase id="hs" value="Hora Simulada" />
-      <phrase id="tarea" value="Tarea:" />
-      <phrase id="mens" value="Mensaje:" />
-      <phrase id="mensenv" value="Mensajes enviados" />
-      <phrase id="hr" value="Hora Real" />
-      <phrase id="hs" value="Hora Simulada" />
-      <phrase id="tmens" value="Titulo mensaje:" />
-      <phrase id="comens" value="Comentarios" />
-      <phrase id="comen" value="Comentario" />
-      <phrase id="env" value="Enviar" />
+      <phrase id="tblcaption" value="organisateur" />
+      <phrase id="mp" value="organisateur Programados" />
+      <phrase id="hr" value="Temps réel" />
+      <phrase id="hs" value="Temps simulé" />
+      <phrase id="tarea" value="Tâche:" />
+      <phrase id="mens" value="Message:" />
+      <phrase id="mensenv" value="organisateur enviados" />
+      <phrase id="hr" value="Temps réel" />
+      <phrase id="hs" value="Temps simulé" />
+      <phrase id="tmens" value="message de titre:" />
+      <phrase id="comens" value="commentaires" />
+      <phrase id="comen" value="commentaire" />
+      <phrase id="env" value="Envoyer" />
     </table>
     <table id="inject_excon">
       <phrase id="tblcaption" value="InjectExcon" />
-       <phrase id="mp" value="Mensajes Programados" />
-      <phrase id="tareas" value="Tarea:" />
-      <phrase id="tmens" value="Título del mensaje:" />
-      <phrase id="para" value="Para:" />
-      <phrase id="res" value="Respuestas:" />
-      <phrase id="me" value="Mensajes enviados" />
-      <phrase id="todos" value="Todos" />
-      <phrase id="pendiente" value="Pendiente" />
-      <phrase id="inconcluso" value="Inconcluso" />
-      <phrase id="finalizado" value="Finalizado" />
-      <phrase id="hr" value="Hora Real" />
-      <phrase id="hs" value="Hora Simulada " />
-      <phrase id="tmen" value="Título Mensaje:" />
-      <phrase id="comen" value="Comentarios" />
-      <phrase id="comens" value="Comentario" />
-      <phrase id="calif" value="Calificar" />
-      <phrase id="enviar" value="Enviar" />
+       <phrase id="mp" value="organisateur programmé" />
+      <phrase id="tareas" value="Tâche:" />
+      <phrase id="tmens" value="message de titre" />
+      <phrase id="para" value="Pour:" />
+      <phrase id="res" value="Réponses:" />
+      <phrase id="me" value="organisateur envoyé" />
+      <phrase id="todos" value="Tout le monde" />
+      <phrase id="pendiente" value="En attente" />
+      <phrase id="inconcluso" value="Inachevé" />
+      <phrase id="finalizado" value="fini" />
+      <phrase id="hr" value="Temps réel" />
+      <phrase id="hs" value="Temps simulé " />
+      <phrase id="tmen" value="message de titre:" />
+      <phrase id="comen" value="commentaires" />
+      <phrase id="comens" value="commentaire" />
+      <phrase id="calif" value="Qualifier" />
+      <phrase id="enviar" value="Envoyer" />
     </table>
     <table id="inject_participante">
       <phrase id="tblcaption" value="injectParticipante" />
-       <phrase id="cargando" value="Cargando..." />
-      <phrase id="ctrlzoom" value="Presione CTRL + rueda del mouse para hacer zoom" />
-      <phrase id="clicizq" value="Para desplazarse en la línea de tiempo, mantener presionado el clic izquierdo del ratón." />
-      <phrase id="rhr" value="Para retornar a la hora real del ejercicio presionar el ícono" />
-      <phrase id="mens" value="Mensajes" />
-      <phrase id="todos" value="Todos" />
-      <phrase id="pendiente" value="Pendiente" />
-      <phrase id="inconcluso" value="Inconcluso" />
-      <phrase id="finalizado" value="Finalizado" />
-      <phrase id="hr" value="Hora real del país del ejercicio " />
+       <phrase id="cargando" value="mise en charge..." />
+      <phrase id="ctrlzoom" value = "Appuyez sur CTRL + molette de la souris pour zoomer" />
+     <phrase id = "left click" value = "Pour faire défiler la chronologie, maintenez le clic gauche de la souris enfoncé." />
+      <phrase id = "rhr" value = "Pour revenir au temps réel de l'exercice, appuyez sur l'icône" />
+      <phrase id="mens" value="organisateur" />
+      <phrase id="todos" value="Tout le monde" />
+      <phrase id="pendiente" value="En attente" />
+      <phrase id="inconcluso" value="inachevé" />
+      <phrase id="finalizado" value="fini" />
+      <phrase id="hr" value="Temps réel del país del ejercicio " />
       <phrase id="hs" value="Hora simulada" />
-      <phrase id="tmens" value="Título del mensaje:" />
-      <phrase id="res" value="Respuestas:" />
-      <phrase id="para" value="Para:" />
-      <phrase id="nuev" value="Nuevo" />
-      <phrase id="res" value="Respuestas:" />
-      <phrase id="respon" value="Responder" />
-      <phrase id="reen" value="Reenviar" />
-      <phrase id="comen" value="Comentario" />
-      <phrase id="reenv" value="Reenviar" />
-      <phrase id="env" value="Envio" />
+      <phrase id="tmens" value="message de titre" />
+      <phrase id="res" value="Réponses:" />
+      <phrase id="para" value="Pour:" />
+      <phrase id="nuev" value="Nouveau" />
+      <phrase id="res" value="Réponses:" />
+      <phrase id="respon" value="Répondre" />
+      <phrase id="reen" value="Renvoyer" />
+      <phrase id="comen" value="commentaire" />
+      <phrase id="reenv" value="Renvoyer" />
+      <phrase id="env" value="Expédition" />
     </table>
     <table id="kanban">
       <phrase id="tblcaption" value="kanban" />
     </table>
     <table id="linea_tiempo">
-      <phrase id="tblcaption" value="lina tiemopo" />
+      <phrase id="tblcaption" value="Ligne de temps" />
     </table>
     <table id="mensagens">
-      <phrase id="tblcaption" value="mensagens" />
+      <phrase id="tblcaption" value="des postes" />
       <field id="id">
         <phrase id="fldcaption" value="id" />
       </field>
@@ -2231,93 +2231,93 @@
         <phrase id="fldcaption" value="id de" />
       </field>
       <field id="id_para">
-        <phrase id="fldcaption" value="id para" />
+        <phrase id="fldcaption" value="id pour" />
       </field>
       <field id="mensagem">
         <phrase id="fldcaption" value="mensagem" />
       </field>
       <field id="time">
-        <phrase id="fldcaption" value="time" />
+        <phrase id="fldcaption" value="temps" />
       </field>
       <field id="lido">
         <phrase id="fldcaption" value="lido" />
       </field>
     </table>
     <table id="mensajes">
-      <phrase id="tblcaption" value="mensajes" />
+      <phrase id="tblcaption" value="organisateur" />
       <field id="id_inyect">
         <phrase id="fldcaption" value="id inyect" />
       </field>
       <field id="id_tarea">
-        <phrase id="fldcaption" value="id tareas" />
+        <phrase id="fldcaption" value="id corvées" />
       </field>
       <field id="titulo">
-        <phrase id="fldcaption" value="titulo" />
+        <phrase id="fldcaption" value="Titre" />
       </field>
       <field id="mensaje">
-        <phrase id="fldcaption" value="mensaje" />
+        <phrase id="fldcaption" value="Message" />
       </field>
       <field id="fechareal_start">
-        <phrase id="fldcaption" value="fechareal start" />
+        <phrase id="fldcaption" value="dateréelle initiale" />
       </field>
       <field id="fechasim_start">
-        <phrase id="fldcaption" value="fechasim start" />
+        <phrase id="fldcaption" value="datesimulée initiale" />
       </field>
       <field id="medios">
-        <phrase id="fldcaption" value="medios" />
+        <phrase id="fldcaption" value="moyens" />
         <phrase id="fldtagvalue1" value="1" />
-        <phrase id="fldtagcaption1" value="Email" />
+        <phrase id="fldtagcaption1" value="e-mail" />
         <phrase id="fldtagvalue2" value="2" />
         <phrase id="fldtagcaption2" value="Daybook" />
         <phrase id="fldtagvalue3" value="3" />
         <phrase id="fldtagcaption3" value="Chirping" />
       </field>
       <field id="actividad_esperada">
-        <phrase id="fldcaption" value="actividad esperada" />
+        <phrase id="fldcaption" value="activité attendue" />
       </field>
       <field id="id_actor">
-        <phrase id="fldcaption" value="id actor" />
+        <phrase id="fldcaption" value="id acteur" />
       </field>
       <field id="enviado">
-        <phrase id="fldcaption" value="enviado" />
+        <phrase id="fldcaption" value="envoyé" />
       </field>
       <field id="para">
-        <phrase id="fldcaption" value="para" />
+        <phrase id="fldcaption" value="pour" />
       </field>
       <field id="adjunto">
-        <phrase id="fldcaption" value="adjunto" />
+        <phrase id="fldcaption" value="ci-joint" />
       </field>
       <field id="dif_horaria">
-        <phrase id="fldcaption" value="dif horaria" />
+        <phrase id="fldcaption" value="dif horaire" />
       </field>
     </table>
     <table id="mensajes_usuarios">
-      <phrase id="tblcaption" value="mensajes usuarios" />
+      <phrase id="tblcaption" value="organisateur utilisateurs" />
       <field id="id_mensaje_usuario">
-        <phrase id="fldcaption" value="id mensaje usuario" />
+        <phrase id="fldcaption" value="id message utilisateur" />
       </field>
       <field id="id_user_remitente">
-        <phrase id="fldcaption" value="id user remitente" />
+        <phrase id="fldcaption" value="id utilisateur expéditeur" />
       </field>
       <field id="id_user_destinatario">
-        <phrase id="fldcaption" value="id user destinatario" />
+        <phrase id="fldcaption" value="id destinataire expéditeur" />
       </field>
       <field id="id_mensaje">
-        <phrase id="fldcaption" value="id mensaje" />
+        <phrase id="fldcaption" value="id message" />
       </field>
       <field id="leido">
-        <phrase id="fldcaption" value="leido" />
+        <phrase id="fldcaption" value="lire" />
         <phrase id="fldtagvalue1" value="1" />
-        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagcaption1" value="Oiu" />
         <phrase id="fldtagvalue2" value="0" />
-        <phrase id="fldtagcaption2" value="No" />
+        <phrase id="fldtagcaption2" value="Non" />
       </field>
       <field id="enviado">
-        <phrase id="fldcaption" value="enviado" />
+        <phrase id="fldcaption" value="envoyé" />
         <phrase id="fldtagvalue1" value="1" />
-        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagcaption1" value="Oiu" />
         <phrase id="fldtagvalue2" value="0" />
-        <phrase id="fldtagcaption2" value="No" />
+        <phrase id="fldtagcaption2" value="Non" />
       </field>
     </table>
     <table id="menucontenedor">
@@ -2335,33 +2335,33 @@
         <phrase id="fldcaption" value="id usersender" />
       </field>
       <field id="leido">
-        <phrase id="fldcaption" value="leido" />
+        <phrase id="fldcaption" value="lire" />
         <phrase id="fldtagvalue1" value="1" />
-        <phrase id="fldtagcaption1" value="Yes" />
+        <phrase id="fldtagcaption1" value="Oiu" />
         <phrase id="fldtagvalue2" value="0" />
-        <phrase id="fldtagcaption2" value="No" />
+        <phrase id="fldtagcaption2" value="Non" />
       </field>
       <field id="id_mensaje">
-        <phrase id="fldcaption" value="id mensaje" />
+        <phrase id="fldcaption" value="id message" />
       </field>
     </table>
     <table id="notifica_email" />
     <table id="onlyoffice">
-      <phrase id="tblcaption" value="Documentos" />
+      <phrase id="tblcaption" value="Documents" />
     </table>
     <table id="paisgmt">
-      <phrase id="tblcaption" value="paisgmt" />
+      <phrase id="tblcaption" value="Paysgmt" />
       <field id="id_zone">
         <phrase id="fldcaption" value="id zone" />
       </field>
       <field id="codpais">
-        <phrase id="fldcaption" value="codpais" />
+        <phrase id="fldcaption" value="codPays" />
       </field>
       <field id="nompais">
-        <phrase id="fldcaption" value="nompais" />
+        <phrase id="fldcaption" value="nomPays" />
       </field>
       <field id="timezone">
-        <phrase id="fldcaption" value="timezone" />
+        <phrase id="fldcaption" value="fuseau horaire" />
       </field>
       <field id="gmt">
         <phrase id="fldcaption" value="gmt" />
@@ -2371,40 +2371,40 @@
       </field>
     </table>
     <table id="participantes">
-      <phrase id="tblcaption" value="participantes" />
+      <phrase id="tblcaption" value="participants" />
       <field id="id_participantes">
-        <phrase id="fldcaption" value="id participantes" />
+        <phrase id="fldcaption" value="id participants" />
       </field>
       <field id="nombres">
-        <phrase id="fldcaption" value="nombres" />
+        <phrase id="fldcaption" value="nom" />
       </field>
       <field id="apellidos">
-        <phrase id="fldcaption" value="apellidos" />
+        <phrase id="fldcaption" value="noms de famille" />
       </field>
       <field id="_login">
         <phrase id="fldcaption" value="login" />
       </field>
       <field id="_password">
-        <phrase id="fldcaption" value="password" />
+        <phrase id="fldcaption" value="le mot de passe" />
       </field>
       <field id="_email">
-        <phrase id="fldcaption" value="email" />
+        <phrase id="fldcaption" value="e-mail" />
       </field>
       <field id="grupo">
-        <phrase id="fldcaption" value="grupo" />
+        <phrase id="fldcaption" value="grouper" />
       </field>
       <field id="subgrupo">
-        <phrase id="fldcaption" value="subgrupo" />
+        <phrase id="fldcaption" value="sous-groupe" />
       </field>
       <field id="imagen_participante">
         <phrase id="fldcaption" value="imagen participante" />
       </field>
       <field id="id_escenario">
-        <phrase id="fldcaption" value="id escenario" />
+        <phrase id="fldcaption" value="id organiser" />
       </field>
     </table>
     <table id="permisos_doc">
-      <phrase id="tblcaption" value="permisos doc" />
+      <phrase id="tblcaption" value="permis doc" />
       <field id="id_permiso">
         <phrase id="fldcaption" value="id permiso" />
       </field>
@@ -2412,57 +2412,57 @@
         <phrase id="fldcaption" value="file numero" />
       </field>
       <field id="tipo_permiso">
-        <phrase id="fldcaption" value="tipo permiso" />
+        <phrase id="fldcaption" value="type de permis" />
         <phrase id="fldtagvalue1" value="1" />
-        <phrase id="fldtagcaption1" value="Edición" />
+        <phrase id="fldtagcaption1" value="Édition" />
         <phrase id="fldtagvalue2" value="2" />
-        <phrase id="fldtagcaption2" value="Visualización" />
+        <phrase id="fldtagcaption2" value="visualisation" />
       </field>
       <field id="fecha_created">
-        <phrase id="fldcaption" value="fecha created" />
+        <phrase id="fldcaption" value="date créée" />
       </field>
       <field id="id_usuarios">
-        <phrase id="fldcaption" value="id usuarios" />
+        <phrase id="fldcaption" value="id utilisateurs" />
       </field>
     </table>
     <table id="permisos_docusers">
-      <phrase id="tblcaption" value="permisos docusers" />
+      <phrase id="tblcaption" value="permis docusers" />
       <field id="id_permisiosuser">
         <phrase id="fldcaption" value="id permisiosuser" />
       </field>
       <field id="id_file">
-        <phrase id="fldcaption" value="id file" />
+        <phrase id="fldcaption" value="id Tâche" />
       </field>
       <field id="tipo_permiso">
-        <phrase id="fldcaption" value="tipo permiso" />
+        <phrase id="fldcaption" value="type de permis" />
         <phrase id="fldtagvalue1" value="1" />
-        <phrase id="fldtagcaption1" value="Edición" />
+        <phrase id="fldtagcaption1" value="Édition" />
         <phrase id="fldtagvalue2" value="2" />
-        <phrase id="fldtagcaption2" value="Visualización" />
+        <phrase id="fldtagcaption2" value="visualisation" />
       </field>
       <field id="id_users">
-        <phrase id="fldcaption" value="id users" />
+        <phrase id="fldcaption" value="id utilisateurs" />
       </field>
       <field id="date_created">
-        <phrase id="fldcaption" value="date created" />
+        <phrase id="fldcaption" value="idate créée" />
       </field>
     </table>
     <table id="pizarra">
-      <phrase id="tblcaption" value="pizarra" />
+      <phrase id="tblcaption" value="tableau" />
     </table>
     <table id="resmensaje">
-      <phrase id="tblcaption" value="resmensaje" />
+      <phrase id="tblcaption" value="resmessage" />
       <field id="id_resmensaje">
         <phrase id="fldcaption" value="id resmensaje" />
       </field>
       <field id="id_users">
-        <phrase id="fldcaption" value="id users" />
+        <phrase id="fldcaption" value="id utilisateurs" />
       </field>
       <field id="id_inyect">
         <phrase id="fldcaption" value="id inyect" />
       </field>
       <field id="resmensaje">
-        <phrase id="fldcaption" value="resmensaje" />
+        <phrase id="fldcaption" value="resmessage" />
       </field>
       <field id="resadjunto">
         <phrase id="fldcaption" value="resadjunto" />
@@ -2470,64 +2470,64 @@
     </table>
     <table id="stream" />
     <table id="subgrupo">
-      <phrase id="tblcaption" value="subgrupo" />
+      <phrase id="tblcaption" value="sous-groupe" />
       <field id="id_subgrupo">
-        <phrase id="fldcaption" value="id subgrupo" />
+        <phrase id="fldcaption" value="id sous-groupe" />
       </field>
       <field id="id_grupo">
-        <phrase id="fldcaption" value="id grupo" />
+        <phrase id="fldcaption" value="id groupe" />
       </field>
       <field id="imagen_subgrupo">
-        <phrase id="fldcaption" value="imagen subgrupo" />
+        <phrase id="fldcaption" value="image sous-groupe" />
       </field>
       <field id="nombre_subgrupo">
-        <phrase id="fldcaption" value="nombre subgrupo" />
+        <phrase id="fldcaption" value="nom  sous-groupe" />
       </field>
       <field id="descripcion_subgrupo">
-        <phrase id="fldcaption" value="descripcion subgrupo" />
+        <phrase id="fldcaption" value="description sous-groupe" />
       </field>
     </table>
     <table id="submit" />
     <table id="tablero_excon">
-      <phrase id="tblcaption" value="Tablero" />
+      <phrase id="tblcaption" value="Planche" />
     </table>
     <table id="tablero_participante">
-      <phrase id="tblcaption" value="Tableroppte" />
+      <phrase id="tblcaption" value="Plancheppte" />
     </table>
     <table id="tareas">
-      <phrase id="tblcaption" value="tareas" />
+      <phrase id="tblcaption" value="Corvées" />
       <field id="id_tarea">
         <phrase id="fldcaption" value="id tarea" />
       </field>
       <field id="id_escenario">
-        <phrase id="fldcaption" value="id escenario" />
+        <phrase id="fldcaption" value="id organiser" />
       </field>
       <field id="id_grupo">
-        <phrase id="fldcaption" value="id grupo" />
+        <phrase id="fldcaption" value="id groupe" />
       </field>
       <field id="titulo_tarea">
-        <phrase id="fldcaption" value="titulo tarea" />
+        <phrase id="fldcaption" value="titre de la tâche" />
       </field>
       <field id="descripcion_tarea">
-        <phrase id="fldcaption" value="descripcion tarea" />
+        <phrase id="fldcaption" value="description de la tâche" />
       </field>
       <field id="fechainireal_tarea">
-        <phrase id="fldcaption" value="fechainireal tarea" />
+        <phrase id="fldcaption" value="fechainireal de la tâche" />
       </field>
       <field id="fechafin_tarea">
-        <phrase id="fldcaption" value="fechafin tarea" />
+        <phrase id="fldcaption" value="fechafin de la tâche" />
       </field>
       <field id="fechainisimulado_tarea">
-        <phrase id="fldcaption" value="fechainisimulado tarea" />
+        <phrase id="fldcaption" value="fechainisimulado de la tâche" />
       </field>
       <field id="fechafinsimulado_tarea">
-        <phrase id="fldcaption" value="fechafinsimulado tarea" />
+        <phrase id="fldcaption" value="fechafinsimulado de la tâche" />
       </field>
       <field id="id_tarearelacion">
         <phrase id="fldcaption" value="id tarearelacion" />
       </field>
       <field id="archivo">
-        <phrase id="fldcaption" value="archivo" />
+        <phrase id="fldcaption" value="fichier" />
         <phrase id="fldtagvalue1" value="1" />
         <phrase id="fldtagcaption1" value="Myemail" />
         <phrase id="fldtagvalue2" value="2" />
@@ -2538,13 +2538,13 @@
         <phrase id="fldtagcaption4" value="Wzup" />
       </field>
       <field id="id_subgrupo">
-        <phrase id="fldcaption" value="id subgrupo" />
+        <phrase id="fldcaption" value="id sous-groupe" />
       </field>
       <field id="valoracion">
-        <phrase id="fldcaption" value="valoracion" />
+        <phrase id="fldcaption" value="évaluation" />
       </field>
       <field id="color">
-        <phrase id="fldcaption" value="color" />
+        <phrase id="fldcaption" value="couleur" />
       </field>
     </table>
     <table id="tbl_status">
@@ -2553,333 +2553,332 @@
         <phrase id="fldcaption" value="id" />
       </field>
       <field id="status_name">
-        <phrase id="fldcaption" value="status name" />
+        <phrase id="fldcaption" value="statut nom" />
       </field>
     </table>
     <table id="tbl_task">
-      <phrase id="tblcaption" value="tbl task" />
+      <phrase id="tblcaption" value="tbl tâche" />
       <field id="id">
         <phrase id="fldcaption" value="id" />
       </field>
       <field id="title">
-        <phrase id="fldcaption" value="title" />
+        <phrase id="fldcaption" value="Titre" />
       </field>
       <field id="description">
         <phrase id="fldcaption" value="description" />
       </field>
       <field id="project_name">
-        <phrase id="fldcaption" value="project name" />
+        <phrase id="fldcaption" value="Nom du projet" />
       </field>
       <field id="status_id">
-        <phrase id="fldcaption" value="status id" />
+        <phrase id="fldcaption" value="statut id" />
       </field>
       <field id="created_at">
         <phrase id="fldcaption" value="created at" />
       </field>
       <field id="id_users">
-        <phrase id="fldcaption" value="id users" />
+        <phrase id="fldcaption" value="id utilisateurs" />
       </field>
     </table>
     <table id="timeline">
-      <phrase id="tblcaption" value="tablero excon" />
-       <phrase id="titulo" value="Timeline | dataHandling | Data serialization" />
+      <phrase id="tblcaption" value="Planche excon" />
+       <phrase id="titulo" value="chronologie | dataHandling | Data serialization" />
       <phrase id="timeline_m_t" value="Linea de tiempo mensajes y tareas" />
-      <phrase id="guardar" value="Guardar" />
-      <phrase id="datos_almacenados" value="Datos almacenados" />
-      <phrase id="datos_almacenados_ok" value="Datos almacenados Ok" />
-      <phrase id="cargand" value="Cargando..." />
-      <phrase id="editar_datos" value="Editar Datos" />
-      <phrase id="titul" value="Titulo" />
-      <phrase id="descrip" value="Descripción" />
-      <phrase id="cerrar" value="Cerrar" />
+      <phrase id="guardar" value="sauvegarder" />
+      <phrase id="datos_almacenados" value="Les données stockées" />
+      <phrase id="datos_almacenados_ok" value="Les données stockées Ok" />
+      <phrase id="cargand" value="mise en charge..." />
+      <phrase id="editar_datos" value="Modifier les données" />
+      <phrase id="titul" value="Titre" />
+      <phrase id="descrip" value="Description" />
+      <phrase id="cerrar" value="Fermer" />
     </table>
     <table id="Timeline2">
-      <phrase id="titulo" value="Creando datepickers con Flatpickr" />
-      <phrase id="fech" value="Fecha" />
-      <phrase id="fn" value="Fecha Nacimiento" />
-      <phrase id="fi" value="Fecha de Ingreso" />
-      <phrase id="fc" value="Fecha de Cita" />
-      <phrase id="fq" value="Fecha de Quincena" />
-      <phrase id="fds" value="Fecha de días de la semana" />
+      <phrase id="titulo" value="Création datepickers con Flatpickr" />
+      <phrase id="fech" value="Date" />
+      <phrase id="fn" value="Date de naissance" />
+      <phrase id="fi" value="Date d'admission" />
+      <phrase id="fc" value="Date de rendez-vous" />
+      <phrase id="fq" value="Quinzaine" />
+      <phrase id="fds" value="Jours de la semaine" />
     </table>
     <table id="timeline_excon">
-      <phrase id="tblcaption" value="TimeLine ExconGrupo" />
-      <phrase id="ctrzoom" value="Presione CTRL + rueda del mouse para hacer zoom" />
-      <phrase id="cltizq" value="Para desplazarse en la línea de tiempo, mantener presionado el clic izquierdo del ratón." />
-      <phrase id="rthr" value="Para retornar a la hora real del ejercicio presionar el ícono " />
-      <phrase id="toast" value="Datos almacenados" />
-      <phrase id="titulo_modalmsg" value="Mensaje" />
-      <phrase id="editar_dat" value="Editar Datos" />
-      <phrase id="descrip" value="Descripción" />
-      <phrase id="hri" value="Hora real inicial:" />
-      <phrase id="hrf" value="Hora real final:" />
-      <phrase id="hsi" value="Hora simulada inicial:" />
-      <phrase id="hsf" value="Hora simulada final:" />
-      <phrase id="cancel" value="Cancelar" />
-      <phrase id="cerrar" value="Cerrar" />
-      <phrase id="guarda" value="Guardar" />
-      <phrase id="titul" value="Título" />
-      <phrase id="fir" value="Fecha Inicio Real:" />
-      <phrase id="ffr" value="Fecha Fin Real:" />
-      <phrase id="fis" value="Fecha Inicio Simulado:" />
-      <phrase id="ffs" value="Fecha Fin Simulado:" />
-      <phrase id="seleccion_medio" value="Seleccione Medio..." />
+      <phrase id="tblcaption" value="chronologie ExconGrupo" />
+      <phrase id="ctrzoom" value = "Appuyez sur CTRL + molette de la souris pour zoomer" />
+      <phrase id = "cltizq" value = "Pour faire défiler la timeline, maintenez le clic gauche de la souris enfoncé." />
+      <phrase id = "rthr" value = "Pour revenir au temps réel de l'exercice appuyez sur l'icône" />
+      <phrase id="toast" value="Les données stockées" />
+      <phrase id="titulo_modalmsg" value="Message" />
+      <phrase id="editar_dat" value="Modifier les données" />
+      <phrase id="descrip" value="Description" />
+      <phrase id="hri" value="Temps réel initiale:" />
+      <phrase id="hrf" value="Temps réel final:" />
+      <phrase id="hsi" value="Temps simulé initial:" />
+      <phrase id="hsf" value="Temps simulé Final:" />
+      <phrase id="cancel" value="Annuler" />
+      <phrase id="cerrar" value="Fermer" />
+      <phrase id="guarda" value="sauvegarder" />
+      <phrase id="titul" value="Titre" />
+      <phrase id="fir" value="Date de début réelle:" />
+      <phrase id="ffr" value="Date de fin réelle:" />
+      <phrase id="fis" value="Date de début simulée:" />
+      <phrase id="ffs" value="Date de fin simulée:" />
+      <phrase id="seleccion_medio" value="Sélectionnez le support..." />
       <phrase id="medio" value="Medio" />
-      <phrase id="acti_es" value="Actividad Esperada" />
+      <phrase id="acti_es" value="activité attendue" />
       <phrase id="de" value="De:" />
-      <phrase id="subir_file" value="Subir Archivo" />
-      <phrase id="seleccione_adjunto" value="Seleccione Adjunto..." />
-      <phrase id="para" value="Para:" />
-      <phrase id="nuevo_mensaje" value="Nuevo Mensaje" />
-      <phrase id="crear_tarea" value="Crear Tarea" />
-      <phrase id="grup" value="Grupo" />
-      <phrase id="seleccion_grup" value="Seleccione Grupo..." />
-      <phrase id="relacion_tarea" value="Relación Tarea" />
-      <phrase id="tareas" value="Tareas..." />
+      <phrase id="subir_file" value="Téléverser un fichier" />
+      <phrase id="seleccione_adjunto" value="Sélectionnez le fichier..." />
+      <phrase id="para" value="Pour:" />
+      <phrase id="nuevo_mensaje" value="Nouveau Message" />
+      <phrase id="crear_tarea" value="créer une tâche" />
+      <phrase id="grup" value="grouper" />
+      <phrase id="seleccion_grup" value="Sélectionnez le grouper..." />
+      <phrase id="relacion_tarea" value="Relation de tâche" />
+      <phrase id="tareas" value="Corvées..." />
     </table>
     <table id="timeline_general">
-      <phrase id="tblcaption" value="timeline General" />
-       <phrase id="tituloTLG" value="Linea de tiempo General" />
-      <phrase id="graba" value="Grabar" />
-      <phrase id="seleccion_escenario" value="Seleccione Escenario..." />
-      <phrase id="datos_almacenados" value="Datos almacenados" />
-      <phrase id="datos_almacenados_ok" value="Datos almacenados Ok" />
-      <phrase id="cargand" value="cargando..." />
-      <phrase id="ctrzoom" value="Presione CTRL + rueda del mouse para hacer zoom" />
-      <phrase id="cltizq" value="Para desplazarse en la línea de tiempo, mantener presionado el clic izquierdo del ratón." />
-      <phrase id="rthr" value="Para retornar a la hora real del ejercicio presionar el ícono " />
-      <phrase id="editar_datos" value="Editar Datos" />
-      <phrase id="titulo" value="Titulo" />
-      <phrase id="descrip" value="Descripción" />
-      <phrase id="hri" value="Hora real inicial:" />
-      <phrase id="hrf" value="Hora real final:" />
-      <phrase id="hsi" value="Hora simulada inicial:" />
-      <phrase id="hsf" value="Hora simulada final:" />
-      <phrase id="Editar_mensaje" value="Editar Mensaje" />
-      <phrase id="cancel" value="Cancelar" />
-      <phrase id="mens" value="Mensaje" />
-      <phrase id="fir" value="Fecha Inicio Real:" />
-      <phrase id="ffr" value="Fecha Fin Real:" />
-      <phrase id="fis" value="Fecha Inicio Simulado:" />
-      <phrase id="ffs" value="Fecha Fin Simulado:" />
-      <phrase id="seleccion_medio" value="Seleccione Medio..." />
+      <phrase id="tblcaption" value="chronologie générale" />
+       <phrase id="tituloTLG" value="Chronologie générale" />
+      <phrase id="graba" value="Graver" />
+      <phrase id="seleccion_escenario" value="Sélectionnez le scénario..." />
+      <phrase id="datos_almacenados" value="Les données stockées" />
+      <phrase id="datos_almacenados_ok" value="Les données stockées Ok" />
+      <phrase id="cargand" value="mise en charge..." />
+      <phrase id="ctrzoom" value = "Appuyez sur CTRL + molette de la souris pour zoomer" />
+      <phrase id = "cltizq" value = "Pour faire défiler la timeline, maintenez le clic gauche de la souris enfoncé." />
+      <phrase id = "rthr" value = "Pour revenir au temps réel de l'exercice appuyez sur l'icône" />
+      <phrase id="editar_datos" value="Modifier les données" />
+      <phrase id="titulo" value="Titre" />
+      <phrase id="descrip" value="Description" />
+      <phrase id="hri" value="Temps réel iniciale:" />
+      <phrase id="hrf" value="Temps réel final:" />
+      <phrase id="hsi" value="Temps simulé initial:" />
+      <phrase id="hsf" value="Temps simulé Final:" />
+      <phrase id="Editar_mensaje" value = "Modifier le message" />
+      <phrase id="cancel" value="Annuler" />
+      <phrase id="mens" value="Message" />
+      <phrase id="fir" value="Date de début réelle:" />
+      <phrase id="ffr" value="Date de fin réelle:" />
+      <phrase id="fis" value="Date de début simulée:" />
+      <phrase id="ffs" value="Date de fin simulée:" />
+      <phrase id="seleccion_medio" value="Sélectionnez le support..." />
       <phrase id="medio" value="Medio" />
-      <phrase id="acti_es" value="Actividad Esperada" />
+      <phrase id="acti_es" value="activité attendue" />
       <phrase id="de" value="De:" />
-      <phrase id="subir_file" value="Subir Archivo" />
-      <phrase id="seleccione_adjunto" value="Seleccione Adjunto..." />
-      <phrase id="para" value="Para:" />
-       <phrase id="nuevo_mensaje" value="Nuevo Mensaje" />
-      <phrase id="crear_tarea" value="Crear Tarea" />
-      <phrase id="grup" value="Grupo" />
-      <phrase id="seleccion_grup" value="Seleccione Grupo..." />
-      <phrase id="relacion_tarea" value="Relación Tarea" />
-      <phrase id="tareas" value="Tareas..." />
-      <phrase id="guardar" value="Guardar" />
+      <phrase id="subir_file" value="Téléverser un fichier" />
+      <phrase id="seleccione_adjunto" value="Sélectionnez le fichier..." />
+      <phrase id="para" value="Pour:" />
+       <phrase id="nuevo_mensaje" value="Nouveau Mensaje" />
+      <phrase id="crear_tarea" value="créer une tâche" />
+      <phrase id="grup" value="grouper" />
+      <phrase id="seleccion_grup" value="Sélectionnez le grouper..." />
+      <phrase id="relacion_tarea" value="Relation de tâche" />
+      <phrase id="tareas" value="Corvées..." />
+      <phrase id="guardar" value="sauvegarder" />
       <phrase id="tarea" value="Tarea" />
-      <phrase id="relacion_tarea" value="Relación Tarea" />
-      <phrase id="cerrar" value="Cerrar" />
+      <phrase id="relacion_tarea" value="Relation de tâche" />
+      <phrase id="cerrar" value="Fermer" />
 
     </table>
     <table id="timeline_mensajes">
-      <phrase id="boots" value="Bootstrap 4 Linea de tiempo" />
-      <phrase id="monjan" value="Lunes, Enero 9th 2020 7:00 AM" />
-      <phrase id="day1" value="Día 1 Orientación" />
-      <phrase id="bienvenida" value="Bienvenido al campus, introduccion y comience el tour por el campus ." />
-      <phrase id="jan10" value="Martes, Enero 10th 2019 8:30 AM" />
-      <phrase id="day2" value="Dia 2 Sesión" />
-      <phrase id="instrucci" value="Regístrese para las lecciones y los ponentes que coincidan con el programa de su curso. Conozca y salude a los instructores." />
-      <phrase id="detalles" value="Mas detalles ▼" />
-      <phrase id="desay" value="08:30 - 09:00 Desayuno en CR 2A" />
-      <phrase id="session" value="09:00 - 10:30 Sesión en vivo en  CR 3" />
-      <phrase id="almuerz" value="10:30 - 10:45 Descanso" />
-      <phrase id="sessionL" value="10:45 - 12:00 Sesión en vivo en CR 3" />
-      <phrase id="jan11" value="Miercoles, Enero 11th 2019 8:30 AM" />
-      <phrase id="day3" value="Dia 3 sesión " />
-      <phrase id="vegan" value="Shoreditch vegan artisan Helvetica. Tattooed Codeply Echo Park Godard kogi, next level irony ennui twee squid fap selvage. Meggings flannel Brooklyn literally small batch, mumblecore PBR try-hard kale chips. Brooklyn vinyl lumbersexual
-                        bicycle rights, viral fap cronut leggings squid chillwave pickled gentrify mustache. 3 wolf moon hashtag church-key Odd Future. Austin messenger bag normcore, Helvetica Williamsburg sartorial tote bag distillery Portland before
-                        they sold out gastropub taxidermy Vice." />
-      <phrase id="jan12" value="Jueves, Enero 12th 2019 11:30 AM" />
-      <phrase id="day4" value="Dia  4 Envolver" />
-      <phrase id="almuerzzo" value="Únase a nosotros para almorzar en el café de Bootsy frente al Campus Central." />
-      <phrase id="jan9" value="Enero 9th 2019 7:00 AM" />
-      <phrase id="jan10" value="Enero 10th 2019 8:30 AM" />
-      <phrase id="signup" value="Regístrese para las lecciones y los ponentes que coincidan con el programa de su curso. Conozca y salude a los instructores." />
-      <phrase id="jan11" value="Enero 11th 2019 8:30 AM" />
-      <phrase id="bicicle" value="Shoreditch vegan artisan Helvetica. Tattooed Codeply Echo Park Godard kogi, next level irony ennui twee squid fap selvage. Meggings flannel Brooklyn literally small batch, mumblecore PBR try-hard kale chips. Brooklyn vinyl lumbersexual
-                        bicycle rights, viral fap cronut leggings squid chillwave pickled gentrify mustache." />
+      <phrase id="boots" value="Chronologie de Bootstrap 4" />
+      <phrase id="monjan" value = "Lundi 9 janvier 2020 7h00" />
+      <phrase id="day1" value = "Orientation Jour 1" />
+      <phrase id="bienvenida" value = "Bienvenue sur le campus, présentation et début de la visite du campus." />
+      <phrase id="jan10" value = "Mardi 10 janvier 2019 08:30" />
+      <phrase id = "day2" value = "Day 2 Session" />
+      <phrase id="instrucci" value = "Inscrivez-vous à des cours et à des conférenciers qui correspondent à votre programme de cours. Rencontrez et saluez les instructeurs." />
+      <phrase id="detalles" value="Plus de détails ▼" />
+      <phrase id="desay" value = "08:30 - 09:00 Petit déjeuner au CR 2A" />
+      <phrase id="session" value = "09:00 - 10:30 Session en direct sur CR 3" />
+      <phrase id="almuerz" valeur = "10:30 - 10:45 Pause" />
+      <phrase id="sessionL" value = "10:45 - 12:00 Session en direct sur CR 3" />
+      <phrase id="jan11" value = "10:45 - 12:00 Session en direct sur CR 3" />
+      <phrase id="day3" value="Dia 3 session " />
+      <phrase id="vegan" value = "Shoreditch vegan artisan Helvetica. Tatoué Codeply Echo Park Godard kogi, prochain niveau ironie ennui twee squid fap selvage. Meggings flanelle Brooklyn littéralement petit lot, mumblecore PBR try-hard chou frisé chips. Brooklyn vinyle lumbersexual
+                         droits de vélo, fap viral leggings cronut calmar chillwave mariné gentrify moustache. 3 loup lune hashtag église-clé Odd Future. Austin messenger bag normcore, Helvetica Williamsburg sartorial tote bag distillery Portland avant
+                         ils ont vendu le vice de taxidermie gastropub. "/>
+       <phrase id = "jan12" value = "Jeudi 12 janvier 2019 11:30" />
+       <phrase id = "day4" value = "Day 4 Wrap" />
+      <phrase id="almuerzzo" value = "Rejoignez-nous pour déjeuner au Bootsy's Cafe en face du campus central." />
+       <phrase id = "jan9" value = "Janvier 9th 2019 07:00 AM" />
+       <phrase id = "jan10" value = "10 janvier 2019 08:30" />
+       <phrase id = "signup" value = "Inscrivez-vous à des cours et à des conférenciers qui correspondent à votre programme de cours. Rencontrez et saluez les instructeurs." />
+       <phrase id = "jan11" value = "11 janvier 2019 08:30" />
+      <phrase id="bicicle" value = "Shoreditch vegan artisan Helvetica. Tatoué Codeply Echo Park Godard kogi, prochain niveau ironie ennui twee squid fap selvage. Meggings flanelle Brooklyn littéralement petit lot, mumblecore PBR try-hard chou frisé chips. Brooklyn vinyle lumbersexual
+                         droits de vélo, fap viral leggings cronut calamar chillwave mariné gentrify moustache. "/>
     </table>
     <table id="tipo_view">
-      <phrase id="titulo" value="Titulo" />
-      <phrase id="esr" value="Ejercicio de Simulación de Respuesta a " />
-      <phrase id="pais" value="Pais" />
-      <phrase id="fech" value="Fecha" />
-      <phrase id="descrip" value="Descripcion" />
-      <phrase id="grups" value="Grupos" />
-      <phrase id="partic" value="Participantes" />
-      <phrase id="conclu" value="Concluciones" />
+      <phrase id="titulo" value="Titre" />
+      <phrase id="esr" value="Réponse à l'exercice de simulation" />
+      <phrase id="pais" value="Pays" />
+      <phrase id="fech" value="Date" />
+      <phrase id="descrip" value="description" />
+      <phrase id="grups" value="groupes" />
+      <phrase id="partic" value="participants" />
+      <phrase id="conclu" value="Conclusion" />
     </table>
     <table id="leermsg">
-      <phrase id="hola_mundo" value="Hola,mundo!" />
+      <phrase id="hola_mundo" value = "Bonjour tout le monde !" />
       <phrase id="de" value="De:" />
-      <phrase id="leer_correo" value="Leer Correo" />
-      <phrase id="replicar" value="Replicar" />
-      <phrase id="reenviar" value="Reenviar" />
+      <phrase id="leer_correo" value = "Lire le courrier" />
+      <phrase id="replicar" value = "Répliquer" />
+      <phrase id="reenviar" value="Renvoyer" />
     </table>
      <table id="kanban">
-      <phrase id="titulo" value="Tarjetas de arrastrar y soltar similares a Trello para software de gestión de proyectos" />
-    </table> <phrase id="tituloTLG" value="Linea de tiempo General" />
-      <phrase id="graba" value="Grabar" />
-      <phrase id="seleccion_escenario" value="Seleccione Escenario..." />
-      <phrase id="datos_almacenados" value="Datos almacenados" />
-      <phrase id="datos_almacenados_ok" value="Datos almacenados Ok" />
-      <phrase id="cargand" value="cargando..." />
-      <phrase id="ctrzoom" value="Presione CTRL + rueda del mouse para hacer zoom" />
-      <phrase id="cltizq" value="Para desplazarse en la línea de tiempo, mantener presionado el clic izquierdo del ratón." />
-      <phrase id="rthr" value="Para retornar a la hora real del ejercicio presionar el ícono " />
-      <phrase id="editar_datos" value="Editar Datos" />
-      <phrase id="titulo" value="Titulo" />
-      <phrase id="descrip" value="Descripción" />
-      <phrase id="hri" value="Hora real inicial:" />
-      <phrase id="hrf" value="Hora real final:" />
-      <phrase id="hsi" value="Hora simulada inicial:" />
-      <phrase id="hsf" value="Hora simulada final:" />
-      <phrase id="Editar_mensaje" value="Editar Mensaje" />
-      <phrase id="cancel" value="Cancelar" />
-      <phrase id="mens" value="Mensaje" />
-      <phrase id="fir" value="Fecha Inicio Real:" />
-      <phrase id="ffr" value="Fecha Fin Real:" />
-      <phrase id="fis" value="Fecha Inicio Simulado:" />
-      <phrase id="ffs" value="Fecha Fin Simulado:" />
-      <phrase id="seleccion_medio" value="Seleccione Medio..." />
+      <phrase id="titulo" value = "Faire glisser et déposer des cartes similaires à Trello pour les logiciels de gestion de projet" />
+    </table> <phrase id="tituloTLG" value="Chronologie générale" />
+      <phrase id="graba" value="Graver" />
+      <phrase id="seleccion_escenario" value="Sélectionnez le scénario..." />
+      <phrase id="datos_almacenados" value="Les données stockées" />
+      <phrase id="datos_almacenados_ok" value="Les données stockées Ok" />
+      <phrase id="cargand" value="mise en charge..." />
+      <phrase id="ctrzoom" value = "Appuyez sur CTRL + molette de la souris pour zoomer" />
+      <phrase id = "cltizq" value = "Pour faire défiler la timeline, maintenez le clic gauche de la souris enfoncé." />
+       <phrase id = "rthr" value = "Pour revenir au temps réel de l'exercice appuyez sur l'icône" />
+      <phrase id="editar_datos" value="Modifier les données" />
+      <phrase id="titulo" value="Titre" />
+      <phrase id="descrip" value="Description" />
+      <phrase id="hri" value="Temps réel inicial:" />
+      <phrase id="hrf" value="Temps réel final:" />
+      <phrase id="hsi" value="Temps simulé initial:" />
+      <phrase id="hsf" value="Temps simulé Final:" />
+      <phrase id="Editar_mensaje" value = "Modifier le message" />
+      <phrase id="cancel" value="Annuler" />
+      <phrase id="mens" value="Message" />
+      <phrase id="fir" value="Date de début réelle:" />
+      <phrase id="ffr" value="Date de fin réelle:" />
+      <phrase id="fis" value="Date de début simulée:" />
+      <phrase id="ffs" value="Date de fin simulée:" />
+      <phrase id="seleccion_medio" value="Sélectionnez le support..." />
       <phrase id="medio" value="Medio" />
-      <phrase id="acti_es" value="Actividad Esperada" />
+      <phrase id="acti_es" value="activité attendue" />
       <phrase id="de" value="De:" />
-      <phrase id="subir_file" value="Subir Archivo" />
-      <phrase id="seleccione_adjunto" value="Seleccione Adjunto..." />
-      <phrase id="para" value="Para:" />
-       <phrase id="nuevo_mensaje" value="Nuevo Mensaje" />
-      <phrase id="crear_tarea" value="Crear Tarea" />
-      <phrase id="grup" value="Grupo" />
-      <phrase id="seleccion_grup" value="Seleccione Grupo..." />
-      <phrase id="relacion_tarea" value="Relación Tarea" />
-      <phrase id="tareas" value="Tareas..." />
-      <phrase id="guardar" value="Guardar" />
+      <phrase id="subir_file" value="Téléverser un fichier" />
+      <phrase id="seleccione_adjunto" value="Sélectionnez le fichier..." />
+      <phrase id="para" value="Pour:" />
+       <phrase id="nuevo_mensaje" value="Nouveau Mensaje" />
+      <phrase id="crear_tarea" value="créer une tâche" />
+      <phrase id="grup" value="grouper" />
+      <phrase id="seleccion_grup" value="Sélectionnez le grouper..." />
+      <phrase id="relacion_tarea" value="Relation de tâche" />
+      <phrase id="tareas" value="Corvées..." />
+      <phrase id="guardar" value="sauvegarder" />
       <phrase id="tarea" value="Tarea" />
-      <phrase id="relacion_tarea" value="Relación Tarea" />
-      <phrase id="cerrar" value="Cerrar" />
+      <phrase id="relacion_tarea" value="Relation de tâche" />
+      <phrase id="cerrar" value="Fermer" />
 
     </table>
     <table id="timeline_mensajes">
-      <phrase id="boots" value="Bootstrap 4 Linea de tiempo" />
-      <phrase id="monjan" value="Lunes, Enero 9th 2020 7:00 AM" />
-      <phrase id="day1" value="Día 1 Orientación" />
-      <phrase id="bienvenida" value="Bienvenido al campus, introduccion y comience el tour por el campus ." />
+      <phrase id="boots" value="Chronologie de Bootstrap 4" />
+      <phrase id="monjan" value = "Lundi 9 janvier 2020 7h00" />
+      <phrase id="day1" value = "Orientation Jour 1" />
+      <phrase id="bienvenida" value = "Bienvenue sur le campus, présentation et début de la visite du campus." />
       <phrase id="jan10" value="Martes, Enero 10th 2019 8:30 AM" />
       <phrase id="day2" value="Dia 2 Sesión" />
       <phrase id="instrucci" value="Regístrese para las lecciones y los ponentes que coincidan con el programa de su curso. Conozca y salude a los instructores." />
-      <phrase id="detalles" value="Mas detalles ▼" />
-      <phrase id="desay" value="08:30 - 09:00 Desayuno en CR 2A" />
-      <phrase id="session" value="09:00 - 10:30 Sesión en vivo en  CR 3" />
-      <phrase id="almuerz" value="10:30 - 10:45 Descanso" />
-      <phrase id="sessionL" value="10:45 - 12:00 Sesión en vivo en CR 3" />
-      <phrase id="jan11" value="Miercoles, Enero 11th 2019 8:30 AM" />
-      <phrase id="day3" value="Dia 3 sesión " />
+      <phrase id="detalles" value="Plus de détails ▼" />
+      <phrase id="desay" value = "08:30 - 09:00 Petit déjeuner au CR 2A" />
+      <phrase id="session" value = "09:00 - 10:30 Session en direct sur CR 3" />
+      <phrase id="almuerz" valeur = "10:30 - 10:45 Pause" />
+      <phrase id="sessionL" value = "10:45 - 12:00 Session en direct sur CR 3" />
+      <phrase id="jan11" value = "10:45 - 12:00 Session en direct sur CR 3" />
+      <phrase id="day3" value="Dia 3 session " />
       <phrase id="vegan" value="Shoreditch vegan artisan Helvetica. Tattooed Codeply Echo Park Godard kogi, next level irony ennui twee squid fap selvage. Meggings flannel Brooklyn literally small batch, mumblecore PBR try-hard kale chips. Brooklyn vinyl lumbersexual
                         bicycle rights, viral fap cronut leggings squid chillwave pickled gentrify mustache. 3 wolf moon hashtag church-key Odd Future. Austin messenger bag normcore, Helvetica Williamsburg sartorial tote bag distillery Portland before
                         they sold out gastropub taxidermy Vice." />
       <phrase id="jan12" value="Jueves, Enero 12th 2019 11:30 AM" />
-      <phrase id="day4" value="Dia  4 Envolver" />
-      <phrase id="almuerzzo" value="Únase a nosotros para almorzar en el café de Bootsy frente al Campus Central." />
-      <phrase id="jan9" value="Enero 9th 2019 7:00 AM" />
-      <phrase id="jan10" value="Enero 10th 2019 8:30 AM" />
-      <phrase id="signup" value="Regístrese para las lecciones y los ponentes que coincidan con el programa de su curso. Conozca y salude a los instructores." />
-      <phrase id="jan11" value="Enero 11th 2019 8:30 AM" />
-      <phrase id="bicicle" value="Shoreditch vegan artisan Helvetica. Tattooed Codeply Echo Park Godard kogi, next level irony ennui twee squid fap selvage. Meggings flannel Brooklyn literally small batch, mumblecore PBR try-hard kale chips. Brooklyn vinyl lumbersexual
+      <phrase id="day4" value = "Enveloppement du jour 4"/>
+      <phrase id="almuerzzo" value = "Rejoignez-nous pour déjeuner au Bootsy's Cafe en face du campus central." />
+      <phrase id = "jan9" value = "Janvier 9th 2019 07:00 AM" />
+       <phrase id = "jan10" value = "10 janvier 2019 08:30" />
+       <phrase id = "signup" value = "Inscrivez-vous à des cours et à des conférenciers qui correspondent à votre programme de cours. Rencontrez et saluez les instructeurs." />
+       <phrase id = "jan11" value = "11 janvier 2019 08:30" /><phrase id="bicicle" value="Shoreditch vegan artisan Helvetica. Tattooed Codeply Echo Park Godard kogi, next level irony ennui twee squid fap selvage. Meggings flannel Brooklyn literally small batch, mumblecore PBR try-hard kale chips. Brooklyn vinyl lumbersexual
                         bicycle rights, viral fap cronut leggings squid chillwave pickled gentrify mustache." />
     </table>
     <table id="tipo_view">
-      <phrase id="titulo" value="Titulo" />
-      <phrase id="esr" value="Ejercicio de Simulación de Respuesta a " />
-      <phrase id="pais" value="Pais" />
-      <phrase id="fech" value="Fecha" />
-      <phrase id="descrip" value="Descripcion" />
-      <phrase id="grups" value="Grupos" />
-      <phrase id="partic" value="Participantes" />
-      <phrase id="conclu" value="Concluciones" />
+      <phrase id="titulo" value="Titre" />
+      <phrase id="esr" value="Réponse à l'exercice de simulation" />
+      <phrase id="pais" value="Pays" />
+      <phrase id="fech" value="Date" />
+      <phrase id="descrip" value="description" />
+      <phrase id="grups" value="groupes" />
+      <phrase id="partic" value="participants" />
+      <phrase id="conclu" value="Conclusion" />
     </table>
     <table id="notica">
-      <phrase id="titulo" value="Actualizar Div sin consultar la página por completo" />
+      <phrase id="titulo" value = "Mettre à jour Div sans consulter complètement la page" />
     </table>
     <table id="menu_contenedor">
-      <phrase id="grupo" value="Grupos" />
-      <phrase id="subgrupo" value="SubGrupo" />
-      <phrase id="tareas" value="Tareas" />
-      <phrase id="mensajes" value="Mensajes" />
+      <phrase id="grupo" value="groupes" />
+      <phrase id="subgrupo" value="sous-groupe" />
+      <phrase id="tareas" value="Corvées" />
+      <phrase id="mensajes" value="organisateur" />
     </table>
     <table id="permisosDocAdd">
       <phrase id="dc" value="Documento compartido" />
-      <phrase id="archivo" value="Archivo" />
-      <phrase id="fc" value="Fecha de Creación" />
+      <phrase id="archivo" value="fichier" />
+      <phrase id="fc" value="Date de Creación" />
     </table>
     <table id="sendEMail2List">
       <phrase id="carpeta" value="Carpeta" />
-      <phrase id="recibidos" value="Recibidos" />
-      <phrase id="enviados" value="Enviados" />
+      <phrase id="recibidos" value="A reçu" />
+      <phrase id="enviados" value="Envoyé" />
       <phrase id="xxxs" value="xxxs" />
-      <phrase id="busca_solucion" value="Tratando de encontrar una solución a este problema ..." />
+      <phrase id="busca_solucion" value="Essayer de trouver une solution à ce problème ..." />
     </table>
     <table id="leermsg">
-      <phrase id="hola_mundo" value="Hola,mundo!" />
+      <phrase id="hola_mundo" value = "Bonjour tout le monde !" />
       <phrase id="de" value="De:" />
-      <phrase id="leer_correo" value="Leer Correo" />
-      <phrase id="replicar" value="Replicar" />
-      <phrase id="reenviar" value="Reenviar" />
+      <phrase id="leer_correo" value = "Lire le courrier" />
+      <phrase id="replicar" value = "Répliquer" />
+      <phrase id="reenviar" value="Renvoyer" />
     </table>
      <table id="kanban">
-      <phrase id="titulo" value="Tarjetas de arrastrar y soltar similares a Trello para software de gestión de proyectos" />
+      <phrase id="titulo" value = "Faire glisser et déposer des cartes similaires à Trello pour les logiciels de gestion de projet" />
     
     </table>
     <table id="tipo">
-      <phrase id="tblcaption" value="tipo" />
+      <phrase id="tblcaption" value="Type" />
       <field id="id_tipo">
-        <phrase id="fldcaption" value="id tipo" />
+        <phrase id="fldcaption" value="id type" />
       </field>
       <field id="tipo_es">
-        <phrase id="fldcaption" value="tipo es" />
+        <phrase id="fldcaption" value="Type es" />
       </field>
       <field id="tipo_en">
-        <phrase id="fldcaption" value="tipo en" />
+        <phrase id="fldcaption" value="Type en" />
       </field>
     </table>
     <table id="todos">
-      <phrase id="tblcaption" value="todos" />
+      <phrase id="tblcaption" value="Tout le monde" />
       <field id="id">
         <phrase id="fldcaption" value="id" />
       </field>
       <field id="nombres">
-        <phrase id="fldcaption" value="nombres" />
+        <phrase id="fldcaption" value="nom" />
       </field>
     </table>
     <table id="user_email">
-      <phrase id="tblcaption" value="user email" />
+      <phrase id="tblcaption"value="utilisateurs e-mail" />
       <field id="id_user_email">
         <phrase id="fldcaption" value="id user email" />
       </field>
       <field id="status">
-        <phrase id="fldcaption" value="status" />
+        <phrase id="fldcaption" value="statut" />
       </field>
       <field id="id_email">
         <phrase id="fldcaption" value="id email" />
       </field>
       <field id="id_user_remitente">
-        <phrase id="fldcaption" value="id user remitente" />
+        <phrase id="fldcaption" value="id utilisateur expéditeur" />
       </field>
       <field id="id_user_destinatario">
-        <phrase id="fldcaption" value="id user destinatario" />
+        <phrase id="fldcaption" value="id destinataire expéditeur" />
       </field>
       <field id="id_mensaje">
-        <phrase id="fldcaption" value="id mensaje" />
+        <phrase id="fldcaption" value="id message" />
       </field>
     </table>
     <table id="userlevelpermissions">
@@ -2904,58 +2903,58 @@
       </field>
     </table>
     <table id="users">
-      <phrase id="tblcaption" value="users" />
+      <phrase id="tblcaption" value="Utilisateurs" />
       <field id="id_users">
-        <phrase id="fldcaption" value="id users" />
+        <phrase id="fldcaption" value="id utilisateurs" />
       </field>
       <field id="escenario">
-        <phrase id="fldcaption" value="excon subgrupo" />
+        <phrase id="fldcaption" value="excon sous-groupe" />
       </field>
       <field id="grupo">
-        <phrase id="fldcaption" value="grupo" />
+        <phrase id="fldcaption" value="grouper" />
       </field>
       <field id="subgrupo">
-        <phrase id="fldcaption" value="subgrupo" />
+        <phrase id="fldcaption" value="sous-groupe" />
       </field>
       <field id="perfil">
-        <phrase id="fldcaption" value="perfil" />
+        <phrase id="fldcaption" value="profil" />
       </field>
       <field id="nombres">
-        <phrase id="fldcaption" value="nombres" />
+        <phrase id="fldcaption" value="nom" />
       </field>
       <field id="apellidos">
-        <phrase id="fldcaption" value="apellidos" />
+        <phrase id="fldcaption" value="noms de famille" />
       </field>
       <field id="pais">
-        <phrase id="fldcaption" value="pais" />
+        <phrase id="fldcaption" value="Pays" />
       </field>
       <field id="_email">
-        <phrase id="fldcaption" value="email" />
+        <phrase id="fldcaption" value="e-mail" />
       </field>
       <field id="fecha">
-        <phrase id="fldcaption" value="fecha" />
+        <phrase id="fldcaption" value="Date" />
       </field>
       <field id="telefono">
-        <phrase id="fldcaption" value="telefono" />
+        <phrase id="fldcaption" value = "Téléphone" />
       </field>
       <field id="pw">
         <phrase id="fldcaption" value="pw" />
       </field>
       <field id="estado">
-        <phrase id="fldcaption" value="estado" />
+        <phrase id="fldcaption" value="Etat" />
         <phrase id="fldtagvalue1" value="1" />
-        <phrase id="fldtagcaption1" value="Activo" />
+        <phrase id="fldtagcaption1" value = "actif" />
         <phrase id="fldtagvalue2" value="2" />
-        <phrase id="fldtagcaption2" value="Inactivo" />
+        <phrase id="fldtagcaption2" value = "inactif" />
       </field>
       <field id="horario">
-        <phrase id="fldcaption" value="horario" />
+        <phrase id="fldcaption" value = "calendrier" />
       </field>
       <field id="limite">
         <phrase id="fldcaption" value="limite" />
       </field>
       <field id="organizacion">
-        <phrase id="fldcaption" value="organizacion" />
+        <phrase id="fldcaption" value = "organisation" />
       </field>
       <field id="img_user">
         <phrase id="fldcaption" value="img user" />
@@ -2963,30 +2962,30 @@
     </table>
     <table id="valida" />
     <table id="view_compartidos">
-      <phrase id="tblcaption" value="view compartidos" />
+      <phrase id="tblcaption" vvalue="vue partagé" />
       <field id="tipo">
-        <phrase id="fldcaption" value="tipo" />
+        <phrase id="fldcaption" value="Type" />
       </field>
       <field id="id_file">
-        <phrase id="fldcaption" value="id file" />
+        <phrase id="fldcaption" value="id Tâche" />
       </field>
       <field id="tipo_permiso">
-        <phrase id="fldcaption" value="tipo permiso" />
+        <phrase id="fldcaption" value="type de permis" />
       </field>
       <field id="id_users">
-        <phrase id="fldcaption" value="id users" />
+        <phrase id="fldcaption" value="id utilisateurs" />
       </field>
       <field id="date_created">
-        <phrase id="fldcaption" value="date created" />
+        <phrase id="fldcaption" value="idate créée" />
       </field>
     </table>
     <table id="view_evento_asociado">
-      <phrase id="tblcaption" value="view evento asociado" />
+      <phrase id="tblcaption" value="voir l'événement associé" />
       <field id="id_incidente">
-        <phrase id="fldcaption" value="id incidente" />
+        <phrase id="fldcaption" value="id incident" />
       </field>
       <field id="id_tipo">
-        <phrase id="fldcaption" value="id tipo" />
+        <phrase id="fldcaption" value="id type" />
       </field>
       <field id="inc_es">
         <phrase id="fldcaption" value="inc es" />
@@ -2996,75 +2995,75 @@
       </field>
     </table>
     <table id="imboxMailList">
-      <phrase id="carpetas" value="Folder" />
-      <phrase id="env" value="Enviados" />
-      <phrase id="rec" value="Recibidos" />
-      <phrase id="leermens" value="Leer Mensaje" />
-      <phrase id="suj" value="Sujeto:" />
+      <phrase id="carpetas" value="dossier" />
+      <phrase id="env" value="Envoyé" />
+      <phrase id="rec" value="A reçu" />
+      <phrase id="leermens" value="Lire les messages" />
+      <phrase id="suj" value="matière:" />
       <phrase id="de" value="De:" />
-      <phrase id="res" value="Responder" />
-      <phrase id="reenv" value="Reenviar" />
+      <phrase id="res" value="Répondre" />
+      <phrase id="reenv" value="Renvoyer" />
     </table>
     <table id="imboxMailView">
-      <phrase id="actualizar" value="Actualizar Div sin consultar la página por completo " />
+      <phrase id="actualizar" value="Mettre à jour Div sans consulter complètement la page" />
       <phrase id="carpetas" value="Folders" />
-      <phrase id="env" value="Enviados" />
-      <phrase id="rec" value="Recibidos" />
-      <phrase id="leermens" value="Leer Mensaje" />
-      <phrase id="suj" value="Sujeto:" />
+      <phrase id="env" value="Envoyé" />
+      <phrase id="rec" value="A reçu" />
+      <phrase id="leermens" value="Lire les messages" />
+      <phrase id="suj" value="matière:" />
       <phrase id="de" value="De:" />
-      <phrase id="res" value="Responder" />
-      <phrase id="reenv" value="Reenviar" />
+      <phrase id="res" value="Répondre" />
+      <phrase id="reenv" value="Renvoyer" />
     </table>
     <table id="view_from">
-      <phrase id="tblcaption" value="view from" />
+      <phrase id="tblcaption" value="Vue de" />
       <field id="nombre_agrupacion">
-        <phrase id="fldcaption" value="nombre agrupacion" />
+        <phrase id="fldcaption" value="nom  agrupacion" />
       </field>
       <field id="id">
         <phrase id="fldcaption" value="id" />
       </field>
       <field id="escenario">
-        <phrase id="fldcaption" value="escenario" />
+        <phrase id="fldcaption" value="organisateur" />
       </field>
       <field id="tipo">
-        <phrase id="fldcaption" value="tipo" />
+        <phrase id="fldcaption" value="Type" />
       </field>
       <field id="idgrupo">
-        <phrase id="fldcaption" value="idgrupo" />
+        <phrase id="fldcaption" value="idgroupe" />
       </field>
       <field id="idsubgrupo">
-        <phrase id="fldcaption" value="idsubgrupo" />
+        <phrase id="fldcaption" value="idssous-groupe" />
       </field>
     </table>
     <table id="view_user_msg">
-      <phrase id="tblcaption" value="view user msg" />
+      <phrase id="tblcaption" value="voir l'utilisateur msg" />
       <field id="file_name">
-        <phrase id="fldcaption" value="file name" />
+        <phrase id="fldcaption" value="nom de fichier" />
       </field>
       <field id="id_file">
-        <phrase id="fldcaption" value="id file" />
+        <phrase id="fldcaption" value="id Tâche" />
       </field>
       <field id="id_usuario">
-        <phrase id="fldcaption" value="user id" />
+        <phrase id="fldcaption" value="utilisateur id" />
       </field>
       <field id="grupo">
-        <phrase id="fldcaption" value="grupo" />
+        <phrase id="fldcaption" value="grouper" />
       </field>
     </table>
     <table id="vista_doc">
-      <phrase id="tblcaption" value="vista doc" />
+      <phrase id="tblcaption" value="vue doc" />
       <field id="id_file">
-        <phrase id="fldcaption" value="id file" />
+        <phrase id="fldcaption" value="id Tâche" />
       </field>
       <field id="perfil">
-        <phrase id="fldcaption" value="perfil" />
+        <phrase id="fldcaption" value="profil" />
       </field>
       <field id="escenario">
-        <phrase id="fldcaption" value="escenario" />
+        <phrase id="fldcaption" value="organisateur" />
       </field>
       <field id="file_name">
-        <phrase id="fldcaption" value="file name" />
+        <phrase id="fldcaption" value="nom de fichier" />
       </field>
     </table>
   </project>
