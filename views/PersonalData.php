@@ -117,19 +117,24 @@ else
                 <h3 class="profile-username text-center"><?php echo $User." ". $ape  ?></h3>
 
                 <p class="text-muted text-center"><?php echo $UserP  ?></p>
-
+                <?php
+                $grupo= $Language->phrase("grupo");
+                $subgrupo= $Language->phrase("subgrupo");
+                $email= $Language->phrase("email");
+                $pais= $Language->phrase("pais");
+                ?>
                 <ul class="list-group list-group-unbordered mb-3">
                   <li class="list-group-item">
-                    <b>Grupo: <?php echo $UserGrd  ?></p></b> 
+                    <b><?php echo $grupo  ?>: <?php echo $UserGrd  ?></p></b> 
                   </li>
                   <li class="list-group-item">
-                    <b>Subgrupo: <em> <?php echo $Usersubg[0];  ?></em></b>  
+                    <b><?php echo $subgrupo  ?>: <em> <?php echo $Usersubg[0];  ?></em></b>  
                   </li>
                   <li class="list-group-item">
-                    <b>Email: <em> <?php echo $mail  ?></em></b> 
+                    <b><?php echo $email  ?>: <em> <?php echo $mail  ?></em></b> 
                   </li>
                   <li class="list-group-item">
-                    <b>País: <em> <?php echo $coutry[2]." / ". $coutry[4]   ?></em></b> 
+                    <b><?php echo $pais  ?>: <em> <?php echo $coutry[2]." / ". $coutry[4]   ?></em></b> 
                   </li>
 
                 </ul>

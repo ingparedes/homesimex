@@ -38,6 +38,11 @@ $TableroExcon = &$Page;
     font-size: 12px;
   }
 </style>
+<?php 
+$inicieBd=$Language->phrase("inicie_Bd"); 
+$falloJson=$Language->phrase("falloJson"); 
+$errorJson=$Language->phrase("errorJson"); 
+?>
 <script type="text/javascript" src="//unpkg.com/vis-timeline@latest/standalone/umd/vis-timeline-graph2d.min.js"></script>
     <link href="//unpkg.com/vis-timeline@latest/styles/vis-timeline-graph2d.min.css" rel="stylesheet" type="text/css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.js"></script>
@@ -128,11 +133,11 @@ $TableroExcon = &$Page;
         console.log("Error", err);
         if (err.status === 0) {
           alert(
-            "Fallo al abrir ."
-          );
-        } else {
-          alert("No se pudo abrir .");
-        }
+              "<?php echo $falloJson; ?>"
+            );
+          } else {
+            alert("<?php echo $errorJson; ?>");
+          }
       },
     });
   </script>
@@ -158,8 +163,7 @@ $TableroExcon = &$Page;
   elseif ($sql[0] == 3){
     $perfil = 2;  }
   
-
-
+    $cargando=$Language->phrase("cargando"); 
   
 
   ?>
@@ -177,7 +181,7 @@ $TableroExcon = &$Page;
       </div>
 
       <div id="visualization"></div>
-    <div id="loading">loading...</div>
+    <div id="loading"><?php echo $cargando; ?>...</div>
 
 
     </div>

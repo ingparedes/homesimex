@@ -259,9 +259,12 @@ loadjs.ready("head", function() {
     ew.addEventHandlers("subgrupo");
 });
 </script>
+<?php
+    $nuevo_subgrupo= $Language->phrase("nuevo_subgrupo");
+?>
 <script>
 loadjs.ready("load", function () {
     // Startup script
-    $("label#elh_subgrupo_nombre_subgrupo").remove(),$("label#elh_subgrupo_id_grupo").remove(),$("label#elh_subgrupo_descripcion_subgrupo").remove(),$("label#elh_subgrupo_imagen_subgrupo").remove(),$("label#elh_subgrupo_participante").remove(),$("label#elh_subgrupo_exon_subgrupo").remove(),$("#r_id_escenario").removeClass("form-group row").addClass("form-group"),$("#r_id_grupo").removeClass("form-group row").addClass("form-group"),$("#r_nombre_subgrupo").removeClass("form-group row").addClass("form-group"),$("#r_imagen_subgrupo").removeClass("form-group row").addClass("form-group"),$("#r_participante").removeClass("form-group row").addClass("form-group"),$("#r_descripcion_subgrupo").removeClass("form-group row").addClass("form-group"),$("h4").text("Nuevo subgrupo");
+    $("label#elh_subgrupo_nombre_subgrupo").remove(),$("label#elh_subgrupo_id_grupo").remove(),$("label#elh_subgrupo_descripcion_subgrupo").remove(),$("label#elh_subgrupo_imagen_subgrupo").remove(),$("label#elh_subgrupo_participante").remove(),$("label#elh_subgrupo_exon_subgrupo").remove(),$("#r_id_escenario").removeClass("form-group row").addClass("form-group"),$("#r_id_grupo").removeClass("form-group row").addClass("form-group"),$("#r_nombre_subgrupo").removeClass("form-group row").addClass("form-group"),$("#r_imagen_subgrupo").removeClass("form-group row").addClass("form-group"),$("#r_participante").removeClass("form-group row").addClass("form-group"),$("#r_descripcion_subgrupo").removeClass("form-group row").addClass("form-group"),$("h4").text("<?php echo $nuevo_subgrupo;  ?>");
 });
 </script>

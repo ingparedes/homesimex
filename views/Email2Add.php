@@ -288,10 +288,24 @@ loadjs.ready("head", function() {
     ew.addEventHandlers("email2");
 });
 </script>
+<?php
+  $Enviar= $Language->phrase("enviar");
+  $NuevoCorreo=$Language->phrase("nuevo_correo");
+  $MensajeReenviado=$Language->phrase("mensaje_reenviado");
+  $reenviar=$Language->phrase("reenviar");
+  $lafecha=$Language->phrase("lafecha");
+  $fecha=$Language->phrase("fecha");
+  $escribio=$Language->phrase("escribio");
+  $respuesta_mensaje=$Language->phrase("respuesta_mensaje");
+  $reenviar_mensaje=$Language->phrase("reenviar_mensaje");
+  $responder_mensaje=$Language->phrase("responder_mensaje");
+  $responder=$Language->phrase("responder");
+  $de=$Language->phrase("de");
+?>
 <script>
 loadjs.ready("load", function () {
     // Startup script
-    $("label#elh_email2_sender_userid").remove(),$("label#elh_email2_sujeto").remove(),$("label#elh_email2_mensaje").remove(),$("label#elh_email2_copy_sender").remove(),$("label#elh_email2_archivo").remove(),$("h4").text("Nuevo Correo");var a=ew.vars.v,fec=ew.vars.fecha,aped=ew.vars.ape,namep=ew.vars.nom,titulo=ew.vars.titles,cuerpo=ew.vars.bodys,idresponder=ew.vars.idm,idrenviar=ew.vars.re,Idmsg=ew.vars.msg,Idreen=ew.vars.reemsg,idm=ew.vars.idmsgs;if(void 0!==idrenviar&&idrenviar&&($("#x_sujeto").val("Fwd: "+titulo),$('h1').text("Reenviar"),$("#x_mensaje").html("<br><br> ---------- Forwarded message --------- <br> De: "+namep+" "+aped+"<br> Fecha: "+fec+"<br>"+cuerpo)),void 0!==idresponder&&idresponder){var archivo=ew.vars.arch,remi=ew.vars.remitente;$("#x_sujeto").val("Re: "+titulo), $('h1').text("Responder"),$("#x_mensaje").html("La Fecha "+fec+" <strong>"+namep+" "+aped+" </strong> Escribió: <br>----------"+cuerpo)}void 0!==Idmsg&&Idmsg&&($("#x_sujeto").val("Re: "+titulo), $('h1').text("Responder mensaje"),$("#x_mensaje").html("<br> <br>---------- Respuesta Mensajes --------- <br> "+titulo+"<br> "+cuerpo+"<br> -------------------------------------------<br>")),void 0!==Idreen&&Idreen&&($("#x_sujeto").val("Fwd: "+titulo),$('h1').text("Reenviar"),$("#x_mensaje").html("<br> <br>---------- Reenviar mensaje --------- <br> "+titulo+"<br> "+cuerpo+"<br> -------------------------------------------<br>")),$("#x_id_mensaje").val(idm),$("#btn-action").html("Enviar"),$(".ew-submit").html("Enviar");
+    $("label#elh_email2_sender_userid").remove(),$("label#elh_email2_sujeto").remove(),$("label#elh_email2_mensaje").remove(),$("label#elh_email2_copy_sender").remove(),$("label#elh_email2_archivo").remove(),$("h4").text("<?php echo $NuevoCorreo; ?>");var a=ew.vars.v,fec=ew.vars.fecha,aped=ew.vars.ape,namep=ew.vars.nom,titulo=ew.vars.titles,cuerpo=ew.vars.bodys,idresponder=ew.vars.idm,idrenviar=ew.vars.re,Idmsg=ew.vars.msg,Idreen=ew.vars.reemsg,idm=ew.vars.idmsgs;if(void 0!==idrenviar&&idrenviar&&($("#x_sujeto").val("Fwd: "+titulo),$('h1').text("<?php echo $reenviar; ?>"),$("#x_mensaje").html("<br><br> ---------- <?php echo $MensajeReenviado; ?> --------- <br> De: "+namep+" "+aped+"<br> <?php echo $fecha; ?>: "+fec+"<br>"+cuerpo)),void 0!==idresponder&&idresponder){var archivo=ew.vars.arch,remi=ew.vars.remitente;$("#x_sujeto").val("Re: "+titulo), $('h1').text("<?php echo $responder; ?>"),$("#x_mensaje").html("<?php echo $lafecha; ?> "+fec+" <strong>"+namep+" "+aped+" </strong> <?php echo $escribio; ?>: <br>----------"+cuerpo)}void 0!==Idmsg&&Idmsg&&($("#x_sujeto").val("Re: "+titulo), $('h1').text("<?php echo $responder_mensaje; ?>"),$("#x_mensaje").html("<br> <br>---------- <?php echo $respuesta_mensaje; ?> --------- <br> "+titulo+"<br> "+cuerpo+"<br> -------------------------------------------<br>")),void 0!==Idreen&&Idreen&&($("#x_sujeto").val("Fwd: "+titulo),$('h1').text("<?php echo $reenviar; ?>"),$("#x_mensaje").html("<br> <br>---------- <?php echo $reenviar_mensaje; ?> --------- <br> "+titulo+"<br> "+cuerpo+"<br> -------------------------------------------<br>")),$("#x_id_mensaje").val(idm),$("#btn-action").html("<?php echo $Enviar; ?>"),$(".ew-submit").html("<?php echo $Enviar; ?>");
 
 });
 </script>

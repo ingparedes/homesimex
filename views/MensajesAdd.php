@@ -429,10 +429,17 @@ loadjs.ready("head", function() {
     ew.addEventHandlers("mensajes");
 });
 </script>
+<?php
+$nuevo= $Language->phrase("nuevo");
+$mensaje= $Language->phrase("mensaje");
+$grabar_nuevo=$Language->phrase("grabar_nuevo");
+?>
 <script>
 loadjs.ready("load", function () {
     // Startup script
-    $('h1').html("<span class='text-muted'>Nuevo</span> mensaje");
-    $("<input>").attr({id:"bnt1",name:"xxxx",value:"",type:"hidden"}).appendTo("form"),$("#btn-action").after('&nbsp; <button class="btn btn-info ew-btn"  name="btn" id="btn" type="submit"  onclick="this.form.xxxx.value=1"> Grabar y nuevo </button>');
+    $('h1').html("<span class='text-muted'><?php echo $nuevo; ?></span> <?php echo $mensaje; ?>");
+    $("<input>").attr({id:"bnt1",name:"xxxx",value:"",type:"hidden"}).appendTo("form"),$("#btn-action").
+    after('&nbsp; <button class="btn btn-info ew-btn"  name="btn" id="btn" type="submit"  
+    onclick="this.form.xxxx.value=1"> <?php echo $nuevo; ?> </button>');
 });
 </script>

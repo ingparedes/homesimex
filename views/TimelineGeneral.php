@@ -537,7 +537,21 @@ INNER JOIN paisgmt as pu on pu.id_zone = users.pais");
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert@1.1.3/dist/sweetalert.min.js"></script>
+
   <link href="https://cdn.jsdelivr.net/npm/sweetalert@1.1.3/dist/sweetalert.css" rel="stylesheet" type="text/css"/>
+  <?php 
+    $inicieBd=$Language->phrase("inicie_Bd"); 
+    $falloJson=$Language->phrase("falloJson"); 
+    $errorJson=$Language->phrase("errorJson"); 
+    $tarea=$Language->phrase("tarea"); 
+    $titulo_tarea=$Language->phrase("titulo_tarea"); 
+    $descripcion_tarea=$Language->phrase("descripcion_tarea"); 
+    $crear_mensaje=$Language->phrase("crear_mensaje"); 
+    $titulo_mensaje=$Language->phrase("titulo_mensaje"); 
+    $descripcion_mensaje=$Language->phrase("descripcion_mensaje"); 
+    $editar_mensaje=$Language->phrase("editar_mensaje"); 
+    $mensaje=$Language->phrase("mensaje"); 
+?>
     <script>
         var btnLoad = document.getElementById('load');
         var btnSave = document.getElementById('save');
@@ -617,7 +631,7 @@ INNER JOIN paisgmt as pu on pu.id_zone = users.pais");
                 url: "dts_notifica.php?accion=loadTL&pg=Grupo&idEscenario=" + esc,
                 success: function(data) {
                     if (data == 'baduser') {
-                        alert("Usuario Maestro, inicie sesión con usuario de la BD");
+                        alert("<?php echo $inicieBd; ?>");
                     } else {
                         document.getElementById("loading").style.display = "none";
                         var container = document.getElementById("visualization");
@@ -791,8 +805,8 @@ INNER JOIN paisgmt as pu on pu.id_zone = users.pais");
                                         
                                         if (tipo == 'M') {
                                             $('#id_tarea').val(data[0].id_tarea);
-                                            $('#modalLongTitle').html(" Editar Mensaje");
-                                            $('#editMsg').html("Editar mensaje");
+                                            $('#modalLongTitle').html(" <?php echo $editar_mensaje; ?>);
+                                            $('#editMsg').html("<?php echo $editar_mensaje; ?> ");
                                             boton.onclick = AbrirEdicionMensaje;
                                            // boton.onclick = v_modalEditMensaje; 
                                             BotonGuardar.onclick = editMensajeBD;
@@ -850,10 +864,10 @@ INNER JOIN paisgmt as pu on pu.id_zone = users.pais");
                     console.log("Error", err);
                     if (err.status === 0) {
                         alert(
-                            "Fallo al abrir JSON ."
+                            "<?php echo $falloJson; ?>"
                         );
                     } else {
-                        alert("No se pudo abrir JSON .");
+                        alert("<?php echo $errorJson; ?> .");
                     }
                 },
             });

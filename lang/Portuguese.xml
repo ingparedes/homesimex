@@ -915,6 +915,12 @@
     <phrase id="500desc" value="Condição inesperada encontrada impedindo o servidor de atender à solicitação." />
     <phrase id="501" value="Not Implemented" />
     <phrase id="501desc" value="O servidor não suporta a funcionalidade necessária para atender à solicitação." />
+     <!--NUEVOS-->
+    <phrase id="enviar" value="Mandar" />
+    
+   
+    
+    <!--NUEVOS-->
   </global>
   <project>
     <phrase id="bodytitle" value="SIMEXAMERICA" />

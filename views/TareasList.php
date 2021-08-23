@@ -496,10 +496,13 @@ loadjs.ready("head", function() {
     ew.addEventHandlers("tareas");
 });
 </script>
+<?php
+$sinecesita=$Language->phrase("sinecesita"); 
+?>
 <script>
 loadjs.ready("load", function () {
     // Startup script
-    $("#r_icon_escenario").hide(),$("#r_fechacreacion_escenario").hide(),$("#r_incidente").hide(),$("#r_entrar").hide(),$("#ftareaslistsrch").before('<div class="callout callout-primary"><em>Si necesita realizar filtro al siguiente lista por favor seleccione uno o varios grupos y por ultimo clics en el  botón buscar.</em></div>');
+    $("#r_icon_escenario").hide(),$("#r_fechacreacion_escenario").hide(),$("#r_incident").hide(),$("#r_entrar").hide(),$("#ftareaslistsrch").before('<div class="callout callout-primary"><em><?php echo $sinecesita; ?></em></div>');
 });
 </script>
 <?php } ?>

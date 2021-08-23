@@ -267,10 +267,14 @@ loadjs.ready("head", function() {
     ew.addEventHandlers("permisos_doc");
 });
 </script>
+<?php
+$documentos= $Language->phrase("documentos");
+$compartir= $Language->phrase("compartir");
+?>
 <script>
 loadjs.ready("load", function () {
     // Startup script
-    $('#ew-page-caption').html("Documentos");
-    $("#btn-action").html("Compartir");
+    $('#ew-page-caption').html("<?php echo $documentos; ?>");
+    $("#btn-action").html("<?php echo $compartir; ?>");
 });
 </script>

@@ -520,6 +520,19 @@ WHERE users.id_users = '" . CurrentUserID() . "';");
             </div>
         </div>
     </div>
+    <?php 
+$inicieBd=$Language->phrase("inicie_Bd"); 
+$falloJson=$Language->phrase("falloJson"); 
+$errorJson=$Language->phrase("errorJson"); 
+$tarea=$Language->phrase("tarea"); 
+$titulo_tarea=$Language->phrase("titulo_tarea"); 
+$descripcion_tarea=$Language->phrase("descripcion_tarea"); 
+$crear_mensaje=$Language->phrase("crear_mensaje"); 
+$titulo_mensaje=$Language->phrase("titulo_mensaje"); 
+$descripcion_mensaje=$Language->phrase("descripcion_mensaje"); 
+$editar_mensaje=$Language->phrase("editar_mensaje"); 
+$mensaje=$Language->phrase("mensaje"); 
+?>
     <script>
     class Arrow {
 
@@ -763,7 +776,7 @@ removeArrowbyItemId(id) {
                 url: "dts_notifica.php?accion=loadTL&pg=excon",
                 success: function(data) {
                     if (data == 'baduser') {
-                        alert("Usuario Maestro, inicie sesión con usuario de la BD");
+                        alert(" <?php echo $inicieBd; ?>");
                     } else {
                         
                         document.getElementById("loading").style.display = "none";
@@ -949,10 +962,10 @@ removeArrowbyItemId(id) {
                                         
                                         if (tipo == 'M') {
                                             $('#id_tarea').val(data[0].id_tarea);
-                                            $('#modalLongTitle').html("Mensaje");
-                                            $('#titulo').html("Título del mensaje");
-                                            $('#descripcion').html("Descripción del mensaje");
-                                            $('#editMsg').html("Editar mensaje");
+                                            $('#modalLongTitle').html("<?php echo $mensaje;?>");
+                                            $('#titulo').html("<?php echo $titulo_mensaje;?>");
+                                            $('#descripcion').html("<?php echo $descripcion_mensaje;?>");
+                                            $('#editMsg').html("<?php echo $editar_mensaje;?>");
                                             boton.onclick = AbrirEdicionMensaje; 
                                             BotonGuardar.onclick = editMensajeBD;
                                            // $('#editMsg').click(function(){
@@ -981,14 +994,14 @@ removeArrowbyItemId(id) {
                                         } else {
                                             boton.onclick =AbrirCrearMensajee;
                                             BotonGuardar.onclick = addMensaje;
-                                            $('#modalLongTitle').html("Tarea");
-                                            $('#titulo').html("Título de la tarea");
-                                            $('#descripcion').html("Descripción de la tarea");
+                                            $('#modalLongTitle').html("<?php echo $tarea;?>");
+                                            $('#titulo').html("<?php echo $titulo_tarea;?>");
+                                            $('#descripcion').html("<?php echo $descripcion_tarea;?>");
                                             $('#idTarea').val(id);
                                             $('#e_id_tarea').val(id);
                                             $('#valorar').show();
                                             $('#ulmjs').show();
-                                            $('#editMsg').html("Crear mensaje");
+                                            $('#editMsg').html("<?php echo $crear_mensaje;?>");
                                             
                                             
                                            // $('#BotonGuardar').click(function(){
@@ -1010,11 +1023,11 @@ removeArrowbyItemId(id) {
                     console.log("Error", err);
                     if (err.status === 0) {
                         alert(
-                            "Fallo al abrir JSON ."
+                        "<?php echo $falloJson; ?>"
                         );
                     } else {
-                        alert("No se pudo abrir JSON .");
-                    }
+                        alert("<?php echo $errorJson; ?>");
+          }
                 },
             });
             // ####### HASTA ACÁ ####### 

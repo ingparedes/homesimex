@@ -101,11 +101,20 @@ $TableroParticipante = &$Page;
 
 
   ?>
+ <?php 
+      $cargando=$Language->phrase("cargando");  
+      $visualizacion_datos=$Language->phrase("visualizacion_datos");  
+      $tablero_control=$Language->phrase("tablero_control");  
+      $descripcion=$Language->phrase("descripcion");  
+      $nuevo_subgrupo=$Language->phrase("nuevo_subgrupo");  
+      $titulo=$Language->phrase("titulo"); 
+      $cerrar=$Language->phrase("cerrar"); 
 
+      ?>
 
   <div class="card" id="update">
     <div class="card-header">
-      <h3 class="card-title">Tablero Control</h3>
+      <h3 class="card-title"><?php echo $tablero_control; ?></h3>
     </div>
     <div class="card-body">
 
@@ -139,9 +148,10 @@ $TableroParticipante = &$Page;
 
 
       </div>
+     
       <input type="button" id="load" value="&darr; Load" style="display:none">
       <div id="visualization"></div>
-    <div id="loading">loading...</div>
+    <div id="loading"><?php echo $cargando; ?>...</div>
 
 
     </div>
@@ -150,7 +160,7 @@ $TableroParticipante = &$Page;
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Visualización de Datos</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle"><?php echo $visualizacion_datos; ?></h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -160,17 +170,17 @@ $TableroParticipante = &$Page;
             <div class="form-group">
               <input type="text" class="form-control" id="id" hidden>
               <input type="text" class="form-control" id="tipo" hidden>
-              <label for="tituloT">Titulo </label>
+              <label for="tituloT"><?php echo $titulo; ?> </label>
               <input type="text" class="form-control" id="tituloT" placeholder="Título Tarea" value="" readonly>
             </div>
             <div class="form-group">
-              <label for="desc_tarea">Descripción </label>
+              <label for="desc_tarea"><?php echo $descripcion; ?> </label>
               <!-- <textarea class="form-control" id="desc_tarea" rows="3"></textarea> -->
               <div id="desc_tarea" class="border" contenteditable="false">
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo $cerrar; ?> </button>
               <!-- <button type="button" onclick="saveMsj()" class="btn btn-primary">Guardar</button> -->
             </div>
           </form>
@@ -184,7 +194,11 @@ $TableroParticipante = &$Page;
   <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.29.9.js"></script>
 <script src="inject/pubnub.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-
+<?php 
+$inicieBd=$Language->phrase("inicie_Bd"); 
+$falloJson=$Language->phrase("falloJson"); 
+$errorJson=$Language->phrase("errorJson"); 
+?>
   <script type="text/javascript">
     function url(cUrl) {
       var frame = $('#frmUrl');
@@ -250,7 +264,7 @@ var app = new Vue({
         //url: "basic.json",
         success: function(data) {
           if (data == 'baduser') {
-            alert("Usuario Maestro, inicie sesión con usuario de la BD");
+            alert("<?php echo $inicieBd; ?>");
           } else {
             document.getElementById("loading").style.display = "none";
 
@@ -333,10 +347,10 @@ var app = new Vue({
           console.log("Error", err);
           if (err.status === 0) {
             alert(
-              "Fallo al abrir JSON ."
+              "<?php echo $falloJson; ?>"
             );
           } else {
-            alert("No se pudo abrir JSON .");
+            alert("<?php echo $errorJson; ?>");
           }
         },
       });

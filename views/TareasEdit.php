@@ -434,10 +434,13 @@ loadjs.ready("head", function() {
     ew.addEventHandlers("tareas");
 });
 </script>
+<?php
+$editar=$Language->phrase("editar"); 
+?>
 <script>
 loadjs.ready("load", function () {
     // Startup script
-    $('h1').html("<span class='text-muted'>Editar</span> tarea");
+    $('h1').html("<span class='text-muted'><?php echo $editar; ?></span> tarea");
     
 });
 </script>

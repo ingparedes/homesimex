@@ -363,6 +363,11 @@ DATE_ADD(e.fechafinal_real,INTERVAL ((RIGHT(p.gmt,2)+60*MID(p.gmt,6,2)*1))-300  
 <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.29.9.js"></script>
 <script src="inject/pubnub.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/disableautofill@2.0.0/dist/disableautofill.min.js"></script>
+<?php 
+$inicieBd=$Language->phrase("inicie_Bd"); 
+$falloJson=$Language->phrase("falloJson"); 
+$errorJson=$Language->phrase("errorJson"); 
+?>
 <script type="text/javascript">
 //Time line 
 var btnLoad = document.getElementById('load');
@@ -379,7 +384,7 @@ var btnLoad = document.getElementById('load');
         //url: "basic.json",
         success: function(data) {
           if (data == 'baduser') {
-            alert("Usuario Maestro, inicie sesión con usuario de la BD");
+            alert(" <?php echo $inicieBd; ?>");
           } else {
             document.getElementById("loading").style.display = "none";
 
@@ -464,10 +469,10 @@ var btnLoad = document.getElementById('load');
           console.log("Error", err);
           if (err.status === 0) {
             alert(
-              "Fallo al abrir JSON ."
+              "<?php echo $falloJson; ?>"
             );
           } else {
-            alert("No se pudo abrir JSON .");
+            alert("<?php echo $errorJson; ?>");
           }
         },
       });

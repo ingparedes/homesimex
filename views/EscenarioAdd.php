@@ -518,8 +518,16 @@ loadjs.ready("load", function () {
     $('#r_icon_escenario').hide();
     //$('div').addClass('col-sm-10 form-group').removeClass('col-sm-10');
     $('h1').html("<span class='text-muted'>Nueva</span> simulación");
+    <?php
+    $justificacion_antecedentes= $Language->phrase("justificacion_antecedentes");
+    $propuesta_simulacion= $Language->phrase("propuesta_simulacion");
+    $objetivos_entrenamiento= $Language->phrase("objetivos_entrenamiento");
+    $escenarios= $Language->phrase("escenarios");
+    $grupo_objetivo= $Language->phrase("grupo_objetivo");
+    $metodologia= $Language->phrase("metodologia");
+     ?>
     <?php if (!CurrentPage()->IsCopy())  { ?>
-    $('#x_descripcion_escenario').val('<p><strong>1. Justificaci&oacute;n y antecedentes </strong></p><p>&nbsp;</p><p><strong>2. Prop&oacute;sito de la simulaci&oacute;n </strong></p><p>&nbsp;</p><p><strong>3. Objetivos de entrenamiento</strong></p><p>&nbsp;</p><p><strong>4. Escenarios</strong></p><p>&nbsp;</p><p><strong>5. </strong><strong>Grupos objetivos</strong></p><p>&nbsp;</p><p><strong>6. Metodolog&iacute;a</strong></p>');
-    <?php } ?>
+
+    $('#x_descripcion_escenario').val('<p><strong><?php echo $justificacion_antecedentes; ?> </strong></p><p>&nbsp;</p><p><strong><?php echo $propuesta_simulacion; ?> </strong></p><p>&nbsp;</p><p><strong><?php echo $objetivos_entrenamiento; ?></strong></p><p>&nbsp;</p><p><strong><?php echo $escenarios; ?></strong></p><p>&nbsp;</p><p><strong>5. </strong><strong><?php echo $grupo_objetivo; ?></strong></p><p>&nbsp;</p><p><strong><?php echo $metodologia; ?></strong></p>');<?php } ?>
 });
 </script>

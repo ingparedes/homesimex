@@ -921,6 +921,10 @@
     <phrase id="500desc" value="Unexpected condition encountered preventing server from fulfilling request." />
     <phrase id="501" value="Not Implemented" />
     <phrase id="501desc" value="The server does not support the functionality required to fulfill the request." />
+     <!--NUEVOS-->
+    
+    
+    <!--NUEVOS-->
   </global>
   <project>
     <phrase id="bodytitle" value="SIMEXAMERICA" />

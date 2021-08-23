@@ -418,10 +418,14 @@ loadjs.ready("head", function() {
     ew.addEventHandlers("mensajes");
 });
 </script>
+<?php
+$editar= $Language->phrase("editar");
+$mensaje= $Language->phrase("mensaje");
+?>
 <script>
 loadjs.ready("load", function () {
     // Startup script
     // Write your table-specific startup script here, no need to add script tags.
-    $('h1').html("<span class='text-muted'>Editar</span> Mensaje");
+    $('h1').html("<span class='text-muted'><?php echo $editar; ?></span> <?php echo $mensaje; ?>");
 });
 </script>

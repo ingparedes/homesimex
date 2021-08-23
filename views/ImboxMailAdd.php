@@ -297,9 +297,12 @@ loadjs.ready("head", function() {
     ew.addEventHandlers("imbox_mail");
 });
 </script>
+<?php
+  $Enviar= $Language->phrase("enviar");
+  ?>
 <script>
 loadjs.ready("load", function () {
     // Startup script
-    $(".ew-submit").html("Enviar");
+    $(".ew-submit").html("<?php echo $Enviar; ?>");
 });
 </script>

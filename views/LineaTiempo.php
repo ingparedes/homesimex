@@ -101,6 +101,11 @@ $LineaTiempo = &$Page;
             </div>
         </div>
     </div>
+    <?php 
+$inicieBd=$Language->phrase("inicie_Bd"); 
+$falloJson=$Language->phrase("falloJson"); 
+$errorJson=$Language->phrase("errorJson"); 
+?>
     <script>
         var btnLoad = document.getElementById('load');
         var btnSave = document.getElementById('save');
@@ -210,11 +215,9 @@ $LineaTiempo = &$Page;
                 error: function(err) {
                     console.log("Error", err);
                     if (err.status === 0) {
-                        alert(
-                            "Fallo al abrir JSON ."
-                        );
+                        alert("<?php echo $falloJson; ?>");
                     } else {
-                        alert("No se pudo abrir JSON .");
+                        alert("<?php echo $errorJson; ?>");
                     }
                 },
             });

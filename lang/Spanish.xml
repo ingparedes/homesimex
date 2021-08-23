@@ -266,6 +266,7 @@
     <phrase id="failedtosendmail" value="Falló al enviar correo electrónico. " />
     <phrase id="fieldname" value="Nombre del campo" />
     <phrase id="fieldrequiredindicator" class="fas fa-asterisk ew-required" />
+    
     <!-- v2019 -->
     <phrase id="filenotfound" value="Archivo no encontrado" />
     <phrase id="filter" value="Filtro" />
@@ -919,6 +920,69 @@
     <phrase id="500desc" value="Se encontró una condición inesperada que impide que el servidor complete la solicitud." />
     <phrase id="501" value="No Implementado" />
     <phrase id="501desc" value="El servidor no admite la funcionalidad requerida para cumplir con la solicitud." />
+    <!--NUEVOS-->
+    <phrase id="enviar" value="Enviar" />
+    <phrase id="nuevo_correo" value="Nuevo Correo" />
+    <phrase id="mensaje_reenviado" value="Mensaje Reenviado" />
+    <phrase id="reenviar" value="Reenviar" />
+    <phrase id="fecha" value="Fecha" />
+    <phrase id="lafecha" value="La fecha" />
+    <phrase id="escribio" value="Escribio" />
+    <phrase id="respuesta_mensaje" value="Respuesta mensaje" />
+    <phrase id="reenviar_mensaje" value="Reenviar mensaje" />
+    <phrase id="responder_mensaje" value="Responder mensaje" />
+    <phrase id="responder" value="Responder " />
+    <phrase id="de" value="De" />
+    <phrase id="justificacion_antecedentes" value="1. Justificaci&oacute;n y antecedentes " />
+    <phrase id="propuesta_simulacion" value="2. Prop&oacute;sito de la simulaci&oacute;n " />
+    <phrase id="objetivos_entrenamiento" value="3. Objetivos de entrenamiento " />
+    <phrase id="escenarios" value="4. Escenarios " />
+    <phrase id="grupo_objetivo" value="Grupos objetivos " />
+    <phrase id="metodologia" value="6. Metodolog&iacute;a " />
+    <phrase id="filtro_lista" value="Filtro para la lista de simulaciones,seleccione el estado de la simulación,  para buscar dar clics en el botón buscar Estado de la simulación: En configuración, Activa o Finalizada." />
+    <phrase id="inicie_Bd" value="Usuario Maestro, inicie sesión con usuario de la BD" />
+    <phrase id="falloJson" value="Fallo al abrir JSON ." />
+    <phrase id="errorJson" value="No se pudo abrir JSON" />
+    <phrase id="nuevo" value="Nuevo" />
+    <phrase id="mensaje" value="mensaje" />
+    <phrase id="grabar_nuevo" value="Grabar y Nuevo" />
+    <phrase id="editar" value="Editar" />
+    <phrase id="hora_local" value="Hora local del Usuario" />
+    <phrase id="hora_real" value="Hora real del país del ejercicio" />
+    <phrase id="hora_simulada" value="Hora Simulada" />
+    <phrase id="documentos" value="Documentos" />
+    <phrase id="compartir" value="Compartir" />
+    <phrase id="grupo" value="Grupo" />
+    <phrase id="subgrupo" value="Subgrupo" />
+    <phrase id="email" value="Email" />
+    <phrase id="pais" value="Pais" />
+    <phrase id="cargando" value="Cargando" />
+    <phrase id="visualizacion_datos" value="Visualización de datos" />
+    <phrase id="tablero_control" value="Tablero de control" />
+    <phrase id="descripcion" value="Descripción" />
+    <phrase id="nuevo_subgrupo" value="Nuevo Subgrupo" />
+    <phrase id="titulo" value="Titulo" />
+    <phrase id="cerrar" value="Cerrar" />
+    <phrase id="simulacion" value="Simulación" />
+    <phrase id="fir" value="Fecha inicio real" />
+    <phrase id="ffr" value="Fecha fin real" />
+    <phrase id="fis" value="Fecha inicio simulada" />
+    <phrase id="ffs" value="Fecha fin simulada" />
+    <phrase id="para" value="Para" />
+    <phrase id="sinecesita" value="Si necesita realizar filtro al siguiente lista por favor seleccione uno o varios grupos y por ultimo clics en el  botón buscar." />
+    <phrase id="tarea" value="Tarea" />
+    <phrase id="titulo_tarea" value="Titulo Tarea" />
+    <phrase id="descripcion_tarea" value="Descripción tarea" />
+    <phrase id="crear_mensaje" value="Crear mensaje" />
+    <phrase id="titulo_mensaje" value="Titulo Mensaje" />
+    <phrase id="descripcion_mensaje" value="Descripción Mensaje" />
+    <phrase id="editar_mensaje" value="Editar mensaje" />
+    <phrase id="participantes" value="Participantes" />
+    <phrase id="emails" value="Emails" />
+    <phrase id="grupo" value="Grupo" />
+    
+    
+    <!--NUEVOS-->
   </global>
   <project>
     <phrase id="bodytitle" value="SIMEXAMERICA" />
@@ -1942,6 +2006,10 @@
     <phrase id="recibidosEm" value ="Recibidos" />
     <phrase id="enviadosEm2" value ="Enviados" />
     <phrase id="paraEm" value ="Para" />
+    </table>
+    <table id="Email2Add" >
+      <phrase id="enviar" value ="Enviar" />
+    
     </table>
 
   
@@ -3055,6 +3123,7 @@
     </table>
 
     <!--Nombres nuevos-->
+    
 
   </project>
 </ew-language>

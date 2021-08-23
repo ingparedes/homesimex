@@ -498,10 +498,11 @@ loadjs.ready("head", function() {
     ew.addEventHandlers("escenario");
 });
 </script>
+<?php $filtro_lista= $Language->phrase("filtro_lista");?>
 <script>
 loadjs.ready("load", function () {
     // Startup script
-    $("#fescenariolistsrch").before('<div class="callout callout-primary"><em>Filtro para la lista de simulaciones,seleccione el estado de la simulación,  para buscar dar clics en el botón buscar Estado de la simulación: En configuración, Activa o Finalizada.</em></div>'),$("a.ew-detail-add").hide();
+    $("#fescenariolistsrch").before('<div class="callout callout-primary"><em><?php echo $filtro_lista; ?></em></div>'),$("a.ew-detail-add").hide();
 });
 </script>
 <?php } ?>

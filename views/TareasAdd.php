@@ -286,10 +286,17 @@ loadjs.ready(["ftareasadd", "editor"], function() {
   //$id_escenario = Container("escenario")->id_escenario->CurrentValue;
 //	$nombreescnario = ExecuteRow("SELECT nombre_escenario,DATE_FORMAT(fechaini_real, '%Y/%m/%d'), DATE_FORMAT(fechafinal_real, '%Y/%m/%d')  FROM escenario WHERE id_escenario =  = '".$id_escenario."';");
 	$escenID = ExecuteRow("SELECT DATE_FORMAT(fechaini_real, '%Y/%m/%d'), DATE_FORMAT(fechafinal_real, '%Y/%m/%d'),nombre_escenario FROM escenario WHERE id_escenario = '".$id_escenario."';");
+    $simulacion=$Language->phrase("simulacion"); 
+    $fir=$Language->phrase("fir"); 
+    $ffr=$Language->phrase("ffr"); 
+    $fis=$Language->phrase("fis"); 
+    $ffs=$Language->phrase("ffs"); 
+    $para=$Language->phrase("para"); 
+    $grabar_nuevo=$Language->phrase("grabar_nuevo"); 
 ?>
 <div class="callout callout-primary">
-  <h4>Simulación: <?php echo $escenID[2];  ?>  </h4>
- <p> <em> Fecha inicio real: <?php echo $escenID[0]  ?> Fecha fin real: <?php echo $escenID[1];  ?> </em></p>
+  <h4><?php echo $simulacion; ?>: <?php echo $escenID[2];  ?>  </h4>
+ <p> <em> <?php echo $fir; ?>: <?php echo $escenID[0]  ?> <?php echo $ffr; ?>: <?php echo $escenID[1];  ?> </em></p>
 </div>
 <div class="form-group col-md-4">
         <label for="x_id_grupo" ><?= $Page->id_grupo->caption() ?></label>
@@ -489,6 +496,6 @@ loadjs.ready("head", function() {
 loadjs.ready("load", function () {
     // Startup script
     $('h1').html("<span class='text-muted'>Nueva</span> tarea");
-    $("<input>").attr({id:"f",name:"xxx",value:"",type:"hidden"}).appendTo("form"),$("#btn-action").after('&nbsp; <button class="btn btn-info ew-btn"  name="btn" id="btn" type="submit"  onclick="this.form.xxx.value=1"> Grabar y nueva </button>');
+    $("<input>").attr({id:"f",name:"xxx",value:"",type:"hidden"}).appendTo("form"),$("#btn-action").after('&nbsp; <button class="btn btn-info ew-btn"  name="btn" id="btn" type="submit"  onclick="this.form.xxx.value=1"> <?php echo $grabar_nuevo; ?> </button>');
 });
 </script>

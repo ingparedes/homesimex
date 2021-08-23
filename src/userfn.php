@@ -132,9 +132,9 @@ else
         $menu->moveItem("Configuración", $menu->Count() - 1); // Move to last
     };
   if ($menu->Id == "navbar") { // Sidebar menu or change from "menu" to "navbar" for top menu
-    //$l1=$Language->TablePhrase("userfn", "hora_local");
-    //$l2=$Language->TablePhrase("userfn", "hora_real");
-    //$l3=$Language->TablePhrase("userfn", "hora_simulada");
+    //$l1=$Language->phrase("hora_local");
+    //$l2=$Language->phrase("hora_real");
+    //$l3=$Language->phrase("hora_simulada");
   	$menu->addMenuItem(456, "usuario", "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" , "#", -1, "", IsLoggedIn());
   	$menu->addMenuItem(457, "usuario", "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" , "#", -1, "", IsLoggedIn());
   	$menu->addMenuItem(455, "usuario", "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" , "#", -1, "", IsLoggedIn());

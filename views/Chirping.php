@@ -137,22 +137,27 @@ $id_user = $_GET['id_user'];
 
                                 </li>
                             </ol>
+                            <?php
+                            $participantes=$Language->phrase("participantes"); 
+                            $emails=$Language->phrase("emails"); 
+                            $grupo=$Language->phrase("grupo"); 
+                            ?>
                             <ul class="navbar-nav content-tweets-index">
                                 <li class="profile-stats-item">
                                     <a class="nav-link">
-                                        <span class="profile-stats-item profile-stats-item-label">Emails</span>
+                                        <span class="profile-stats-item profile-stats-item-label"><?php echo $email; ?></span>
                                         <span class="profile-stats-item profile-stats-item-number"><?php echo $cant ?></span>
                                     </a>
                                 </li>
                                 <li>
                                     <a class="nav-link">
-                                        <span class="profile-stats-item profile-stats-item-label">Grupo</span>
+                                        <span class="profile-stats-item profile-stats-item-label"><?php echo $grupo; ?></span>
                                         <span class="profile-stats-item profile-stats-item-number"><?php echo $row_dtsUsr[2] ?></span>
                                     </a>
                                 </li>
                                 <li>
                                     <a class="nav-link">
-                                        <span class="profile-stats-item profile-stats-item-label">Participantes</span>
+                                        <span class="profile-stats-item profile-stats-item-label"><?php echo $participantes; ?></span>
                                         <span class="profile-stats-item profile-stats-item-number"><?php echo $cant_prtcp ?></span>
                                     </a>
                                 </li>
