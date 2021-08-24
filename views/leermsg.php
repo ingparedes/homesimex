@@ -7,7 +7,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title><?php echo $Language->TablePhrase("leermsg", "hola_mundo"); ?></title>
+    <title><?php echo $Language->phrase("hola_mundo"); ?></title>
 
 <?php
 include("../config.php");
@@ -58,13 +58,13 @@ $sql_mail = mysqli_fetch_array($result)
 <div class="col-md-9">
           <div class="card card-primary card-outline">
             <div class="card-header">
-              <h3 class="card-title"><?php echo $Language->TablePhrase("leermsg", "leer_correo"); ?></h3>
+              <h3 class="card-title"><?php echo $Language->phrase("leer_correo"); ?></h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body p-0">
               <div class="mailbox-read-info">
                 <h5><?php echo $sql_mail["sujeto"]?></h5>
-                <h6><?php echo $Language->TablePhrase("leermsg", "de"); ?><?php echo $sql_mail["destino"]?>
+                <h6><?php echo $Language->phrase("de"); ?><?php echo $sql_mail["destino"]?>
                   <span class="mailbox-read-time float-right"><?php echo $sql_mail["tiempo"]?></span></h6>
               </div>
                <!-- /.btn-group -->
@@ -80,8 +80,8 @@ $sql_mail = mysqli_fetch_array($result)
             <!-- /.card-footer -->
             <div class="card-footer">
               <div class="float-right">
-                <button type="button" class="btn btn-default"><i class="fas fa-reply"></i> <?php echo $Language->TablePhrase("leermsg", "replicar"); ?></button>
-                <button type="button" class="btn btn-default"><i class="fas fa-share"></i> <?php echo $Language->TablePhrase("leermsg", "reenviar"); ?></button>
+                <button type="button" class="btn btn-default"><i class="fas fa-reply"></i> <?php echo $Language->phrase("replicar"); ?></button>
+                <button type="button" class="btn btn-default"><i class="fas fa-share"></i> <?php echo $Language->phrase("reenviar"); ?></button>
               </div>
              </div>
             <!-- /.card-footer -->

@@ -328,7 +328,7 @@ $Page->ListOptions->render("body", "right", $Page->RowCount, "block", $Page->Tab
 </div>
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title"><?php echo $Language->TablePhrase("imboxMailList", "carpetas"); ?></h3>
+              <h3 class="card-title"><?php echo $Language->phrase( "carpetas"); ?></h3>
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
                   <i class="fas fa-minus"></i>
@@ -339,13 +339,13 @@ $Page->ListOptions->render("body", "right", $Page->RowCount, "block", $Page->Tab
                 <ul class="nav nav-pills flex-column">
                   <li class="nav-item">
                     <a href="Email2List" class="nav-link">
-                      <i class="cil-envelope-closed"></i> <?php echo $Language->TablePhrase("imboxMailList", "env"); ?> 
+                      <i class="cil-envelope-closed"></i> <?php echo $Language->phrase( "env"); ?> 
                       <span class="badge bg-primary float-right"></span>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="ImboxMailList" class="nav-link">
-                      <i class="cil-inbox"></i> <?php echo $Language->TablePhrase("imboxMailList", "rec"); ?>
+                      <i class="cil-inbox"></i> <?php echo $Language->phrase( "rec"); ?>
                     </a>
                   </li>
               </ul>
@@ -360,7 +360,7 @@ $Page->ListOptions->render("body", "right", $Page->RowCount, "block", $Page->Tab
         <div class="col-md-9">
           <div class="card card-primary card-outline">
             <div class="card-header">
-              <h3 class="card-title"><?php echo $Language->TablePhrase("imboxMailList", "rec"); ?></h3>
+              <h3 class="card-title"><?php echo $Language->phrase( "rec"); ?></h3>
               <!-- /.card-tools -->
             </div>
             <!-- /.card-header -->

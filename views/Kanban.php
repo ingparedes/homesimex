@@ -7,7 +7,7 @@ $Kanban = &$Page;
 ?>
 <html>
 <head>
-<title><?php echo $Language->TablePhrase("kanban", "titulo"); ?></title>
+<title><?php echo $Language->phrase( "titulo"); ?></title>
 
 
 

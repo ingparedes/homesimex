@@ -257,13 +257,13 @@ echo "<a class=\"btn btn-default ew-row-link ew-view\" title=\"Tareas\" data-tab
     <td class='text-center' >
      
 	<slot class="ew-slot" name="tpx_escenario_image_escenario"></slot>
-   <h3  style="text-align:center;"> <?php echo $Language->TablePhrase("EscenarioView", "notaEv"); ?> </h3>
+   <h3  style="text-align:center;"> <?php echo $Language->phrase( "notaEv"); ?> </h3>
     <h2  style="text-align:center;"><slot class="ew-slot" name="tpx_escenario_nombre_escenario"></slot></h2>
-    <h5  style="text-align:center;"> <?php echo $Language->TablePhrase("EscenarioView", "eventoEv"); ?> <slot class="ew-slot" name="tpx_escenario_incidente"></slot> <br>
-    <?php echo $Language->TablePhrase("EscenarioView", "eventosAsociadosEv"); ?>
+    <h5  style="text-align:center;"> <?php echo $Language->phrase( "eventoEv"); ?> <slot class="ew-slot" name="tpx_escenario_incidente"></slot> <br>
+    <?php echo $Language->phrase( "eventosAsociadosEv"); ?>
 </slot>&nbsp;<slot class="ew-slot" name="tpx_escenario_evento_asociado"></slot><br>
-<?php echo $Language->TablePhrase("EscenarioView", "paisEv"); ?> <slot class="ew-slot" name="tpx_escenario_pais_escenario"></slot><br>
-<?php echo $Language->TablePhrase("EscenarioView", "fechayhoraInicio"); ?> <slot class="ew-slot" name="tpx_escenario_fechaini_real"></slot> <br> <?php echo $Language->TablePhrase("EscenarioView", "fechayhoraFinalizacion"); ?> <slot class="ew-slot" name="tpx_escenario_fechafinal_real"></slot></h5>
+<?php echo $Language->phrase( "paisEv"); ?> <slot class="ew-slot" name="tpx_escenario_pais_escenario"></slot><br>
+<?php echo $Language->phrase( "fechayhoraInicio"); ?> <slot class="ew-slot" name="tpx_escenario_fechaini_real"></slot> <br> <?php echo $Language->phrase( "fechayhoraFinalizacion"); ?> <slot class="ew-slot" name="tpx_escenario_fechafinal_real"></slot></h5>
     </tr>
     </td>
     </table>

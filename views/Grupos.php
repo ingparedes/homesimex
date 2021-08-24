@@ -382,8 +382,8 @@ ul {
 <body>
   
 <div class="callout callout-primary">
-  <h4><?php echo $Language->TablePhrase("grupos", "simu"); ?> <?php echo $escenID[2];  ?>  </h4>
- <p> <em> <?php echo $Language->TablePhrase("grupos", "fir"); ?>  <?php echo $escenID[0]  ?> <?php echo $Language->TablePhrase("grupos", "ffr"); ?>  <?php echo $escenID[1];  ?> </em></p>
+  <h4><?php echo $Language->phrase( "simu"); ?> <?php echo $escenID[2];  ?>  </h4>
+ <p> <em> <?php echo $Language->phrase( "fir"); ?>  <?php echo $escenID[0]  ?> <?php echo $Language->phrase( "ffr"); ?>  <?php echo $escenID[1];  ?> </em></p>
 </div>
 
     <div class="main-page" id="vue-chat">
@@ -392,7 +392,7 @@ ul {
           <div class="card-header">
                 <h3 class="card-title">
                 <i class="fa fa-users" aria-hidden="true"></i>
-                <?php echo $Language->TablePhrase("grupos", "usu"); ?> 
+                <?php echo $Language->phrase( "usu"); ?> 
                 </h3>
             </div>
             <div class="card-body">
@@ -416,7 +416,7 @@ ul {
                 <div class="card-header">
                 <h3 class="card-title">
                 <i class="fa fa-users" aria-hidden="true"></i>
-                <?php echo $Language->TablePhrase("grupos", "gys"); ?> 
+                <?php echo $Language->phrase( "gys"); ?> 
                 </h3>
                 </div>
                 <div class="home-screen-editor-content">
@@ -429,7 +429,7 @@ ul {
 
                                   <div class="nombre-Grupo" v-if="'grupo'==elemento.tipo" id="{{elemento.id}}">
                                         <div class="item ex-moved section-item" id="{{elemento.id}}"> 
-                                            <span class="drag-image"></span> <h6> <i class="fa fa-users" aria-hidden="true"></i> <strong> <?php echo $Language->TablePhrase("grupos", "grup"); ?>    {{elemento.nombre}}</strong> </h6>
+                                            <span class="drag-image"></span> <h6> <i class="fa fa-users" aria-hidden="true"></i> <strong> <?php echo $Language->phrase( "grup"); ?>    {{elemento.nombre}}</strong> </h6>
                                             <div class="buttons-group">
                                                 <span class="delete-image"></span>
                                             </div>
@@ -440,7 +440,7 @@ ul {
                                       <div class="nested {{elemento.id}}"  v-if="elemento.tipo == 'usuario grupo'">
                                         <div class="item ex-moved{{elemento.id}}" >
                                             <span class="drag-image"></span>
-                                            <span class="dashboard-image"></span> <i class="fa fa-user-times" aria-hidden="true"></i> <?php echo $Language->TablePhrase("grupos", "exc"); ?>  {{elemento.nombre}}
+                                            <span class="dashboard-image"></span> <i class="fa fa-user-times" aria-hidden="true"></i> <?php echo $Language->phrase( "exc"); ?>  {{elemento.nombre}}
                                            
                                         </div>
 
@@ -450,7 +450,7 @@ ul {
                                   
                                    <div class="nested-gris" v-if="elemento.tipo == 'subgrupo'" >
                                         <div class="sub-section ex-moved">
-                                            <div class="sub-section-titlee item"><span id="{{elemento.id}}"></span> <i class="fa fa-users" aria-hidden="true"></i> <?php echo $Language->TablePhrase("grupos", "subg"); ?>  {{elemento.nombre}}
+                                            <div class="sub-section-titlee item"><span id="{{elemento.id}}"></span> <i class="fa fa-users" aria-hidden="true"></i> <?php echo $Language->phrase( "subg"); ?>  {{elemento.nombre}}
                                                 <div class="buttons-group">
 
                                                 </div>

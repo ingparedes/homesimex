@@ -6,7 +6,7 @@ namespace PHPMaker2021\simexamerica;
 $Documentos = &$Page;
 ?>
 <div class="card">
-    <div class="card-header"><strong><?php echo $Language->TablePhrase("Documentos", "mis_documentos"); ?></strong> </div>
+    <div class="card-header"><strong><?php echo $Language->phrase("mis_documentos"); ?></strong> </div>
     <div class="card-body">
         <?php 
 $idUs = CurrentUserID();
@@ -41,7 +41,7 @@ echo ExecuteHtml($sql_doc, array("horizontal" => TRUE, "fieldcaption" => TRUE, "
 </div>
 
 <div class="card">
-    <div class="card-header"><strong><?php echo $Language->TablePhrase("Documentos", "documentos_compartido"); ?></strong></div>
+    <div class="card-header"><strong><?php echo $Language->phrase("documentos_compartido"); ?></strong></div>
     <div class="card-body">
     <?php
  

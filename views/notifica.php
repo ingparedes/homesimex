@@ -1,5 +1,5 @@
 <head>
-    <title><?php echo $Language->TablePhrase("notica", "titulo"); ?></title>
+    <title><?php echo $Language->phrase( "titulo"); ?></title>
     <script src="https://code.jquery.com/jquery-latest.js"></script>
     <script>
         $(document).ready(function() {

@@ -54,7 +54,7 @@ $_SESSION['id_user'] = CurrentUserID();
     <div class="card" id="vue-chat">
 
         <div class="card-header bg-success">
-            <h3 class="card-title"><?php echo $Language->TablePhrase("EditFrupos", "mensajesEd"); ?></h3>
+            <h3 class="card-title"><?php echo $Language->phrase( "mensajesEd"); ?></h3>
             <input type="text" class="form-control float-right" id="buscador" placeholder="Buscar">
         </div>
 
@@ -69,10 +69,10 @@ $_SESSION['id_user'] = CurrentUserID();
                                     <span class="direct-chat-name float-left">{{mens.nombre_usuario}}</span>
                                     <span class="direct-chat-timestamp float-right">
                                         <i class='far fa-clock text-primary'></i> 
-                                        <?php echo $Language->TablePhrase("EditFrupos", "horaReal"); ?>
+                                        <?php echo $Language->phrase( "horaReal"); ?>
  {{mens.fstar}} <br> 
                                         <i class='far fa-clock text-info'></i> 
-                                        <?php echo $Language->TablePhrase("EditFrupos", "horaSimulada"); ?>  {{mens.fstarsim}} 
+                                        <?php echo $Language->phrase( "horaSimulada"); ?>  {{mens.fstarsim}} 
                                     </span>
                                    </div>
                     </div>
@@ -90,16 +90,16 @@ $_SESSION['id_user'] = CurrentUserID();
                             <hr>
                             <div class="timeline-footer">
                                 <a href="javascript:;" class="m-r-15 text-inverse-lighter">
-                                    <i class="fa fa-thumbs-up fa-fw fa-lg m-r-3"></i>  <?php echo $Language->TablePhrase("EditFrupos", "meGusta"); ?>
+                                    <i class="fa fa-thumbs-up fa-fw fa-lg m-r-3"></i>  <?php echo $Language->phrase( "meGusta"); ?>
                                 </a>
                                 <a class="m-r-15 text-inverse-lighter" title="" data-caption="Enviar" href="/homesimex/Email2Add?Idrenviar=71" data-original-title="Enviar">
-                                <?php echo $Language->TablePhrase("EditFrupos", "reenviarE"); ?>&nbsp;<i class="fas fa-sign-out-alt"></i> 
+                                <?php echo $Language->phrase( "reenviarE"); ?>&nbsp;<i class="fas fa-sign-out-alt"></i> 
                                 </a>
                                 <a href="javascript:;" class="m-r-15 text-inverse-lighter">
-                                    <i class="fa fa-comments fa-fw fa-lg m-r-3"></i> <?php echo $Language->TablePhrase("EditFrupos", "comentario1"); ?>
+                                    <i class="fa fa-comments fa-fw fa-lg m-r-3"></i> <?php echo $Language->phrase( "comentario1"); ?>
                                 </a> 
                                 <a type="button" class="m-r-15 text-inverse-lighter" data-toggle="collapse" v-bind:href="'#collapse'+mens.id" >
-                                    <i class="fa fa-comments fa-fw fa-lg m-r-3"></i> <?php echo $Language->TablePhrase("EditFrupos", "comentario2"); ?>
+                                    <i class="fa fa-comments fa-fw fa-lg m-r-3"></i> <?php echo $Language->phrase( "comentario2"); ?>
                                 </a> 
                             </div>
             
@@ -113,7 +113,7 @@ $_SESSION['id_user'] = CurrentUserID();
                                             <textarea type="text" class="textarealine" v-model="mens.entrada"></textarea>
                                         </div>
                                         <div class="mt-2 text-right">
-                                            <button class="btn btn-primary btn-sm shadow-none" v-on:click="hacerComentario(mens)" type="button"><?php echo $Language->TablePhrase("EditFrupos", "envioEd"); ?>
+                                            <button class="btn btn-primary btn-sm shadow-none" v-on:click="hacerComentario(mens)" type="button"><?php echo $Language->phrase( "envioEd"); ?>
                                         </div>
                                         <hr>       
                                         <div v-for="coment in mens.comentarios">   

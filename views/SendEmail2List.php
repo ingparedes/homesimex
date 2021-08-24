@@ -335,7 +335,7 @@ $Page->ListOptions->render("body", "right", $Page->RowCount, "block", $Page->Tab
           <a class="btn btn-primary btn-block mb-3 ew-add-edit ew-add" title="" data-table="email2" data-caption="Add" href="#" onclick="return ew.modalDialogShow({lnk:this,btn:'AddBtn',url:'/simexamerica/Email2Add'});" data-original-title="Add">Compose</a>
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title"><?php echo $Language->TablePhrase("sendEMail2List", "carpeta"); ?></h3>
+              <h3 class="card-title"><?php echo $Language->phrase( "carpeta"); ?></h3>
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
                   <i class="fas fa-minus"></i>
@@ -346,13 +346,13 @@ $Page->ListOptions->render("body", "right", $Page->RowCount, "block", $Page->Tab
               <ul class="nav nav-pills flex-column">
                 <li class="nav-item active">
                   <a href="#" class="nav-link">
-                    <i class="fas fa-inbox"></i> <?php echo $Language->TablePhrase("sendEMail2List", "recibidos"); ?>
+                    <i class="fas fa-inbox"></i> <?php echo $Language->phrase( "recibidos"); ?>
                     <span class="badge bg-primary float-right">12</span>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="#" class="nav-link">
-                    <i class="far fa-envelope"></i> <?php echo $Language->TablePhrase("sendEMail2List", "enviados"); ?>
+                    <i class="far fa-envelope"></i> <?php echo $Language->phrase( "enviados"); ?>
                   </a>
                 </li>
               </ul>
@@ -367,7 +367,7 @@ $Page->ListOptions->render("body", "right", $Page->RowCount, "block", $Page->Tab
         <div class="col-md-9">
           <div class="card card-primary card-outline">
             <div class="card-header">
-              <h3 class="card-title"><?php echo $Language->TablePhrase("sendEMail2List", "enviados"); ?></h3>
+              <h3 class="card-title"><?php echo $Language->phrase( "enviados"); ?></h3>
               <!-- /.card-tools -->
             </div>
             <!-- /.card-header -->
@@ -376,9 +376,9 @@ $Page->ListOptions->render("body", "right", $Page->RowCount, "block", $Page->Tab
                 <table class="table table-hover table-striped">
                   <tbody>
                   <tr>
-                  <td class="mailbox-name" width="10%"><?php echo $Language->TablePhrase("sendEMail2List", "xxxs"); ?></td>
+                  <td class="mailbox-name" width="10%"><?php echo $Language->phrase( "xxxs"); ?></td>
                    <td class="mailbox-name" width="30%"><a href="read-mail.html"><slot class="ew-slot" name="tpx<?= $i ?>_send_email2_para_user"></slot></a></td>
-                    <td class="mailbox-subject" width="30%"><b><slot class="ew-slot" name="tpx<?= $i ?>_send_email2_sujeto"></slot></b> - <?php echo $Language->TablePhrase("sendEMail2List", "busca_solucion"); ?>
+                    <td class="mailbox-subject" width="30%"><b><slot class="ew-slot" name="tpx<?= $i ?>_send_email2_sujeto"></slot></b> - <?php echo $Language->phrase( "busca_solucion"); ?>
                     </td>
                     <td class="mailbox-attachment"width="10%"><slot class="ew-slot" name="tpx<?= $i ?>_send_email2_archivo"></slot></td>
                     <td class="mailbox-date" width="10%"><slot class="ew-slot" name="tpx<?= $i ?>_send_email2_tiempo"></slot></td>

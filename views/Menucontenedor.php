@@ -128,19 +128,19 @@ $Menucontenedor = &$Page;
             <div class="card-header">
 
                 <button class="btn btn-primary" type="button" id="btnPaciente" data="GrupoAdd?showdetail=&showmaster=escenario&fk_id_escenario=<?php echo $id ?>">
-                    <span class="cil-group btn-icon mr-2"></span> <br>&nbsp<?php echo $Language->TablePhrase("menu_contenedor", "grupo"); ?>&nbsp
+                    <span class="cil-group btn-icon mr-2"></span> <br>&nbsp<?php echo $Language->phrase( "grupo"); ?>&nbsp
                 </button>
 
                 <button class="btn btn-primary" type="button" id="btnEvaluacion" data="SubgrupoAdd">
-                    <span class="cil-user-plus btn-icon mr-2"></span><br><?php echo $Language->TablePhrase("menu_contenedor", "subgrupo"); ?>
+                    <span class="cil-user-plus btn-icon mr-2"></span><br><?php echo $Language->phrase( "subgrupo"); ?>
                 </button>
 
                 <button class="btn btn-primary" type="button" id="btnAmbulanciad" data="TareasAdd">
-                    <span class="cil-laptop btn-icon mr-2"></span> <br>&nbsp<?php echo $Language->TablePhrase("menu_contenedor", "tareas"); ?>&nbsp
+                    <span class="cil-laptop btn-icon mr-2"></span> <br>&nbsp<?php echo $Language->phrase( "tareas"); ?>&nbsp
                 </button>
 
                 <button class="btn btn-primary" type="button" id="btnAmbulanciad" data="">
-                    <span class="cil-paper-plane "></span> <br><?php echo $Language->TablePhrase("menu_contenedor", "mensajes"); ?>
+                    <span class="cil-paper-plane "></span> <br><?php echo $Language->phrase( "mensajes"); ?>
                 </button>
             </div>
 

@@ -981,6 +981,297 @@
     <phrase id="emails" value="Emails" />
     <phrase id="grupo" value="Grupo" />
     
+      <phrase id="de" value ="De:" />
+      <phrase id="leerCorreo" value ="Leer Correo" />
+      <phrase id="respuesta" value ="Respuesta" />
+      <phrase id="reenviar" value ="Reenviar" />
+    <phrase id="carpeta" value ="Carpeta" />
+    <phrase id="enviadosEm" value ="Enviados" />
+    <phrase id="recibidosEm" value ="Recibidos" />
+    <phrase id="enviadosEm2" value ="Enviados" />
+    <phrase id="paraEm" value ="Para" />
+    <phrase id="carpetasEv" value ="Carpetas" />
+    <phrase id="enviadosEv" value ="Enviados" />
+    <phrase id="recibidosEv" value ="Recibidos" />
+    <phrase id="leerMensajeEv" value ="Leer Mensaje" />
+    <phrase id="sujetoEv" value ="Sujeto:" />
+    <phrase id="paraEv" value ="Para:" />
+    <phrase id="notaEv" value ="Nota conceptual de la simulación" />
+    <phrase id="eventoEv " value ="Evento principal: " />
+    <phrase id="eventosAsociadosEv" value ="Evento(s) Asociado(s):" />
+    <phrase id="paisEv" value ="País del ejercicio:" />
+    <phrase id="fechayhoraInicio" value ="Fecha y hora de inicio:" />
+    <phrase id="fechayhoraFinalizacion" value ="Fecha y hora de finalización:" />
+    <phrase id="mensajesEd" value ="Mensajes" />
+     <phrase id="horaReal" value =" Hora real" />
+     <phrase id="horaSimulada" value ="Hora Simulada" />
+     <phrase id="meGusta" value ="Me gusta" />
+     <phrase id="reenviarEd" value ="Reenviar" />
+     <phrase id="comentario1" value ="Comentario" />
+     <phrase id="comentario2" value ="Comentario" />
+     <phrase id="envioEd" value ="Envio" />
+      <phrase id="Chirping" value ="Acción" />
+      <phrase id="anotherChirping" value ="Otra Acción" />
+      <phrase id="somethingChirping" value ="Algo más aquí" />
+      <phrase id="tweetChirping" value ="Tweet" />
+      <phrase id="homechirping" value ="Casa" />
+      <phrase id="momentChirping" value ="Momentos" />
+      <phrase id="notiChirping" value ="Notificaciones" />
+      <phrase id="mensajesChirping" value ="Mensajes" />
+      <phrase id="1" value ="Chirping" />
+      <phrase id="responderCh" value ="Responder" />
+      <phrase id="reenviarCh" value ="Reenviar" />
+      <phrase id="leidoCh" value ="Leido" />
+      <phrase id="eliminarCh" value ="Eliminar" />
+      <phrase id="simu" value="Simulación:" />
+      <phrase id="fir" value="Fecha inicio real:" />
+      <phrase id="ffr" value="Fecha fin real:" />
+      <phrase id="mis_documentos" value="Mis documentos" />
+        <phrase id="documentos_compartido" value="Documentos compartidos conmigo" />
+        <phrase id="tblcaption" value="Grupos" />
+      <phrase id="simu" value="Simulación:" />
+      <phrase id="fir" value="Fecha inicio real:" />
+      <phrase id="ffr" value="Fecha fin real:" />
+      <phrase id="usu" value="Usuarios" />
+      <phrase id="gys" value="Grupos y subgrupos" />
+      <phrase id="grup" value="Grupo:" />
+      <phrase id="exc" value="Excon:" />
+      <phrase id="subg" value="SubGrupo:" />
+<phrase id="carpetas" value="Folder" />
+      <phrase id="env" value="Enviados" />
+      <phrase id="rec" value="Recibidos" />
+      <phrase id="leermens" value="Leer Mensaje" />
+      <phrase id="suj" value="Sujeto:" />
+      <phrase id="de" value="De:" />
+      <phrase id="res" value="Responder" />
+      <phrase id="reenv" value="Reenviar" />
+       <phrase id="actualizar" value="Actualizar Div sin consultar la página por completo " />
+      <phrase id="carpetas" value="Folders" />
+      <phrase id="env" value="Enviados" />
+      <phrase id="rec" value="Recibidos" />
+      <phrase id="leermens" value="Leer Mensaje" />
+      <phrase id="suj" value="Sujeto:" />
+      <phrase id="de" value="De:" />
+      <phrase id="res" value="Responder" />
+      <phrase id="reenv" value="Reenviar" />
+       <phrase id="tblcaption" value="Escenario" />
+      <phrase id="mp" value="Mensajes Programados" />
+      <phrase id="hr" value="Hora real" />
+      <phrase id="hs" value="Hora Simulada" />
+      <phrase id="tarea" value="Tarea:" />
+      <phrase id="mens" value="Mensaje:" />
+      <phrase id="mensenv" value="Mensajes enviados" />
+      <phrase id="hr" value="Hora Real" />
+      <phrase id="hs" value="Hora Simulada" />
+      <phrase id="tmens" value="Titulo mensaje:" />
+      <phrase id="comens" value="Comentarios" />
+      <phrase id="comen" value="Comentario" />
+      <phrase id="env" value="Enviar" />
+      <phrase id="mp" value="Mensajes Programados" />
+      <phrase id="tareas" value="Tarea:" />
+      <phrase id="tmens" value="Título del mensaje:" />
+      <phrase id="para" value="Para:" />
+      <phrase id="res" value="Respuestas:" />
+      <phrase id="me" value="Mensajes enviados" />
+      <phrase id="todos" value="Todos" />
+      <phrase id="pendiente" value="Pendiente" />
+      <phrase id="inconcluso" value="Inconcluso" />
+      <phrase id="finalizado" value="Finalizado" />
+      <phrase id="hr" value="Hora Real" />
+      <phrase id="hs" value="Hora Simulada " />
+      <phrase id="tmen" value="Título Mensaje:" />
+      <phrase id="comen" value="Comentarios" />
+      <phrase id="comens" value="Comentario" />
+      <phrase id="calif" value="Calificar" />
+      <phrase id="enviar" value="Enviar" />
+       <phrase id="cargando" value="Cargando..." />
+      <phrase id="ctrlzoom" value="Presione CTRL + rueda del mouse para hacer zoom" />
+      <phrase id="clicizq" value="Para desplazarse en la línea de tiempo, mantener presionado el clic izquierdo del ratón." />
+      <phrase id="rhr" value="Para retornar a la hora real del ejercicio presionar el ícono" />
+      <phrase id="mens" value="Mensajes" />
+      <phrase id="todos" value="Todos" />
+      <phrase id="pendiente" value="Pendiente" />
+      <phrase id="inconcluso" value="Inconcluso" />
+      <phrase id="finalizado" value="Finalizado" />
+      <phrase id="hr" value="Hora real del país del ejercicio " />
+      <phrase id="hs" value="Hora simulada" />
+      <phrase id="tmens" value="Título del mensaje:" />
+      <phrase id="res" value="Respuestas:" />
+      <phrase id="para" value="Para:" />
+      <phrase id="nuev" value="Nuevo" />
+      <phrase id="res" value="Respuestas:" />
+      <phrase id="respon" value="Responder" />
+      <phrase id="reen" value="Reenviar" />
+      <phrase id="comen" value="Comentario" />
+      <phrase id="reenv" value="Reenviar" />
+      <phrase id="env" value="Envio" />
+ <phrase id="cargando" value="Cargando..." />
+      <phrase id="ctrlzoom" value="Presione CTRL + rueda del mouse para hacer zoom" />
+      <phrase id="clicizq" value="Para desplazarse en la línea de tiempo, mantener presionado el clic izquierdo del ratón." />
+      <phrase id="rhr" value="Para retornar a la hora real del ejercicio presionar el ícono" />
+      <phrase id="mens" value="Mensajes" />
+      <phrase id="todos" value="Todos" />
+      <phrase id="pendiente" value="Pendiente" />
+      <phrase id="inconcluso" value="Inconcluso" />
+      <phrase id="finalizado" value="Finalizado" />
+      <phrase id="hr" value="Hora real del país del ejercicio " />
+      <phrase id="hs" value="Hora simulada" />
+      <phrase id="tmens" value="Título del mensaje:" />
+      <phrase id="res" value="Respuestas:" />
+      <phrase id="para" value="Para:" />
+      <phrase id="nuev" value="Nuevo" />
+      <phrase id="res" value="Respuestas:" />
+      <phrase id="respon" value="Responder" />
+      <phrase id="reen" value="Reenviar" />
+      <phrase id="comen" value="Comentario" />
+      <phrase id="reenv" value="Reenviar" />
+      <phrase id="env" value="Envio" />
+      <phrase id="tblcaption" value="Chat" />
+      <phrase id="titulo" value="Timeline | dataHandling | Data serialization" />
+      <phrase id="timeline_m_t" value="Linea de tiempo mensajes y tareas" />
+      <phrase id="guardar" value="Guardar" />
+      <phrase id="datos_almacenados" value="Datos almacenados" />
+      <phrase id="datos_almacenados_ok" value="Datos almacenados Ok" />
+      <phrase id="cargand" value="Cargando..." />
+      <phrase id="editar_datos" value="Editar Datos" />
+      <phrase id="titul" value="Titulo" />
+      <phrase id="descrip" value="Descripción" />
+      <phrase id="cerrar" value="Cerrar" />
+      <phrase id="titulo" value="Creando datepickers con Flatpickr" />
+      <phrase id="fech" value="Fecha" />
+      <phrase id="fn" value="Fecha Nacimiento" />
+      <phrase id="fi" value="Fecha de Ingreso" />
+      <phrase id="fc" value="Fecha de Cita" />
+      <phrase id="fq" value="Fecha de Quincena" />
+      <phrase id="fds" value="Fecha de días de la semana" />
+        <phrase id="ctrzoom" value="Presione CTRL + rueda del mouse para hacer zoom" />
+      <phrase id="cltizq" value="Para desplazarse en la línea de tiempo, mantener presionado el clic izquierdo del ratón." />
+      <phrase id="rthr" value="Para retornar a la hora real del ejercicio presionar el ícono " />
+      <phrase id="toast" value="Datos almacenados" />
+      <phrase id="titulo_modalmsg" value="Mensaje" />
+       <phrase id="editar_dat" value="Editar Datos" />
+      <phrase id="descrip" value="Descripción" />
+      <phrase id="hri" value="Hora real inicial:" />
+      <phrase id="hrf" value="Hora real final:" />
+      <phrase id="hsi" value="Hora simulada inicial:" />
+      <phrase id="hsf" value="Hora simulada final:" />
+      <phrase id="cancel" value="Cancelar" />
+      <phrase id="cerrar" value="Cerrar" />
+      <phrase id="guarda" value="Guardar" />
+      <phrase id="titul" value="Título" />
+      <phrase id="fir" value="Fecha Inicio Real:" />
+      <phrase id="ffr" value="Fecha Fin Real:" />
+      <phrase id="fis" value="Fecha Inicio Simulado:" />
+      <phrase id="ffs" value="Fecha Fin Simulado:" />
+      <phrase id="seleccion_medio" value="Seleccione Medio..." />
+      <phrase id="medio" value="Medio" />
+      <phrase id="acti_es" value="Actividad Esperada" />
+      <phrase id="de" value="De:" />
+      <phrase id="subir_file" value="Subir Archivo" />
+      <phrase id="seleccione_adjunto" value="Seleccione Adjunto..." />
+      <phrase id="para" value="Para:" />
+      <phrase id="nuevo_mensaje" value="Nuevo Mensaje" />
+      <phrase id="crear_tarea" value="Crear Tarea" />
+      <phrase id="grup" value="Grupo" />
+      <phrase id="seleccion_grup" value="Seleccione Grupo..." />
+      <phrase id="relacion_tarea" value="Relación Tarea" />
+      <phrase id="tareas" value="Tareas..." />
+       <phrase id="tituloTLG" value="Linea de tiempo General" />
+      <phrase id="graba" value="Grabar" />
+      <phrase id="seleccion_escenario" value="Seleccione Escenario..." />
+      <phrase id="datos_almacenados" value="Datos almacenados" />
+      <phrase id="datos_almacenados_ok" value="Datos almacenados Ok" />
+      <phrase id="cargand" value="cargando..." />
+      <phrase id="ctrzoom" value="Presione CTRL + rueda del mouse para hacer zoom" />
+      <phrase id="cltizq" value="Para desplazarse en la línea de tiempo, mantener presionado el clic izquierdo del ratón." />
+      <phrase id="rthr" value="Para retornar a la hora real del ejercicio presionar el ícono " />
+      <phrase id="editar_datos" value="Editar Datos" />
+      <phrase id="titulo" value="Titulo" />
+      <phrase id="descrip" value="Descripción" />
+      <phrase id="hri" value="Hora real inicial:" />
+      <phrase id="hrf" value="Hora real final:" />
+      <phrase id="hsi" value="Hora simulada inicial:" />
+      <phrase id="hsf" value="Hora simulada final:" />
+      <phrase id="Editar_mensaje" value="Editar Mensaje" />
+      <phrase id="cancel" value="Cancelar" />
+      <phrase id="mens" value="Mensaje" />
+      <phrase id="fir" value="Fecha Inicio Real:" />
+      <phrase id="ffr" value="Fecha Fin Real:" />
+      <phrase id="fis" value="Fecha Inicio Simulado:" />
+      <phrase id="ffs" value="Fecha Fin Simulado:" />
+      <phrase id="seleccion_medio" value="Seleccione Medio..." />
+      <phrase id="medio" value="Medio" />
+      <phrase id="acti_es" value="Actividad Esperada" />
+      <phrase id="de" value="De:" />
+      <phrase id="subir_file" value="Subir Archivo" />
+      <phrase id="seleccione_adjunto" value="Seleccione Adjunto..." />
+      <phrase id="para" value="Para:" />
+       <phrase id="nuevo_mensaje" value="Nuevo Mensaje" />
+      <phrase id="crear_tarea" value="Crear Tarea" />
+      <phrase id="grup" value="Grupo" />
+      <phrase id="seleccion_grup" value="Seleccione Grupo..." />
+      <phrase id="relacion_tarea" value="Relación Tarea" />
+      <phrase id="tareas" value="Tareas..." />
+      <phrase id="guardar" value="Guardar" />
+      <phrase id="tarea" value="Tarea" />
+      <phrase id="relacion_tarea" value="Relación Tarea" />
+      <phrase id="cerrar" value="Cerrar" />
+       <phrase id="boots" value="Bootstrap 4 Linea de tiempo" />
+      <phrase id="monjan" value="Lunes, Enero 9th 2020 7:00 AM" />
+      <phrase id="day1" value="Día 1 Orientación" />
+      <phrase id="bienvenida" value="Bienvenido al campus, introduccion y comience el tour por el campus ." />
+      <phrase id="jan10" value="Martes, Enero 10th 2019 8:30 AM" />
+      <phrase id="day2" value="Dia 2 Sesión" />
+      <phrase id="instrucci" value="Regístrese para las lecciones y los ponentes que coincidan con el programa de su curso. Conozca y salude a los instructores." />
+      <phrase id="detalles" value="Mas detalles ▼" />
+      <phrase id="desay" value="08:30 - 09:00 Desayuno en CR 2A" />
+      <phrase id="session" value="09:00 - 10:30 Sesión en vivo en  CR 3" />
+      <phrase id="almuerz" value="10:30 - 10:45 Descanso" />
+      <phrase id="sessionL" value="10:45 - 12:00 Sesión en vivo en CR 3" />
+      <phrase id="jan11" value="Miercoles, Enero 11th 2019 8:30 AM" />
+      <phrase id="day3" value="Dia 3 sesión " />
+      <phrase id="vegan" value="Shoreditch vegan artisan Helvetica. Tattooed Codeply Echo Park Godard kogi, next level irony ennui twee squid fap selvage. Meggings flannel Brooklyn literally small batch, mumblecore PBR try-hard kale chips. Brooklyn vinyl lumbersexual
+                        bicycle rights, viral fap cronut leggings squid chillwave pickled gentrify mustache. 3 wolf moon hashtag church-key Odd Future. Austin messenger bag normcore, Helvetica Williamsburg sartorial tote bag distillery Portland before
+                        they sold out gastropub taxidermy Vice." />
+      <phrase id="jan12" value="Jueves, Enero 12th 2019 11:30 AM" />
+      <phrase id="day4" value="Dia  4 Envolver" />
+      <phrase id="almuerzzo" value="Únase a nosotros para almorzar en el café de Bootsy frente al Campus Central." />
+      <phrase id="jan9" value="Enero 9th 2019 7:00 AM" />
+      <phrase id="jan10" value="Enero 10th 2019 8:30 AM" />
+      <phrase id="signup" value="Regístrese para las lecciones y los ponentes que coincidan con el programa de su curso. Conozca y salude a los instructores." />
+      <phrase id="jan11" value="Enero 11th 2019 8:30 AM" />
+      <phrase id="bicicle" value="Shoreditch vegan artisan Helvetica. Tattooed Codeply Echo Park Godard kogi, next level irony ennui twee squid fap selvage. Meggings flannel Brooklyn literally small batch, mumblecore PBR try-hard kale chips. Brooklyn vinyl lumbersexual
+                        bicycle rights, viral fap cronut leggings squid chillwave pickled gentrify mustache." />
+                        <phrase id="titulo" value="Titulo" />
+      <phrase id="esr" value="Ejercicio de Simulación de Respuesta a " />
+      <phrase id="pais" value="Pais" />
+      <phrase id="fech" value="Fecha" />
+      <phrase id="descrip" value="Descripcion" />
+      <phrase id="grups" value="Grupos" />
+      <phrase id="partic" value="Participantes" />
+      <phrase id="conclu" value="Concluciones" />
+
+ <phrase id="hola_mundo" value="Hola,mundo!" />
+      <phrase id="de" value="De:" />
+      <phrase id="leer_correo" value="Leer Correo" />
+      <phrase id="replicar" value="Replicar" />
+      <phrase id="reenviar" value="Reenviar" />
+       <phrase id="titulo" value="Tarjetas de arrastrar y soltar similares a Trello para software de gestión de proyectos" />
+  <phrase id="titulo" value="Actualizar Div sin consultar la página por completo" />
+   <phrase id="grupo" value="Grupos" />
+      <phrase id="subgrupo" value="SubGrupo" />
+      <phrase id="tareas" value="Tareas" />
+      <phrase id="mensajes" value="Mensajes" />
+      <phrase id="dc" value="Documento compartido" />
+      <phrase id="archivo" value="Archivo" />
+      <phrase id="fc" value="Fecha de Creación" />
+      <phrase id="carpeta" value="Carpeta" />
+      <phrase id="recibidos" value="Recibidos" />
+      <phrase id="enviados" value="Enviados" />
+      <phrase id="xxxs" value="xxxs" />
+      <phrase id="busca_solucion" value="Tratando de encontrar una solución a este problema ..." />
+
+    
     
     <!--NUEVOS-->
   </global>

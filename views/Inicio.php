@@ -259,7 +259,7 @@ $Inicio = &$Page;
             <div class="col-6">
                 <div class="card direct-chat direct-chat-primary">
                     <div class="card-header bg-primary">
-                        <h3 class="card-title"><?php echo $Language->TablePhrase("inicio", "mp"); ?></h3>
+                        <h3 class="card-title"><?php echo $Language->phrase("inicio", "mp"); ?></h3>
                         <input type="text" class="form-control float-right" id="buscador_admin" placeholder="Buscar">
                     </div>
                     <!-- /.card-header -->
@@ -273,9 +273,9 @@ $Inicio = &$Page;
                                     <span class="direct-chat-name float-left">{{mens.nombre_usuario}}</span>
                                     <span class="direct-chat-timestamp float-right">
                                         <i class='far fa-clock text-primary'></i> 
-                                        <?php echo $Language->TablePhrase("inicio", "hr"); ?> {{mens.fstar}} <br> 
+                                        <?php echo $Language->phrase("inicio", "hr"); ?> {{mens.fstar}} <br> 
                                         <i class='far fa-clock text-info'></i> 
-                                        <?php echo $Language->TablePhrase("inicio", "hs"); ?> {{mens.fstarsim}} 
+                                        <?php echo $Language->phrase("inicio", "hs"); ?> {{mens.fstarsim}} 
                                     </span>
                                    </div>
                                 <!-- /.direct-chat-infos -->
@@ -283,8 +283,8 @@ $Inicio = &$Page;
                                 <!-- /.direct-chat-img -->
                                 <div class="direct-chat-text" style="background-color:#f2f3f4" >
                                     <div class = "header">
-                                    <span><em><?php echo $Language->TablePhrase("inicio", "tareas"); ?> {{mens.titulo_tarea}} </em></span>
-                                        <h4><?php echo $Language->TablePhrase("inicio", "mens"); ?>{{mens.titulo_mensaje}} </h4> 
+                                    <span><em><?php echo $Language->phrase("inicio", "tareas"); ?> {{mens.titulo_tarea}} </em></span>
+                                        <h4><?php echo $Language->phrase("inicio", "mens"); ?>{{mens.titulo_mensaje}} </h4> 
                                         
                                     </div> 
                                     <hr>
@@ -316,7 +316,7 @@ $Inicio = &$Page;
             <div class="col">
                 <div class="card direct-chat direct-chat-primary">
                     <div class="card-header bg-success">
-                        <h3 class="card-title"><?php echo $Language->TablePhrase("inicio", "mensenv"); ?></h3>
+                        <h3 class="card-title"><?php echo $Language->phrase("inicio", "mensenv"); ?></h3>
                         <input type="text" class="form-control float-right" id="buscador_client" placeholder="Buscar">
                     </div>
                     <div class="container" id="vue-chat">
@@ -325,12 +325,12 @@ $Inicio = &$Page;
                                 <!-- begin timeline-time -->
                                 <div class="timeline-time">
                                     <span class="time" ><i class='far fa-clock text-primary'></i></span>
-                                    <span class="date"> <small> <?php echo $Language->TablePhrase("inicio", "hr"); ?></small> </span>
+                                    <span class="date"> <small> <?php echo $Language->phrase("inicio", "hr"); ?></small> </span>
                                     <span class="date"> <small> {{mens.fstar.split(' ')[0]}} </small> </span>
                                     <span class="time">{{mens.fstar.split(' ')[1]}}</span>
                         
                                     <span class="time" ><hr><i class='far fa-clock text-info'></i></span>
-                                    <span class="date"><small>  <?php echo $Language->TablePhrase("inicio", "hs"); ?> </small></span>
+                                    <span class="date"><small>  <?php echo $Language->phrase("inicio", "hs"); ?> </small></span>
                                     <span class="date"><small> {{mens.fstarsim.split(' ')[0]}} </small></span>
                                     <span class="time">{{mens.fstarsim.split(' ')[1]}}</span>
                                 </div>
@@ -348,15 +348,15 @@ $Inicio = &$Page;
                                     </div>
                                     <div class="timeline-content">
                                         <p>
-                                        <span><em><?php echo $Language->TablePhrase("inicio", "tarea"); ?> {{mens.titulo_tarea}} </em></span>
-                                        <h5><?php echo $Language->TablePhrase("inicio", "tmens"); ?> {{mens.titulo_mensaje}} </h5> 
+                                        <span><em><?php echo $Language->phrase("inicio", "tarea"); ?> {{mens.titulo_tarea}} </em></span>
+                                        <h5><?php echo $Language->phrase("inicio", "tmens"); ?> {{mens.titulo_mensaje}} </h5> 
 
                                         <span v-html="mens.mensaje"></span>
                                         </p>
                                     </div>
                                     <div class="timeline-likes">
                                         <div class="stats-right">
-                                            <span class="stats-text">{{mens.numero_comentarios}} <?php echo $Language->TablePhrase("inicio", "comens"); ?></span>
+                                            <span class="stats-text">{{mens.numero_comentarios}} <?php echo $Language->phrase("inicio", "comens"); ?></span>
                                         </div>
                                         <div class="stats">
                                             <span class="stats-total"></span>
@@ -364,7 +364,7 @@ $Inicio = &$Page;
                                     </div>
                                     <div class="timeline-footer">
                                         <a class="m-r-15 text-inverse-lighter" data-toggle="collapse" v-bind:href="'#collapse'+mens.id" >
-                                            <i class="fa fa-comments fa-fw fa-lg m-r-3"></i> <?php echo $Language->TablePhrase("inicio", "comen"); ?>
+                                            <i class="fa fa-comments fa-fw fa-lg m-r-3"></i> <?php echo $Language->phrase("inicio", "comen"); ?>
                                         </a> 
                                     </div>
 
@@ -379,7 +379,7 @@ $Inicio = &$Page;
                                                         <textarea type="text" class="textarealine" v-model="mens.entrada"></textarea>
                                                     </div>
                                                     <div class="mt-2 text-right">
-                                                        <button class="btn btn-primary btn-sm shadow-none" v-on:click="hacerComentario(mens)" type="button"><?php echo $Language->TablePhrase("inicio", "env"); ?>
+                                                        <button class="btn btn-primary btn-sm shadow-none" v-on:click="hacerComentario(mens)" type="button"><?php echo $Language->phrase("inicio", "env"); ?>
                                                     </div>
                                                     <hr>       
                                                     <div v-for="coment in mens.comentarios">

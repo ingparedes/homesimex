@@ -287,7 +287,7 @@ $InjectExcon = &$Page;
             <div class="col-6" id="vue-admin" v-if="mensajes.length>0">
                 <div class="card direct-chat direct-chat-primary">
                     <div class="card-header bg-primary">
-                        <h3 class="card-title"><?php echo $Language->TablePhrase("inject_excon", "mp"); ?></h3>
+                        <h3 class="card-title"><?php echo $Language->phrase( "mp"); ?></h3>
                         <form id="formulario_buscador">
                         <input type="text" class="form-control float-right" id="buscador_admin" placeholder="Buscar" autocomplete="off">
                         </form>
@@ -304,10 +304,10 @@ $InjectExcon = &$Page;
                                     <span class="direct-chat-timestamp float-right">
                                         <i class='far fa-clock text-primary'></i> 
                                         <span v-bind:class="{'badge-danger': mens.fstar == '2000/01/01 00:00'}">
-                                        <?php echo $Language->TablePhrase("inject_excon", "hr"); ?> {{mens.fstar}} <span class="badge-danger" v-if="mens.fstar==='2000/01/01 00:00'">PAUSADO</span></span>
+                                        <?php echo $Language->phrase( "hr"); ?> {{mens.fstar}} <span class="badge-danger" v-if="mens.fstar==='2000/01/01 00:00'">PAUSADO</span></span>
                                          <br> <!--HACER ABAJO-->
                                         <i class='far fa-clock text-info'></i> 
-                                        <?php echo $Language->TablePhrase("inject_excon", "hs"); ?> {{mens.fstarsim}} 
+                                        <?php echo $Language->phrase( "hs"); ?> {{mens.fstarsim}} 
                                     </span>
                                    </div>
                                 <!-- /.direct-chat-infos -->
@@ -315,9 +315,9 @@ $InjectExcon = &$Page;
                                 <!-- /.direct-chat-img -->
                                 <div class="direct-chat-text" style="background-color:#f2f3f4" >
                                     <div class = "header">
-                                    <span><em><?php echo $Language->TablePhrase("inject_excon", "tareas"); ?> {{mens.titulo_tarea}} </em></span>
+                                    <span><em><?php echo $Language->phrase( "tareas"); ?> {{mens.titulo_tarea}} </em></span>
                                     <a data-toggle="collapse" v-bind:href="'#descripcion'+mens.id" role="button" aria-expanded="false">
-                                    <h4><?php echo $Language->TablePhrase("inject_excon", "tmens"); ?>{{mens.titulo_mensaje}} <i class="fa" ></i></h4>   </a> 
+                                    <h4><?php echo $Language->phrase( "tmens"); ?>{{mens.titulo_mensaje}} <i class="fa" ></i></h4>   </a> 
                                    
                                     </div> 
 
@@ -341,7 +341,7 @@ $InjectExcon = &$Page;
                                        
                                             <a  data-toggle="collapse" v-bind:href="'#para'+mens.id" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
                                             <i class="fa fa-users"></i>     
-                                            <?php echo $Language->TablePhrase("inject_excon", "para"); ?></a>
+                                            <?php echo $Language->phrase( "para"); ?></a>
                                             </p>
                                            
                                             <div class="collapse multi-collapse" v-bind:id="'para'+mens.id">
@@ -352,7 +352,7 @@ $InjectExcon = &$Page;
                                         <p><!--MIGUEL, Region Respuestas-->
                                         <a  data-toggle="collapse" v-bind:href="'#respuestas'+mens.id" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
                                             <i class="fa fa-users"></i>     
-                                            <?php echo $Language->TablePhrase("inject_excon", "res"); ?></a><a class="badge badge-danger" v-if="mens.respuestasPendientes==1">MSG</a>
+                                            <?php echo $Language->phrase( "res"); ?></a><a class="badge badge-danger" v-if="mens.respuestasPendientes==1">MSG</a>
                                             </p>
                                            
                                             <div class="collapse multi-collapse" v-bind:id="'respuestas'+mens.id">
@@ -381,7 +381,7 @@ $InjectExcon = &$Page;
             <div class="col">
                 <div class="card direct-chat direct-chat-primary">
                     <div class="card-header bg-success">
-                        <h3 class="card-title"><?php echo $Language->TablePhrase("inject_excon", "me"); ?></h3>
+                        <h3 class="card-title"><?php echo $Language->phrase( "me"); ?></h3>
                         <!--Miguel Select-->
       
                         <!--MIGUel, CAMBIO UN SELEC POR UN BOTON CON UN DROPDOWN-->
@@ -390,10 +390,10 @@ $InjectExcon = &$Page;
                         </form>
                         <button type="button" data-toggle="dropdown" id="botonEstado" class="btn btn-success dropdown-toggle dropdown-toggle-split" aria-haspopup="true" aria-expanded="false"><span id="searchtype"></span></button>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item " href="#" onclick="busquedaEstado('Todos');"><?php echo $Language->TablePhrase("inject_excon", "todos"); ?></a>
-                            <a class="dropdown-item " href="#" onclick="busquedaEstado('Pendiente');"><?php echo $Language->TablePhrase("inject_excon", "pendiente"); ?></a>
-                            <a class="dropdown-item " href="#" onclick="busquedaEstado('Inconcluso');"><?php echo $Language->TablePhrase("inject_excon", "inconcluso"); ?></a>
-                            <a class="dropdown-item " href="#" onclick="busquedaEstado('Finalizado');"><?php echo $Language->TablePhrase("inject_excon", "finalizado"); ?></a>
+                            <a class="dropdown-item " href="#" onclick="busquedaEstado('Todos');"><?php echo $Language->phrase( "todos"); ?></a>
+                            <a class="dropdown-item " href="#" onclick="busquedaEstado('Pendiente');"><?php echo $Language->phrase( "pendiente"); ?></a>
+                            <a class="dropdown-item " href="#" onclick="busquedaEstado('Inconcluso');"><?php echo $Language->phrase( "inconcluso"); ?></a>
+                            <a class="dropdown-item " href="#" onclick="busquedaEstado('Finalizado');"><?php echo $Language->phrase( "finalizado"); ?></a>
                         </div>
                     </div>
                     <div class="container" id="vue-chat">
@@ -402,12 +402,12 @@ $InjectExcon = &$Page;
                                 <!-- begin timeline-time -->
                                 <div class="timeline-time">
                                     <span class="time" ><i class='far fa-clock text-primary'></i></span>
-                                    <span class="date"> <small> <?php echo $Language->TablePhrase("inject_excon", "hr"); ?></small> </span>
+                                    <span class="date"> <small> <?php echo $Language->phrase( "hr"); ?></small> </span>
                                     <span class="date"> <small> {{mens.fstar.split(' ')[0]}} </small> </span>
                                     <span class="time">{{mens.fstar.split(' ')[1]}}</span>
                         
                                     <span class="time" ><hr><i class='far fa-clock text-info'></i></span>
-                                    <span class="date"><small>  <?php echo $Language->TablePhrase("inject_excon", "hs"); ?></small></span>
+                                    <span class="date"><small>  <?php echo $Language->phrase( "hs"); ?></small></span>
                                     <span class="date"><small> {{mens.fstarsim.split(' ')[0]}} </small></span>
                                     <span class="time">{{mens.fstarsim.split(' ')[1]}}</span>
                                 </div>
@@ -435,10 +435,10 @@ $InjectExcon = &$Page;
                                        </div>
                                     <div class="timeline-content">
                                         <p>
-                                        <span><em><?php echo $Language->TablePhrase("inject_excon", "tareas"); ?> {{mens.titulo_tarea}} </em></span>
+                                        <span><em><?php echo $Language->phrase( "tareas"); ?> {{mens.titulo_tarea}} </em></span>
                                         <!--MIGUEL Acordeon punto 148-->
                                         <a data-toggle="collapse" v-bind:href="'#descripcions'+mens.id" role="button" aria-expanded="false">
-                                    <h4>  <?php echo $Language->TablePhrase("inject_excon", "tmen"); ?>{{mens.titulo_mensaje}} <i class="fa" aria-hidden="true"></i></h4>   </a> 
+                                    <h4>  <?php echo $Language->phrase( "tmen"); ?>{{mens.titulo_mensaje}} <i class="fa" aria-hidden="true"></i></h4>   </a> 
 
                                         
                                     <div class="collapse" v-bind:id="'descripcions'+mens.id">
@@ -469,7 +469,7 @@ $InjectExcon = &$Page;
                                        
                                             <a  data-toggle="collapse" v-bind:href="'#para'+mens.id" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
                                             <i class="fa fa-users"></i>     
-                                            <?php echo $Language->TablePhrase("inject_excon", "para"); ?></a>
+                                            <?php echo $Language->phrase( "para"); ?></a>
                                             </p>
                                            
                                             <div class="collapse multi-collapse" v-bind:id="'para'+mens.id">
@@ -480,7 +480,7 @@ $InjectExcon = &$Page;
                                         <p><!--MIGUEL, Region Respuestas-->
                                         <a  data-toggle="collapse" v-bind:href="'#respuestas'+mens.id" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
                                             <i class="fa fa-users"></i>     
-                                            <?php echo $Language->TablePhrase("inject_excon", "res"); ?></a><a class="badge badge-warning" v-if="mens.respuestasPendientes==1"> <i class="fa fa-envelope" aria-hidden="true"></i></a>
+                                            <?php echo $Language->phrase( "res"); ?></a><a class="badge badge-warning" v-if="mens.respuestasPendientes==1"> <i class="fa fa-envelope" aria-hidden="true"></i></a>
                                             </p>
                                            
                                             <div class="collapse multi-collapse" v-bind:id="'respuestas'+mens.id">
@@ -495,12 +495,12 @@ $InjectExcon = &$Page;
                                     
                                         <div class="btn-group dropleft float-right">
                                     <button class="btn btn-primary btn-sm dropdown-toggle " type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <?php echo $Language->TablePhrase("inject_excon", "calif"); ?>
+                                    <?php echo $Language->phrase( "calif"); ?>
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" v-bind:href="'inject/calificar.php?calificacion=1&idMensaje='+mens.id"><?php echo $Language->TablePhrase("inject_excon", "pendiente"); ?></a>
-                                        <a class="dropdown-item" v-bind:href="'inject/calificar.php?calificacion=2&idMensaje='+mens.id"><?php echo $Language->TablePhrase("inject_excon", "inconcluso"); ?> </a>
-                                        <a class="dropdown-item" v-bind:href="'inject/calificar.php?calificacion=3&idMensaje='+mens.id"><?php echo $Language->TablePhrase("inject_excon", "finalizado"); ?></a>
+                                        <a class="dropdown-item" v-bind:href="'inject/calificar.php?calificacion=1&idMensaje='+mens.id"><?php echo $Language->phrase( "pendiente"); ?></a>
+                                        <a class="dropdown-item" v-bind:href="'inject/calificar.php?calificacion=2&idMensaje='+mens.id"><?php echo $Language->phrase( "inconcluso"); ?> </a>
+                                        <a class="dropdown-item" v-bind:href="'inject/calificar.php?calificacion=3&idMensaje='+mens.id"><?php echo $Language->phrase( "finalizado"); ?></a>
                                     </div>
                                     </div>
 
@@ -519,7 +519,7 @@ $InjectExcon = &$Page;
                                                         <textarea type="text" class="textarealine" v-model="mens.entrada"></textarea>
                                                     </div>
                                                     <div class="mt-2 text-right">
-                                                        <button class="btn btn-primary btn-sm shadow-none" v-on:click="hacerComentario(mens)" type="button"><?php echo $Language->TablePhrase("inject_excon", "enviar"); ?>
+                                                        <button class="btn btn-primary btn-sm shadow-none" v-on:click="hacerComentario(mens)" type="button"><?php echo $Language->phrase( "enviar"); ?>
                                                     </div>
                                                     <hr>       
                                                     <div v-for="coment in mens.comentarios">

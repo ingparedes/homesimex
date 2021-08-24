@@ -8,7 +8,7 @@ $TimelineGeneral = &$Page;
 <html>
 
 <head>
-    <title><?php echo $Language->TablePhrase("timeline_general", "tituloTLG"); ?></title>
+    <title><?php echo  $Language->phrase( "tituloTLG"); ?></title>
 
     <style>
         .vis-item .vis-item-overflow {
@@ -132,10 +132,10 @@ INNER JOIN paisgmt as pu on pu.id_zone = users.pais");
     <div class="buttons">
         <input type="button" id="load" value="&darr; Load" style="display:none">
         <!-- <input type="button" id="save" value="&uarr; Save" title="Save data from the Timeline into the textarea"> -->
-        <button type="button" id="save" class="btn btn-secondary" disabled><?php echo $Language->TablePhrase("timeline_general", "graba"); ?></button>
+        <button type="button" id="save" class="btn btn-secondary" disabled><?php echo  $Language->phrase( "graba"); ?></button>
         <!-- <button type="button" id="addTarea" class="btn btn-primary" onclick="$('#modalAddTarea').modal('show');">Nueva Tarea</button> -->
         <select id="escenario" name="escenario" class="form-control-sm">
-            <option value="0"><?php echo $Language->TablePhrase("timeline_general", "seleccion_escenario"); ?></option>";
+            <option value="0"><?php echo  $Language->phrase( "seleccion_escenario"); ?></option>";
             <?php
             foreach ($sql_escnrio as $valor) {
                 echo "<option value=\"" . $valor[0] . "\">" . $valor[1] . "</option>";
@@ -148,19 +148,19 @@ INNER JOIN paisgmt as pu on pu.id_zone = users.pais");
     <div class="toast position-fixed bottom-10" role="alert" aria-live="assertive" data-delay="2000">
         <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" data-delay="2000">
             <div class="toast-header bg-success text-white">
-                <small><?php echo $Language->TablePhrase("timeline_general", "datos_almacenados"); ?></small>
+                <small><?php echo  $Language->phrase( "datos_almacenados"); ?></small>
             </div>
             <div class="toast-body bg-success text-white">
-            <?php echo $Language->TablePhrase("timeline_general", "datos_almacenados_ok"); ?>
+            <?php echo  $Language->phrase( "datos_almacenados_ok"); ?>
             </div>
         </div>
     </div>
 
-    <div id="loading"><?php echo $Language->TablePhrase("timeline_general", "cargand"); ?></div>
+    <div id="loading"><?php echo  $Language->phrase( "cargand"); ?></div>
     <div id="visualization"></div>
-    <p class = "small">  <em> <?php echo $Language->TablePhrase("timeline_general", "ctrzoom"); ?></em> <br>
-<em><?php echo $Language->TablePhrase("timeline_general", "cltizq"); ?><br>
-<?php echo $Language->TablePhrase("timeline_general", "rthr"); ?><img src = "https://simexamericas.org/homesimex/images/iconotimeline.png"  width="30" height="30"> <em> </p>
+    <p class = "small">  <em> <?php echo  $Language->phrase( "ctrzoom"); ?></em> <br>
+<em><?php echo  $Language->phrase( "cltizq"); ?><br>
+<?php echo  $Language->phrase( "rthr"); ?><img src = "https://simexamericas.org/homesimex/images/iconotimeline.png"  width="30" height="30"> <em> </p>
 
 
     <!-- Modal1 -->
@@ -168,7 +168,7 @@ INNER JOIN paisgmt as pu on pu.id_zone = users.pais");
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalLongTitle"><?php echo $Language->TablePhrase("timeline_general", "editar_datos"); ?></h5>
+                    <h5 class="modal-title" id="modalLongTitle"><?php echo  $Language->phrase( "editar_datos"); ?></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -180,7 +180,7 @@ INNER JOIN paisgmt as pu on pu.id_zone = users.pais");
                             <input type="text" class="form-control" id="id" hidden>
                             <input type="text" class="form-control" id="tipo" hidden>
                             <input type="text" class="form-control" id="id_tarea" hidden>
-                            <label for="tituloT"><?php echo $Language->TablePhrase("timeline_general", "titulo"); ?>: </label>
+                            <label for="tituloT"><?php echo  $Language->phrase( "titulo"); ?>: </label>
                             <h3>
                                 <div id="tituloT"> </div>
                                 </hr>
@@ -188,21 +188,21 @@ INNER JOIN paisgmt as pu on pu.id_zone = users.pais");
                         </div>
                         <hr>
                         <div class="form-group">
-                            <label for="desc_tarea"><?php echo $Language->TablePhrase("timeline_general", "descrip"); ?> </label>
+                            <label for="desc_tarea"><?php echo  $Language->phrase( "descrip"); ?> </label>
                             <!-- <textarea class="form-control" id="desc_tarea" rows="3"></textarea> -->
                             <em>
                                 <div id="desc_tarea"></div><em>
                         </div>
                         <hr>
                         <ul id="ulmjs">
-                            <li> <strong><?php echo $Language->TablePhrase("timeline_general", "hri"); ?></strong> <span id="fechainireal_tarea"> </span></li>
-                            <li> <strong><?php echo $Language->TablePhrase("timeline_general", "hrf"); ?></strong> <span id="fechafin_tarea"> </span></li>
-                            <li><strong><?php echo $Language->TablePhrase("timeline_general", "hsi"); ?></strong><span id="fechainisimulado_tarea"> </span></li>
-                            <li><strong><?php echo $Language->TablePhrase("timeline_general", "hsf"); ?></strong> <span id="fechafinsimulado_tarea"> </span> </li>
+                            <li> <strong><?php echo  $Language->phrase( "hri"); ?></strong> <span id="fechainireal_tarea"> </span></li>
+                            <li> <strong><?php echo  $Language->phrase( "hrf"); ?></strong> <span id="fechafin_tarea"> </span></li>
+                            <li><strong><?php echo  $Language->phrase( "hsi"); ?></strong><span id="fechainisimulado_tarea"> </span></li>
+                            <li><strong><?php echo  $Language->phrase( "hsf"); ?></strong> <span id="fechafinsimulado_tarea"> </span> </li>
                         </ul>
                         <div class="modal-footer">
                            <!-- <button type="button" id="btnAddMensaje" onclick="modalAddMsj();" data-dismiss="modal2" class="btn btn-info btn-sm mr-auto">Crear Mensaje</button>
--->                         <button type="button" id="editMsg"  class="btn btn-info btn-sm"><?php echo $Language->TablePhrase("timeline_general", "Editar_mensaje"); ?></button>
+-->                         <button type="button" id="editMsg"  class="btn btn-info btn-sm"><?php echo  $Language->phrase( "Editar_mensaje"); ?></button>
                            <!-- <select id="valorar" class="form-control-sm" name="valorar">
                                 <option value="0" selected>Valorar...</option>
                                 <option value="1" style="background-color:white">Pendiente</option>
@@ -211,7 +211,7 @@ INNER JOIN paisgmt as pu on pu.id_zone = users.pais");
                             </select>
                             
                             <button type="button" id="submint" onclick="saveMsj()" class="btn btn-primary btn-sm">Guardar</button>-->
-                            <button type="button" class="btn btn-light btn-sm" data-dismiss="modal"><?php echo $Language->TablePhrase("timeline_general", "cancel"); ?></button>
+                            <button type="button" class="btn btn-light btn-sm" data-dismiss="modal"><?php echo  $Language->phrase( "cancel"); ?></button>
 
                         </div>
                     </form>
@@ -225,7 +225,7 @@ INNER JOIN paisgmt as pu on pu.id_zone = users.pais");
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="e_modalLongTitle"><?php echo $Language->TablePhrase("timeline_general", "mens"); ?></h5>
+                    <h5 class="modal-title" id="e_modalLongTitle"><?php echo  $Language->phrase( "mens"); ?></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -240,25 +240,25 @@ INNER JOIN paisgmt as pu on pu.id_zone = users.pais");
                             <input type="hidden" class="form-control-sm" id="e_id_tarea" name="e_id_tarea">
 
                             <div class="form-group">
-                                <label for="titulo"><?php echo $Language->TablePhrase("timeline_general", "titulo"); ?> </label>
+                                <label for="titulo"><?php echo  $Language->phrase( "titulo"); ?> </label>
                                 <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Título Mensaje" value="" required>
                             </div>
 
-                            <label for="mensaje"><?php echo $Language->TablePhrase("timeline_general", "mens"); ?> </label>
+                            <label for="mensaje"><?php echo  $Language->phrase( "mens"); ?> </label>
                             <textarea class="form-control" id="mensaje" name="mensaje" rows="2"></textarea>
                             <!-- <div id="e_mensaje" name="e_mensaje" class="border" contenteditable="true"></div> -->
 
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <label for="fechareal_start"><?php echo $Language->TablePhrase("timeline_general", "fir"); ?></label>
+                                        <label for="fechareal_start"><?php echo  $Language->phrase( "fir"); ?></label>
                                         <input type="text" class="form-control" id="fechareal_start" name="fechareal_start">
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <label for="fechasim_start"><?php echo $Language->TablePhrase("timeline_general", "fis"); ?></label>
+                                        <label for="fechasim_start"><?php echo  $Language->phrase( "fis"); ?></label>
                                         <input type="text" class="form-control" id="fechasim_start" name="fechasim_start">
                                     </div>
                                 </div>
@@ -276,23 +276,23 @@ INNER JOIN paisgmt as pu on pu.id_zone = users.pais");
 
                             </select> -->
                             <div class="form-group">
-                                <label for="medios"> <?php echo $Language->TablePhrase("timeline_general", "medio"); ?></label>
+                                <label for="medios"> <?php echo  $Language->phrase( "medio"); ?></label>
                                 <select id="medios" name="medios" class="form-control" required="">
-                                    <option style="background-color:white" value=""><?php echo $Language->TablePhrase("timeline_general", "seleccion_medio"); ?></option>
+                                    <option style="background-color:white" value=""><?php echo  $Language->phrase( "seleccion_medio"); ?></option>
                                     <option style="background-color:white" value="1">Email</option>
                                     <option style="background-color:white" value="2">Daybook</option>
                                     <option style="background-color:white" value="3">Chirping</option>
                                 </select>
                                 <div>
                                     <div class="form-group">
-                                        <label for="actividad_esperada"><?php echo $Language->TablePhrase("timeline_general", "acti_es"); ?></label>
+                                        <label for="actividad_esperada"><?php echo  $Language->phrase( "acti_es"); ?></label>
                                         <textarea class="form-control" id="actividad_esperada" name="actividad_esperada" rows="2"></textarea>
                                     </div>
                                     <div class="row">
                                         <div class="col-6">
 
                                             <div class="form-group">
-                                                <label for="id_actor"><?php echo $Language->TablePhrase("timeline_general", "de"); ?></label>
+                                                <label for="id_actor"><?php echo  $Language->phrase( "de"); ?></label>
                                                 <select id="id_actor" name="id_actor" class="form-control">
                                                     <?php
                                                     foreach ($sqlActores as $valor) {
@@ -302,10 +302,10 @@ INNER JOIN paisgmt as pu on pu.id_zone = users.pais");
                                                 </select>
                                             </div>
                                             <div class="form-group">
-                                                <label for="adjunto"><?php echo $Language->TablePhrase("timeline_general", "subir_file"); ?></label>
+                                                <label for="adjunto"><?php echo  $Language->phrase( "subir_file"); ?></label>
                                                 <!--<input type="file" class="form-control" id="archivo" name="adjunto">
                                                 --><select id="adjunto" name="adjunto" class="form-control">
-                                                    <option value="0"><?php echo $Language->TablePhrase("timeline_general", "seleccione_adjunto"); ?></option>";
+                                                    <option value="0"><?php echo  $Language->phrase( "seleccione_adjunto"); ?></option>";
                                                     <?php
                                                     foreach ($sqlArchivo as $valor) {
                                                         echo "<option  style=\"background-color:white\" value=\"" . $valor[0] . "\">" . $valor[1] . "</option>";
@@ -317,7 +317,7 @@ INNER JOIN paisgmt as pu on pu.id_zone = users.pais");
                                         <div class="col-6">
                                             <!-- Build your select: -->
                                             <div class="form-group">
-                                                <label for="para"><?php echo $Language->TablePhrase("timeline_general", "para"); ?></label>
+                                                <label for="para"><?php echo  $Language->phrase( "para"); ?></label>
                                                 <select id="para" name="para[]" multiple="multiple" class="form-control">
 
                                                     <?php
@@ -333,8 +333,8 @@ INNER JOIN paisgmt as pu on pu.id_zone = users.pais");
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary btn-sm" id="BotonGuardar" ><?php echo $Language->TablePhrase("timeline_general", "guardar"); ?></button>
-                                <button type="button" class="btn btn-light btn-sm" data-dismiss="modal"><?php echo $Language->TablePhrase("timeline_general", "cancel"); ?></button>
+                                <button type="button" class="btn btn-primary btn-sm" id="BotonGuardar" ><?php echo  $Language->phrase( "guardar"); ?></button>
+                                <button type="button" class="btn btn-light btn-sm" data-dismiss="modal"><?php echo  $Language->phrase( "cancel"); ?></button>
                     </form>
 
                 </div>
@@ -347,7 +347,7 @@ INNER JOIN paisgmt as pu on pu.id_zone = users.pais");
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalLongTitle"><?php echo $Language->TablePhrase("timeline_general", "nuevo_mensaje"); ?> </h5>
+                    <h5 class="modal-title" id="modalLongTitle"><?php echo  $Language->phrase( "nuevo_mensaje"); ?> </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -361,25 +361,25 @@ INNER JOIN paisgmt as pu on pu.id_zone = users.pais");
                             <input type="hidden" class="form-control-sm" id="idTarea" name="idTarea">
 
                             <div class="form-group">
-                                <label for="titulo" ><?php echo $Language->TablePhrase("timeline_general", "titulo"); ?> </label>
+                                <label for="titulo" ><?php echo  $Language->phrase( "titulo"); ?> </label>
                                 <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Título Mensaje"   required>
                             </div>
 
-                            <label for="mensaje"><?php echo $Language->TablePhrase("timeline_general", "mens"); ?>  </label>
+                            <label for="mensaje"><?php echo  $Language->phrase( "mens"); ?>  </label>
                             <textarea class="form-control" id="mensaje" name="mensaje" rows="2"></textarea>
                             <!-- <div id="mensaje" name="mensaje" class="border" contenteditable="true"></div> -->
 
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <label for="fechaIniRealMjs"><?php echo $Language->TablePhrase("timeline_general", "fir"); ?> </label>
+                                        <label for="fechaIniRealMjs"><?php echo  $Language->phrase( "fir"); ?> </label>
                                         <input type="text" class="form-control" id="fechaIniReal" name="fechaIniReal">
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <label for="fechaIniSimMjs"><?php echo $Language->TablePhrase("timeline_general", "fis"); ?> </label>
+                                        <label for="fechaIniSimMjs"><?php echo  $Language->phrase( "fis"); ?> </label>
                                         <input type="text" class="form-control" id="fechaIniSimMjs" name="fechaIniSimMjs">
                                     </div>
                                 </div>
@@ -397,23 +397,23 @@ INNER JOIN paisgmt as pu on pu.id_zone = users.pais");
 
                             </select> -->
                             <div class="form-group">
-                                <label for="medio"> <?php echo $Language->TablePhrase("timeline_general", "medio"); ?> </label>
+                                <label for="medio"> <?php echo  $Language->phrase( "medio"); ?> </label>
                                 <select id="medio" name="medio" class="form-control" required="">
-                                    <option style="background-color:white" value=""><?php echo $Language->TablePhrase("timeline_general", "seleccion_medio"); ?> </option>
+                                    <option style="background-color:white" value=""><?php echo  $Language->phrase( "seleccion_medio"); ?> </option>
                                     <option style="background-color:white" value="1">Email</option>
                                     <option style="background-color:white" value="2">Daybook</option>
                                     <option style="background-color:white" value="3">Chirping</option>
                                 </select>
                                 <div>
                                     <div class="form-group">
-                                        <label for="actividad"><?php echo $Language->TablePhrase("timeline_general", "acti_es"); ?> </label>
+                                        <label for="actividad"><?php echo  $Language->phrase( "acti_es"); ?> </label>
                                         <textarea class="form-control" id="actividad" name="actividad" rows="2"></textarea>
                                     </div>
                                     <div class="row">
                                         <div class="col-6">
 
                                             <div class="form-group">
-                                                <label for="actor"><?php echo $Language->TablePhrase("timeline_general", "de"); ?> </label>
+                                                <label for="actor"><?php echo  $Language->phrase( "de"); ?> </label>
                                                 <select id="actor" name="actor" class="form-control">
                                                     <?php
                                                     foreach ($sqlActores as $valor) {
@@ -423,10 +423,10 @@ INNER JOIN paisgmt as pu on pu.id_zone = users.pais");
                                                 </select>
                                             </div>
                                             <div class="form-group">
-                                                <label for="archivo"><?php echo $Language->TablePhrase("timeline_general", "subir_file"); ?> </label>
+                                                <label for="archivo"><?php echo  $Language->phrase( "subir_file"); ?> </label>
                                                <!-- <input type="file" class="form-control" id="archivo">
                                                --> <select id="archivo" name="archivo" class="form-control">
-                                                    <option value="0"><?php echo $Language->TablePhrase("timeline_general", "seleccione_adjunto"); ?> </option>";
+                                                    <option value="0"><?php echo  $Language->phrase( "seleccione_adjunto"); ?> </option>";
                                                     <?php
                                                     foreach ($sqlArchivo as $valor) {
                                                         echo "<option  style=\"background-color:white\" value=\"" . $valor[0] . "\">" . $valor[1] . "</option>";
@@ -438,7 +438,7 @@ INNER JOIN paisgmt as pu on pu.id_zone = users.pais");
                                         <div class="col-6">
                                             <!-- Build your select: -->
                                             <div class="form-group">
-                                                <label for="para"><?php echo $Language->TablePhrase("timeline_general", "para"); ?> </label>
+                                                <label for="para"><?php echo  $Language->phrase( "para"); ?> </label>
                                                 <select id="para" name="para" multiple="multiple" class="form-control">
                                                     <?php
                                                     foreach ($sqlPara as $valor) {
@@ -453,8 +453,8 @@ INNER JOIN paisgmt as pu on pu.id_zone = users.pais");
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary btn-sm" ><?php echo $Language->TablePhrase("timeline_general", "guardar"); ?> </button>
-                                <button type="button" class="btn btn-light btn-sm" data-dismiss="modal"><?php echo $Language->TablePhrase("timeline_general", "cancel"); ?> </button>
+                                <button type="button" class="btn btn-primary btn-sm" ><?php echo  $Language->phrase( "guardar"); ?> </button>
+                                <button type="button" class="btn btn-light btn-sm" data-dismiss="modal"><?php echo  $Language->phrase( "cancel"); ?> </button>
                     </form>
 
                 </div>
@@ -467,7 +467,7 @@ INNER JOIN paisgmt as pu on pu.id_zone = users.pais");
         <div class="modal-dialog" style="width:100%; height: 400px;">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-tittle"><?php echo $Language->TablePhrase("timeline_general", "tarea"); ?> </h4>
+                    <h4 class="modal-tittle"><?php echo  $Language->phrase( "tarea"); ?> </h4>
                 </div>
                 <form action="dts_notifica.php?accion=addTarea" method="post">
                     <form action="" method="post" class="form-horizontal">
@@ -475,7 +475,7 @@ INNER JOIN paisgmt as pu on pu.id_zone = users.pais");
                             <input type="text" class="form-control" id="idTarea" hidden>
                             <label for="idGrupo">Grupo</label>
                             <select name="idGrupo" id="idGrupo" class="form-control">
-                                <option selected value=""><?php echo $Language->TablePhrase("timeline_general", "seleccion_grup"); ?> </option>
+                                <option selected value=""><?php echo  $Language->phrase( "seleccion_grup"); ?> </option>
                                 <?php
                                 foreach ($sqlGrupos as $valor) {
                                     echo "<option value=\"" . $valor[0] . "\">" . $valor[1] . "</option>";
@@ -484,37 +484,37 @@ INNER JOIN paisgmt as pu on pu.id_zone = users.pais");
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="titleTarea"><?php echo $Language->TablePhrase("timeline_general", "titulo"); ?>  </label>
+                            <label for="titleTarea"><?php echo  $Language->phrase( "titulo"); ?>  </label>
                             <input type="text" class="form-control" id="titleTarea" placeholder="Título Tarea" value="">
                         </div>
                         <div class="form-group">
-                            <label for="descTarea"><?php echo $Language->TablePhrase("timeline_general", "descrip"); ?>  </label>
+                            <label for="descTarea"><?php echo  $Language->phrase( "descrip"); ?>  </label>
                             <textarea class="form-control" id="desc_tarea" rows="3"></textarea>
                             <!--
                             <div id="descTarea" class="border" contenteditable="true">
                             </div>-->
                         </div>
                         <div class="form-group">
-                            <label for="fechaIniReal" class="col-md-2 control-label"><?php echo $Language->TablePhrase("timeline_general", "fir"); ?> </label>
+                            <label for="fechaIniReal" class="col-md-2 control-label"><?php echo  $Language->phrase( "fir"); ?> </label>
                             <input type="text" class="form-control" id="fechaIniReal">
                         </div>
                         <div class="form-group mb-2">
-                            <label for="fechaFinReal" class="col-md-2 control-label"><?php echo $Language->TablePhrase("timeline_general", "ffr"); ?> </label>
+                            <label for="fechaFinReal" class="col-md-2 control-label"><?php echo  $Language->phrase( "ffr"); ?> </label>
                             <input type="text" class="form-control" id="fechaFinReal">
                         </div>
 
                         <div class="form-group">
-                            <label for="fechaIniSim"><?php echo $Language->TablePhrase("timeline_general", "fis"); ?> </label>
+                            <label for="fechaIniSim"><?php echo  $Language->phrase( "fis"); ?> </label>
                             <input type="text" class="form-control" id="fechaIniSim">
                         </div>
                         <div class="form-group">
-                            <label for="fechaFinSim"><?php echo $Language->TablePhrase("timeline_general", "ffs"); ?> </label>
+                            <label for="fechaFinSim"><?php echo  $Language->phrase( "ffs"); ?> </label>
                             <input type="text" class="form-control" id="fechaFinSim">
                         </div>
                         <div class="form-group">
-                            <label for="idTareaRelacion"><?php echo $Language->TablePhrase("timeline_general", "relacion_tarea"); ?> </label>
+                            <label for="idTareaRelacion"><?php echo  $Language->phrase( "relacion_tarea"); ?> </label>
                             <select id="idTareaRelacion" class="form-control">
-                                <option value=""><?php echo $Language->TablePhrase("timeline_general", "tareas"); ?> </option>
+                                <option value=""><?php echo  $Language->phrase( "tareas"); ?> </option>
                                 <?php
                                 foreach ($sqlTareas as $valor) {
                                     echo "<option value=\"" . $valor[0] . "\">" . $valor[1] . "</option>";
@@ -523,14 +523,14 @@ INNER JOIN paisgmt as pu on pu.id_zone = users.pais");
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="archivo"><?php echo $Language->TablePhrase("timeline_general", "subir_file"); ?> </label>
+                            <label for="archivo"><?php echo  $Language->phrase( "subir_file"); ?> </label>
                             <input type="file" class="form-control" id="archivo">
                         </div>
 
                     </form>
                     <div class="modal-footer">
-                        <button type="button" onclick="addTarea()" class="btn btn-primary btn-sm"><?php echo $Language->TablePhrase("timeline_general", "guardar"); ?> </button>
-                        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal"><?php echo $Language->TablePhrase("timeline_general", "cerrar"); ?> </button>
+                        <button type="button" onclick="addTarea()" class="btn btn-primary btn-sm"><?php echo  $Language->phrase( "guardar"); ?> </button>
+                        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal"><?php echo  $Language->phrase( "cerrar"); ?> </button>
                     </div>
                 </form>
             </div>

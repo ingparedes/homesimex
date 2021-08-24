@@ -212,8 +212,8 @@ WHERE
 	archivos_doc.id_file = '".$IdDoc."' AND  archivos_doc.id_users = '".$userid."'";
 ?>
 <div class="callout callout-primary">
-  <h4><?php echo $Language->TablePhrase("permisosDocAdd", "archivo"); ?> <?php echo $NameDoc[0] ?>  </h4>
-  <p> <em> <?php echo $Language->TablePhrase("permisosDocAdd", "fc"); ?> <?php echo $NameDoc[1]  ?> </em></p>
+  <h4><?php echo $Language->phrase("archivo"); ?> <?php echo $NameDoc[0] ?>  </h4>
+  <p> <em> <?php echo $Language->phrase("fc"); ?> <?php echo $NameDoc[1]  ?> </em></p>
  </div>
  <div class="container-fluid">
     <div class="row">
@@ -229,7 +229,7 @@ WHERE
                 </div>
                 <div class="col-md-6">
 <div class="card">
-    <div class="card-header"><strong> <?php echo $Language->TablePhrase("permisosDocAdd", "dc"); ?>  </strong></div>
+    <div class="card-header"><strong> <?php echo $Language->phrase("dc"); ?>  </strong></div>
     <div class="card-body">
 <?php
 echo ExecuteHtml($Doctos, ["fieldcaption" => TRUE, "tablename" => ["archivos_doc", "permisos_docusers", "users","grupo"]]); 

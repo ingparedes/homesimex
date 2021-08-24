@@ -82,15 +82,15 @@ $Page->showMessage();
 <div id="tpd_tipoview" class="ew-custom-template"></div>
 <template id="tpm_tipoview">
 <div id="ct_TipoView"><fieldset>
-<legend><?php echo $Language->TablePhrase("tipo_view", "titulo"); ?></legend>
-<h2><?php echo $Language->TablePhrase("tipo_view", "esr"); ?><slot class="ew-slot" name="tpx_tipo_evento"></slot></h2>
-<h2><?php echo $Language->TablePhrase("tipo_view", "pais"); ?><slot class="ew-slot" name="tpx_pais_escenario"></slot></h2>
-<h3><?php echo $Language->TablePhrase("tipo_view", "fech"); ?> <slot class="ew-slot" name="tpx_fechaini_real"></slot> | <slot class="ew-slot" name="tpx_fechafinal_real"></slot>  </h3>
-<legend><?php echo $Language->TablePhrase("tipo_view", "descrip"); ?></legend>
+<legend><?php echo  $Language->phrase("titulo"); ?></legend>
+<h2><?php echo  $Language->phrase("esr"); ?><slot class="ew-slot" name="tpx_tipo_evento"></slot></h2>
+<h2><?php echo  $Language->phrase("pais"); ?><slot class="ew-slot" name="tpx_pais_escenario"></slot></h2>
+<h3><?php echo  $Language->phrase("fech"); ?> <slot class="ew-slot" name="tpx_fechaini_real"></slot> | <slot class="ew-slot" name="tpx_fechafinal_real"></slot>  </h3>
+<legend><?php echo  $Language->phrase("descrip"); ?></legend>
 <slot class="ew-slot" name="tpx_descripcion_escenario"></slot>
-<legend><?php echo $Language->TablePhrase("tipo_view", "grups"); ?></legend>
-<legend><?php echo $Language->TablePhrase("tipo_view", "partic"); ?></legend>
-<legend><?php echo $Language->TablePhrase("tipo_view", "conclu"); ?></legend>
+<legend><?php echo  $Language->phrase("grups"); ?></legend>
+<legend><?php echo  $Language->phrase("partic"); ?></legend>
+<legend><?php echo  $Language->phrase("conclu"); ?></legend>
 </fieldset>
 </div>
 </template>
